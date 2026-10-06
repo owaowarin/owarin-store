@@ -1,0 +1,62 @@
+# owarin-store = code + docs only (B1, 2026-10-07). Media/data live in C:\Users\JIN\OWARIN-DATA,
+# secrets in C:\Users\JIN\Documents\OWARIN-secrets. No trailing "/" on the junctions: git may see a junction as a link.
+
+# media/data folders = junctions to C:\Users\JIN\OWARIN-DATA\<name>
+/All Products
+/_r2_upload
+/GGB Online Files
+/_fb_albums
+/Supplier
+/_exports
+/Facebook - Catalouge Project
+
+# secrets - never commit
+.env
+.env.*
+!.env.example
+credential/
+*credential*.json
+*.key
+*.pem
+*token*.txt
+*secret*.json
+
+# media and binaries
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.gif
+*.mp3
+*.mp4
+*.pdf
+*.iso
+*.bin
+*.zip
+*.rar
+*.7z
+*.exe
+*.dll
+*.pyd
+*.node
+
+# data exports (stay on the PC; back up with OWARIN-DATA)
+*.xlsx
+*.csv
+*.ndjson
+!_logs/*.csv
+
+# deps, caches, local-only
+node_modules/
+.r2-worker-deps/
+__pycache__/
+*.pyc
+*.log
+*.tmp
+*.bak*
+out/
+_archive/
+.claude/settings.local.json
+desktop.ini
+Thumbs.db
+*.lnk
