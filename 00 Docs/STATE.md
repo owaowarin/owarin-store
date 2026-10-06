@@ -38,6 +38,10 @@ Rule: OVERWRITE at session close; ≤80 lines. Active PLAN holds scope; dated lo
 ### 4. OWA Facebook ads — PARKED
 - Nothing created in Meta. Plan: `00 Docs/PLAN-OWA-META-ADS_2026-09-25.md`, evidence `00 Docs/ads-evidence/`. Status board: all steps TODO. Resume at S0 after owner decisions D1 budget, D2 three category posts, D3 break-even cost per purchase. Activate only on OWARI's explicit "go". Opus plans, Sonnet executes.
 
+### 4b. Sheet compaction audit (2026-10-07) — Phase 1 DONE, Phase 2 waits owner
+- `00 Docs/AUDIT-SHEET-STRUCTURE_2026-10-07.md` F1–F10 (duplicate Sheet23, TYPE LIST vs FB ALBUMS, empty columns, dead SERIES MAP/DESCRIPTION code, FB CATALOGUE vs META EXPORT). Nothing live changed.
+- Next ONE: owner runs read-only `04 Design Tools/sheet-audit/SheetAudit.gs`, commits `_logs/sheet-audit_<date>.json`; then `prompts/sheet-compact-audit.md`. Order: v43 deploy → v44 Add perf (`prompts/add-save-performance.md`) → compaction.
+
 ### 5. Other (not reviewed 2026-10-01)
 - Back-office web app, storefront (on hold), watermark tool, FB album autopost, AI Usage Widget, Chubbygirlbkk reporting: see memory areas / `STATUS_OWARIN-STORE.md` (last 2026-09-13) — status unknown here.
 
