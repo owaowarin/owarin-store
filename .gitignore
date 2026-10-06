@@ -46,6 +46,9 @@ credential/
 *.csv
 *.ndjson
 !_logs/*.csv
+# large evidence/journal dumps in tool logs (> 5 MB; stay on the PC)
+04 Design Tools/logs/**/evidence*.json
+04 Design Tools/logs/**/*journal*.json
 
 # deps, caches, local-only
 node_modules/

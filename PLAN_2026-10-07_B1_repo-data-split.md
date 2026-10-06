@@ -85,6 +85,8 @@ Split rule read off the chart: **code + docs** (the arrows) → git; **media + d
 - `.claude\settings.local.json` holds the old path; it is git-ignored, Claude Code asks for permissions again once.
 - Before Block B: stop `r2-queue-worker.py` and anything else running from the folder.
 
+**B1-B result (2026-10-07 02:42, ads-optimizer `4c7df04`):** 52/52 PASS, 47,716 files / 8,034,226,548 B moved, old folder gone; both repos HEAD unchanged. **B1-C:** owarin-back-house-lab PASS (`75b833e`); owarin-store stopped by its guards (`016822f`, nothing pushed): 5 tool-log JSON dumps > 5 MB → now git-ignored (`04 Design Tools/logs/**/evidence*.json`, `**/*journal*.json`); 130 files matched the secret-value check → script now writes a masked explain CSV (kind, length, first 4 chars, short hash) and the `sk-`-style patterns need a word boundary (they hit CSS names like `task-…`). B1-H report: commit made on the PC, push rejected by GitHub — retried with the next run.
+
 Rollback: every move is a rename listed in `B1_moves_<stamp>.csv` (source → destination); reverse = move each destination back in reverse order. No step deletes anything.
 
 ## 5. Owner decisions 2026-10-07 (answers to the first open list)
