@@ -1,0 +1,7 @@
+# HANDOFF — Session52 / Stream B — Create order input diagnosis
+
+1. Stream B §§2/5/5.2.1/9; one writer, no agents/runtime change.
+2. Files: docs/README/CLAUDE/decision log → subsidy entry instructions; before hashes/backups in `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-CART-20261006-01`. Source `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\03 Apps Script\Web App\Index.html` unchanged v41. Prior handoff archived `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\00 Docs\_archive\handoffs_old\HANDOFF_2026-10-06_Session51.md`.
+3. Evidence: owner screenshot this turn; fresh local Index SHA256 DD76DBBD112627C52D4122AB05BB46A7AF4C4A1BDE3F03FF406CAB150DFE3455 matches saved release. Actual strict-money function: blank rejects,0 accepts; frontend returns before order API. No fresh Google export/current business counts claimed.
+4. Diagnosis: Session52: Create order toastในภาพเกิดจาก Shipping Subsidyว่าง; exact deployed v41 Index validation reject missing before orders.create และรับ0. กรอก0เฉพาะเมื่อร้านไม่ช่วยค่าส่ง หรือจำนวนจริงที่ร้านออก แล้วกด Create order; ราคา270/CustomerShipping50ในภาพไม่ต้องย้ายไปช่องsubsidy. ไม่มี source/deploy/data write หรือ order API call; ยังไม่ได้ตรวจผลหลังเจ้าของกรอกค่า. Production remains release v41/Version5; Session51 backup/undo retained.
+5. Next ONE: owner fills actual shop contribution (0 if none), presses Create order in existing cart and checks response; report any new error for bounded diagnosis.
