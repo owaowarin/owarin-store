@@ -1,0 +1,22 @@
+// Web app UX harness (2026-10-07): renders Index.html with mock data, no Sheet access. Cloud: node webapp-ux-harness.cjs "<Web App dir>" <outDir>  (Playwright at /opt/node-tools)
+const fs=require('fs'),path=require('path');const {chromium}=require('/opt/node-tools/node_modules/playwright');
+const W=process.argv[2],OUT=process.argv[3];
+let html=fs.readFileSync(path.join(W,'Index.html'),'utf8').replace(/<\?!=\s*_w2Include_\("(\w+)"\)\s*\?>/g,(m,n)=>(t=>n==='W2Suggest'?t.replace(/^<script>\s*/,'').replace(/\s*<\/script>\s*$/,''):t)(fs.readFileSync(path.join(W,n+'.html'),'utf8')));
+const rows=[];const pubs=['SQUARE ENIX','ENIX','CAPCOM','KONAMI','NAMCO'];const st=['Instock','Instock','Sold','New Arrival','Auction'];
+for(let i=0;i<40;i++)rows.push({row:i+3,source:'GGB',itemUid:'U'+i,name:(i%3?'ドラゴンクエストⅤ 公式ガイドブック ':'FINAL FANTASY VII ULTIMANIA ')+'Vol.'+i+(i%7==0?' (RESTOCK-02)':''),status:st[i%5],publisher:pubs[i%5],platform:'PS2',genre:'RPG',subGenre:'',type:'Guide',condition:['A','B','S','C'][i%4],original:1500,cost:200,suggested:450,price:450+i*10,marketplace:'',grossProfit:250,productId:'GGB-'+String(100+i),priceContentLists:'',soldDate:'',listedDate:'2026-09-01',copyFlags:'',rarity:'',marketRef:'',refNote:'',priceRange:'',maxGRef:'',baseTitle:'X'+i});
+const boot={GGB:rows,MAG:rows.slice(0,8).map(r=>({...r,source:'MAG',productId:'MAG-'+r.row})),settings:{ship:{base:50,step:10,cap:100},bank:{no:'xxx',bank:'K',account:'A'},orderPrefix:'OW'},sheetUrl:'#',generatedAt:new Date().toISOString()};
+const mock=`<script>window.__boot=${JSON.stringify(boot)};window.__calls=[];function __mk(){var r={_s:null,_f:null,withSuccessHandler:function(x){r._s=x;return r},withFailureHandler:function(x){r._f=x;return r},withUserObject:function(){return r},api:function(a,p){window.__calls.push(a);var s=r._s;setTimeout(function(){var d=a==='inventory.bootstrap'?window.__boot:(/list|search|labels.get/.test(a)?[]:{});s&&s(JSON.stringify({ok:true,data:d}))},150)}};return r}window.google={script:{run:new Proxy({},{get:function(t,k){var r=__mk();return r[k]}})}};</script>`;
+html=html.replace('<head>','<head>'+mock);fs.writeFileSync(path.join(OUT,'page.html'),html);
+(async()=>{const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium-1194/chrome-linux/chrome'});
+for(const [name,vp] of [['mobile',{width:390,height:844}],['desktop',{width:1366,height:850}]]){
+ const pg=await b.newPage({viewport:vp});const errs=[];pg.on('pageerror',e=>errs.push(e.message));pg.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
+ await pg.goto('file://'+path.join(OUT,'page.html'));await pg.waitForTimeout(2000);console.log(name,'calls',JSON.stringify(await pg.evaluate(()=>window.__calls)),'rows',await pg.evaluate(()=>document.querySelectorAll('[data-sku],[data-src]').length));
+ await pg.screenshot({path:path.join(OUT,name+'-1-inventory.png')});
+ const m=await pg.evaluate(()=>({sw:document.documentElement.scrollWidth,cw:innerWidth,nav:[...document.querySelectorAll('nav button, nav a')].map(e=>e.textContent.trim()),small:[...document.querySelectorAll('button,input,select,a')].filter(e=>{const r=e.getBoundingClientRect();return r.width>0&&r.height>0&&r.height<32}).length,total:[...document.querySelectorAll('button,input,select,a')].filter(e=>e.getBoundingClientRect().width>0).length,thin:[...document.querySelectorAll('*')].filter(e=>{const c=getComputedStyle(e);return e.childNodes.length&&[...e.childNodes].some(n=>n.nodeType==3&&n.textContent.trim())&&parseFloat(c.fontSize)<12&&e.getBoundingClientRect().width>0}).length,noLabel:[...document.querySelectorAll('input,select,textarea')].filter(e=>e.getBoundingClientRect().width>0&&!e.labels?.length&&!e.getAttribute('aria-label')&&!e.placeholder).map(e=>e.id)}));
+ console.log(name,JSON.stringify(m));
+ // try add to cart via first cart button
+ const cartBtn=await pg.$('[data-act="cart"], button:has-text("cart"), button:has-text("🛒")');console.log(name,'cartBtn',!!cartBtn);
+ if(cartBtn){await cartBtn.click().catch(e=>console.log('click',e.message));await pg.waitForTimeout(400);}
+ for(const t of await pg.$$('nav button, nav a')){const tx=(await t.textContent()).trim();await t.click().catch(()=>{});await pg.waitForTimeout(500);await pg.screenshot({path:path.join(OUT,name+'-tab-'+tx.replace(/[^A-Za-z0-9ก-๙]+/g,'_').slice(0,20)+'.png')});}
+ console.log(name,'errors',JSON.stringify(errs.slice(0,8)));await pg.close();}
+await b.close();})();
