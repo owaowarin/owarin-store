@@ -1,5 +1,5 @@
-# Next step — web app DNA + UX v43 (prepared 2026-10-07 by Opus; execute with Sonnet)
-Read `00 Docs/STATE.md`, then `00 Docs/PLAN_2026-10-07_webapp-dna-ux.md` (the whole plan, it is short).
-Owner-approved scope for this run: A1, A2, A3 + B items: <owner fills: none / B1 B2 B3 B4>.
-Do steps in board order. Stop and report on any failed preflight hash, failed test, or a change in money accept/reject behaviour.
-Give the owner the paste + deploy steps in Thai, click-level, and wait for their reply before marking C1 PASS.
+# Next step — web app DNA + UX release v43 (prepared 2026-10-07 by Opus; execute with Sonnet)
+Read `00 Docs/STATE.md`, then `00 Docs/PLAN_2026-10-07_webapp-dna-ux.md` (whole file).
+Owner decision 2026-10-07: do ALL steps (S1, A1, A2, B1–B6, T1, D1, C1, A3) and update every related file in §7. Do not ask again.
+Apply the edits verbatim from the plan; every anchor must match once. Stop and report on a failed preflight hash, a failed test, a missing anchor, or any change in money accept/reject behaviour.
+Give the owner the C1 paste + deploy steps in Thai, click-level, then wait for their reply before marking C1 PASS (owner-confirmed).

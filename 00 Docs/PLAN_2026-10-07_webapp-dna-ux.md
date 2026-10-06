@@ -1,82 +1,184 @@
-# PLAN — Web app design DNA + UX cleanup (v43)
+# PLAN — Web app design DNA + UX cleanup (release v43)
 
 จัดทำ: 2026-10-07 (Wednesday) · planner: Opus · executor: Sonnet · rules 2026-10-07 · D41
-Stream B (Add / Cart / Orders / Label). One writer. No new agent/chat. No P0/P1 restart, no LAB.
+Stream B (Add / Cart / Orders / Label). One writer. No new agent/chat. No P0/P1 restart, no LAB, no production data write.
+**Owner decision 2026-10-07: fix ALL items (A1–A3, B1–B6) and update every related file.** Do not ask again.
 
 ## 0. Status board
 
-| Step | What | Owner OK needed | Status | Evidence |
-|---|---|---|---|---|
-| A0 | Preflight: live = repo v42 | no | DONE 2026-10-07 | `04 Design Tools/logs/webapp-sync-audit_20261007.csv` (10/10 SHA256 match, Drive modifiedTime 2026-10-06T13:16:45Z) |
-| A1 | W2LabelUI colours → tokens with fallbacks | yes (code) | TODO | |
-| A2 | LabelDialog Arial → documented exception | no (docs only) | TODO | |
-| A3 | STATE + HANDOFF + logs for this stream | no | TODO | |
-| B1 | Mobile nav: show that more tabs exist | yes (code) | TODO (optional) | |
-| B2 | Cart money error names the field + focuses it | yes (code) | TODO (optional) | |
-| B3 | Toast hides when a modal/tab changes | yes (code) | TODO (optional) | |
-| B4 | Mobile header: count/title do not wrap | yes (code) | TODO (optional) | |
-| C1 | Pair bump v43, tests, owner paste + deploy | owner clicks | TODO | |
+| Step | What | Status | Evidence |
+|---|---|---|---|
+| A0 | Preflight: live = repo v42 | DONE 2026-10-07 | `04 Design Tools/logs/webapp-sync-audit_20261007.csv` (10/10 SHA256, Drive modifiedTime 2026-10-06T13:16:45Z) |
+| S1 | Packet + backup + pair bump v43 | TODO | |
+| A1 | W2LabelUI colours → tokens with fallbacks | TODO | |
+| A2 | LabelDialog Arial = documented exception | TODO | |
+| B1 | Phone nav: fade + active tab scrolled into view | TODO | |
+| B2 | Money error names + focuses the bad field | TODO | |
+| B3 | Toast hides on tab change / modal open | TODO | |
+| B4 | Phone header does not wrap | TODO | |
+| B5 | Phone touch targets ≥ 36–40 px | TODO | |
+| B6 | FAB hides while scrolling on phone | TODO | |
+| T1 | Tests: new `dna-ux.test.cjs` + all suites + harness | TODO | |
+| D1 | Related docs updated (list §7) | TODO | |
+| C1 | Owner paste + deploy Version 7, owner confirms | TODO | |
+| A3 | Session close (STATE, HANDOFF, logs) | TODO | |
 
-Ship A1 (+ any approved B items) as ONE release v43. A2/A3 are docs-only and can land without a release.
+Order: S1 → A1 → A2 → B1…B6 → T1 → D1 → C1 → A3. Ship everything as ONE release v43.
 
-## 1. Facts the executor must not re-derive
+## 1. Facts — do not re-derive
 
-- Live project `webapp` (1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp) = repo `03 Apps Script/Web App` revision `W1-SUBSIDY0-20261006-01/v42@AD586F22…1263`; /exec = deployment Version6. No ChatGPT edit after that (checked 2026-10-07).
-- The cloud session cannot read or write Apps Script. The owner pastes files and deploys; the executor gives click-level steps.
-- DNA (`03 Apps Script/Web App/owarin-webapp-plan_v4.1-EN.md` §2.1): bg hsl(0 0% 5%), fg 95%, card 8%, input 15%, border 18%, gold 43 76% 52% (muted 43 40% 35%), radius 0, Outfit 300 + Shippori Mincho, hairline borders, 2-px scrollbar.
-- **Trap:** `W2LabelUI.html` is included in BOTH `Index.html` (has `:root` tokens) AND `LabelDialog.html` (Sheets dialog, NO tokens). Every `var(--x)` must carry a fallback: `var(--card,#151515)`. Without it the Sheets Label Tool turns transparent/black-on-black.
-- UX test harness (mock data, no Sheet access): `04 Design Tools/webapp-ux-harness.cjs` (render + screenshots) then `04 Design Tools/webapp-ux-flow.cjs` (Cart/Add flow); output to `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/ux/`. Baseline result: 0 JS errors, 7/7 test suites PASS, Cart default 0 PASS, blank subsidy blocked PASS.
+- Live `webapp` project 1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp = repo revision `W1-SUBSIDY0-20261006-01/v42@AD586F22…1263`; /exec = deployment **Version 6**.
+- The cloud session cannot read/write Apps Script. The owner pastes and deploys; give Thai click-level steps.
+- DNA = `03 Apps Script/Web App/owarin-webapp-plan_v4.1-EN.md` §2.1 (dark, gold, radius 0, Outfit + Shippori Mincho, hairlines).
+- **Trap 1:** `W2LabelUI.html` is included in `Index.html` (has `:root` tokens) AND `LabelDialog.html` (Sheets dialog, NO tokens). Every `var(--x)` in W2LabelUI MUST have a fallback `var(--x,#hex)`.
+- **Trap 2:** Sheets "Labels > Open Label Tool" runs the SAVED code immediately (no deployment). The web /exec changes only at the new deployment version. So the owner saves all files in one sitting, then deploys.
+- **Trap 3:** B2 touches the money path. Only messages/focus/outline may change. Accept/reject set must stay identical (§5 T1 matrix). Any difference = STOP.
+- Harness (mock data, no Sheet): `node "04 Design Tools/webapp-ux-harness.cjs" "03 Apps Script/Web App" <out>` then `node "04 Design Tools/webapp-ux-flow.cjs" <out>`. **Planner dry-run 2026-10-07 (scratch copy, all §3/§5 edits applied verbatim): every anchor matched once; 0 JS errors phone+desktop; all phone buttons ≥ 36 px; `.brand` 28 px, `#count` 14 px; blank subsidy toast = "Shipping Subsidy — ใส่ตัวเลข (0 ได้)"; nav fade visible.** Expect the same numbers. Baseline before edits: 0 JS errors; phone 390×844: chips 25 px, Add-to-cart 29 px, selects 33 px, nav 37 px, `.brand` 45 px tall, `#count` 28 px tall (wrapped).
 
-## 2. Step A1 — W2LabelUI colours (owner OK first)
+## 2. S1 — packet, backup, pair bump
 
-File: `03 Apps Script/Web App/W2LabelUI.html`, line 2 `<style>` only. No JS change.
+Packet folder `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/` holding `build.py` (copy the pattern of `W1-SUBSIDY0-20261006-01/build.py`: sha helper, `log()` to `changes.csv`, `replace()` with `count==1` assert), `before/`, `candidate/`, `revision.json`, `result.md`, `UNDO.md`, `ux/`.
+1. Assert SHA256 of the 10 repo files = `W1-SUBSIDY0-20261006-01/revision.json` hashes. Not equal → STOP, report.
+2. Copy the 10 files to `before/`; full `Code_v42.gs` + `WebApp_v42.gs` to `03 Apps Script/Web App/backup/pre-v43-20261007/`.
+3. Create `Code_v43.gs` / `WebApp_v43.gs`: only the header text `v42` → `v43` (assert exactly 2 hits per file, as build.py did for v41→v42). Add one header line under the title in each: `// v43 (2026-10-07): UI only — DNA tokens in W2LabelUI, phone nav/header/touch/FAB, field-specific money errors. Server unchanged.`
+4. Replace `Code_v42.gs` / `WebApp_v42.gs` with 1-line stubs, same wording as the current `Code_v41.gs` stub: `// Full source archived: backup/pre-v43-20261007/Code_v42.gs; active paired source is v43.`
+5. Log every write as DRYRUN row then result row (source → destination, before hash → after hash).
 
-| Now | Replace with | Why |
+## 3. A1 — W2LabelUI.html (line 2 `<style>` only)
+
+| Find (exact) | Replace | Count |
 |---|---|---|
-| `#000b` (overlay) | `hsl(0 0% 0% / .73)` | same colour, no token exists |
-| `#151515` | `var(--card,#151515)` | panel |
-| `#eee` (×2) | `var(--fg,#eee)` | text |
-| `#ad914d` | `var(--gold-muted,#ad914d)` | panel hairline |
-| `#222` (×2) | `var(--input,#222)` | inputs, suggest list |
-| `#555` | `var(--border,#555)` | input hairline |
-| `#63532e` | `var(--gold-muted,#63532e)` | suggest hover |
-| `#ddd` (`#w2Preview`) | keep | paper preview of the label, must stay light |
+| `background:#000b` | `background:hsl(0 0% 0% / .73)` | 1 |
+| `background:#151515` | `background:var(--card,#151515)` | 1 |
+| `color:#eee` | `color:var(--fg,#eee)` | 2 |
+| `border:1px solid #ad914d` | `border:1px solid var(--gold-muted,#ad914d)` | 1 |
+| `background:#222` | `background:var(--input,#222)` | 2 |
+| `border:1px solid #555` | `border:1px solid var(--border,#555)` | 1 |
+| `background:#63532e` | `background:var(--gold-muted,#63532e)` | 1 |
+| `#w2Preview{…background:#ddd` | keep (label paper preview) | — |
 
-Rules: targeted string replacement with count asserts (pattern = `04 Design Tools/logs/W1-SUBSIDY0-20261006-01/build.py`); radius stays 0; no other line changes.
-Accept: every hex left in the `<style>` sits inside a `var(--x,#hex)` fallback except `#w2Preview` `#ddd`; harness screenshots of Orders → label modal in Index before/after; LabelDialog rendered standalone (no tokens) still shows dark panel + light text (fallback proof).
+Before editing, assert each count. No `border-radius` may be added.
 
-## 3. Step A2 — LabelDialog font (docs only)
+## 4. A2 — LabelDialog font
 
-Keep `LabelDialog.html` Arial: it is a small Google Sheets dialog, Google fonts there add load time for no gain. Add one line to §2.1 of `owarin-webapp-plan_v4.1-EN.md`: "Exception: LabelDialog.html (Sheets dialog) uses Arial by design, 2026-10-07." Append a CLOSED row to `04 Design Tools/logs/decisions_2026-10-07.csv` ONLY after the owner agrees (default = keep Arial).
+No code change. In `owarin-webapp-plan_v4.1-EN.md` §2.1 append: `Exception: LabelDialog.html (Sheets dialog) keeps Arial by design (2026-10-07, owner).` Add decision row `WEB-DNA-1` CLOSED to `04 Design Tools/logs/decisions_2026-10-07.csv` (owner chose "fix all"; default keep Arial accepted by the plan). Same CSV quoting/BOM as the existing rows.
 
-## 4. Step B — UX quick wins found 2026-10-07 (each optional, owner picks)
+## 5. B1–B6 — Index.html (exact edits)
 
-Measured on 390×844 (phone) and 1366×850 with mock data:
+**CSS** — insert one block right after line `@media(min-width:700px){ .modal-bg{align-items:center} html,body{font-size:15px} }`:
+```css
+/* v43 phone UX (2026-10-07) */
+nav.more{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}
+.bad{outline:1px solid var(--destructive);outline-offset:-1px}
+.fab{transition:opacity .15s}.fab.hide{opacity:0;pointer-events:none}
+@media(max-width:600px){
+  nav button{padding:14px 12px 12px}
+  .chip{min-height:36px}
+  .btn,.btn.small,.seg button{min-height:36px}
+  select,input:not([type=checkbox]){min-height:40px}
+}
+@media(max-width:420px){
+  .brand{letter-spacing:.2em;font-size:12px}
+  .brand .g,#count{white-space:nowrap}
+}
+```
 
-- **B1 (medium)** Phone shows INVENTORY…REVIEW; BOOKING/CONTENTS/TOOLS are off-screen and the nav scrollbar is hidden (`nav{scrollbar-width:none}` + `nav::-webkit-scrollbar{display:none}`). Fix: add a right-edge fade `nav{mask-image:linear-gradient(90deg,#000 85%,transparent)}` only under `@media (max-width:600px)`, and on tab click `btn.scrollIntoView({inline:'center',block:'nearest'})`. No layout change on desktop.
-- **B2 (medium)** Blank/invalid money gives a generic toast "Enter valid prices, Customer Shipping and Shipping Subsidy (0 is allowed)". Fix: in the existing validation, find the FIRST invalid input, add class `bad` (`outline:1px solid var(--destructive)`), `focus()` it, and name it in the toast (e.g. "Shipping Subsidy ต้องเป็นตัวเลข (0 ได้)"). Must not change what is accepted/rejected: blank still rejects, 0 still accepted, Customer Shipping never substitutes subsidy. Re-run subsidy/regression tests.
-- **B3 (low)** Toast (4.2 s) stays on top of the newly opened Add form/Save button. Fix: hide `#toast` in the tab switch and modal-open functions.
-- **B4 (low)** Phone header wraps "BACK-OFFICE" and "48 / 48". Fix: under `@media (max-width:420px)` shrink brand letter-spacing and `white-space:nowrap` on the counter.
-- Not in scope (recorded only): chips are 30 px tall (< 44 px touch guideline); FAB covers part of a mid-list "Add to cart" while scrolling (list already has 90 px bottom padding, so the last row is reachable). Raise later only if the owner reports mis-taps.
+**B1 + B3 — `showView(v)`**: before its closing `}` (after `if (v === 'contents') loadContents(false);`) add:
+```js
+  $('toast').style.display = 'none';
+  var navOn = document.querySelector('nav button.on');
+  if (navOn && navOn.scrollIntoView) navOn.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+  navFade();
+```
+**B3 — `showModal`**: replace `function showModal(id, on){ $(id).classList.toggle('open', !!on); }` with
+`function showModal(id, on){ if (on) $('toast').style.display = 'none'; $(id).classList.toggle('open', !!on); }`
+(hide only on OPEN — success toasts are shown after modals close and must survive.)
 
-## 5. Step C1 — release v43 (copy the Session53 pattern exactly)
+**B1 + B6 + B2 helpers** — add right after the line `$('fab').addEventListener('click', openAdd);`:
+```js
+function navFade(){ var n = document.querySelector('nav'); n.classList.toggle('more', n.scrollLeft + n.clientWidth < n.scrollWidth - 4); }
+document.querySelector('nav').addEventListener('scroll', navFade, { passive: true });
+window.addEventListener('resize', navFade);
+navFade();
+var fabTimer = null;
+window.addEventListener('scroll', function(){
+  var f = $('fab'); if (window.innerWidth > 600 || f.style.display === 'none') return;
+  f.classList.add('hide'); clearTimeout(fabTimer);
+  fabTimer = setTimeout(function(){ f.classList.remove('hide'); }, 700);
+}, { passive: true });
+document.addEventListener('input', function(e){ if (e.target.classList && e.target.classList.contains('bad')) e.target.classList.remove('bad'); });
+function markBad(el, msg){
+  var old = document.querySelectorAll('.bad'); for (var i = 0; i < old.length; i++) old[i].classList.remove('bad');
+  if (el) { el.classList.add('bad'); el.focus(); }
+  toast(msg);
+}
+```
 
-Packet: `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/` with build.py, candidate/, before/, changes.csv, revision.json, result.md, UNDO.md.
-1. Preflight: SHA256 of repo files = `W1-SUBSIDY0-20261006-01/revision.json` hashes. If not equal STOP and report.
-2. Copy full v42 pair to `backup/pre-v43-20261007/`; `Code_v42.gs` / `WebApp_v42.gs` become 1-line stubs (like the v41 stubs); new `Code_v43.gs` / `WebApp_v43.gs` = header `v42`→`v43` only (assert count == 2 each).
-3. Apply A1 (+ approved B items) to candidate files; log EDIT-DRYRUN then EDIT rows (source → destination, before → after hash).
-4. Re-point tests that name v42: `image-url.test.js`, `p1-add.test.cjs`, `fb-catalogue.test.js`, `meta-pipeline.test.js`; update `README.md` table. Run all 7 suites + `W1-SUBSIDY0-20261006-01/subsidy.test.cjs` + `regression.cjs` (re-pointed). All PASS or STOP.
-5. Harness screenshots before/after (phone + desktop): Inventory, Cart, label modal, LabelDialog standalone. Attach to result.md.
-6. Owner steps (give in Thai, click-level): open Apps Script `webapp` → for each changed file (Code.gs, webapp.gs, W2LabelUI.html, + Index.html if B items) select all → paste repo text → Ctrl+S → title bar shows "Saved to Drive" → Deploy → Manage deployments → ✏️ → Version: New version → Description `v43 DNA/UX 2026-10-07` → Deploy. Owner sends back: the Version number and one phone screenshot committed to the repo (commit id only).
-7. After owner reports: record PASS — owner-confirmed with their exact message; never claim agent-verified live.
-UNDO: Manage deployments → Version 6; data unaffected (UI-only change).
+**B2 — `confirmSold()`**: replace the single validation line
+`if(w1StrictMoney(p.customerShipping)===null||w1StrictMoney(p.shippingSubsidy)===null||p.items.some(function(i){return w1StrictMoney(i.price)===null;})){toast('Enter valid prices, Customer Shipping and Shipping Subsidy (0 is allowed)');return;}`
+with
+```js
+ var badIdx=-1;p.items.some(function(i,k){if(w1StrictMoney(i.price)===null){badIdx=k;return true;}return false;});
+ if(badIdx>=0){markBad(document.querySelector('.cl-price[data-idx="'+badIdx+'"]'),'Price of item '+(badIdx+1)+' — ใส่ตัวเลข เช่น 450');return;}
+ if(w1StrictMoney(p.customerShipping)===null){markBad($('cShip'),'Customer Shipping — ใส่ตัวเลข (0 ได้)');return;}
+ if(w1StrictMoney(p.shippingSubsidy)===null){markBad($('cShipShop'),'Shipping Subsidy — ใส่ตัวเลข (0 ได้)');return;}
+```
+**B2 — single sold form** (line with `toast('Valid price/subsidy required')`): replace that `toast(...)` call with
+`markBad(w1StrictMoney(price)===null?$('soldPrice'):$('soldShip'),w1StrictMoney(price)===null?'Price — ใส่ตัวเลข เช่น 450':'Shipping Subsidy — ใส่ตัวเลข (0 ได้)')`
+Keep the surrounding `if(...)` condition byte-identical.
 
-## 6. Step A3 — session close (every time)
+Every find string must match exactly once (assert); if any anchor is missing STOP and report — do not improvise a different location.
 
-Log CSV, decisions CSV (only owner-closed items), this board ticked with evidence, `00 Docs/STATE.md` overwrite (≤ 80 lines, Stream 1 next step), `00 Docs/HANDOFF_2026-10-07.md` (one page), `_logs/INCIDENTS.csv` for any failed step, commit via `C:\Users\JIN\ads-optimizer\tools\pc\b1-store-commit.ps1` on PC or git push in cloud on the assigned branch.
+## 6. T1 — tests (all must PASS; never weaken an assertion)
 
-## 7. Risks
+1. Re-point v42 → v43 in `image-url.test.js`, `p1-add.test.cjs`, `fb-catalogue.test.js`, `meta-pipeline.test.js` (filename strings only).
+2. New `03 Apps Script/Web App/dna-ux.test.cjs` (node, no deps):
+   - W2LabelUI: every hex in `<style>` is inside `var(--…,#hex)` except `#w2Preview` `#ddd`; no `border-radius` other than 0.
+   - Money matrix through the real `w1StrictMoney` extracted from Index.html (same regex extraction style as `Index.test.js`): `'0'`,`'12.50'`,`'450'` accepted; `''`,`' '`,`'-1'`,`'1.234'`,`'abc'`,`'1e3'` rejected — identical results to the v42 function in `backup/pre-v43-20261007/`… (Index v42 lives in packet `before/Index.html`; compare both).
+   - `confirmSold` order: run the extracted function in a VM with stubbed `$`, `toast`, `markBad`, `w1Run`, `w1OpenReview`; cases: bad item price → markBad on `.cl-price[data-idx="0"]` and no `w1Run`; bad customer → `cShip`; blank subsidy → `cShipShop`; all valid SHOP → `w1Run('orders.create')` called once with payload unchanged vs v42.
+3. Run: `Index.test.js`, `R2Upload.test.js`, `fb-catalogue.test.js`, `image-url.test.js`, `meta-pipeline.test.js`, `p1-add.test.cjs`, `p1-ui.test.cjs`, `dna-ux.test.cjs`, plus `04 Design Tools/logs/W1-SUBSIDY0-20261006-01/subsidy.test.cjs` and its `regression.cjs` re-pointed copies placed in the new packet (do not edit the old packet).
+4. Harness on phone + desktop, save screenshots in packet `ux/`; record in `result.md`: 0 JS errors; every phone button ≥ 36 px (REFRESH, ALL SHEETS/GUIDE BOOKS/MAGAZINE included), selects/inputs ≥ 40, `.brand` ≤ 32 px, `#count` ≤ 16 px; nav has class `more` at load and not after scrolling to the end; TOOLS click scrolls it into view; blank subsidy → outline on `#cShipShop` + toast names it; toast hidden after opening Add form; desktop 1366 screenshots unchanged except colours/size (compare visually).
+5. LabelDialog standalone render (strip `<?!= … ?>` like the harness, no tokens): panel dark, text light (fallback proof) — screenshot in `ux/`.
 
-- Missing fallback in A1 → Sheets Label Tool unreadable. Guard: standalone LabelDialog screenshot.
-- B2 touches the money-validation path → only presentation may change; any change in accept/reject = STOP.
-- Owner pastes partial file (DOM truncation ~200 KB lesson) → compare saved LF SHA256 with candidate before deploy if a capture route exists; otherwise owner-confirmed only.
+## 7. D1 — related files to update in the same pass
+
+| File | Change |
+|---|---|
+| `03 Apps Script/Web App/README.md` | rows Code/WebApp v42 → v43, describe v43 UI-only, backup path, add `dna-ux.test.cjs` row |
+| `03 Apps Script/Web App/owarin-webapp-plan_v4.1-EN.md` §2.1 | A2 exception + 2 rules: "partials shared with LabelDialog use `var(--x,#fallback)`"; "phone ≤600 px: touch targets ≥ 36 px (inputs 40)" |
+| `00 Docs/HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md` | header line → v43 / Version 7; one Thai line: error now names the field and outlines it red |
+| `00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md` | status lines v42/Version6 → v43/Version7 (targeted) |
+| `00 Docs/IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md` | append "Session54 — DNA/UX v43" (≤ 15 lines; >50 KB file: append with targeted edit, do not rewrite) |
+| `OWARI-MASTER-CONTEXT_EN_2026-09-13.md` | lines 272/278/536: v42 → v43, deployment 6 → 7 |
+| `CLAUDE.md` | new dated rule (English): "Partials included by both Index.html and LabelDialog.html must use `var(--token,#fallback)`; LabelDialog has no tokens. (2026-10-07)" |
+| `00 Docs/STATE.md` | overwrite ≤ 80 lines (A3) |
+| `00 Docs/HANDOFF_2026-10-07.md` | append Session54 section, ≤ 1 page |
+| `04 Design Tools/logs/decisions_2026-10-07.csv` | WEB-DNA-1 (Arial) + WEB-DNA-2 "fix all A1–B6" CLOSED |
+| `_logs/INCIDENTS.csv` | any failed step/retry, 7-column layout |
+| `prompts/webapp-design-dna.md` | replace with next-step prompt after release |
+| this plan | tick board with evidence |
+
+Leave historical logs/handoffs as they are (dated evidence).
+
+## 8. C1 — owner paste + deploy (give in Thai, click-level)
+
+Files the owner pastes into Apps Script `webapp`: `Code.gs` ← `Code_v43.gs`, `webapp.gs` ← `WebApp_v43.gs`, `Index.html`, `W2LabelUI.html`. Others unchanged.
+Steps per file: open file in left list → click into code → Ctrl+A → Delete → paste repo text (owner opens the repo file on PC: `C:\Users\JIN\owarin-store\03 Apps Script\Web App\<file>` → Ctrl+A → Ctrl+C) → Ctrl+S → title bar "Saved to Drive"; line 2 of Code.gs shows `Code.gs v43`.
+Then Deploy → Manage deployments → pencil icon → Version: **New version** → Description `v43 DNA/UX 2026-10-07` → Deploy → note the Version number (expect 7).
+Owner check on phone: open web app, refresh, see nav fade, put an item in Cart, clear the Subsidy box, press Create order → red outline + toast naming Shipping Subsidy; then type 0 again. Do NOT complete an order for testing.
+Owner sends back: Version number + "ผ่าน"/problem. Record as PASS — owner-confirmed with the exact message. Never claim agent-verified live.
+UNDO: Manage deployments → pencil → Version 6 → Deploy (web). For the Sheets Label Tool, paste back `before/W2LabelUI.html` (and the v42 trio) and save. UI-only: no data to restore.
+
+## 9. A3 — session close
+
+CLAUDE.md checklist 1–9: log CSV (packet `changes.csv` + `logs/WEBAPP-DNA-UX-20261007-01.csv` summary), decisions, this board, STATE overwrite, HANDOFF, related files (§7), rules (CLAUDE.md line), verify by read-back, live actions with time + who clicked. Commit + push on the assigned branch (cloud) or `C:\Users\JIN\ads-optimizer\tools\pc\b1-store-commit.ps1` (PC).
+
+## 10. Risks
+
+| Risk | Guard |
+|---|---|
+| Missing fallback → Sheets Label Tool unreadable | T1.2 hex check + T1.5 standalone screenshot |
+| B2 changes money accept/reject | T1.2 matrix vs v42 function; STOP on diff |
+| Owner pastes partial file (~200 KB DOM truncation lesson) | Paste from the PC file via Ctrl+A/Ctrl+C, not from a browser view; check line 2 header and that the file ends with `</html>` / last function |
+| Sheets dialog live before /exec deploy | Owner saves all 4 files in one sitting, then deploys immediately |
+| `min-height` on inputs breaks a dense desktop layout | rules sit inside `max-width:600px` only; desktop screenshot compare |
