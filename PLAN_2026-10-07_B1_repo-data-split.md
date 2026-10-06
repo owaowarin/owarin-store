@@ -49,7 +49,7 @@ Split rule read off the chart: **code + docs** (the arrows) → git; **media + d
 | `C:\Users\JIN\owarin-store\` | inner `OWARIN STORE\` code + docs: `00 Docs`, `03 Apps Script`, `04 Design Tools`, `Shopee`, `Claude outputs`, `AI Usage Widget`, `Facebook - Group`, `.claude`, root files (`AGENTS.md`, `CLAUDE.md`, …); outer `00 Docs` + root files → `_from-outer-root\` | **owaowarin/owarin-store** (private, created 2026-10-07); `.gitignore` in this repo |
 | `C:\Users\JIN\owarin-store\<media name>` | **junctions** → `C:\Users\JIN\OWARIN-DATA\<media name>` (7 folders below) — relative paths in tools keep working | ignored |
 | `C:\Users\JIN\owarin-retro-guides_1\` | web repo, moved whole (history + `node_modules` intact) | owaowarin/owarin-retro-guides_1 (exists, private) |
-| `C:\Users\JIN\owarin-back-house-lab\` | Back House LAB, moved whole (its `.git` kept) | none yet → open item 3 |
+| `C:\Users\JIN\owarin-back-house-lab\` | Back House LAB, moved whole (its `.git` kept); separate project — anything LAB-related goes in this repo (owner 2026-10-07) | **owaowarin/owarin-back-house-lab** (private, created by owner 2026-10-07; `.gitignore` pushed `1f657e0`) |
 | `C:\Users\JIN\OWARIN-DATA\` | `All Products`, `_r2_upload`, `GGB Online Files`, `_fb_albums`, `Supplier`, `_exports`, `Facebook - Catalouge Project`, `outputs`, `OWARIN AFFILIATE`, `_logs\` | never in git |
 | `C:\Users\JIN\Documents\OWARIN-secrets\` | `owarin-store\credential\owarin-store-api-….json` (moved) · `owarin-store\cloudflare token.txt` (moved) · `owarin-retro-guides_1\.env` (copy; the live `.env` stays in the web repo so the site still builds) | never in git |
 | `C:\Users\JIN\_archive\` | `OWARIN STORE-inner-archive_<stamp>\` (old inner `_archive`, minus the token) · `OWARIN STORE-shell_<stamp>\` (the emptied old folder tree) · `_logs\` | never deleted |
@@ -62,27 +62,29 @@ Split rule read off the chart: **code + docs** (the arrows) → git; **media + d
 |---|---|---|
 | owarin-store code + docs | none | GitHub private (Block C) ✅ |
 | owarin-retro-guides_1 | GitHub ✅ | unchanged |
-| Back House LAB | none | **still none** → open item 3 |
-| OWARIN-DATA (≈ 7.5 GB) + ignored files inside the repo folder | none | **still none** → open item 4 |
-| secrets (3 files) | none | **still none** → open item 5 |
+| Back House LAB | none | GitHub private (Block C `-Name owarin-back-house-lab`) ✅ |
+| OWARIN-DATA (≈ 7.5 GB) + ignored files inside the repo folder | owner: "probably in R2" — not verified | B1-G checks what R2 really holds; gaps → decision |
+| secrets (3 files) | none | none — owner accepts for now (one-person setup), noted |
 
 ## 4. Steps
 | Step | Who · model | What | Done when |
 |---|---|---|---|
 | **B1-A** | owner (PowerShell) | `b1-split.ps1` (no switch) = **dry-run**: every planned operation with files/bytes/top extensions and status (READY/DONE/COLLISION/MISSING/REVIEW), files that mention old paths/secret files (file + line numbers only), scheduled tasks that point at OWARIN → `ads-optimizer\_logs\B1_dryrun_<stamp>.csv`, commit + push | owner pastes the commit id; Claude checks: 0 not-ready, every top-level entry has a home, path-ref list read |
 | **B1-B** | owner (PowerShell) | close Claude Desktop, VS Code, Explorer windows on the folder → `b1-split.ps1 -Apply`. Order: tag `cp/B1-start` → **secrets first** → clone owarin-store → media → inner `_archive` → code/docs into the clone → junctions → the 2 repos (moved whole; HEAD + changed-count compared before/after) → outer leftovers → empty shell to `_archive`. Each move = same-volume rename; per-step files/bytes before = after, `Test-Path` source gone / destination present; stops at the first FAIL; re-run skips DONE steps. Log `B1_moves_<stamp>.csv` → ads-optimizer `_logs`, `OWARIN-DATA\_logs`, `_archive\_logs`, `owarin-store\_logs`; push | log all PASS, moved files = 47,716 (or the dry-run total), old folder gone |
-| **B1-C** | owner (PowerShell) | `b1-store-commit.ps1`: `git add -A` in owarin-store; stops (unstages, pushes nothing) on any file > 5 MB, total > 200 MB, a secret-looking file name, or a secret-looking value in a staged file; else commit + push | log PASS, GitHub shows the files |
+| **B1-C** | owner (PowerShell) | `b1-store-commit.ps1` (owarin-store), then `b1-store-commit.ps1 -Name owarin-back-house-lab` (adopts GitHub `main` without touching local files, restores only missing GitHub files such as `.gitignore`): `git add -A`; stops (unstages, pushes nothing) on any file > 5 MB, total > 200 MB, a secret-looking file name, or a secret-looking value in a staged file; else commit + push | both logs PASS, GitHub shows the files |
 | **B1-D** | Claude cloud · Opus | bring `AGENTS.md` / `CLAUDE.md` of owarin-store to **Rules version 2026-10-07 · D41**: new paths (repo / OWARIN-DATA / secrets), remove OneDrive (D37), D36 routing line, D38 Thai chat, D39 PC output via a commit to this repo, D40/D41 close-out, plain Thai with full PC paths, `prompts/<task>.md`, `_logs/INCIDENTS.csv`; owner-wide rules stay in `C:\Users\JIN\.claude\CLAUDE.md` (rules-sync block) — project files keep only project rules + the label. Never touch `04 Design Tools\logs\…\before*` | label present once; grep `OneDrive` = 0 outside `logs\…\before*`; owner pulls |
 | **B1-E** | Claude Code · Sonnet (this PLAN = approval) | fix every path-ref row from B1-A: absolute old paths → repo-relative or env `OWARIN_DATA` / `OWARIN_SECRETS`; key-file paths → `C:\Users\JIN\Documents\OWARIN-secrets\…`; re-point scheduled tasks; syntax check each file; commit | each listed file re-grepped clean; each tool's smoke run named in the commit |
 | **B1-F** | owner (clicks) | re-add the project folder `C:\Users\JIN\owarin-store` in Claude Desktop/Cowork and VS Code; delete stale shortcuts only after checking them | owner confirms |
+| **B1-G** | Claude cloud · Opus, then owner | R2 coverage: after B1-C, read the R2 uploader in `04 Design Tools` (bucket, key source) → read-only PC script lists R2 object names/sizes and compares them with OWARIN-DATA (names, counts, bytes only) → CSV via commit. Expectation to verify: R2 holds the web images (`_r2_upload`), not raw `All Products` snapshots, `Supplier` or the `GGB Online Files` ISOs | coverage CSV read; owner decides backup for what R2 lacks |
+| **B1-H** | owner (PowerShell) | dedupe (owner: "do it", 2026-10-07): `b1-dedupe.ps1` = read-only report (size groups → SHA256; full list stays in `OWARIN-DATA\_logs\`, summary committed) → Claude reviews → `b1-dedupe.ps1 -Apply` turns every extra copy into an NTFS **hard link** to one kept copy: every path and folder snapshot still works, the disk keeps one copy. Per file: re-hash, rename, link, re-hash, then remove the renamed duplicate (identical bytes stay at both paths). Side effects: linked copies share one modified date; an in-place edit of one path changes all (normal "save as new file" breaks the link safely) | apply log PASS, space won = report figure ± skipped |
 
 Rollback: every move is a rename listed in `B1_moves_<stamp>.csv` (source → destination); reverse = move each destination back in reverse order. No step deletes anything.
 
-## 5. Open decisions (owner) — importance · impact · exact action
-1. **High · secret exposure:** `.env` of owarin-retro-guides_1 is in GitHub history. Action: tell Claude where the site is hosted; then (a) set the same variables in the host's settings, (b) `git rm --cached .env` + push, (c) rotate every key in it at its provider. AI default: do it right after B1-B.
-2. **High · secret exposure:** `cloudflare token.txt` sat in plain text in a "to delete" folder. Action: Cloudflare dashboard → My Profile → API Tokens → find the token → Roll (or Delete if unused); B1-B already moves the file to the secrets folder.
-3. **Medium · no backup:** Back House LAB has 0 commits. Action: create private repo `owarin-back-house-lab` at https://github.com/new (Private, no README) → Claude writes a first-commit script with the same guards as Block C. Or say "fold into owarin-store".
-4. **High · data loss risk:** OWARIN-DATA (≈ 7.5 GB, single copy). Options: external drive + weekly `robocopy /E` script (AI default), or Cloudflare R2 bucket (already used for `_r2_upload`), or Google Drive (needs ≥ 8 GB free). Owner picks; Claude writes the script.
-5. **Medium · lock-out risk:** the 3 secrets have no second copy. AI default: store them in a password manager (Bitwarden free), not on a cloud drive in plain text.
-6. **Low · disk:** `All Products` keeps dated snapshot folders (`Instock - 22-09-2026`, `Instock - 05-10-2026`, `All - GGB`) with the same images; dedupe could save GBs. Backlog — separate task after B1.
-7. **Low:** `OWARIN AFFILIATE` (9 files) goes to OWARIN-DATA (AI default); `*.csv`/`*.xlsx` stay out of git (AI default) — say if any CSV is a config table the tools need in git.
+## 5. Owner decisions 2026-10-07 (answers to the first open list)
+1. `.env` in owarin-retro-guides_1 history — **web project on hold**: no action now. Block B still copies the `.env` into the secrets folder; revisit (host env vars, untrack, rotate) when the project restarts.
+2. `cloudflare token.txt` — owner: discard if unused; single-owner repo, so no rotation now. Block B moves it to the secrets folder (never deleted locally); if B1-A/B1-G show nothing uses it, owner may delete the token in the Cloudflare dashboard (My Profile → API Tokens → ⋯ → Delete).
+3. Media backup — owner: "probably in R2" → verify in B1-G before deciding.
+4. Back House LAB — repo created by owner; separate project, LAB material goes there; B1 only moves it and makes its first commit.
+5. Secrets single copy — accepted for now, noted.
+6. `All Products` duplicates — do it → B1-H.
+7. `OWARIN AFFILIATE` → OWARIN-DATA and `*.csv`/`*.xlsx` out of git stay AI defaults until the owner says otherwise.
