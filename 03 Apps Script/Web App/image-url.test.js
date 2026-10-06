@@ -2,12 +2,12 @@ const assert = require("assert");
 const fs = require("fs");
 const vm = require("vm");
 
-const source = fs.readFileSync(__dirname + "/Code_v42.gs", "utf8");
+const source = fs.readFileSync(__dirname + "/Code_v43.gs", "utf8");
 const snippet = source.match(/var R2_PUBLIC_URL[\s\S]*?\nfunction _imageUrl\(pid\) \{[\s\S]*?\n\}\n/);
-assert.ok(snippet, "_r2ImageIndex()/_imageUrl() snippet not found in Code_v42.gs");
+assert.ok(snippet, "_r2ImageIndex()/_imageUrl() snippet not found in Code_v43.gs");
 
 const errSnippet = source.match(/function _looksLikeSheetError\(v\) \{[\s\S]*?\n\}\n/);
-assert.ok(errSnippet, "_looksLikeSheetError() snippet not found in Code_v42.gs");
+assert.ok(errSnippet, "_looksLikeSheetError() snippet not found in Code_v43.gs");
 const _looksLikeSheetError = new Function(errSnippet[0] + "\nreturn _looksLikeSheetError;")();
 
 function run(rows) {

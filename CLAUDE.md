@@ -157,3 +157,7 @@ When the Cart money-validation toast appears, inspect price, Customer Shipping a
 ## Local UI evidence transport (2026-10-06, Session53)
 
 For UTF-8 evidence transfers, concatenate raw network Buffers then decode once; decoding each chunk can introduce replacement characters at multibyte boundaries. Reject mismatched complete LF hashes, recheck native clipboard and retain failed evidence; never attribute transport corruption to live source or weaken equality to proceed.
+
+## Shared partials and LabelDialog (added 2026-10-07)
+
+Partials included by both Index.html and LabelDialog.html (e.g. W2LabelUI.html) must use `var(--token,#fallback)` for every colour; LabelDialog has no `:root` tokens. Phone (≤600 px) touch targets are ≥ 36 px (inputs 40). A new UI state class must be checked by computed style, not only by class presence (input rules carry `outline:none`).

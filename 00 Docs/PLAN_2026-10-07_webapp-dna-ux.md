@@ -9,19 +9,19 @@ Stream B (Add / Cart / Orders / Label). One writer. No new agent/chat. No P0/P1 
 | Step | What | Status | Evidence |
 |---|---|---|---|
 | A0 | Preflight: live = repo v42 | DONE 2026-10-07 | `04 Design Tools/logs/webapp-sync-audit_20261007.csv` (10/10 SHA256, Drive modifiedTime 2026-10-06T13:16:45Z) |
-| S1 | Packet + backup + pair bump v43 | TODO | |
-| A1 | W2LabelUI colours → tokens with fallbacks | TODO | |
-| A2 | LabelDialog Arial = documented exception | TODO | |
-| B1 | Phone nav: fade + active tab scrolled into view | TODO | |
-| B2 | Money error names + focuses the bad field | TODO | |
-| B3 | Toast hides on tab change / modal open | TODO | |
-| B4 | Phone header does not wrap | TODO | |
-| B5 | Phone touch targets ≥ 36–40 px | TODO | |
-| B6 | FAB hides while scrolling on phone | TODO | |
-| T1 | Tests: new `dna-ux.test.cjs` + all suites + harness | TODO | |
-| D1 | Related docs updated (list §7) | TODO | |
-| C1 | Owner paste + deploy Version 7, owner confirms | TODO | |
-| A3 | Session close (STATE, HANDOFF, logs) | TODO | |
+| S1 | Packet + backup + pair bump v43 | DONE 2026-10-07 | `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`result.md, changes.csv |
+| A1 | W2LabelUI colours → tokens with fallbacks | DONE | `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`result.md, changes.csv |
+| A2 | LabelDialog Arial = documented exception | DONE | `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`result.md, changes.csv |
+| B1 | Phone nav: fade + active tab scrolled into view | DONE | `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`result.md, changes.csv |
+| B2 | Money error names + focuses the bad field | DONE | `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`result.md, changes.csv |
+| B3 | Toast hides on tab change / modal open | DONE | `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`result.md, changes.csv |
+| B4 | Phone header does not wrap | DONE | `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`result.md, changes.csv |
+| B5 | Phone touch targets ≥ 36–40 px | DONE | `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`result.md, changes.csv |
+| B6 | FAB hides while scrolling on phone | DONE | `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`result.md, changes.csv |
+| T1 | Tests: new `dna-ux.test.cjs` + all suites + harness | DONE | `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`result.md, changes.csv |
+| D1 | Related docs updated (list §7) | DONE | `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`result.md, changes.csv |
+| C1 | Owner paste + deploy Version 7, owner confirms | WAITING owner | `prompts/webapp-design-dna.md`; live = v42/Version6 until Version 7 |
+| A3 | Session close (STATE, HANDOFF, logs) | DONE except C1 | STATE, HANDOFF Session54, decisions, INCIDENTS |
 
 Order: S1 → A1 → A2 → B1…B6 → T1 → D1 → C1 → A3. Ship everything as ONE release v43.
 
@@ -182,3 +182,9 @@ CLAUDE.md checklist 1–9: log CSV (packet `changes.csv` + `logs/WEBAPP-DNA-UX-2
 | Owner pastes partial file (~200 KB DOM truncation lesson) | Paste from the PC file via Ctrl+A/Ctrl+C, not from a browser view; check line 2 header and that the file ends with `</html>` / last function |
 | Sheets dialog live before /exec deploy | Owner saves all 4 files in one sitting, then deploys immediately |
 | `min-height` on inputs breaks a dense desktop layout | rules sit inside `max-width:600px` only; desktop screenshot compare |
+
+## 11. Execution notes (2026-10-07)
+
+- Deviation: `.bad` outline needs `!important` (inputs carry `outline:none`) — `fix1.py`, CSS only. Final revision in packet `revision.json`.
+- Master context lines 272/278/536 say v43 is a repo candidate; flip to live v43/Version 7 only after the owner confirms C1.
+- Leftover: Cart ✕ 23 px on phone (outside B5 scope).

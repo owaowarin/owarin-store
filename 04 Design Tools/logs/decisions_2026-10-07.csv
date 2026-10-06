@@ -7,3 +7,5 @@
 "2026-10-07","B1-6","Secrets have a single copy: accepted for now","CLOSED","owner chat 2026-10-07"
 "2026-10-07","B1-7","Duplicate images in OWARIN-DATA: replace extra copies with hard links (B1-H)","CLOSED","owner chat 2026-10-07"
 "2026-10-07","B1-8","Media backup: AI default — private R2 bucket owarin-backup, weekly rclone copy (never sync) of OWARIN-DATA except _r2_upload and _logs; dry-run first","CLOSED","owner chat 2026-10-07"
+"2026-10-07","WEB-DNA-1","LabelDialog.html (Sheets dialog) keeps Arial by design; owner chose fix-all, plan default accepted","CLOSED","owner chat 2026-10-07 / PLAN_2026-10-07_webapp-dna-ux §4"
+"2026-10-07","WEB-DNA-2","Fix ALL web app DNA/UX items A1-A3 B1-B6 in one release v43; do not ask again","CLOSED","owner chat 2026-10-07 / prompts/webapp-design-dna.md"

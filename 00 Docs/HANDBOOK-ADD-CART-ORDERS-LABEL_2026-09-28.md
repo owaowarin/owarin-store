@@ -1,6 +1,6 @@
 # OWARIN — Implementation & user handbook
 
-จัดทำ: 2026-10-06T07:55:18.753873+07:00 · Stream B · **W1/W2 LIVE v42 / Version6; Session53 default0 CLOSED**
+จัดทำ: 2026-10-06T07:55:18.753873+07:00 · Stream B · **W1/W2 LIVE v42 / Version6; Session53 default0 CLOSED; v43 DNA/UX ready for Version 7 (owner deploy)**
 
 คู่กับ [แผนหลัก](PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md) ซึ่งเป็นที่เดียวของ priority/requirements/QA; ไฟล์นี้เก็บขั้นตอนใช้และกู้คืน ส่วนผลจริงอยู่ใน Implementation log และ CSV
 
@@ -274,3 +274,5 @@ Session52: Create order toastในภาพเกิดจาก Shipping Subsi
 ## Session53 default0
 
 Cart/หน้าขายรายชิ้นเริ่มที่0; Clear cart/สร้างออเดอร์สำเร็จ/เปิดขายรายชิ้นใหม่กลับ0. จำนวนที่แก้ไว้คงอยู่เมื่อสลับช่องทาง; ค่าส่งลูกค้าแยกต่างหาก. รีเฟรชแท็บเก่าแล้วใส่สินค้าที่อยู่ในตะกร้าที่ยังไม่สร้างออเดอร์ใหม่เพื่อรับรุ่น42. Undo/evidence: `04 Design Tools/logs/W1-SUBSIDY0-20261006-01/UNDO.md`.
+
+v43 (2026-10-07): ถ้ากรอกตัวเลขเงินผิด (ราคา / Customer Shipping / Shipping Subsidy) ข้อความจะบอกชื่อช่องที่ผิด และช่องนั้นจะมีกรอบแดง — แก้แล้วกรอบหายเอง

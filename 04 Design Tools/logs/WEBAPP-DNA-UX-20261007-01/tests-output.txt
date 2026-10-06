@@ -1,0 +1,18 @@
+== Index.test.js
+Index inventory smoke test passed
+== R2Upload.test.js
+R2Upload request-contract test passed
+== fb-catalogue.test.js
+fb-catalogue.test.js: all assertions passed
+== image-url.test.js
+image-url test passed
+== meta-pipeline.test.js
+v28 headless tests passed
+v29 title tests passed
+v30 dedup/title tests passed
+== p1-add.test.cjs
+PASS: 20 Add calls; R1 committed snapshot after sort/SKU reuse/duplicate/removal; R2 fresh header and supplied-field gates; R3 source/status gates; R4 four form
+== p1-ui.test.cjs
+PASS: 20 UI resets, DONE/NOT_FOUND/ERROR retries, historical DONE skips live cache, frozen reload, storage/render failure, timeout/no-callback/late callback, su
+== dna-ux.test.cjs
+PASS dna-ux: W2LabelUI fallbacks; money matrix == v42; confirmSold field targeting; toast/nav/FAB helpers; phone CSS scoped

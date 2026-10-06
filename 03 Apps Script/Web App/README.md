@@ -10,13 +10,13 @@
 **อัปเดต 2026-09-18:** `Code.gs` / `WebApp.gs` (ไม่มีต่อท้าย v20) เป็นโค้ดเก่าที่หลุดคู่กัน
 (`WebApp.gs` เขียนไว้ว่า "คู่กับ Code.gs v17" แต่ `Code.gs` เองอ้างว่าเป็น v19 — ไปคนละทาง
 และไม่มี `doGet()`/`api()` ของตัวเอง ใช้เป็นเว็บแอปไม่ได้) กับสอบเทียบลำดับคอลัมน์ในชีตจริงแล้ว
-ไม่ตรงด้วย → **ย้ายเข้า archive แล้ว ห้ามอัปขึ้น Apps Script อีก** ไฟล์ตัวจริงคือ `Code_v42.gs` + `WebApp_v42.gs` (ติดตั้ง/อ่านกลับร้าน Session53 วันที่2026-10-06; deployment Version6; คู่ v42/v42)
+ไม่ตรงด้วย → **ย้ายเข้า archive แล้ว ห้ามอัปขึ้น Apps Script อีก** ไฟล์ตัวจริงคือ `Code_v43.gs` + `WebApp_v43.gs` (ติดตั้ง/อ่านกลับร้าน Session53 วันที่2026-10-06; deployment Version6; คู่ v42/v42)
 (v20–v31 ถูกแทนที่แล้วเช่นกัน — ดูกฎเวอร์ชันด้านล่าง)
 
 | ไฟล์ | คืออะไร | อัปไปที่ไหน |
 |---|---|---|
-| `Code_v42.gs` | ตรรกะหลัก (v42 = default0 UI + unchanged v41 server; v41 = accepted W1/W2 + fresh Code v32 FB Album changes + guarded native CLIENT metadata migration; v31 = v30 + durable Add journal, same-ID recovery, R1–R4 validation/readback · v30 = v29 + เล่มซ้ำที่เหมือนกัน (ชื่อ+Publisher+Original+Condition+Copy Flags) ลงฟีดแถวเดียว quantity = จำนวนเล่ม + ชื่อตัวพิมพ์ใหญ่ล้วนส่งออกเป็น Capitalised + บันทึก D6 · v29 = v28 + ชื่อสินค้าที่ส่ง Meta ไม่มี (RESTOCK-NN) อีก: ขั้น v20b เขียนชื่อที่ตัดแล้ว + ตัด RESTOCK จาก FB Title ทุกค่าตอน export · v28 = v27 + รีเฟรช Meta feed อัตโนมัติทุกคืน: `refreshMetaFeedAuto`, ด่านกันยอดตก <80%, แท็บ REFRESH LOG, อีเมลแจ้งเตือน, `installMetaRefreshTrigger` · v27 = v26 + P1: PID CHANGES ledger + follow/archive แถวกำพร้าใน FB CATALOGUE, F2: Description ว่างเติมจาก caption template, F4: image index อ่านสดจาก R2 meta/images.csv, เมนู 🚀 Refresh Meta feed + health check): ราคา SP-2, SKU, เมนู Inventory Tools, เครื่องมือ Facebook | Apps Script → `Code.gs` |
-| `WebApp_v42.gs` | API ของเว็บแอป (inventory / cart / sales / booking / contents) — คอมเมนต์หัวไฟล์เขียนไว้ชัดว่า "pairs with Code.gs v42" | Apps Script → `webapp.gs` |
+| `Code_v43.gs` | ตรรกะหลัก (v43 = UI-only DNA/UX, server unchanged; backup `backup/pre-v43-20261007/`; v42 = default0 UI + unchanged v41 server; v41 = accepted W1/W2 + fresh Code v32 FB Album changes + guarded native CLIENT metadata migration; v31 = v30 + durable Add journal, same-ID recovery, R1–R4 validation/readback · v30 = v29 + เล่มซ้ำที่เหมือนกัน (ชื่อ+Publisher+Original+Condition+Copy Flags) ลงฟีดแถวเดียว quantity = จำนวนเล่ม + ชื่อตัวพิมพ์ใหญ่ล้วนส่งออกเป็น Capitalised + บันทึก D6 · v29 = v28 + ชื่อสินค้าที่ส่ง Meta ไม่มี (RESTOCK-NN) อีก: ขั้น v20b เขียนชื่อที่ตัดแล้ว + ตัด RESTOCK จาก FB Title ทุกค่าตอน export · v28 = v27 + รีเฟรช Meta feed อัตโนมัติทุกคืน: `refreshMetaFeedAuto`, ด่านกันยอดตก <80%, แท็บ REFRESH LOG, อีเมลแจ้งเตือน, `installMetaRefreshTrigger` · v27 = v26 + P1: PID CHANGES ledger + follow/archive แถวกำพร้าใน FB CATALOGUE, F2: Description ว่างเติมจาก caption template, F4: image index อ่านสดจาก R2 meta/images.csv, เมนู 🚀 Refresh Meta feed + health check): ราคา SP-2, SKU, เมนู Inventory Tools, เครื่องมือ Facebook | Apps Script → `Code.gs` |
+| `WebApp_v43.gs` | API ของเว็บแอป (inventory / cart / sales / booking / contents) — คอมเมนต์หัวไฟล์เขียนไว้ชัดว่า "pairs with Code.gs v43" | Apps Script → `webapp.gs` |
 | `R2Upload.gs` | คำสั่ง `R2 Images`: snapshot แถว Instock ลง `R2 JOBS` และเปิดดู `IMAGE UPLOADS` — ⚠️ ห้ามประกาศ helper ชื่อซ้ำกับ Code.gs (`_resolveColumns`/`_val`/`_tryWrite`/`_sp2ResetWriteErrors`/`_withLock`) เพราะไฟล์นี้โหลดทีหลังและจะทับทั้งโปรเจกต์ (เหตุการณ์ 2026-09-23) · ตัวใน Apps Script ตอนนี้ = v3 เดิม + rename helper เป็น `_r2*_` (ยังไม่ใช่ไฟล์ v4 ในโฟลเดอร์นี้) | Apps Script → เพิ่มไฟล์ `R2Upload.gs` |
 | `P1Journal.gs` | guarded ADD REQUESTS migration + read-only production readiness; no trigger installed | Apps Script → `P1Journal.gs` |
 | `Index.html` | หน้าเว็บแอปทั้งหมด (SPA) — ไฟล์เดียว ใช้ร่วมกับทุกเวอร์ชันของ Code.gs ไม่มีเวอร์ชันแยก | Apps Script → `Index.html` |
@@ -27,8 +27,9 @@
 | `LabelDialog.html` | Native Sheets Label Tool | Apps Script → `LabelDialog.html` |
 | `ReleaseMigration.gs` | Owner/exact production schema entrypoints; original schema request DONE | Apps Script → `ReleaseMigration.gs`; do not reset/run with new IDs |
 | `Index.test.js` | Smoke test ของ ALL SHEETS + ค่าเริ่มต้น Add Item (`node Index.test.js`) | รันบนเครื่องเท่านั้น |
-| `image-url.test.js` | Test `_r2ImageIndex()`/`_imageUrl()`/`_looksLikeSheetError()` ใน `Code_v42.gs` (`node image-url.test.js`) | รันบนเครื่องเท่านั้น |
-| `fb-catalogue.test.js` | โหลด `Code_v42.gs` แล้วตามด้วย `R2Upload.gs` ในบริบทเดียว (เหมือน Apps Script) → รัน Rebuild descriptions / Build FB CATALOGUE / Build META EXPORT กับข้อมูลจำลอง · จับได้ถ้าไฟล์อื่นทับ helper ของ Code.gs (`node fb-catalogue.test.js`) | รันบนเครื่องเท่านั้น |
+| `image-url.test.js` | Test `_r2ImageIndex()`/`_imageUrl()`/`_looksLikeSheetError()` ใน `Code_v43.gs` (`node image-url.test.js`) | รันบนเครื่องเท่านั้น |
+| `fb-catalogue.test.js` | โหลด `Code_v43.gs` แล้วตามด้วย `R2Upload.gs` ในบริบทเดียว (เหมือน Apps Script) → รัน Rebuild descriptions / Build FB CATALOGUE / Build META EXPORT กับข้อมูลจำลอง · จับได้ถ้าไฟล์อื่นทับ helper ของ Code.gs (`node fb-catalogue.test.js`) | รันบนเครื่องเท่านั้น |
+| `dna-ux.test.cjs` | v43: W2LabelUI มี fallback ทุกสี, money accept/reject = v42, `confirmSold` ชี้ช่องที่ผิด, toast/nav/FAB (`node dna-ux.test.cjs`) | รันบนเครื่องเท่านั้น |
 | `meta-pipeline.test.js` | Test v27 + v28 + v29 + v30 (รวมเล่มซ้ำ/ชื่อตัวพิมพ์ใหญ่) (รีเฟรชอัตโนมัติ: ไม่มี popup, ด่านกัน, REFRESH LOG, อีเมล, trigger): PID CHANGES ledger + chain resolution, `refreshMetaFeed()` end-to-end (rename-in-place / archive orphan / safety-stop), live-index fallback, `_recalcRow` ledger logging (`node meta-pipeline.test.js`) | รันบนเครื่องเท่านั้น |
 | `prepare_r2_upload.py` | เตรียมรูปสำหรับอัป Cloudflare R2 | รันบนเครื่อง (วางที่โฟลเดอร์ OWARIN STORE) |
 
@@ -233,3 +234,7 @@ Create order requires an explicit `Shipping Subsidy — shop contribution`: ente
 ## Session53 — current production v42 / Version6
 
 Shipping Subsidy defaults0 in Cart and single sold form; Clear/success/new sold form reset0 and edited values survive rerender/channel change. Strict blank/invalid rejection and pending/retry payload preserved. Three native saved-source hashes and root10revision hashes PASS; seven helpers retained. Previous full41pair `backup/pre-v42-20261006/`;41root stubs point42. Six root regressions + targeted UI/W2 checks PASS; native UI proof/default/custom/clear and backup/undo in `../../04 Design Tools/logs/W1-SUBSIDY0-20261006-01/`. Historical41release/table-migration evidence remains dated; no schema/data transaction performed.
+
+## Session54 — v43 DNA/UX (repo candidate; live = v42 / Version6 until owner deploys Version 7)
+
+UI only, server unchanged. W2LabelUI colours use `var(--token,#fallback)` (LabelDialog has no tokens); phone nav fade + active tab scrolled into view, header no-wrap, touch targets ≥36 px (inputs 40), FAB hides while scrolling, toast hides on tab change/modal open; money errors name and outline the bad field (`markBad`). Accept/reject set identical to v42 (`dna-ux.test.cjs`). Packet `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`; backup `backup/pre-v43-20261007/`; paste order in `00 Docs/PLAN_2026-10-07_webapp-dna-ux.md` §8.

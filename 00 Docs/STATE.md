@@ -1,6 +1,6 @@
 # STATE — OWARIN STORE (read this FIRST; open other files only when a line below points to them)
 
-จัดทำ: 2026-10-06T20:23:30.092892+07:00 — Stream B Session53 subsidy default0 CLOSED v42/Version6; other streams retain prior snapshots.
+จัดทำ: 2026-10-07 — Stream B Session54: v43 DNA/UX candidate built + tested in repo (live still v42/Version6, waits for owner deploy Version7); other streams retain prior snapshots.
 Rule: OVERWRITE at session close; ≤80 lines. Active PLAN holds scope; dated logs are lookup evidence.
 
 ## Streams
@@ -13,7 +13,8 @@ Rule: OVERWRITE at session close; ≤80 lines. Active PLAN holds scope; dated lo
 - Root fix: native CLIENT Table creates Column7/8 on capacity extension; exact placeholders allowed only while headers ARMED, originalA:F matches and G:H values/formulas empty. Preserve request-v40/IDs/history; never reset/rerun with new ID or weaken test guards.
 - Checks: release13failure groups, W2 fourteenCRM/retry + renderer6/Ordersstale checks, six root impact regressions PASS. P1 test loaders adapted to actual W2Suggest partial; runtime/P1 unchanged. Live read-only Inventory/OrdersALL/Cart and native Labels > Open Label Tool PASS; no fake production Add/order/sale/client mutation.
 - Print/PDF/physical Print-Reprint: PASS — owner-confirmed Session50 “ผ่านหมดแล้ว”; prior deferral closed. No supplied PDF/photo/printer details or agent artifact inspection. W1 F05 repair/review CLOSED, never repeat; all dated W1/W2/local/test acceptance evidence retained.
-- Next ONE: เจ้าของรีเฟรชเว็บแล้วใส่รายการที่ยังไม่สร้างออเดอร์กลับในตะกร้า; Subsidy default0ใช้ได้พร้อมแก้จำนวนจริง และใช้งาน Create orderตามปกติ. No fake production transaction, P0/P1 restart, monitor or new chat/agent.
+- Session54 (2026-10-07): `WEBAPP-DNA-UX-20261007-01/v43@E9668B552D3E04DCED84F38A3AB3764E4676E8E4D99F8DB5F2521EE6A2C88D98` UI-only (W2LabelUI tokens+fallbacks, phone nav/header/touch/FAB, toast hide, field-specific money errors; accept/reject = v42). Plan `00 Docs/PLAN_2026-10-07_webapp-dna-ux.md`, packet `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`, prompt `prompts/webapp-design-dna.md`. C1 = owner paste 4 files + Deploy Version7 + reply "ผ่าน"; record PASS owner-confirmed only after that.
+- Next ONE (Session54): เจ้าของวาง Code.gs/webapp.gs/Index.html/W2LabelUI.html ตาม `prompts/webapp-design-dna.md` + Deploy → Version 7 แล้วตอบ "ผ่าน"/ปัญหา. (Session53 next below stays valid:) เจ้าของรีเฟรชเว็บแล้วใส่รายการที่ยังไม่สร้างออเดอร์กลับในตะกร้า; Subsidy default0ใช้ได้พร้อมแก้จำนวนจริง และใช้งาน Create orderตามปกติ. No fake production transaction, P0/P1 restart, monitor or new chat/agent.
 - Scope: original project1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp / Sheet16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0. No P0/P1 restart or Back House LAB. Other streams remain prior snapshots.
 - Evidence/undo: 04 Design Tools/logs/W3-PROD-20261006-01/ result/review/implementation/CONTINUE/verification/UNDO, source-verification-final/migration/replay/root-regressions/ui-smoke/native JSON/fresh XLSX/backup.png/smoke.png/changes.csv. Private settings stay local; rollback Version4 runtime is separate from data; never overwrite later history with old XLSX.
 - Current HANDOFF_2026-10-06.md Session53; Session50/51/52 archived in _archive/handoffs_old/. Earlier Session48 labels.save reconciliation remains dated history; actor uncertainty retained, no old export restore.

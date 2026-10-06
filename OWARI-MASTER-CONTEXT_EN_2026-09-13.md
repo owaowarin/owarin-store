@@ -269,13 +269,13 @@ _exports/  _r2_upload/  _fb_albums/  Shopee/   <- pipeline folders stay put
 - `.claude/` is writable only from OWARI's machine (remote tools are blocked). `OWARIN STORE/.claude/settings.local.json` already holds permissions.allow entries — **do not overwrite it.**
 
 ### 5.2 Back-office (Google Apps Script + Sheets)
-- Current Stream B source is routed by `00 Docs/STATE.md` and `03 Apps Script/Web App/README.md`; last verified Session53 (2026-10-06) is paired Code/WebApp v42 + retained W1/W2/shared label helpers, deployment6. Older version statements are historical. Keep code/comments/menu items in English.
+- Current Stream B source is routed by `00 Docs/STATE.md` and `03 Apps Script/Web App/README.md`; last verified Session53 (2026-10-06) is paired Code/WebApp v42 (v43 UI-only candidate in repo, Version 7 pending owner deploy) + retained W1/W2/shared label helpers, deployment6. Older version statements are historical. Keep code/comments/menu items in English.
 - Prefer existing helpers and targeted changes; an add-on is appropriate only when it avoids duplication/global collisions. The old absolute "never edit Code.gs" rule is retired; authorized paired-source changes follow AGENTS versioning and backup/review requirements.
 - Shared helpers to reuse rather than rewrite: `_metaInvIndex()`, `_resolveColumns()`/`HEADER_MAP`, `_fbFindCol()`, `_withLock()`, `_tryWrite()`/`_sp2ResetWriteErrors()`/`_sp2WriteErrMsg()`
 - The sheets are Google Sheets **Tables**, so **every write must go through `_tryWrite`.**
 - The `onOpen()` menu is `📦 Inventory Tools`; new tools are added as a submenu before `.addToUi();`
 - Locked decisions: Order ID = `OWA-YYYYMMDD-NN` · SALES Product = base title only · Note = SKU · shipping `50 + 10×(n−1)` capped at 100 · the Owner column is retired · two message templates (แจ้งราคา / Quotation) are used verbatim.
-- Status for the current Add/Cart/Orders/Label project: P1 retained, W1/W2 LIVE v42, W3 release CLOSED Session51; owner-approved UI subsidy default0 LIVE Session53. Observe the first real owner order; do not create synthetic production transactions or rerun DONE schema migration. Old webapp phase numbers refer to a different roadmap; do not reuse them as current status.
+- Status for the current Add/Cart/Orders/Label project: P1 retained, W1/W2 LIVE v42 (v43 UI-only candidate, Version7 pending owner deploy), W3 release CLOSED Session51; owner-approved UI subsidy default0 LIVE Session53. Observe the first real owner order; do not create synthetic production transactions or rerun DONE schema migration. Old webapp phase numbers refer to a different roadmap; do not reuse them as current status.
 - `GAMEMAG` is the correct brand name — `GAMGEMAG` anywhere is a typo to fix.
 
 ### 5.2.1 Delivery priorities — owner update 2026-10-03 (Stream B)
@@ -533,6 +533,6 @@ Written to `00 Docs/HANDOFF_<YYYY-MM-DD>.md` (stream B) or that period's runbook
 | Products / prices / condition / Type | Google Sheet `OWARIN STORE` | **re-export before every use** |
 | Image index | the sheet's `R2 IMAGES` tab | R2 has no egress |
 | Shopee descriptions | `OWARIN STORE\Shopee\Shopee Details.txt` | |
-| Live back-office code | STATE.md / Web App README; paired Code_v42.gs + WebApp_v42.gs with shared helpers | Session53 native deployment6 |
+| Live back-office code | STATE.md / Web App README; paired Code_v43.gs + WebApp_v43.gs (repo, UI-only) with shared helpers | live = v42 native deployment6; v43/Version7 pending owner deploy (Session54) |
 | Coding mode | skill `ponytail` | copied into §6 |
 | **This file** | consolidated copy as of 2026-09-13 | each subject's original is in this table |

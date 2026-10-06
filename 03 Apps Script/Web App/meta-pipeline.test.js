@@ -1,5 +1,5 @@
 // v27/v28 regression test: PID CHANGES ledger, FB CATALOGUE follow/archive, description template,
-// live R2 index, Refresh Meta feed health check. Loads Code_v42.gs then R2Upload.gs (as in the project).
+// live R2 index, Refresh Meta feed health check. Loads Code_v43.gs then R2Upload.gs (as in the project).
 // Run: node meta-pipeline.test.js
 const assert = require("assert");
 const fs = require("fs");
@@ -60,7 +60,7 @@ function setup(opts) {
     UrlFetchApp: { fetch: () => (opts.liveDown ? { getResponseCode: () => 503, getContentText: () => "" } : { getResponseCode: () => 200, getContentText: () => csv }) }
   };
   vm.createContext(ctx); ctxRef.c = ctx;
-  vm.runInContext(fs.readFileSync(__dirname + "/Code_v42.gs", "utf8"), ctx);
+  vm.runInContext(fs.readFileSync(__dirname + "/Code_v43.gs", "utf8"), ctx);
   vm.runInContext(fs.readFileSync(__dirname + "/R2Upload.gs", "utf8"), ctx);
   return { ctx, sheets, ss, alerts, mails, trig, deleted };
 }
@@ -142,7 +142,7 @@ function setup(opts) {
   const ctx = { SpreadsheetApp: { getActiveSpreadsheet: () => ss, getUi: () => ({ alert() {} }), flush() {} }, Logger: { log() {} }, console,
     LockService: { getScriptLock: () => ({ waitLock() {}, releaseLock() {} }) } };
   vm.createContext(ctx);
-  vm.runInContext(fs.readFileSync(__dirname + "/Code_v42.gs", "utf8"), ctx);
+  vm.runInContext(fs.readFileSync(__dirname + "/Code_v43.gs", "utf8"), ctx);
   ctx.__gg = gg;
   vm.runInContext('_recalcRow(__gg, 3, _resolveColumns(__gg), "GAME GUIDE BOOKS", { publisher: true })', ctx);
   const L = sheets["PID CHANGES"]._g;

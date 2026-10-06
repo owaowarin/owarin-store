@@ -139,20 +139,6 @@ footer .g{color:var(--gold-muted)}
 .modal{background:var(--card);border:1px solid var(--border);width:100%;max-width:560px;
   max-height:92vh;display:flex;flex-direction:column}
 @media(min-width:700px){ .modal-bg{align-items:center} html,body{font-size:15px} }
-/* v43 phone UX (2026-10-07) */
-nav.more{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}
-.bad{outline:1px solid var(--destructive)!important;outline-offset:-1px}
-.fab{transition:opacity .15s}.fab.hide{opacity:0;pointer-events:none}
-@media(max-width:600px){
-  nav button{padding:14px 12px 12px}
-  .chip{min-height:36px}
-  .btn,.btn.small,.seg button{min-height:36px}
-  select,input:not([type=checkbox]){min-height:40px}
-}
-@media(max-width:420px){
-  .brand{letter-spacing:.2em;font-size:12px}
-  .brand .g,#count{white-space:nowrap}
-}
 .m-head{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:13px 16px;
   border-bottom:1px solid var(--border);letter-spacing:.12em;font-size:12px}
 .m-head span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -868,7 +854,7 @@ $('list').addEventListener('click', function(e){
 });
 
 /* ── modal helpers ── */
-function showModal(id, on){ if (on) $('toast').style.display = 'none'; $(id).classList.toggle('open', !!on); }
+function showModal(id, on){ $(id).classList.toggle('open', !!on); }
 document.addEventListener('click', function(e){
   var c = e.target.closest ? e.target.closest('[data-close]') : null;
   if (c) {
@@ -1293,7 +1279,7 @@ function openSold(sku, src){
   showModal('soldModal', true);
 }
 $('soldGo').addEventListener('click',function(){
- var price=$('soldPrice').value.trim(),subsidy=$('soldShip').value.trim();if(w1StrictMoney(price)===null||w1StrictMoney(subsidy)===null){markBad(w1StrictMoney(price)===null?$('soldPrice'):$('soldShip'),w1StrictMoney(price)===null?'Price — ใส่ตัวเลข เช่น 450':'Shipping Subsidy — ใส่ตัวเลข (0 ได้)');return;}
+ var price=$('soldPrice').value.trim(),subsidy=$('soldShip').value.trim();if(w1StrictMoney(price)===null||w1StrictMoney(subsidy)===null){toast('Valid price/subsidy required');return;}
  showModal('soldModal',false);w1OpenReview({single:true,channel:M.soldChannel,items:[{source:M.row.source,sku:M.sku,itemUid:M.row.itemUid||'',price:price}],customerShipping:'0',shippingSubsidy:subsidy,labelLater:true},null);
 });
 
@@ -1965,10 +1951,6 @@ function showView(v){
   if (v === 'review') renderReview();
   if (v === 'booking') loadBooking(false);
   if (v === 'contents') loadContents(false);
-  $('toast').style.display = 'none';
-  var navOn = document.querySelector('nav button.on');
-  if (navOn && navOn.scrollIntoView) navOn.scrollIntoView({ inline: 'nearest', block: 'nearest' });
-  navFade();
 }
 $('navInv').addEventListener('click', function(){ showView('inv'); });
 $('navTools').addEventListener('click', function(){ showView('tools'); });
@@ -1981,22 +1963,6 @@ $('navContents').addEventListener('click', function(){ showView('contents'); });
 /* ── main events ── */
 $('refresh').addEventListener('click', load);
 $('fab').addEventListener('click', openAdd);
-function navFade(){ var n = document.querySelector('nav'); n.classList.toggle('more', n.scrollLeft + n.clientWidth < n.scrollWidth - 4); }
-document.querySelector('nav').addEventListener('scroll', navFade, { passive: true });
-window.addEventListener('resize', navFade);
-navFade();
-var fabTimer = null;
-window.addEventListener('scroll', function(){
-  var f = $('fab'); if (window.innerWidth > 600 || f.style.display === 'none') return;
-  f.classList.add('hide'); clearTimeout(fabTimer);
-  fabTimer = setTimeout(function(){ f.classList.remove('hide'); }, 700);
-}, { passive: true });
-document.addEventListener('input', function(e){ if (e.target.classList && e.target.classList.contains('bad')) e.target.classList.remove('bad'); });
-function markBad(el, msg){
-  var old = document.querySelectorAll('.bad'); for (var i = 0; i < old.length; i++) old[i].classList.remove('bad');
-  if (el) { el.classList.add('bad'); el.focus(); }
-  toast(msg);
-}
 $('srcALL').addEventListener('click', function(){ setSource('ALL'); });
 $('srcGGB').addEventListener('click', function(){ setSource('GGB'); });
 $('srcMAG').addEventListener('click', function(){ setSource('MAG'); });
@@ -2085,10 +2051,7 @@ function w1CartPayload(){
 function w1StrictMoney(v){return /^\d+(\.\d{1,2})?$/.test(String(v).trim())?Number(v):null;}
 function confirmSold(){
  if(!S.cart.length){toast('Cart is empty');return;}var p=w1CartPayload();
- var badIdx=-1;p.items.some(function(i,k){if(w1StrictMoney(i.price)===null){badIdx=k;return true;}return false;});
- if(badIdx>=0){markBad(document.querySelector('.cl-price[data-idx="'+badIdx+'"]'),'Price of item '+(badIdx+1)+' — ใส่ตัวเลข เช่น 450');return;}
- if(w1StrictMoney(p.customerShipping)===null){markBad($('cShip'),'Customer Shipping — ใส่ตัวเลข (0 ได้)');return;}
- if(w1StrictMoney(p.shippingSubsidy)===null){markBad($('cShipShop'),'Shipping Subsidy — ใส่ตัวเลข (0 ได้)');return;}
+ if(w1StrictMoney(p.customerShipping)===null||w1StrictMoney(p.shippingSubsidy)===null||p.items.some(function(i){return w1StrictMoney(i.price)===null;})){toast('Enter valid prices, Customer Shipping and Shipping Subsidy (0 is allowed)');return;}
  if(S.cartChannel==='SHOP')w1Run('orders.create',p).then(function(r){w1Saved(r,'orders.create');}).catch(function(e){toast(e.message);});
  else w1OpenReview(p,null);
 }

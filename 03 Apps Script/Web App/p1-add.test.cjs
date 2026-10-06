@@ -5,7 +5,7 @@ const vm = require('node:vm');
 const crypto = require('node:crypto');
 const base = __dirname;
 const read = f => fs.readFileSync(path.join(base, f), 'utf8');
-for (const f of ['Code_v42.gs', 'WebApp_v42.gs']) new vm.Script(read(f), {filename:f});
+for (const f of ['Code_v43.gs', 'WebApp_v43.gs']) new vm.Script(read(f), {filename:f});
 const suggest = read('W2Suggest.html').replace(/^<script>\s*/, '').replace(/\s*<\/script>\s*$/, '');
 const html = read('Index.html').replace('<?!= _w2Include_("W2Suggest") ?>', suggest);
 for (const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)) if (m[1].trim()) new vm.Script(m[1], {filename:'Index.html'});
@@ -38,7 +38,7 @@ const c=vm.createContext({SpreadsheetApp:{getActiveSpreadsheet:()=>ss,flush(){}}
   LockService:{getScriptLock:()=>({waitLock(){},releaseLock(){}})},
   Utilities:{DigestAlgorithm:{SHA_256:'sha256'},computeDigest:(_,s)=>[...crypto.createHash('sha256').update(s).digest()]},
   Session:{getScriptTimeZone:()=> 'Asia/Bangkok',getActiveUser:()=>({getEmail:()=>''})},Logger:{log(){}}});
-vm.runInContext(read('Code_v42.gs'),c);vm.runInContext(read('WebApp_v42.gs'),c);
+vm.runInContext(read('Code_v43.gs'),c);vm.runInContext(read('WebApp_v43.gs'),c);
 const realResolve=c._resolveColumns;
 c._resolveColumns=()=>columns;
 c._autoFormat=x=>x;c._detectRestock=x=>({title:x,isRestock:false});
