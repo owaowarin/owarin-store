@@ -1,5 +1,5 @@
 # Next step — v43 owner deploy (C1) then close (prepared 2026-10-07; execute with Sonnet)
-Read `00 Docs/STATE.md`, then `00 Docs/PLAN_2026-10-07_webapp-dna-ux.md` §8 and `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/result.md`. Repo is already v43 (`WEBAPP-DNA-UX-20261007-01/v43@E9668B552D3E04DCED84F38A3AB3764E4676E8E4D99F8DB5F2521EE6A2C88D98`); live is v42 / Version6.
+Read `00 Docs/STATE.md`, then `00 Docs/PLAN_2026-10-07_webapp-dna-ux.md` §8 and `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/result.md`. Repo is already v43 (`WEBAPP-DNA-UX-20261007-01/v43@4F23D01DBD71B5D5E363AD48678E27C2E59B284CA9013848DD67B484D47C3F52`); live is v42 / Version6.
 Give the owner the C1 paste + deploy steps in Thai, click-level (files: Code.gs ← Code_v43.gs, webapp.gs ← WebApp_v43.gs, Index.html, W2LabelUI.html; then Deploy → Version 7). Do not claim live until the owner replies.
 When the owner replies with the Version number + "ผ่าน": record PASS — owner-confirmed with the exact message (plan board C1, STATE, HANDOFF_2026-10-07, README, master context lines 272/278/536 → live v43/Version 7). If a problem: UNDO.md, log in _logs/INCIDENTS.csv.
 Optional small leftover: Cart ✕ (.cl-rm) is 23 px on phone — add `.cart-line .cl-rm{min-height:36px;min-width:36px}` inside the max-width:600px block only if the owner agrees (it changes the v43 hash).

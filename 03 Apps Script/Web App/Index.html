@@ -1968,6 +1968,7 @@ function showView(v){
   $('toast').style.display = 'none';
   var navOn = document.querySelector('nav button.on');
   if (navOn && navOn.scrollIntoView) navOn.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+  if (navOn) { var navEl = navOn.parentNode, over = navOn.getBoundingClientRect().right - (navEl.getBoundingClientRect().right - navEl.clientWidth * 0.18); if (over > 0) navEl.scrollLeft += over; }
   navFade();
 }
 $('navInv').addEventListener('click', function(){ showView('inv'); });
@@ -2069,8 +2070,9 @@ function w1Saved(result,action){
  if(action==='orders.create'||action==='orders.confirm'||action==='inventory.markSold'){
   S.cart=[];S.shipOverride=null;$('cShipShop').value='0';updateCartCount();S.sales.loaded=false;showModal('w1ReviewModal',false);showModal('soldModal',false);
  }
+ showView('orders');
  okToast((result.message||result.status)+' · '+result.orderId+' · '+(result.labelReadiness==='MISSING'?'Missing label':''));
- showView('orders');load(); // Fresh inventory; do not apply a historical request snapshot to the current cache.
+ load(); // Fresh inventory; do not apply a historical request snapshot to the current cache.
 }
 function w1Resume(){
  if(!w1Pending||w1Busy)return;var action=w1Pending.action;

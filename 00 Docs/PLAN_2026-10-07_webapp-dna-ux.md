@@ -188,3 +188,4 @@ CLAUDE.md checklist 1–9: log CSV (packet `changes.csv` + `logs/WEBAPP-DNA-UX-2
 - Deviation: `.bad` outline needs `!important` (inputs carry `outline:none`) — `fix1.py`, CSS only. Final revision in packet `revision.json`.
 - Master context lines 272/278/536 say v43 is a repo candidate; flip to live v43/Version 7 only after the owner confirms C1.
 - Leftover: Cart ✕ 23 px on phone (outside B5 scope).
+- Opus review 2026-10-07: fix2 (w1Saved toast order) + fix3 (nav fade over selected last tab); final revision WEBAPP-DNA-UX-20261007-01/v43@4F23D01DBD71B5D5E363AD48678E27C2E59B284CA9013848DD67B484D47C3F52.

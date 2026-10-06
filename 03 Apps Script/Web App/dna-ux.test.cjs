@@ -46,4 +46,9 @@ for(const s of ['function navFade(','function markBad(','nav.more{','.fab.hide{'
 // 6. phone CSS rules only inside max-width:600px/420px
 const blk=html.match(/@media\(max-width:600px\)\{\n  nav button[\s\S]*?\n\}/)[0];
 for(const r of ['nav button{padding:14px 12px 12px}','.chip{min-height:36px}','.btn,.btn.small,.seg button{min-height:36px}','select,input:not([type=checkbox]){min-height:40px}'])assert(blk.includes(r),r);
+// 7. order-saved toast must survive B3: w1Saved switches view BEFORE showing the toast
+{const seq=[];const ctx=vm.createContext({S:{cart:[1],sales:{}},$:()=>({value:''}),updateCartCount(){},showModal(){},
+ showView:v=>seq.push('view:'+v),okToast:m=>seq.push('toast'),load:()=>seq.push('load')});
+ vm.runInContext(between(html,'function w1Saved(result,action){','function w1Resume(){'),ctx);
+ ctx.w1Saved({status:'PENDING',orderId:'X'},'orders.create');assert.deepEqual(seq,['view:orders','toast','load']);}
 console.log('PASS dna-ux: W2LabelUI fallbacks; money matrix == v42; confirmSold field targeting; toast/nav/FAB helpers; phone CSS scoped');

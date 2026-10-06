@@ -743,3 +743,4 @@ Issue: plan CSS `.bad{outline…}` did not render (input rules carry `outline:no
 Tests PASS: Index, R2Upload, fb-catalogue, image-url, meta-pipeline, p1-add, p1-ui, dna-ux, subsidy (re-pointed), regression (re-pointed). Harness phone+desktop 0 JS errors; brand 28 px, count 14 px, all phone buttons ≥36 / inputs ≥40 (inventory view).
 Leftover: Cart row remove button `.cl-rm` (✕) is 23 px tall on phone (outside plan B5 scope).
 Live /exec unchanged until owner deploys Version 7; PASS only by owner confirmation.
+Opus pre-release review: fix2 (order-saved toast hidden by B3 → showView before okToast) and fix3 (selected last nav tab under fade mask) — CSS/JS UI only; final revision WEBAPP-DNA-UX-20261007-01/v43@4F23D01DBD71B5D5E363AD48678E27C2E59B284CA9013848DD67B484D47C3F52; all tests PASS.
