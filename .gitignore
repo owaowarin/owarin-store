@@ -49,6 +49,9 @@ credential/
 # large evidence/journal dumps in tool logs (> 5 MB; stay on the PC)
 04 Design Tools/logs/**/evidence*.json
 04 Design Tools/logs/**/*journal*.json
+# B1-C 2026-10-07: log snapshots holding Meta-token-shaped values (stay on the PC, never edited)
+04 Design Tools/logs/W2-20261005-01/before/04 Design Tools/OWARIN — LABEL TOOL.html
+04 Design Tools/logs/W3-PROD-20261006-01/project-settings.json
 
 # deps, caches, local-only
 node_modules/
