@@ -20,7 +20,7 @@ Stream B (Add / Cart / Orders / Label). One writer. No new agent/chat. No P0/P1 
 | B6 | FAB hides while scrolling on phone | DONE | `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`result.md, changes.csv |
 | T1 | Tests: new `dna-ux.test.cjs` + all suites + harness | DONE | `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`result.md, changes.csv |
 | D1 | Related docs updated (list §7) | DONE | `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`result.md, changes.csv |
-| C1 | Owner paste + deploy Version 7, owner confirms | WAITING owner | `prompts/webapp-design-dna.md`; live = v42/Version6 until Version 7 |
+| C1 | Owner paste + deploy Version 7, owner confirms | DONE 2026-10-07 — PASS owner-confirmed | "เวอร์ชัน 7 ผ่าน" + screenshot Manage deployments: Version 7 on Oct 7, 2026 6:39 AM, description "v43 DNA/UX 2026-10-07", Active |
 | A3 | Session close (STATE, HANDOFF, logs) | DONE except C1 | STATE, HANDOFF Session54, decisions, INCIDENTS |
 
 Order: S1 → A1 → A2 → B1…B6 → T1 → D1 → C1 → A3. Ship everything as ONE release v43.
@@ -189,3 +189,4 @@ CLAUDE.md checklist 1–9: log CSV (packet `changes.csv` + `logs/WEBAPP-DNA-UX-2
 - Master context lines 272/278/536 say v43 is a repo candidate; flip to live v43/Version 7 only after the owner confirms C1.
 - Leftover: Cart ✕ 23 px on phone (outside B5 scope).
 - Opus review 2026-10-07: fix2 (w1Saved toast order) + fix3 (nav fade over selected last tab); final revision WEBAPP-DNA-UX-20261007-01/v43@4F23D01DBD71B5D5E363AD48678E27C2E59B284CA9013848DD67B484D47C3F52.
+- C1 closed 2026-10-07: live /exec = v43 / Version 7. (Earlier owner test via Test deployment was not the live /exec; the Manage-deployments screenshot showed Version 6 until Version 7 was created.)

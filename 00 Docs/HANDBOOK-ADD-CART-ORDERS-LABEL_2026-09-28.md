@@ -1,6 +1,6 @@
 # OWARIN — Implementation & user handbook
 
-จัดทำ: 2026-10-06T07:55:18.753873+07:00 · Stream B · **W1/W2 LIVE v42 / Version6; Session53 default0 CLOSED; v43 DNA/UX ready for Version 7 (owner deploy)**
+จัดทำ: 2026-10-06T07:55:18.753873+07:00 · Stream B · **W1/W2 LIVE v42 / Version6; Session53 default0 CLOSED; v43 DNA/UX LIVE Version 7**
 
 คู่กับ [แผนหลัก](PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md) ซึ่งเป็นที่เดียวของ priority/requirements/QA; ไฟล์นี้เก็บขั้นตอนใช้และกู้คืน ส่วนผลจริงอยู่ใน Implementation log และ CSV
 

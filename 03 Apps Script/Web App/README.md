@@ -235,6 +235,6 @@ Create order requires an explicit `Shipping Subsidy — shop contribution`: ente
 
 Shipping Subsidy defaults0 in Cart and single sold form; Clear/success/new sold form reset0 and edited values survive rerender/channel change. Strict blank/invalid rejection and pending/retry payload preserved. Three native saved-source hashes and root10revision hashes PASS; seven helpers retained. Previous full41pair `backup/pre-v42-20261006/`;41root stubs point42. Six root regressions + targeted UI/W2 checks PASS; native UI proof/default/custom/clear and backup/undo in `../../04 Design Tools/logs/W1-SUBSIDY0-20261006-01/`. Historical41release/table-migration evidence remains dated; no schema/data transaction performed.
 
-## Session54 — v43 DNA/UX (repo candidate; live = v42 / Version6 until owner deploys Version 7)
+## Session54 — v43 DNA/UX (LIVE since 2026-10-07 = Version 7, owner-confirmed)
 
 UI only, server unchanged. W2LabelUI colours use `var(--token,#fallback)` (LabelDialog has no tokens); phone nav fade + active tab scrolled into view, header no-wrap, touch targets ≥36 px (inputs 40), FAB hides while scrolling, toast hides on tab change/modal open; money errors name and outline the bad field (`markBad`). Accept/reject set identical to v42 (`dna-ux.test.cjs`). Packet `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`; backup `backup/pre-v43-20261007/`; paste order in `00 Docs/PLAN_2026-10-07_webapp-dna-ux.md` §8.
