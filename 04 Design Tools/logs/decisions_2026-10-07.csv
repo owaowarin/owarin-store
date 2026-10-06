@@ -6,3 +6,4 @@
 "2026-10-07","B1-5","Back House LAB = separate project, own private repo owaowarin/owarin-back-house-lab","CLOSED","owner chat 2026-10-07"
 "2026-10-07","B1-6","Secrets have a single copy: accepted for now","CLOSED","owner chat 2026-10-07"
 "2026-10-07","B1-7","Duplicate images in OWARIN-DATA: replace extra copies with hard links (B1-H)","CLOSED","owner chat 2026-10-07"
+"2026-10-07","B1-8","Media backup: AI default — private R2 bucket owarin-backup, weekly rclone copy (never sync) of OWARIN-DATA except _r2_upload and _logs; dry-run first","CLOSED","owner chat 2026-10-07"
