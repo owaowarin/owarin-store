@@ -1,0 +1,5 @@
+Observed exec exit 0; reproduction run once before documentation close.
+CONFIRMED R1: interleave unlocked EXTERNAL_EDIT between journal row allocation/write; completed audit event overwritten by PREPARED.
+CONFIRMED R2a: multi-row edit starting on unclaimed row skips managed second row; no audit event.
+CONFIRMED R2b: deleted managed UID skips audit; transaction gate still rejects MANAGED_IDENTITY_CONFLICT (no demonstrated duplicate sale).
+MEASURED R3: accepted 100-item PREPARED Snapshot=77743 characters in one cell; Google cell/capacity/runtime boundary remains unverified.

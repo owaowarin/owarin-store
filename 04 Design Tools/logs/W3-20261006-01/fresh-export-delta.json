@@ -1,0 +1,220 @@
+{
+  "oldJournalRowsIncludingHeader": 1296,
+  "newJournalRowsIncludingHeader": 1301,
+  "prefixPreserved": true,
+  "addedEvents": [
+    {
+      "requestId": "w1-1791222331322-mxgbvwmbbv",
+      "action": "labels.save",
+      "state": "PREPARED",
+      "time": "2026-10-05T17:45:53.067Z",
+      "orderId": "OWA-20261005-05",
+      "attempt": 1.0,
+      "payload": {
+        "orderId": "OWA-20261005-05",
+        "recipient": {
+          "postalCode": "00124",
+          "deliveryNote": "ลูกค้าใหม่ · ข้อมูลจำลอง",
+          "address": "234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ",
+          "name": "ผู้ซื้อ จำลอง W2 ใหม่",
+          "phone": "0890000003"
+        },
+        "clientChoice": {
+          "fields": {
+            "note": "=2+3 INTERNAL",
+            "facebook": "+FB INTERNAL SYNTHETIC",
+            "address": "234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ",
+            "postalCode": "00124",
+            "name": "ผู้ซื้อ จำลอง W2 ใหม่",
+            "phone": "0890000003"
+          },
+          "id": "CL-68601c9f-9ae7-4ca6-93e3-66c93317ad3b",
+          "mode": "order",
+          "expectedRevision": "2026-10-05T15:11:11.736Z"
+        },
+        "requestId": "w1-1791222331322-mxgbvwmbbv",
+        "expectedRevision": 3
+      },
+      "orderBeforeRevision": null,
+      "steps": {}
+    },
+    {
+      "requestId": "w1-1791222331322-mxgbvwmbbv",
+      "action": "labels.save",
+      "state": "APPLYING",
+      "time": "2026-10-05T17:45:54.029Z",
+      "orderId": "OWA-20261005-05",
+      "attempt": 1.0,
+      "payload": {
+        "orderId": "OWA-20261005-05",
+        "recipient": {
+          "postalCode": "00124",
+          "deliveryNote": "ลูกค้าใหม่ · ข้อมูลจำลอง",
+          "address": "234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ",
+          "name": "ผู้ซื้อ จำลอง W2 ใหม่",
+          "phone": "0890000003"
+        },
+        "clientChoice": {
+          "fields": {
+            "note": "=2+3 INTERNAL",
+            "facebook": "+FB INTERNAL SYNTHETIC",
+            "address": "234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ",
+            "postalCode": "00124",
+            "name": "ผู้ซื้อ จำลอง W2 ใหม่",
+            "phone": "0890000003"
+          },
+          "id": "CL-68601c9f-9ae7-4ca6-93e3-66c93317ad3b",
+          "mode": "order",
+          "expectedRevision": "2026-10-05T15:11:11.736Z"
+        },
+        "requestId": "w1-1791222331322-mxgbvwmbbv",
+        "expectedRevision": 3
+      },
+      "orderBeforeRevision": null,
+      "steps": {}
+    },
+    {
+      "requestId": "w1-1791222331322-mxgbvwmbbv",
+      "action": "labels.save",
+      "state": "APPLYING",
+      "time": "2026-10-05T17:45:56.551Z",
+      "orderId": "OWA-20261005-05",
+      "attempt": 1.0,
+      "payload": {
+        "orderId": "OWA-20261005-05",
+        "recipient": {
+          "postalCode": "00124",
+          "deliveryNote": "ลูกค้าใหม่ · ข้อมูลจำลอง",
+          "address": "234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ",
+          "name": "ผู้ซื้อ จำลอง W2 ใหม่",
+          "phone": "0890000003"
+        },
+        "clientChoice": {
+          "fields": {
+            "note": "=2+3 INTERNAL",
+            "facebook": "+FB INTERNAL SYNTHETIC",
+            "address": "234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ",
+            "postalCode": "00124",
+            "name": "ผู้ซื้อ จำลอง W2 ใหม่",
+            "phone": "0890000003"
+          },
+          "id": "CL-68601c9f-9ae7-4ca6-93e3-66c93317ad3b",
+          "mode": "order",
+          "expectedRevision": "2026-10-05T15:11:11.736Z"
+        },
+        "requestId": "w1-1791222331322-mxgbvwmbbv",
+        "expectedRevision": 3
+      },
+      "orderBeforeRevision": null,
+      "steps": {
+        "label": "ARMED"
+      }
+    },
+    {
+      "requestId": "w1-1791222331322-mxgbvwmbbv",
+      "action": "labels.save",
+      "state": "APPLYING",
+      "time": "2026-10-05T17:45:59.001Z",
+      "orderId": "OWA-20261005-05",
+      "attempt": 1.0,
+      "payload": {
+        "orderId": "OWA-20261005-05",
+        "recipient": {
+          "postalCode": "00124",
+          "deliveryNote": "ลูกค้าใหม่ · ข้อมูลจำลอง",
+          "address": "234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ",
+          "name": "ผู้ซื้อ จำลอง W2 ใหม่",
+          "phone": "0890000003"
+        },
+        "clientChoice": {
+          "fields": {
+            "note": "=2+3 INTERNAL",
+            "facebook": "+FB INTERNAL SYNTHETIC",
+            "address": "234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ",
+            "postalCode": "00124",
+            "name": "ผู้ซื้อ จำลอง W2 ใหม่",
+            "phone": "0890000003"
+          },
+          "id": "CL-68601c9f-9ae7-4ca6-93e3-66c93317ad3b",
+          "mode": "order",
+          "expectedRevision": "2026-10-05T15:11:11.736Z"
+        },
+        "requestId": "w1-1791222331322-mxgbvwmbbv",
+        "expectedRevision": 3
+      },
+      "orderBeforeRevision": null,
+      "steps": {
+        "label": "DONE"
+      }
+    },
+    {
+      "requestId": "w1-1791222331322-mxgbvwmbbv",
+      "action": "labels.save",
+      "state": "DONE",
+      "time": "2026-10-05T17:45:59.947Z",
+      "orderId": "OWA-20261005-05",
+      "attempt": 1.0,
+      "payload": {
+        "orderId": "OWA-20261005-05",
+        "recipient": {
+          "postalCode": "00124",
+          "deliveryNote": "ลูกค้าใหม่ · ข้อมูลจำลอง",
+          "address": "234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ",
+          "name": "ผู้ซื้อ จำลอง W2 ใหม่",
+          "phone": "0890000003"
+        },
+        "clientChoice": {
+          "fields": {
+            "note": "=2+3 INTERNAL",
+            "facebook": "+FB INTERNAL SYNTHETIC",
+            "address": "234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ",
+            "postalCode": "00124",
+            "name": "ผู้ซื้อ จำลอง W2 ใหม่",
+            "phone": "0890000003"
+          },
+          "id": "CL-68601c9f-9ae7-4ca6-93e3-66c93317ad3b",
+          "mode": "order",
+          "expectedRevision": "2026-10-05T15:11:11.736Z"
+        },
+        "requestId": "w1-1791222331322-mxgbvwmbbv",
+        "expectedRevision": 3
+      },
+      "orderBeforeRevision": null,
+      "steps": {
+        "label": "DONE"
+      }
+    }
+  ],
+  "order19before": [
+    "OWA-20261005-05",
+    "SOLD",
+    "SHOP",
+    "2026-10-05T14:38:05.347Z",
+    "2026-10-05T14:58:04.109Z",
+    null,
+    "CL-68601c9f-9ae7-4ca6-93e3-66c93317ad3b",
+    390.1,
+    50.0,
+    10.0,
+    440.1,
+    "{\"name\":\"ผู้ซื้อ จำลอง W2 ใหม่\",\"phone\":\"0890000003\",\"address\":\"234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ\",\"postalCode\":\"00124\",\"deliveryNote\":\"ลูกค้าใหม่ · ข้อมูลจำลอง\"}",
+    3.0,
+    "w1-1791213011996-e0ywaj6bd6j"
+  ],
+  "order19after": [
+    "OWA-20261005-05",
+    "SOLD",
+    "SHOP",
+    "2026-10-05T14:38:05.347Z",
+    "2026-10-05T14:58:04.109Z",
+    null,
+    "CL-68601c9f-9ae7-4ca6-93e3-66c93317ad3b",
+    390.1,
+    50.0,
+    10.0,
+    440.1,
+    "{\"name\":\"ผู้ซื้อ จำลอง W2 ใหม่\",\"phone\":\"0890000003\",\"address\":\"234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ\",\"postalCode\":\"00124\",\"deliveryNote\":\"ลูกค้าใหม่ · ข้อมูลจำลอง\"}",
+    4.0,
+    "w1-1791222331322-mxgbvwmbbv"
+  ]
+}

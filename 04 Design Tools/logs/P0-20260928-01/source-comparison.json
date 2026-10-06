@@ -1,0 +1,57 @@
+[
+  {
+    "file": "Code.gs",
+    "local": "03 Apps Script/Web App/Code_v27.gs",
+    "liveBytes": 169955,
+    "liveSHA256": "48919f5834ce102faa65a282400ebe565f46660bed908733d9376df62688af3e",
+    "localSHA256": "ef8c6d347e7ec4235aeffdb6eed2925c4bfa7f1e36726e60d61f2466f58a6832",
+    "lfLiveSHA256": "ef8c6d347e7ec4235aeffdb6eed2925c4bfa7f1e36726e60d61f2466f58a6832",
+    "lfLocalSHA256": "ef8c6d347e7ec4235aeffdb6eed2925c4bfa7f1e36726e60d61f2466f58a6832",
+    "exact": false,
+    "lfEqual": true
+  },
+  {
+    "file": "webapp.gs",
+    "local": "03 Apps Script/Web App/WebApp_v25.gs",
+    "liveBytes": 36809,
+    "liveSHA256": "fd60232c342c5483904a8822c25d95a3632afb4191a931344369429dc707b46a",
+    "localSHA256": "2cee59212cc5db464330ee91e476e35d8daf89700d1ce3d056c61bc2099e3d0a",
+    "lfLiveSHA256": "2cee59212cc5db464330ee91e476e35d8daf89700d1ce3d056c61bc2099e3d0a",
+    "lfLocalSHA256": "2cee59212cc5db464330ee91e476e35d8daf89700d1ce3d056c61bc2099e3d0a",
+    "exact": false,
+    "lfEqual": true
+  },
+  {
+    "file": "Index.html",
+    "local": "03 Apps Script/Web App/Index.html",
+    "liveBytes": 104017,
+    "liveSHA256": "2869dffb36fd44cea39e99ad9124f25d2fa6d82aba867651b46cea292ebde335",
+    "localSHA256": "0f7c099c761dce35dfc27d562aa98d3a34ef4b6a0a6224670bb18ed61e384fd3",
+    "lfLiveSHA256": "0f7c099c761dce35dfc27d562aa98d3a34ef4b6a0a6224670bb18ed61e384fd3",
+    "lfLocalSHA256": "0f7c099c761dce35dfc27d562aa98d3a34ef4b6a0a6224670bb18ed61e384fd3",
+    "exact": false,
+    "lfEqual": true
+  },
+  {
+    "file": "FbAlbum.gs",
+    "local": "03 Apps Script/FbAlbum.gs",
+    "liveBytes": 18005,
+    "liveSHA256": "f8912f40e9118dd558debc9f811e2dca6c05c1dfe31aeb52c3db018f2aa12f08",
+    "localSHA256": "8d806616d60352a2249e2f6371d35e2017c04a0776205d2fbc0512cfbb2e0e30",
+    "lfLiveSHA256": "ee1df2bd5b2d55c004091711e7ca2356573f9f100b2701d1e1a8839cc2c3c558",
+    "lfLocalSHA256": "8d806616d60352a2249e2f6371d35e2017c04a0776205d2fbc0512cfbb2e0e30",
+    "exact": false,
+    "lfEqual": false
+  },
+  {
+    "file": "R2Upload.gs",
+    "local": "03 Apps Script/Web App/R2Upload.gs",
+    "liveBytes": 10262,
+    "liveSHA256": "276c58f1c3ff88d4168e4297ed5304d0b659c7a82b6629e0c256e7c1da931999",
+    "localSHA256": "b3219c742e03df97283aa0db686d9d912303a2f2e1f43b9ebdf2e8fb7eecd960",
+    "lfLiveSHA256": "a19439f5edf7233ce96012a51fccaf981fc3fae5ac5995bd264d876991901d65",
+    "lfLocalSHA256": "b3219c742e03df97283aa0db686d9d912303a2f2e1f43b9ebdf2e8fb7eecd960",
+    "exact": false,
+    "lfEqual": false
+  }
+]

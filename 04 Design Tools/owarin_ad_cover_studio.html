@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OWARIN AD COVER STUDIO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Shippori+Mincho:wght@400;500;600&family=Archivo:wght@700;800;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── OWARIN design tokens (same as Watermark Studio) ── */
+:root{
+  --bg:hsl(0 0% 5%); --fg:hsl(0 0% 95%);
+  --card:hsl(0 0% 8%); --card2:hsl(0 0% 10%);
+  --muted:hsl(0 0% 14%); --muted-fg:hsl(0 0% 55%);
+  --border:hsl(0 0% 18%); --input:hsl(0 0% 15%);
+  --gold:hsl(43 76% 52%); --gold-muted:hsl(43 40% 35%); --gold-bright:hsl(43 85% 60%);
+  --destructive:hsl(0 62% 50%); --ok:hsl(140 45% 45%);
+}
+*{box-sizing:border-box;border-color:var(--border)}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);
+  font-family:'Outfit','Noto Sans Thai',sans-serif;font-weight:300;font-size:14px;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:hsl(0 0% 20%)}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit}
+
+header{position:sticky;top:0;z-index:20;background:hsl(0 0% 5%/.94);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);padding:12px 18px;display:flex;align-items:center;gap:14px}
+.brand{font-weight:500;letter-spacing:.35em;font-size:13px;white-space:nowrap}
+.brand .g{color:var(--gold)}
+.brand small{display:block;letter-spacing:.18em;color:var(--muted-fg);font-size:9px;margin-top:3px;
+  font-family:'Shippori Mincho',serif}
+.hd-right{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+#status{color:var(--muted-fg);font-size:11px;letter-spacing:.08em}
+#status.err{color:var(--destructive)}
+#status.ok{color:var(--ok)}
+
+.btn{background:transparent;border:1px solid var(--border);color:var(--fg);
+  padding:8px 15px;font-size:11px;letter-spacing:.14em;transition:.2s;white-space:nowrap}
+.btn:hover:not(:disabled){border-color:var(--gold);color:var(--gold)}
+.btn:disabled{opacity:.35;cursor:default}
+.btn.primary{background:var(--gold);color:hsl(0 0% 5%);border-color:var(--gold);font-weight:500}
+.btn.primary:hover:not(:disabled){background:var(--gold-bright);color:hsl(0 0% 5%)}
+.btn.small{padding:6px 11px;font-size:10px}
+
+.wrap{display:grid;grid-template-columns:320px 1fr;align-items:start}
+.panel{border-right:1px solid var(--border);position:sticky;top:59px;
+  height:calc(100vh - 59px);overflow-y:auto}
+.stage{padding:18px 20px 60px;min-height:calc(100vh - 59px)}
+
+.sect{border-bottom:1px solid var(--border)}
+.sect>summary{list-style:none;cursor:pointer;padding:12px 16px;display:flex;align-items:center;gap:8px;
+  font-size:10px;letter-spacing:.22em;color:var(--muted-fg);text-transform:uppercase;user-select:none}
+.sect>summary::-webkit-details-marker{display:none}
+.sect>summary::before{content:'+';color:var(--gold-muted);font-size:13px;line-height:1;width:9px}
+.sect[open]>summary::before{content:'−'}
+.sect[open]>summary{color:var(--gold)}
+.sect .body{padding:2px 16px 16px}
+.field{margin-bottom:13px}
+.field:last-child{margin-bottom:0}
+.field label{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  font-size:9px;letter-spacing:.18em;color:var(--muted-fg);text-transform:uppercase;margin-bottom:6px}
+.field label .val{color:var(--gold);letter-spacing:.06em;font-size:10px}
+.hint{font-size:10.5px;color:var(--muted-fg);line-height:1.6;margin-top:6px}
+input[type=text],input[type=number],select,textarea{width:100%;background:var(--input);
+  border:1px solid var(--border);color:var(--fg);padding:8px 10px;font-size:12.5px;outline:none;font-weight:300}
+input[type=text]:focus,input[type=number]:focus,textarea:focus,select:focus{border-color:var(--gold-muted)}
+textarea{resize:vertical;line-height:1.5}
+input[type=range]{width:100%;accent-color:var(--gold);margin:3px 0;background:transparent}
+.row{display:flex;gap:8px}
+.row>*{flex:1;min-width:0}
+.seg{display:flex;border:1px solid var(--border);flex-wrap:wrap}
+.seg button{flex:1;background:none;border:none;border-right:1px solid var(--border);
+  color:var(--muted-fg);padding:8px 4px;font-size:10px;letter-spacing:.1em;transition:.15s;min-width:60px}
+.seg button:last-child{border-right:none}
+.seg button:hover{color:var(--fg)}
+.seg button.on{background:var(--gold);color:hsl(0 0% 5%);font-weight:500}
+.toggle{display:flex;align-items:center;gap:9px;cursor:pointer;font-size:11.5px;letter-spacing:.06em;margin-bottom:9px}
+.toggle input{width:15px;height:15px;accent-color:var(--gold)}
+.drop{border:1px dashed var(--border);padding:22px 14px;text-align:center;color:var(--muted-fg);
+  cursor:pointer;transition:.2s;font-size:11.5px;letter-spacing:.06em;line-height:1.6}
+.drop:hover,.drop.hot{border-color:var(--gold);color:var(--gold);background:var(--card)}
+.drop b{display:block;font-size:20px;font-weight:200;margin-bottom:4px;line-height:1}
+
+.bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-bottom:14px;
+  border-bottom:1px solid var(--border);margin-bottom:18px}
+.bar .lbl{font-size:9px;letter-spacing:.2em;color:var(--muted-fg);text-transform:uppercase}
+.bar .sp{flex:1}
+
+#canvasHost{display:flex;justify-content:center;align-items:flex-start}
+#preview{max-width:100%;max-height:calc(100vh - 190px);border:1px solid var(--border);background:hsl(0 0% 3%)}
+
+.picklist{max-height:240px;overflow-y:auto;border:1px solid var(--border);margin-top:8px}
+.picklist div{padding:7px 10px;font-size:11.5px;border-bottom:1px solid var(--border);cursor:pointer;
+  color:var(--muted-fg);line-height:1.35}
+.picklist div:last-child{border-bottom:none}
+.picklist div:hover{background:var(--card);color:var(--gold)}
+.picklist div b{display:block;color:var(--fg);font-weight:400;font-size:12px}
+.picklist div:hover b{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><span class="g">OWARIN</span> AD COVER STUDIO<small>オワリン商店 — 広告カバー</small></div>
+  <div class="hd-right">
+    <span id="status">พร้อมใช้งาน</span>
+    <button class="btn" id="btnCopy">คัดลอกภาพ</button>
+    <button class="btn primary" id="btnPng">ดาวน์โหลด PNG</button>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="panel">
+
+  <details class="sect" open>
+    <summary>1. รูปสินค้า</summary>
+    <div class="body">
+      <div class="drop" id="drop"><b>+</b>ลากรูปมาวาง หรือคลิกเลือกไฟล์<br><span style="font-size:10px">รองรับหลายไฟล์ (สูงสุด 3 รูป สำหรับเลย์เอาต์ TRIO)</span></div>
+      <input type="file" id="file" accept="image/*" multiple hidden>
+      <div class="hint">ใช้รูปสินค้าที่ผ่าน Watermark Studio แล้วได้เลย — เลย์เอาต์จะครอบทับพื้นหลังให้เอง</div>
+      <div class="field" style="margin-top:12px">
+        <label>ซูมรูป <span class="val" id="vZoom">100%</span></label>
+        <input type="range" id="zoom" min="60" max="220" value="100">
+      </div>
+      <div class="field">
+        <label>เลื่อนแนวตั้ง <span class="val" id="vOffY">0</span></label>
+        <input type="range" id="offY" min="-40" max="40" value="0">
+      </div>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>2. ข้อความ</summary>
+    <div class="body">
+      <div class="field">
+        <label>หัวเรื่อง (ชื่อเกม)</label>
+        <input type="text" id="title" value="Metal Gear Solid">
+      </div>
+      <div class="field">
+        <label>บรรทัดญี่ปุ่น / คำโปรย</label>
+        <input type="text" id="jp" value="攻略本 · ゲームガイド">
+      </div>
+      <div class="field">
+        <label>บรรทัดรอง (ไทย)</label>
+        <input type="text" id="sub" value="คู่มือเฉลยเกม PlayStation · มือสองสภาพดี">
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>ราคา</label>
+          <input type="text" id="price" value="350">
+        </div>
+        <div class="field">
+          <label>ป้ายมุม</label>
+          <input type="text" id="badge" value="เกรด A">
+        </div>
+      </div>
+      <div class="field">
+        <label>ปุ่ม CTA</label>
+        <input type="text" id="cta" value="ทักแชทสั่งซื้อ">
+      </div>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>3. เลย์เอาต์ &amp; ขนาด</summary>
+    <div class="body">
+      <div class="field">
+        <label>เลย์เอาต์</label>
+        <div class="seg" id="segLayout">
+          <button data-v="hero" class="on">HERO</button>
+          <button data-v="split">SPLIT</button>
+          <button data-v="story">STORY</button>
+          <button data-v="trio">TRIO</button>
+        </div>
+        <div class="hint" id="layoutHint"></div>
+      </div>
+      <div class="field">
+        <label>สัดส่วน</label>
+        <div class="seg" id="segRatio">
+          <button data-v="1:1" class="on">1:1</button>
+          <button data-v="4:5">4:5</button>
+          <button data-v="9:16">9:16</button>
+        </div>
+        <div class="hint">1:1 = การ์ด carousel · 4:5 = ฟีด (กินพื้นที่จอมากสุด) · 9:16 = Reels/Stories</div>
+      </div>
+      <label class="toggle"><input type="checkbox" id="safe"> แสดง safe zone (ห้ามวางข้อความในโซนแดง)</label>
+      <label class="toggle"><input type="checkbox" id="grain" checked> เกรนฟิล์มบางๆ</label>
+      <label class="toggle"><input type="checkbox" id="showWm" checked> แสดงโลโก้ OWARIN STORE</label>
+    </div>
+  </details>
+
+  <details class="sect">
+    <summary>4. ดึงข้อมูลจาก CSV</summary>
+    <div class="body">
+      <div class="drop" id="dropCsv" style="padding:16px 12px"><b>↓</b>วางไฟล์ META EXPORT.csv</div>
+      <input type="file" id="csv" accept=".csv" hidden>
+      <div class="field" style="margin-top:10px">
+        <label>ค้นหาสินค้า</label>
+        <input type="text" id="search" placeholder="พิมพ์ชื่อเกม หรือ SKU">
+      </div>
+      <div class="picklist" id="picklist"></div>
+      <div class="hint">เลือกแล้วจะเติมชื่อ + ราคาให้อัตโนมัติ (รูปยังต้องลากมาวางเอง เพราะ R2 บล็อกการดึงข้ามโดเมน)</div>
+    </div>
+  </details>
+
+  <details class="sect">
+    <summary>5. สเปคของ Meta</summary>
+    <div class="body">
+      <div class="hint" style="margin:0">
+        <b style="color:var(--fg)">ขนาดไฟล์</b><br>
+        · การ์ด carousel — 1080×1080 (1:1)<br>
+        · ฟีด — 1080×1350 (4:5) ได้พื้นที่จอเยอะสุด<br>
+        · Reels / Stories — 1080×1920 (9:16)<br>
+        · PNG หรือ JPG ไม่เกิน 30MB<br><br>
+        <b style="color:var(--fg)">Safe zone ของ 9:16</b><br>
+        เว้นบน 14% และล่าง 20% ไว้ — UI ของ Reels จะทับ<br><br>
+        <b style="color:var(--fg)">ข้อความบนภาพ</b><br>
+        Meta เลิกใช้กฎ 20% แล้ว แต่ยังลดการแสดงผลถ้าตัวอักษรเยอะ<br>
+        เอาให้อ่านจบใน 1 วินาที: ชื่อเกม + ราคา พอ
+      </div>
+    </div>
+  </details>
+
+</div>
+
+<div class="stage">
+  <div class="bar">
+    <span class="lbl">ตัวอย่าง</span>
+    <span id="dims" style="font-size:11px;color:var(--gold);letter-spacing:.1em"></span>
+    <span class="sp"></span>
+    <button class="btn small" id="btnRandom">สุ่มคำโปรยญี่ปุ่น</button>
+  </div>
+  <div id="canvasHost"><canvas id="preview"></canvas></div>
+</div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const GOLD='#e2ad28', GOLD_D='#8a6a1f', BG='#0d0d0d', FG='#f2f2f2', MUTED='#8c8c8c';
+const JP_LINES=['攻略本 · ゲームガイド','中古 · 良品','ゲーム攻略本 専門店','レトロゲーム 攻略本','完全攻略ガイド','希少 · 入荷しました'];
+
+let imgs=[], fontsReady=false;
+document.fonts.ready.then(()=>{fontsReady=true;draw();});
+
+const S={layout:'hero',ratio:'1:1',zoom:100,offY:0,safe:false,grain:true,showWm:true};
+
+/* ---------- helpers ---------- */
+function dims(){
+  if(S.ratio==='1:1')return[1080,1080];
+  if(S.ratio==='4:5')return[1080,1350];
+  return[1080,1920];
+}
+function rr(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
+}
+function wrap(ctx,text,maxW){
+  const words=(text||'').split(' ');const lines=[];let cur='';
+  for(const w of words){
+    const t=cur?cur+' '+w:w;
+    if(ctx.measureText(t).width>maxW&&cur){lines.push(cur);cur=w;}else cur=t;
+  }
+  if(cur)lines.push(cur);
+  return lines;
+}
+function fitFont(ctx,text,maxW,startPx,weight,fam,minPx){
+  let px=startPx;
+  while(px>minPx){
+    ctx.font=`${weight} ${px}px ${fam}`;
+    if(ctx.measureText(text).width<=maxW)break;
+    px-=2;
+  }
+  return px;
+}
+/* draw image cover-cropped into rect */
+function drawCover(ctx,img,x,y,w,h,zoom,offYPct){
+  if(!img)return;
+  ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
+  const s=Math.max(w/img.width,h/img.height)*(zoom/100);
+  const dw=img.width*s, dh=img.height*s;
+  ctx.drawImage(img,x+(w-dw)/2,y+(h-dh)/2+(offYPct/100)*h,dw,dh);
+  ctx.restore();
+}
+function vGrad(ctx,x,y,w,h,stops){
+  const g=ctx.createLinearGradient(x,y,x,y+h);
+  stops.forEach(s=>g.addColorStop(s[0],s[1]));
+  ctx.fillStyle=g;ctx.fillRect(x,y,w,h);
+}
+function hairline(ctx,x,y,w){
+  ctx.fillStyle=GOLD;ctx.fillRect(x,y,w,2);
+}
+function grain(ctx,W,H){
+  if(!S.grain)return;
+  const n=Math.floor(W*H/900);
+  ctx.save();ctx.globalAlpha=.045;ctx.fillStyle='#ffffff';
+  for(let i=0;i<n;i++)ctx.fillRect(Math.random()*W,Math.random()*H,1,1);
+  ctx.restore();
+}
+function logo(ctx,W,cx,cy,scale){
+  if(!S.showWm)return;
+  ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';
+  const f1=W*0.032*scale;
+  ctx.fillStyle=FG;ctx.font=`800 ${f1}px Archivo, Arial, sans-serif`;
+  if('letterSpacing' in ctx)ctx.letterSpacing=`${f1*0.06}px`;
+  ctx.fillText('OWARIN STORE',cx,cy);
+  ctx.fillStyle=GOLD;ctx.font=`500 ${f1*0.5}px "Noto Sans JP", sans-serif`;
+  if('letterSpacing' in ctx)ctx.letterSpacing=`${f1*0.28}px`;
+  ctx.fillText('オワリン商店',cx,cy+f1*0.95);
+  ctx.restore();
+}
+function priceTag(ctx,W,x,y,txt){
+  if(!txt)return;
+  ctx.save();
+  const px=W*0.075;
+  ctx.font=`700 ${px}px Archivo, Arial, sans-serif`;
+  const bahtF=px*0.5;
+  ctx.textBaseline='alphabetic';
+  const wNum=ctx.measureText(txt).width;
+  ctx.font=`400 ${bahtF}px "Noto Sans Thai", sans-serif`;
+  const wB=ctx.measureText(' บาท').width;
+  const padX=W*0.032, padY=W*0.022;
+  const bw=wNum+wB+padX*2, bh=px*1.12+padY*2;
+  ctx.fillStyle=GOLD;rr(ctx,x-bw,y,bw,bh,2);ctx.fill();
+  ctx.fillStyle='#0d0d0d';
+  ctx.font=`700 ${px}px Archivo, Arial, sans-serif`;
+  ctx.fillText(txt,x-bw+padX,y+padY+px*0.9);
+  ctx.font=`400 ${bahtF}px "Noto Sans Thai", sans-serif`;
+  ctx.fillText(' บาท',x-bw+padX+wNum,y+padY+px*0.9);
+  ctx.restore();
+  return bh;
+}
+function badgeChip(ctx,W,x,y,txt){
+  if(!txt)return;
+  ctx.save();
+  const px=W*0.024;
+  ctx.font=`600 ${px}px "Noto Sans Thai", sans-serif`;
+  if('letterSpacing' in ctx)ctx.letterSpacing=`${px*0.1}px`;
+  const w=ctx.measureText(txt).width+px*1.6, h=px*2.2;
+  ctx.strokeStyle=GOLD;ctx.lineWidth=Math.max(1.5,W*0.0018);
+  rr(ctx,x,y,w,h,1);ctx.stroke();
+  ctx.fillStyle=GOLD;ctx.textBaseline='middle';
+  ctx.fillText(txt,x+px*0.8,y+h/2+px*0.06);
+  ctx.restore();
+}
+function ctaButton(ctx,W,cx,y,txt){
+  if(!txt)return;
+  ctx.save();
+  const px=W*0.034;
+  ctx.font=`600 ${px}px "Noto Sans Thai", sans-serif`;
+  const w=ctx.measureText(txt).width+px*3.2, h=px*2.6;
+  ctx.fillStyle=GOLD;rr(ctx,cx-w/2,y,w,h,h/2);ctx.fill();
+  ctx.fillStyle='#0d0d0d';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText(txt,cx,y+h/2+px*0.05);
+  ctx.restore();
+}
+/* Reels/Stories UI overlays top 14% and bottom 20% — keep content clear of it */
+function topInset(H){return S.ratio==='9:16'?H*0.155:H*0.055;}
+function botInset(H){return S.ratio==='9:16'?H*0.215:H*0.055;}
+function safeZone(ctx,W,H){
+  if(!S.safe)return;
+  ctx.save();ctx.fillStyle='rgba(220,60,60,.22)';
+  const top=S.ratio==='9:16'?H*0.14:H*0.06;
+  const bot=S.ratio==='9:16'?H*0.20:H*0.06;
+  ctx.fillRect(0,0,W,top);ctx.fillRect(0,H-bot,W,bot);
+  ctx.strokeStyle='rgba(220,60,60,.6)';ctx.lineWidth=2;
+  ctx.strokeRect(0,top,W,H-top-bot);
+  ctx.restore();
+}
+
+/* ---------- layouts ---------- */
+function layHero(ctx,W,H,d){
+  drawCover(ctx,imgs[0],0,0,W,H,S.zoom,S.offY);
+  if(!imgs[0]){ctx.fillStyle='#1a1a1a';ctx.fillRect(0,0,W,H);}
+  // dark scrim
+  vGrad(ctx,0,0,W,H*0.34,[[0,'rgba(13,13,13,.86)'],[1,'rgba(13,13,13,0)']]);
+  vGrad(ctx,0,H*0.42,W,H*0.58,[[0,'rgba(13,13,13,0)'],[0.55,'rgba(13,13,13,.86)'],[1,'rgba(13,13,13,.97)']]);
+  grain(ctx,W,H);
+
+  const M=W*0.075;
+  const tI=topInset(H), bI=botInset(H);
+  logo(ctx,W,W/2,tI+W*0.03,0.85);
+  badgeChip(ctx,W,M,tI+W*0.085,d.badge);
+
+  // CTA sits just above the bottom safe zone
+  if(d.cta){ctaButton(ctx,W,W/2,H-bI-W*0.09,d.cta);}
+  const baseY=d.cta?H-bI-W*0.155:H-bI;
+
+  ctx.textAlign='left';ctx.textBaseline='alphabetic';
+  // price right aligned above title block
+  let ty=baseY;
+  if(d.sub){
+    ctx.fillStyle=MUTED;ctx.font=`300 ${W*0.028}px "Noto Sans Thai", sans-serif`;
+    ctx.fillText(d.sub,M,ty);ty-=W*0.055;
+  }
+  if(d.jp){
+    ctx.fillStyle=GOLD;ctx.font=`500 ${W*0.03}px "Shippori Mincho", serif`;
+    if('letterSpacing' in ctx)ctx.letterSpacing=`${W*0.006}px`;
+    ctx.fillText(d.jp,M,ty);
+    if('letterSpacing' in ctx)ctx.letterSpacing='0px';
+    ty-=W*0.05;
+  }
+  hairline(ctx,M,ty,W*0.14);ty-=W*0.045;
+  const tPx=fitFont(ctx,d.title,W-M*2,W*0.088,'400','Outfit, sans-serif',W*0.042);
+  ctx.fillStyle=FG;ctx.font=`400 ${tPx}px Outfit, "Noto Sans Thai", sans-serif`;
+  if('letterSpacing' in ctx)ctx.letterSpacing=`${tPx*0.02}px`;
+  ctx.fillText(d.title.toUpperCase(),M,ty);
+  if('letterSpacing' in ctx)ctx.letterSpacing='0px';
+  ty-=W*0.09;
+  priceTag(ctx,W,W-M,ty-W*0.02,d.price);
+}
+
+function laySplit(ctx,W,H,d){
+  ctx.fillStyle=BG;ctx.fillRect(0,0,W,H);
+  const imgX=W*0.40;
+  drawCover(ctx,imgs[0],imgX,0,W-imgX,H,S.zoom,S.offY);
+  if(!imgs[0]){ctx.fillStyle='#1a1a1a';ctx.fillRect(imgX,0,W-imgX,H);}
+  // fade image into panel
+  const g=ctx.createLinearGradient(imgX,0,imgX+W*0.14,0);
+  g.addColorStop(0,'rgba(13,13,13,1)');g.addColorStop(1,'rgba(13,13,13,0)');
+  ctx.fillStyle=g;ctx.fillRect(imgX,0,W*0.14,H);
+  grain(ctx,W,H);
+
+  const M=W*0.06;
+  const tI=topInset(H);
+  ctx.textAlign='left';ctx.textBaseline='alphabetic';
+  logo(ctx,W,imgX*0.5,tI+W*0.035,0.62);
+  badgeChip(ctx,W,M,tI+W*0.10,d.badge);
+
+  let y=Math.max(H*0.42,tI+W*0.22);
+  hairline(ctx,M,y,W*0.10);y+=W*0.055;
+  const tPx=fitFont(ctx,d.title,imgX-M*1.4,W*0.062,'400','Outfit, sans-serif',W*0.03);
+  ctx.fillStyle=FG;ctx.font=`400 ${tPx}px Outfit, "Noto Sans Thai", sans-serif`;
+  const lines=wrap(ctx,d.title.toUpperCase(),imgX-M*1.4);
+  lines.forEach(L=>{ctx.fillText(L,M,y);y+=tPx*1.18;});
+  y+=W*0.012;
+  if(d.jp){
+    ctx.fillStyle=GOLD;ctx.font=`500 ${W*0.028}px "Shippori Mincho", serif`;
+    ctx.fillText(d.jp,M,y);y+=W*0.055;
+  }
+  if(d.sub){
+    ctx.fillStyle=MUTED;ctx.font=`300 ${W*0.024}px "Noto Sans Thai", sans-serif`;
+    wrap(ctx,d.sub,imgX-M*1.4).forEach(L=>{ctx.fillText(L,M,y);y+=W*0.036;});
+  }
+  y+=W*0.03;
+  ctx.textAlign='left';
+  const bh=priceTag(ctx,W,M+ctx.measureText('').width,y,'')||0;
+  // price tag left-aligned: draw manually
+  if(d.price){
+    ctx.save();
+    const px=W*0.062;
+    ctx.font=`700 ${px}px Archivo, Arial, sans-serif`;
+    const wNum=ctx.measureText(d.price).width;
+    ctx.font=`400 ${px*0.5}px "Noto Sans Thai", sans-serif`;
+    const wB=ctx.measureText(' บาท').width;
+    const padX=W*0.028,padY=W*0.018;
+    const bw=wNum+wB+padX*2,bhh=px*1.12+padY*2;
+    ctx.fillStyle=GOLD;rr(ctx,M,y,bw,bhh,2);ctx.fill();
+    ctx.fillStyle='#0d0d0d';ctx.font=`700 ${px}px Archivo, Arial, sans-serif`;
+    ctx.fillText(d.price,M+padX,y+padY+px*0.9);
+    ctx.font=`400 ${px*0.5}px "Noto Sans Thai", sans-serif`;
+    ctx.fillText(' บาท',M+padX+wNum,y+padY+px*0.9);
+    ctx.restore();
+    y+=bhh+W*0.05;
+  }
+  if(d.cta){
+    ctx.save();
+    const px=W*0.026;
+    ctx.font=`600 ${px}px "Noto Sans Thai", sans-serif`;
+    const w=ctx.measureText(d.cta).width+px*2.8,h=px*2.4;
+    ctx.strokeStyle=GOLD;ctx.lineWidth=Math.max(1.5,W*0.0018);
+    rr(ctx,M,y,w,h,h/2);ctx.stroke();
+    ctx.fillStyle=GOLD;ctx.textBaseline='middle';ctx.textAlign='center';
+    ctx.fillText(d.cta,M+w/2,y+h/2+px*0.05);
+    ctx.restore();
+  }
+}
+
+function layStory(ctx,W,H,d){
+  ctx.fillStyle=BG;ctx.fillRect(0,0,W,H);
+  const top=H*0.16, ih=H*0.46;
+  drawCover(ctx,imgs[0],0,top,W,ih,S.zoom,S.offY);
+  if(!imgs[0]){ctx.fillStyle='#1a1a1a';ctx.fillRect(0,top,W,ih);}
+  vGrad(ctx,0,top,W,ih*0.3,[[0,'rgba(13,13,13,.9)'],[1,'rgba(13,13,13,0)']]);
+  vGrad(ctx,0,top+ih*0.6,W,ih*0.4,[[0,'rgba(13,13,13,0)'],[1,'rgba(13,13,13,1)']]);
+  grain(ctx,W,H);
+
+  const M=W*0.09;
+  logo(ctx,W,W/2,topInset(H)*0.62,0.9);
+  ctx.textAlign='center';ctx.textBaseline='alphabetic';
+
+  let y=top+ih+H*0.035;
+  hairline(ctx,W/2-W*0.07,y,W*0.14);y+=H*0.045;
+  const tPx=fitFont(ctx,d.title.toUpperCase(),W-M*2,W*0.078,'400','Outfit, sans-serif',W*0.038);
+  ctx.fillStyle=FG;ctx.font=`400 ${tPx}px Outfit, "Noto Sans Thai", sans-serif`;
+  if('letterSpacing' in ctx)ctx.letterSpacing=`${tPx*0.02}px`;
+  ctx.fillText(d.title.toUpperCase(),W/2,y);
+  if('letterSpacing' in ctx)ctx.letterSpacing='0px';
+  y+=H*0.038;
+  if(d.jp){
+    ctx.fillStyle=GOLD;ctx.font=`500 ${W*0.032}px "Shippori Mincho", serif`;
+    ctx.fillText(d.jp,W/2,y);y+=H*0.032;
+  }
+  if(d.sub){
+    ctx.fillStyle=MUTED;ctx.font=`300 ${W*0.026}px "Noto Sans Thai", sans-serif`;
+    wrap(ctx,d.sub,W-M*2).forEach(L=>{ctx.fillText(L,W/2,y);y+=H*0.026;});
+  }
+  y+=H*0.028;
+  if(d.price){
+    ctx.save();
+    const px=W*0.10;
+    ctx.font=`700 ${px}px Archivo, Arial, sans-serif`;
+    const wNum=ctx.measureText(d.price).width;
+    ctx.font=`400 ${px*0.42}px "Noto Sans Thai", sans-serif`;
+    const wB=ctx.measureText(' บาท').width;
+    const tot=wNum+wB;
+    ctx.fillStyle=GOLD;ctx.textAlign='left';
+    ctx.font=`700 ${px}px Archivo, Arial, sans-serif`;
+    ctx.fillText(d.price,W/2-tot/2,y+px*0.75);
+    ctx.font=`400 ${px*0.42}px "Noto Sans Thai", sans-serif`;
+    ctx.fillText(' บาท',W/2-tot/2+wNum,y+px*0.75);
+    ctx.restore();
+    y+=px*1.1;
+  }
+  if(d.badge){
+    ctx.save();ctx.textAlign='center';
+    const px=W*0.024;
+    ctx.font=`600 ${px}px "Noto Sans Thai", sans-serif`;
+    const w=ctx.measureText(d.badge).width+px*2.2,h=px*2.2;
+    ctx.strokeStyle=GOLD_D;ctx.lineWidth=2;rr(ctx,W/2-w/2,y,w,h,1);ctx.stroke();
+    ctx.fillStyle=GOLD_D;ctx.textBaseline='middle';ctx.fillText(d.badge,W/2,y+h/2+px*0.06);
+    ctx.restore();
+  }
+  // CTA sits above the 20% bottom safe zone
+  ctaButton(ctx,W,W/2,H-botInset(H)-W*0.10,d.cta);
+}
+
+function layTrio(ctx,W,H,d){
+  ctx.fillStyle=BG;ctx.fillRect(0,0,W,H);
+  const M=W*0.06, gap=W*0.018;
+  const topPad=topInset(H)+H*0.145;
+  const cellW=(W-M*2-gap*2)/3;
+  const cellH=Math.min(cellW*1.32,H*0.42);
+  for(let i=0;i<3;i++){
+    const x=M+i*(cellW+gap);
+    ctx.save();ctx.fillStyle='#1a1a1a';ctx.fillRect(x,topPad,cellW,cellH);ctx.restore();
+    drawCover(ctx,imgs[i],x,topPad,cellW,cellH,S.zoom,S.offY);
+    ctx.strokeStyle='rgba(226,173,40,.35)';ctx.lineWidth=Math.max(1,W*0.0014);
+    ctx.strokeRect(x+0.5,topPad+0.5,cellW-1,cellH-1);
+  }
+  grain(ctx,W,H);
+  ctx.textAlign='center';ctx.textBaseline='alphabetic';
+  logo(ctx,W,W/2,topInset(H)*0.60,0.9);
+
+  let y=topPad-H*0.075;
+  hairline(ctx,W/2-W*0.06,y-W*0.04,W*0.12);
+  const tPx=fitFont(ctx,d.title.toUpperCase(),W-M*2,W*0.072,'400','Outfit, sans-serif',W*0.036);
+  ctx.fillStyle=FG;ctx.font=`400 ${tPx}px Outfit, "Noto Sans Thai", sans-serif`;
+  if('letterSpacing' in ctx)ctx.letterSpacing=`${tPx*0.03}px`;
+  ctx.fillText(d.title.toUpperCase(),W/2,y);
+  if('letterSpacing' in ctx)ctx.letterSpacing='0px';
+
+  y=topPad+cellH+H*0.06;
+  if(d.jp){
+    ctx.fillStyle=GOLD;ctx.font=`500 ${W*0.032}px "Shippori Mincho", serif`;
+    ctx.fillText(d.jp,W/2,y);y+=H*0.045;
+  }
+  if(d.sub){
+    ctx.fillStyle=MUTED;ctx.font=`300 ${W*0.026}px "Noto Sans Thai", sans-serif`;
+    wrap(ctx,d.sub,W-M*2).forEach(L=>{ctx.fillText(L,W/2,y);y+=H*0.032;});
+  }
+  y+=H*0.02;
+  ctaButton(ctx,W,W/2,y,d.cta);
+}
+
+/* ---------- render ---------- */
+function draw(){
+  const [W,H]=dims();
+  const cv=$('preview');
+  cv.width=W;cv.height=H;
+  cv.style.width=(S.ratio==='9:16'?360:480)+'px';
+  const ctx=cv.getContext('2d');
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle=BG;ctx.fillRect(0,0,W,H);
+
+  const d={
+    title:$('title').value.trim()||'UNTITLED',
+    jp:$('jp').value.trim(),
+    sub:$('sub').value.trim(),
+    price:$('price').value.trim(),
+    badge:$('badge').value.trim(),
+    cta:$('cta').value.trim()
+  };
+  try{
+    if(S.layout==='hero')layHero(ctx,W,H,d);
+    else if(S.layout==='split')laySplit(ctx,W,H,d);
+    else if(S.layout==='story')layStory(ctx,W,H,d);
+    else layTrio(ctx,W,H,d);
+  }catch(e){console.error(e);}
+  safeZone(ctx,W,H);
+  $('dims').textContent=`${W} × ${H}`;
+}
+
+/* ---------- inputs ---------- */
+['title','jp','sub','price','badge','cta'].forEach(id=>$(id).addEventListener('input',draw));
+$('zoom').addEventListener('input',e=>{S.zoom=+e.target.value;$('vZoom').textContent=S.zoom+'%';draw();});
+$('offY').addEventListener('input',e=>{S.offY=+e.target.value;$('vOffY').textContent=S.offY;draw();});
+$('safe').addEventListener('change',e=>{S.safe=e.target.checked;draw();});
+$('grain').addEventListener('change',e=>{S.grain=e.target.checked;draw();});
+$('showWm').addEventListener('change',e=>{S.showWm=e.target.checked;draw();});
+
+const HINTS={
+  hero:'รูปเต็มเฟรม + ไล่สีดำด้านล่าง — ใช้เป็นการ์ดแรกของ carousel หรือรูปเดี่ยว',
+  split:'แบ่งซ้ายดำ-ขวารูป แนวนิตยสาร — เหมาะกับ 1:1 และ 4:5',
+  story:'รูปกลาง ข้อความล่าง เว้น safe zone ให้ Reels แล้ว — ใช้กับ 9:16',
+  trio:'สามเล่มเรียงกัน — ใช้ทำโพสต์ของเข้าใหม่ / รวมชุด'
+};
+function seg(id,key,after){
+  $(id).addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b)return;
+    [...$(id).children].forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');S[key]=b.dataset.v;if(after)after();draw();
+  });
+}
+seg('segLayout','layout',()=>{$('layoutHint').textContent=HINTS[S.layout];});
+seg('segRatio','ratio');
+$('layoutHint').textContent=HINTS.hero;
+
+$('btnRandom').onclick=()=>{$('jp').value=JP_LINES[Math.floor(Math.random()*JP_LINES.length)];draw();};
+
+/* ---------- image loading ---------- */
+function loadFiles(fl){
+  const list=[...fl].filter(f=>f.type.startsWith('image/')).slice(0,3);
+  if(!list.length)return;
+  let done=0;const out=[];
+  list.forEach((f,i)=>{
+    const im=new Image();
+    im.onload=()=>{out[i]=im;if(++done===list.length){imgs=out;setStatus(`โหลดรูปแล้ว ${out.length} ไฟล์`,'ok');draw();}};
+    im.src=URL.createObjectURL(f);
+  });
+}
+$('drop').onclick=()=>$('file').click();
+$('file').onchange=e=>loadFiles(e.target.files);
+['dragenter','dragover'].forEach(ev=>$('drop').addEventListener(ev,e=>{e.preventDefault();$('drop').classList.add('hot');}));
+['dragleave','drop'].forEach(ev=>$('drop').addEventListener(ev,e=>{e.preventDefault();$('drop').classList.remove('hot');}));
+$('drop').addEventListener('drop',e=>loadFiles(e.dataTransfer.files));
+document.addEventListener('paste',e=>{
+  const it=[...(e.clipboardData?.items||[])].filter(i=>i.type.startsWith('image/'));
+  if(it.length)loadFiles(it.map(i=>i.getAsFile()));
+});
+
+/* ---------- CSV ---------- */
+let rows=[];
+function parseCSV(text){
+  const out=[];let row=[],cur='',q=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(q){ if(c==='"'){ if(text[i+1]==='"'){cur+='"';i++;} else q=false; } else cur+=c; }
+    else if(c==='"')q=true;
+    else if(c===','){row.push(cur);cur='';}
+    else if(c==='\n'){row.push(cur);out.push(row);row=[];cur='';}
+    else if(c!=='\r')cur+=c;
+  }
+  if(cur||row.length){row.push(cur);out.push(row);}
+  const hdr=out.shift().map(h=>h.replace(/^﻿/,'').trim());
+  return out.filter(r=>r.length>1).map(r=>Object.fromEntries(hdr.map((h,i)=>[h,(r[i]||'').trim()])));
+}
+$('dropCsv').onclick=()=>$('csv').click();
+$('csv').onchange=e=>{
+  const f=e.target.files[0];if(!f)return;
+  f.text().then(t=>{rows=parseCSV(t);setStatus(`อ่าน CSV แล้ว ${rows.length} รายการ`,'ok');renderPick('');});
+};
+['dragenter','dragover'].forEach(ev=>$('dropCsv').addEventListener(ev,e=>{e.preventDefault();$('dropCsv').classList.add('hot');}));
+['dragleave','drop'].forEach(ev=>$('dropCsv').addEventListener(ev,e=>{e.preventDefault();$('dropCsv').classList.remove('hot');}));
+$('dropCsv').addEventListener('drop',e=>{
+  const f=e.dataTransfer.files[0];if(!f)return;
+  f.text().then(t=>{rows=parseCSV(t);setStatus(`อ่าน CSV แล้ว ${rows.length} รายการ`,'ok');renderPick('');});
+});
+$('search').addEventListener('input',e=>renderPick(e.target.value));
+function renderPick(q){
+  q=(q||'').toLowerCase();
+  const hits=rows.filter(r=>!q||(r.title||'').toLowerCase().includes(q)||(r.id||'').toLowerCase().includes(q)).slice(0,60);
+  $('picklist').innerHTML=hits.map((r,i)=>`<div data-i="${rows.indexOf(r)}"><b>${esc(r.title)}</b>${esc(r.id)} · ${esc(r.price)}</div>`).join('');
+}
+function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+$('picklist').addEventListener('click',e=>{
+  const el=e.target.closest('div[data-i]');if(!el)return;
+  const r=rows[+el.dataset.i];if(!r)return;
+  $('title').value=r.title||'';
+  $('price').value=(r.price||'').replace(/[^\d.]/g,'').replace(/\.00$/,'');
+  draw();
+  setStatus('เติมข้อมูลแล้ว — ลากรูปมาวางเพิ่ม','ok');
+});
+
+/* ---------- export ---------- */
+function setStatus(t,cls){const s=$('status');s.textContent=t;s.className=cls||'';}
+$('btnPng').onclick=()=>{
+  const wasSafe=S.safe;if(wasSafe){S.safe=false;draw();}
+  const name=($('title').value.trim()||'owarin').replace(/[^\w\-ก-๙ ]/g,'').replace(/\s+/g,'_');
+  $('preview').toBlob(b=>{
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(b);
+    a.download=`${name}_${S.layout}_${S.ratio.replace(':','x')}.png`;
+    a.click();
+    if(wasSafe){S.safe=true;draw();}
+    setStatus('บันทึกแล้ว','ok');
+  },'image/png');
+};
+$('btnCopy').onclick=async()=>{
+  const wasSafe=S.safe;if(wasSafe){S.safe=false;draw();}
+  try{
+    const b=await new Promise(r=>$('preview').toBlob(r,'image/png'));
+    await navigator.clipboard.write([new ClipboardItem({'image/png':b})]);
+    setStatus('คัดลอกลงคลิปบอร์ดแล้ว','ok');
+  }catch(err){setStatus('คัดลอกไม่ได้ ใช้ปุ่มดาวน์โหลดแทน','err');}
+  if(wasSafe){S.safe=true;draw();}
+};
+
+draw();
+</script>
+</body>
+</html>

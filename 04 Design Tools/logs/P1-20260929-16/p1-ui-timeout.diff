@@ -1,0 +1,65 @@
+diff --git "a/04 Design Tools\\logs\\P1-20260929-16\\p1-ui-before.test.cjs" "b/04 Design Tools\\logs\\P1-20260929-01\\p1-ui.test.cjs"
+index f5a5065..ccdeb3b 100644
+--- "a/04 Design Tools\\logs\\P1-20260929-16\\p1-ui-before.test.cjs"	
++++ "b/04 Design Tools\\logs\\P1-20260929-01\\p1-ui.test.cjs"	
+@@ -4,7 +4,7 @@ const vm=require('node:vm');
+ const html=fs.readFileSync(__dirname+'/candidate/Index.html','utf8');
+ function between(a,b){const i=html.indexOf(a),j=html.indexOf(b,i+1);assert(i>=0&&j>i);return html.slice(i,j);}
+ function make(backing=new Map(),storageFailure=false){
+-  const elements={}, pending=[], notices=[], requests=[], focused=[];
++  const elements={}, pending=[], notices=[], requests=[], focused=[], timers=[];
+   const $=id=>elements[id] ||= {value:'',innerHTML:'',textContent:'',disabled:false,style:{display:'none'},handlers:{},
+     addEventListener(type,fn){(this.handlers[type] ||= []).push(fn);},focus(){focused.push(id);},querySelectorAll(){return []}};
+   let render=()=>{}, flags='';
+@@ -15,7 +15,9 @@ function make(backing=new Map(),storageFailure=false){
+     sel==='#modal input, #modal select' ? Object.entries(elements).filter(([id])=>id.startsWith('f')).map(([,el])=>el) : Object.values(elements)},
+     M:{mode:'add',source:'GGB',saving:false,auto:{}},S:{source:'GGB',data:{GGB:[],MAG:[]}},
+     LAST_ADD:null,_flT:null,
+-    clearTimeout(){},setTimeout(){return 1;},setFlagChips(v){flags=v;},getFlagStr(){return flags;},
++    clearTimeout(id){if(timers[id-1])timers[id-1].cleared=true;},
++    setTimeout(fn,ms){timers.push({fn,ms,cleared:false});return timers.length;},
++    setFlagChips(v){flags=v;},getFlagStr(){return flags;},
+     setModalSource(src){c.M.source=src;},showModal(){},toast(x){notices.push(x);},okToast(){},
+     esc:String,money:String,bookingBanner(){return '';},buildFilterOptions(){},
+     render(){render();},callApi(action,payload){requests.push({action,payload});return new Promise((resolve,reject)=>pending.push({resolve,reject}));}});
+@@ -26,7 +28,7 @@ function make(backing=new Map(),storageFailure=false){
+   const fire=(id,type,e={})=>(($(id).handlers[type]||[]).forEach(fn=>fn(e)));
+   const settle=()=>new Promise(r=>setImmediate(r));
+   const saved=i=>({item:{source:c.M.source,productId:'TEST-'+i,name:'Synthetic '+i,suggested:300},result:{},bookingMatches:[]});
+-  return {c,$,fire,pending,notices,requests,focused,settle,saved,backing,setRender:fn=>render=fn};
++  return {c,$,fire,pending,notices,requests,focused,timers,settle,saved,backing,setRender:fn=>render=fn};
+ }
+ (async()=>{
+   let u=make();
+@@ -101,6 +103,24 @@ function make(backing=new Map(),storageFailure=false){
+   u=make();u.c.openAdd();u.$('fName').value='Saving';u.fire('mSave','click');u.fire('mSave','click');
+   u.c.openAdd();assert.equal(u.requests.length,1);assert.equal(u.$('fName').value,'Saving');
+   u.pending.shift().resolve(u.saved(101));await u.settle();
++  u=make();u.c.openAdd();u.$('fName').value='Late success';u.fire('mSave','click');
++  const delayed=u.pending.shift(), delayedId=u.c.addRequestId;
++  u.timers.find(t=>t.ms===45000).fn();await u.settle();
++  assert.equal(u.c.M.saving,false);assert.equal(u.c.addRequestId,delayedId);
++  assert.equal(u.$('fName').disabled,true,'timed-out draft remains frozen');
++  delayed.resolve(u.saved(103));await u.settle();
++  assert.equal(u.c.addRequestId,delayedId,'late callback must not clear pending request');
++  assert.equal(u.$('fName').value,'Late success','late callback must not reset form');
++  u.fire('mSave','click');assert.equal(u.requests[1].action,'inventory.addStatus');
++  u.pending.shift().resolve({state:'DONE',data:u.saved(103)});await u.settle();
++  assert.equal(u.c.addRequestId,'');
++  u=make();u.c.openAdd();u.$('fName').value='Late status';u.fire('mSave','click');
++  u.pending.shift().reject(Error('INJECTED NETWORK ERROR'));await u.settle();
++  u.fire('mSave','click');const delayedStatus=u.pending.shift();
++  u.timers.filter(t=>t.ms===45000).at(-1).fn();await u.settle();
++  delayedStatus.resolve({state:'NOT_FOUND'});await u.settle();
++  assert.equal(u.requests.length,2,'late NOT_FOUND status must not launch Add');
++  assert.equal(u.$('fName').disabled,true);
+   u=make();u.c.attachSuggest('fName','sugName',()=>['Old suggestion']);u.c.openAdd();
+   u.$('fName').value='Old';u.fire('fName','input');u.fire('mSave','click');
+   u.pending.shift().resolve(u.saved(102));await u.settle();
+@@ -108,5 +128,5 @@ function make(backing=new Map(),storageFailure=false){
+   u.fire('fName','keydown',{key:'ArrowDown',preventDefault(){}});
+   u.fire('fName','keydown',{key:'Enter',preventDefault(){}});
+   assert.equal(u.$('fName').value,'');
+-  console.log('PASS: 20 UI resets, status-before-retry DONE/NOT_FOUND/ERROR, frozen reload, storage failure, safe validation release, render failure, in-flight guard, stale suggestion clear');
++  console.log('PASS: 20 UI resets, status-before-retry DONE/NOT_FOUND/ERROR, frozen reload, storage failure, safe validation release, render failure, in-flight guard, Add timeout/late callback, stale suggestion clear');
+ })().catch(e=>{console.error(e);process.exitCode=1;});

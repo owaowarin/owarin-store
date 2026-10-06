@@ -1,0 +1,44 @@
+diff --git a/04 Design Tools/logs/P1-20260929-01/runtime-source/webapp.gs b/04 Design Tools/logs/P1-20260929-01/candidate/webapp.gs
+index cc8e481..4e5e9bc 100644
+--- a/04 Design Tools/logs/P1-20260929-01/runtime-source/webapp.gs	
++++ b/04 Design Tools/logs/P1-20260929-01/candidate/webapp.gs	
+@@ -166,6 +166,17 @@ function _numOrRaw(v) {
+   return isNaN(n) ? s : n;
+ }
+ 
++// Add must not rely on a typed Sheets column to reject malformed money.
++function _addNumber(v, field) {
++  var s = String(v === undefined || v === null ? '' : v).trim();
++  if (!s) return '';
++  if (!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(s) &&
++      !/^[+-]?\d{1,3}(?:,\d{3})+(?:\.\d+)?$/.test(s)) throw new Error(field + ' must be a number');
++  var n = Number(s.replace(/,/g, ''));
++  if (!isFinite(n)) throw new Error(field + ' must be a finite number');
++  return n;
++}
++
+ // ── WRITE: ADD ──
+ // Uses addInventoryRow from Code.gs (lock + SP-2 + Listed Date all included)
+ // then fills the fields the old sidebar did not have (platform / genre), header-driven
+@@ -180,9 +191,9 @@ function _apiInvAdd(p) {
+     title:    title,
+     pub:      String(p.pub || "").trim(),
+     cond:     String(p.cond || "").trim(),
+-    original: _numOrRaw(p.original),
+-    cost:     _numOrRaw(p.cost),
+-    price:    _numOrRaw(p.price),
++    original: _addNumber(p.original, 'Original'),
++    cost:     _addNumber(p.cost, 'Cost'),
++    price:    _addNumber(p.price, 'Price'),
+     status:   String(p.status || "").trim() || "New Arrival",
+     // SP-2: handled inside addInventoryRow (platform affects the curve, so it must be set first)
+     platform:  String(p.platform  || "").trim(),
+@@ -191,7 +202,7 @@ function _apiInvAdd(p) {
+     type:      String(p.type      || "").trim(),
+     copyFlags: String(p.copyFlags || "").trim(),
+     rarity:    String(p.rarity    || "").trim(),
+-    marketRef: _numOrRaw(p.marketRef),
++    marketRef: _addNumber(p.marketRef, 'Market Ref'),
+     refNote:   String(p.refNote   || "").trim()
+   });
+ 

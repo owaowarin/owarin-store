@@ -1,0 +1,8 @@
+REPRO baseline unavailable sale Auction
+REPRO baseline unavailable sale Hold
+REPRO baseline unavailable sale New Arrival
+REPRO duplicate cart -> two SALES lines
+REPRO partial Sold returned success with no ledger
+REPRO status edit bypass
+REPRO omitted subsidy -> customer shipping 50
+PASS reproduction asserts baseline defects; not acceptance

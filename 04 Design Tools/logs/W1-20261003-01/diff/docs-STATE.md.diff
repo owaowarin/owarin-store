@@ -1,0 +1,41 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\before\\00 Docs\\STATE.md" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\STATE.md"
+index 539be63..2d7d570 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\before\\00 Docs\\STATE.md"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\STATE.md"	
+@@ -1,19 +1,19 @@
+ # STATE — OWARIN STORE (read this FIRST; open other files only when a line below points to them)
+ 
+-จัดทำ: 2026-10-03 22:19:06 +0700 — Stream B Session35 plan/rules update only. Production statements cite Session34; other streams retain prior snapshots. Re-read live before acting on data.
++จัดทำ: 2026-10-04 02:59:46 +0700 — Stream B Session36. Fresh read-only v31 source/schema baseline; other streams keep prior snapshots.
+ Rule: OVERWRITE at session close; ≤80 lines. Read active PLAN for scope; dated logs are lookup evidence.
+ 
+ ## Streams
+ 
+-### 1. Add / Cart / Orders / Label (Stream B) — P1 LIVE; W1 next
+-- Status: Session34 verified Code/WebApp v31 + Index/P1Journal; ADD REQUESTS installed; existing /exec deployment4 at2026-10-03 21:44, owner-only. Local/isolated R1–R4 and production readiness/modal smoke passed; Session35 changes documentation only.
+-- Next ONE step: W1.1 compare current transaction source/schema/callers to v31, reproduce remaining sale risks, then implement W1 Cart/Orders/reserve/cancel/confirm in local + isolated test project; no P0/Add restart.
+-- Plan: `00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md` §0/§10 = W1 transactions+Orders, W2 CLIENT/Label, W3 acceptance/release; contract/QA remains in that plan. `00 Docs/HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md` = operations/recovery.
+-- Open: first real P1 Add/DONE observed when a real item is available; retain Request ID. Real network outage unproven; lost-ID/new-device recovery manual. New Orders/reservations/client/label audit not installed; legacy sales outside P1 journal.
+-- Closed: Pending reserves; Cancel only own claim; Auction unavailable; Shipping Cost=shop subsidy; reuse CLIENT; Facebook off-label. P1 source/schema/deploy was explicitly approved with backup-first undo. Future release authorization checked for its actual scope.
+-- Rules: `AGENTS.md`, `CLAUDE.md`, master §§2,5,6,9 + §5.2.1 six priorities; one writer/no extra agents. Decisions `04 Design Tools/logs/decisions_20261003.csv`.
+-- Evidence: `04 Design Tools/logs/P1-20261003-03/result.md`/`UNDO.md` (exact installed hashes, deployment4/rollback3); `P1-20261003-02/review.md`; frozen baseline `P1-20260930-11/review.md`. Historical replay is not current-SKU identity.
+-- Session35: `04 Design Tools/logs/PLAN-20261003-01/result.md`/`changes.csv`/`before/`/`diff/`; `00 Docs/HANDOFF_2026-09-28.md` Session35; `00 Docs/HANDOFF_2026-10-03.md`; `00 Docs/IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md` Session35 only. Older `ORDERS-CRM-LABEL-DESIGN.md` is a superseded reference.
++### 1. Add / Cart / Orders / Label (Stream B) — P1 LIVE; W1 local ready, Google gate pending
++- Status: W1 v32 candidate implemented; 14 transaction groups +1,032 injected simulated write positions, UI recovery tests, six regressions PASS. Browser synthetic flows/two tabs PASS. Sanitized source saved/read back in separate Google test project; fixture/schema/UI acceptance blocked by Authorization. W1 is not DONE.
++- Next ONE step: owner authorize test project, then guarded fixture/recovery + actual Google UI/LockService/table checks; focused GPT-6 Astra / High review on exact revision. No new agent/chat/model-switch claim; no W2 or shop release.
++- Plan: `00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md` §0/§10 W1→W2→W3; handbook updated with test buttons/recovery. No P0/P1 restart.
++- Shop: no source/schema/data/Run/Save/deploy mutation; fresh v31 four-source hashes match Session34. Deployment4 remains dated Session34 evidence. Root v31/Index/P1Journal unchanged. First real P1 Add remains to observe when a real item exists.
++- Closed: Pending reserves; Cancel releases only own claim; only Instock sells, Auction unavailable; Shipping Cost=shop subsidy; CLIENT reused; Facebook off-label. Price/SALES/Meta/R2 retained.
++- Open: Google authorization and real runtime acceptance; focused review; partial journal/derived edit/conflicting external edit/lost device ID manual recovery. Script lock cannot prevent owner direct Sheets edits. W2 CLIENT/snapshot/Label/print absent; Label later=Missing label.
++- Evidence: `04 Design Tools/logs/W1-20261003-01/result.md`, revision.json, diff/, changes.csv, issues.md, UNDO.md, REVIEW-ASTRA-HIGH.md. Candidate local v32 stored there; authoritative root source stays production v31.
++- Rules/history: AGENTS/CLAUDE/master §§2,5,6,9 +§5.2.1; decisions_20261004.csv; HANDOFF_2026-10-04.md; historical HANDOFF_2026-09-28.md and Implementation log appended Session36. P1 production undo stays P1-20261003-03/UNDO.md; Session35 PLAN-20261003-01 retained.
+ 
+ ### 2. Meta catalog feed / R2 images — v29 pipeline LIVE, plan closed (S0–S4 DONE 2026-10-02)
+ - Verified live 2026-10-02 00:3x +07 (Meta connector): feed 1048143251023664 pulled daily 2026-09-26→10-01 05:50 Bangkok, all `succeeded_with_warnings`, 1,342 detected = 1,342 persisted, 0 invalid, 1 warning (3 all-caps titles, should_fix only). Next pull 2026-10-02 ~05:50.
+@@ -40,5 +40,5 @@ Rule: OVERWRITE at session close; ≤80 lines. Read active PLAN for scope; dated
+ 
+ ## Housekeeping
+ - DONE 2026-10-01/02 (by OWARI in PowerShell): HANDOFF.md + HANDOFF_2026-09-12/13/14/18/20/22/23/24/25/29 moved to `00 Docs/_archive/handoffs_old/` (11 files, verified by folder listing 2026-10-02). `HANDOFF_2026-09-29.md` was a byte-identical prefix of 09-28, so nothing was lost.
+-- Current handoffs for the Add/Cart stream: `HANDOFF_2026-09-28.md` (Sessions through 35, history preserved) and the concise `HANDOFF_2026-10-03.md`.
++- Current handoffs for the Add/Cart stream: `HANDOFF_2026-09-28.md` (Sessions through 36, history preserved) and the concise `HANDOFF_2026-10-04.md` (10-03 kept as Session35 history).
+ - Still pending: misplaced `00 Docs/logs/` copy of older handoffs and `_to_delete/` leftovers (OWARI to clear); stream 5 status unreviewed.

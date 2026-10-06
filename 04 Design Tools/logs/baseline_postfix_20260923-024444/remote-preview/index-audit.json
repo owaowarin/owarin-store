@@ -1,0 +1,32 @@
+{
+  "observed_bangkok": "2026-09-23 04:00-04:06",
+  "sheet_id": "16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0",
+  "sheet_tab": "R2 IMAGES",
+  "remote_index": "r2:owarin-images/meta/images.csv",
+  "remote_index_exactly_matches_sheet_import": true,
+  "index_product_rows": 1816,
+  "sheet_product_rows": 2465,
+  "index_product_ids_absent_from_sheet": 31,
+  "remote_library_objects": 2700,
+  "expected_index_keys": 2696,
+  "missing_expected_index_keys": 0,
+  "unindexed_remote_keys": [
+    "library/OWA-GGBD045BRBN00/1.png",
+    "library/OWA-GGBD045BRBN00/2.png",
+    "library/OWA-GGBD049FWAN00/1.png",
+    "library/OWA-GGBD049FWAN00/2.png"
+  ],
+  "hardcoded_jpg_sheet_urls_missing": 67,
+  "affected_current_products": 39,
+  "affected_by_status": {
+    "Instock": {"products": 19, "links": 31},
+    "Auction": {"products": 11, "links": 19},
+    "Sold": {"products": 9, "links": 17}
+  },
+  "formula_link_risks_csv_sha256": "A18F5952B4A554390156868C16FFD4645836061DCC68D0E3B1E293CD5DB0AF81",
+  "formula_link_product_summary_csv_sha256": "20674E7A199B03068033C5E7180E5A20F89311378268F90FCA619ECC88BBAB14",
+  "live_legacy_queue_rows": 1333,
+  "live_legacy_queue_scope": "r2-hybrid-v3",
+  "bucket_listing": "403 ListBuckets AccessDenied; private bucket existence and privacy unknown",
+  "cloud_or_sheet_mutation": false
+}

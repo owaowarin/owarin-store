@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OWARIN ARRIVAL CARD STUDIO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Shippori+Mincho:wght@400;500&family=Archivo:wght@600;700;800;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:hsl(0 0% 5%); --fg:hsl(0 0% 95%); --card:hsl(0 0% 8%); --muted-fg:hsl(0 0% 55%);
+  --border:hsl(0 0% 18%); --input:hsl(0 0% 15%);
+  --gold:hsl(43 76% 52%); --gold-muted:hsl(43 40% 35%); --gold-bright:hsl(43 85% 60%);
+  --destructive:hsl(0 62% 50%); --ok:hsl(140 45% 45%);
+}
+*{box-sizing:border-box;border-color:var(--border)}
+html,body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:'Outfit','Noto Sans Thai',sans-serif;font-weight:300;font-size:14px;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-thumb{background:hsl(0 0% 20%)}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit}
+header{position:sticky;top:0;z-index:30;background:hsl(0 0% 5%/.94);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);padding:12px 18px;display:flex;align-items:center;gap:14px}
+.brand{font-weight:500;letter-spacing:.35em;font-size:13px;white-space:nowrap}
+.brand .g{color:var(--gold)}
+.brand small{display:block;letter-spacing:.18em;color:var(--muted-fg);font-size:9px;margin-top:3px;font-family:'Shippori Mincho',serif}
+.hd-right{margin-left:auto;display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+#status{color:var(--muted-fg);font-size:11px}
+#status.ok{color:var(--ok)} #status.err{color:var(--destructive)}
+.btn{background:transparent;border:1px solid var(--border);color:var(--fg);
+  padding:8px 14px;font-size:11px;letter-spacing:.14em;transition:.2s;white-space:nowrap}
+.btn:hover:not(:disabled){border-color:var(--gold);color:var(--gold)}
+.btn.primary{background:var(--gold);color:hsl(0 0% 5%);border-color:var(--gold);font-weight:500}
+.btn.primary:hover{background:var(--gold-bright)}
+.btn.small{padding:6px 10px;font-size:10px}
+.btn.block{width:100%;display:block}
+.wrap{display:grid;grid-template-columns:344px 1fr;align-items:start}
+.panel{border-right:1px solid var(--border);position:sticky;top:59px;height:calc(100vh - 59px);overflow-y:auto}
+.stage{padding:16px 20px 60px}
+.sect{border-bottom:1px solid var(--border)}
+.sect>summary{list-style:none;cursor:pointer;padding:12px 16px;display:flex;gap:8px;
+  font-size:10px;letter-spacing:.22em;color:var(--muted-fg);text-transform:uppercase;user-select:none}
+.sect>summary::-webkit-details-marker{display:none}
+.sect>summary::before{content:'+';color:var(--gold-muted);font-size:13px;width:9px}
+.sect[open]>summary::before{content:'−'}
+.sect[open]>summary{color:var(--gold)}
+.sect .body{padding:2px 16px 16px}
+.field{margin-bottom:12px}.field:last-child{margin-bottom:0}
+.field label{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  font-size:9px;letter-spacing:.18em;color:var(--muted-fg);text-transform:uppercase;margin-bottom:6px}
+.field label .val{color:var(--gold);letter-spacing:.05em;font-size:10px}
+.hint{font-size:10.5px;color:var(--muted-fg);line-height:1.6;margin-top:6px}
+.hint code{background:var(--input);padding:1px 4px;color:var(--gold);font-size:10px}
+input[type=text],textarea,select{width:100%;background:var(--input);border:1px solid var(--border);
+  color:var(--fg);padding:8px 10px;font-size:12.5px;outline:none;font-weight:300}
+input[type=number]{width:100%;background:var(--input);border:1px solid var(--border);color:var(--fg);
+  padding:7px 4px;text-align:center;font-size:12px;outline:none}
+input[type=color]{width:100%;height:30px;background:var(--input);border:1px solid var(--border);padding:2px}
+input[type=range]{width:100%;accent-color:var(--gold);background:transparent;margin:3px 0}
+input:focus,textarea:focus,select:focus{border-color:var(--gold-muted)}
+textarea{resize:vertical;line-height:1.55;font-size:12px}
+.row{display:flex;gap:8px}.row>*{flex:1;min-width:0}
+.seg{display:flex;border:1px solid var(--border);flex-wrap:wrap}
+.seg button{flex:1;background:none;border:none;border-right:1px solid var(--border);
+  color:var(--muted-fg);padding:8px 3px;font-size:9.5px;letter-spacing:.08em;min-width:46px}
+.seg button:last-child{border-right:none}
+.seg button.on{background:var(--gold);color:hsl(0 0% 5%);font-weight:500}
+.toggle{display:flex;align-items:center;gap:9px;cursor:pointer;font-size:11.5px;margin-bottom:9px}
+.toggle input{width:15px;height:15px;accent-color:var(--gold)}
+.drop{border:1px dashed var(--border);padding:16px 14px;text-align:center;color:var(--muted-fg);
+  cursor:pointer;transition:.2s;font-size:11.5px;line-height:1.6}
+.drop:hover,.drop.hot{border-color:var(--gold);color:var(--gold);background:var(--card)}
+.drop b{display:block;font-size:20px;font-weight:200;margin-bottom:4px}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.pgrid .pl{font-size:9px;color:var(--muted-fg);text-align:center;margin-bottom:4px;letter-spacing:.14em}
+.bar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding-bottom:12px;
+  border-bottom:1px solid var(--border);margin-bottom:16px}
+.bar .lbl{font-size:9px;letter-spacing:.2em;color:var(--muted-fg);text-transform:uppercase}
+.bar .sp{flex:1}
+#canvasHost{display:flex;justify-content:center}
+#preview{border:1px solid var(--border);cursor:ns-resize;touch-action:none;user-select:none}
+
+/* ── รายการช่อง : รูป+ชื่อ+ราคา+SOLD อยู่ก้อนเดียวกัน ── */
+#slots{display:flex;flex-direction:column;gap:6px;margin-top:9px}
+.slot{display:grid;grid-template-columns:44px 1fr;gap:8px;padding:6px;border:1px solid var(--border);
+  background:var(--card);align-items:center}
+.slot.sel{border-color:var(--gold)}
+.slot .th{width:44px;height:56px;object-fit:contain;background:#111;border:1px solid var(--border)}
+.slot .th.empty{display:flex;align-items:center;justify-content:center;color:var(--muted-fg);font-size:16px}
+.slot .col{display:flex;flex-direction:column;gap:4px;min-width:0}
+.slot input[type=text]{padding:5px 7px;font-size:11.5px}
+.slot .r2{display:flex;gap:4px}
+.slot .r2 input{flex:1;min-width:0}
+.slot .r2 button{background:var(--input);border:1px solid var(--border);color:var(--muted-fg);
+  font-size:9.5px;padding:0 7px;letter-spacing:.06em;white-space:nowrap}
+.slot .r2 button:hover{border-color:var(--gold);color:var(--gold)}
+.slot .r2 button.on{background:var(--destructive);border-color:var(--destructive);color:#fff}
+#sugg{border:1px solid var(--gold-muted);max-height:260px;overflow-y:auto;margin-top:6px;display:none}
+#sugg>div{display:grid;grid-template-columns:38px 1fr auto;gap:8px;align-items:center;
+  padding:5px 7px;border-bottom:1px solid var(--border);cursor:pointer;font-size:11.5px;color:var(--muted-fg)}
+#sugg>div:hover{background:var(--input);color:var(--gold)}
+#sugg img{width:38px;height:48px;object-fit:contain;background:#111}
+#sugg .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.35}
+#sugg .nm .dir{font-size:9.5px;color:var(--gold-muted);letter-spacing:.04em}
+#sugg .pr{color:var(--gold);font-size:11px;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><span class="g">OWARIN</span> ARRIVAL CARD<small>オワリン商店 — 入荷案内</small></div>
+  <div class="hd-right">
+    <span id="status">Ready</span>
+    <button class="btn small" id="btnCaption">CAPTION</button>
+    <button class="btn small" id="btnReset">RESET</button>
+    <button class="btn primary" id="btnExport">EXPORT</button>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="panel">
+
+  <details class="sect" open>
+    <summary>1 · Setup — size &amp; safe zone</summary>
+    <div class="body">
+      <div class="row">
+        <div class="field"><label>Style</label>
+          <div class="seg" id="segLay"><button data-v="grid" class="on">GRID</button><button data-v="sale">SALE</button></div></div>
+        <div class="field"><label>Cells</label>
+          <div class="seg" id="segCells"><button data-v="6" class="on">6</button><button data-v="9">9</button></div></div>
+      </div>
+      <div class="field"><label>Size</label>
+        <div class="seg" id="segRatio">
+          <button data-v="4:5" class="on">1080×1350</button><button data-v="1:1">1080×1080</button><button data-v="9:16">1080×1920</button>
+        </div></div>
+      <div class="field" id="safeModeWrap" style="display:none"><label>9:16 safe-zone profile</label>
+        <div class="seg" id="segSafeMode">
+          <button data-v="stories" class="on">Stories</button><button data-v="reels">Reels max</button><button data-v="light">Reels light</button>
+        </div>
+        <div class="hint">Meta ไม่ได้ประกาศตัวเลขทางการชุดเดียว แหล่งอ้างอิงให้ค่าต่างกัน —
+          Stories 250/250 · Reels แบบระวังสุด 270/670 · อีกแหล่งให้ 108/320<br>
+          ตัวชี้ขาดคือ <b>Safe Zone Guardrail</b> ในหน้าพรีวิวของ Ads Manager</div></div>
+      <div class="field" id="feedModeWrap"><label>Posting as</label>
+        <div class="seg" id="segFeedMode">
+          <button data-v="single" class="on">Single photo</button><button data-v="multi">Multi-photo / album</button>
+        </div>
+        <div class="hint">Facebook ไม่ได้ประกาศสเปคการ crop กริดหลายรูปอย่างเป็นทางการ — พอโพสรวมหลายรูปในโพสต์เดียว
+          FB จะ crop กลางภาพให้พอดีช่องกริดของตัวเอง (มักบีบเข้าใกล้จัตุรัส) ไม่ใช่โชว์เต็มอัตราส่วนที่ตั้งไว้<br>
+          <b>Multi-photo / album</b> เผื่อระยะขอบเพิ่ม (ประมาณการแบบระวังไว้ก่อน สมมติแย่สุด≈ครอปกลางเป็นจัตุรัส)
+          ให้หัวเรื่อง/โลโก้ไม่หลุดขอบ · เช็คให้ชัวร์ด้วยการโพสจริงแล้วดูภาพย่อ</div></div>
+      <label class="toggle"><input type="checkbox" id="safe"> Show safe zone</label>
+      <label class="toggle"><input type="checkbox" id="autoTune" checked> Auto-tune settings when size changes</label>
+      <button class="btn small block" id="btnPreset">Apply preset for this size</button>
+      <div class="hint">Each size has its own tuned defaults. 9:16 loses 49% of its height to Reels UI,
+        so it uses tighter spacing and a wider side margin (7% &gt; the 6% side safe zone).</div>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>2 · Products</summary>
+    <div class="body">
+      <button class="btn small block" id="btnFolder">Choose image folder</button>
+      <input type="file" id="folder" webkitdirectory directory multiple hidden>
+      <div class="hint" id="folderNote">No folder selected — point it at <code>All Products</code>, then type a game name to search.
+        (Must be re-selected each time this page is opened; browsers do not persist folder access.)</div>
+
+      <div class="field" style="margin-top:11px">
+        <label>Type a game name to add</label>
+        <input type="text" id="sq" placeholder="e.g. metal gear" autocomplete="off">
+        <div id="sugg"></div>
+      </div>
+
+      <div id="slots"></div>
+      <div class="row" style="margin-top:8px">
+        <button class="btn small" id="btnAddEmpty">+ Empty slot</button>
+        <button class="btn small" id="btnClear">Clear all</button>
+      </div>
+
+      <details style="margin-top:11px">
+        <summary style="cursor:pointer;font-size:10px;letter-spacing:.16em;color:var(--muted-fg)">Paste multiple lines</summary>
+        <textarea id="bulk" rows="5" placeholder="Final Fantasy VII | 300&#10;Metal Gear Solid 2 | 230"></textarea>
+        <button class="btn small block" id="btnBulk" style="margin-top:6px">Import as slots</button>
+        <div class="hint">For first import · <code>name | price</code> · SALE uses <code>name | was | now</code></div>
+      </details>
+
+      <div class="drop" id="drop" style="margin-top:11px"><b>+</b>or drop image files here</div>
+      <input type="file" id="file" accept="image/*" multiple hidden>
+      <button class="btn small block" id="btnDemo" style="margin-top:7px">Load sample covers</button>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>3 · Cover zoom &amp; pan</summary>
+    <div class="body">
+      <div class="field">
+        <label>Zoom presets <span class="val">%</span></label>
+        <div class="pgrid">
+          <div><div class="pl">1</div><input type="number" id="pz1" min="50" max="200" value="90"></div>
+          <div><div class="pl">2</div><input type="number" id="pz2" min="50" max="200" value="105"></div>
+          <div><div class="pl">3</div><input type="number" id="pz3" min="50" max="200" value="120"></div>
+        </div>
+      </div>
+      <div class="field"><label>Applies to</label>
+        <div class="seg" id="segScope"><button data-v="one" class="on">This cell</button><button data-v="all">All cells</button></div>
+        <div class="hint">Drag up/down on the preview to pan · Shift+drag to zoom · double-click to reset</div>
+      </div>
+      <div class="field"><label>Zoom <span class="val" id="vZoom">100%</span></label>
+        <input type="range" id="zoom" min="60" max="180" step="1" value="100"></div>
+      <div class="field"><label>Vertical offset <span class="val" id="vOffY">0</span></label>
+        <input type="range" id="offY" min="-40" max="40" step="1" value="0"></div>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>4 · HEADER — headline &amp; subtitle</summary>
+    <div class="body">
+      <div class="field"><label>Line 1</label><input type="text" id="h1" value="NEW ARRIVAL"></div>
+      <div class="field"><label>Line 2</label><input type="text" id="h2" value="GUIDE BOOKS"></div>
+      <div class="field" style="margin-top:12px"><label>Max size <span class="val" id="vHeadMax">9.8%</span></label>
+        <input type="range" id="headMax" min="4" max="14" step="0.2" value="9.8"></div>
+      <div class="field"><label>Max width <span class="val" id="vHeadW">55%</span></label>
+        <input type="range" id="headW" min="35" max="90" step="1" value="55"></div>
+      <div class="field"><label>Line height <span class="val" id="vHeadLead">96%</span></label>
+        <input type="range" id="headLead" min="75" max="130" step="1" value="96"></div>
+      <div class="field"><label>Weight <span class="val" id="vHeadWeight">800</span></label>
+        <input type="range" id="headWeight" min="600" max="900" step="100" value="800"></div>
+      <div class="field"><label>Letter spacing <span class="val" id="vHeadTrack">0%</span></label>
+        <input type="range" id="headTrack" min="-0.6" max="1.6" step="0.01" value="0"></div>
+      <div class="field"><label>Subtitle text</label><input type="text" id="date" value=""></div>
+      <div class="field"><label>Subtitle size <span class="val" id="vDateSize">2.2%</span></label>
+        <input type="range" id="dateSize" min="1.2" max="4" step="0.1" value="2.2"></div>
+      <div class="field"><label>Subtitle gap <span class="val" id="vSubGap">1.8%</span></label>
+        <input type="range" id="subGap" min="0" max="6" step="0.1" value="1.8"></div>
+      <div class="field"><label>Header band height <span class="val" id="vHeadBand">17%</span></label>
+        <input type="range" id="headBand" min="6" max="34" step="0.5" value="17">
+        <div class="hint">ความสูงของแถบบน · การ์ดจะเริ่มใต้แถบนี้</div></div>
+      <div class="field"><label>Header vertical position <span class="val" id="vHeadY">0</span></label>
+        <input type="range" id="headY" min="-50" max="50" step="1" value="0">
+        <div class="hint">0 = กึ่งกลางแถบพอดี · ลบ = ขยับขึ้น · บวก = ขยับลง</div></div>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>6 · FOOTER — logo &amp; mark</summary>
+    <div class="body">
+      <div class="field"><label>Store name text</label><input type="text" id="storeName" value="OWARIN STORE"></div>
+      <div class="field"><label>Japanese line text</label><input type="text" id="storeJP" value="オワリン商店"></div>
+      <div class="field"><label>Store name weight <span class="val" id="vLogoWeight">700</span></label>
+        <input type="range" id="logoWeight" min="400" max="900" step="100" value="700"></div>
+      <div class="field"><label>Store name letter spacing <span class="val" id="vLogoTrack">0.07%</span></label>
+        <input type="range" id="logoTrack" min="-0.6" max="1.6" step="0.01" value="0.07"></div>
+      <div class="field"><label>Store name size <span class="val" id="vLogoSize">3.4%</span></label>
+        <input type="range" id="logoSize" min="1.8" max="6" step="0.1" value="3.4"></div>
+      <label class="toggle"><input type="checkbox" id="showJP" checked> Show オワリン商店 line</label>
+      <div class="field"><label>Japanese line size <span class="val" id="vJpSize">1.32%</span></label>
+        <input type="range" id="jpSize" min="0.5" max="4" step="0.02" value="1.32"></div>
+      <div class="field"><label>Japanese line gap <span class="val" id="vJpGap">2.31%</span></label>
+        <input type="range" id="jpGap" min="0.5" max="6" step="0.02" value="2.31"></div>
+      <div class="field"><label>Japanese letter spacing <span class="val" id="vJpTrack">0.79%</span></label>
+        <input type="range" id="jpTrack" min="0" max="3" step="0.01" value="0.79"></div>
+      <div class="field"><label>Logo mark size <span class="val" id="vMarkSize">4.95%</span></label>
+        <input type="range" id="markSize" min="0" max="14" step="0.05" value="4.95">
+        <div class="hint">ตราดอกไม้ทางขวาของชื่อร้าน · 0 = ซ่อน</div></div>
+      <div class="field"><label>Logo mark gap <span class="val" id="vMarkGap">1.12%</span></label>
+        <input type="range" id="markGap" min="0" max="6" step="0.02" value="1.12"></div>
+      <div class="hint" style="margin-bottom:11px">ทุกค่าในหมวดนี้เป็น % ของ<b>ความกว้างภาพ</b>
+        ปรับตัวไหนก็มีผลเฉพาะตัวนั้น ไม่ลากตัวอื่นตาม</div>
+      <div class="field"><label>Footer band height <span class="val" id="vFootBand">8%</span></label>
+        <input type="range" id="footBand" min="3" max="22" step="0.5" value="8"></div>
+      <div class="field"><label>Footer vertical position <span class="val" id="vFootY">0</span></label>
+        <input type="range" id="footY" min="-50" max="50" step="1" value="0">
+        <div class="hint">0 = กึ่งกลางแถบพอดี · ลบ = ขยับขึ้น · บวก = ขยับลง</div></div>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>5 · GRID — name &amp; price in cells</summary>
+    <div class="body">
+      <label class="toggle"><input type="checkbox" id="showName"> Show game name</label>
+      <label class="toggle"><input type="checkbox" id="showPrice" checked> Show price</label>
+      <div class="hint" style="margin:-2px 0 11px">Turn both off and the text zone collapses — the cover fills the whole cell. GRID only.</div>
+      <div class="field"><label>Name size <span class="val" id="vNameSize">1.65%</span></label>
+        <input type="range" id="nameSize" min="0.8" max="3.5" step="0.05" value="1.65"></div>
+      <div class="field"><label>Price size <span class="val" id="vPriceSize">2.4%</span></label>
+        <input type="range" id="priceSize" min="1.4" max="4.5" step="0.1" value="2.4"></div>
+      <div class="field"><label>Gap below cover <span class="val" id="vTextGap">1.4%</span></label>
+        <input type="range" id="textGap" min="0" max="6" step="0.1" value="1.4">
+        <div class="hint">Distance from the bottom of the cover to the first line of text</div></div>
+      <div class="field"><label>Text zone height <span class="val" id="vTextZone">17%</span></label>
+        <input type="range" id="textZone" min="10" max="34" step="1" value="17"></div>
+      <div class="row">
+        <div class="field"><label>Price prefix</label><input type="text" id="pricePre" value="" placeholder="เช่น ฿"></div>
+        <div class="field"><label>Price suffix</label><input type="text" id="priceSuf" value=".-"></div>
+      </div>
+      <div class="field"><label>SOLD badge text</label><input type="text" id="soldText" value="SOLD"></div>
+      <div class="field"><label>SOLD badge size <span class="val" id="vSoldSize">2.6%</span></label>
+        <input type="range" id="soldSize" min="1" max="6" step="0.1" value="2.6"></div>
+    </div>
+  </details>
+
+  <details class="sect">
+    <summary>7 · FRAME — margins &amp; rules</summary>
+    <div class="body">
+
+      <div class="field"><label>Side margin <span class="val" id="vMargin">5.5%</span></label>
+        <input type="range" id="margin" min="2" max="12" step="0.1" value="5.5"></div>
+      <div class="field"><label>Card padding <span class="val" id="vPad">4.0%</span></label>
+        <input type="range" id="pad" min="1" max="9" step="0.1" value="4.0"></div>
+      <div class="field"><label>Cover fill <span class="val" id="vImgFill">92%</span></label>
+        <input type="range" id="imgFill" min="60" max="100" step="1" value="92"></div>
+      <div class="field"><label>Rule width <span class="val" id="vRuleW">86%</span></label>
+        <input type="range" id="ruleW" min="0" max="100" step="1" value="86"></div>
+      <div class="field"><label>Rule thickness <span class="val" id="vRuleH">2px</span></label>
+        <input type="range" id="ruleH" min="0" max="6" step="1" value="2"></div>
+      <div class="field"><label>Rule opacity <span class="val" id="vRuleDark">22%</span></label>
+        <input type="range" id="ruleDark" min="0" max="70" step="1" value="22"></div>
+      <div class="field"><label>Rule position <span class="val" id="vRulePos">0</span></label>
+        <input type="range" id="rulePos" min="-50" max="50" step="1" value="0">
+        <div class="hint">0 = exactly centred in the gap between the text above and the cover below</div></div>
+
+    </div>
+  </details>
+
+  <details class="sect">
+    <summary>8 · Colour &amp; extras</summary>
+    <div class="body">
+      <div class="field"><label>Card colour</label>
+        <div class="seg" id="segCardBg">
+          <button data-v="#ffffff" class="on">White</button><button data-v="auto">Auto</button>
+          <button data-v="#e8e5e0">Grey</button><button data-v="custom">Custom</button>
+        </div>
+        <input type="color" id="cardColor" value="#ffffff" style="margin-top:8px;display:none">
+        <div class="hint">White is the intended value (spec rule 4)</div>
+      </div>
+      <div class="field"><label>Theme</label>
+        <div class="seg" id="segTheme"><button data-v="light" class="on">Light</button><button data-v="dark">Dark</button></div></div>
+      <label class="toggle"><input type="checkbox" id="customCol"> Use custom colours</label>
+      <div class="row">
+        <div class="field"><label>Page</label><input type="color" id="colPage" value="#efede8"></div>
+        <div class="field"><label>Ink</label><input type="color" id="colInk" value="#111111"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Secondary</label><input type="color" id="colSub" value="#8f8f8f"></div>
+        <div class="field"><label>Accent</label><input type="color" id="colAccent" value="#a8801c"></div>
+      </div>
+      <div class="field"><label>Sale red</label><input type="color" id="colCut" value="#c0392b"></div>
+      <div class="row">
+        <div class="field"><label>Label · was</label><input type="text" id="labWas" value="ราคาปกติ"></div>
+        <div class="field"><label>Label · now</label><input type="text" id="labNow" value="ราคาพิเศษ"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Label · single</label><input type="text" id="labOne" value="ราคา"></div>
+        <div class="field"><label>Footnote prefix</label><input type="text" id="notePre" value="※ "></div>
+      </div>
+      <div class="field"><label>Footnotes ※ (separate with ·)</label><input type="text" id="note" value="มีชิ้นเดียว หมดแล้วหมดเลย · ไม่ร่วมกับโปรโมชันอื่น"></div>
+      <div class="field"><label>END line (SALE)</label><input type="text" id="endline" value="END : 2026.8.31 MON"></div>
+      <div class="field"><label>Vertical bar text (SALE)</label><input type="text" id="jp" value="数量限定 中古特別価格"></div>
+      <div class="field"><label>Bar colour (SALE)</label>
+        <div class="seg" id="segBar"><button data-v="#c0392b" class="on">Red</button><button data-v="#111111">Black</button><button data-v="#a8801c">Gold</button></div></div>
+    </div>
+  </details>
+
+  <details class="sect">
+    <summary>9 · SALE layout sizes</summary>
+    <div class="body">
+      <div class="hint" style="margin-top:0">ทุกค่าเป็น % ของความกว้างภาพ · ใช้เฉพาะเลย์เอาต์ SALE</div>
+      <div class="field"><label>Side bar width <span class="val" id="vSaleBarW">13.5%</span></label>
+        <input type="range" id="saleBarW" min="0" max="30" step="0.5" value="13.5"></div>
+      <div class="field"><label>Side bar text size <span class="val" id="vSaleBarText">4.2%</span></label>
+        <input type="range" id="saleBarText" min="1.5" max="8" step="0.1" value="4.2"></div>
+      <div class="field"><label>Row image width <span class="val" id="vSaleImg">20%</span></label>
+        <input type="range" id="saleImg" min="8" max="34" step="0.5" value="20"></div>
+      <div class="field"><label>Product name size <span class="val" id="vSaleName">3.8%</span></label>
+        <input type="range" id="saleName" min="1.5" max="7" step="0.1" value="3.8"></div>
+      <div class="field"><label>Spec line size <span class="val" id="vSaleSpec">2.0%</span></label>
+        <input type="range" id="saleSpec" min="1" max="4" step="0.05" value="2.0"></div>
+      <div class="field"><label>Price label size <span class="val" id="vSaleLabel">1.9%</span></label>
+        <input type="range" id="saleLabel" min="1" max="4" step="0.05" value="1.9"></div>
+      <div class="field"><label>Was-price size <span class="val" id="vSaleWas">3.6%</span></label>
+        <input type="range" id="saleWas" min="1.5" max="7" step="0.1" value="3.6"></div>
+      <div class="field"><label>Now-price size <span class="val" id="vSaleNow">4.8%</span></label>
+        <input type="range" id="saleNow" min="2" max="9" step="0.1" value="4.8"></div>
+      <div class="field"><label>END line size <span class="val" id="vSaleEnd">2.6%</span></label>
+        <input type="range" id="saleEnd" min="1.2" max="5" step="0.1" value="2.6"></div>
+      <div class="field"><label>Footnote size <span class="val" id="vSaleNote">1.7%</span></label>
+        <input type="range" id="saleNote" min="0.9" max="4" step="0.05" value="1.7"></div>
+    </div>
+  </details>
+
+  <details class="sect">
+    <summary>10 · Export</summary>
+    <div class="body">
+      <div class="field"><label>Format &amp; quality</label>
+        <div class="row">
+          <select id="fmt"><option value="png" selected>PNG</option><option value="jpeg">JPG</option></select>
+          <select id="q"><option value="0.92" selected>HIGH 92%</option><option value="0.85">MEDIUM 85%</option><option value="1">MAXIMUM</option></select>
+        </div></div>
+      <div class="field"><label>Filename suffix</label><input type="text" id="suffix" value="" placeholder="blank = auto"></div>
+    </div>
+  </details>
+
+</div>
+
+<div class="stage">
+  <div class="bar" id="previewBar">
+    <span class="lbl">View</span>
+    <div class="seg" style="max-width:230px" id="segZoomView">
+      <button data-v="fit" class="on">FIT</button><button data-v="50">50%</button>
+      <button data-v="75">75%</button><button data-v="100">100%</button>
+    </div>
+    <span class="lbl" id="zoomLabel">—</span>
+    <span class="lbl" style="margin-left:14px">Bulk</span>
+    <button class="btn small" data-all="100">ZOOM 100%</button>
+    <button class="btn small" data-all="p1">P1</button>
+    <button class="btn small" data-all="p2">P2</button>
+    <button class="btn small" data-all="p3">P3</button>
+    <button class="btn small" id="recenterAll">RESET ALL CELLS</button>
+    <span class="sp"></span>
+    <span class="lbl" id="sel">—</span>
+    <span class="lbl" id="dims"></span>
+  </div>
+  <div id="canvasHost"><canvas id="preview"></canvas></div>
+</div>
+</div>
+
+<script src="owarin_covers.js"></script>
+<script src="owarin_logo.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const LS='owarin_arrival_v6';  // ขึ้นเวอร์ชันเมื่อความหมายของค่าเปลี่ยน ไม่งั้นค่าเก่าจะทำให้เพี้ยน
+
+const S={zoomView:'fit',lay:'grid',cells:6,theme:'light',ratio:'4:5',safe:false,scope:'one',safeMode:'stories',feedMode:'single',
+  cardBg:'#ffffff',barColor:'#c0392b',fmt:'png',q:0.92,sel:0};
+const P={headMax:9.8,headW:55,headLead:96,dateSize:2.2,subGap:1.8,
+  nameSize:1.65,priceSize:2.4,textGap:1.4,textZone:17,
+  headBand:17,footBand:8,headY:0,footY:0,margin:5.5,pad:4.0,imgFill:92,
+  ruleW:86,ruleH:2,ruleDark:22,rulePos:0,logoSize:3.4,logoWeight:700,logoTrack:0.07,jpSize:1.36,jpGap:2.38,jpTrack:0.82,markSize:5.10,markGap:1.16,headWeight:800,headTrack:0,soldSize:2.6,saleBarW:13.5,saleBarText:4.2,saleImg:20,saleName:3.8,saleSpec:2.0,saleLabel:1.9,saleWas:3.6,saleNow:4.8,saleEnd:2.6,saleNote:1.7};
+const PZ={1:90,2:105,3:120};
+/* ค่าตั้งต้นแยกตามสัดส่วน — สลับขนาดแล้วปรับให้เองทันที
+   1:1 พื้นที่แนวตั้งน้อยสุด · 9:16 เสีย 49% ให้ UI จึงต้องกระชับและขอบข้างกว้างกว่า 6% */
+const PRESET={
+ // ฟีด: safe 880×880 / 880×1150 · ขอบ 100px ทำให้ทุกอย่างอยู่ในกรอบพอดี
+ '1:1' :{headBand:19.0,footBand:8.5,headMax:8.0,headW:58,headLead:94,dateSize:1.9,subGap:1.2,nameSize:1.50,priceSize:2.2,
+         textGap:1.1,textZone:16,headY:0,footY:0,margin:9.3,pad:3.0,imgFill:94,
+         ruleW:86,ruleH:2,ruleDark:22,rulePos:0,logoSize:3.0,logoWeight:700,logoTrack:0.06,jpSize:1.2,jpGap:2.1,jpTrack:0.72,markSize:4.5,markGap:1.02,headWeight:800,headTrack:0,soldSize:2.6,saleBarW:13.5,saleBarText:4.2,saleImg:20,saleName:3.8,saleSpec:2.0,saleLabel:1.9,saleWas:3.6,saleNow:4.8,saleEnd:2.6,saleNote:1.7},
+ '4:5' :{headBand:16.5,footBand:7.2,headMax:9.2,headW:58,headLead:96,dateSize:2.1,subGap:1.6,nameSize:1.60,priceSize:2.35,
+         textGap:1.3,textZone:17,headY:0,footY:0,margin:9.3,pad:3.6,imgFill:93,
+         ruleW:86,ruleH:2,ruleDark:22,rulePos:0,logoSize:3.3,logoWeight:700,logoTrack:0.07,jpSize:1.32,jpGap:2.31,jpTrack:0.79,markSize:4.95,markGap:1.12,headWeight:800,headTrack:0,soldSize:2.6,saleBarW:13.5,saleBarText:4.2,saleImg:20,saleName:3.8,saleSpec:2.0,saleLabel:1.9,saleWas:3.6,saleNow:4.8,saleEnd:2.6,saleNote:1.7},
+ // Stories 250/250 -> safe 950×1420 สูงที่สุดในบรรดาฟอร์แมตที่ใช้จริง
+ '9:16-stories':{headBand:12.5,footBand:5.6,headMax:10.0,headW:62,headLead:96,dateSize:2.3,subGap:1.9,nameSize:1.75,priceSize:2.6,
+         textGap:1.5,textZone:17,headY:0,footY:0,margin:6.6,pad:4.0,imgFill:93,
+         ruleW:86,ruleH:2,ruleDark:22,rulePos:0,logoSize:3.6,logoWeight:700,logoTrack:0.07,jpSize:1.44,jpGap:2.52,jpTrack:0.86,markSize:5.4,markGap:1.22,headWeight:800,headTrack:0,soldSize:2.6,saleBarW:13.5,saleBarText:4.2,saleImg:20,saleName:3.8,saleSpec:2.0,saleLabel:1.9,saleWas:3.6,saleNow:4.8,saleEnd:2.6,saleNote:1.7},
+ // Reels max 270/670 -> safe 950×980 เตี้ยสุด ต้องกระชับทุกอย่าง
+ '9:16-reels'  :{headBand:11.0,footBand:5.0,headMax:7.6,headW:64,headLead:93,dateSize:1.9,subGap:1.0,nameSize:1.45,priceSize:2.1,
+         textGap:1.0,textZone:15,headY:0,footY:0,margin:6.6,pad:2.6,imgFill:95,
+         ruleW:86,ruleH:2,ruleDark:22,rulePos:0,logoSize:2.9,logoWeight:700,logoTrack:0.06,jpSize:1.16,jpGap:2.03,jpTrack:0.7,markSize:4.35,markGap:0.99,headWeight:800,headTrack:0,soldSize:2.6,saleBarW:13.5,saleBarText:4.2,saleImg:20,saleName:3.8,saleSpec:2.0,saleLabel:1.9,saleWas:3.6,saleNow:4.8,saleEnd:2.6,saleNote:1.7},
+ // Reels light 108/320 -> safe 960×1492 กว้างขวางที่สุด
+ '9:16-light'  :{headBand:12.0,footBand:5.2,headMax:10.4,headW:62,headLead:96,dateSize:2.4,subGap:2.0,nameSize:1.80,priceSize:2.7,
+         textGap:1.6,textZone:17,headY:0,footY:0,margin:6.0,pad:4.2,imgFill:93,
+         ruleW:86,ruleH:2,ruleDark:22,rulePos:0,logoSize:3.7,logoWeight:700,logoTrack:0.07,jpSize:1.48,jpGap:2.59,jpTrack:0.89,markSize:5.55,markGap:1.26,headWeight:800,headTrack:0,soldSize:2.6,saleBarW:13.5,saleBarText:4.2,saleImg:20,saleName:3.8,saleSpec:2.0,saleLabel:1.9,saleWas:3.6,saleNow:4.8,saleEnd:2.6,saleNote:1.7}};
+function presetKey(){return S.ratio==='9:16'?'9:16-'+S.safeMode:S.ratio;}
+function applyPreset(){
+  Object.assign(P,PRESET[presetKey()]||PRESET['4:5']);
+  for(const k in P){const el=$(k);if(el&&el.type==='range'){el.value=P[k];el.dispatchEvent(new Event('input'));}}
+}
+
+/* slots = แหล่งความจริงเดียว รูป+ชื่อ+ราคา+SOLD อยู่ด้วยกัน */
+let slots=[];           // {img,name,price,price2,sold,zoom,offY,src}
+let hit=[], rows=[], sampled=null, folderIdx=new Map();
+let logoImg=null;
+if(window.OWARIN_LOGO){logoImg=new Image();logoImg.onload=()=>draw();logoImg.src=window.OWARIN_LOGO;}
+
+const TH={
+  light:{page:'#efedE8',ink:'#111111',sub:'#8f8f8f',accent:'#a8801c',ruleRGB:'17,17,17',
+         cut:'#c0392b',sold:'rgba(17,17,17,.70)',soldInk:'#ffffff',greyBar:'#dddbd5'},
+  dark :{page:'#0d0d0d',ink:'#f2f2f2',sub:'#8c8c8c',accent:'#e2ad28',ruleRGB:'255,255,255',
+         cut:'#d0533f',sold:'rgba(13,13,13,.76)',soldInk:'#e2ad28',greyBar:'#333'}
+};
+function T(){
+  const t={...TH[S.theme]};
+  if($('customCol')&&$('customCol').checked){
+    t.page=$('colPage').value; t.ink=$('colInk').value;
+    t.sub=$('colSub').value;   t.accent=$('colAccent').value;
+    t.cut=$('colCut').value;
+    t.ruleRGB=(m=>m?`${parseInt(m[1],16)},${parseInt(m[2],16)},${parseInt(m[3],16)}`:t.ruleRGB)
+      (/^#(\w{2})(\w{2})(\w{2})$/.exec($('colInk').value));
+  }
+  t.card = S.cardBg==='auto' ? (sampled||'#ffffff')
+         : S.cardBg==='custom' ? $('cardColor').value : S.cardBg;
+  if(S.theme==='dark'&&S.cardBg==='#ffffff')t.card='#191919';
+  t.rule=`rgba(${t.ruleRGB},${P.ruleDark/100})`;
+  return t;
+}
+
+/* ---------- ชื่อไฟล์ → ชื่อเกม (ตัด RESTOCK-xx และเลขหน้า-หลัง) ---------- */
+function cleanName(n){
+  n=n.replace(/\.[a-z0-9]+$/i,'');
+  n=n.replace(/\s*\(\s*\d+\s*\)\s*$/,'');          // (1) (2) หน้า-หลัง
+  n=n.replace(/RES[OT]{2}CK-\d+/ig,'');            // RESTOCK-01 (รวมที่สะกดผิด RESOTCK)
+  n=n.replace(/\(\s*[・･]?\s*\)/g,'');              // วงเล็บที่ว่างหลังตัด
+  n=n.replace(/\(\s*[・･]/g,'(').replace(/[・･]\s*\)/g,')');
+  return n.replace(/\s{2,}/g,' ').trim().replace(/^[-・\s]+|[-・\s]+$/g,'');
+}
+function normKey(s){
+  return cleanName(s).toLowerCase().replace(/include/g,'incl').replace(/incl\./g,'incl')
+    .replace(/[^a-z0-9]/g,'');
+}
+
+/* ---------- เรียงลำดับ: ตัวอักษรก่อน แล้วเลขโรมัน/เลขอารบิกเรียงตามค่าจริง ----------
+   จำกัดเลขโรมันไว้แค่ I–XXX เพื่อไม่ให้คำอย่าง MIX / DC / CIVIC ถูกอ่านเป็นตัวเลข */
+const ROMAN=(()=>{const R={},U=['','I','II','III','IV','V','VI','VII','VIII','IX'],
+  T=['','X','XX','XXX'];for(let i=1;i<=30;i++)R[T[(i/10)|0]+U[i%10]]=i;return R;})();
+function tokens(s){
+  return (s||'').split(/\s+/).filter(Boolean).flatMap(w=>w.split(/(\d+)/).filter(Boolean));
+}
+function tokVal(t){
+  if(/^\d+$/.test(t))return{n:+t};
+  const up=t.toUpperCase().replace(/[^A-Z]/g,'');
+  if(ROMAN[up]!==undefined&&up===t.toUpperCase())return{n:ROMAN[up]};
+  return{s:t.toLowerCase()};
+}
+function cmpName(a,b){
+  const A=tokens(a),B=tokens(b);
+  for(let i=0;i<Math.max(A.length,B.length);i++){
+    if(A[i]===undefined)return -1;
+    if(B[i]===undefined)return 1;
+    const x=tokVal(A[i]),y=tokVal(B[i]);
+    if(x.n!==undefined&&y.n!==undefined){if(x.n!==y.n)return x.n-y.n;continue;}
+    const xs=x.s??String(x.n), ys=y.s??String(y.n);
+    if(xs!==ys)return xs<ys?-1:1;
+  }
+  return 0;
+}
+
+/* ---------- utils ---------- */
+function dims(){return S.ratio==='1:1'?[1080,1080]:S.ratio==='4:5'?[1080,1350]:[1080,1920];}
+/* Safe zone ตามสเปค Meta (unified 9:16 มีนาคม 2026 — อิงตัวที่แคบสุดคือ Reels)
+   9:16  บน 14% (270px) · ล่าง 35% (670px) · ข้าง 6% (65px)   ← UI ทับจริง
+   4:5   ไม่มี UI ทับ · ระยะเผื่อที่แนะนำ 250px บน-ล่าง (18.5%)
+   1:1   ไม่มี UI ทับ · ระยะเผื่อที่แนะนำ 100px รอบด้าน (9.3%) */
+/* ---------- Safe zone ----------
+   ไม่มีสเปคทางการชุดเดียวที่ Meta ประกาศ · แหล่งอ้างอิงให้ตัวเลขต่างกันชัดเจน
+   จึงทำเป็น "โปรไฟล์" ให้เลือก แล้วไปยืนยันด้วย Safe Zone Guardrail ใน Ads Manager
+   ค่าเป็นพิกเซลจริงที่ขนาด native ของแต่ละสัดส่วน */
+const SAFE={
+  '1:1' :{single:{t:100,b:100,s:100,ui:false,label:'Feed · single-photo post · advisory padding only'},
+          multi :{t:130,b:130,s:130,ui:true, label:'Feed · multi-photo/album post · grid-crop estimate (unofficial)'}},
+  '4:5' :{single:{t:100,b:100,s:100,ui:false,label:'Feed · single-photo post · advisory padding only'},
+          multi :{t:150,b:150,s:110,ui:true, label:'Feed · multi-photo/album post · grid-crop estimate (unofficial)'}},
+  '9:16':{stories:{t:250,b:250,s:65,ui:true,label:'Stories 250/250'},
+          reels  :{t:270,b:670,s:65,ui:true,label:'Reels worst case 270/670'},
+          light  :{t:108,b:320,s:60,ui:true,label:'Reels light 108/320'}}
+};
+/* '4:5' multi 150px บน-ล่าง: กันไว้ให้เนื้อหาอยู่ในกรอบจัตุรัสกลางภาพ 1080×1080
+   (1350−1080=270 ⇒ 135px/ข้างคือค่าต่ำสุดที่พอดี — ปัดขึ้นเป็น 150px กันชนเพิ่ม)
+   '1:1' multi 130px รอบด้าน: ภาพเป็นจัตุรัสอยู่แล้ว แต่บางเลย์เอาต์กริดของ FB (เช่นแถวที่มี 3 รูป)
+   ใช้ tile ที่ไม่ใช่จัตุรัส จึงเผื่อขอบทุกด้านเพิ่มเป็นกันชน
+   ทั้งหมดนี้เป็น "ค่าประมาณแบบระวังไว้ก่อน" ไม่ใช่สเปคที่ Meta ประกาศ — FB ไม่เคยเผยอัลกอริทึม
+   crop กริดหลายรูปอย่างเป็นทางการ ต่างจาก Stories/Reels ที่มี Safe Zone Guardrail ใน Ads Manager ให้เทียบ */
+function safeProfile(){
+  const g=SAFE[S.ratio]||SAFE['4:5'];
+  const key=S.ratio==='9:16'?S.safeMode:S.feedMode;
+  if(g[key]&&typeof g[key].t==='number')return g[key];
+  for(const k in g)if(g[k]&&typeof g[k].t==='number')return g[k];
+  return {t:100,b:100,s:100,ui:false,label:'fallback'};
+}
+/* กรอบ safe zone = แหล่งความจริงเดียว เนื้อหาทุกชิ้นต้องอยู่ในกรอบเสมอทุกสัดส่วน
+   (v13 เคยให้ฟีดใช้ระยะของตัวเอง ผลคือพาดหัวกับโลโก้หลุดออกนอกกรอบที่วาดไว้) */
+function topInset(H){return safeProfile().t;}
+function botInset(H){return safeProfile().b;}
+function sideInset(){return safeProfile().s;}
+function fitLines(ctx,lines,maxW,start,min,weight,fam){
+  for(let px=start;px>=min;px-=1){
+    ctx.font=`${weight} ${px}px ${fam}`;
+    if(lines.every(L=>!L||ctx.measureText(L).width<=maxW))return px;
+  }
+  return min;
+}
+function fit(ctx,t,maxW,start,weight,fam,min){
+  let px=start;
+  while(px>min){ctx.font=`${weight} ${px}px ${fam}`;if(ctx.measureText(t).width<=maxW)break;px-=2;}
+  return px;
+}
+function drawCell(ctx,sl,i,x,y,w,h){
+  hit[i]={x,y,w,h};
+  if(!sl||!sl.img)return null;
+  const z=(sl.zoom||100)/100;
+  const s=Math.min(w/sl.img.width,h/sl.img.height)*z;
+  const dw=sl.img.width*s, dh=sl.img.height*s;
+  const ox=x+(w-dw)/2, oy=y+(h-dh)/2+((sl.offY||0)/100)*h;
+  ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
+  ctx.drawImage(sl.img,ox,oy,dw,dh);ctx.restore();
+  return {x:Math.max(ox,x),y:Math.max(oy,y),w:Math.min(dw,w),h:Math.min(dh,h)};
+}
+/* ข้อความและสีทุกตัวที่วาดลงการ์ด อ่านจากช่องกรอก ไม่ฮาร์ดโค้ดอีก */
+const TX=(id,fallback)=>{const e=$(id);return e&&e.value!==undefined&&e.value!==''?e.value:fallback;};
+const PRICE=v=>v?`${TX('pricePre','')}${v}${TX('priceSuf','.-')}`:'';
+function sampleBg(img){
+  try{const c=document.createElement('canvas');c.width=c.height=8;
+    const x=c.getContext('2d');x.drawImage(img,0,0,8,8);
+    const d=x.getImageData(0,0,3,3).data;let r=0,g=0,b=0;
+    for(let i=0;i<9;i++){r+=d[i*4];g+=d[i*4+1];b+=d[i*4+2];}
+    const h=v=>Math.round(v/9).toString(16).padStart(2,'0');
+    return '#'+h(r)+h(g)+h(b);}catch(e){return null;}
+}
+/* วัดขอบบน-ล่างจริงของตัวอักษรด้วย actualBoundingBox แทนการเดาด้วยตัวคูณ
+   เพราะบล็อกโลโก้มีสองบรรทัดคนละฟอนต์ (Archivo + Noto Sans JP) การเดาจะเบี้ยวเสมอ */
+function logoBlock(ctx,W){
+  const f=W*P.logoSize/100, showJP=$('showJP').checked;
+  ctx.save();
+  const NAME=TX('storeName','OWARIN STORE'), JPTXT=TX('storeJP','オワリン商店');
+  ctx.font=`${P.logoWeight} ${f}px Archivo, Arial, sans-serif`;
+  if('letterSpacing' in ctx)ctx.letterSpacing=`${W*P.logoTrack/100}px`;
+  const m1=ctx.measureText(NAME);
+  const asc=m1.actualBoundingBoxAscent||f*0.72;
+  const w1=m1.width;
+  let bot=m1.actualBoundingBoxDescent||f*0.05, w2=0;
+  const jpF=W*P.jpSize/100, jpGap=W*P.jpGap/100;
+  if(showJP){
+    ctx.font=`500 ${jpF}px "Noto Sans JP", sans-serif`;
+    if('letterSpacing' in ctx)ctx.letterSpacing=`${W*P.jpTrack/100}px`;
+    const m2=ctx.measureText(JPTXT);
+    w2=m2.width; bot=jpGap+(m2.actualBoundingBoxDescent||jpF*0.12);
+  }
+  ctx.restore();
+  const textH=asc+bot;
+  const markOn=!!(logoImg&&logoImg.complete&&P.markSize>0);
+  const markH=markOn?W*P.markSize/100:0;
+  const markW=markOn?markH*(logoImg.width/logoImg.height):0;
+  const gap=markOn?W*P.markGap/100:0;
+  return {f,jpF,jpGap,asc,bot,textH,showJP,markOn,markH,markW,gap,
+          blockH:Math.max(textH,markH), blockW:Math.max(w1,w2)+gap+markW};
+}
+function drawLogo(ctx,W,rightX,bandTop,bandH,offset){
+  const t=T(), B=logoBlock(ctx,W);
+  const free=Math.max(0,bandH-B.blockH);
+  const top=bandTop+free*(0.5+offset/100);
+  const baseline=top+(B.blockH-B.textH)/2+B.asc;
+  const tx=rightX-B.markW-B.gap;
+  ctx.save();ctx.textAlign='right';ctx.textBaseline='alphabetic';
+  ctx.fillStyle=t.ink;ctx.font=`${P.logoWeight} ${B.f}px Archivo, Arial, sans-serif`;
+  if('letterSpacing' in ctx)ctx.letterSpacing=`${W*P.logoTrack/100}px`;
+  ctx.fillText(TX('storeName','OWARIN STORE'),tx,baseline);
+  if(B.showJP){
+    ctx.fillStyle=t.accent;ctx.font=`500 ${B.jpF}px "Noto Sans JP", sans-serif`;
+    if('letterSpacing' in ctx)ctx.letterSpacing=`${W*P.jpTrack/100}px`;
+    ctx.fillText(TX('storeJP','オワリン商店'),tx,baseline+B.jpGap);
+  }
+  ctx.restore();
+  if(B.markOn)ctx.drawImage(logoImg,rightX-B.markW,top+(B.blockH-B.markH)/2,B.markW,B.markH);
+  return {top,bottom:top+B.blockH};
+}
+function soldBadge(ctx,W,b){
+  if(!b)return;
+  const t=T(), h=b.h*0.17, y=b.y+b.h*0.42;
+  ctx.save();ctx.fillStyle=t.sold;ctx.fillRect(b.x,y,b.w,h);
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  const px=Math.min(h*0.56,W*0.026);
+  ctx.fillStyle=t.soldInk;ctx.font=`800 ${px}px Archivo, Arial, sans-serif`;
+  if('letterSpacing' in ctx)ctx.letterSpacing=`${px*0.18}px`;
+  ctx.fillText(TX('soldText','SOLD'),b.x+b.w/2,y+h/2);ctx.restore();
+}
+
+/* ---------- GRID ---------- */
+function layGrid(ctx,W,H,d){
+  const t=T(), M=Math.max(W*P.margin/100,sideInset()), tI=topInset(H), bI=botInset(H);
+  ctx.fillStyle=t.page;ctx.fillRect(0,0,W,H);
+  const hp=fitLines(ctx,[d.h1,d.h2],W*P.headW/100,Math.round(W*P.headMax/100),
+                    Math.round(W*0.030),`${P.headWeight}`,'Archivo, Arial, sans-serif');
+  const sf=W*P.dateSize/100;
+  /* แถบบน-ล่างสูงตายตัว แล้วจัดบล็อกข้อความกึ่งกลางแถบ
+     ความสูงบล็อกวัดจาก actualBoundingBox จริง ไม่ใช่ตัวคูณเดา
+     offset −50…50 = ขยับจากกึ่งกลางเป็นสัดส่วนของที่ว่างที่เหลือ */
+  const headBandH=H*P.headBand/100, footBandH=H*P.footBand/100;
+  ctx.font=`${P.headWeight} ${hp}px Archivo, Arial, sans-serif`;
+  if('letterSpacing' in ctx)ctx.letterSpacing=`${hp*P.headTrack/100}px`;
+  const mh=ctx.measureText(d.h1||d.h2||'H');
+  const hAsc=mh.actualBoundingBoxAscent||hp*0.72;
+  let lastOff=d.h2?hp*P.headLead/100:0;
+  let lastDesc=(ctx.measureText(d.h2||d.h1||'H').actualBoundingBoxDescent)||hp*0.05;
+  if(d.date){
+    ctx.font=`400 ${sf}px Outfit, sans-serif`;
+    const ms=ctx.measureText(d.date);
+    lastOff+=W*P.subGap/100+(ms.actualBoundingBoxAscent||sf*0.70);
+    lastDesc=ms.actualBoundingBoxDescent||sf*0.20;
+  }
+  const headBlockH=hAsc+lastOff+lastDesc;
+  const freeH=Math.max(0,headBandH-headBlockH);
+  let y=tI+freeH*(0.5+P.headY/100)+hAsc;
+  ctx.textAlign='left';ctx.textBaseline='alphabetic';
+  ctx.fillStyle=t.ink;ctx.font=`${P.headWeight} ${hp}px Archivo, Arial, sans-serif`;
+  if('letterSpacing' in ctx)ctx.letterSpacing=`${hp*P.headTrack/100}px`;
+  if(d.h1)ctx.fillText(d.h1,M,y);
+  if(d.h2){y+=hp*P.headLead/100;ctx.fillText(d.h2,M,y);}
+  if(d.date){
+    ctx.font=`400 ${sf}px Outfit, sans-serif`;
+    y+=W*P.subGap/100+(ctx.measureText(d.date).actualBoundingBoxAscent||sf*0.70);
+    ctx.fillStyle=t.sub;ctx.fillText(d.date,M,y);
+  }
+  drawLogo(ctx,W,W-M,H-bI-footBandH,footBandH,P.footY);
+  const cardTop=tI+headBandH, cardBot=H-bI-footBandH, cardH=cardBot-cardTop;
+  if(cardH<W*0.15){
+    $('dims').textContent='พื้นที่การ์ดไม่พอ — ลด Header offset / Footer offset ลง';
+    return;
+  }
+  ctx.fillStyle=t.card;ctx.fillRect(M,cardTop,W-M*2,cardH);
+
+  const n=Math.min(S.cells,Math.max(slots.length,1));
+  const cols=3, rowsN=Math.max(1,Math.ceil(n/cols));
+  const pad=W*P.pad/100;
+  const gw=(W-M*2-pad*2)/cols, gh=(cardH-pad*2)/rowsN;
+  const showName=$('showName').checked, showPrice=$('showPrice').checked;
+  // ปิดทั้งคู่ = ยุบโซนข้อความ ปกได้พื้นที่เต็มช่อง
+  const textH=(showName||showPrice)?gh*P.textZone/100:0;
+  const imgArea=gh-textH;
+  const priceFont=Math.round(W*P.priceSize/100), nameFont=Math.round(W*P.nameSize/100);
+  hit=[];
+  for(let i=0;i<n;i++){
+    const c=i%cols, r=Math.floor(i/cols);
+    const x=M+pad+c*gw, yy=cardTop+pad+r*gh;
+    const sl=slots[i]||{};
+    const zw=gw*(P.imgFill/100)*0.93, zh=imgArea*(P.imgFill/100);
+    const b=drawCell(ctx,sl,i,x+(gw-zw)/2,yy+(imgArea-zh)/2,zw,zh);
+    if(sl.sold)soldBadge(ctx,W,b);
+    if(i===S.sel){
+      ctx.save();ctx.strokeStyle=t.accent;ctx.setLineDash([6,5]);ctx.lineWidth=2;
+      ctx.strokeRect(x+(gw-zw)/2,yy+(imgArea-zh)/2,zw,zh);ctx.restore();
+    }
+    // จัดชื่อ+ราคาให้อยู่กึ่งกลางโซนข้อความเสมอ ไม่ว่าจะเปิดอันเดียวหรือทั้งคู่
+    const parts=[];
+    if(showName&&sl.name)parts.push({t:sl.name,f:nameFont,c:t.sub});
+    if(showPrice&&sl.price)parts.push({t:PRICE(sl.price),f:priceFont,c:sl.sold?t.sub:t.ink});
+    /* วางข้อความโดยอ้างจาก "ขอบล่างจริงของปก" ไม่ใช่กึ่งกลางโซนข้อความ
+       เดิมพอปิดราคาเหลือชื่อบรรทัดเดียว ชื่อจะไปลอยกลางโซนทำให้ห่างจากปกมาก */
+    let textBottom=yy+imgArea;
+    if(parts.length){
+      const LH=1.30;
+      const blockH=parts.reduce((a,p)=>a+p.f*LH,0);
+      const coverBottom=b?b.y+b.h:yy+imgArea;
+      const maxTop=yy+gh-blockH;                       // ไม่ให้ล้นออกนอกช่อง
+      let cy=Math.min(coverBottom+W*P.textGap/100,maxTop);
+      textBottom=cy+blockH;
+      ctx.save();ctx.textAlign='center';ctx.textBaseline='alphabetic';
+      parts.forEach(p=>{
+        cy+=p.f*LH;
+        ctx.fillStyle=p.c;ctx.font=`400 ${p.f}px Outfit, sans-serif`;
+        ctx.fillText(p.t,x+gw/2,cy-p.f*0.28);
+      });
+      ctx.restore();
+    }
+    /* BUG v5: เดิมวางเส้นที่ขอบล่างช่องตายตัว ทำให้ชิดตัวหนังสือแถวบนแต่ห่างรูปแถวล่าง
+       ตอนนี้วางกลางช่องว่างจริงระหว่างฐานราคากับขอบบนรูปแถวถัดไป */
+    if(r<rowsN-1&&P.ruleW>0&&P.ruleH>0){
+      // textBottom คำนวณไว้แล้วจากบล็อกข้อความจริงด้านบน
+      const nextImgTop=yy+gh+(imgArea*(1-P.imgFill/100))/2;
+      const ry=textBottom+(nextImgTop-textBottom)*(0.5+P.rulePos/200);
+      const rw=gw*P.ruleW/100;
+      ctx.fillStyle=t.rule;ctx.fillRect(x+(gw-rw)/2,Math.round(ry),rw,P.ruleH);
+    }
+  }
+  $('dims').textContent=`${W}×${H} · cell ${Math.round(gw)}×${Math.round(gh)} · head ${hp}px · price ${priceFont}px · name ${nameFont}px`;
+}
+
+/* ---------- SALE ---------- */
+function laySale(ctx,W,H,d){
+  const t=T(), tI=topInset(H), bI=botInset(H);
+  ctx.fillStyle=t.card;ctx.fillRect(0,0,W,H);
+  const bw=W*P.saleBarW/100;
+  ctx.fillStyle=S.barColor;ctx.fillRect(0,0,bw,H);
+  if(d.jp){
+    ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';
+    const ch=[...d.jp.replace(/\s/g,'　')];
+    const fs=W*P.saleBarText/100, gap=fs*1.42;
+    let cy=H/2-(ch.length-1)*gap/2;
+    ctx.fillStyle='#ffffff';ctx.font=`500 ${fs}px "Noto Sans JP", sans-serif`;
+    ch.forEach(c=>{ctx.fillText(c,bw/2,cy);cy+=gap;});
+    ctx.restore();
+  }
+  const L=Math.max(W*0.19,sideInset()+W*0.02), R=W-Math.max(W*0.045,sideInset());
+  let y=Math.max(tI+W*0.030,H*0.115)+H*P.headY/100;
+  ctx.fillStyle=t.rule;ctx.fillRect(L,y,R-L,Math.max(1,P.ruleH-1));
+  const rowsTop=y+W*0.030;
+  const fBand=H*P.footBand/100;
+  const lb=drawLogo(ctx,R,R,H-bI-fBand,fBand,P.footY);
+  const logoY=lb.top+ (lb.bottom-lb.top)*0.55;
+  ctx.textAlign='left';ctx.textBaseline='alphabetic';
+  let footY=lb.top-W*0.010;
+  const notes=(d.note||'').split('·').map(s=>s.trim()).filter(Boolean);
+  for(let i=notes.length-1;i>=0;i--){
+    ctx.fillStyle=t.sub;ctx.font=`300 ${W*P.saleNote/100}px "Noto Sans Thai", sans-serif`;
+    ctx.fillText(TX('notePre','※ ')+notes[i],L,footY);footY-=W*0.026;
+  }
+  if(d.endline){
+    ctx.fillStyle=t.ink;ctx.font=`700 ${W*P.saleEnd/100}px Archivo, Arial, sans-serif`;
+    ctx.fillText(d.endline,L,footY);footY-=W*0.024;
+  }
+  ctx.fillStyle=t.rule;ctx.fillRect(L,footY,R-L,Math.max(1,P.ruleH-1));
+
+  const list=slots.slice(0,3), n=Math.max(list.length,1);
+  const avail=footY-W*0.026-rowsTop, rh=avail/n;
+  const imgW=W*P.saleImg/100, imgH=Math.min(rh*0.78,W*P.saleImg/100);
+  const tx=L+W*P.saleImg/100*1.18;
+  hit=[];
+  list.forEach((sl,i)=>{
+    const ry=rowsTop+i*rh, mid=ry+rh/2;
+    const b=drawCell(ctx,sl,i,L,mid-imgH/2,imgW,imgH);
+    if(sl.sold)soldBadge(ctx,W,b);
+    if(i===S.sel){
+      ctx.save();ctx.strokeStyle=t.accent;ctx.setLineDash([6,5]);ctx.lineWidth=2;
+      ctx.strokeRect(L,mid-imgH/2,imgW,imgH);ctx.restore();
+    }
+    let ty=mid-rh*0.28;
+    ctx.textAlign='left';ctx.fillStyle=t.ink;
+    const nf=fit(ctx,sl.name||'',R-tx,Math.round(W*P.saleName/100),'600','Outfit, sans-serif',Math.round(W*P.saleName/100*0.58));
+    ctx.font=`600 ${nf}px Outfit, sans-serif`;
+    ctx.fillText(sl.name||'',tx,ty);ty+=W*0.056;
+    const px0=tx+W*0.014, two=!!sl.price2;
+    ctx.fillStyle=t.greyBar;ctx.fillRect(tx,ty-W*0.014,3,two?W*0.118:W*0.052);
+    ctx.fillStyle=t.sub;ctx.font=`400 ${W*P.saleLabel/100}px "Noto Sans Thai", sans-serif`;
+    const lab=two?TX('labWas','ราคาปกติ'):TX('labOne','ราคา');
+    ctx.fillText(lab,px0,ty+W*0.014);
+    const lw=ctx.measureText(lab).width;
+    if(two){
+      ctx.fillStyle=t.ink;ctx.font=`500 ${W*P.saleWas/100}px Outfit, sans-serif`;
+      ctx.fillText(PRICE(sl.price),px0+lw+W*0.014,ty+W*0.018);
+      const nw=ctx.measureText(PRICE(sl.price)).width;
+      ctx.save();ctx.fillStyle=t.cut;ctx.beginPath();
+      const ax=px0+lw+W*0.014+nw/2, ay=ty+W*0.028, s=W*0.009;
+      ctx.moveTo(ax-s,ay);ctx.lineTo(ax+s,ay);ctx.lineTo(ax,ay+s*1.2);ctx.closePath();ctx.fill();ctx.restore();
+      ty+=W*0.066;
+      ctx.fillStyle=t.sub;ctx.font=`400 ${W*P.saleLabel/100}px "Noto Sans Thai", sans-serif`;
+      ctx.fillText(TX('labNow','ราคาพิเศษ'),px0,ty+W*0.016);
+      const lw2=ctx.measureText(TX('labNow','ราคาพิเศษ')).width;
+      ctx.fillStyle=t.cut;ctx.font=`700 ${W*P.saleNow/100}px Outfit, sans-serif`;
+      ctx.fillText(PRICE(sl.price2),px0+lw2+W*0.014,ty+W*0.022);
+    }else if(sl.price){
+      ctx.fillStyle=t.ink;ctx.font=`700 ${W*P.saleNow/100}px Outfit, sans-serif`;
+      ctx.fillText(PRICE(sl.price),px0+lw+W*0.014,ty+W*0.020);
+    }
+  });
+  $('dims').textContent=`${W}×${H} · ${list.length} rows`;
+}
+
+function drawSafe(ctx,W,H){
+  const p=safeProfile();
+  const t=p.t, b=p.b, s=p.s;
+  ctx.save();
+  if(p.ui){
+    ctx.fillStyle='rgba(220,60,60,.24)';
+    ctx.fillRect(0,0,W,t);ctx.fillRect(0,H-b,W,b);
+    ctx.fillRect(0,t,s,H-t-b);ctx.fillRect(W-s,t,s,H-t-b);
+  }else{
+    // ฟีดไม่มี UI ทับ — ถมสีจางกว่ามาก ให้เห็นขอบเขตแต่ไม่ดูเหมือนพื้นที่ต้องห้าม
+    ctx.fillStyle='rgba(90,140,220,.10)';
+    ctx.fillRect(0,0,W,t);ctx.fillRect(0,H-b,W,b);
+    ctx.fillRect(0,t,s,H-t-b);ctx.fillRect(W-s,t,s,H-t-b);
+  }
+  // 9:16 : ขีดเทียบโปรไฟล์อื่นไว้ให้เห็นว่าตัวเลขต่างกันแค่ไหน
+  if(S.ratio==='9:16'){
+    ctx.font=`600 ${W*0.019}px Outfit, sans-serif`;ctx.textAlign='left';
+    Object.entries(SAFE['9:16']).forEach(([k,o])=>{
+      if(k===S.safeMode)return;
+      const y=H-o.b;
+      ctx.strokeStyle='rgba(220,60,60,.45)';ctx.lineWidth=2;ctx.setLineDash([10,8]);
+      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle='rgba(200,70,60,.75)';
+      ctx.fillText(o.label,s+W*0.014,y-W*0.010);
+    });
+  }
+  ctx.strokeStyle=p.ui?'rgba(220,60,60,.7)':'rgba(90,140,220,.75)';
+  ctx.lineWidth=2;ctx.strokeRect(s,t,W-s*2,H-t-b);
+  // ป้ายกำกับวางในแถบบน (พื้นที่ว่างอยู่แล้ว) ไม่ให้ทับพาดหัว
+  ctx.fillStyle=p.ui?'rgba(200,50,45,.95)':'rgba(60,110,190,.95)';
+  ctx.font=`600 ${W*0.021}px Outfit, sans-serif`;ctx.textAlign='left';ctx.textBaseline='alphabetic';
+  const ly=p.ui?Math.max(t*0.62,W*0.026):W*0.030;
+  ctx.fillText(`${p.label} · safe ${W-s*2}×${H-t-b}`,W*0.016,ly);
+  ctx.restore();
+}
+
+/* ---------- render ---------- */
+function draw(){
+  const [W,H]=dims();
+  const cv=$('preview');cv.width=W;cv.height=H;
+  fitPreview(W,H);
+  const ctx=cv.getContext('2d');
+  const d={h1:$('h1').value.trim(),h2:$('h2').value.trim(),date:$('date').value.trim(),
+    jp:$('jp').value.trim(),endline:$('endline').value.trim(),note:$('note').value.trim()};
+  try{ S.lay==='grid'?layGrid(ctx,W,H,d):laySale(ctx,W,H,d); }catch(e){console.error(e);}
+  if(S.safe)drawSafe(ctx,W,H);
+  if(S.sel>=slots.length)S.sel=Math.max(0,slots.length-1);
+  const sl=slots[S.sel];
+  $('sel').textContent=sl?`Cell ${S.sel+1}`:'—';
+  $('zoom').value=sl?.zoom??100;$('vZoom').textContent=($('zoom').value)+'%';
+  $('offY').value=sl?.offY??0;$('vOffY').textContent=$('offY').value;
+  markSel();saveLater();
+}
+/* เขียน localStorage แบบหน่วง — เดิมเขียนทุกเฟรมตอนลาก ทำให้หน่วง */
+let saveT=null;
+function saveLater(){clearTimeout(saveT);saveT=setTimeout(save,400);}
+
+/* ---------- รายการช่อง ---------- */
+function markSel(){
+  [...$('slots').children].forEach((el,i)=>el.classList.toggle('sel',i===S.sel));
+}
+function renderSlots(){
+  $('slots').innerHTML=slots.map((s,i)=>`
+    <div class="slot${i===S.sel?' sel':''}" data-i="${i}">
+      ${s.src?`<img class="th" src="${s.src}">`:'<div class="th empty">+</div>'}
+      <div class="col">
+        <input type="text" data-f="name" value="${(s.name||'').replace(/"/g,'&quot;')}" placeholder="Game name">
+        <div class="r2">
+          <input type="text" data-f="price" value="${s.price||''}" placeholder="Price">
+          <input type="text" data-f="price2" value="${s.price2||''}" placeholder="Sale">
+          <button data-a="sold" class="${s.sold?'on':''}">SOLD</button>
+          <button data-a="up">↑</button><button data-a="dn">↓</button><button data-a="del">×</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+$('slots').addEventListener('input',e=>{
+  const el=e.target.closest('[data-f]');if(!el)return;
+  const i=+el.closest('.slot').dataset.i;
+  slots[i][el.dataset.f]=el.value;draw();
+});
+$('slots').addEventListener('click',e=>{
+  const row=e.target.closest('.slot');if(!row)return;
+  const i=+row.dataset.i, b=e.target.closest('[data-a]');
+  // BUG v5: เดิมเรียก renderSlots() ทุกครั้งที่คลิก ทำให้ input ถูกสร้างใหม่แล้วโฟกัสหลุด พิมพ์ไม่ได้
+  // ตอนนี้คลิกที่ input หรือที่ว่าง = แค่เลือกช่อง ไม่สร้าง DOM ใหม่
+  if(!b){S.sel=i;markSel();draw();return;}
+  const a=b.dataset.a;
+  if(a==='sold')slots[i].sold=!slots[i].sold;
+  if(a==='del')slots.splice(i,1);
+  if(a==='up'&&i>0)[slots[i-1],slots[i]]=[slots[i],slots[i-1]];
+  if(a==='dn'&&i<slots.length-1)[slots[i+1],slots[i]]=[slots[i],slots[i+1]];
+  S.sel=Math.min(S.sel,Math.max(0,slots.length-1));
+  renderSlots();draw();
+});
+function addSlot(o){
+  slots.push({name:'',price:'',price2:'',sold:false,zoom:100,offY:0,...o});
+  if(slots.length>9)slots.length=9;
+  renderSlots();draw();
+}
+$('btnAddEmpty').onclick=()=>addSlot({});
+$('btnClear').onclick=()=>{slots=[];S.sel=0;renderSlots();draw();};
+$('btnBulk').onclick=()=>{
+  const lines=$('bulk').value.split('\n').map(l=>l.trim()).filter(Boolean);
+  lines.slice(0,9).forEach((l,i)=>{
+    const sold=/\*\s*$/.test(l);
+    const p=l.replace(/\*\s*$/,'').split('|').map(s=>s.trim());
+    if(slots[i]){Object.assign(slots[i],{name:p[0]||'',price:p[1]||'',price2:p[2]||'',sold});}
+    else addSlot({name:p[0]||'',price:p[1]||'',price2:p[2]||'',sold});
+  });
+  renderSlots();draw();setStatus(`Imported ${lines.length} rows`,'ok');
+};
+
+/* ---------- โฟลเดอร์ + suggestion ---------- */
+$('btnFolder').onclick=()=>$('folder').click();
+let allFiles=[];
+$('folder').onchange=e=>{
+  const files=[...e.target.files].filter(f=>/\.(jpe?g|png|webp)$/i.test(f.name));
+  urlCache.forEach(u=>URL.revokeObjectURL(u));urlCache.clear();
+  allFiles=files.map(f=>{
+    const rel=(f.webkitRelativePath||f.name).split('/');
+    return {file:f, key:normKey(f.name), name:cleanName(f.name),
+      dir:rel.length>1?rel[rel.length-2]:'', page:(f.name.match(/\((\d+)\)\s*\.[a-z]+$/i)||[])[1]||''};
+  }).filter(x=>x.key);
+  // เรียงชื่อ (เลขโรมันตามค่าจริง) → โฟลเดอร์ → หน้า
+  allFiles.sort((a,b)=>cmpName(a.name,b.name)||a.dir.localeCompare(b.dir)||a.page.localeCompare(b.page));
+  folderIdx=new Map();
+  allFiles.forEach(x=>{if(!folderIdx.has(x.key))folderIdx.set(x.key,[]);folderIdx.get(x.key).push(x);});
+  const dirs={};allFiles.forEach(x=>{dirs[x.dir]=(dirs[x.dir]||0)+1;});
+  const top=Object.entries(dirs).sort((a,b)=>b[1]-a[1]).slice(0,4)
+    .map(([d,n])=>`${d||'(root)'} ${n}`).join(' · ');
+  $('folderNote').innerHTML=`Indexed <b style="color:var(--gold)">${files.length}</b> images ·
+    ${folderIdx.size} unique names · RESTOCK-xx and page numbers stripped<br>
+    <span style="font-size:10px">Largest folders: ${top}</span>`;
+  setStatus(`Indexed ${allFiles.length} images`,'ok');
+};
+/* BUG v6: เดิมคืน object URL ทิ้งทุกครั้งที่พิมพ์ รูปที่กำลังโหลดค้างอยู่จึงพัง (ไอคอนรูปแตก)
+   ตอนนี้แคชต่อไฟล์ ไม่สร้างซ้ำ ไม่คืนทิ้งระหว่างพิมพ์ — ล้างเฉพาะตอนเลือกโฟลเดอร์ใหม่ */
+const urlCache=new Map();
+function fileUrl(f){
+  if(!urlCache.has(f))urlCache.set(f,URL.createObjectURL(f));
+  return urlCache.get(f);
+}
+function priceOf(key){
+  const r=rows.find(x=>normKey(x.title)===key);
+  return r?(r.price||'').replace(/[^\d.]/g,'').replace(/\.00$/,''):'';
+}
+function suggest(q){
+  const qn=q.toLowerCase().replace(/[^a-z0-9]/g,'');
+  if(!qn){$('sugg').style.display='none';return;}
+  // แสดง "ทุกไฟล์" ที่ตรง ไม่ใช่ไฟล์แรกของแต่ละชื่อ — เกมเดียวกันมีหลายเล่ม/หลายโฟลเดอร์
+  let list=allFiles.filter(x=>x.key.includes(qn))
+    .map(x=>({name:x.name,file:x.file,dir:x.dir,page:x.page,price:priceOf(x.key)}));
+  // รายการใน CSV ที่ไม่มีรูป ให้ต่อท้ายไว้ จะได้ยังเพิ่มชื่อ+ราคาได้
+  const have=new Set(list.map(x=>normKey(x.name)));
+  rows.forEach(r=>{
+    const k=normKey(r.title);
+    if(!k.includes(qn)||have.has(k))return;
+    have.add(k);
+    list.push({name:cleanName(r.title),file:null,dir:'',page:'',
+      price:(r.price||'').replace(/[^\d.]/g,'').replace(/\.00$/,'')});
+  });
+  list.sort((a,b)=>cmpName(a.name,b.name)||a.dir.localeCompare(b.dir)||a.page.localeCompare(b.page));
+  list=list.slice(0,30);
+  if(!list.length){$('sugg').style.display='none';return;}
+  $('sugg').innerHTML=list.map((r,i)=>{
+    const img=r.file?`<img src="${fileUrl(r.file)}" loading="lazy">`
+                    :'<span style="width:38px;height:48px;background:#111;display:block"></span>';
+    const meta=[r.dir,r.page?'img '+r.page:''].filter(Boolean).join(' · ');
+    return `<div data-i="${i}">${img}
+      <span class="nm">${r.name.replace(/</g,'&lt;')}${meta?`<br><span class="dir">${meta}</span>`:''}</span>
+      <span class="pr">${r.price?r.price+'.-':''}</span></div>`;}).join('');
+  $('sugg').style.display='block';
+  $('sugg')._list=list;
+}
+$('sq').addEventListener('input',e=>suggest(e.target.value));
+$('sugg').addEventListener('click',e=>{
+  const el=e.target.closest('div[data-i]');if(!el)return;
+  const r=$('sugg')._list[+el.dataset.i];
+  addBatch([{name:r.name,price:r.price,url:r.file?fileUrl(r.file):null}]);
+  $('sq').value='';$('sugg').style.display='none';
+});
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#sugg')&&e.target!==$('sq'))$('sugg').style.display='none';
+});
+
+/* ---------- ลากไฟล์ / ปกตัวอย่าง ---------- */
+/* BUG v5: เดิม push ใน onload ทำให้ลำดับสลับตามความเร็วโหลด — ตอนนี้จองช่องไว้ก่อนแล้วค่อยเติมรูป */
+function addBatch(entries){
+  const base=slots.length;
+  entries.forEach(en=>{
+    if(slots.length>=9)return;
+    slots.push({name:en.name||'',price:en.price||'',price2:'',sold:false,zoom:100,offY:0,img:null,src:''});
+  });
+  renderSlots();draw();
+  entries.forEach((en,k)=>{
+    const idx=base+k; if(idx>=slots.length||!en.url)return;
+    const im=new Image();
+    im.onload=()=>{
+      if(!slots[idx])return;
+      slots[idx].img=im;slots[idx].src=im.src;
+      if(!sampled)sampled=sampleBg(im);
+      // อัปเดตเฉพาะรูปย่อ ไม่สร้างแถวใหม่ — กันโฟกัสหลุดถ้าผู้ใช้กำลังพิมพ์อยู่
+      const row=$('slots').children[idx];
+      if(row){const th=row.querySelector('.th');
+        if(th){const nu=document.createElement('img');nu.className='th';nu.src=im.src;th.replaceWith(nu);}}
+      draw();
+    };
+    im.src=en.url;
+  });
+}
+function loadFiles(fl){
+  const list=[...fl].filter(f=>f.type.startsWith('image/')).slice(0,9);
+  addBatch(list.map(f=>({name:cleanName(f.name),url:URL.createObjectURL(f)})));
+}
+$('drop').onclick=()=>$('file').click();
+$('file').onchange=e=>loadFiles(e.target.files);
+['dragenter','dragover'].forEach(ev=>$('drop').addEventListener(ev,e=>{e.preventDefault();$('drop').classList.add('hot');}));
+['dragleave','drop'].forEach(ev=>$('drop').addEventListener(ev,e=>{e.preventDefault();$('drop').classList.remove('hot');}));
+$('drop').addEventListener('drop',e=>loadFiles(e.dataTransfer.files));
+$('btnDemo').onclick=()=>{
+  const list=window.OWARIN_COVERS||[];
+  if(!list.length){setStatus('owarin_covers.js not found','err');return;}
+  slots=[];S.sel=0;
+  addBatch(list.slice(0,S.cells).map(c=>({name:c.name,url:c.src})));
+};
+
+/* พรีวิวขยายเต็มพื้นที่ที่มี ไม่ใช่ล็อกความกว้างตายตัวเหมือนเดิม */
+function fitPreview(W,H){
+  const cv=$('preview'), host=$('canvasHost');
+  const availW=Math.max(240,(host.clientWidth||900)-8);
+  const availH=Math.max(240,window.innerHeight-$('previewBar').getBoundingClientRect().bottom-28);
+  let scale = S.zoomView==='fit' ? Math.min(availW/W,availH/H) : (+S.zoomView/100);
+  cv.style.width=Math.round(W*scale)+'px';
+  cv.style.height=Math.round(H*scale)+'px';
+  $('zoomLabel').textContent=Math.round(scale*100)+'%';
+}
+window.addEventListener('resize',()=>{const [W,H]=dims();fitPreview(W,H);});
+
+/* ---------- ลาก/ซูม บนพรีวิว ---------- */
+const cv=$('preview');
+let drag=null;
+function toCanvas(e){
+  const r=cv.getBoundingClientRect();
+  return {x:(e.clientX-r.left)/r.width*cv.width, y:(e.clientY-r.top)/r.height*cv.height};
+}
+function pickCell(pt){
+  for(let i=0;i<hit.length;i++){const h=hit[i];
+    if(h&&pt.x>=h.x&&pt.x<=h.x+h.w&&pt.y>=h.y&&pt.y<=h.y+h.h)return i;}
+  return -1;
+}
+cv.addEventListener('pointerdown',e=>{
+  const i=pickCell(toCanvas(e));if(i<0||!slots[i])return;
+  S.sel=i;
+  drag={i,y:e.clientY,zoom:slots[i].zoom||100,offY:slots[i].offY||0,shift:e.shiftKey};
+  cv.setPointerCapture(e.pointerId);markSel();draw();
+});
+cv.addEventListener('pointermove',e=>{
+  if(!drag)return;
+  const dy=(e.clientY-drag.y)/cv.getBoundingClientRect().height*100;
+  const apply=(k,v)=>{
+    if(S.scope==='all')slots.forEach(s=>{s[k]=v;});else slots[drag.i][k]=v;
+  };
+  if(drag.shift)apply('zoom',Math.max(60,Math.min(180,Math.round(drag.zoom-dy*2))));
+  else apply('offY',Math.max(-40,Math.min(40,Math.round(drag.offY+dy))));
+  draw();
+});
+['pointerup','pointercancel'].forEach(ev=>cv.addEventListener(ev,()=>{drag=null;}));
+cv.addEventListener('dblclick',e=>{
+  const i=pickCell(toCanvas(e));if(i<0)return;
+  if(S.scope==='all')slots.forEach(s=>{s.zoom=100;s.offY=0;});
+  else if(slots[i]){slots[i].zoom=100;slots[i].offY=0;}
+  draw();
+});
+
+/* ---------- controls ---------- */
+function slider(id,key,unit,dec){
+  const el=$(id), out=$('v'+id[0].toUpperCase()+id.slice(1));
+  const show=()=>{if(out)out.textContent=(dec?(+el.value).toFixed(dec):el.value)+(unit||'');};
+  el.addEventListener('input',()=>{P[key]=+el.value;show();draw();});show();
+}
+slider('headMax','headMax','%',1);slider('headW','headW','%');slider('headLead','headLead','%');
+slider('dateSize','dateSize','%',1);slider('subGap','subGap','%',1);
+slider('nameSize','nameSize','%',2);slider('priceSize','priceSize','%',1);slider('textGap','textGap','%',1);
+slider('textZone','textZone','%');slider('headBand','headBand','%',1);slider('headY','headY','');
+slider('footBand','footBand','%',1);slider('footY','footY','');
+slider('margin','margin','%',1);slider('pad','pad','%',1);
+slider('imgFill','imgFill','%');slider('ruleW','ruleW','%');slider('ruleH','ruleH','px');
+slider('ruleDark','ruleDark','%');slider('rulePos','rulePos','');slider('logoSize','logoSize','%',1);
+slider('markSize','markSize','%',2);slider('markGap','markGap','%',2);
+slider('jpSize','jpSize','%',2);slider('jpGap','jpGap','%',2);slider('jpTrack','jpTrack','%',2);
+slider('headWeight','headWeight','');slider('headTrack','headTrack','%',2);
+slider('logoWeight','logoWeight','');slider('logoTrack','logoTrack','%',2);
+slider('soldSize','soldSize','%',1);
+['saleBarW','saleBarText','saleImg','saleName','saleSpec','saleLabel','saleWas','saleNow','saleEnd','saleNote']
+  .forEach(k=>slider(k,k,'%',k==='saleBarW'||k==='saleImg'?1:2));
+
+$('zoom').addEventListener('input',e=>{
+  const v=+e.target.value;
+  if(S.scope==='all')slots.forEach(s=>{s.zoom=v;});else if(slots[S.sel])slots[S.sel].zoom=v;
+  draw();
+});
+$('offY').addEventListener('input',e=>{
+  const v=+e.target.value;
+  if(S.scope==='all')slots.forEach(s=>{s.offY=v;});else if(slots[S.sel])slots[S.sel].offY=v;
+  draw();
+});
+[1,2,3].forEach(k=>{const el=$('pz'+k);el.value=PZ[k];
+  el.addEventListener('input',()=>{PZ[k]=+el.value||100;save();});});
+document.querySelector('.bar').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-all]');if(!b)return;
+  const v=b.dataset.all, z=v==='100'?100:PZ[+v.slice(1)];
+  slots.forEach(s=>{s.zoom=z;});draw();
+});
+$('recenterAll').onclick=()=>{slots.forEach(s=>{s.zoom=100;s.offY=0;});draw();};
+
+['h1','h2','date','endline','note','jp','cardColor','suffix','storeName','storeJP',
+ 'pricePre','priceSuf','soldText','labWas','labNow','labOne','notePre',
+ 'colPage','colInk','colSub','colAccent','colCut'].forEach(id=>$(id).addEventListener('input',draw));
+['showName','showPrice','showJP','customCol'].forEach(id=>$(id).addEventListener('change',draw));
+$('safe').onchange=e=>{S.safe=e.target.checked;draw();};
+$('fmt').onchange=e=>{S.fmt=e.target.value;save();};
+$('q').onchange=e=>{S.q=+e.target.value;save();};
+function seg(id,key,cast,after){
+  $(id).onclick=e=>{const b=e.target.closest('button');if(!b)return;
+    [...$(id).children].forEach(x=>x.classList.remove('on'));b.classList.add('on');
+    S[key]=cast?cast(b.dataset.v):b.dataset.v;if(after)after();draw();};
+}
+seg('segLay','lay');seg('segCells','cells',Number);seg('segTheme','theme');
+seg('segRatio','ratio',null,()=>{
+  $('safeModeWrap').style.display=S.ratio==='9:16'?'block':'none';
+  $('feedModeWrap').style.display=S.ratio==='9:16'?'none':'block';
+  if($('autoTune').checked)applyPreset();
+});
+seg('segSafeMode','safeMode',null,()=>{if($('autoTune').checked)applyPreset();});
+seg('segFeedMode','feedMode');
+seg('segBar','barColor');seg('segScope','scope');seg('segZoomView','zoomView');
+$('btnPreset').onclick=()=>{applyPreset();setStatus(`Preset ${presetKey()} applied`,'ok');};
+seg('segCardBg','cardBg',null,()=>{$('cardColor').style.display=S.cardBg==='custom'?'block':'none';});
+function setStatus(t,c){$('status').textContent=t;$('status').className=c||'';}
+
+/* ---------- CSV (ราคา) ---------- */
+function parseCSV(text){
+  const out=[];let row=[],cur='',q=false;
+  for(let i=0;i<text.length;i++){const c=text[i];
+    if(q){if(c==='"'){if(text[i+1]==='"'){cur+='"';i++;}else q=false;}else cur+=c;}
+    else if(c==='"')q=true;
+    else if(c===','){row.push(cur);cur='';}
+    else if(c==='\n'){row.push(cur);out.push(row);row=[];cur='';}
+    else if(c!=='\r')cur+=c;}
+  if(cur||row.length){row.push(cur);out.push(row);}
+  const hdr=out.shift().map(h=>h.replace(/^﻿/,'').trim());
+  return out.filter(r=>r.length>1).map(r=>Object.fromEntries(hdr.map((h,i)=>[h,(r[i]||'').trim()])));
+}
+/* รับ CSV ผ่านการลากลงหน้าเว็บได้เลย
+   BUG v5: เดิมไม่ preventDefault เมื่อไม่ใช่ CSV — ลากรูปตกนอกกรอบแล้วเบราว์เซอร์เปิดไฟล์รูปทับหน้าเว็บ */
+document.addEventListener('dragover',e=>e.preventDefault());
+document.addEventListener('drop',e=>{
+  e.preventDefault();
+  const fs=[...(e.dataTransfer?.files||[])];
+  const csv=fs.find(x=>/\.csv$/i.test(x.name));
+  if(csv){csv.text().then(t=>{rows=parseCSV(t);
+    setStatus(`CSV loaded — ${rows.length} rows, prices now appear in search`,'ok');});return;}
+  if(fs.some(f=>f.type.startsWith('image/')))loadFiles(fs);
+});
+
+/* ---------- persist ---------- */
+function save(){
+  try{localStorage.setItem(LS,JSON.stringify({S,P,PZ,
+    txt:Object.fromEntries(['h1','h2','date','note','endline','jp','storeName','storeJP',
+      'pricePre','priceSuf','soldText','labWas','labNow','labOne','notePre',
+      'colPage','colInk','colSub','colAccent','colCut'].map(k=>[k,$(k).value])),
+    chk:{showName:$('showName').checked,showPrice:$('showPrice').checked,showJP:$('showJP').checked,autoTune:$('autoTune').checked,customCol:$('customCol').checked},
+    slots:slots.map(s=>({name:s.name,price:s.price,price2:s.price2,sold:s.sold,zoom:s.zoom,offY:s.offY}))}));}catch(e){}
+}
+function load(){
+  try{
+    const o=JSON.parse(localStorage.getItem(LS));if(!o)return;
+    Object.assign(S,o.S||{});Object.assign(P,o.P||{});Object.assign(PZ,o.PZ||{});
+    for(const k in (o.txt||{}))if($(k))$(k).value=o.txt[k];
+    for(const k in (o.chk||{}))if($(k))$(k).checked=o.chk[k];
+    // บีบทุกค่าให้อยู่ในช่วงของสไลเดอร์ · กันค่าเก่าที่ความหมายเปลี่ยนทำให้เลย์เอาต์พัง
+    for(const k in P){
+      const el=$(k);if(!el)continue;
+      if(el.type==='range'){
+        const lo=+el.min, hi=+el.max;
+        if(!Number.isFinite(P[k])||P[k]<lo||P[k]>hi)P[k]=+el.value;
+      }
+      el.value=P[k];
+    }
+    [1,2,3].forEach(k=>$('pz'+k).value=PZ[k]);
+    $('fmt').value=S.fmt;$('q').value=S.q;
+    slots=(o.slots||[]).map(s=>({...s,img:null,src:''}));
+    const mark=(id,v)=>{const w=$(id);if(!w)return;
+      [...w.children].forEach(b=>b.classList.toggle('on',b.dataset.v===String(v)));};
+    mark('segLay',S.lay);mark('segCells',S.cells);mark('segTheme',S.theme);mark('segRatio',S.ratio);
+    mark('segBar',S.barColor);mark('segScope',S.scope);mark('segCardBg',S.cardBg);
+    mark('segSafeMode',S.safeMode);mark('segFeedMode',S.feedMode);
+    $('safeModeWrap').style.display=S.ratio==='9:16'?'block':'none';
+    $('feedModeWrap').style.display=S.ratio==='9:16'?'none':'block';
+    $('cardColor').style.display=S.cardBg==='custom'?'block':'none';
+    document.querySelectorAll('.panel input[type=range]').forEach(el=>el.dispatchEvent(new Event('input')));
+  }catch(e){}
+}
+$('btnReset').onclick=()=>{
+  if(!confirm('Reset everything to defaults?'))return;
+  localStorage.removeItem(LS);location.reload();
+};
+
+/* ---------- caption + export ---------- */
+$('btnCaption').onclick=async()=>{
+  const list=slots.slice(0,S.lay==='grid'?S.cells:3);
+  const head=[$('h1').value.trim(),$('h2').value.trim()].filter(Boolean).join(' — ');
+  const dt=$('date').value.trim();
+  const lines=list.map(s=>{
+    const p=s.price2?`${PRICE(s.price)} → ${PRICE(s.price2)}`:PRICE(s.price);
+    return `${s.name}  ${p}${s.sold?'  (SOLD)':''}`;});
+  const txt=[head+(dt?`  ${dt}`:''),'',...lines,'',$('endline').value.trim(),$('note').value.trim()]
+    .join('\n').replace(/\n{3,}/g,'\n\n').trim();
+  try{await navigator.clipboard.writeText(txt);setStatus('Caption copied','ok');}
+  catch(e){setStatus('Copy failed — see console','err');console.log(txt);}
+};
+$('btnExport').onclick=()=>{
+  const was=S.safe, sel=S.sel;
+  S.safe=false;S.sel=-1;draw();
+  const sfx=$('suffix').value.trim();
+  const name=`OWARIN_${S.lay}${S.lay==='grid'?S.cells:''}_${S.ratio.replace(':','x')}${sfx?'_'+sfx:''}`;
+  $('preview').toBlob(b=>{
+    const a=document.createElement('a');a.href=URL.createObjectURL(b);
+    a.download=name+(S.fmt==='png'?'.png':'.jpg');a.click();
+    S.safe=was;S.sel=sel;draw();setStatus('Saved','ok');
+  },S.fmt==='png'?'image/png':'image/jpeg',S.q);
+};
+
+load();renderSlots();
+document.fonts.ready.then(draw);
+draw();
+</script>
+</body>
+</html>

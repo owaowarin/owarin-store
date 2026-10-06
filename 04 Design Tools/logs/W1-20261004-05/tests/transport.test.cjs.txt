@@ -1,0 +1,2 @@
+REPRO PASS: transport key order changes request hash; no business retry/write
+PASS owner-only ID resume loads exact immutable server payload, ignores replacement values, same-ID DONE replay

@@ -1,0 +1,66 @@
+{
+  "result": "PASS",
+  "sources": {
+    "Code.gs": {
+      "chars": 183510,
+      "LFsha256": "01B501E69DCC3ADAFAA3A5B09D0D7908E58C816F8D1FC74EDC96D78E81B2A2E6"
+    },
+    "webapp.gs": {
+      "chars": 39408,
+      "LFsha256": "7102CC7FA4735F5859B7E8F11092B0CADC2BF155E5D204658949A11696ACE67D"
+    },
+    "Index.html": {
+      "chars": 103700,
+      "LFsha256": "6EFF256A460F7A8E0BA5EBB72438EC6534D6064F7373FC6A77D1DAE592650516"
+    },
+    "FbAlbum.gs": {
+      "chars": 36087,
+      "LFsha256": "0EA4C03049CE886E4D9C34A190811BA6A1BD8A3799ABD452CA5D15983A3A6482"
+    },
+    "R2Upload.gs": {
+      "chars": 10260,
+      "LFsha256": "A19439F5EDF7233CE96012A51FCCAF981FC3FAE5AC5995BD264D876991901D65"
+    },
+    "P1Journal.gs": {
+      "chars": 3088,
+      "LFsha256": "FDF4B656488EA92DB4CCB50B573AC75BFD8AA27C91769B425E03FF06509890BF"
+    },
+    "appsscript.json": {
+      "chars": 203,
+      "LFsha256": "94A0FBB0108ACC28D5D97CD2C21759707EDA9DC36EC2DE12AD1930820782A502"
+    }
+  },
+  "workbookBytes": 1747978,
+  "workbookSha256": "dc0bfe97769b60a3e810b4bbdc0bd8f63409c211c835f014280dd5c7cb189f6a",
+  "tabs": [
+    "SALES",
+    "GAME GUIDE BOOKS",
+    "MAGAZINE",
+    "CLIENT",
+    "ADD REQUESTS",
+    "FB ALBUM LOG",
+    "REFRESH LOG",
+    "PID CHANGES",
+    "FB CATALOGUE ARCHIVE",
+    "R2 JOBS",
+    "IMAGE UPLOADS",
+    "FB ALBUM CAPTION",
+    "FB CATALOGUE",
+    "FB ALBUMS",
+    "TYPE LIST",
+    "R2 IMAGES",
+    "GAME INFO",
+    "META EXPORT",
+    "BOOKING",
+    "TEMPLATES",
+    "FB ALBUM CAPTION BACKUP 2026-10",
+    "Sheet23"
+  ],
+  "changedFromLocalV31DiffLines": {
+    "Code.gs": 26,
+    "webapp.gs": 0,
+    "Index.html": 11,
+    "P1Journal.gs": 0
+  },
+  "manifestRuntime": "V8"
+}

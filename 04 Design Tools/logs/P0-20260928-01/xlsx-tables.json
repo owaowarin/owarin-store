@@ -1,0 +1,421 @@
+[
+  {
+    "file": "xl/tables/table1.xml",
+    "attributes": {
+      "totalsRowCount": "1",
+      "ref": "A1:I52",
+      "displayName": "REPORT",
+      "name": "REPORT",
+      "id": "3"
+    },
+    "columns": [
+      {
+        "totalsRowLabel": "OWA-20260727-01",
+        "name": "Order ID",
+        "id": "1"
+      },
+      {
+        "totalsRowLabel": "Dynasty Warriors 5",
+        "name": "Item Name Sold",
+        "id": "2"
+      },
+      {
+        "totalsRowLabel": "7/27/2026",
+        "name": "Order date",
+        "id": "3"
+      },
+      {
+        "totalsRowLabel": "11",
+        "name": "Cost",
+        "id": "4"
+      },
+      {
+        "totalsRowLabel": "170",
+        "name": "Price",
+        "id": "5"
+      },
+      {
+        "totalsRowLabel": "50",
+        "name": "Shipping Cost",
+        "id": "6"
+      },
+      {
+        "totalsRowFunction": "custom",
+        "name": "Net Profit",
+        "id": "7"
+      },
+      {
+        "totalsRowLabel": "OWA-GGBD066YKAR01",
+        "name": "Note",
+        "id": "8"
+      },
+      {
+        "name": "Product ID",
+        "id": "9"
+      }
+    ]
+  },
+  {
+    "file": "xl/tables/table2.xml",
+    "attributes": {
+      "ref": "A1:AF1615",
+      "displayName": "Table1",
+      "name": "Table1",
+      "id": "1"
+    },
+    "columns": [
+      {
+        "name": "Item name",
+        "id": "1"
+      },
+      {
+        "name": "Product ID",
+        "id": "2"
+      },
+      {
+        "name": "Status",
+        "id": "3"
+      },
+      {
+        "name": "Condition",
+        "id": "4"
+      },
+      {
+        "name": "Copy Flags",
+        "id": "5"
+      },
+      {
+        "name": "Rarity",
+        "id": "6"
+      },
+      {
+        "name": "Publisher",
+        "id": "7"
+      },
+      {
+        "name": "Platform",
+        "id": "8"
+      },
+      {
+        "name": "Genre",
+        "id": "9"
+      },
+      {
+        "name": "Original",
+        "id": "10"
+      },
+      {
+        "name": "Cost",
+        "id": "11"
+      },
+      {
+        "name": "Price Range",
+        "id": "12"
+      },
+      {
+        "name": "Price",
+        "id": "13"
+      },
+      {
+        "name": "Gross Profit",
+        "id": "14"
+      },
+      {
+        "name": "Market Place_x000a_Price",
+        "id": "15"
+      },
+      {
+        "name": "Gross Profit MP",
+        "id": "16"
+      },
+      {
+        "name": "Market Ref",
+        "id": "17"
+      },
+      {
+        "name": "Ref Note",
+        "id": "18"
+      },
+      {
+        "name": "Listed Date",
+        "id": "19"
+      },
+      {
+        "name": "Sold Date",
+        "id": "20"
+      },
+      {
+        "name": "Suggested Price",
+        "id": "21"
+      },
+      {
+        "name": "Price Content Lists",
+        "id": "22"
+      },
+      {
+        "name": "Max G Ref",
+        "id": "23"
+      },
+      {
+        "name": "Shopee Upload",
+        "id": "24"
+      },
+      {
+        "name": "Type",
+        "id": "25"
+      },
+      {
+        "name": "Sub Genre",
+        "id": "26"
+      },
+      {
+        "name": "Column 25",
+        "id": "27"
+      },
+      {
+        "name": "Column 26",
+        "id": "28"
+      },
+      {
+        "name": "Column 27",
+        "id": "29"
+      },
+      {
+        "name": "Column 28",
+        "id": "30"
+      },
+      {
+        "name": "Column 29",
+        "id": "31"
+      },
+      {
+        "name": "Column 30",
+        "id": "32"
+      }
+    ]
+  },
+  {
+    "file": "xl/tables/table3.xml",
+    "attributes": {
+      "ref": "A1:AD854",
+      "displayName": "Table2",
+      "name": "Table2",
+      "id": "4"
+    },
+    "columns": [
+      {
+        "name": "Item name",
+        "id": "1"
+      },
+      {
+        "name": "Product ID",
+        "id": "2"
+      },
+      {
+        "name": "Status",
+        "id": "3"
+      },
+      {
+        "name": "Condition",
+        "id": "4"
+      },
+      {
+        "name": "Copy Flags",
+        "id": "5"
+      },
+      {
+        "name": "Rarity",
+        "id": "6"
+      },
+      {
+        "name": "Publisher",
+        "id": "7"
+      },
+      {
+        "name": "Original",
+        "id": "8"
+      },
+      {
+        "name": "Cost",
+        "id": "9"
+      },
+      {
+        "name": "Price Range",
+        "id": "10"
+      },
+      {
+        "name": "Price",
+        "id": "11"
+      },
+      {
+        "name": "Gross Profit",
+        "id": "12"
+      },
+      {
+        "name": "Market Place_x000a_Price",
+        "id": "13"
+      },
+      {
+        "name": "Gross Profit MP",
+        "id": "14"
+      },
+      {
+        "name": "Market Ref",
+        "id": "15"
+      },
+      {
+        "name": "Ref Note",
+        "id": "16"
+      },
+      {
+        "name": "Listed Date",
+        "id": "17"
+      },
+      {
+        "name": "Sold Date",
+        "id": "18"
+      },
+      {
+        "name": "Suggested Price",
+        "id": "19"
+      },
+      {
+        "name": "Price Content Lists",
+        "id": "20"
+      },
+      {
+        "name": "Max G Ref",
+        "id": "21"
+      },
+      {
+        "name": "Shopee Upload",
+        "id": "22"
+      },
+      {
+        "name": "Type",
+        "id": "23"
+      },
+      {
+        "name": "Column 24",
+        "id": "24"
+      },
+      {
+        "name": "Column 25",
+        "id": "25"
+      },
+      {
+        "name": "Column 26",
+        "id": "26"
+      },
+      {
+        "name": "Column 27",
+        "id": "27"
+      },
+      {
+        "name": "Column 28",
+        "id": "28"
+      },
+      {
+        "name": "Column 29",
+        "id": "29"
+      },
+      {
+        "name": "Column 30",
+        "id": "30"
+      }
+    ]
+  },
+  {
+    "file": "xl/tables/table4.xml",
+    "attributes": {
+      "ref": "A1:F1000",
+      "displayName": "CLIENT",
+      "name": "CLIENT",
+      "id": "2"
+    },
+    "columns": [
+      {
+        "name": "Facebook Account",
+        "id": "1"
+      },
+      {
+        "name": "Name",
+        "id": "2"
+      },
+      {
+        "name": "Phone Number",
+        "id": "3"
+      },
+      {
+        "name": "Address",
+        "id": "4"
+      },
+      {
+        "name": "Post Code",
+        "id": "5"
+      },
+      {
+        "name": "Note",
+        "id": "6"
+      }
+    ]
+  },
+  {
+    "file": "xl/tables/table5.xml",
+    "attributes": {
+      "ref": "A1:E308",
+      "displayName": "GGB_LISTING_2",
+      "name": "GGB_LISTING_2",
+      "id": "5"
+    },
+    "columns": [
+      {
+        "name": "Customer Name",
+        "id": "1"
+      },
+      {
+        "name": "Game Title",
+        "id": "2"
+      },
+      {
+        "name": "Queue",
+        "id": "3"
+      },
+      {
+        "name": "Status",
+        "id": "4"
+      },
+      {
+        "name": "Note",
+        "id": "5"
+      }
+    ]
+  },
+  {
+    "file": "xl/tables/table6.xml",
+    "attributes": {
+      "ref": "A1:D315",
+      "displayName": "CHAT",
+      "name": "CHAT",
+      "id": "6"
+    },
+    "columns": [
+      {
+        "name": "Template Name",
+        "id": "1"
+      },
+      {
+        "name": "Content",
+        "id": "2"
+      },
+      {
+        "name": "Content Alt",
+        "id": "3"
+      },
+      {
+        "name": "Column 3",
+        "id": "4"
+      }
+    ]
+  }
+]

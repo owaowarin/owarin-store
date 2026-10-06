@@ -1,0 +1,60 @@
+diff --git a/04 Design Tools/logs/P1-20260929-13/p1-ui-before.test.cjs b/04 Design Tools/logs/P1-20260929-01/p1-ui.test.cjs
+index 5a1b325..f5a5065 100644
+--- a/04 Design Tools/logs/P1-20260929-13/p1-ui-before.test.cjs	
++++ b/04 Design Tools/logs/P1-20260929-01/p1-ui.test.cjs	
+@@ -46,9 +46,12 @@ function make(backing=new Map(),storageFailure=false){
+   u.c.openAdd();assert.equal(u.$('fName').value,'Retain me','unresolved request must not reset draft');
+   assert.equal(u.$('fName').disabled,true,'uncertain draft must be frozen');
+   u.$('fName').value='Tampered';
+-  u.fire('mSave','click');assert.equal(u.requests[1].payload.requestId,request);
+-  assert.equal(u.requests[1].payload.title,'Retain me','retry must use frozen payload');
+-  u.pending.shift().resolve(u.saved(99));await u.settle();assert.equal(u.c.addRequestId,'');
++  u.fire('mSave','click');assert.equal(u.requests[1].action,'inventory.addStatus');
++  assert.equal(u.requests[1].payload.requestId,request);
++  assert.equal(u.requests[1].payload.title,'Retain me','status check must use frozen payload');
++  u.pending.shift().resolve({state:'DONE',data:u.saved(99)});await u.settle();
++  assert.equal(u.requests.length,2,'DONE status must not send another Add');
++  assert.equal(u.c.addRequestId,'');
+   assert.equal(u.backing.size,0,'committed request must clear browser storage');
+   const store=new Map();u=make(store);u.c.S.source='MAG';u.c.openAdd();u.$('fName').value='After reload';
+   u.$('fCost').value='1,200.50';u.fire('mSave','click');
+@@ -60,10 +63,30 @@ function make(backing=new Map(),storageFailure=false){
+   assert.equal(reloaded.$('fName').disabled,true);
+   assert.equal(reloaded.$('mSrcGGB').disabled,true);
+   reloaded.c.S.data.MAG.push(reloaded.saved(110).item);
+-  reloaded.fire('mSave','click');assert.equal(JSON.stringify(reloaded.requests[0].payload),frozen);
+-  reloaded.pending.shift().resolve(reloaded.saved(110));await reloaded.settle();
++  reloaded.fire('mSave','click');assert.equal(reloaded.requests[0].action,'inventory.addStatus');
++  assert.equal(JSON.stringify(reloaded.requests[0].payload),frozen);
++  reloaded.pending.shift().resolve({state:'DONE',data:reloaded.saved(110)});await reloaded.settle();
+   assert.equal(store.size,0);assert.equal(reloaded.c.addRequestId,'');
+   assert.equal(reloaded.c.S.data.MAG.length,1,'replayed Add must not duplicate the loaded item in cache');
++  u=make();u.c.openAdd();u.$('fName').value='Never reached server';u.fire('mSave','click');
++  const missingId=u.requests[0].payload.requestId;
++  u.pending.shift().reject(Error('INJECTED NETWORK ERROR'));await u.settle();
++  u.fire('mSave','click');assert.equal(u.requests[1].action,'inventory.addStatus');
++  u.pending.shift().resolve({state:'NOT_FOUND'});await u.settle();
++  assert.equal(u.requests[2].action,'inventory.add');
++  assert.equal(u.requests[2].payload.requestId,missingId,'NOT_FOUND retries the original ID');
++  u.pending.shift().resolve(u.saved(111));await u.settle();
++  assert.equal(u.backing.size,0);
++  u=make();u.c.openAdd();u.$('fName').value='Needs review';u.fire('mSave','click');
++  u.pending.shift().reject(Error('INJECTED NETWORK ERROR'));await u.settle();
++  u.fire('mSave','click');u.pending.shift().resolve({state:'ERROR'});await u.settle();
++  assert.equal(u.requests.length,2,'ERROR status must not retry Add');
++  assert.equal(u.backing.size,1,'recovery state retains Request ID');
++  assert.equal(u.$('fName').disabled,true);
++  u=make();u.c.openAdd();u.$('fName').value='Corrupt retry';u.fire('mSave','click');
++  u.pending.shift().reject(Error('INJECTED NETWORK ERROR'));await u.settle();
++  u.fire('mSave','click');u.pending.shift().reject(Error('Cost must be a number'));await u.settle();
++  assert.equal(u.backing.size,1,'validation-like status error must not clear an uncertain request');
+   u=make();u.c.openAdd();u.$('fName').value='Bad cost';u.$('fCost').value='bad';u.fire('mSave','click');
+   u.pending.shift().reject(Error('Cost must be a number'));await u.settle();
+   assert.equal(u.backing.size,0,'known pre-write validation failure may release ID');
+@@ -85,5 +108,5 @@ function make(backing=new Map(),storageFailure=false){
+   u.fire('fName','keydown',{key:'ArrowDown',preventDefault(){}});
+   u.fire('fName','keydown',{key:'Enter',preventDefault(){}});
+   assert.equal(u.$('fName').value,'');
+-  console.log('PASS: 20 UI resets, frozen retry, reload same ID/payload, storage failure, validation release, render failure, in-flight guard, stale suggestion clear');
++  console.log('PASS: 20 UI resets, status-before-retry DONE/NOT_FOUND/ERROR, frozen reload, storage failure, safe validation release, render failure, in-flight guard, stale suggestion clear');
+ })().catch(e=>{console.error(e);process.exitCode=1;});

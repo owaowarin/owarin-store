@@ -1,0 +1,48 @@
+# STATE — OWARIN STORE (read this FIRST; open other files only when a line below points to them)
+
+จัดทำ: 2026-10-05 +07 — Stream B Session43 R7 checkpoint; other streams retain prior snapshots.
+Rule: OVERWRITE at session close; ≤80 lines. Active PLAN holds scope; dated logs are lookup evidence.
+
+## Streams
+
+### 1. Add / Cart / Orders / Label (Stream B) — P1 LIVE; W1 R7 OPEN
+- Status: focused v37 review CHANGES REQUIRED for R7 decimal readback; v38 local candidate built, syntax PASS only. Google core still v37; no W1 sign-off.
+- Next ONE step: Sol / High targeted decimal + failure/retry tests of v38 via `04 Design Tools/logs/W1-20261005-01/CONTINUE.md`; then scoped Google decimal UI/export and Astra/High changed-diff review. No P0/P1 restart.
+- Local revision: W1-20261005-01/v38@3E7CF8A86790DF274D2EEC0D01EFD09DB65C8BBCCB224A07F895F7F7069F0C42; four LF hashes in revision.json; paired Code_v38/WebApp_v38, shared W1Orders/Index. v37 backup retained.
+- R7 evidence: review.cjs/review-results.json; fresh google-before.xlsx, google-decimal.xlsx/google-decimal-final.xlsx. Correct280.03 vs JS280.03000000000003; subtotal0.3 vs JS0.30000000000000004. Adapter replay fails v37; native transaction not run this phase.
+- v38 change: cent totals and bounded typed profit readback in batch/legacy; formulas unchanged. Behavioral, corruption1cent, legacy intent/retry and real Google acceptance still OPEN.
+- Historical Session42: F05 fixed-ID49-gap repair and v37 two-tab/lost-response/Final review/export PASS; `W1-20261004-05/result.md`/UNDO.md. Prior journals/hashes immutable.
+- Environment: only project1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd / Sheet13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM; new scratch W1 DECIMAL REVIEW. URLs in new CONTINUE.md.
+- Scope: one writer, local/test only; no production source/schema/data/save/run/deploy, LAB/W2. Production v31/deployment4 historical Session34.
+- Rules: Pending reserves; Cancel own order; Instock only/Auction unavailable; SALES shipping=subsidy distinct customer shipping; CLIENT/Label later, price/Meta/R2 unchanged.
+- Recovery: original exact ID/payload/allocated rows and old journals retained. Before backups in new package; never import a stale workbook over later events.
+- History: current one-page HANDOFF_2026-10-05.md; Session42 handoff archived as _archive/handoffs_old/HANDOFF_2026-10-05_Session42.md; previous packages frozen.
+- Model: active exact variant/effort not exposed; no switch claimed. Sol/High for R7 implementation/tests, Astra/High focused review.
+
+### 2. Meta catalog feed / R2 images — v29 pipeline LIVE, plan closed (S0–S4 DONE 2026-10-02)
+- Verified live 2026-10-02 00:3x +07 (Meta connector): feed 1048143251023664 pulled daily 2026-09-26→10-01 05:50 Bangkok, all `succeeded_with_warnings`, 1,342 detected = 1,342 persisted, 0 invalid, 1 warning (3 all-caps titles, should_fix only). Next pull 2026-10-02 ~05:50.
+- Code v27 live (sha 48919f58…af3e, 2026-09-25), D8=A closed (PIDs may change, logged in PID CHANGES), `upload-missing-r2.ps1` v2 in use.
+- Protect: sheet stays "Anyone with the link can view"; META EXPORT keeps gid 355347627; never delete PID CHANGES or FB CATALOGUE ARCHIVE tabs.
+- Open (small): (a) CONFIRMED + refreshed 2026-10-02 ~01:00 by OWARI: popup `✅ Every Instock product is in the feed (1337)` — Ready 1,337 (was 1,342 → 5 sold items now out), Wrong status 1,128, Incomplete 0, Not in inventory 0. Verify the ~05:50 pull shows detected 1,337 and deleted ≥ 5. Staleness cause was the manual refresh; fix LIVE 2026-10-02 02:12 (v28 deployed, first run OK Ready 1337, trigger daily 04:00–05:00 +07, e-mail alerts on; verify A5 tomorrow): `Code_v28.gs` + `WebApp_v26.gs` (tests pass) — nightly headless refresh ~04:30 Bangkok, 80% drop guard, REFRESH LOG tab, MailApp e-mail on GUARD/ERROR/BUSY; plan `00 Docs/PLAN-META-AUTO-REFRESH_2026-10-02.md` (board A2–A4 DONE, A5 TODO = check REFRESH LOG ~04:30 row + Meta pull 05:50); NEW finding: Apps Script trigger `fbaPostBatch` shows Error rate 100% (stream 5? album autopost) — check; (a2) FIX LIVE + VERIFIED 2026-10-02 03:0x (OWARI pasted v29, ran Refresh: popup 1337 ready, live META EXPORT 1337 rows, 0 titles with RESTOCK): 7 live titles showed `(RESTOCK-NN)` — root cause = v20b add-missing-rows step wrote the raw inventory name into FB CATALOGUE!FB Title and the export used it verbatim (324 FB Title cells hold RESTOCK, 7 are Instock). `Code_v29.gs` + `WebApp_v27.gs`: step writes `_capTitle(name)`, export passes every FB Title through `_capTitle` (legacy cells cleaned at export, manual titles kept); tests + mutations pass; (a3) v30 LIVE + VERIFIED 2026-10-02 (OWARI pasted + refreshed; live META EXPORT 1,162 rows, 0 dup ids, quantity sum 1,337 = Instock count, qty dist 1:1010 2:130 3:21 4:1, 0 RESTOCK, 0 all-caps, price 'NNN.00 THB' all OK, image_link https all OK; REFRESH LOG newest row is still the v28 auto run — manual menu runs don't log): `Code_v30.gs` + `WebApp_v28.gs` — identical copies (title+Publisher+Original+Condition+Copy Flags) listed once with quantity = copies (live data: 1,337 → 1,162 rows, 175 merged, passes 80% guard min 1,070); all-caps titles exported Capitalised; D6 closed = by design (FB CATALOGUE Price/Description ARE the Meta fields). A5 TODO 2026-10-03: 04:30 auto run must log Ready≈1,162 (OK, not GUARD) and the ~05:50 Meta pull should delete ≈175 merged items; (b) catalog `product_count` reads 1,356 vs feed 1,342 (no other source has items; likely count lag — recheck); (c) 3 all-caps titles — which ones is not retrievable via the connector, find in META EXPORT; (d) DONE: old catalogue "Products for OWA" is gone — Meta Assets (2026-10-02) lists only OWARIN STORE under commerce account OWA — OWARIN's STORE; its delete box is greyed because it is the last catalogue. NEW RULE (CLAUDE.md): exactly one catalogue; replace only via create-new → feed+schedule → connect → verify → delete-old; OWARIN STORE has no CPAS; (e) CLOSED 2026-10-02 (by design, see a3) D6 Price/price: collision still in Code_v27 (`_fbFindCol` is case-insensitive, so Meta field `price` writes into an existing `Price` column on FB CATALOGUE) — feed prices themselves are fine (6 clean pulls, source = shop-front Price); only that column's content is affected; fix = low priority, plan first; (f) DONE: OWARI deleted `00 Docs/_staging/meta-v27/` (2026-10-02).
+- Detail: `00 Docs/PLAN-META-PIPELINE-HARDENING_2026-09-25.md` (board §0), `00 Docs/PLAN-FB-CATALOG_2026-09-23.md`.
+
+### 3. Shopee relisting — 584 listings LIVE (updated 2026-10-02 ~07:45)
+- Shop = 584 live listings (75 pre-existing + 509 new from `Shopee/out/mass_upload_2026-10-02.xlsx`, published). Earlier belief "nothing uploaded" was WRONG.
+- DONE 2026-10-02: (a) condition rule applied via in-page API — grade S all-members = new (1), else used (4): 582 used / 5 new (of 587 incl. 3 hidden dupes) (55218671139, 54167162790, 52018671274, 45868696655, 41384888480), log `04 Design Tools/logs/condition_bulk_20261002.csv`; (b) spelling fixed to "เกม เฉลยเกม คู่มือเกม" on 510 live names via API `update_product_info {name}` (Mass Update stalled at 0 rows), builder SUFFIX fixed too, log `shopee_rename_applied_20261002.csv`; (c) 3 duplicate SKUs: new copies 58168676258 / 58068676257 / 57818671182 HIDDEN (status 8), old 52517159882 / 51067176112 / 28395698341 kept live (all sales 0, stock 1, same SKU); (d) `Shopee/skip_skus.txt` regenerated = all 584 live parent SKUs.
+- Method notes: write API = POST /api/v3/product/update_product_info?SPC_CDS=<cookie>&SPC_CDS_VER=2 body {"product_id":N,"product_info":{"condition":4}} (or {"name":...}); reads lag ~1s after write; code 252 = transient throttle, retry with backoff; max ~2 parallel.
+- OPEN: (1) reconcile 64 old listings vs build (names/desc/price/stock/options/images) — needs Mass Update Sales Info export from OWARI (price/stock/options not readable via API); (2) re-run `test_build_dedup.py` after SUFFIX edit; (3) write Shopee item IDs back to the sheet; (4) Seller Centre "ยังไม่ลงขาย" tab should show only the 3 hidden dupes — verify no stray drafts; (5) SPX rule: items >2000 THB need AJ=ปิด (builder does it now).
+- Detail: `00 Docs/PLAN-shopee-relisting.md` (§11 changelog), `00 Docs/HANDOFF_2026-10-02.md`.
+
+### 4. OWA Facebook ads — PARKED
+- Nothing created in Meta. Plan: `00 Docs/PLAN-OWA-META-ADS_2026-09-25.md`, evidence `00 Docs/ads-evidence/`. Status board: all steps TODO. Resume at S0 after owner decisions D1 budget, D2 three category posts, D3 break-even cost per purchase. Activate only on OWARI's explicit "go". Opus plans, Sonnet executes.
+
+### 5. Other (not reviewed 2026-10-01)
+- Back-office web app, storefront (on hold), watermark tool, FB album autopost, AI Usage Widget, Chubbygirlbkk reporting: see memory areas / `STATUS_OWARIN-STORE.md` (last 2026-09-13) — status unknown here.
+
+## Environment
+- Current Codex local host (2026-10-03): PowerShell can read/write this workspace; verify changed files after OneDrive writes. The 2026-09-08 remote mount workaround is historical, not required here.
+
+## Housekeeping
+- DONE 2026-10-01/02 (by OWARI in PowerShell): HANDOFF.md + HANDOFF_2026-09-12/13/14/18/20/22/23/24/25/29 moved to `00 Docs/_archive/handoffs_old/` (11 files, verified by folder listing 2026-10-02). `HANDOFF_2026-09-29.md` was a byte-identical prefix of 09-28, so nothing was lost.
+- Current handoffs for the Add/Cart stream: `HANDOFF_2026-09-28.md` (older history) and concise `HANDOFF_2026-10-05.md`; Session41's 10-04 and Session42's 10-05 handoffs are archived.
+- Still pending: misplaced `00 Docs/logs/` copy of older handoffs and `_to_delete/` leftovers (OWARI to clear); stream 5 status unreviewed.

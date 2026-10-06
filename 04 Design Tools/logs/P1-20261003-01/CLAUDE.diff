@@ -1,0 +1,17 @@
+diff --git "a/04 Design Tools\\logs\\P1-20261003-01\\before-followup\\CLAUDE.md" b/CLAUDE.md
+index d632de3..ff68b50 100644
+--- "a/04 Design Tools\\logs\\P1-20261003-01\\before-followup\\CLAUDE.md"	
++++ b/CLAUDE.md
+@@ -18,6 +18,7 @@
+ - **ทุกงานที่แก้ เพิ่ม ลบ ย้าย หรืออัปโหลดข้อมูล ต้องเขียน log CSV ลง `04 Design Tools/logs/` ทุกครั้ง**
+   ทั้งรอบ dry-run และรอบ commit · คอลัมน์อย่างน้อย: ต้นทาง → ปลายทาง, ก่อน → หลัง
+   **ไม่มี log = ถือว่างานยังไม่เสร็จ**
++- **Issue and model handoff rule (owner decision 2026-10-03):** Record every issue, failed attempt, fix, retry, result, and recovery reference in the task CSV and Implementation log. If GPT-5.6 Sol / High cannot resolve a reproducible issue, record the remaining problem and exact revision, then hand the repair to GPT-6 Astra / High. Do not claim a switch or create an agent/chat automatically; keep one writer per change.
+ - การตัดสินใจของเจ้าของงานที่ปิดแล้ว ให้บันทึกลง `04 Design Tools/logs/decisions_<วันที่>.csv`
+   และลงเอกสารที่เกี่ยวข้องทันทีในรอบเดียวกัน
+ - **อ่าน `decisions_*.csv` ทุกไฟล์ก่อนเสนอทางเลือกใด ๆ** ถ้าเรื่องนั้นมีสถานะ CLOSED อยู่แล้ว
+@@ -83,4 +84,3 @@ Sold: change Status to Sold → it leaves the feed at the next nightly refresh (
+ **Feed content rules (Code v30, 2026-10-02):** (1) Identical copies are listed ONCE: same base title + Publisher + Original (cover price) + Condition + Copy Flags → one row (first complete copy), `quantity_to_sell_on_facebook` = number of copies; any difference in those fields = separate rows. When the listed copy sells, the next one takes over at the next refresh. (2) Titles never carry `(RESTOCK-NN)` (stripped at the v20b write and again at export). (3) A title with no lowercase Latin letter is exported Capitalised (GAMEMAG → Gamemag; PS2/RPG/VII untouched); the sheet name is not changed. (4) FB CATALOGUE `Price` / `Description` columns ARE the Meta price/description fields by design (header match is case-insensitive); the `price (Meta format)` columns are legacy and unused. The 80% drop guard compares rows, so a change that merges many copies must be checked against it (first v30 run: 1,337 → 1,162 expected, guard minimum 1,070).
+ 
+ PID changes are logged in **PID CHANGES**; never delete that tab. Orphaned FB CATALOGUE rows (old PID no longer in inventory) are auto-archived to **FB CATALOGUE ARCHIVE**; never delete that tab either. Plan: `00 Docs/PLAN-META-PIPELINE-HARDENING_2026-09-25.md`.
+-

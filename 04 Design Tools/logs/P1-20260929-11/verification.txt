@@ -1,0 +1,14 @@
+P1-20260929-11 | 2026-09-29 15:08 +07 | separate synthetic test only
+
+Pre-submit: GGB 13, MAG 10 business rows; ADD REQUESTS 52 events; GGB A16:C18 and journal C54:E59 empty.
+Two /dev tabs: near-simultaneous Save clicks both fulfilled; both displayed Saving…; A24 completed while A25 still saving; both then displayed Added and reset.
+A24 Request add-1790669194526-a15jhrnafsn: GGB row 16, OWA-GGBS014N00, New Arrival, Cost 0, Price 250; journal rows 54-55 PREPARED/DONE.
+A25 Request add-1790669194533-3ew10f5106v: GGB row 17, OWA-GGBS015N00, New Arrival, Cost 0, Price 260; journal rows 56-57 PREPARED/DONE.
+GGB row 18 and journal rows 58-59 empty; MAG remains 10 rows; final 25 synthetic business rows and 56 journal events.
+Fresh Google XLSX export: 23,310 bytes. Refreshed /dev displays 25/25 with A24 and A25 each once.
+First read-only Sheets connector verification returned HTTP 429 RATE_LIMIT_EXCEEDED. No business retry was made; later bounded live reads confirmed row and journal state. One additional wide-range read returned 429, but the needed A15:C18 and A54:Q59 reads passed.
+No Apps Script source, schema or deployment changed in P1-11. Test /exec remains version 2. Production and Back House LAB were untouched.
+P1-11 changes.csv: 7 unique parsed event IDs. Implementation and HANDOFF each contain one appended section; before→after diffs saved here.
+
+Limit: one two-tab interleaving with distinct items only. No true timeout, newer-draft stale callback, cross-tab request-status lookup, general manual recovery, or external Sheet edit serialization was proved.
+Recovery: leave both synthetic rows and their journal pairs for reconciliation. Do not delete the Sheet or issue fresh IDs for uncertain outcomes. Use native Sheet version history and the exact Request IDs above if later recovery is needed.

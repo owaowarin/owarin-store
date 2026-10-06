@@ -1,0 +1,132 @@
+{
+  "result": "PASS",
+  "export": "google-final.xlsx",
+  "orders": {
+    "OWA-20261004-01": {
+      "status": "SOLD",
+      "channel": "SHOP",
+      "customerShipping": 50.0,
+      "shippingSubsidy": 10.0,
+      "requestId": "w1-20261004-recovery-confirm"
+    },
+    "OWA-20261004-02": {
+      "status": "CANCELLED",
+      "channel": "SHOP",
+      "customerShipping": 50.0,
+      "shippingSubsidy": 10.0,
+      "requestId": "w1-1791059465888-wzpaj3c0gl"
+    },
+    "OWA-20261004-03": {
+      "status": "SOLD",
+      "channel": "SHOP",
+      "customerShipping": 50.0,
+      "shippingSubsidy": 0.0,
+      "requestId": "w1-1791059669311-wcaptgbi8vn"
+    },
+    "OWA-20261004-04": {
+      "status": "SOLD",
+      "channel": "SHOPEE",
+      "customerShipping": 50.0,
+      "shippingSubsidy": 10.0,
+      "requestId": "w1-1791060029426-05o01xtbp1ou"
+    },
+    "OWA-20261004-05": {
+      "status": "SOLD",
+      "channel": "SHOP",
+      "customerShipping": 0.0,
+      "shippingSubsidy": 20.0,
+      "requestId": "w1-1791060140231-e2uhpxl6rzc"
+    },
+    "OWA-20261004-06": {
+      "status": "CANCELLED",
+      "channel": "SHOP",
+      "customerShipping": 50.0,
+      "shippingSubsidy": 0.0,
+      "requestId": "w1-1791060443030-zkdasmeult"
+    }
+  },
+  "sales": [
+    {
+      "row": 1001,
+      "order": "OWA-20261004-01",
+      "price": 390.0,
+      "cost": 100.0,
+      "subsidy": 10.0,
+      "profit": 280,
+      "lineId": "OWA-20261004-01-L1"
+    },
+    {
+      "row": 1002,
+      "order": "OWA-20261004-03",
+      "price": 390.0,
+      "cost": 100.0,
+      "subsidy": 0.0,
+      "profit": 290,
+      "lineId": "OWA-20261004-03-L1"
+    },
+    {
+      "row": 1003,
+      "order": "OWA-20261004-04",
+      "price": 391.0,
+      "cost": 100.0,
+      "subsidy": 10.0,
+      "profit": 281,
+      "lineId": "OWA-20261004-04-L1"
+    },
+    {
+      "row": 1004,
+      "order": "OWA-20261004-05",
+      "price": 400.0,
+      "cost": 100.0,
+      "subsidy": 20.0,
+      "profit": 280,
+      "lineId": "OWA-20261004-05-L1"
+    }
+  ],
+  "copies": [
+    [
+      "W1 QA 20261004 Copy 1",
+      "Instock",
+      "708595c3-950e-4f21-830e-5aece23f82e7"
+    ],
+    [
+      "W1 QA 20261004 Copy 2",
+      "Instock",
+      "fd7ae9fe-0397-44e8-8554-b045ccf1136c"
+    ],
+    [
+      "W1 QA 20261004 Copy 3",
+      "Instock",
+      null
+    ],
+    [
+      "W1 QA 20261004 Copy 4",
+      "Sold",
+      "b64414ef-99f5-4dd2-b503-3b12a3a9edac"
+    ],
+    [
+      "W1 QA 20261004 Copy 5",
+      "Sold",
+      "739e8046-cb1c-4d62-9346-94cd6db8f78c"
+    ],
+    [
+      "W1 QA 20261004 Copy 6",
+      "Sold",
+      "436e5086-922e-4ced-b0c3-53048d5d619e"
+    ],
+    [
+      "W1 QA 20261004 Copy 7",
+      "Sold",
+      "d28bae28-b942-48f0-911c-dc45e6773788"
+    ],
+    [
+      "W1 QA 20261004 Copy 8",
+      "Auction",
+      null
+    ]
+  ],
+  "table": "A1:I53",
+  "finiteG2AndLegacy52": "unchanged",
+  "cancelSameId": "one PREPARED + one DONE",
+  "injectedHoldSales": "NEEDS_REVIEW then DONE same IDs"
+}

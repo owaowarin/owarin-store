@@ -1,0 +1,35 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\before\\00 Docs\\STATE.md" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\STATE.md"
+index 2d7d570..a2eb04b 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\before\\00 Docs\\STATE.md"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\STATE.md"	
+@@ -1,19 +1,20 @@
+ # STATE — OWARIN STORE (read this FIRST; open other files only when a line below points to them)
+ 
+-จัดทำ: 2026-10-04 02:59:46 +0700 — Stream B Session36. Fresh read-only v31 source/schema baseline; other streams keep prior snapshots.
++จัดทำ: 2026-10-04 03:53:17 +0700 — Stream B Session37. Other streams retain prior snapshots.
+ Rule: OVERWRITE at session close; ≤80 lines. Read active PLAN for scope; dated logs are lookup evidence.
+ 
+ ## Streams
+ 
+-### 1. Add / Cart / Orders / Label (Stream B) — P1 LIVE; W1 local ready, Google gate pending
+-- Status: W1 v32 candidate implemented; 14 transaction groups +1,032 injected simulated write positions, UI recovery tests, six regressions PASS. Browser synthetic flows/two tabs PASS. Sanitized source saved/read back in separate Google test project; fixture/schema/UI acceptance blocked by Authorization. W1 is not DONE.
+-- Next ONE step: owner authorize test project, then guarded fixture/recovery + actual Google UI/LockService/table checks; focused GPT-6 Astra / High review on exact revision. No new agent/chat/model-switch claim; no W2 or shop release.
+-- Plan: `00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md` §0/§10 W1→W2→W3; handbook updated with test buttons/recovery. No P0/P1 restart.
+-- Shop: no source/schema/data/Run/Save/deploy mutation; fresh v31 four-source hashes match Session34. Deployment4 remains dated Session34 evidence. Root v31/Index/P1Journal unchanged. First real P1 Add remains to observe when a real item exists.
+-- Closed: Pending reserves; Cancel releases only own claim; only Instock sells, Auction unavailable; Shipping Cost=shop subsidy; CLIENT reused; Facebook off-label. Price/SALES/Meta/R2 retained.
+-- Open: Google authorization and real runtime acceptance; focused review; partial journal/derived edit/conflicting external edit/lost device ID manual recovery. Script lock cannot prevent owner direct Sheets edits. W2 CLIENT/snapshot/Label/print absent; Label later=Missing label.
+-- Evidence: `04 Design Tools/logs/W1-20261003-01/result.md`, revision.json, diff/, changes.csv, issues.md, UNDO.md, REVIEW-ASTRA-HIGH.md. Candidate local v32 stored there; authoritative root source stays production v31.
+-- Rules/history: AGENTS/CLAUDE/master §§2,5,6,9 +§5.2.1; decisions_20261004.csv; HANDOFF_2026-10-04.md; historical HANDOFF_2026-09-28.md and Implementation log appended Session36. P1 production undo stays P1-20261003-03/UNDO.md; Session35 PLAN-20261003-01 retained.
++### 1. Add / Cart / Orders / Label (Stream B) — P1 LIVE; W1 local/Google test ready for focused review
++- Status: W1 v32 core implementation + isolated-Google acceptance PASS. Six synthetic orders/four unique SALES; real partial Hold/SALES retry, two-tabs one-copy concurrency, Cancel/reload/recovery, SHOP/Shopee/single, Auction/shared guards/external conflict, typed SALES/footer/formulas verified. W1 IN PROGRESS: critical review pending.
++- Next ONE step: GPT-6 Astra / High focused money/stock/security review against exact revision; no self-switch/new agent/chat. Then address focused findings; no W2/shop release in this chat.
++- Plan: `00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md` §0/§10; handbook/README updated. No P0/P1 restart.
++- Shop: root production v31 four files unchanged; no source/schema/data/Run/Save/deploy mutation. Fresh shop baseline is Session36 read-only evidence; deployment4 remains dated Session34 evidence. First real P1 Add observation still pending.
++- Test: exact isolated Sheet13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM and project1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd. Seven tabs now; saved source/readback; W1 usable /dev HEAD only. No numbered deployment updated; prior /exec is not current W1 proof. Fixture/recovery helpers must not rerun blindly.
++- Closed rules: Pending reserves; Cancel only own order; only Instock sells/Auction unavailable; SALES Shipping Cost=shop subsidy separate from customer shipping; CLIENT reused/Facebook off Label; price/SALES/Meta/R2 preserved.
++- Limits: focused review pending; max-cart/quota/latency and multi-cell/UID/menu trigger coverage not all tested on Google. Owner can edit Sheets directly; corrupt journal/partial derived edit/external conflict/lost ID need manual reconciliation. W2 CLIENT/snapshot/Label/print absent, Label later=MISSING.
++- Evidence/revision: `04 Design Tools/logs/W1-20261004-01/result.md`, revision.json, diff/, google-final.xlsx, google-assertions.json, changes.csv, implementation.md, UNDO.md, REVIEW-ASTRA-HIGH.md; W1-20261004-01/v32@AECC03651A1CD7EC62650EF1611582E4B77580EB8629F68B4A6ABE17D18AC2D3. Frozen full implementation +14 groups/1,032 injected positions/6 regressions at W1-20261003-01.
++- History: AGENTS/CLAUDE/master §§2,5,6,9 +§5.2.1; HANDOFF_2026-10-04.md and historical HANDOFF_2026-09-28.md/Implementation log appended Session37; Session35 PLAN-20261003-01 retained. P1 production undo remains P1-20261003-03/UNDO.md.
+ 
+ ### 2. Meta catalog feed / R2 images — v29 pipeline LIVE, plan closed (S0–S4 DONE 2026-10-02)
+ - Verified live 2026-10-02 00:3x +07 (Meta connector): feed 1048143251023664 pulled daily 2026-09-26→10-01 05:50 Bangkok, all `succeeded_with_warnings`, 1,342 detected = 1,342 persisted, 0 invalid, 1 warning (3 all-caps titles, should_fix only). Next pull 2026-10-02 ~05:50.

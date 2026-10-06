@@ -1,0 +1,32 @@
+--- C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-02\before\STATE.md
++++ C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\00 Docs\STATE.md
+@@ -1,17 +1,17 @@
+ # STATE — OWARIN STORE (read this FIRST; open other files only when a line below points to them)
+ 
+-จัดทำ: 2026-10-03 05:51 +07 — Stream B P1 isolated Google test status updated; other streams retained from the 2026-10-02 snapshot. Re-verify live sources before acting on any number.
++จัดทำ: 2026-10-03 21:17 +0700 — Stream B P1 focused rereview and isolated R1–R4 updated; other streams retained from the 2026-10-02 snapshot. Re-verify live sources before acting on any number.
+ Rule: this file is OVERWRITTEN (never appended) at the end of every session. Detail goes to the dated HANDOFF/log, not here. Keep ≤ 80 lines.
+ 
+ ## Streams
+ 
+ ### 1. Add / Cart / Orders / Label (Stream B) — P1 NO-GO for shop
+-- Status: Sessions 31–32 local R1–R4 candidate and VM regressions pass against frozen Session 30 reproduction. Owner saved three staged files in separate Apps Script; fresh editor readback matched source hashes. Isolated `/dev` normal Add and same-ID reload/retry pass with before/after Sheet exports; Google R1–R4 fault injection not run. Shop promotion remains NO-GO. Current local candidate SHA256 Code `695A2EAA4FB9...`, webapp `6168CEA9DE2B...`, Index `F87ADF6B67B0...`.
+-- Shop untouched: no ADD REQUESTS / ORDERS / AUDIT LOG tabs (checked 2026-09-30); no source/schema/data/deploy change.
+-- Next ONE step: GPT-6 Astra / High focused integrity rereview of the exact candidate/test hashes and isolated evidence before any separately approved shop migration; document any remaining Google fault-injection gate. No shop migration yet.
++- Status: Session33 rereview found R1 replay provenance/cache and R3 non-string coercion gaps; repaired locally. Frozen before→after and API/UI failure/retry suites PASS. Actual isolated Google R1–R4 PASS; final helper-free source Save/readback matched exact hashes. Candidate SHA256 Code `279140CB27CF...`, webapp `057840A5F2E9...`, Index `5ECE912BC9AE...`. Shop promotion remains NO-GO.
++- Shop untouched this session; schema absence evidence is historical (2026-09-30), not a fresh production check. No source/schema/data/deploy change or installed runtime journal/Orders/reservation claim.
++- Next ONE step: separately review current-shop source rebase/pairing plus journal schema migration before a promotion decision; do not overwrite newer Meta/catalog work with this older candidate.
+ - Open: lost-ID recovery (new tab/device) is manual journal↔inventory reconciliation; P2 = stable identity, shared reservation guard, order-owned Cancel, idempotent SALES/Order ID.
+ - Owner rules (closed, do not re-ask): Shipping Cost = shop subsidy; Auction already sold/unavailable; Pending reserves stock; Cancel releases only its own order's reservation; reuse CLIENT; Facebook Account never on Label.
+-- Detail: `00 Docs/HANDOFF_2026-09-28.md` (Sessions 20–32, tail of file), `00 Docs/HANDOFF_2026-10-03.md`, `00 Docs/IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md`, evidence `04 Design Tools/logs/P1-20261003-01/`.
++- Detail: `00 Docs/HANDOFF_2026-09-28.md` (Session 33, tail of file), `00 Docs/HANDOFF_2026-10-03.md`, `00 Docs/IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md`, evidence `04 Design Tools/logs/P1-20261003-02/review.md` (prior package preserved).
+ 
+ ### 2. Meta catalog feed / R2 images — v29 pipeline LIVE, plan closed (S0–S4 DONE 2026-10-02)
+ - Verified live 2026-10-02 00:3x +07 (Meta connector): feed 1048143251023664 pulled daily 2026-09-26→10-01 05:50 Bangkok, all `succeeded_with_warnings`, 1,342 detected = 1,342 persisted, 0 invalid, 1 warning (3 all-caps titles, should_fix only). Next pull 2026-10-02 ~05:50.
+@@ -38,5 +38,5 @@
+ 
+ ## Housekeeping
+ - DONE 2026-10-01/02 (by OWARI in PowerShell): HANDOFF.md + HANDOFF_2026-09-12/13/14/18/20/22/23/24/25/29 moved to `00 Docs/_archive/handoffs_old/` (11 files, verified by folder listing 2026-10-02). `HANDOFF_2026-09-29.md` was a byte-identical prefix of 09-28, so nothing was lost.
+-- Current handoffs for the Add/Cart stream: `HANDOFF_2026-09-28.md` (Sessions through 32, history preserved) and the concise `HANDOFF_2026-10-03.md`.
++- Current handoffs for the Add/Cart stream: `HANDOFF_2026-09-28.md` (Sessions through 33, history preserved) and the concise `HANDOFF_2026-10-03.md`.
+ - Still pending: misplaced `00 Docs/logs/` copy of older handoffs and `_to_delete/` leftovers (OWARI to clear); stream 5 status unreviewed.

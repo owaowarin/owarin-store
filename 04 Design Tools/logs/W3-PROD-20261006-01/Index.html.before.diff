@@ -1,0 +1,11 @@
+--- local-v31/Index.html
++++ fresh-production/Index.html
+@@ -355,7 +355,7 @@
+           </div>
+         </div>
+         <div class="cart-row" id="cartChHintRow" style="display:none">
+-          <span class="hint">SHOPEE: ราคาที่กรอกจะถูกแปลงกลับฐานหน้าร้านอัตโนมัติ (÷1.2 −50)</span>
++          <span class="hint">SHOPEE: ราคาที่กรอกจะถูกแปลงกลับฐานหน้าร้าน��ัตโนมัติ (÷1.2 −50)</span>
+         </div>
+         <div class="cart-row"><span>Subtotal</span><span id="cSub">฿0</span></div>
+         <div class="cart-row">

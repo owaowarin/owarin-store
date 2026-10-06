@@ -1,0 +1,15 @@
+{
+  "Created": "2026-09-23 01:28:09 +07:00",
+  "SourceReport": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\baseline_20260922-234553\\reports-v2",
+  "PriorityProposals": 35,
+  "ByAction": {
+    "ADD_PRODUCT_ID_ALIAS": 9,
+    "ADD_PRODUCT_ROUTE_OVERRIDE": 6,
+    "ADD_TYPE_ROUTE": 14,
+    "OWNER_CONFIRM_PAGE_SEQUENCE": 5,
+    "SET_SHEET_TYPE_THEN_USE_ROUTE": 1
+  },
+  "TypeRouteProposals": 2,
+  "Approved": 0,
+  "Mutations": 0
+}

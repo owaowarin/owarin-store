@@ -1,0 +1,2 @@
+PASS before fix: legacy GZIP decoder throws exact Google MIME failure; corrected decoder succeeds.
+PASS before fix: derived callback write error incorrectly reaches DONE; remaining.test verifies corrected NEEDS_REVIEW.

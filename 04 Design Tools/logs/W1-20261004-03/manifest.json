@@ -1,0 +1,598 @@
+{
+  "revision": "W1-20261004-03/v33@1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20",
+  "time": "2026-10-04 05:51:05 +0700",
+  "files": {
+    "04 Design Tools/logs/W1-20261004-03/attempts/build-01.cjs": {
+      "bytes": 6827,
+      "sha256": "0D5DA4F5D6C9AC7DEB85AFD8238C3AB05CDE52DD902AB61AAF72BBD42D65292A"
+    },
+    "04 Design Tools/logs/W1-20261004-03/attempts/bulk-before-2-W1Orders.gs": {
+      "bytes": 31817,
+      "sha256": "60419506306AACB149DB147DC42B6694410861E8A73F8D4408AE275871B16B36"
+    },
+    "04 Design Tools/logs/W1-20261004-03/attempts/verify-google-before-array-normalization.py": {
+      "bytes": 3650,
+      "sha256": "D9B861B2972518B2CDC7AD30AB89C6C67B73C349E17FEF63F03E562DDE70223A"
+    },
+    "04 Design Tools/logs/W1-20261004-03/audit-final.py": {
+      "bytes": 1301,
+      "sha256": "CEC3CF784BCCC104E161F9E8C400A813854545D5E41F3B96D2AD0F5EF37C8415"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/00 Docs/HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "bytes": 27102,
+      "sha256": "3C99AA898E53312A8A7B473D3001CF094A9856122B07B0FF6669747F754E5B2E"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/00 Docs/HANDOFF_2026-10-04.md": {
+      "bytes": 4521,
+      "sha256": "357DA176BEE9613B901CA6F2C0B298BEEC9D1F9EECB4F64465DC36186521AA5A"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/00 Docs/IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "bytes": 136285,
+      "sha256": "8C1DF6B13D2F98EB431052DC2872DF52720B3C1857AD5B259FB003A8042BA201"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "bytes": 66747,
+      "sha256": "E214733612F8BCA59CD706141352FEE81C7AF367C2E99383095B1651F35E3AB1"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/00 Docs/STATE.md": {
+      "bytes": 9937,
+      "sha256": "FC6D252B62F57D869046E910A313853748D3D19B9F7F8EF4BC8F81A69D6D556C"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/03 Apps Script/Web App/README.md": {
+      "bytes": 17979,
+      "sha256": "29F7849660DA99529E27AB89D46665FA7F344C5757472F70EC78DF79914E337F"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/decisions_2026-10-04.csv": {
+      "bytes": 228,
+      "sha256": "3C9348F1AEF12B89465DC7C108D24357DF481B41AB993C45EE0886280C763097"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/candidate/Code_v33.gs": {
+      "bytes": 183847,
+      "sha256": "80ADCDFFA51C9E913B751ED121803A929BA2E130260EE563CE2A482E67EFECFE"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/candidate/fb-catalogue.test.js": {
+      "bytes": 4236,
+      "sha256": "C5379A0B78EE5E3267B12AAD01B5AAE7014672E63DCE23047DCE39F86FE8175B"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/candidate/image-url.test.js": {
+      "bytes": 2966,
+      "sha256": "0151CBFB03788D27A60B072A94B6335D4DE2B8927ED15F9EBAF361E9E299568C"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/candidate/Index.html": {
+      "bytes": 116471,
+      "sha256": "F020E3B47A3337608B1249B8C6CECC113191AA473288B4B11DC2537CA87EE8B0"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/candidate/Index.test.js": {
+      "bytes": 826,
+      "sha256": "3BAAC3C2181C044E9976C22AB79E1326F4963FF45910855B6DE9D31EABE1AB99"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/candidate/meta-pipeline.test.js": {
+      "bytes": 19682,
+      "sha256": "C7E426605CD54D18A4A61F61152E60A4A162B170B983196C708D58F38274CD79"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/candidate/p1-add.test.cjs": {
+      "bytes": 14331,
+      "sha256": "C457DBBDACC294E93BF28EF9D80661A3C82AE6C386075FEA8C74C314726A2037"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/candidate/p1-ui.test.cjs": {
+      "bytes": 12107,
+      "sha256": "06804F2F2CD571AC583952BDF11B9D01CE79710534549A36997327CDF40056FF"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/candidate/R2Upload.gs": {
+      "bytes": 10488,
+      "sha256": "B3219C742E03DF97283AA0DB686D9D912303A2F2E1F43B9EBDF2E8FB7EECD960"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/candidate/W1Orders.gs": {
+      "bytes": 30161,
+      "sha256": "946CF5D9BAC3F8DA0A34B9328FF6D975CF7B6081530C6F7BB57D53AF55CA32DE"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/candidate/WebApp_v33.gs": {
+      "bytes": 32334,
+      "sha256": "A3E109E259DDA3EFF98F47585D5DC1590F856D3CBF1B051CE795022FADD4A91E"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/close.cjs": {
+      "bytes": 20231,
+      "sha256": "76019E29BDB8F9AD668371649A7559121B1B6AA15808612F675797E906E2CFD5"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/diff/candidate-Code_v33.gs.diff": {
+      "bytes": 6454,
+      "sha256": "A3A5AA6B682758318E5D21414EFC2719F93E1EF09BBC2A3BFA74391381CAF188"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/diff/candidate-Index.html.diff": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/diff/candidate-W1Orders.gs.diff": {
+      "bytes": 16191,
+      "sha256": "C63B6AFBD246F23016F080FB91EA048EABA5382FA2018688896D18EF01FD81BC"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/diff/candidate-WebApp_v33.gs.diff": {
+      "bytes": 2517,
+      "sha256": "6B6773DE68F03BC339F61868476A4B26FA9F02D515F35E2A6E0569EF1482CB6E"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/focused-review.md": {
+      "bytes": 2094,
+      "sha256": "CC149696E5722CA0C58BADFF7528A393CA8EB39CB9847B581586671669A17F67"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/freeze.cjs": {
+      "bytes": 5431,
+      "sha256": "A8C6C6E3C74846DF49BF655C99951C6B565A90610E7E01C688A405EBBA915D31"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/google-source-readback/W1Orders.gs": {
+      "bytes": 31584,
+      "sha256": "2A84861EA237D5DDDDADCD1ECFC8A8FF92D0FB078FE7DB75B5B6C6352CEE4C4E"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/google-source-readback/W1Qa.gs": {
+      "bytes": 6091,
+      "sha256": "C2BF5E0DFC07CFA500F898F0BD580CBC9BEFB0E557D8EDA04A1B200C74E5AD0D"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/harness.cjs": {
+      "bytes": 4595,
+      "sha256": "36A1BE530FA0EA94612725DA0A5C257B1B6C23C72B5682FB6A989F7E8EDCC842"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/helpers.gs": {
+      "bytes": 5154,
+      "sha256": "667E5B75332D4C8EBA87F6D5DE886EB6E658D17A87CE4D94AA58BE2985BC802A"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/remaining.test.cjs": {
+      "bytes": 4633,
+      "sha256": "591110489139795AF3DA2617E8D53D682F2ED020B963A9EBDAB0B37D4D383189"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/revision.json": {
+      "bytes": 834,
+      "sha256": "2835978E91D7F6EA5D7260BA1028C24F63C8DB063E0D1BC95D34A8E46788FA74"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/RUNTIME-ASTRA-HANDOFF.md": {
+      "bytes": 1068,
+      "sha256": "2B2715A8C473C8FE7C2D64475A39E6254757A34B28B6B48CA05BBC6C1FF7F7D8"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/schema.json": {
+      "bytes": 5126,
+      "sha256": "B59B676FC8D05B8990E0434AA197F35FCB0B06C82AEB692E48434EFBAFB17398"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/serve.cjs": {
+      "bytes": 1935,
+      "sha256": "2DA1C624256C96975E8A8F335E1F0363F0171A80BE7C5B66565797B367F70DEB"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/stage.cjs": {
+      "bytes": 2253,
+      "sha256": "2AD9DCE759CA7528B0EEA142CECB78B0E2B6B91D2586ABD5DDA539111F9179AC"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/test-runtime/appsscript.json": {
+      "bytes": 457,
+      "sha256": "5BE1C5B8A215FE3BCED90564B7C083989A2B71E182D8B8AA0046BB9A756A8D4A"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/test-runtime/Code.gs": {
+      "bytes": 183821,
+      "sha256": "E060FEBD97734204B6BDC8D95C68E29F9908AD5F74D8BABD4F27E6A0B5F605DA"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/test-runtime/Index.html": {
+      "bytes": 117521,
+      "sha256": "7CF36628442897133292420D40883FD8C3DF103E85F279512AC67C9EACD58B36"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/test-runtime/W1Orders.gs": {
+      "bytes": 31100,
+      "sha256": "639F5D0675E1D69C4F1EAFDA3975519C7544F3F49E186656DAAA2E0D9AC1F020"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/test-runtime/W1Qa.gs": {
+      "bytes": 4955,
+      "sha256": "9AEE7D71A04BB968F3F260702E15ABF775F540BC86AD7F2D9D99780FF306FFC7"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/test-runtime/Webapp.gs": {
+      "bytes": 32411,
+      "sha256": "029E11F9E7FD06647521D0A028A5229CCF16F5730383F8250077BCA4BA3EAD2F"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/tests/candidate-fb-catalogue.test.js.txt": {
+      "bytes": 44,
+      "sha256": "17DA8C7A29C28E8FC9B19C1E59DFCF2B1669B2FF282FA35DFEC501FED670C6A4"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/tests/candidate-image-url.test.js.txt": {
+      "bytes": 22,
+      "sha256": "1F916329B523A657847D32F895EF969425289E08D8FEAD5440F5689B98201154"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/tests/candidate-meta-pipeline.test.js.txt": {
+      "bytes": 123,
+      "sha256": "2193227FBFF347B4F98770621076DD73734FB86D1C51AC8D8448DF79FE2245E8"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/tests/candidate-p1-add.test.cjs.txt": {
+      "bytes": 1327,
+      "sha256": "788D154C95937D99A1AD42BB40980F8EE375BD43FEA93EE256AE1D9892D1522D"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/tests/remaining.test.cjs.txt": {
+      "bytes": 456,
+      "sha256": "364B7D7AFA187AB60BBBD8124DF48AE68B5DC781947B9690B48EE26FBDA90C8C"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/tests/w1.test.cjs.txt": {
+      "bytes": 1337,
+      "sha256": "6C9E1DE8769DEF8CDE0546DAF274878BCCA3EA067423E281D9F415E264C7ECBB"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/w1.test.cjs": {
+      "bytes": 9710,
+      "sha256": "C42F053B67E3DFAC417E0C3251E4FE370C08B68304F06FD7D00A15FEA54F6B2B"
+    },
+    "04 Design Tools/logs/W1-20261004-03/before/04 Design Tools/logs/W1-20261004-03/W1CloseQa.gs": {
+      "bytes": 4955,
+      "sha256": "9AEE7D71A04BB968F3F260702E15ABF775F540BC86AD7F2D9D99780FF306FFC7"
+    },
+    "04 Design Tools/logs/W1-20261004-03/build.cjs": {
+      "bytes": 7747,
+      "sha256": "4AE4B72D9837F0A7C98948ECF7E30F7FE9E06F4D1DBEF5CE3F67CB8B6E23B2D3"
+    },
+    "04 Design Tools/logs/W1-20261004-03/bulk-attempts.json": {
+      "bytes": 689,
+      "sha256": "A2BBB3BBB997C50F8D26D384BEB9626363C135D8804BC5D4B408A84ADFAC6D85"
+    },
+    "04 Design Tools/logs/W1-20261004-03/bulk-fix-2.cjs": {
+      "bytes": 2843,
+      "sha256": "1EFB6A5B762C63982A986C88B4232FFC92AA26B756486F766AFA17E1807CCC1C"
+    },
+    "04 Design Tools/logs/W1-20261004-03/bulk-fix.cjs": {
+      "bytes": 1874,
+      "sha256": "136D213410B0F925433EB252A6218D4CE92BD9EE00F84659BA51667C0084D09A"
+    },
+    "04 Design Tools/logs/W1-20261004-03/candidate/Code_v33.gs": {
+      "bytes": 183847,
+      "sha256": "21E7467238CA1576B50497EC4BE39C9FD56A611956CB887E78362162F770B392"
+    },
+    "04 Design Tools/logs/W1-20261004-03/candidate/fb-catalogue.test.js": {
+      "bytes": 4236,
+      "sha256": "A8A3488353259A3694B816A0C4DA95259A5409953A5AFF4543B0530313F270A3"
+    },
+    "04 Design Tools/logs/W1-20261004-03/candidate/image-url.test.js": {
+      "bytes": 2966,
+      "sha256": "1CBCF7993DD99DCF4A6AAE5E8AF2A016FBDF0C6F1A934670ABAEFA8247A17A1F"
+    },
+    "04 Design Tools/logs/W1-20261004-03/candidate/Index.html": {
+      "bytes": 116471,
+      "sha256": "F020E3B47A3337608B1249B8C6CECC113191AA473288B4B11DC2537CA87EE8B0"
+    },
+    "04 Design Tools/logs/W1-20261004-03/candidate/Index.test.js": {
+      "bytes": 826,
+      "sha256": "3BAAC3C2181C044E9976C22AB79E1326F4963FF45910855B6DE9D31EABE1AB99"
+    },
+    "04 Design Tools/logs/W1-20261004-03/candidate/meta-pipeline.test.js": {
+      "bytes": 19682,
+      "sha256": "806F35E766F40C370F4E5A56E5730B3D5BA2314F29FAE44C09D76AC5E4829FA2"
+    },
+    "04 Design Tools/logs/W1-20261004-03/candidate/p1-add.test.cjs": {
+      "bytes": 14331,
+      "sha256": "F607FC4F7C14D277D62030EF1C0EE168A9E233E275379915807BC010727E8649"
+    },
+    "04 Design Tools/logs/W1-20261004-03/candidate/p1-ui.test.cjs": {
+      "bytes": 12107,
+      "sha256": "06804F2F2CD571AC583952BDF11B9D01CE79710534549A36997327CDF40056FF"
+    },
+    "04 Design Tools/logs/W1-20261004-03/candidate/R2Upload.gs": {
+      "bytes": 10488,
+      "sha256": "B3219C742E03DF97283AA0DB686D9D912303A2F2E1F43B9EBDF2E8FB7EECD960"
+    },
+    "04 Design Tools/logs/W1-20261004-03/candidate/W1Orders.gs": {
+      "bytes": 31931,
+      "sha256": "D131D597CD7C2A72320F0F3088986E4F89337FA48C432F4AB13CB3DFD4EF208F"
+    },
+    "04 Design Tools/logs/W1-20261004-03/candidate/WebApp_v33.gs": {
+      "bytes": 32411,
+      "sha256": "029E11F9E7FD06647521D0A028A5229CCF16F5730383F8250077BCA4BA3EAD2F"
+    },
+    "04 Design Tools/logs/W1-20261004-03/cell-limit.cjs": {
+      "bytes": 2114,
+      "sha256": "198B8337B0B13F4BEAD9CB4B5E18C6FD98D5723377342D345BAD7B98A625E8A0"
+    },
+    "04 Design Tools/logs/W1-20261004-03/changes.csv": {
+      "bytes": 63049,
+      "sha256": "B195FDC029B75D0BF3A026904AB82195DACCB1E7D847E8439C7F59A86E6556FC"
+    },
+    "04 Design Tools/logs/W1-20261004-03/check.cjs": {
+      "bytes": 658,
+      "sha256": "454BC5E613CE5FEBBD9910C45538C82C76A1B3B6AC6D70733B8F5D5AB1FE9D83"
+    },
+    "04 Design Tools/logs/W1-20261004-03/close.cjs": {
+      "bytes": 20575,
+      "sha256": "43966425AB91B25C78CE5E183D2CD9D2587831693ADE72C16D0B95FD72386DEF"
+    },
+    "04 Design Tools/logs/W1-20261004-03/COMPACT.md": {
+      "bytes": 1234,
+      "sha256": "5B9AE2B399D8891393D1614420B9D072597A54DFD6A750E635D4EAFA83F1139F"
+    },
+    "04 Design Tools/logs/W1-20261004-03/diff/candidate-Code_v33.gs.diff": {
+      "bytes": 6454,
+      "sha256": "A3A5AA6B682758318E5D21414EFC2719F93E1EF09BBC2A3BFA74391381CAF188"
+    },
+    "04 Design Tools/logs/W1-20261004-03/diff/candidate-Index.html.diff": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261004-03/diff/candidate-W1Orders.gs.diff": {
+      "bytes": 20121,
+      "sha256": "EAFC10D84F5204A979C9C4ED898D3175540D7990E3939C39CD3AB19C8D66D680"
+    },
+    "04 Design Tools/logs/W1-20261004-03/diff/candidate-WebApp_v33.gs.diff": {
+      "bytes": 2517,
+      "sha256": "6B6773DE68F03BC339F61868476A4B26FA9F02D515F35E2A6E0569EF1482CB6E"
+    },
+    "04 Design Tools/logs/W1-20261004-03/final-notes.cjs": {
+      "bytes": 4013,
+      "sha256": "B0640A7B0C4A52CAADA069102D70DF4C493E37DF1E90567F838958C005818AF5"
+    },
+    "04 Design Tools/logs/W1-20261004-03/finish-fix.cjs": {
+      "bytes": 1978,
+      "sha256": "0B9B77EC3C0D17FB1F535E0EF436EA77B0B3892397299123B43CB8226253DF30"
+    },
+    "04 Design Tools/logs/W1-20261004-03/focused-review.md": {
+      "bytes": 2094,
+      "sha256": "0E7E388D36BD7E25DDE67219EA1E57D6B00FED9439214194A819798B9483F10E"
+    },
+    "04 Design Tools/logs/W1-20261004-03/freeze.cjs": {
+      "bytes": 5444,
+      "sha256": "B118901C422350460057BAA6F34038E448767B2AFFE1FAF91E29E8AF6F37F5A7"
+    },
+    "04 Design Tools/logs/W1-20261004-03/fresh-source-before/Code.gs": {
+      "bytes": 183842,
+      "sha256": "EA6A1139E14B022EB1EF88C7A8F4DDE79BBAE94A4BC9F52F03A0B6F0130EC519"
+    },
+    "04 Design Tools/logs/W1-20261004-03/fresh-source-before/Index.html": {
+      "bytes": 117464,
+      "sha256": "640C72A84EE4FAFA97D86F3F5BDA94A00D10B37F206ECEF072D4DC979216F42B"
+    },
+    "04 Design Tools/logs/W1-20261004-03/fresh-source-before/W1Orders.gs": {
+      "bytes": 26208,
+      "sha256": "3596CCE53149A15A5A58D226D1525200C0129A5901FDDDE991E09C9D48F8ACC2"
+    },
+    "04 Design Tools/logs/W1-20261004-03/fresh-source-before/W1Qa.gs": {
+      "bytes": 3381,
+      "sha256": "56A2398B25C294071F3FE5B985C83C858E82A39081544F0A6B28D7B7C1487176"
+    },
+    "04 Design Tools/logs/W1-20261004-03/fresh-source-before/Webapp.gs": {
+      "bytes": 32487,
+      "sha256": "3E371C14DA33E66A89E6DBF8B2A10154AD76C7F37F21018A6486E334B91CBEE3"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-assertions.json": {
+      "bytes": 943,
+      "sha256": "25625494A69ED8208FBE69A34F1A128196F152456A2A897348588BAFAA09A0E9"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-before.xlsx": {
+      "bytes": 66147,
+      "sha256": "554DB4C71252D7F1716BF9B2D2C74779A46DC17F2B0CB716577E5877A7858541"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-bulk-timeout-2.xlsx": {
+      "bytes": 381952,
+      "sha256": "6DAEC9F1881A098E55B9A8AA8E8D293E0FFE179A1C810D69238624674F8DB08D"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-bulk-timeout-3.xlsx": {
+      "bytes": 511809,
+      "sha256": "EAE913679FDB08263499015A64973CAD677B15A15A1F733219115DE676775087"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-bulk-timeout-4.xlsx": {
+      "bytes": 591642,
+      "sha256": "F8E7CBDCDB6557BBD20A9862186EE0EBDC708FA43116F5B2945E238BFE8108A3"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-bulk-timeout.xlsx": {
+      "bytes": 272999,
+      "sha256": "B1C9FCF03296D2365DA3EAF96D5AC9382634F51A21DD37FB6AA5E3125BF0E1CF"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-close-attempt.xlsx": {
+      "bytes": 72202,
+      "sha256": "8724AD970078A40DC5BD9EE9025D1F0E90C32F5756D0500BB5F1CC5E32DC9B6A"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-final.xlsx": {
+      "bytes": 631884,
+      "sha256": "2C6956E71D3974F8A24854174AFD636EF7E655D61DC2D8324B18285E716D33C9"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-proof.png": {
+      "bytes": 103238,
+      "sha256": "2CA49149280F9DC315F5BA80AF9736131E66E97C6197DB0384DB87DF4E3911B8"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-source-readback/Code.gs": {
+      "bytes": 183821,
+      "sha256": "E060FEBD97734204B6BDC8D95C68E29F9908AD5F74D8BABD4F27E6A0B5F605DA"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-source-readback/Index.html": {
+      "bytes": 117528,
+      "sha256": "CEAD6787B9EF52D5B94A63381DC4FB4CBB64CFC367649519FA97C1AE712B6803"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-source-readback/W1Orders.gs": {
+      "bytes": 31931,
+      "sha256": "D131D597CD7C2A72320F0F3088986E4F89337FA48C432F4AB13CB3DFD4EF208F"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-source-readback/W1Qa.gs": {
+      "bytes": 6159,
+      "sha256": "E0BFC63EB423BB14C2567661D562C8EF04E210D66711807CF7F8F3C5A58A5FEC"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-source-readback/Webapp.gs": {
+      "bytes": 32411,
+      "sha256": "029E11F9E7FD06647521D0A028A5229CCF16F5730383F8250077BCA4BA3EAD2F"
+    },
+    "04 Design Tools/logs/W1-20261004-03/google-ui.md": {
+      "bytes": 472,
+      "sha256": "B088A2611F16BEDD16A24CBE463789316B98BC9DA384FE86E02510FDFF53BA56"
+    },
+    "04 Design Tools/logs/W1-20261004-03/gzip-fix.cjs": {
+      "bytes": 2753,
+      "sha256": "909E102A61B60DC434FEC88FEE59C67122B03697E1A1ADCF4DC3E2D121AF5C2D"
+    },
+    "04 Design Tools/logs/W1-20261004-03/harness.cjs": {
+      "bytes": 4685,
+      "sha256": "0E27C514699F7BD3C1288140DC14915306807C03B928B1FF17BABF3BBEF84333"
+    },
+    "04 Design Tools/logs/W1-20261004-03/helpers.gs": {
+      "bytes": 5638,
+      "sha256": "90965F577FF2C29F005B81D6FE651B499E7B94C10FB8AD9154E45A36BDEAADA9"
+    },
+    "04 Design Tools/logs/W1-20261004-03/implementation.md": {
+      "bytes": 65019,
+      "sha256": "5F914875BFD99071BAAA28DF9E1661D8B01D3460F0CB65449C2C210935B3A0D9"
+    },
+    "04 Design Tools/logs/W1-20261004-03/prepare-review.cjs": {
+      "bytes": 3874,
+      "sha256": "889D4179DEAAC66133434C01E25BB7D407EA6BAA4BE09DCBCBA097A43A87CEAF"
+    },
+    "04 Design Tools/logs/W1-20261004-03/qualify-runtime.cjs": {
+      "bytes": 3367,
+      "sha256": "897D67C284DD75E1C8A076041F64CB699D314B22658B040C71CD9141AA91025C"
+    },
+    "04 Design Tools/logs/W1-20261004-03/remaining.test.cjs": {
+      "bytes": 5664,
+      "sha256": "7B23AC0843036310C17B346C9FC108F6A5FF0469C8137ABB17A1F3282B147978"
+    },
+    "04 Design Tools/logs/W1-20261004-03/repro-final.cjs": {
+      "bytes": 1504,
+      "sha256": "66FA5E010BC17C705AA82FC2193FFE6A99F529DF48FBE204C6011E7B2DA68294"
+    },
+    "04 Design Tools/logs/W1-20261004-03/request-outcomes.csv": {
+      "bytes": 2852,
+      "sha256": "3AD673C26D476B57159379E643EFD7C232B6751BC199E6439D246B66092FCA0E"
+    },
+    "04 Design Tools/logs/W1-20261004-03/request-outcomes.json": {
+      "bytes": 4529,
+      "sha256": "5807AF92534F90C3FB2F9EFF0714D8CDDF1D9161568A15919F811B88F365DEC2"
+    },
+    "04 Design Tools/logs/W1-20261004-03/result.md": {
+      "bytes": 5176,
+      "sha256": "DD31523F66E0E286C90846370CE040440ADBB1323D5B83E5893A08C858FE932E"
+    },
+    "04 Design Tools/logs/W1-20261004-03/REVIEW-ASTRA-HIGH.md": {
+      "bytes": 2061,
+      "sha256": "75A90738D396B58D9C044F26E06294F09451D1291DEAF71FA6BA9172973EBA7C"
+    },
+    "04 Design Tools/logs/W1-20261004-03/revision.json": {
+      "bytes": 834,
+      "sha256": "0F75BB504BBDA72AF889F7684DC96A4D16150EF7B3BBAD26D9F7F271FCD016FD"
+    },
+    "04 Design Tools/logs/W1-20261004-03/RUNTIME-ASTRA-HANDOFF.md": {
+      "bytes": 2044,
+      "sha256": "05B76A6DEA1CBF5878ED1B0FD04831535FDEC6DC728338B910237C291C218FE7"
+    },
+    "04 Design Tools/logs/W1-20261004-03/schema.json": {
+      "bytes": 5126,
+      "sha256": "B59B676FC8D05B8990E0434AA197F35FCB0B06C82AEB692E48434EFBAFB17398"
+    },
+    "04 Design Tools/logs/W1-20261004-03/serve.cjs": {
+      "bytes": 2363,
+      "sha256": "6C234555C2280A925CCCEB80EBA51D8BFA23E063C59844A07EB8A41D21727567"
+    },
+    "04 Design Tools/logs/W1-20261004-03/source-readback.json": {
+      "bytes": 1327,
+      "sha256": "A807FC0B83F4FD3C27FE8D4EC39802E72D2794E5883933DE01C29883982F882D"
+    },
+    "04 Design Tools/logs/W1-20261004-03/stage.cjs": {
+      "bytes": 2260,
+      "sha256": "36351A9DDFD1CF60A1460440C148D3ABB53C8331D84555B288513652594521FE"
+    },
+    "04 Design Tools/logs/W1-20261004-03/test-runtime/appsscript.json": {
+      "bytes": 457,
+      "sha256": "5BE1C5B8A215FE3BCED90564B7C083989A2B71E182D8B8AA0046BB9A756A8D4A"
+    },
+    "04 Design Tools/logs/W1-20261004-03/test-runtime/Code.gs": {
+      "bytes": 183821,
+      "sha256": "E060FEBD97734204B6BDC8D95C68E29F9908AD5F74D8BABD4F27E6A0B5F605DA"
+    },
+    "04 Design Tools/logs/W1-20261004-03/test-runtime/Index.html": {
+      "bytes": 117528,
+      "sha256": "CEAD6787B9EF52D5B94A63381DC4FB4CBB64CFC367649519FA97C1AE712B6803"
+    },
+    "04 Design Tools/logs/W1-20261004-03/test-runtime/W1Orders.gs": {
+      "bytes": 31931,
+      "sha256": "D131D597CD7C2A72320F0F3088986E4F89337FA48C432F4AB13CB3DFD4EF208F"
+    },
+    "04 Design Tools/logs/W1-20261004-03/test-runtime/W1Qa.gs": {
+      "bytes": 6159,
+      "sha256": "E0BFC63EB423BB14C2567661D562C8EF04E210D66711807CF7F8F3C5A58A5FEC"
+    },
+    "04 Design Tools/logs/W1-20261004-03/test-runtime/Webapp.gs": {
+      "bytes": 32411,
+      "sha256": "029E11F9E7FD06647521D0A028A5229CCF16F5730383F8250077BCA4BA3EAD2F"
+    },
+    "04 Design Tools/logs/W1-20261004-03/tests/candidate-fb-catalogue.test.js.txt": {
+      "bytes": 44,
+      "sha256": "17DA8C7A29C28E8FC9B19C1E59DFCF2B1669B2FF282FA35DFEC501FED670C6A4"
+    },
+    "04 Design Tools/logs/W1-20261004-03/tests/candidate-image-url.test.js.txt": {
+      "bytes": 22,
+      "sha256": "1F916329B523A657847D32F895EF969425289E08D8FEAD5440F5689B98201154"
+    },
+    "04 Design Tools/logs/W1-20261004-03/tests/candidate-meta-pipeline.test.js.txt": {
+      "bytes": 123,
+      "sha256": "2193227FBFF347B4F98770621076DD73734FB86D1C51AC8D8448DF79FE2245E8"
+    },
+    "04 Design Tools/logs/W1-20261004-03/tests/candidate-p1-add.test.cjs.txt": {
+      "bytes": 227,
+      "sha256": "59233B0C260B806D565872F2D1980D9FEA2741C15ED5FF369D4E393F06648051"
+    },
+    "04 Design Tools/logs/W1-20261004-03/tests/cell-limit-before.txt": {
+      "bytes": 162,
+      "sha256": "69C41EBBF3A6DC70486AAEB0E1C2AFF37D1A335D38B0DA5F45DC4A065BC590C5"
+    },
+    "04 Design Tools/logs/W1-20261004-03/tests/lookup-calls.json": {
+      "bytes": 86,
+      "sha256": "1E398FE8CC2A00E4B9122DCDFE0F3510C7AE285E0D63D4AF1BC60860F372ACFA"
+    },
+    "04 Design Tools/logs/W1-20261004-03/tests/remaining.test.cjs.txt": {
+      "bytes": 659,
+      "sha256": "D32D152A164DF606E1BEC506D740727A8592C1D88ED2CED4CC597E186F387D58"
+    },
+    "04 Design Tools/logs/W1-20261004-03/tests/repro-final.txt": {
+      "bytes": 219,
+      "sha256": "57A417627CB491F3E332347A61AC1C0A706B04E4A5A7309F4D85E584D4921C6E"
+    },
+    "04 Design Tools/logs/W1-20261004-03/tests/w1.test.cjs.txt": {
+      "bytes": 1337,
+      "sha256": "6C9E1DE8769DEF8CDE0546DAF274878BCCA3EA067423E281D9F415E264C7ECBB"
+    },
+    "04 Design Tools/logs/W1-20261004-03/transfer-readback.cjs": {
+      "bytes": 1156,
+      "sha256": "4B9DBD38E6340436C2EA14FA808CD61D504A437B60630206C3FE287E5E5036FB"
+    },
+    "04 Design Tools/logs/W1-20261004-03/UNDO.md": {
+      "bytes": 2796,
+      "sha256": "38FD3F24112FA96819A948CB7D780D82936281591938EC54719CA379D0311EBE"
+    },
+    "04 Design Tools/logs/W1-20261004-03/verification.txt": {
+      "bytes": 383,
+      "sha256": "9300F8E216712A5E7FC8535CD56856459D3461E5B9F5CDC0CF9AF82AF86F6889"
+    },
+    "04 Design Tools/logs/W1-20261004-03/verify-google.py": {
+      "bytes": 3792,
+      "sha256": "A05A1EF8D7BB8A87843998AB27ECD2EC6B667E32FA203938A4051E3C2DCFEE95"
+    },
+    "04 Design Tools/logs/W1-20261004-03/w1.test.cjs": {
+      "bytes": 9710,
+      "sha256": "C42F053B67E3DFAC417E0C3251E4FE370C08B68304F06FD7D00A15FEA54F6B2B"
+    },
+    "04 Design Tools/logs/W1-20261004-03/W1CloseQa.gs": {
+      "bytes": 6159,
+      "sha256": "E0BFC63EB423BB14C2567661D562C8EF04E210D66711807CF7F8F3C5A58A5FEC"
+    },
+    "04 Design Tools/logs/W1-20261004-03/work.cjs": {
+      "bytes": 1208,
+      "sha256": "D8F99691943613851891EB630FB2DAFEC1CDB49B3190904AEE5843DF2D69292B"
+    },
+    "00 Docs/STATE.md": {
+      "bytes": 10238,
+      "sha256": "0DE33F9AB3846CF14BB7452D048536CD61729338C31B4C5BC53ACE44D754751F"
+    },
+    "00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "bytes": 67509,
+      "sha256": "122824ED44DA0B202D7ADE19B04539C29D070FD448205EA96B647655A171D3DE"
+    },
+    "00 Docs/HANDOFF_2026-10-04.md": {
+      "bytes": 1947,
+      "sha256": "8408655F5B9906BC7AF5231324F614710D36270880F116BB3780C99B777369AC"
+    },
+    "00 Docs/HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "bytes": 28718,
+      "sha256": "72EB5DAF2749180302F721AD742DCB752D47B822CE4622FD016E5AD5C769FADB"
+    },
+    "00 Docs/IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "bytes": 137334,
+      "sha256": "B4FC343D47FB6170347B580B7FB7746AB1FC7255401BA6B392E7ECBD72908471"
+    },
+    "03 Apps Script/Web App/README.md": {
+      "bytes": 19595,
+      "sha256": "6BB10DCF2044E6DE32211C6254EDE341F9F687C42136A32688C58C41E743B229"
+    },
+    "04 Design Tools/logs/decisions_2026-10-04.csv": {
+      "bytes": 548,
+      "sha256": "E78053F86C1AF68F4BE27CA0E8DAADA6D693F8ABBEA285B2DDBFE83CA09DDBDC"
+    }
+  }
+}

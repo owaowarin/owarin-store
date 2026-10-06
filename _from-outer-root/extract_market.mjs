@@ -1,0 +1,13 @@
+import { FileBlob, SpreadsheetFile } from '@oai/artifact-tool';
+const wb = await SpreadsheetFile.importXlsx(await FileBlob.load('C:/Users/JIN/Downloads/Market Place - Price Check.xlsx'));
+const sh = wb.worksheets.getItem('GAME GUIDE BOOKS');
+const vals = sh.getRange('A1:R1613').values;
+console.log(JSON.stringify(vals.slice(0, 8)));
+const headers = vals[0];
+const idx = Object.fromEntries(headers.map((h,i)=>[h,i]));
+const rows = vals.slice(1).filter(r => r[idx['Item name']]);
+const count = {};
+for (const r of rows) count[r[idx['Rarity']] ?? '(blank)'] = (count[r[idx['Rarity']] ?? '(blank)'] || 0)+1;
+console.log('ROWS', rows.length, 'RARITY', JSON.stringify(count));
+console.log('LAST', JSON.stringify(rows.slice(-5)));
+console.log('PRICE RANGE', rows.map(r=>Number(r[idx['Price']])).filter(Number.isFinite).sort((a,b)=>a-b).slice(0,10), rows.map(r=>Number(r[idx['Price']])).filter(Number.isFinite).sort((a,b)=>a-b).slice(-10));

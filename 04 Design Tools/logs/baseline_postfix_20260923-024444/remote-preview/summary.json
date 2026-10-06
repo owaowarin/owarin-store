@@ -1,0 +1,27 @@
+{
+  "source": "r2:owarin-images/library",
+  "method": "rclone lsf --recursive --files-only --fast-list --format ps; read-only key and size listing",
+  "remote_objects": 2700,
+  "remote_listed_bytes": 795355391,
+  "local_candidate_rows": 2905,
+  "comparison": {
+    "local_only": 436,
+    "remote_only": 231,
+    "size_mismatch": 158,
+    "same_size_not_byte_verified": 2311
+  },
+  "remote_only_by_sheet_status": {
+    "Sold": 160,
+    "NO-SHEET-PID": 52,
+    "Instock": 12,
+    "Auction": 7
+  },
+  "sha256": {
+    "remote-inventory.csv": "74AEB7AAA937A3C629C60BDF1B28B08C2CBC710795B3DB435B398DF724EB5791",
+    "key-size-comparison.csv": "EBB49E9C143A2343259B6105A3B8D39E3BEF27C2DF6EE88834E5870BB5B66594",
+    "reconciled-inventory.csv": "15174799E45692F6D46CA6C8EDF10A5DD6765A57C6E5FB6CAA6B4B4A556DEB06"
+  },
+  "content_hashes_verified": false,
+  "cloud_mutation": false,
+  "publish_authority": false
+}

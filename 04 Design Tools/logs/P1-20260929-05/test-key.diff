@@ -1,0 +1,13 @@
+diff --git a/04 Design Tools/logs/P1-20260929-01/candidate/Index.html b/04 Design Tools/logs/P1-20260929-01/runtime-source/Index.html
+index f33a4c2..7219835 100644
+--- a/04 Design Tools/logs/P1-20260929-01/candidate/Index.html	
++++ b/04 Design Tools/logs/P1-20260929-01/runtime-source/Index.html	
+@@ -571,7 +571,7 @@ var M = { mode: 'add', source: 'GGB', sku: '', row: null, saving: false, soldCha
+ var LAST_ADD = null;
+ var addSuggestionResets = [], addAutoTimers = [];
+ // ponytail: this tab survives reloads; cross-tab recovery needs a server request-status lookup.
+-var ADD_PENDING_KEY = 'owarin.add.pending.1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp.v1';
++var ADD_PENDING_KEY = 'owarin.add.pending.1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd.v1';
+ var addPending = null, addPendingBroken = false;
+ try {
+   var savedAdd = sessionStorage.getItem(ADD_PENDING_KEY);

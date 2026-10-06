@@ -1,0 +1,7 @@
+PASS R1 serialized append: contending mock lock rejects, append after release retains transaction and external event
+PASS R2 multi-row and missing UID audit; failclosed identity unchanged
+PASS R3 100-item compressed create / same-ID replay / journal and lines capacity growth; encoded 3605
+PASS R3 unsupported high-entropy payload rejected before first write
+PASS R4 sort audit plus partial write failclosed / exact-before reconciliation / no blind replay
+PASS R4 swallowed derived-write error blocks DONE; previous error does not cause false failure
+PASS R3 escaped plain line snapshot rejected before intent; compressed journal cannot bypass per-cell bound

@@ -1,0 +1,96 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\candidate\\Code_v32.gs" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-03\\candidate\\Code_v33.gs"
+index 2c582b1..212235a 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\candidate\\Code_v32.gs"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-03\\candidate\\Code_v33.gs"	
+@@ -1,5 +1,5 @@
+ // ============================================================
+-// OWARIN BACK-OFFICE — Code.gs v32 (SP-2 pricing/SKU engine, pairs with WebApp.gs v32)
++// OWARIN BACK-OFFICE — Code.gs v33 (SP-2 pricing/SKU engine, pairs with WebApp.gs v33)
+ // v31 (2026-10-03): durable Add journal, validated money/source/status, committed snapshot replay and formula readback.
+ // v30 (2026-10-02): (1) Identical copies are listed ONCE in META EXPORT: same base title + Publisher + Original
+ //   (cover price) + Condition + Copy Flags -> one row (the first complete copy), quantity_to_sell_on_facebook =
+@@ -264,12 +264,15 @@ function _sp2WriteErrMsg() {
+ }
+ 
+ // ───────────────────── v16: LOCK WRAPPER ─────────────────────
++var _W1_LOCK_HELD = false;
+ function _withLock(fn) {
+   var lock = LockService.getScriptLock();
+   lock.waitLock(30000);
++  _W1_LOCK_HELD = true;
+   try {
+     return fn();
+   } finally {
++    _W1_LOCK_HELD = false;
+     lock.releaseLock();
+   }
+ }
+@@ -1228,7 +1231,7 @@ function _sp2ApplyCore(dryRun, mode, sheetName) {
+   }
+ 
+   if (!dryRun && out.changed) {
+-    _tryWrite("Price", function () { priceCol.setValues(cur); SpreadsheetApp.flush(); });
++    _w1MaintenanceWrite_("SP-2 prices",sheet,priceCol,cur);
+   }
+   return out;
+ }
+@@ -1337,7 +1340,7 @@ function _sp2MigrateFlagsCore(dryRun, sheetName) {
+   }
+ 
+   if (!dryRun && out.filled.length) {
+-    _tryWrite("Copy Flags", function () { flagsRange.setValues(flags); SpreadsheetApp.flush(); });
++    _w1MaintenanceWrite_("Copy Flags",sheet,flagsRange,flags);
+   }
+   return out;
+ }
+@@ -1607,10 +1610,8 @@ function _sp2SuspectAuctionCore(sheetName, dryRun, ratioOverride) {
+       if (sd) sd[out.found[f].idx][0] = "";   // an auction is not a normal sale -> clear the sold date
+       out.changed++;
+     }
+-    _tryWrite("Status → Auction", function () { stRange.setValues(st); });
+-    if (sd) _tryWrite("clear Sold Date", function () {
+-      sheet.getRange(3, COL.soldDate, data.length, 1).setValues(sd);
+-    });
++    _w1MaintenanceWrite_("Status → Auction",sheet,stRange,st);
++    if(sd)_w1MaintenanceWrite_("clear Sold Date",sheet,sheet.getRange(3,COL.soldDate,data.length,1),sd);
+     SpreadsheetApp.flush();
+   }
+   return out;
+@@ -2051,9 +2052,7 @@ function sortInventoryCore_() {
+     return _titleCmp(va, vb);   // v18.1: RESTOCK copies always stay next to their parent volume
+   });
+ 
+-  _tryWrite("sort setValues", function () { range.setValues(data); });
+-  _fixDerivedFormulasForSheet(sheet, COL);
+-  _sp2RepaintFromRange(sheet, COL);
++  _w1MaintenanceWrite_("sort inventory menu",sheet,range,data,function(){_fixDerivedFormulasForSheet(sheet,COL);_sp2RepaintFromRange(sheet,COL);},true);
+ }
+ 
+ // ============================================================
+@@ -2327,7 +2326,7 @@ function regenerateAllSKUsCore_() {
+   }
+ 
+   if (!minted) { ui.alert("Product ID", "Every row already has an ID. Nothing to do.", ui.ButtonSet.OK); return; }
+-  _withLock(function(){ if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet); if(typeof _w1Write_ === "function") _w1Write_("fill Product ID",function(){sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut);}); else _tryWrite("fill Product ID", function () { sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut); }); });
++  _withLock(function(){ if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet); if(typeof _w1MaintenanceWrite_ === "function") _w1MaintenanceWrite_("fill Product ID",sheet,sheet.getRange(3,COL.productId,colOut.length,1),colOut); else _tryWrite("fill Product ID", function () { sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut); }); });
+   ui.alert("Product ID", "Done for " + sheetName + ".\n\nKept: " + kept + " existing IDs\nCreated: " + minted + " new IDs", ui.ButtonSet.OK);
+ }
+ 
+@@ -2381,7 +2380,7 @@ function forceRegenerateAllSKUsCore_() {
+     colOut.push([_composeSKU(catLetter, gameNumStr, pub, cond, title, prefix)]);
+   }
+ 
+-  _withLock(function(){ if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet); if(typeof _w1Write_ === "function") _w1Write_("regen Product ID",function(){sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut);}); else _tryWrite("regen Product ID", function () { sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut); }); });
++  _withLock(function(){ if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet); if(typeof _w1MaintenanceWrite_ === "function") _w1MaintenanceWrite_("regen Product ID",sheet,sheet.getRange(3,COL.productId,colOut.length,1),colOut); else _tryWrite("regen Product ID", function () { sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut); }); });
+   ui.alert("Product ID", "All Product IDs on " + sheetName + " have been rebuilt.", ui.ButtonSet.OK);
+ }
+ 
+@@ -2538,7 +2537,7 @@ function fixAllRestockTagsCore_() {
+     updated.push([newTitle]);
+   }
+ 
+-  _withLock(function(){ if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet); if(typeof _w1Write_ === "function") _w1Write_("fix RESTOCK names",function(){sheet.getRange(3, COL.name, updated.length, 1).setValues(updated);}); else _tryWrite("fix RESTOCK names", function () { sheet.getRange(3, COL.name, updated.length, 1).setValues(updated); }); });
++  _withLock(function(){ if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet); if(typeof _w1MaintenanceWrite_ === "function") _w1MaintenanceWrite_("fix RESTOCK names",sheet,sheet.getRange(3,COL.name,updated.length,1),updated); else _tryWrite("fix RESTOCK names", function () { sheet.getRange(3, COL.name, updated.length, 1).setValues(updated); }); });
+   ui.alert("✅ RESTOCK tags renumbered.\n\n⚠️ Titles changed — run 'Fill missing Product IDs' afterwards.");
+ }
+ 

@@ -1,0 +1,1 @@
+PASS resume and duplicate QA-helper metadata reads are inside owned ScriptLock; same execution nests safely; no second mutation on QA replay

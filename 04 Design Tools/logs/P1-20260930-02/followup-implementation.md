@@ -1,0 +1,7 @@
+
+
+## P1 malformed DONE result replay guard — P1-20260930-02 (2026-09-30 00:09–00:16 +07)
+
+Change/Request `P1-20260930-02` / `P1-ADD-DONE-RESULT-001`; one writer, **local files only**. Focused review found `addInventoryRow` replayed a prior DONE by writing a new DONE journal event **before** parsing its stored Result. A local in-memory corruption test intentionally failed under the old candidate with SyntaxError. The fix parses and checks `success`, row, SKU and sheet against the prior event before any replay write. Corrupt DONE now fails closed with `requires recovery` and no new journal/business event; valid replay behavior remains intact.
+
+Backups, exact diffs and error/retry/recovery are in `04 Design Tools/logs/P1-20260930-02/`. Candidate Code SHA256 `01EE565A...→C977093F40C6D2244B12C730D2F298310BCD0014DD49C051328A4CB92C46A8F5`; prepared sanitized test Code `D1D4DEE...→6006FE13F41F4C156E1FC623C9D77FCF2A219EC02D1703AE13F1C55807A9C3F8`. `node p1-add.test.cjs` and `node p1-ui.test.cjs` PASS after the expected red test. This fix and P1-16 Index timeout are **not installed** in the separate test Apps Script; no live Google corruption/timeout acceptance or shop write is claimed. Production still lacks ADD REQUESTS per the fresh P1-17 schema read. Next: supported test-source install/readback and bounded live failure/timeout checks, then focused shop transaction-integrity promotion review.

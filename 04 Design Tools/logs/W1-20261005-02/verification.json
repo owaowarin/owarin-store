@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-10-05T13:43:28.887Z",
+  "result": "PASS",
+  "revision": "W1-20261005-01/v38@3E7CF8A86790DF274D2EEC0D01EFD09DB65C8BBCCB224A07F895F7F7069F0C42",
+  "candidateHashes": 4,
+  "googleSourceReadbackFiles": 6,
+  "manifestUnchanged": true,
+  "syntax": "PASS",
+  "versionOnlyPairedDiff": true,
+  "indexUnchanged": true,
+  "recordedDecimalGroups": 21,
+  "datedGoogleEvidence": "2026-10-05; read locally, no new live claim",
+  "finalExportHash": "9cc89d03dc705843fa153de72e3c06d1a68cb276977ce00bc1978c71fb27af2e",
+  "sourceOrBusinessWrites": 0
+}

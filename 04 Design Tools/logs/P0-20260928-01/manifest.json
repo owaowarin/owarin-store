@@ -1,0 +1,130 @@
+{
+  "changeId": "P0-20260928-01",
+  "recordedAt": "2026-09-28T21:41:55.511683+07:00",
+  "fileHashes": [
+    {
+      "path": "before\\HANDOFF_2026-09-28.md",
+      "sha256": "8627C45B7E104439D4F2B9C15CCA7D3F84096B712EEEF8D11DF58015E885CBBE"
+    },
+    {
+      "path": "before\\IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md",
+      "sha256": "8A712AE53073EB1FBA6866E2DCF4B76BD87ACDF0AD16B553D6621EA1FB718CCE"
+    },
+    {
+      "path": "changes.csv",
+      "sha256": "2C56575D59444C47E5C714018E6E662ED0BF3254211F2FA36DE99071D9B7586E"
+    },
+    {
+      "path": "checks\\attempt-1.txt",
+      "sha256": "7C56BF109F1E91787015C5249C09F4BFBB1C98CD0505306A048D2040CC671CC3"
+    },
+    {
+      "path": "checks\\attempt-2.txt",
+      "sha256": "81D21A7F88ECBD4CB30B3E4E2E57692E7290EDCDE78F9694D5731956643AFDF9"
+    },
+    {
+      "path": "checks\\export-inspection.txt",
+      "sha256": "A114F3249E4873F5F6549A03790D03273655043AD385DA5521213E1BB292D4AD"
+    },
+    {
+      "path": "checks\\inspect-export.py",
+      "sha256": "B6E28D8A7C8B49998295D85C23B08D7ABB2D18C90DA4E483C623839221C632E7"
+    },
+    {
+      "path": "checks\\p0-repro-results.json",
+      "sha256": "145D3BB8FC42A391D768B4BBBF2EA008F83FDA6D15FB07897A1C3B25CF8180E8"
+    },
+    {
+      "path": "checks\\p0-repro.cjs",
+      "sha256": "52AECDDB48EB265FDA92BC1B7D5B012158BD97086A08B6C3A21C2F51D28A2D2E"
+    },
+    {
+      "path": "deployment-link.txt",
+      "sha256": "1827BAD0FC4F8AF1B70DE97C7489ACA5B1901ED01107772F1C98C1DBEC4D0003"
+    },
+    {
+      "path": "docs.diff",
+      "sha256": "051B9731980F96792FB1F5BE711E3236D8F629EF9F0B13767666D397025566E6"
+    },
+    {
+      "path": "FbAlbum.gs.diff",
+      "sha256": "DA508047645131D9CF4660D3021858B07671D7A6205A0514CB5B72812644F772"
+    },
+    {
+      "path": "identity-formula-summary.json",
+      "sha256": "77A132A5640CF72479D8B05D4D0E9DDAF93CE9A2C681CE7B387876FB20346667"
+    },
+    {
+      "path": "live-source\\Code.gs",
+      "sha256": "48919F5834CE102FAA65A282400EBE565F46660BED908733D9376DF62688AF3E"
+    },
+    {
+      "path": "live-source\\FbAlbum.gs",
+      "sha256": "F8912F40E9118DD558DEBC9F811E2DCA6C05C1DFE31AEB52C3DB018F2AA12F08"
+    },
+    {
+      "path": "live-source\\Index.html",
+      "sha256": "2869DFFB36FD44CEA39E99AD9124F25D2FA6D82ABA867651B46CEA292EBDE335"
+    },
+    {
+      "path": "live-source\\R2Upload.gs",
+      "sha256": "276C58F1C3FF88D4168E4297ED5304D0B659C7A82B6629E0C256E7C1DA931999"
+    },
+    {
+      "path": "live-source\\webapp.gs",
+      "sha256": "FD60232C342C5483904A8822C25D95A3632AFB4191A931344369429DC707B46A"
+    },
+    {
+      "path": "local-baseline.json",
+      "sha256": "8EBDBAFA2D7F6E656966CB8B66A4AE1581E594A7D8367E11BD81976B2117DACD"
+    },
+    {
+      "path": "project-overview.txt",
+      "sha256": "C03249E8C674858895C3A7C1E29430D02D233B9BD33744D2DC799E1D03E65680"
+    },
+    {
+      "path": "project-settings-safe.txt",
+      "sha256": "9A4EF286C57821F42B38071D80C84C6CBF4F8AB2516D66D6A2C7ED966B5C676B"
+    },
+    {
+      "path": "protection-ui.txt",
+      "sha256": "10285F0520E4879C00E6642781FE2829CB89FF82A3591DC2C35E835FAA1BBD7C"
+    },
+    {
+      "path": "R2Upload.gs.diff",
+      "sha256": "B87EFDFC0890688D9B7A84F33612287EB957F9F7E852621B477DFBA40A886C11"
+    },
+    {
+      "path": "sharing-metadata.json",
+      "sha256": "E98C8D53892E44EE4E6CE546A03160A403FFE255CCDAB68EA56046BE2C4DF437"
+    },
+    {
+      "path": "sheet-headers-formulas.json",
+      "sha256": "572DF4749BACC6791EC8C00CE681F173A90EAF2A465A5B69563BE0A2699AB5AC"
+    },
+    {
+      "path": "sheet-metadata.json",
+      "sha256": "A870AB8C702C98F863F1065ED80A1F1A83C386308377C6B4FD17A23694FED0C3"
+    },
+    {
+      "path": "source-comparison.json",
+      "sha256": "7996F6B28CFE60F1F541AC7123C822508C1E2E78D4DAEC138AAC743BD8C06C24"
+    },
+    {
+      "path": "triggers.txt",
+      "sha256": "5E63895196A35BE0775D6AF3D26C0847413831E0ABFAEF7D76CF9EE9EA05D542"
+    },
+    {
+      "path": "verification.json",
+      "sha256": "D970F137CBC31A5C22112EC5F029BC7634DE00096D4CA8A9BF464964C349FCEB"
+    },
+    {
+      "path": "xlsx-structure.json",
+      "sha256": "0EEA9AA77C142C804E24A13C2A3E5D5B9239FA6A089CE52DE11D4447E728EFA5"
+    },
+    {
+      "path": "xlsx-tables.json",
+      "sha256": "607C179CC0B6094159D257688CA9842EB0542551F0C64C2CE1F7E6A0EF911B54"
+    }
+  ]
+}

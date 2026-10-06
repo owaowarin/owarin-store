@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "checks": [
+    "HTML escaped; real __MORE__ title stays literal",
+    "Natural sort shared by standalone and web",
+    "Printable document prunes every non-allowlisted field",
+    "100x150mm/zero page margin and font/image ready guard",
+    "One-item overflow may become +1 item; no silent clipped title",
+    "Generated print document syntax"
+  ]
+}

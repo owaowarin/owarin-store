@@ -1,0 +1,20 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-runtime\\W1Qa.gs" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\test-runtime\\W1Qa.gs"
+index 7d22b63..3170510 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-runtime\\W1Qa.gs"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\test-runtime\\W1Qa.gs"	
+@@ -8,7 +8,7 @@ function w1QaPrepare20261004(){
+  }
+  var dry=w1SchemaDryRun();Logger.log('DRY_RUN '+JSON.stringify(dry));w1PrepareTestSchema();
+  for(var i=1;i<=8;i++){var r=_apiInvAdd({requestId:'w1-20261004-fixture-'+i,source:'GGB',title:'W1 QA 20261004 Copy '+i,publisher:'QA',condition:'A',status:'Instock',cost:'100',price:'390'});Logger.log('FIXTURE '+i+' '+r.item.productId);}
+- Logger.log('PASS W1 synthetic fixture ready; no shop data copied');
++ Logger.log('PASS W1 synthetic fixture ready; no shop data copied');return 'Fixture ready: eight synthetic copies; exact test Sheet';
+ }
+ function w1QaRecovery20261004(){
+  _w1Access_();if(SpreadsheetApp.getActiveSpreadsheet().getId()!=='13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM')throw new Error('TEST_ONLY');
+@@ -18,5 +18,5 @@ function w1QaRecovery20261004(){
+  var write=_tryWrite,armed=false;try{_tryWrite=function(label,fn){if(label.indexOf('inventory')>=0&&label.indexOf('status')>=0&&!armed){armed=true;return false;}return write(label,fn);};var error='';try{_w1Mutate_('create',p);}catch(e){error=e.message;}if(error.indexOf('RECOVERY_REQUIRED')<0||!armed)throw Error('Missing injected failure');Logger.log('INJECTED '+error);}finally{_tryWrite=write;}
+  var order=_w1Mutate_('create',p);if(order.status!=='PENDING')throw Error('Retry create');var confirm={requestId:'w1-20261004-recovery-confirm',orderId:order.orderId,expectedRevision:order.revision,labelLater:true};
+  armed=false;try{_tryWrite=function(label,fn){if(label.indexOf('SALES')>=0&&label.indexOf('price')>=0&&!armed){armed=true;return false;}return write(label,fn);};var error='';try{_w1Mutate_('confirm',confirm);}catch(e){error=e.message;}if(error.indexOf('RECOVERY_REQUIRED')<0||!armed)throw Error('Missing ledger failure');Logger.log('INJECTED '+error);}finally{_tryWrite=write;}
+- var sold=_w1Mutate_('confirm',confirm),retry=_w1Mutate_('confirm',confirm);if(sold.status!=='SOLD'||!retry.replayed||sold.orderId!==retry.orderId)throw Error('Retry sold');Logger.log('PASS W1 real-Google partial Hold/SALES recovery '+sold.orderId+'; exact Request IDs '+p.requestId+' / '+confirm.requestId);
++ var sold=_w1Mutate_('confirm',confirm),retry=_w1Mutate_('confirm',confirm);if(sold.status!=='SOLD'||!retry.replayed||sold.orderId!==retry.orderId)throw Error('Retry sold');Logger.log('PASS W1 real-Google partial Hold/SALES recovery '+sold.orderId+'; exact Request IDs '+p.requestId+' / '+confirm.requestId);return 'Partial Hold + SALES recovery '+sold.orderId+'; same-ID confirm replay verified';
+ }

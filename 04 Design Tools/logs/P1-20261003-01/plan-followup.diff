@@ -1,0 +1,13 @@
+diff --git "a/04 Design Tools\\logs\\P1-20261003-01\\before-followup\\plan.md" b/00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md
+index 9de05d8..c0ed91e 100644
+--- "a/04 Design Tools\\logs\\P1-20261003-01\\before-followup\\plan.md"	
++++ b/00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md	
+@@ -2,7 +2,7 @@
+ 
+ วันที่ 2026-09-28 · Stream B · สถานะ: **ออกแบบเพื่อส่งต่อ ยังไม่ได้แก้ source หรือ deploy**
+ 
+-P1 board update 2026-10-03: R1–R4 local candidate + VM regression **DONE (local)**, Google test project Save/readback/runtime **TODO**, shop promotion **NO-GO**. Evidence `04 Design Tools/logs/P1-20261003-01/` (Change `P1-20261003-01`, Request `P1-R1-R4-LOCAL-FIX-001`); candidate revision Code `695A2EAA4FB9...`, webapp `6168CEA9DE2B...`, Index `F87ADF6B67B0...`. Do not treat the local pass as an installed test or shop source.
++P1 board update 2026-10-03: R1–R4 local candidate + VM regression **DONE**; isolated Google test source Save/readback, normal Add and same-ID reload/retry **DONE**. Before/after/retry XLSX exports: 28,531 / 29,078 / 29,587 bytes; only synthetic GGB rows 25–26 and ADD REQUESTS rows 76–79 added; `verify-test-add.py` and `verify-test-retry.py` PASS. Direct Google fault injection for R1–R4 **NOT RUN**; GPT-6 Astra / High rereview **TODO**; shop promotion **NO-GO**. Evidence `04 Design Tools/logs/P1-20261003-01/` (Change `P1-20261003-01`, Request `P1-R1-R4-LOCAL-FIX-001`); exact candidate revision Code `695A2EAA4FB9...`, webapp `6168CEA9DE2B...`, Index `F87ADF6B67B0...`. Test `/exec` and shop were not changed.
+ 
+ ## 1. ขอบเขตและข้อสรุป
+ 

@@ -1,0 +1,15 @@
+--- C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-01\test-runtime-source\Index.html
++++ C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-02\test-runtime-source\Index.html
+@@ -1080,10 +1080,11 @@
+         'Suggested: ' + sugLine +
+         (res.tier ? ' <span style="color:var(--muted-fg)">[' + esc(res.tier) + ']</span>' : '') +
+         '</div>';
++      LAST_ADD = null;
++      if (dd.historical) { toast('Saved — refresh inventory to see current stock'); return; }
+       LAST_ADD = { item: dd.item, matches: dd.bookingMatches || [] };
+       if (LAST_ADD.matches.length) $('mResult').innerHTML += bookingBanner(LAST_ADD);
+       okToast('Added: ' + dd.item.productId);
+-      if (dd.historical) { toast('Saved — refresh inventory to see current stock'); return; }
+       try {
+         addToCache(dd.item);
+         buildFilterOptions(true);

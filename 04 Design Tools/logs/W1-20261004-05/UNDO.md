@@ -1,0 +1,7 @@
+# Recovery — W1 local candidate and isolated test only
+
+No production rollback is needed: production source/deployment, shop Sheet and Back House LAB were untouched. Candidate v36 source is in `candidate/backup/v36/`; the pre-Session42 files are in `session42-before-close/` and `attempts/F05/session42-before/`. Compare exact LF hashes and the latest file history before restoring any source.
+
+The isolated test Sheet's journal was intentionally reconciled: the 49 original blank rows now contain fixed `QA_CAPACITY_GAP` notes, with repair PREPARED/DONE. Preserve them and every older event/ID/hash. `attempts/F05/session42-before.xlsx`, `session42-repaired.xlsx`, `google-final.xlsx`, the repair spec and both assertion JSON files are evidence, not files to import over a live Sheet. Any future partial request must be checked against its original ID, stored payload, allocated rows and current inventory/SALES before same-ID retry. For the final UI sale, IDs are `w1-1791153252195-hx9e08l17e6` (create) and `w1-1791153462270-cw715xj4mec` (confirm), order `OWA-20261005-01`.
+
+To abandon v37 before any new test writes, restore the four local files from `candidate/backup/v36/` as a paired set and verify their hashes; restore the isolated test project's source only after comparing its current readback with `google-source-readback/` and later changes. Do not reverse the journal repair by importing an older workbook. The synthetic Sold result can remain as immutable test evidence. `changes.csv`/`implementation.md` record the before → after operations.

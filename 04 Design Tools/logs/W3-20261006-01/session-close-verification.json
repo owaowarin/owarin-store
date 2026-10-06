@@ -1,0 +1,86 @@
+{
+  "result": "PASS",
+  "verifiedAt": "2026-10-06T01:43:26+07:00",
+  "revision": "W2-20261005-01/v39@7043D1B05E52DEAA3272C4AB3986790592081BD1C2688C5E3867A4D4FBC88D51",
+  "candidateFilesUnchanged": 9,
+  "recordedSourceReadbacksUnchanged": 12,
+  "localChecks": 13,
+  "freshIsolatedExport": {
+    "file": "google-before-replay.xlsx",
+    "bytes": 1388126,
+    "sha256": "453f05b4a6bbe5218183de83a66e3ae11e59d80d37fe25ae9162a915804f53b8",
+    "sevenOtherSheetsUnchanged": true,
+    "oldJournalPrefixPreserved": true,
+    "priorSessionDeltaReconciled": {
+      "requestId": "w1-1791222331322-mxgbvwmbbv",
+      "action": "labels.save",
+      "addedEvents": 5,
+      "orderRevision": "3 -> 4",
+      "allOtherOrderFieldsUnchanged": true,
+      "noSalesStockClientChange": true,
+      "originalIntentMatchesObservedBeforeAfter": true
+    }
+  },
+  "nativeLegacySixColumnMigration": "NOT_TESTED",
+  "pdfPhysicalPrint": "DEFERRED_UNTESTED_NOT_PASS",
+  "productionChanged": false,
+  "afterReplayExport": {
+    "file": "google-after-replay.xlsx",
+    "bytes": 1375652,
+    "sha256": "57e5edea99dd4412271560f96f3cfc1ef8496d247ddfa24b6837db27f2606923",
+    "allSheetValuesFormulasUnchanged": true
+  },
+  "freshNativeReplay": {
+    "result": "PASS",
+    "at": "2026-10-05T18:42:52.413Z",
+    "scope": "Named isolated test /dev; existing DONE requests only",
+    "beforeAfterNativeProofEqual": true,
+    "replays": 7,
+    "allReplayed": true,
+    "sales": 2,
+    "clients": 2,
+    "journalRows": 1300,
+    "journalHash": "3712f62fe7a3924d8f829746b37e8361bccf602ab5f6faaea3e99962352becdf",
+    "orderRevisions": [
+      {
+        "id": "OWA-20261005-04",
+        "revision": 3
+      },
+      {
+        "id": "OWA-20261005-05",
+        "revision": 4
+      }
+    ],
+    "allPreserved": true,
+    "originalRequestIds": [
+      "w1-1791211286953-0rsaw0nbbhm9",
+      "crm-e25e645597759a0b94bb7618f355e489633d7ac3afcf0556701ab91cbe7b698c",
+      "w1-1791212258776-uhkq20tawig",
+      "w2-1791212370313-nwi36oxgpy",
+      "w1-1791213011996-e0ywaj6bd6j",
+      "crm-515740f3a747c839be1023edd58ef97d79cd5b3d17e163614d3415eb0ac61c84",
+      "w1-1791222331322-mxgbvwmbbv"
+    ],
+    "method": "Cleared old QA textarea, Read native proof after exact /dev reload; invoked Replay original requests once; compared complete before-proof JSON with returned proof JSON in browser REPL; fresh export before and after retained",
+    "physicalPrint": "DEFERRED_UNTESTED_NOT_PASS"
+  },
+  "sessionClose": {
+    "stateLines": 47,
+    "csv": true,
+    "decisions": true,
+    "plan": true,
+    "handoff": true,
+    "relatedDocs": true,
+    "datedLesson": true,
+    "readback": true,
+    "runtimeVersionUnchanged": "v39"
+  },
+  "finalReadback": {
+    "result": "PASS",
+    "otherStreamSnapshotsUnchanged": true,
+    "historicalDocsPreserved": true,
+    "archivedHandoffExact": true,
+    "csvRows": 64,
+    "candidate9HashesUnchanged": true
+  }
+}

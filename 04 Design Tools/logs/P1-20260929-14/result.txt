@@ -1,0 +1,12 @@
+P1-20260929-14 / P1-QA-STATUS-001
+Status: PREPARED BUT NOT INSTALLED OR RUN IN GOOGLE.
+Separate Sheet baseline XLSX SHA256 99DBD5690BDCB8CC9DAF52E26495B5BFF020D63A8C64B4F4C4FA4A9C8992F792: GGB 17, MAG 10, ADD REQUESTS 61 events through row 62; GGB row 20 and journal row 63 empty.
+Test Code.gs editor LF SHA256 D1D4DEE32188B35807DD8B3C5A0F6DEAEE7EF14C4C8A1B14769E4844E0A090AD.
+status-probe.gs is a local, guarded, one-run test helper. It was syntax-checked with Node vm.Script; it has NOT been pasted into Apps Script, saved, selected, or run. If run later, it would append three synthetic journal events and no business inventory row, then must be removed after evidence is captured.
+The in-app browser rejected the local file URL under its security policy and expressly prohibited workaround transfer. No alternate transfer was attempted.
+Current local candidate checks: p1-add.test.cjs PASS; p1-ui.test.cjs PASS. These simulate NOT_FOUND/ERROR UI and server read-only status but do not establish live Google behavior for those branches.
+External recovery: none needed; separate test Sheet and Apps Script were not changed in this phase. Pre-edit docs and Code backup are in this folder.
+Follow-up: owner reported installation, but fresh test editor copies of Code/Webapp/Index retained prior hashes and contain no p1QaStatusProbe; production Code hash also equals P0 baseline and contains no probe. No function was run. Exact test project ID: 1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd.
+After a full reload of the exact test project editor, Code.gs again matched baseline D1D4DEE... and p1QaStatusProbe was absent. The live probe remains blocked at installation, not at execution.
+
+Live follow-up 2026-09-29 16:20 +07: owner-pasted exact helper was saved in separate test Code.gs, run once, and completed PASS. NOT_FOUND/PREPARED/ERROR/RECOVERED lookups were read-only; mismatched DONE payload rejected. Independent after-run export SHA256 ECC953834E480D7C3C333D36C7553E0592A66D1AA34E39482EE54B17CB209C8D: business sheets identical to pre-run, GGB A20 empty, three synthetic journal-only events at rows63-65, total64. Temporary helper removed; saved/reloaded Code.gs LF SHA256 D1D4DEE32188B35807DD8B3C5A0F6DEAEE7EF14C4C8A1B14769E4844E0A090AD. The older PREPARED/UNINSTALLED lines above are historical pre-install snapshots. No shop or test /exec deployment change. See execution-log.txt, changes.csv, appended Implementation log and HANDOFF.

@@ -1,0 +1,94 @@
+{
+  "result": "PASS",
+  "initial": [
+    {
+      "test": "Index.test.js",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "a827e8",
+        "wall_time_seconds": 1.6933477,
+        "exit_code": 0,
+        "original_token_count": 9,
+        "output": "Index inventory smoke test passed\n"
+      }
+    },
+    {
+      "test": "image-url.test.js",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "542bea",
+        "wall_time_seconds": 1.6844335,
+        "exit_code": 0,
+        "original_token_count": 6,
+        "output": "image-url test passed\n"
+      }
+    },
+    {
+      "test": "fb-catalogue.test.js",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "4f612f",
+        "wall_time_seconds": 1.1858918,
+        "exit_code": 0,
+        "original_token_count": 11,
+        "output": "fb-catalogue.test.js: all assertions passed\n"
+      }
+    },
+    {
+      "test": "meta-pipeline.test.js",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "acb003",
+        "wall_time_seconds": 0.6140968,
+        "exit_code": 0,
+        "original_token_count": 31,
+        "output": "meta-pipeline.test.js: all assertions passed\nv28 headless tests passed\nv29 title tests passed\nv30 dedup/title tests passed\n"
+      }
+    },
+    {
+      "test": "p1-add.test.cjs",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "9d2395",
+        "wall_time_seconds": 0.5507627,
+        "exit_code": 1,
+        "original_token_count": 187,
+        "output": "Index.html:572\r\n<?!= _w2Include_(\"W2Suggest\") ?>\r\n^\r\n\r\nSyntaxError: Unexpected token '<'\r\n    at new Script (node:vm:117:7)\r\n    at Object.<anonymous> (C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\03 Apps Script\\Web App\\p1-add.test.cjs:10:90)\r\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\r\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\r\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\r\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\r\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\r\n    at node:internal/main/run_main_module:33:47\r\n\r\nNode.js v24.19.0\r\n"
+      }
+    },
+    {
+      "test": "p1-ui.test.cjs",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "cc6168",
+        "wall_time_seconds": 0.5883498,
+        "exit_code": 1,
+        "original_token_count": 284,
+        "output": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(i>=0&&j>i)\n\n    at between (C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\03 Apps Script\\Web App\\p1-ui.test.cjs:5:69)\n    at make (C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\03 Apps Script\\Web App\\p1-ui.test.cjs:27:19)\n    at C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\03 Apps Script\\Web App\\p1-ui.test.cjs:34:9\n    at Object.<anonymous> (C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\03 Apps Script\\Web App\\p1-ui.test.cjs:160:3)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5) {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: false,\n  expected: true,\n  operator: '==',\n  diff: 'simple'\n}\n"
+      }
+    }
+  ],
+  "retry": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "1b653b",
+        "wall_time_seconds": 1.5172135,
+        "exit_code": 0,
+        "original_token_count": 57,
+        "output": "PASS: 20 Add calls; R1 committed snapshot after sort/SKU reuse/duplicate/removal; R2 fresh header and supplied-field gates; R3 source/status gates; R4 four formula readbacks and blocked retries; existing journal/write failures\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "4615f9",
+        "wall_time_seconds": 0.6317222,
+        "exit_code": 0,
+        "original_token_count": 44,
+        "output": "PASS: 20 UI resets, DONE/NOT_FOUND/ERROR retries, historical DONE skips live cache, frozen reload, storage/render failure, timeout/no-callback/late callback, suggestion clear\n"
+      }
+    }
+  ],
+  "reason": "Two older P1 loaders required the actual canonical W2Suggest template include; all original assertions retained; no runtime edit."
+}

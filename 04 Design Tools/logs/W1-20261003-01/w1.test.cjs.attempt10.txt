@@ -1,0 +1,20 @@
+PASS Create -> Pending -> Cancel; no sale; replay; clear has no server effect
+PASS SHOP confirm snapshot prices, subsidy distinct, one line on timeout/retry
+PASS Two sessions/requests one copy one winner; independent Pending coexist
+PASS Reject unavailable, missing subsidy, malformed price, duplicate before mutation
+PASS Direct Shopee no business Pending; price round(entered*0.7-50)
+PASS UID survives sort/PID rename; source namespaces remain distinct
+PASS Duplicate UID/SKU rejected; manual edits and wrong revision do not get overwritten
+PASS All legacy writers/status edit fail closed; unauthorized rejected
+PASS Allocator includes ORDERS, SALES and intent and supports >99
+BOUNDARIES create 197
+BOUNDARIES cancel 164
+BOUNDARIES confirm 296
+BOUNDARIES shopee 375
+PASS Every actual write boundary: Create/Cancel/Confirm, throw before or response lost -> same-ID recovery
+PASS W1 10 groups
+PASS Managed-item menu guards; unattended common lock preserved; foreign reservation unchanged
+PASS Multi-item cross-source partial ledger, silent write loss, legacy profit/formula preserved
+PASS W1 12 groups final
+PASS UID/delete/relabel cannot orphan a claim and create another reservation
+PASS W1 13 groups accepted

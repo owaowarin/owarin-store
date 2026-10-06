@@ -1,0 +1,4 @@
+const fs=require('node:fs'),path=require('node:path'),w=require('./work.cjs');
+const a="  if (!confirm('Clear all items from the cart?')) return;\n";
+for(const name of ['candidate/Index.html','test-runtime/Index.html']){const rel='04 Design Tools/logs/W1-20261004-01/'+name,f=path.join(w.dir,name),s=fs.readFileSync(f,'utf8');if(s.split(a).length!==2)throw Error('Clear unique anchor');const out=path.join(w.dir,'attempts/clear-before',name);fs.mkdirSync(path.dirname(out),{recursive:true});fs.copyFileSync(f,out);w.write(rel,s.replace(a,''));}
+w.log('UI-CLEAR-F02','Clear client-only cart directly after explicit click','Reproduced same native-confirm CDP hang/dialog undefined; reload recovered. Remove one client confirmation line; no server/money/stock call','attempts/clear-before/ exact sources; other legacy confirm dialogs outside W1 unchanged');

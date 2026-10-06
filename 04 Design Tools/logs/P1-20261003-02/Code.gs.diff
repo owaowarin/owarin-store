@@ -1,0 +1,21 @@
+diff --git a/04 Design Tools/logs/P1-20261003-02/baseline/candidate/Code.gs b/04 Design Tools/logs/P1-20260929-01/candidate/Code.gs
+index 451cfcf..1674997 100644
+--- a/04 Design Tools/logs/P1-20261003-02/baseline/candidate/Code.gs	
++++ b/04 Design Tools/logs/P1-20260929-01/candidate/Code.gs	
+@@ -2055,6 +2055,8 @@ function _addRequestHash(data) {
+   return bytes.map(function(b){ return ('0' + (b & 255).toString(16)).slice(-2); }).join('');
+ }
+ function _addStatus(value) {
++  if (value !== undefined && value !== null && typeof value !== 'string')
++    throw new Error('Invalid Add status: expected text');
+   var status = String(value || '').trim() || 'New Arrival';
+   if (['Instock', 'Sold', 'Auction', 'Hold', 'New Arrival'].indexOf(status) < 0)
+     throw new Error('Invalid Add status: ' + status);
+@@ -2116,6 +2118,7 @@ function addInventoryRow(data) {
+           throw new Error('Add DONE result requires recovery; Request ID ' + requestId);
+         _addRequestEvent(journal, requestId, attempt, 'DONE', prior[8], hash, prior[10], prior[11],
+                          'replay of DONE', prior[13], '', prior[15]);
++        saved.replayed = true;
+         return saved;
+       }
+       _addRequestEvent(journal, requestId, attempt, 'ERROR', prior[8], hash, prior[10], prior[11],

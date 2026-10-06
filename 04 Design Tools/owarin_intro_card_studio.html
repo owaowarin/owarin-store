@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OWARIN INTRO CARD STUDIO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=Shippori+Mincho:wght@400;500;600&family=Archivo:wght@700;800;900&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:hsl(0 0% 5%); --fg:hsl(0 0% 95%);
+  --card:hsl(0 0% 8%); --muted-fg:hsl(0 0% 55%);
+  --border:hsl(0 0% 18%); --input:hsl(0 0% 15%);
+  --gold:hsl(43 76% 52%); --gold-muted:hsl(43 40% 35%); --gold-bright:hsl(43 85% 60%);
+  --destructive:hsl(0 62% 50%); --ok:hsl(140 45% 45%);
+}
+*{box-sizing:border-box;border-color:var(--border)}
+html,body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:'Outfit','Noto Sans Thai',sans-serif;font-weight:300;font-size:14px;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-thumb{background:hsl(0 0% 20%)}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit}
+header{position:sticky;top:0;z-index:20;background:hsl(0 0% 5%/.94);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);padding:12px 18px;display:flex;align-items:center;gap:14px}
+.brand{font-weight:500;letter-spacing:.35em;font-size:13px;white-space:nowrap}
+.brand .g{color:var(--gold)}
+.brand small{display:block;letter-spacing:.18em;color:var(--muted-fg);font-size:9px;margin-top:3px;font-family:'Shippori Mincho',serif}
+.hd-right{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+#status{color:var(--muted-fg);font-size:11px;letter-spacing:.08em}
+#status.ok{color:var(--ok)} #status.err{color:var(--destructive)}
+.btn{background:transparent;border:1px solid var(--border);color:var(--fg);
+  padding:8px 15px;font-size:11px;letter-spacing:.14em;transition:.2s;white-space:nowrap}
+.btn:hover:not(:disabled){border-color:var(--gold);color:var(--gold)}
+.btn.primary{background:var(--gold);color:hsl(0 0% 5%);border-color:var(--gold);font-weight:500}
+.btn.primary:hover{background:var(--gold-bright)}
+.btn.small{padding:6px 11px;font-size:10px}
+.wrap{display:grid;grid-template-columns:330px 1fr;align-items:start}
+.panel{border-right:1px solid var(--border);position:sticky;top:59px;height:calc(100vh - 59px);overflow-y:auto}
+.stage{padding:18px 20px 60px;min-height:calc(100vh - 59px)}
+.sect{border-bottom:1px solid var(--border)}
+.sect>summary{list-style:none;cursor:pointer;padding:12px 16px;display:flex;align-items:center;gap:8px;
+  font-size:10px;letter-spacing:.22em;color:var(--muted-fg);text-transform:uppercase;user-select:none}
+.sect>summary::-webkit-details-marker{display:none}
+.sect>summary::before{content:'+';color:var(--gold-muted);font-size:13px;width:9px}
+.sect[open]>summary::before{content:'−'}
+.sect[open]>summary{color:var(--gold)}
+.sect .body{padding:2px 16px 16px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:9px;letter-spacing:.18em;color:var(--muted-fg);text-transform:uppercase;margin-bottom:6px}
+.hint{font-size:10.5px;color:var(--muted-fg);line-height:1.6;margin-top:6px}
+input[type=text],textarea,select{width:100%;background:var(--input);border:1px solid var(--border);
+  color:var(--fg);padding:8px 10px;font-size:12.5px;outline:none;font-weight:300}
+input:focus,textarea:focus,select:focus{border-color:var(--gold-muted)}
+textarea{resize:vertical;line-height:1.5}
+.row{display:flex;gap:8px}.row>*{flex:1;min-width:0}
+.seg{display:flex;border:1px solid var(--border);flex-wrap:wrap}
+.seg button{flex:1;background:none;border:none;border-right:1px solid var(--border);
+  color:var(--muted-fg);padding:8px 4px;font-size:10px;letter-spacing:.1em;min-width:56px}
+.seg button:last-child{border-right:none}
+.seg button.on{background:var(--gold);color:hsl(0 0% 5%);font-weight:500}
+.toggle{display:flex;align-items:center;gap:9px;cursor:pointer;font-size:11.5px;margin-bottom:9px}
+.toggle input{width:15px;height:15px;accent-color:var(--gold)}
+.bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-bottom:14px;
+  border-bottom:1px solid var(--border);margin-bottom:18px}
+.bar .lbl{font-size:9px;letter-spacing:.2em;color:var(--muted-fg);text-transform:uppercase}
+.bar .sp{flex:1}
+#canvasHost{display:flex;justify-content:center}
+#preview{border:1px solid var(--border);background:#000}
+.chk{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:8px}
+.chk label{display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--muted-fg);cursor:pointer}
+.chk input{accent-color:var(--gold)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><span class="g">OWARIN</span> INTRO CARD STUDIO<small>オワリン商店 — カタログ広告 表紙</small></div>
+  <div class="hd-right">
+    <span id="status">กำลังโหลดปกหนังสือ…</span>
+    <button class="btn" id="btnBoth">โหลดทั้ง 2 แบบ</button>
+    <button class="btn primary" id="btnPng">ดาวน์โหลด PNG</button>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="panel">
+
+  <details class="sect" open>
+    <summary>1. กำแพงพิสูจน์</summary>
+    <div class="body">
+      <div class="seg" id="segWall">
+        <button data-v="covers" class="on">ปกจริง</button>
+        <button data-v="titles">ชื่อเกม</button>
+      </div>
+      <div class="hint" id="wallHint"></div>
+      <div class="chk" id="coverPick"></div>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>2. พาดหัว</summary>
+    <div class="body">
+      <div class="field"><label>บรรทัดเล็กบน</label><input type="text" id="kicker" value="ร้านหนังสือคู่มือเกมญี่ปุ่น"></div>
+      <div class="field"><label>พาดหัวบรรทัด 1</label><input type="text" id="h1" value="คู่มือเฉลยเกม"></div>
+      <div class="field"><label>พาดหัวบรรทัด 2 (เน้นทอง)</label><input type="text" id="h2" value="ยุค PS1–PS2"></div>
+      <div class="field"><label>บรรทัดญี่ปุ่น</label><input type="text" id="jp" value="ゲーム攻略本 · 中古良品"></div>
+      <div class="field"><label>คำโปรย</label><input type="text" id="tag" value="ของสะสมหายาก · ถ่ายจากสินค้าจริงทุกเล่ม"></div>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>3. บล็อกราคา</summary>
+    <div class="body">
+      <div class="row">
+        <div class="field"><label>เริ่มต้น</label><input type="text" id="pMin" value="120"></div>
+        <div class="field"><label>ส่วนใหญ่</label><input type="text" id="pMid" value="230–330"></div>
+      </div>
+      <div class="field"><label>จำนวนในสต็อก</label><input type="text" id="stock" value="364"></div>
+      <div class="hint" id="csvNote">คำนวณจาก 364 รายการ · ต่ำสุด 120 · กลาง 270 · สูงสุด 880 — ช่วง 230–330 ครอบคลุม 53% ของสต็อก</div>
+      <input type="file" id="csv" accept=".csv" hidden>
+      <button class="btn small" id="btnCsv" style="width:100%;margin-top:8px">คำนวณจาก CSV ใหม่</button>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>4. แถวความน่าเชื่อถือ</summary>
+    <div class="body">
+      <div class="field"><label>ช่อง 1</label><input type="text" id="t1" value="ตรวจสภาพทุกเล่ม"></div>
+      <div class="field"><label>ช่อง 2</label><input type="text" id="t2" value="ห่อกระดาษแก้วกันน้ำ"></div>
+      <div class="field"><label>ช่อง 3</label><input type="text" id="t3" value="รูปถ่ายจากของจริง"></div>
+      <div class="field"><label>ช่อง 4</label><input type="text" id="t4" value="ส่งไว เก็บปลายทางได้"></div>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>5. ปุ่ม CTA</summary>
+    <div class="body">
+      <div class="field"><label>ข้อความปุ่ม</label><input type="text" id="cta" value="ทักแชทถามเล่มที่อยากได้"></div>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>6. ขนาด</summary>
+    <div class="body">
+      <div class="seg" id="segRatio">
+        <button data-v="4:5" class="on">4:5</button>
+        <button data-v="1:1">1:1</button>
+        <button data-v="9:16">9:16</button>
+      </div>
+      <div class="hint">4:5 = ค่าเริ่มต้นที่ควรใช้ (กินพื้นที่จอมากสุด) · 1:1 = การ์ด carousel · 9:16 = Reels</div>
+      <label class="toggle" style="margin-top:10px"><input type="checkbox" id="safe"> แสดง safe zone</label>
+      <label class="toggle"><input type="checkbox" id="grain" checked> เกรนฟิล์ม</label>
+    </div>
+  </details>
+
+</div>
+
+<div class="stage">
+  <div class="bar">
+    <span class="lbl">ตัวอย่าง</span>
+    <span id="dims" style="font-size:11px;color:var(--gold);letter-spacing:.1em"></span>
+    <span class="sp"></span>
+    <button class="btn small" id="btnShuffle">สลับปกที่โชว์</button>
+  </div>
+  <div id="canvasHost"><canvas id="preview"></canvas></div>
+</div>
+</div>
+
+<script src="owarin_covers.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const GOLD='#e2ad28', GOLD_D='#8a6a1f', BG='#0d0d0d', PANEL='#141414', FG='#f2f2f2', MUTED='#8c8c8c';
+const S={wall:'covers',ratio:'4:5',safe:false,grain:true};
+let covers=[], picked=[], fontsReady=false;
+
+/* ชื่อเกมสำหรับโหมด "ชื่อเกม" — เรียงตามที่คนไทยจำได้ */
+const TITLES=['FINAL FANTASY','METAL GEAR SOLID','SILENT HILL','RESIDENT EVIL','DRAGON QUEST',
+ 'ONIMUSHA','GOD OF WAR','DEVIL MAY CRY','KINGDOM HEARTS','SUIKODEN','TALES OF','BIOHAZARD',
+ 'SUPER ROBOT WARS','HARVEST MOON','CASTLEVANIA','YU-GI-OH!'];
+
+document.fonts.ready.then(()=>{fontsReady=true;draw();});
+
+/* ---------- load embedded covers ---------- */
+function initCovers(){
+  const list=window.OWARIN_COVERS||[];
+  if(!list.length){setStatus('ไม่พบ owarin_covers.js — วางไฟล์ไว้โฟลเดอร์เดียวกัน','err');return;}
+  let done=0;
+  list.forEach((c,i)=>{
+    const im=new Image();
+    im.onload=()=>{covers[i]={...c,img:im};if(++done===list.length)afterCovers();};
+    im.onerror=()=>{if(++done===list.length)afterCovers();};
+    im.src=c.src;
+  });
+}
+function afterCovers(){
+  covers=covers.filter(Boolean);
+  picked=covers.map((_,i)=>i);
+  $('coverPick').innerHTML=covers.map((c,i)=>
+    `<label><input type="checkbox" data-i="${i}" checked>${c.name}</label>`).join('');
+  $('coverPick').onchange=()=>{
+    picked=[...$('coverPick').querySelectorAll('input:checked')].map(x=>+x.dataset.i);
+    draw();
+  };
+  setStatus(`พร้อมใช้งาน · ปก ${covers.length} เล่ม`,'ok');
+  draw();
+}
+
+/* ---------- geometry ---------- */
+/* 1080×1080 สูงไม่พอใส่ครบ 6 บล็อก — โหมดกระชับจะตัดคำโปรยกับแถวความน่าเชื่อถือออก */
+function compact(){return S.ratio==='1:1';}
+function dims(){return S.ratio==='1:1'?[1080,1080]:S.ratio==='4:5'?[1080,1350]:[1080,1920];}
+function topInset(H){return S.ratio==='9:16'?H*0.150:H*0.038;}
+function botInset(H){return S.ratio==='9:16'?H*0.210:H*0.038;}
+function rr(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function fit(ctx,t,maxW,start,weight,fam,min){
+  let px=start;
+  while(px>min){ctx.font=`${weight} ${px}px ${fam}`;if(ctx.measureText(t).width<=maxW)break;px-=2;}
+  return px;
+}
+function grain(ctx,W,H){
+  if(!S.grain)return;
+  ctx.save();ctx.globalAlpha=.04;ctx.fillStyle='#fff';
+  for(let i=0;i<W*H/1100;i++)ctx.fillRect(Math.random()*W,Math.random()*H,1,1);
+  ctx.restore();
+}
+
+/* ---------- icons (เส้นวาดเอง ไม่พึ่งฟอนต์ไอคอน) ---------- */
+function icon(ctx,kind,cx,cy,r){
+  ctx.save();ctx.strokeStyle=GOLD;ctx.lineWidth=Math.max(2,r*0.13);
+  ctx.lineCap='round';ctx.lineJoin='round';ctx.fillStyle='none';
+  if(kind===0){ // แว่นขยาย
+    ctx.beginPath();ctx.arc(cx-r*0.15,cy-r*0.15,r*0.55,0,7);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx+r*0.25,cy+r*0.25);ctx.lineTo(cx+r*0.7,cy+r*0.7);ctx.stroke();
+  }else if(kind===1){ // กล่องพัสดุ
+    ctx.beginPath();ctx.rect(cx-r*0.7,cy-r*0.5,r*1.4,r*1.05);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx-r*0.7,cy-r*0.12);ctx.lineTo(cx+r*0.7,cy-r*0.12);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx,cy-r*0.5);ctx.lineTo(cx,cy+r*0.55);ctx.stroke();
+  }else if(kind===2){ // กล้อง
+    ctx.beginPath();ctx.rect(cx-r*0.72,cy-r*0.42,r*1.44,r*0.95);ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy+r*0.05,r*0.3,0,7);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx-r*0.25,cy-r*0.42);ctx.lineTo(cx-r*0.12,cy-r*0.62);
+    ctx.lineTo(cx+r*0.12,cy-r*0.62);ctx.lineTo(cx+r*0.25,cy-r*0.42);ctx.stroke();
+  }else{ // รถส่งของ
+    ctx.beginPath();ctx.rect(cx-r*0.75,cy-r*0.45,r*0.9,r*0.72);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx+r*0.15,cy-r*0.15);ctx.lineTo(cx+r*0.5,cy-r*0.15);
+    ctx.lineTo(cx+r*0.75,cy+r*0.1);ctx.lineTo(cx+r*0.75,cy+r*0.27);ctx.lineTo(cx+r*0.15,cy+r*0.27);ctx.closePath();ctx.stroke();
+    ctx.beginPath();ctx.arc(cx-r*0.4,cy+r*0.4,r*0.17,0,7);ctx.stroke();
+    ctx.beginPath();ctx.arc(cx+r*0.45,cy+r*0.4,r*0.17,0,7);ctx.stroke();
+  }
+  ctx.restore();
+}
+function messengerGlyph(ctx,cx,cy,r,color){
+  ctx.save();ctx.fillStyle=color;
+  ctx.beginPath();ctx.ellipse(cx,cy,r,r*0.94,0,0,7);ctx.fill();
+  ctx.beginPath();ctx.moveTo(cx-r*0.52,cy+r*0.12);ctx.lineTo(cx-r*0.1,cy-r*0.24);
+  ctx.lineTo(cx+r*0.12,cy+r*0.02);ctx.lineTo(cx+r*0.52,cy-r*0.24);
+  ctx.lineTo(cx+r*0.1,cy+r*0.24);ctx.lineTo(cx-r*0.12,cy-r*0.02);ctx.closePath();
+  ctx.globalCompositeOperation='destination-out';ctx.fill();
+  ctx.restore();
+}
+
+/* ---------- blocks ---------- */
+function blockLogo(ctx,W,y){
+  ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';
+  const f=W*0.042;
+  ctx.fillStyle=FG;ctx.font=`800 ${f}px Archivo, Arial, sans-serif`;
+  if('letterSpacing' in ctx)ctx.letterSpacing=`${f*0.05}px`;
+  ctx.fillText('OWARIN STORE',W/2,y);
+  ctx.fillStyle=GOLD;ctx.font=`500 ${f*0.44}px "Noto Sans JP", sans-serif`;
+  if('letterSpacing' in ctx)ctx.letterSpacing=`${f*0.3}px`;
+  ctx.fillText('オワリン商店',W/2,y+f*0.85);
+  ctx.restore();
+  return y+f*1.35;
+}
+function blockHead(ctx,W,y,d){
+  ctx.save();ctx.textAlign='center';ctx.textBaseline='alphabetic';
+  if(d.kicker){
+    ctx.fillStyle=MUTED;ctx.font=`400 ${W*0.026}px "Noto Sans Thai", sans-serif`;
+    if('letterSpacing' in ctx)ctx.letterSpacing=`${W*0.005}px`;
+    ctx.fillText(d.kicker,W/2,y);
+    if('letterSpacing' in ctx)ctx.letterSpacing='0px';
+    y+=W*0.045;
+  }
+  const M=W*0.07;
+  let p1=fit(ctx,d.h1,W-M*2,W*0.076,'700','"Noto Sans Thai", sans-serif',W*0.046);
+  ctx.fillStyle=FG;ctx.font=`700 ${p1}px "Noto Sans Thai", sans-serif`;
+  ctx.fillText(d.h1,W/2,y+p1*0.78);y+=p1*1.00;
+  if(d.h2){
+    let p2=fit(ctx,d.h2,W-M*2,W*0.086,'700','"Noto Sans Thai", sans-serif',W*0.050);
+    ctx.fillStyle=GOLD;ctx.font=`700 ${p2}px "Noto Sans Thai", sans-serif`;
+    ctx.fillText(d.h2,W/2,y+p2*0.86);y+=p2*1.06;
+  }
+  if(d.jp){
+    ctx.fillStyle=GOLD_D;ctx.font=`500 ${W*0.026}px "Shippori Mincho", serif`;
+    if('letterSpacing' in ctx)ctx.letterSpacing=`${W*0.008}px`;
+    ctx.fillText(d.jp,W/2,y+W*0.028);
+    if('letterSpacing' in ctx)ctx.letterSpacing='0px';
+    y+=W*0.048;
+  }
+  if(d.tag&&!compact()){
+    ctx.fillStyle=MUTED;ctx.font=`300 ${W*0.024}px "Noto Sans Thai", sans-serif`;
+    ctx.fillText(d.tag,W/2,y+W*0.024);y+=W*0.040;
+  }
+  ctx.restore();return y;
+}
+/* เลือกจำนวนแถวให้สัดส่วนช่องใกล้เคียงปกจริงที่สุด แล้วยืดความสูงให้เต็มพื้นที่ว่างพอดี */
+function wallPlan(W,availH){
+  const M=W*0.055, gap=W*0.014, cols=4;
+  const cellW=(W-M*2-gap*(cols-1))/cols;
+  const IDEAL=0.56;
+  let best=null;
+  for(let rows=1;rows<=4;rows++){
+    const cellH=(availH-gap*(rows-1))/rows;
+    const ratio=cellH/cellW;
+    if(ratio<0.32||ratio>0.72)continue;
+    const score=Math.abs(ratio-IDEAL);
+    if(!best||score<best.score)best={rows,cellW,cellH,gap,M,cols,score};
+  }
+  if(!best){
+    const rows=Math.max(1,Math.min(4,Math.round(availH/(cellW*IDEAL))));
+    best={rows,cellW,cellH:Math.min(cellW*IDEAL,(availH-gap*(rows-1))/rows),gap,M,cols,score:9};
+  }
+  return best;
+}
+function blockWall(ctx,W,y,availH){
+  const P=wallPlan(W,availH);
+  const M=P.M, gap=P.gap, cols=P.cols, cellW=P.cellW, cellH=P.cellH, useRows=P.rows;
+  if(S.wall==='covers'){
+    const use=picked.length?picked:covers.map((_,i)=>i);
+    for(let i=0;i<useRows*cols;i++){
+      const ci=use[i%Math.max(use.length,1)];
+      const c=covers[ci]; if(!c)continue;
+      const x=M+(i%cols)*(cellW+gap), yy=y+Math.floor(i/cols)*(cellH+gap);
+      ctx.save();ctx.beginPath();ctx.rect(x,yy,cellW,cellH);ctx.clip();
+      const s=Math.max(cellW/c.img.width,cellH/c.img.height);
+      ctx.drawImage(c.img,x+(cellW-c.img.width*s)/2,yy+(cellH-c.img.height*s)/2,
+        c.img.width*s,c.img.height*s);
+      ctx.restore();
+      ctx.strokeStyle='rgba(226,173,40,.30)';ctx.lineWidth=Math.max(1,W*0.0013);
+      ctx.strokeRect(x+.5,yy+.5,cellW-1,cellH-1);
+    }
+  }else{
+    const n=useRows*cols;
+    for(let i=0;i<n;i++){
+      const t=TITLES[i%TITLES.length];
+      const x=M+(i%cols)*(cellW+gap), yy=y+Math.floor(i/cols)*(cellH+gap);
+      ctx.save();
+      ctx.fillStyle=PANEL;ctx.fillRect(x,yy,cellW,cellH);
+      ctx.strokeStyle='rgba(226,173,40,.30)';ctx.lineWidth=Math.max(1,W*0.0013);
+      ctx.strokeRect(x+.5,yy+.5,cellW-1,cellH-1);
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      const px=fit(ctx,t,cellW*0.86,W*0.030,'400','Outfit, sans-serif',W*0.014);
+      ctx.fillStyle=FG;ctx.font=`400 ${px}px Outfit, sans-serif`;
+      if('letterSpacing' in ctx)ctx.letterSpacing=`${px*0.06}px`;
+      ctx.fillText(t,x+cellW/2,yy+cellH/2);
+      ctx.restore();
+    }
+  }
+  return y+useRows*cellH+(useRows-1)*gap;
+}
+function blockPrice(ctx,W,y,d){
+  const M=W*0.055, h=W*0.145;
+  ctx.save();
+  ctx.fillStyle=PANEL;ctx.fillRect(M,y,W-M*2,h);
+  ctx.strokeStyle=GOLD_D;ctx.lineWidth=Math.max(1.5,W*0.0016);
+  ctx.strokeRect(M+.5,y+.5,W-M*2-1,h-1);
+  const cw=(W-M*2)/3;
+  ctx.textAlign='center';
+  const cells=[['เริ่มต้น',d.pMin,'บาท'],['ส่วนใหญ่',d.pMid,'บาท'],['ในสต็อก',d.stock,'เล่ม']];
+  cells.forEach((c,i)=>{
+    const cx=M+cw*i+cw/2;
+    if(i>0){ctx.strokeStyle='rgba(226,173,40,.28)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(M+cw*i,y+h*0.18);ctx.lineTo(M+cw*i,y+h*0.82);ctx.stroke();}
+    ctx.fillStyle=MUTED;ctx.font=`400 ${W*0.021}px "Noto Sans Thai", sans-serif`;
+    ctx.textBaseline='alphabetic';
+    ctx.fillText(c[0],cx,y+h*0.30);
+    const np=fit(ctx,c[1],cw*0.74,W*0.062,'700','Archivo, Arial, sans-serif',W*0.032);
+    ctx.fillStyle=GOLD;ctx.font=`700 ${np}px Archivo, Arial, sans-serif`;
+    ctx.fillText(c[1],cx,y+h*0.66);
+    ctx.fillStyle=MUTED;ctx.font=`300 ${W*0.020}px "Noto Sans Thai", sans-serif`;
+    ctx.fillText(c[2],cx,y+h*0.86);
+  });
+  ctx.restore();return y+h;
+}
+function blockTrust(ctx,W,y,d){
+  const M=W*0.055, cw=(W-M*2)/4, h=W*0.105;
+  ctx.save();ctx.textAlign='center';ctx.textBaseline='alphabetic';
+  [d.t1,d.t2,d.t3,d.t4].forEach((t,i)=>{
+    const cx=M+cw*i+cw/2;
+    icon(ctx,i,cx,y+h*0.30,W*0.030);
+    ctx.fillStyle=MUTED;
+    const px=fit(ctx,t,cw*0.94,W*0.0195,'400','"Noto Sans Thai", sans-serif',W*0.013);
+    ctx.font=`400 ${px}px "Noto Sans Thai", sans-serif`;
+    ctx.fillText(t,cx,y+h*0.80);
+  });
+  ctx.restore();return y+h;
+}
+function blockCTA(ctx,W,y,d){
+  const M=W*0.055, h=W*0.098;
+  ctx.save();
+  ctx.fillStyle=GOLD;rr(ctx,M,y,W-M*2,h,h/2);ctx.fill();
+  const px=fit(ctx,d.cta,W-M*2-h*2.2,W*0.036,'600','"Noto Sans Thai", sans-serif',W*0.022);
+  ctx.font=`600 ${px}px "Noto Sans Thai", sans-serif`;
+  const tw=ctx.measureText(d.cta).width;
+  const gr=h*0.30, gx=W/2-(tw+gr*2.6)/2+gr;
+  messengerGlyph(ctx,gx,y+h/2,gr,'#0d0d0d');
+  ctx.fillStyle='#0d0d0d';ctx.textAlign='left';ctx.textBaseline='middle';
+  ctx.fillText(d.cta,gx+gr*1.5,y+h/2+px*0.04);
+  ctx.restore();return y+h;
+}
+
+/* ---------- render ---------- */
+function draw(){
+  const [W,H]=dims();
+  const cv=$('preview');cv.width=W;cv.height=H;
+  cv.style.width=(S.ratio==='9:16'?330:S.ratio==='4:5'?430:470)+'px';
+  const ctx=cv.getContext('2d');
+  const d={kicker:$('kicker').value.trim(),h1:$('h1').value.trim(),h2:$('h2').value.trim(),
+    jp:$('jp').value.trim(),tag:$('tag').value.trim(),pMin:$('pMin').value.trim(),
+    pMid:$('pMid').value.trim(),stock:$('stock').value.trim(),
+    t1:$('t1').value.trim(),t2:$('t2').value.trim(),t3:$('t3').value.trim(),t4:$('t4').value.trim(),
+    cta:$('cta').value.trim()};
+
+  ctx.fillStyle=BG;ctx.fillRect(0,0,W,H);
+  // ขอบทองบางรอบใบ
+  ctx.strokeStyle='rgba(226,173,40,.22)';ctx.lineWidth=Math.max(2,W*0.0022);
+  const ins=W*0.018;ctx.strokeRect(ins,ins,W-ins*2,H-ins*2);
+  grain(ctx,W,H);
+
+  const tI=topInset(H), bI=botInset(H);
+  let y=tI+W*0.045;
+  y=blockLogo(ctx,W,y);
+  // เส้นขีดทอง
+  ctx.fillStyle=GOLD;ctx.fillRect(W/2-W*0.055,y+W*0.012,W*0.11,2);
+  y+=W*0.045;
+  y=blockHead(ctx,W,y,d);
+
+  // คำนวณพื้นที่ที่เหลือให้กำแพงพิสูจน์
+  const G1=W*0.026, G2=W*0.018; // ช่องไฟระหว่างบล็อกล่าง
+  const bottomStack=compact()
+    ? W*0.145+G1+W*0.098                    // price + cta
+    : W*0.145+G1+W*0.105+G2+W*0.098;        // price + trust + cta
+  const wallTop=y+W*0.022;
+  const bottomStart=H-bI-bottomStack;
+  const wallAvail=Math.max(bottomStart-wallTop-W*0.024,W*0.16);
+  blockWall(ctx,W,wallTop,wallAvail);
+
+  let by=bottomStart;
+  by=blockPrice(ctx,W,by,d)+G1;
+  if(!compact())by=blockTrust(ctx,W,by,d)+G2;
+  blockCTA(ctx,W,by,d);
+
+  if(S.safe){
+    ctx.save();ctx.fillStyle='rgba(220,60,60,.22)';
+    const t=S.ratio==='9:16'?H*0.14:H*0.05, b=S.ratio==='9:16'?H*0.20:H*0.05;
+    ctx.fillRect(0,0,W,t);ctx.fillRect(0,H-b,W,b);
+    ctx.strokeStyle='rgba(220,60,60,.6)';ctx.lineWidth=2;ctx.strokeRect(0,t,W,H-t-b);
+    ctx.restore();
+  }
+  $('dims').textContent=`${W} × ${H}`;
+}
+
+/* ---------- ui ---------- */
+['kicker','h1','h2','jp','tag','pMin','pMid','stock','t1','t2','t3','t4','cta']
+  .forEach(id=>$(id).addEventListener('input',draw));
+const WHINT={covers:'ครอปส่วนบนของปกจริง — เลี่ยงลายน้ำ เห็นโลโก้เกมชัด ปลอดภัยเรื่องลิขสิทธิ์เพราะเป็นรูปสินค้าที่คุณถือครองจริง',
+  titles:'ตัวหนังสือชื่อซีรีส์ — สะอาดกว่า แต่ชื่อเกมเป็นเครื่องหมายการค้าของผู้พัฒนา มีโอกาสถูก Meta ปฏิเสธมากกว่า'};
+function seg(id,key,cb){
+  $(id).onclick=e=>{const b=e.target.closest('button');if(!b)return;
+    [...$(id).children].forEach(x=>x.classList.remove('on'));b.classList.add('on');
+    S[key]=b.dataset.v;if(cb)cb();draw();};
+}
+seg('segWall','wall',()=>{$('wallHint').textContent=WHINT[S.wall];
+  $('coverPick').style.display=S.wall==='covers'?'grid':'none';});
+seg('segRatio','ratio');
+$('wallHint').textContent=WHINT.covers;
+$('safe').onchange=e=>{S.safe=e.target.checked;draw();};
+$('grain').onchange=e=>{S.grain=e.target.checked;draw();};
+$('btnShuffle').onclick=()=>{picked=picked.slice().sort(()=>Math.random()-.5);draw();};
+
+function setStatus(t,c){$('status').textContent=t;$('status').className=c||'';}
+
+/* CSV recompute */
+$('btnCsv').onclick=()=>$('csv').click();
+$('csv').onchange=e=>{
+  const f=e.target.files[0];if(!f)return;
+  f.text().then(t=>{
+    const lines=t.split('\n').filter(x=>x.trim());
+    const hdr=lines[0].replace(/^﻿/,'').split(',').map(s=>s.trim());
+    const pi=hdr.indexOf('price');
+    if(pi<0){setStatus('ไม่พบคอลัมน์ price','err');return;}
+    const ps=[];
+    for(let i=1;i<lines.length;i++){
+      const m=lines[i].match(/(\d+(?:\.\d+)?)\s*THB/);
+      if(m)ps.push(parseFloat(m[1]));
+    }
+    if(!ps.length){setStatus('อ่านราคาไม่ได้','err');return;}
+    ps.sort((a,b)=>a-b);
+    const q1=ps[Math.floor(ps.length*0.25)], q3=ps[Math.floor(ps.length*0.75)];
+    $('pMin').value=String(Math.round(ps[0]));
+    $('pMid').value=`${Math.round(q1)}–${Math.round(q3)}`;
+    $('stock').value=String(ps.length);
+    $('csvNote').textContent=`คำนวณจาก ${ps.length} รายการ · ต่ำสุด ${ps[0]} · กลาง ${ps[Math.floor(ps.length/2)]} · สูงสุด ${ps[ps.length-1]}`;
+    setStatus('อัปเดตตัวเลขจาก CSV แล้ว','ok');draw();
+  });
+};
+
+/* export */
+function save(tag){
+  const was=S.safe;if(was){S.safe=false;draw();}
+  $('preview').toBlob(b=>{
+    const a=document.createElement('a');a.href=URL.createObjectURL(b);
+    a.download=`OWARIN_intro_${tag}_${S.ratio.replace(':','x')}.png`;a.click();
+    if(was){S.safe=true;draw();}
+  },'image/png');
+}
+$('btnPng').onclick=()=>{save(S.wall);setStatus('บันทึกแล้ว','ok');};
+$('btnBoth').onclick=async()=>{
+  const orig=S.wall;
+  S.wall='covers';[...$('segWall').children].forEach(x=>x.classList.toggle('on',x.dataset.v==='covers'));
+  draw();await new Promise(r=>setTimeout(r,220));save('covers');
+  await new Promise(r=>setTimeout(r,600));
+  S.wall='titles';[...$('segWall').children].forEach(x=>x.classList.toggle('on',x.dataset.v==='titles'));
+  draw();await new Promise(r=>setTimeout(r,220));save('titles');
+  await new Promise(r=>setTimeout(r,400));
+  S.wall=orig;[...$('segWall').children].forEach(x=>x.classList.toggle('on',x.dataset.v===orig));
+  draw();setStatus('บันทึกครบ 2 แบบแล้ว','ok');
+};
+
+initCovers();draw();
+</script>
+</body>
+</html>

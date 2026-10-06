@@ -1,0 +1,13 @@
+P1-20260929-12 | 2026-09-29 15:15 +07 | separate synthetic test only
+
+Baseline: GGB 15, MAG 10 synthetic rows, 56 journal events; GGB row 18 and journal row 58 empty.
+Temporary Code.gs suffix: exact test Sheet ID and exact A26 title; 20-second sleep after original addInventoryRow returned. Combined syntax PASS; editor source prefix exact baseline and suffix LF-normalized exact timeout-wrapper.gs; Saved to Drive.
+Request ID add-1790669607287-e115wef5uuj: Save showed Saving…, then immediate browser reload. Reopened Add showed same unresolved ID, original frozen draft and Retry same request.
+Before retry: GGB row 18 A26 OWA-GGBS016N00, New Arrival; journal row 58 PREPARED and row 59 DONE. DONE snapshot Cost 0 Price 270.
+Retry: same stored ID/payload, journal row 60 attempt-2 DONE; no row 19; form reset, Save label restored. Closing modal showed 26/26 and one A26 card.
+After removing only appended suffix: full Apps Script editor copy exactly equals pre-probe source; LF SHA256 D1D4DEE32188B35807DD8B3C5A0F6DEAEE7EF14C4C8A1B14769E4844E0A090AD; Saved to Drive.
+Fresh XLSX export: 23,720 bytes. Bounded Sheet read GGB 16, MAG 10, 59 journal events through row 60, rows 19 and 61-62 empty. /dev reload after source restoration shows 26/26 and one A26 card.
+P1-12 changes.csv: 7 unique parsed event IDs; Implementation current status updated and one P1-12 section appended; HANDOFF has one new session; before→after diffs saved here.
+
+Limit: page reload interrupted a delayed callback; actual transport timeout and stale response after a newer draft were not forced. Browser storage is tab-scoped; cross-tab/new-device reconciliation and general non-DONE recovery remain open.
+Recovery: temporary wrapper already removed. Keep A26 and its linked journal rows for reconciliation; do not delete the Sheet or generate a new Request ID for uncertain outcomes. Test deployment version 2 was unchanged, and production was untouched.

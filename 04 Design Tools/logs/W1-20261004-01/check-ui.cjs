@@ -1,0 +1,2 @@
+const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),w=require('./work.cjs');
+for(const name of ['ui.test.cjs','check-cancel.cjs','candidate/p1-ui.test.cjs','candidate/Index.test.js']){const r=cp.spawnSync(process.execPath,[path.join(__dirname,name)],{encoding:'utf8'});const out=(r.stdout||'')+(r.stderr||'');fs.writeFileSync(path.join(w.dir,name.replaceAll('/','-')+'.txt'),out);w.log('UI-CANCEL-F01-TEST','Run '+name,'exit '+r.status+' / output '+w.sha(out));console.log(name+' exit '+r.status+'\n'+out);if(r.status)process.exitCode=1;}

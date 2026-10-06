@@ -1,0 +1,17 @@
+W1Orders.gs:36
+  if(!r[0]||!r[2]||!r[4]||!r[5]||!r[7]||!r[8])throw new Error('CORRUPT_JOURNAL manual reconciliation required');
+                                              ^
+
+Error: CORRUPT_JOURNAL manual reconciliation required
+    at W1Orders.gs:36:53
+    at Array.forEach (<anonymous>)
+    at _w1Requests_ (W1Orders.gs:35:41)
+    at _w1TechnicalGate_ (W1Orders.gs:42:10)
+    at W1Orders.gs:190:28
+    at _withLock (Code_v32.gs:272:12)
+    at Object._w1Mutate_ (W1Orders.gs:189:9)
+    at create (C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:3:64)
+    at C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:7:130
+    at test (C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:2:34)
+
+Node.js v24.14.0

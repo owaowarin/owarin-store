@@ -1,0 +1,1 @@
+{"source":"{\r\n  \"timeZone\": \"Asia/Bangkok\",\r\n  \"dependencies\": {},\r\n  \"exceptionLogging\": \"STACKDRIVER\",\r\n  \"runtimeVersion\": \"V8\",\r\n  \"webapp\": {\r\n    \"executeAs\": \"USER_DEPLOYING\",\r\n    \"access\": \"MYSELF\"\r\n  }\r\n}","projectId":"1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp","capturedAt":"2026-10-05T19:57:28.218Z"}

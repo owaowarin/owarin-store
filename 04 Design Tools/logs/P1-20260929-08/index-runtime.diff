@@ -1,0 +1,13 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\P1-20260929-08\\index-runtime-before.html" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\P1-20260929-01\\runtime-source\\Index.html"
+index 7219835..458f49c 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\P1-20260929-08\\index-runtime-before.html"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\P1-20260929-01\\runtime-source\\Index.html"	
+@@ -639,7 +639,7 @@ function findBySku(source, sku){
+ function inventoryRows(){
+   return S.allSheets ? S.data.GGB.concat(S.data.MAG) : S.data[S.source];
+ }
+-function addToCache(item){ S.data[item.source].push(item); }
++function addToCache(item){ replaceInCache(item.productId, item); }
+ function replaceInCache(prevSku, item){
+   var arr = S.data[item.source];
+   for (var i = 0; i < arr.length; i++) {

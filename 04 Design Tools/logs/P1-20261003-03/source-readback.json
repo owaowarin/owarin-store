@@ -1,0 +1,22 @@
+{
+  "recorded_at": "2026-10-03 21:56:32 +0700",
+  "project_id": "1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp",
+  "saved_to_drive_observed": true,
+  "method": "Fresh editor reload and exact full clipboard string comparison; LF normalized",
+  "sha256": {
+    "Code_v31.gs": "6EF098CD39F5B82F888D60A41577C71ECD3C81C26D4E4604E41EEFB27E87CD5D",
+    "WebApp_v31.gs": "7102CC7FA4735F5859B7E8F11092B0CADC2BF155E5D204658949A11696ACE67D",
+    "Index.html": "5ECE912BC9AE2F7D7FBB9662C2E417B125F78930C68C0D9A03619DE44EB69AEB",
+    "P1Journal.gs": "FDF4B656488EA92DB4CCB50B573AC75BFD8AA27C91769B425E03FF06509890BF"
+  },
+  "deployment": {
+    "id": "AKfycbxk-2PAuL3asvDlF0VmftrF7pwkMuQr3qUnTtej0j9MfxLaG1l4Mb39oQ1Q-2CkSYOn",
+    "before_version": 3,
+    "after_version": 4,
+    "success_ui_time": "2026-10-03 21:44 Bangkok",
+    "execute_as": "owner",
+    "access": "Only myself",
+    "url": "https://script.google.com/macros/s/AKfycbxk-2PAuL3asvDlF0VmftrF7pwkMuQr3qUnTtej0j9MfxLaG1l4Mb39oQ1Q-2CkSYOn/exec"
+  },
+  "journal_sheet_id": 1424987581
+}

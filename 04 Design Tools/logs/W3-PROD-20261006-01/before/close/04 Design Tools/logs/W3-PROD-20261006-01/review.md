@@ -1,0 +1,9 @@
+# v40 focused review — current writer
+
+Scope: frozen W2 v39 rebased with the three verified fresh Code v32 FB Album changes. Correct candidate Index text replaces the pre-existing damaged character; W1 pending/dialog keys identify the production project. No QA source, synthetic data or external call is installed. No separate model switch or Astra-specific sign-off is claimed.
+
+Shared schema helpers retain the exact test guards at public test entrypoints. Production entrypoints require active/effective owner equality, exact real Sheet ID and an already-valid ADD REQUESTS journal. CLIENT must exist with exact A:F/6-or-8-column schema before bootstrap; wrong schema/Sheet/actor cannot write. Bootstrap initializes only missing/empty technical tables and appended identity headers under the existing lock, with readback. It never changes a legacy business cell or enables triggers. A partial nonempty table header deliberately requires manual reconciliation rather than guessing.
+
+CLIENT migration uses the existing durable W2 runner and a distinct fixed production request ID. Allocated IDs/time and original values survive failure/retry; blank rows remain blank, equal names receive distinct IDs, original A:F (including numeric legacy/leading zeros/formulas) are never rewritten. Existing after-effect and changed-data guards remain. Requested schema can be retried only through prodReleaseMigrate with the original ID; incomplete recovery blocks sibling transactions.
+
+Checks: release.test.cjs PASS nine groups including five after-effect boundaries and external-change blocking; existing W2 suite against actual v40 sources PASS14 groups, renderer six checks and Orders stale-response check. Transactions outside the schema helper region are unchanged from accepted v39 except journal version label. No production data/source/deployment write has occurred at this review checkpoint. Native execution/readback/export and UI smoke remain required before release PASS.

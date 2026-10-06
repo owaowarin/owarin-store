@@ -1,0 +1,81 @@
+{
+  "Verified": "2026-09-23 01:31:49 +07:00",
+  "Status": "OFFLINE-HARDENING-PASSED-NOT-DEPLOYED",
+  "Files": [
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\r2-queue-worker.py",
+      "Bytes": 26826,
+      "SHA256": "98A3618584747089933CBE5B631EA8D194C1F8A3E1506AABF691AB7A869C49AF"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\export-instock-snapshot.ps1",
+      "Bytes": 15290,
+      "SHA256": "FAB4E5DECA773AFD19099DC78CC79FA716774F77837A7D420DB8B649330C6E12"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\image-library.test.ps1",
+      "Bytes": 6096,
+      "SHA256": "F4143F47BEC99AADD1632647D0A70226F639FC16238C201143A8F567C5C4A501"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\BASELINE-R2-REVIEW_2026-09-23.md",
+      "Bytes": 8936,
+      "SHA256": "717405DF11B3D10FD8960445A1A953248A17728A63838549D38A930F29B47F7F"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\HANDOFF_2026-09-23.md",
+      "Bytes": 4363,
+      "SHA256": "4E2F194020CC6650318112FD84D740036034A1E6912AA0F2390DCCC858119558"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\worker_hardening_20260923-012809\\priority-route-alias-proposals.csv",
+      "Bytes": 18875,
+      "SHA256": "6255FBA37E62B0C1C4F599722A9A11B37C29ECCD9E16DA0A0035D77F1EF79BB1"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\worker_hardening_20260923-012809\\type-route-proposals.csv",
+      "Bytes": 630,
+      "SHA256": "D226D7349EF534BBBADCC683C6E920AEFBB243C58AF8755DBC14C4A71BB0F8B4"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\worker_hardening_20260923-012809\\summary.json",
+      "Bytes": 499,
+      "SHA256": "3A1C2A226DCEADCDBA2D80ADB3FE780A18C1FD6FE855EA5847B2E56F13C4D460"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\worker_hardening_20260923-012809\\action-log.csv",
+      "Bytes": 1560,
+      "SHA256": "94AB3A14FE4839EBD7FE83DF50DA248ADBBEB986CE2C1713CD5A9AFB0A7A1078"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\worker_hardening_20260923-012809\\test-results.csv",
+      "Bytes": 176,
+      "SHA256": "7B293318A994A1BC04427F5DFA39C6706A89B95930DDB23D1D10C3EE69709EA0"
+    }
+  ],
+  "Tests": [
+    {
+      "Check": "python py_compile",
+      "ExitCode": "0",
+      "Result": "PASS"
+    },
+    {
+      "Check": "r2 worker self-test",
+      "ExitCode": "0",
+      "Result": "PASS"
+    },
+    {
+      "Check": "image library/exporter integration",
+      "ExitCode": "0",
+      "Result": "PASS"
+    },
+    {
+      "Check": "PowerShell parser",
+      "ExitCode": "0",
+      "Result": "PASS"
+    }
+  ],
+  "LegacyLedgerDetected": true,
+  "DefaultLedgerDetected": false,
+  "ProductionMutation": "NONE"
+}

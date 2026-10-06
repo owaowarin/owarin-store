@@ -1,0 +1,339 @@
+{
+  "SALES": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Order ID",
+      "Item Name Sold",
+      "Order date",
+      "Cost",
+      "Price",
+      "Shipping Cost",
+      "Net Profit",
+      "Note",
+      "Product ID",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "REFRESH LOG": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Time",
+      "Mode",
+      "Status",
+      "Ready",
+      "Wrong status",
+      "Incomplete",
+      "Note",
+      "Error"
+    ]
+  },
+  "GAME GUIDE BOOKS": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Item name",
+      "Product ID",
+      "Status",
+      "Condition",
+      "Copy Flags",
+      "Rarity",
+      "Publisher",
+      "Platform",
+      "Genre",
+      "Original",
+      "Cost",
+      "Price Range",
+      "Price",
+      "Gross Profit",
+      "Market Place\nPrice",
+      "Gross Profit MP",
+      "Market Ref",
+      "Ref Note",
+      "Listed Date",
+      "Sold Date",
+      "Suggested Price",
+      "Price Content Lists",
+      "Max G Ref",
+      "Shopee Upload",
+      "Type",
+      "Sub Genre",
+      "Column 25",
+      "Column 26",
+      "Column 27",
+      "Column 28",
+      "Column 29",
+      "Column 30"
+    ]
+  },
+  "MAGAZINE": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Item name",
+      "Product ID",
+      "Status",
+      "Condition",
+      "Copy Flags",
+      "Rarity",
+      "Publisher",
+      "Original",
+      "Cost",
+      "Price Range",
+      "Price",
+      "Gross Profit",
+      "Market Place\nPrice",
+      "Gross Profit MP",
+      "Market Ref",
+      "Ref Note",
+      "Listed Date",
+      "Sold Date",
+      "Suggested Price",
+      "Price Content Lists",
+      "Max G Ref",
+      "Shopee Upload",
+      "Type",
+      "Column 24",
+      "Column 25",
+      "Column 26",
+      "Column 27",
+      "Column 28",
+      "Column 29",
+      "Column 30"
+    ]
+  },
+  "CLIENT": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Facebook Account",
+      "Name",
+      "Phone Number",
+      "Address",
+      "Post Code",
+      "Note"
+    ]
+  },
+  "FB CATALOGUE ARCHIVE": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Archived at",
+      "Reason",
+      "Product ID",
+      "FB Title",
+      "Freebies",
+      "Synopsis",
+      "Price",
+      "Marketplace Price",
+      "price (Meta format)",
+      "mp price (Meta format)",
+      "Helper Raw Name",
+      "Helper Base Title",
+      "Description",
+      "id",
+      "title",
+      "availability",
+      "condition",
+      "link",
+      "image_link",
+      "brand"
+    ]
+  },
+  "R2 JOBS": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Request ID",
+      "Batch ID",
+      "Requested UTC",
+      "Mode",
+      "Source",
+      "Product ID",
+      "Item name",
+      "Type",
+      "Requested Status",
+      "Input fingerprint",
+      "Plan ID",
+      "Plan hash",
+      "Scope version",
+      "Snapshot read UTC"
+    ]
+  },
+  "IMAGE UPLOADS": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Request ID",
+      "Batch ID",
+      "Source",
+      "Product ID",
+      "Item name",
+      "Input fingerprint",
+      "Manifest hash",
+      "State",
+      "Photo count",
+      "Cover URL",
+      "Image URLs",
+      "Run ID",
+      "Plan ID",
+      "Plan hash",
+      "Last checked UTC",
+      "Last success UTC",
+      "Error",
+      "Local output path",
+      "Snapshot read UTC"
+    ]
+  },
+  "FB ALBUM CAPTION": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Product ID",
+      "Item name",
+      "Sheet",
+      "Image URL",
+      "Caption",
+      "Posted"
+    ]
+  },
+  "FB CATALOGUE": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Product ID",
+      "FB Title",
+      "Freebies",
+      "Synopsis",
+      "Price",
+      "Marketplace Price",
+      "price (Meta format)",
+      "mp price (Meta format)",
+      "Helper Raw Name",
+      "Helper Base Title",
+      "Description",
+      "id",
+      "title",
+      "availability",
+      "condition",
+      "link",
+      "image_link",
+      "brand"
+    ]
+  },
+  "FB ALBUMS": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "album_key (Type)",
+      "album_id",
+      "Album name on Page",
+      "Photos",
+      "active",
+      null,
+      "Last run",
+      "2026-09-22 08:43:00"
+    ]
+  },
+  "TYPE LIST": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Type",
+      "Album name"
+    ]
+  },
+  "R2 IMAGES": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Product ID\tImage 1\tImage 2\t\tpid\tn"
+    ]
+  },
+  "GAME INFO": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Base Title",
+      "Synopsis",
+      "Series",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "META EXPORT": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "id",
+      "title",
+      "description",
+      "availability",
+      "condition",
+      "price",
+      "link",
+      "image_link",
+      "brand",
+      "quantity_to_sell_on_facebook"
+    ]
+  },
+  "BOOKING": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Customer Name",
+      "Game Title",
+      "Queue",
+      "Status",
+      "Note"
+    ]
+  },
+  "TEMPLATES": {
+    "rows": null,
+    "columns": null,
+    "headers": [
+      "Template Name",
+      "Content",
+      "Content Alt",
+      "Column 3"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+<script>
+var remoteSuggestionEpoch=0;
+function attachSuggest(inputId,boxId,listFn,onChoose,options){
+ options=options||{};var inp=$(inputId),box=$(boxId),items=[],active=-1,blurTimer,debounce;
+ function hide(){box.style.display='none';active=-1;}
+ addSuggestionResets.push(function(){clearTimeout(blurTimer);clearTimeout(debounce);items=[];box.innerHTML='';hide();});
+ function paint(){var nodes=box.querySelectorAll('.sug-i');for(var i=0;i<nodes.length;i++)nodes[i].classList.toggle('on',i===active);if(active>=0&&nodes[active])nodes[active].scrollIntoView({block:'nearest'});}
+ function choose(v){inp.value=typeof v==='object'?v.label:v;hide();if(onChoose)onChoose(v);}
+ function display(list,q){var pre=[],mid=[];if(options.remote)items=list.slice(0,8);else{list.forEach(function(v){var text=String(typeof v==='object'?v.searchText:v).toLowerCase();if(text.indexOf(q)===0)pre.push(v);else if(text.indexOf(q)!==-1)mid.push(v);});items=pre.concat(mid).slice(0,50);}
+  if(!items.length){hide();return;}box.innerHTML=items.map(v=>'<div class="sug-i">'+esc(typeof v==='object'?v.label:v)+'</div>').join('');active=-1;box.style.display='block';}
+ function build(){var q=inp.value.trim().toLowerCase(),ticket=remoteSuggestionEpoch;if(!q){items=[];hide();return;}if(options.remote){Promise.resolve(listFn(q)).then(list=>{if(ticket!==remoteSuggestionEpoch||q!==inp.value.trim().toLowerCase())return;display(list,q);}).catch(()=>hide());}else display(listFn(),q);}
+ inp.addEventListener('input',function(){if(options.remote){remoteSuggestionEpoch++;document.querySelectorAll('#w2Modal .w2-suggest').forEach(n=>n.style.display='none');clearTimeout(debounce);debounce=setTimeout(build,200);}else build();});
+ inp.addEventListener('keydown',function(e){if(box.style.display==='none'||!items.length)return;if(e.key==='ArrowDown'){e.preventDefault();active=(active+1)%items.length;paint();}else if(e.key==='ArrowUp'){e.preventDefault();active=active<=0?items.length-1:active-1;paint();}else if(e.key==='Enter'&&active>=0){e.preventDefault();choose(items[active]);}else if(e.key==='Escape')hide();});
+ box.addEventListener('mousedown',function(e){var node=e.target.closest('.sug-i');if(!node)return;e.preventDefault();var i=[...box.querySelectorAll('.sug-i')].indexOf(node);choose(items[i]);});
+ inp.addEventListener('blur',function(){blurTimer=setTimeout(hide,150);});
+}
+</script>

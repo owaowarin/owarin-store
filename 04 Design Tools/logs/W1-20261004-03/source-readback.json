@@ -1,0 +1,38 @@
+{
+  "time": "2026-10-04 05:51:03 +0700",
+  "revision": "W1-20261004-03/v33@1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20",
+  "files": [
+    {
+      "file": "Code.gs",
+      "chars": 181311,
+      "sha256LF": "E060FEBD97734204B6BDC8D95C68E29F9908AD5F74D8BABD4F27E6A0B5F605DA",
+      "freshExactReadback": true
+    },
+    {
+      "file": "Webapp.gs",
+      "chars": 32265,
+      "sha256LF": "029E11F9E7FD06647521D0A028A5229CCF16F5730383F8250077BCA4BA3EAD2F",
+      "freshExactReadback": true
+    },
+    {
+      "file": "W1Orders.gs",
+      "chars": 31931,
+      "sha256LF": "D131D597CD7C2A72320F0F3088986E4F89337FA48C432F4AB13CB3DFD4EF208F",
+      "freshExactReadback": true
+    },
+    {
+      "file": "W1Qa.gs",
+      "chars": 6159,
+      "sha256LF": "E0BFC63EB423BB14C2567661D562C8EF04E210D66711807CF7F8F3C5A58A5FEC",
+      "freshExactReadback": true
+    },
+    {
+      "file": "Index.html",
+      "chars": 111820,
+      "sha256LF": "CEAD6787B9EF52D5B94A63381DC4FB4CBB64CFC367649519FA97C1AE712B6803",
+      "freshExactReadback": true
+    }
+  ],
+  "manifest": "appsscript.json unchanged byte-for-byte from frozen Session37 staged constrained manifest; not newly clipboard-read this session",
+  "transforms": "Code sanitized bank; Index test-only QA controls/project key transforms inherited; W1Qa test-only"
+}

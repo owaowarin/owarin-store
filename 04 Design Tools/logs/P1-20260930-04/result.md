@@ -1,0 +1,9 @@
+# P1-20 first Add after saved test source
+
+Change ID P1-20260930-04; live synthetic Request ID `add-1790703155002-hztup0z5ec`, attempt 1. Target only the separate owner-only test `/dev` and Sheet `13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM`. No shop source/schema/data/deploy, independent Back House LAB, or test `/exec` deploy.
+
+Fresh pre-write Sheet export `test-sheet-before.xlsx` SHA256 `AA3D1329E1327AB1457ED1B9C0CC6E049C80C6A79C4283C1C9DA829AAD6655BD`: GGB 19 named items, MAG 10, ADD REQUESTS 68 events; GGB row 22 and journal row 70 empty. In test `/dev`, submitted `Synthetic QA SavedSource 20260930 A30`, publisher TEST, Original 300, Cost 100, Price 292, status New Arrival. UI showed Saving with fields disabled, then Added `OWA-GGBS020N00`, reset the form, and displayed the item once.
+
+Fresh post-write export `test-sheet-after.xlsx` SHA256 `4C83218198C79811D5D7E6CA8944EF6487450813BD4A5909878125600BE32919`: GGB row 22 has A30/SKU020/New Arrival/TEST/300/100/292, derived formula cells N/O/P present, row 23 empty. Journal rows 70–71 contain the same Request ID, attempt 1 PREPARED→DONE, row 22/SKU020; row 72 empty. All earlier GGB exported values/formulas, all MAG values/formulas, and journal rows 1–69 are identical to the pre-write export. Final named items GGB 20, MAG 10; journal 70 events. `inspect-after.py` and `readback.txt` contain the executable assertions and compact readback.
+
+No error or business retry; no recovery mutation needed. Preserve this synthetic row and journal pair as evidence. A corrupt-result replay guard and 45-second UI timeout are now saved in the separate test Apps Script, but this normal Add exercises neither failure branch and is **not** a true transport timeout test. Next: bounded delayed/no-callback test using only the separate test setup, with same-ID reconciliation before any retry. The shop still lacks the ADD REQUESTS schema.

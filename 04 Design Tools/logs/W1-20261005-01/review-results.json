@@ -1,0 +1,19 @@
+{
+  "revision": "W1-20261004-05/v37@4495CECEB8821B2CFF4B04482B7395A922E371766F0A1E650A956C953B9DE38E",
+  "localOnly": true,
+  "realGoogleDecimalReadback": "not tested by this script",
+  "checks": [
+    {
+      "mode": "existing-JS-formula-fixture",
+      "outcome": "SOLD"
+    },
+    {
+      "mode": "cent-exact-numeric-formula-readback",
+      "outcome": "NEEDS_REVIEW on first call and same-ID retry",
+      "correctProfit": 280.03,
+      "jsExpected": 280.03000000000003,
+      "salesRows": 1,
+      "siblingBlocked": true
+    }
+  ]
+}

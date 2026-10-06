@@ -1,0 +1,53 @@
+{
+  "changeId": "P1-20260929-01",
+  "sourceChecks": [
+    {
+      "path": "03 Apps Script\\Web App\\Code_v27.gs",
+      "expected": "EF8C6D347E7EC4235AEFFDB6EED2925C4BFA7F1E36726E60D61F2466F58A6832",
+      "actual": "EF8C6D347E7EC4235AEFFDB6EED2925C4BFA7F1E36726E60D61F2466F58A6832",
+      "pass": true
+    },
+    {
+      "path": "03 Apps Script\\Web App\\WebApp_v25.gs",
+      "expected": "2CEE59212CC5DB464330EE91E476E35D8DAF89700D1CE3D056C61BC2099E3D0A",
+      "actual": "2CEE59212CC5DB464330EE91E476E35D8DAF89700D1CE3D056C61BC2099E3D0A",
+      "pass": true
+    },
+    {
+      "path": "03 Apps Script\\Web App\\Index.html",
+      "expected": "0F7C099C761DCE35DFC27D562AA98D3A34EF4B6A0A6224670BB18ED61E384FD3",
+      "actual": "0F7C099C761DCE35DFC27D562AA98D3A34EF4B6A0A6224670BB18ED61E384FD3",
+      "pass": true
+    },
+    {
+      "path": "03 Apps Script\\Web App\\R2Upload.gs",
+      "expected": "B3219C742E03DF97283AA0DB686D9D912303A2F2E1F43B9EBDF2E8FB7EECD960",
+      "actual": "B3219C742E03DF97283AA0DB686D9D912303A2F2E1F43B9EBDF2E8FB7EECD960",
+      "pass": true
+    },
+    {
+      "path": "03 Apps Script\\FbAlbum.gs",
+      "expected": "8D806616D60352A2249E2F6371D35E2017C04A0776205D2FBC0512CFBB2E0E30",
+      "actual": "8D806616D60352A2249E2F6371D35E2017C04A0776205D2FBC0512CFBB2E0E30",
+      "pass": true
+    }
+  ],
+  "implementationHistoryBytePreserved": true,
+  "handoffHistoryBytePreserved": true,
+  "candidateHashes": [
+    {
+      "name": "Code.gs",
+      "sha256": "FD5B470D376713DD7DFB424C69EF6CAACF001FE29B5B66432483566B9FD577A7"
+    },
+    {
+      "name": "Index.html",
+      "sha256": "8BCDA256FF8029416B32B96DCE837068F50229CF4835C695286A109E42C4B048"
+    },
+    {
+      "name": "webapp.gs",
+      "sha256": "18757D9976FE45B57631154B4ECDE38AC5B921A9546F402647D74AA1F9F55582"
+    }
+  ],
+  "testScriptSourceInstalled": false,
+  "googleRuntimeQA": false
+}

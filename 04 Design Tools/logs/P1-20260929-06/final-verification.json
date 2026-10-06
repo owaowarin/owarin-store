@@ -1,0 +1,38 @@
+{
+  "changeId": "P1-20260929-06",
+  "productionSources": [
+    {
+      "path": "03 Apps Script\\Web App\\Code_v27.gs",
+      "unchanged": true
+    },
+    {
+      "path": "03 Apps Script\\Web App\\WebApp_v25.gs",
+      "unchanged": true
+    },
+    {
+      "path": "03 Apps Script\\Web App\\Index.html",
+      "unchanged": true
+    },
+    {
+      "path": "03 Apps Script\\Web App\\R2Upload.gs",
+      "unchanged": true
+    },
+    {
+      "path": "03 Apps Script\\FbAlbum.gs",
+      "unchanged": true
+    }
+  ],
+  "documents": [
+    {
+      "historyPreserved": true,
+      "path": "00 Docs/IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md"
+    },
+    {
+      "historyPreserved": true,
+      "path": "00 Docs/HANDOFF_2026-09-29.md"
+    }
+  ],
+  "candidateInstalledInGoogle": false,
+  "addTest": "PASS: syntax, 20 Add calls, numeric validation, replay, partial/failed writes, silent inventory/PREPARED/DONE readback failures",
+  "uiTest": "PASS: 20 UI resets, frozen retry, reload same ID/payload, storage failure, validation release, render failure, in-flight guard, stale suggestion clear"
+}

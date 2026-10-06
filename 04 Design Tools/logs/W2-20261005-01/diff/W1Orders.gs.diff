@@ -1,0 +1,71 @@
+--- v38/W1Orders.gs
++++ v39/W1Orders.gs
+@@ -1,4 +1,4 @@
+-// W1 v38 local/test candidate. Private helpers end in _. No marketplace stock sync.
++// W1 v39 local/test candidate. Private helpers end in _. No marketplace stock sync.
+ var W1_HEADERS = {
+  'ORDERS':['Order ID','Status','Channel','Created At','Sold At','Cancelled At','Client ID','Subtotal','Customer Shipping','Shipping Subsidy','Total','Recipient Snapshot','Revision','Last Request ID'],
+  'ORDER LINES':['Order ID','Line ID','Item UID','Source','SKU Snapshot','Title Snapshot','Condition Snapshot','Cost Snapshot','Entered Price','Ledger Price','Price Basis','Prior Status','Reservation State','Inventory Snapshot'],
+@@ -34,7 +34,7 @@
+ }
+ function _w1Rows_(name){var sh=_w1Table_(name),n=sh.getLastRow();return n<2?[]:sh.getRange(2,1,n-1,W1_HEADERS[name].length).getValues();}
+ function _w1Event_(req,state,result,error){
+- var sh=_w1Table_('ORDER REQUESTS'),row=[Utilities.getUuid(),new Date().toISOString(),req.id,req.attempt,req.action,req.hash,req.snap.orderId||'',state,_w1Encode_(req.snap),_w1Encode_(result||null),String(error||'').slice(0,1000),req.actor||Session.getActiveUser().getEmail()||'Unknown',req.entrySource||'web/api','Code v38 / WebApp v38','Request '+req.id+'; retry same payload; never a new ID'];
++ var sh=_w1Table_('ORDER REQUESTS'),row=[Utilities.getUuid(),new Date().toISOString(),req.id,req.attempt,req.action,req.hash,req.snap.orderId||'',state,_w1Encode_(req.snap),_w1Encode_(result||null),String(error||'').slice(0,1000),req.actor||Session.getActiveUser().getEmail()||'Unknown',req.entrySource||'web/api','Code v39 / WebApp v39','Request '+req.id+'; retry same payload; never a new ID'];
+  var r=sh.getLastRow()+1;_w1EnsureRow_(sh,r);_w1Write_('journal '+state,function(){sh.getRange(r,1,1,row.length).setValues([row]);});
+  if(JSON.stringify(sh.getRange(r,1,1,row.length).getValues()[0])!==JSON.stringify(row))throw new Error('JOURNAL_READBACK '+req.id);
+ }
+@@ -112,7 +112,8 @@
+   });snap.orderId=_w1NextId_();snap.lines.forEach(function(l,i){l.id=snap.orderId+'-L'+(i+1);});
+  }
+  // W1 supports Label later. W2 will add CLIENT/snapshot/renderer, without another sale.
+- if(action==='confirm'&&p.labelLater!==true)throw new Error('LABEL_LATER_REQUIRED_W1');
++ if(action==='confirm'&&p.labelLater!==true&&p.labelLater!==false)throw new Error('LABEL_CHOICE_REQUIRED');
++ if(action==='confirm'||action==='cancel')_w2Attach_(snap,p);
+  snap.subtotal=snap.lines.reduce(function(a,l){return a+Math.round(l.entered*100);},0)/100;snap.total=(Math.round(snap.subtotal*100)+Math.round(snap.customerShipping*100))/100;
+  snap.alloc={lines:snap.orderBefore?0:_w1Table_('ORDER LINES').getLastRow()+1,sales:action==='confirm'?_getSalesSheet().getMaxRows()+1:0};_w1Preflight_(action,snap);return snap;
+ }
+@@ -195,10 +196,10 @@
+    allowed.status.push('Sold');_w1Step_(req,l.id+'.sold',function(done){_w1Cell_(l,'status','Sold',allowed,done);});
+   }
+  });
+- var status=action==='create'?'PENDING':action==='cancel'?'CANCELLED':'SOLD',order=[s.orderId,status,s.channel,s.orderBefore?s.orderBefore[3]:s.created,status==='SOLD'?s.created:'',status==='CANCELLED'?s.created:'','',Math.round(s.subtotal*100)/100,s.customerShipping,s.subsidy,Math.round(s.total*100)/100,'',s.revision,req.id];
++ var status=action==='create'?'PENDING':action==='cancel'?'CANCELLED':'SOLD',order=[s.orderId,status,s.channel,s.orderBefore?s.orderBefore[3]:s.created,status==='SOLD'?s.created:'',status==='CANCELLED'?s.created:'',s.clientId||'',Math.round(s.subtotal*100)/100,s.customerShipping,s.subsidy,Math.round(s.total*100)/100,s.recipientSnapshot||'',s.revision,req.id];
+  _w1Step_(req,'order',function(done){if(done){if(JSON.stringify(_w1Order_(s.orderId))!==JSON.stringify(order))throw new Error('ORDER_CHANGED');return;}_w1Record_('ORDERS',s.orderId,order,s.orderBefore||null);});
+  if(action!=='create')s.lines.forEach(function(l){_w1Step_(req,l.id+'.finish',function(){_w1Record_('ORDER LINES',l.id,_w1LineRow_(s,l,action==='cancel'?'RELEASED':'SOLD'),_w1LineRow_(s,l,'RESERVED'));});});
+- return {orderId:s.orderId,status:status,revision:s.revision,count:s.lines.length,shipping:s.subsidy,labelReadiness:'MISSING',items:s.lines.map(function(l){return _w1Inv_(l.source,l.sku,l.uid).obj;})};
++ return {orderId:s.orderId,status:status,revision:s.revision,count:s.lines.length,shipping:s.subsidy,labelReadiness:_w2Ready_(s.recipientSnapshot),items:s.lines.map(function(l){return _w1Inv_(l.source,l.sku,l.uid).obj;})};
+ }
+ function _w1Mutate_(action,p){
+  _w1Access_();if(!p||!/^[A-Za-z0-9_-]{12,100}$/.test(p.requestId||''))throw new Error('REQUEST_ID_REQUIRED');
+@@ -210,7 +211,7 @@
+   catch(e){try{_w1Event_(req,'NEEDS_REVIEW',null,e.message);}catch(a){throw new Error('PARTIAL_AUDIT '+req.id+' '+e.message+'; '+a.message);}throw new Error('RECOVERY_REQUIRED '+req.id+' '+e.message);}
+  });
+ }
+-function _w1List_(status){_w1Access_();var pending=_w1Requests_();var rows=_w1Rows_('ORDERS').map(function(r){var lines=_w1Rows_('ORDER LINES').filter(function(l){return l[0]===r[0];});return {orderId:r[0],status:r[1],channel:r[2],createdAt:r[3],subtotal:r[7],customerShipping:r[8],shippingSubsidy:r[9],total:r[10],revision:r[12],labelReadiness:'MISSING',lines:lines.map(function(l){return {lineId:l[1],itemUid:l[2],source:l[3],sku:l[4],title:l[5],enteredPrice:l[8],ledgerPrice:l[9],priceBasis:l[10]};}),recovery:Object.keys(pending).filter(function(k){return pending[k].snap.orderId===r[0]&&pending[k].state!=='DONE';})};});return {orders:rows.filter(function(o){return !status||status==='ALL'||o.status===status;}).reverse(),recoveries:Object.keys(pending).filter(function(k){return pending[k].state!=='DONE';}).map(function(k){return {requestId:k,orderId:pending[k].snap.orderId,state:pending[k].state,error:pending[k].error};})};}
++function _w1List_(status){_w1Access_();var pending=_w1Requests_();var rows=_w1Rows_('ORDERS').map(function(r){var lines=_w1Rows_('ORDER LINES').filter(function(l){return l[0]===r[0];});return {orderId:r[0],status:r[1],channel:r[2],createdAt:r[3],subtotal:r[7],customerShipping:r[8],shippingSubsidy:r[9],total:r[10],revision:r[12],labelReadiness:_w2Ready_(r[11]),clientId:r[6],lines:lines.map(function(l){return {lineId:l[1],itemUid:l[2],source:l[3],sku:l[4],title:l[5],enteredPrice:l[8],ledgerPrice:l[9],priceBasis:l[10]};}),recovery:Object.keys(pending).filter(function(k){return pending[k].snap.orderId===r[0]&&pending[k].state!=='DONE';})};});return {orders:rows.filter(function(o){return !status||status==='ALL'||o.status===status;}).reverse(),recoveries:Object.keys(pending).filter(function(k){return pending[k].state!=='DONE';}).map(function(k){return {requestId:k,orderId:pending[k].snap.orderId,state:pending[k].state,error:pending[k].error};})};}
+ function _w1Get_(id){var list=_w1List_('ALL').orders.filter(function(o){return o.orderId===id;});if(list.length!==1)throw new Error('ORDER_NOT_FOUND');return list[0];}
+ function _w1Status_(id){_w1Access_();var r=_w1Requests_()[id];return r?{requestId:id,state:r.state,orderId:r.snap.orderId,error:r.error,data:r.state==='DONE'?r.result:null}:{state:'NOT_FOUND'};}
+ function _w1EditGuard_(sh,row,ch,requestId){
+@@ -277,7 +278,7 @@
+  var future=JSON.parse(JSON.stringify(s));
+  s.lines.forEach(function(l){['uid','line','hold','sales','price','date','sold','release','finish'].forEach(function(k){future.steps[l.id+'.'+k]='ARMED';});});future.steps.order='ARMED';
+  _w1Encode_(future);
+- var result={orderId:s.orderId,status:action==='create'?'PENDING':action==='cancel'?'CANCELLED':'SOLD',revision:s.revision,count:s.lines.length,shipping:s.subsidy,labelReadiness:'MISSING',items:(s._previewItems||[]).map(function(o,i){var item=Object.assign({},o),l=s.lines[i];item.itemUid=l.uid;item.status=action==='create'?'Hold':action==='cancel'?l.prior:'Sold';if(action==='confirm'){item.price=l.ledger;item.soldDate=s.created;}return item;})};
++ var result={orderId:s.orderId,status:action==='create'?'PENDING':action==='cancel'?'CANCELLED':'SOLD',revision:s.revision,count:s.lines.length,shipping:s.subsidy,labelReadiness:_w2Ready_(s.recipientSnapshot),items:(s._previewItems||[]).map(function(o,i){var item=Object.assign({},o),l=s.lines[i];item.itemUid=l.uid;item.status=action==='create'?'Hold':action==='cancel'?l.prior:'Sold';if(action==='confirm'){item.price=l.ledger;item.soldDate=s.created;}return item;})};
+  _w1Encode_(result);
+ }
+ function _w1Locked_(fn){return typeof _W1_LOCK_HELD!=='undefined'&&_W1_LOCK_HELD?fn():_withLock(fn);}
+@@ -443,9 +444,9 @@
+   each(function(part,start){_w1StockBatch_(req,part,start,'date','soldDate',function(){return new Date(s.created);});});
+   each(function(part,start){_w1StockBatch_(req,part,start,'sold','status',function(){return 'Sold';});});
+  }
+- var status=action==='create'?'PENDING':action==='cancel'?'CANCELLED':'SOLD',order=[s.orderId,status,s.channel,s.orderBefore?s.orderBefore[3]:s.created,status==='SOLD'?s.created:'',status==='CANCELLED'?s.created:'','',Math.round(s.subtotal*100)/100,s.customerShipping,s.subsidy,Math.round(s.total*100)/100,'',s.revision,req.id];
++ var status=action==='create'?'PENDING':action==='cancel'?'CANCELLED':'SOLD',order=[s.orderId,status,s.channel,s.orderBefore?s.orderBefore[3]:s.created,status==='SOLD'?s.created:'',status==='CANCELLED'?s.created:'',s.clientId||'',Math.round(s.subtotal*100)/100,s.customerShipping,s.subsidy,Math.round(s.total*100)/100,s.recipientSnapshot||'',s.revision,req.id];
+  _w1Step_(req,'order',function(done){if(done){if(JSON.stringify(_w1Order_(s.orderId))!==JSON.stringify(order))throw new Error('ORDER_CHANGED');return;}_w1Record_('ORDERS',s.orderId,order,s.orderBefore||null);});
+  if(action!=='create')each(function(part,start){_w1LineBatch_(req,part,start,true);});
+  var view=_w1View_(),items=s.lines.map(function(l,i){var x=_w1ViewFind_(view,l,false);_w1Assert_(l,x.obj,_w1Allowed_(s,l,i,action));if(x.obj.status!==(action==='create'?'Hold':action==='cancel'?l.prior:'Sold'))throw new Error('FINAL_STOCK_READBACK');return x.obj;});
+- return {orderId:s.orderId,status:status,revision:s.revision,count:s.lines.length,shipping:s.subsidy,labelReadiness:'MISSING',items:items};
+-}
++ return {orderId:s.orderId,status:status,revision:s.revision,count:s.lines.length,shipping:s.subsidy,labelReadiness:_w2Ready_(s.recipientSnapshot),items:items};
++}

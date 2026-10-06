@@ -1,0 +1,6 @@
+p1-add.test.cjs exit 0
+p1-ui.test.cjs exit 0
+Index.test.js exit 0
+image-url.test.js exit 0
+fb-catalogue.test.js exit 0
+meta-pipeline.test.js exit 0

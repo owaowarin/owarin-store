@@ -1,0 +1,12 @@
+diff --git "a/04 Design Tools\\logs\\P1-20261003-01\\before\\Index.html" "b/04 Design Tools\\logs\\P1-20260929-01\\candidate\\Index.html"
+index a79c97a..e9d11ae 100644
+--- "a/04 Design Tools\\logs\\P1-20261003-01\\before\\Index.html"	
++++ "b/04 Design Tools\\logs\\P1-20260929-01\\candidate\\Index.html"	
+@@ -1083,6 +1083,7 @@ $('mSave').addEventListener('click', function(){
+       LAST_ADD = { item: dd.item, matches: dd.bookingMatches || [] };
+       if (LAST_ADD.matches.length) $('mResult').innerHTML += bookingBanner(LAST_ADD);
+       okToast('Added: ' + dd.item.productId);
++      if (dd.historical) { toast('Saved — refresh inventory to see current stock'); return; }
+       try {
+         addToCache(dd.item);
+         buildFilterOptions(true);

@@ -1,0 +1,970 @@
+{
+  "revision": "W1-20261003-01/v32@3B0D1F63B06C4196578FFEA9714BEC50EC6AD060B3BAC95D8190582175B2BB08",
+  "time": "2026-10-04 03:05:29 +0700",
+  "files": {
+    "04 Design Tools/logs/W1-20261003-01/attempts/F01-partial-record/Code_v31.gs": {
+      "bytes": 87,
+      "sha256": "6697712052FE5A8814E959320B1DA226B811C8579050269211D1C604CDC3E82F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F01-partial-record/Code_v32.gs": {
+      "bytes": 182270,
+      "sha256": "29A78BDDEC3C3796C5D6D05E618582514C0D6461600BD88C862FD7F7593E73B8"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F01-partial-record/W1Orders.gs": {
+      "bytes": 24976,
+      "sha256": "8672552421472C0AB0C97820C8F4634DE32E71E02C4B419BA074ED5D1D715A5B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F01-partial-record/WebApp_v31.gs": {
+      "bytes": 89,
+      "sha256": "58E32FB171205CFE5FE64C9907F120FBF18E691153A40A3942BC2D79ADCE910B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F01-partial-record/WebApp_v32.gs": {
+      "bytes": 32309,
+      "sha256": "06D8632AADA1F316ED2F6E13EFFF1A91BAD8ED2D4AB214BCFD88724DFE19D579"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F02-finish-armed/Code_v31.gs": {
+      "bytes": 87,
+      "sha256": "6697712052FE5A8814E959320B1DA226B811C8579050269211D1C604CDC3E82F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F02-finish-armed/Code_v32.gs": {
+      "bytes": 182270,
+      "sha256": "29A78BDDEC3C3796C5D6D05E618582514C0D6461600BD88C862FD7F7593E73B8"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F02-finish-armed/W1Orders.gs": {
+      "bytes": 25169,
+      "sha256": "B084BED389A5F57EE74418EDF4B518A89102EE484F4F1361EBDAC6D62083C1A8"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F02-finish-armed/WebApp_v31.gs": {
+      "bytes": 89,
+      "sha256": "58E32FB171205CFE5FE64C9907F120FBF18E691153A40A3942BC2D79ADCE910B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F02-finish-armed/WebApp_v32.gs": {
+      "bytes": 32309,
+      "sha256": "06D8632AADA1F316ED2F6E13EFFF1A91BAD8ED2D4AB214BCFD88724DFE19D579"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F03-shared-callers/Code_v31.gs": {
+      "bytes": 87,
+      "sha256": "6697712052FE5A8814E959320B1DA226B811C8579050269211D1C604CDC3E82F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F03-shared-callers/Code_v32.gs": {
+      "bytes": 182270,
+      "sha256": "29A78BDDEC3C3796C5D6D05E618582514C0D6461600BD88C862FD7F7593E73B8"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F03-shared-callers/fb-catalogue.test.js": {
+      "bytes": 4236,
+      "sha256": "C5379A0B78EE5E3267B12AAD01B5AAE7014672E63DCE23047DCE39F86FE8175B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F03-shared-callers/image-url.test.js": {
+      "bytes": 2966,
+      "sha256": "0151CBFB03788D27A60B072A94B6335D4DE2B8927ED15F9EBAF361E9E299568C"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F03-shared-callers/Index.html": {
+      "bytes": 115945,
+      "sha256": "B8C6280487E3A87747E38DF8FA5E33507EE64D0B0086D08EC6B039960C4EAB50"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F03-shared-callers/Index.test.js": {
+      "bytes": 826,
+      "sha256": "3BAAC3C2181C044E9976C22AB79E1326F4963FF45910855B6DE9D31EABE1AB99"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F03-shared-callers/meta-pipeline.test.js": {
+      "bytes": 19682,
+      "sha256": "C7E426605CD54D18A4A61F61152E60A4A162B170B983196C708D58F38274CD79"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F03-shared-callers/p1-add.test.cjs": {
+      "bytes": 14331,
+      "sha256": "C457DBBDACC294E93BF28EF9D80661A3C82AE6C386075FEA8C74C314726A2037"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F03-shared-callers/p1-ui.test.cjs": {
+      "bytes": 12107,
+      "sha256": "06804F2F2CD571AC583952BDF11B9D01CE79710534549A36997327CDF40056FF"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F03-shared-callers/R2Upload.gs": {
+      "bytes": 10488,
+      "sha256": "B3219C742E03DF97283AA0DB686D9D912303A2F2E1F43B9EBDF2E8FB7EECD960"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F03-shared-callers/W1Orders.gs": {
+      "bytes": 25314,
+      "sha256": "C5F6D5BF8CE5809FB99895E253C4F2D1C209C13D688AFF178D92D51A4AF0E199"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F03-shared-callers/WebApp_v31.gs": {
+      "bytes": 89,
+      "sha256": "58E32FB171205CFE5FE64C9907F120FBF18E691153A40A3942BC2D79ADCE910B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F03-shared-callers/WebApp_v32.gs": {
+      "bytes": 32321,
+      "sha256": "193DA0BB8238A886E2B89D1D2CB765CD76F637FC25C88164C8E8FCA7AA634569"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F04-uid-sort-readback/Code_v31.gs": {
+      "bytes": 87,
+      "sha256": "6697712052FE5A8814E959320B1DA226B811C8579050269211D1C604CDC3E82F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F04-uid-sort-readback/Code_v32.gs": {
+      "bytes": 183244,
+      "sha256": "28253F07BCE023CBA9C4685FF7C9167129D9F716EB11B9902A353D08FEED9E3B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F04-uid-sort-readback/fb-catalogue.test.js": {
+      "bytes": 4236,
+      "sha256": "C5379A0B78EE5E3267B12AAD01B5AAE7014672E63DCE23047DCE39F86FE8175B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F04-uid-sort-readback/image-url.test.js": {
+      "bytes": 2966,
+      "sha256": "0151CBFB03788D27A60B072A94B6335D4DE2B8927ED15F9EBAF361E9E299568C"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F04-uid-sort-readback/Index.html": {
+      "bytes": 116019,
+      "sha256": "E030E3829A01F562D95EBC07E5E3DF9D756C8CEA155C700833A9792CF0DBEC24"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F04-uid-sort-readback/Index.test.js": {
+      "bytes": 826,
+      "sha256": "3BAAC3C2181C044E9976C22AB79E1326F4963FF45910855B6DE9D31EABE1AB99"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F04-uid-sort-readback/meta-pipeline.test.js": {
+      "bytes": 19682,
+      "sha256": "C7E426605CD54D18A4A61F61152E60A4A162B170B983196C708D58F38274CD79"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F04-uid-sort-readback/p1-add.test.cjs": {
+      "bytes": 14331,
+      "sha256": "C457DBBDACC294E93BF28EF9D80661A3C82AE6C386075FEA8C74C314726A2037"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F04-uid-sort-readback/p1-ui.test.cjs": {
+      "bytes": 12107,
+      "sha256": "06804F2F2CD571AC583952BDF11B9D01CE79710534549A36997327CDF40056FF"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F04-uid-sort-readback/R2Upload.gs": {
+      "bytes": 10488,
+      "sha256": "B3219C742E03DF97283AA0DB686D9D912303A2F2E1F43B9EBDF2E8FB7EECD960"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F04-uid-sort-readback/W1Orders.gs": {
+      "bytes": 25314,
+      "sha256": "C5F6D5BF8CE5809FB99895E253C4F2D1C209C13D688AFF178D92D51A4AF0E199"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F04-uid-sort-readback/WebApp_v31.gs": {
+      "bytes": 89,
+      "sha256": "58E32FB171205CFE5FE64C9907F120FBF18E691153A40A3942BC2D79ADCE910B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F04-uid-sort-readback/WebApp_v32.gs": {
+      "bytes": 32321,
+      "sha256": "193DA0BB8238A886E2B89D1D2CB765CD76F637FC25C88164C8E8FCA7AA634569"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F05-maintenance-lock/Code_v31.gs": {
+      "bytes": 87,
+      "sha256": "6697712052FE5A8814E959320B1DA226B811C8579050269211D1C604CDC3E82F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F05-maintenance-lock/Code_v32.gs": {
+      "bytes": 183244,
+      "sha256": "28253F07BCE023CBA9C4685FF7C9167129D9F716EB11B9902A353D08FEED9E3B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F05-maintenance-lock/fb-catalogue.test.js": {
+      "bytes": 4236,
+      "sha256": "C5379A0B78EE5E3267B12AAD01B5AAE7014672E63DCE23047DCE39F86FE8175B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F05-maintenance-lock/image-url.test.js": {
+      "bytes": 2966,
+      "sha256": "0151CBFB03788D27A60B072A94B6335D4DE2B8927ED15F9EBAF361E9E299568C"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F05-maintenance-lock/Index.html": {
+      "bytes": 116019,
+      "sha256": "E030E3829A01F562D95EBC07E5E3DF9D756C8CEA155C700833A9792CF0DBEC24"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F05-maintenance-lock/Index.test.js": {
+      "bytes": 826,
+      "sha256": "3BAAC3C2181C044E9976C22AB79E1326F4963FF45910855B6DE9D31EABE1AB99"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F05-maintenance-lock/meta-pipeline.test.js": {
+      "bytes": 19682,
+      "sha256": "C7E426605CD54D18A4A61F61152E60A4A162B170B983196C708D58F38274CD79"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F05-maintenance-lock/p1-add.test.cjs": {
+      "bytes": 14331,
+      "sha256": "C457DBBDACC294E93BF28EF9D80661A3C82AE6C386075FEA8C74C314726A2037"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F05-maintenance-lock/p1-ui.test.cjs": {
+      "bytes": 12107,
+      "sha256": "06804F2F2CD571AC583952BDF11B9D01CE79710534549A36997327CDF40056FF"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F05-maintenance-lock/R2Upload.gs": {
+      "bytes": 10488,
+      "sha256": "B3219C742E03DF97283AA0DB686D9D912303A2F2E1F43B9EBDF2E8FB7EECD960"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F05-maintenance-lock/W1Orders.gs": {
+      "bytes": 25665,
+      "sha256": "77D1211E0486E2E7DB72E3B9FD7F4712604BDAD049DEF5C6BE90B64E41CC0D36"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F05-maintenance-lock/WebApp_v31.gs": {
+      "bytes": 89,
+      "sha256": "58E32FB171205CFE5FE64C9907F120FBF18E691153A40A3942BC2D79ADCE910B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F05-maintenance-lock/WebApp_v32.gs": {
+      "bytes": 32487,
+      "sha256": "3E371C14DA33E66A89E6DBF8B2A10154AD76C7F37F21018A6486E334B91CBEE3"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F06-subsidy-new-cart/Code_v31.gs": {
+      "bytes": 87,
+      "sha256": "6697712052FE5A8814E959320B1DA226B811C8579050269211D1C604CDC3E82F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F06-subsidy-new-cart/Code_v32.gs": {
+      "bytes": 183868,
+      "sha256": "59913385F070DB7800E65BE1C59803882F4E4202612FEE33B0ED447022060CB3"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F06-subsidy-new-cart/fb-catalogue.test.js": {
+      "bytes": 4236,
+      "sha256": "C5379A0B78EE5E3267B12AAD01B5AAE7014672E63DCE23047DCE39F86FE8175B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F06-subsidy-new-cart/image-url.test.js": {
+      "bytes": 2966,
+      "sha256": "0151CBFB03788D27A60B072A94B6335D4DE2B8927ED15F9EBAF361E9E299568C"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F06-subsidy-new-cart/Index.html": {
+      "bytes": 116019,
+      "sha256": "E030E3829A01F562D95EBC07E5E3DF9D756C8CEA155C700833A9792CF0DBEC24"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F06-subsidy-new-cart/Index.test.js": {
+      "bytes": 826,
+      "sha256": "3BAAC3C2181C044E9976C22AB79E1326F4963FF45910855B6DE9D31EABE1AB99"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F06-subsidy-new-cart/meta-pipeline.test.js": {
+      "bytes": 19682,
+      "sha256": "C7E426605CD54D18A4A61F61152E60A4A162B170B983196C708D58F38274CD79"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F06-subsidy-new-cart/p1-add.test.cjs": {
+      "bytes": 14331,
+      "sha256": "C457DBBDACC294E93BF28EF9D80661A3C82AE6C386075FEA8C74C314726A2037"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F06-subsidy-new-cart/p1-ui.test.cjs": {
+      "bytes": 12107,
+      "sha256": "06804F2F2CD571AC583952BDF11B9D01CE79710534549A36997327CDF40056FF"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F06-subsidy-new-cart/R2Upload.gs": {
+      "bytes": 10488,
+      "sha256": "B3219C742E03DF97283AA0DB686D9D912303A2F2E1F43B9EBDF2E8FB7EECD960"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F06-subsidy-new-cart/W1Orders.gs": {
+      "bytes": 26147,
+      "sha256": "AB240A6910B8201BDF4369FDDB72B2C9082EC06993E1E15EEACCBABF11266297"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F06-subsidy-new-cart/WebApp_v31.gs": {
+      "bytes": 89,
+      "sha256": "58E32FB171205CFE5FE64C9907F120FBF18E691153A40A3942BC2D79ADCE910B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F06-subsidy-new-cart/WebApp_v32.gs": {
+      "bytes": 32487,
+      "sha256": "3E371C14DA33E66A89E6DBF8B2A10154AD76C7F37F21018A6486E334B91CBEE3"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F07-duplicate-UID-before-intent/Code_v31.gs": {
+      "bytes": 87,
+      "sha256": "6697712052FE5A8814E959320B1DA226B811C8579050269211D1C604CDC3E82F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F07-duplicate-UID-before-intent/Code_v32.gs": {
+      "bytes": 183868,
+      "sha256": "59913385F070DB7800E65BE1C59803882F4E4202612FEE33B0ED447022060CB3"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F07-duplicate-UID-before-intent/fb-catalogue.test.js": {
+      "bytes": 4236,
+      "sha256": "C5379A0B78EE5E3267B12AAD01B5AAE7014672E63DCE23047DCE39F86FE8175B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F07-duplicate-UID-before-intent/image-url.test.js": {
+      "bytes": 2966,
+      "sha256": "0151CBFB03788D27A60B072A94B6335D4DE2B8927ED15F9EBAF361E9E299568C"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F07-duplicate-UID-before-intent/Index.html": {
+      "bytes": 116149,
+      "sha256": "0D6FC513F6F020B42B98ADE756B5B112B48C7024755EA5FC49BADF0834B276DB"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F07-duplicate-UID-before-intent/Index.test.js": {
+      "bytes": 826,
+      "sha256": "3BAAC3C2181C044E9976C22AB79E1326F4963FF45910855B6DE9D31EABE1AB99"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F07-duplicate-UID-before-intent/meta-pipeline.test.js": {
+      "bytes": 19682,
+      "sha256": "C7E426605CD54D18A4A61F61152E60A4A162B170B983196C708D58F38274CD79"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F07-duplicate-UID-before-intent/p1-add.test.cjs": {
+      "bytes": 14331,
+      "sha256": "C457DBBDACC294E93BF28EF9D80661A3C82AE6C386075FEA8C74C314726A2037"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F07-duplicate-UID-before-intent/p1-ui.test.cjs": {
+      "bytes": 12107,
+      "sha256": "06804F2F2CD571AC583952BDF11B9D01CE79710534549A36997327CDF40056FF"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F07-duplicate-UID-before-intent/R2Upload.gs": {
+      "bytes": 10488,
+      "sha256": "B3219C742E03DF97283AA0DB686D9D912303A2F2E1F43B9EBDF2E8FB7EECD960"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F07-duplicate-UID-before-intent/W1Orders.gs": {
+      "bytes": 26147,
+      "sha256": "AB240A6910B8201BDF4369FDDB72B2C9082EC06993E1E15EEACCBABF11266297"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F07-duplicate-UID-before-intent/WebApp_v31.gs": {
+      "bytes": 89,
+      "sha256": "58E32FB171205CFE5FE64C9907F120FBF18E691153A40A3942BC2D79ADCE910B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/attempts/F07-duplicate-UID-before-intent/WebApp_v32.gs": {
+      "bytes": 32487,
+      "sha256": "3E371C14DA33E66A89E6DBF8B2A10154AD76C7F37F21018A6486E334B91CBEE3"
+    },
+    "04 Design Tools/logs/W1-20261003-01/baseline.json": {
+      "bytes": 574,
+      "sha256": "FFA07285B84E8614D85D5BF70670989979DEDCDA4C3D96558B9F6C9BE8E4C5BB"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/00 Docs/HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "bytes": 23747,
+      "sha256": "004BE97212C4E39024099754E9D72FF19B27B40B2E6E9B28028448B1F7C52B9C"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/00 Docs/HANDOFF_2026-09-28.md": {
+      "bytes": 66627,
+      "sha256": "5D4A0880276D623CD1D6D72CC915ADF126762E4AF69DA2322C92727AF39C2507"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/00 Docs/HANDOFF_2026-10-03.md": {
+      "bytes": 1996,
+      "sha256": "0420355698B71F313A79A7A4D0D579607861D77DD97F3519B2B3D6108C965243"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/00 Docs/IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "bytes": 128090,
+      "sha256": "D8C34F782FEB67572AEFE2CEC8CEF4EC23A06C042BF3BC620124C4323294E452"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "bytes": 65194,
+      "sha256": "2A40D8FC125B1E677596BF632C569147EBD091BCACA7BC772997FFA1C663CDAD"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/00 Docs/STATE.md": {
+      "bytes": 9704,
+      "sha256": "50669FE760D5DDBC5CD35A419DD57589481F16C1F8C3E34436B0AC6725ED6778"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/03 Apps Script/Web App/Code_v31.gs": {
+      "bytes": 182011,
+      "sha256": "6EF098CD39F5B82F888D60A41577C71ECD3C81C26D4E4604E41EEFB27E87CD5D"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/03 Apps Script/Web App/Index.html": {
+      "bytes": 107571,
+      "sha256": "5ECE912BC9AE2F7D7FBB9662C2E417B125F78930C68C0D9A03619DE44EB69AEB"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/03 Apps Script/Web App/P1Journal.gs": {
+      "bytes": 3043,
+      "sha256": "FDF4B656488EA92DB4CCB50B573AC75BFD8AA27C91769B425E03FF06509890BF"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/03 Apps Script/Web App/README.md": {
+      "bytes": 15721,
+      "sha256": "BACD0C038C001E6B6A94DAC208157D923CFCFE137EBF3D8BE107BDABB88B1F6E"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/03 Apps Script/Web App/WebApp_v31.gs": {
+      "bytes": 38654,
+      "sha256": "7102CC7FA4735F5859B7E8F11092B0CADC2BF155E5D204658949A11696ACE67D"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/candidate/backup/Code_v31.gs": {
+      "bytes": 182011,
+      "sha256": "6EF098CD39F5B82F888D60A41577C71ECD3C81C26D4E4604E41EEFB27E87CD5D"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/candidate/backup/WebApp_v31.gs": {
+      "bytes": 38654,
+      "sha256": "7102CC7FA4735F5859B7E8F11092B0CADC2BF155E5D204658949A11696ACE67D"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/candidate/Code_v31.gs": {
+      "bytes": 87,
+      "sha256": "6697712052FE5A8814E959320B1DA226B811C8579050269211D1C604CDC3E82F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/candidate/Code_v32.gs": {
+      "bytes": 182270,
+      "sha256": "29A78BDDEC3C3796C5D6D05E618582514C0D6461600BD88C862FD7F7593E73B8"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/candidate/fb-catalogue.test.js": {
+      "bytes": 4236,
+      "sha256": "C5379A0B78EE5E3267B12AAD01B5AAE7014672E63DCE23047DCE39F86FE8175B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/candidate/image-url.test.js": {
+      "bytes": 2966,
+      "sha256": "0151CBFB03788D27A60B072A94B6335D4DE2B8927ED15F9EBAF361E9E299568C"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/candidate/Index.html": {
+      "bytes": 115945,
+      "sha256": "B8C6280487E3A87747E38DF8FA5E33507EE64D0B0086D08EC6B039960C4EAB50"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/candidate/Index.test.js": {
+      "bytes": 826,
+      "sha256": "3BAAC3C2181C044E9976C22AB79E1326F4963FF45910855B6DE9D31EABE1AB99"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/candidate/meta-pipeline.test.js": {
+      "bytes": 19682,
+      "sha256": "C7E426605CD54D18A4A61F61152E60A4A162B170B983196C708D58F38274CD79"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/candidate/p1-add.test.cjs": {
+      "bytes": 14331,
+      "sha256": "C457DBBDACC294E93BF28EF9D80661A3C82AE6C386075FEA8C74C314726A2037"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/candidate/p1-ui.test.cjs": {
+      "bytes": 12107,
+      "sha256": "06804F2F2CD571AC583952BDF11B9D01CE79710534549A36997327CDF40056FF"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/candidate/R2Upload.gs": {
+      "bytes": 10488,
+      "sha256": "B3219C742E03DF97283AA0DB686D9D912303A2F2E1F43B9EBDF2E8FB7EECD960"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/candidate/WebApp_v31.gs": {
+      "bytes": 89,
+      "sha256": "58E32FB171205CFE5FE64C9907F120FBF18E691153A40A3942BC2D79ADCE910B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/candidate/WebApp_v32.gs": {
+      "bytes": 32309,
+      "sha256": "06D8632AADA1F316ED2F6E13EFFF1A91BAD8ED2D4AB214BCFD88724DFE19D579"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/freeze.cjs": {
+      "bytes": 5199,
+      "sha256": "90336A57F45A71F52B8B28AE54B20D0609E17ED8CFE092771289F528340AC91D"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/issues.md": {
+      "bytes": 3264,
+      "sha256": "92A00620E1692E6A65AD4812A31A791CD1AF6629933C39F007798C75CE42AE16"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/source-readback.json": {
+      "bytes": 1657,
+      "sha256": "D6FB14DFC8A685F30747E6FB56240BAF21ACC3B05E5C82A50299922122EABBBA"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/test-runtime/Code.gs": {
+      "bytes": 182244,
+      "sha256": "8EDF5E9CC7B1C6D3CE964BF499CDA79F6D6B736BF213E82C3F05661578382B5E"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/test-runtime/Index.html": {
+      "bytes": 115987,
+      "sha256": "DB2494FC8232A6AAA437B91D66EA8CCBEE293E16157D7FB42EC07169CFBFE6C1"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/test-runtime/W1Orders.gs": {
+      "bytes": 25314,
+      "sha256": "C5F6D5BF8CE5809FB99895E253C4F2D1C209C13D688AFF178D92D51A4AF0E199"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/test-runtime/W1Qa.gs": {
+      "bytes": 3227,
+      "sha256": "8ED31DB98F7277725179484C0D1DDE24328E18B0FFF8D59BBBD2E68BB35228C7"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/04 Design Tools/logs/W1-20261003-01/test-runtime/Webapp.gs": {
+      "bytes": 32321,
+      "sha256": "193DA0BB8238A886E2B89D1D2CB765CD76F637FC25C88164C8E8FCA7AA634569"
+    },
+    "04 Design Tools/logs/W1-20261003-01/before/EMPTY": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/build.cjs": {
+      "bytes": 7488,
+      "sha256": "B740DEE89E56B1A502DF82E15983DA6E37714A03D906AA685E678C9346E93D9F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/build.cjs.attempt1.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/build.cjs.attempt2.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/build.cjs.attempt3.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/backup/Code_v31.gs": {
+      "bytes": 182011,
+      "sha256": "6EF098CD39F5B82F888D60A41577C71ECD3C81C26D4E4604E41EEFB27E87CD5D"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/backup/WebApp_v31.gs": {
+      "bytes": 38654,
+      "sha256": "7102CC7FA4735F5859B7E8F11092B0CADC2BF155E5D204658949A11696ACE67D"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/Code_v31.gs": {
+      "bytes": 87,
+      "sha256": "6697712052FE5A8814E959320B1DA226B811C8579050269211D1C604CDC3E82F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/Code_v32.gs": {
+      "bytes": 183868,
+      "sha256": "59913385F070DB7800E65BE1C59803882F4E4202612FEE33B0ED447022060CB3"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/fb-catalogue.test.js": {
+      "bytes": 4236,
+      "sha256": "C5379A0B78EE5E3267B12AAD01B5AAE7014672E63DCE23047DCE39F86FE8175B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/image-url.test.js": {
+      "bytes": 2966,
+      "sha256": "0151CBFB03788D27A60B072A94B6335D4DE2B8927ED15F9EBAF361E9E299568C"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/Index.html": {
+      "bytes": 116149,
+      "sha256": "0D6FC513F6F020B42B98ADE756B5B112B48C7024755EA5FC49BADF0834B276DB"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/Index.test.js": {
+      "bytes": 826,
+      "sha256": "3BAAC3C2181C044E9976C22AB79E1326F4963FF45910855B6DE9D31EABE1AB99"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/meta-pipeline.test.js": {
+      "bytes": 19682,
+      "sha256": "C7E426605CD54D18A4A61F61152E60A4A162B170B983196C708D58F38274CD79"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/p1-add.test.cjs": {
+      "bytes": 14331,
+      "sha256": "C457DBBDACC294E93BF28EF9D80661A3C82AE6C386075FEA8C74C314726A2037"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/p1-ui.test.cjs": {
+      "bytes": 12107,
+      "sha256": "06804F2F2CD571AC583952BDF11B9D01CE79710534549A36997327CDF40056FF"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/R2Upload.gs": {
+      "bytes": 10488,
+      "sha256": "B3219C742E03DF97283AA0DB686D9D912303A2F2E1F43B9EBDF2E8FB7EECD960"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/README.md": {
+      "bytes": 391,
+      "sha256": "2352C373CDC4289768954F911DA8EF6042F634391282F2FEE69594FD52DC7421"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/W1Orders.gs": {
+      "bytes": 26208,
+      "sha256": "3596CCE53149A15A5A58D226D1525200C0129A5901FDDDE991E09C9D48F8ACC2"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/WebApp_v31.gs": {
+      "bytes": 89,
+      "sha256": "58E32FB171205CFE5FE64C9907F120FBF18E691153A40A3942BC2D79ADCE910B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/candidate/WebApp_v32.gs": {
+      "bytes": 32487,
+      "sha256": "3E371C14DA33E66A89E6DBF8B2A10154AD76C7F37F21018A6486E334B91CBEE3"
+    },
+    "04 Design Tools/logs/W1-20261003-01/changes.csv": {
+      "bytes": 244426,
+      "sha256": "35C1FA9F6500CF524FC8927AAEE40990BD0CF406E1F6C657BE11C89252F76B95"
+    },
+    "04 Design Tools/logs/W1-20261003-01/checkpoint.cjs": {
+      "bytes": 579,
+      "sha256": "A7FF3C164CEA727C99FAA3EDC0820C20CF2BBDFA8E9BEA9727DB0A8F3DB2E630"
+    },
+    "04 Design Tools/logs/W1-20261003-01/close.cjs": {
+      "bytes": 29675,
+      "sha256": "0BE5EFCB6DA9ED90C5C95B29F93BF70E989B468AAB1697151D6213A93F36B1C8"
+    },
+    "04 Design Tools/logs/W1-20261003-01/compare-test-export.py": {
+      "bytes": 1158,
+      "sha256": "9F710347AE288F8291AFAD9ECAED8E350F74B6E0E2E3E2B34DDFC32EA0B7DFC3"
+    },
+    "04 Design Tools/logs/W1-20261003-01/debug.cjs": {
+      "bytes": 528,
+      "sha256": "D72F4782736B40B17798EE7B2C2276C02853D045079B44217AFD65E77402B187"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/Code_v32.gs.diff": {
+      "bytes": 8714,
+      "sha256": "DA60B9E91A782E16896EF04C242C8150FB24F1B1773DE53F6DC5F01482AAB8C0"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/docs-HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md.diff": {
+      "bytes": 3507,
+      "sha256": "9A6AE52D5FD2265B8DBCCC12D4051A414AE298E8C6EB2B017688C2D27A18B640"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/docs-HANDOFF_2026-09-28.md.diff": {
+      "bytes": 4312,
+      "sha256": "2AEDAD3015001C01DDC0EB0D0F0AC549FCE9D3F6CCFF9276D045E1EC98BCB667"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/docs-IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md.diff": {
+      "bytes": 4830,
+      "sha256": "D423015D3CEEF2A3C1E3D9D9235ABA500AB5F5CBD512C889B59F20A31DAE3148"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/docs-PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md.diff": {
+      "bytes": 6897,
+      "sha256": "6C3BD263E61DEEF191DAB9B6B47E67EC4658430E855921ABFAB8187CAA7E9DC1"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/docs-STATE.md.diff": {
+      "bytes": 6429,
+      "sha256": "B880470BD5DC52FB458CD8863F43542DC1C0C42C5D689251AE5C5B0B7FB6DF6B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/freeze-verifier.diff": {
+      "bytes": 2175,
+      "sha256": "E67DD895AE0B685B1F80C9D83E3A48C6AAD3B20149A4DB64B309195E4AA3243C"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/Index.html.diff": {
+      "bytes": 27248,
+      "sha256": "6BE0129D1517FB11EA61D57917FFF13CAD469B1813C23F1A6C5056419AE8AC7A"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/README.md.diff": {
+      "bytes": 1772,
+      "sha256": "CE26DAAA5463B51D451CFE39FEEDFB1B2161593099009CC96D8E79D75FECDA9D"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/test-appsscript.json.diff": {
+      "bytes": 1047,
+      "sha256": "439E51565DA3CE762C3FCB621D77926BFA12357CCA68E1D2F729F1615BDA0F0E"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/test-Code.gs.diff": {
+      "bytes": 24097,
+      "sha256": "9148303C819756F9DEDE1B80F3DCD1D75D9013B0CEDD596BFE098136524F318E"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/test-Index.html.diff": {
+      "bytes": 27256,
+      "sha256": "2A902D4DA993EE01AFDA058D24C4D03AD7C3342610B21B3262A0EE8105CFCD1D"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/test-W1Orders.gs.diff": {
+      "bytes": 27088,
+      "sha256": "28F512DB5152A4347B66F42BBFE24F3415F20A537B350ABE77CFB78481B02EF5"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/test-W1Qa.gs.diff": {
+      "bytes": 3865,
+      "sha256": "F1807E0A9BE24EDE6BBD9CCA9512C2027E5F54C11E4DBB47465E5B7FD439A142"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/test-Webapp.gs.diff": {
+      "bytes": 16126,
+      "sha256": "C6006BD3AF275E37069B43EE67100E8295E1D0B9394283845026A4665026EB82"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/W1Orders.gs.diff": {
+      "bytes": 27082,
+      "sha256": "1BB48BCE7811247D30AA2EC0A9CDC002A443B6C41BA7352740BCEF3F3E04B421"
+    },
+    "04 Design Tools/logs/W1-20261003-01/diff/WebApp_v32.gs.diff": {
+      "bytes": 15806,
+      "sha256": "BF1DE3E0176F14E4B7C8FD288C6B0D8B6512388B8EDD6C77C6F2B0ECDC3803DC"
+    },
+    "04 Design Tools/logs/W1-20261003-01/duplicate-uid-reproduction.txt": {
+      "bytes": 134,
+      "sha256": "ACB9D95B6FCF6B91EC3A9458FA5B4797A840CEBC21ABCBFA3D9C517549E376CB"
+    },
+    "04 Design Tools/logs/W1-20261003-01/freeze.cjs": {
+      "bytes": 5397,
+      "sha256": "DC6174114EFD0B254C8E9E0A39CA1E455111793DED3DD82E73DDBB9F635626F0"
+    },
+    "04 Design Tools/logs/W1-20261003-01/harness.cjs": {
+      "bytes": 4170,
+      "sha256": "2DEB34C300734BD8B5432EB1D90D4DA06E209AF7C37AF192080640EA26983178"
+    },
+    "04 Design Tools/logs/W1-20261003-01/issues.md": {
+      "bytes": 3647,
+      "sha256": "1AE9251760C90495ACC6AEA7C246130F6DB72A0F4282948E4CB5A28F8AB38178"
+    },
+    "04 Design Tools/logs/W1-20261003-01/preview.cjs": {
+      "bytes": 2976,
+      "sha256": "1059EC61CDDC43450A0D5189F6275F1428C08FDA979A2F0F75D0A4B0D7C875BF"
+    },
+    "04 Design Tools/logs/W1-20261003-01/regression-fb-catalogue.test.js.txt": {
+      "bytes": 44,
+      "sha256": "17DA8C7A29C28E8FC9B19C1E59DFCF2B1669B2FF282FA35DFEC501FED670C6A4"
+    },
+    "04 Design Tools/logs/W1-20261003-01/regression-image-url.test.js.txt": {
+      "bytes": 22,
+      "sha256": "1F916329B523A657847D32F895EF969425289E08D8FEAD5440F5689B98201154"
+    },
+    "04 Design Tools/logs/W1-20261003-01/regression-Index.test.js.txt": {
+      "bytes": 34,
+      "sha256": "EB0787A61EFE7F6FFA08B5323982C2AFFBAE4A0CA65CE8CE6C15BC736C387B24"
+    },
+    "04 Design Tools/logs/W1-20261003-01/regression-meta-pipeline.test.js.txt": {
+      "bytes": 123,
+      "sha256": "2193227FBFF347B4F98770621076DD73734FB86D1C51AC8D8448DF79FE2245E8"
+    },
+    "04 Design Tools/logs/W1-20261003-01/regression-p1-add.test.cjs.txt": {
+      "bytes": 227,
+      "sha256": "59233B0C260B806D565872F2D1980D9FEA2741C15ED5FF369D4E393F06648051"
+    },
+    "04 Design Tools/logs/W1-20261003-01/regression-p1-ui.test.cjs.txt": {
+      "bytes": 175,
+      "sha256": "E3DA2466EEE06DDD14322DFF20CDC10272DD34EDE23EC5406A25F82C1B6498B3"
+    },
+    "04 Design Tools/logs/W1-20261003-01/regression.cjs": {
+      "bytes": 652,
+      "sha256": "5C195A320C6E751B1F2D6883E53C1AEADF2FCAF5A3B72AB99869DE82787B687F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/regression.cjs.attempt1.txt": {
+      "bytes": 148,
+      "sha256": "56342A86602BCF31CC3760DE5D0C86609F7C2BED88BFA022F0B26AFFFEEE4947"
+    },
+    "04 Design Tools/logs/W1-20261003-01/regression.cjs.attempt2.txt": {
+      "bytes": 148,
+      "sha256": "56342A86602BCF31CC3760DE5D0C86609F7C2BED88BFA022F0B26AFFFEEE4947"
+    },
+    "04 Design Tools/logs/W1-20261003-01/regression.cjs.attempt3.txt": {
+      "bytes": 148,
+      "sha256": "56342A86602BCF31CC3760DE5D0C86609F7C2BED88BFA022F0B26AFFFEEE4947"
+    },
+    "04 Design Tools/logs/W1-20261003-01/regression.cjs.attempt4.txt": {
+      "bytes": 148,
+      "sha256": "56342A86602BCF31CC3760DE5D0C86609F7C2BED88BFA022F0B26AFFFEEE4947"
+    },
+    "04 Design Tools/logs/W1-20261003-01/reproduce.cjs": {
+      "bytes": 1472,
+      "sha256": "0216DA2C6EAA4270BF43B8E79EAC09F25C150386FEB1478A28793719F21016DC"
+    },
+    "04 Design Tools/logs/W1-20261003-01/reproduction.txt": {
+      "bytes": 350,
+      "sha256": "2B0694D128BF6240D4B8DF39DD28A4C6FA1867DCF3131BADBE455DCDF3C2AC9D"
+    },
+    "04 Design Tools/logs/W1-20261003-01/result.md": {
+      "bytes": 4849,
+      "sha256": "4A5F83B2B0048F0A33DDC5BB5239EF4BC8173303F44ADA8A24F9C2D8BAAF527F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/REVIEW-ASTRA-HIGH.md": {
+      "bytes": 2692,
+      "sha256": "CFB19F1003A209DD6D14932C02AB753FE4405B5A6E09472CA6771D135D0A6BAB"
+    },
+    "04 Design Tools/logs/W1-20261003-01/revision.json": {
+      "bytes": 751,
+      "sha256": "9F2E213A421B0B2AD8441E1CF299B2BBFA1061968480606A8999392412C4F127"
+    },
+    "04 Design Tools/logs/W1-20261003-01/run.cjs": {
+      "bytes": 727,
+      "sha256": "8F13E609638915227EDD4A09847AD9D5E61400B592E2959EBA3153D8FC87E619"
+    },
+    "04 Design Tools/logs/W1-20261003-01/schema.json": {
+      "bytes": 5126,
+      "sha256": "B59B676FC8D05B8990E0434AA197F35FCB0B06C82AEB692E48434EFBAFB17398"
+    },
+    "04 Design Tools/logs/W1-20261003-01/schema.py": {
+      "bytes": 930,
+      "sha256": "721C93B1D0A0DB625DB758F9F8CB226DE83F4575DD8E758CED9244EC512BCAC0"
+    },
+    "04 Design Tools/logs/W1-20261003-01/serve.cjs": {
+      "bytes": 973,
+      "sha256": "4549A362AB334CF6DB1024ECBD615157D94F190D14CA3C934D10D71743665CD6"
+    },
+    "04 Design Tools/logs/W1-20261003-01/shop-schema-before.xlsx": {
+      "bytes": 1536638,
+      "sha256": "D662D3D153844B901BCCF1ECC54466148DBBE032C8868A986BCE19C4A18DDD2A"
+    },
+    "04 Design Tools/logs/W1-20261003-01/source-readback.json": {
+      "bytes": 1657,
+      "sha256": "F01C9EAA3D70C9318B834B326754825C44A83C13D5B804B6793E6253838223DC"
+    },
+    "04 Design Tools/logs/W1-20261003-01/stage.cjs": {
+      "bytes": 1559,
+      "sha256": "629773C87E916945CF303B18191EF3D1AD869FCBF496AF510A5D5C5268EC8EAF"
+    },
+    "04 Design Tools/logs/W1-20261003-01/stage.cjs.attempt1.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/stage.cjs.attempt2.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/stage.cjs.attempt3.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/stage.cjs.attempt4.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/stage.cjs.attempt5.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/stage.cjs.attempt6.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/stage.cjs.attempt7.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/test-after-source-save.xlsx": {
+      "bytes": 30909,
+      "sha256": "697463DB5E8636CBC087A13DF6EF9382CE0D3CD54FE44B00D88F253FCA075716"
+    },
+    "04 Design Tools/logs/W1-20261003-01/test-before/appsscript.json": {
+      "bytes": 194,
+      "sha256": "94A0FBB0108ACC28D5D97CD2C21759707EDA9DC36EC2DE12AD1930820782A502"
+    },
+    "04 Design Tools/logs/W1-20261003-01/test-before/Code.gs": {
+      "bytes": 174035,
+      "sha256": "3F906DA2F078A943A3F2C7C5176FF1D6971CA95648FECC25BFBAB5DD64AA21D0"
+    },
+    "04 Design Tools/logs/W1-20261003-01/test-before/Index.html": {
+      "bytes": 107571,
+      "sha256": "271313D0D0674EDF2D6642D3D5788C7495EAF2302EBA4F794E3F1F8BD2486A12"
+    },
+    "04 Design Tools/logs/W1-20261003-01/test-before/sheet.xlsx": {
+      "bytes": 30887,
+      "sha256": "AFA9969ACC281212767061E26E1E8A1234816DDAF1F58C60271FF2D2C58A034E"
+    },
+    "04 Design Tools/logs/W1-20261003-01/test-before/webapp.gs": {
+      "bytes": 38292,
+      "sha256": "057840A5F2E9675121FA0CB8E03EEE7F0B4593750CB7EB4A4C83E3E204E0B621"
+    },
+    "04 Design Tools/logs/W1-20261003-01/test-data-readback.json": {
+      "bytes": 402,
+      "sha256": "CF12EBB8FCBD2DD2AE5A897AA0DB4C0B39126DB53A0A66713FB0887DB904663C"
+    },
+    "04 Design Tools/logs/W1-20261003-01/test-runtime/appsscript.json": {
+      "bytes": 457,
+      "sha256": "5BE1C5B8A215FE3BCED90564B7C083989A2B71E182D8B8AA0046BB9A756A8D4A"
+    },
+    "04 Design Tools/logs/W1-20261003-01/test-runtime/Code.gs": {
+      "bytes": 183842,
+      "sha256": "EA6A1139E14B022EB1EF88C7A8F4DDE79BBAE94A4BC9F52F03A0B6F0130EC519"
+    },
+    "04 Design Tools/logs/W1-20261003-01/test-runtime/Index.html": {
+      "bytes": 116191,
+      "sha256": "3238C2EF3A19F25977F137A15E15690A5B3D46D204D63E8E391418CBFAE860FF"
+    },
+    "04 Design Tools/logs/W1-20261003-01/test-runtime/W1Orders.gs": {
+      "bytes": 26208,
+      "sha256": "3596CCE53149A15A5A58D226D1525200C0129A5901FDDDE991E09C9D48F8ACC2"
+    },
+    "04 Design Tools/logs/W1-20261003-01/test-runtime/W1Qa.gs": {
+      "bytes": 3227,
+      "sha256": "8ED31DB98F7277725179484C0D1DDE24328E18B0FFF8D59BBBD2E68BB35228C7"
+    },
+    "04 Design Tools/logs/W1-20261003-01/test-runtime/Webapp.gs": {
+      "bytes": 32487,
+      "sha256": "3E371C14DA33E66A89E6DBF8B2A10154AD76C7F37F21018A6486E334B91CBEE3"
+    },
+    "04 Design Tools/logs/W1-20261003-01/ui-build.cjs": {
+      "bytes": 7080,
+      "sha256": "D46FD42D494FCDA329741C6CE0E1ACC531D68B5DC23E22CB6927CD074E8FD6AD"
+    },
+    "04 Design Tools/logs/W1-20261003-01/ui-build.cjs.attempt1.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/ui-build.cjs.attempt2.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/ui-build.cjs.attempt3.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/ui-build.cjs.attempt4.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/ui-build.cjs.attempt5.txt": {
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "04 Design Tools/logs/W1-20261003-01/ui-proof.jpg": {
+      "bytes": 62634,
+      "sha256": "66B80A953C42F4307A261C266340F01980BD93ECC74E4CE1DD985F6EFF19AE82"
+    },
+    "04 Design Tools/logs/W1-20261003-01/ui.test.cjs": {
+      "bytes": 3971,
+      "sha256": "55AB3013950792BDE9F19B40BF76E8BC548EC33186457EF2E86C7F116FD2F0D5"
+    },
+    "04 Design Tools/logs/W1-20261003-01/ui.test.cjs.attempt1.txt": {
+      "bytes": 284,
+      "sha256": "EB03723257AE4260370AB126581C2159834A3A99D80BF4EDC8D025542EAD784F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/ui.test.cjs.attempt2.txt": {
+      "bytes": 284,
+      "sha256": "EB03723257AE4260370AB126581C2159834A3A99D80BF4EDC8D025542EAD784F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/ui.test.cjs.attempt3.txt": {
+      "bytes": 284,
+      "sha256": "EB03723257AE4260370AB126581C2159834A3A99D80BF4EDC8D025542EAD784F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/ui.test.cjs.attempt4.txt": {
+      "bytes": 360,
+      "sha256": "56665567628A40A4E73106DF154BE213591EDB07F7B88B98C2393E5DE2DB22C2"
+    },
+    "04 Design Tools/logs/W1-20261003-01/ui.test.cjs.attempt5.txt": {
+      "bytes": 360,
+      "sha256": "56665567628A40A4E73106DF154BE213591EDB07F7B88B98C2393E5DE2DB22C2"
+    },
+    "04 Design Tools/logs/W1-20261003-01/ui.test.cjs.attempt6.txt": {
+      "bytes": 436,
+      "sha256": "96848D2FAF39864DEF6D9A81F59D13147679AA0309C9CEB4E705E68A3C28554B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/uid-reproduction.txt": {
+      "bytes": 92,
+      "sha256": "231AC2D7920CB9663DBA5D3A078DC2C381484EF2A7D7564DBA4E141535C992CA"
+    },
+    "04 Design Tools/logs/W1-20261003-01/UNDO.md": {
+      "bytes": 3191,
+      "sha256": "E996BA9FC881B3095C44FEDF898471F50606E985249E4EE846E962CF5E2E17D4"
+    },
+    "04 Design Tools/logs/W1-20261003-01/verification.txt": {
+      "bytes": 356,
+      "sha256": "C1FD7DBCB0E05CAF938D9A35DD2D19BE32CCF6EFF222550F2A909B98B5BFB58C"
+    },
+    "04 Design Tools/logs/W1-20261003-01/w1.test.cjs": {
+      "bytes": 9710,
+      "sha256": "C42F053B67E3DFAC417E0C3251E4FE370C08B68304F06FD7D00A15FEA54F6B2B"
+    },
+    "04 Design Tools/logs/W1-20261003-01/w1.test.cjs.attempt1.txt": {
+      "bytes": 918,
+      "sha256": "83ACE3724228CF7553F4C804C213C0D9B7B55E555DEE150E7BE7A033CF51532A"
+    },
+    "04 Design Tools/logs/W1-20261003-01/w1.test.cjs.attempt10.txt": {
+      "bytes": 1213,
+      "sha256": "9EA113827BB7922803D4312E39E0E65C1CC343BA564FA1E8C77B981B8A54FDB2"
+    },
+    "04 Design Tools/logs/W1-20261003-01/w1.test.cjs.attempt11.txt": {
+      "bytes": 1337,
+      "sha256": "6C9E1DE8769DEF8CDE0546DAF274878BCCA3EA067423E281D9F415E264C7ECBB"
+    },
+    "04 Design Tools/logs/W1-20261003-01/w1.test.cjs.attempt2.txt": {
+      "bytes": 1245,
+      "sha256": "8292D96A84E232B187BF952C4242B9F211FC1E732B00CB0E07CF892CABD5C7F5"
+    },
+    "04 Design Tools/logs/W1-20261003-01/w1.test.cjs.attempt3.txt": {
+      "bytes": 2071,
+      "sha256": "ED518EFB98E734072CD50D61B2B6C220E18861B13D28BFEB2D9713269BA9EFBA"
+    },
+    "04 Design Tools/logs/W1-20261003-01/w1.test.cjs.attempt4.txt": {
+      "bytes": 2102,
+      "sha256": "E977078155D64D01027382E6EA742C156BC0F92FB681BFBA1843C3FCC8C13F33"
+    },
+    "04 Design Tools/logs/W1-20261003-01/w1.test.cjs.attempt5.txt": {
+      "bytes": 894,
+      "sha256": "D42659DCE794FD54AAD9D7874D87A56B44825DB5694D2D35F5C6973826E77C58"
+    },
+    "04 Design Tools/logs/W1-20261003-01/w1.test.cjs.attempt6.txt": {
+      "bytes": 894,
+      "sha256": "D42659DCE794FD54AAD9D7874D87A56B44825DB5694D2D35F5C6973826E77C58"
+    },
+    "04 Design Tools/logs/W1-20261003-01/w1.test.cjs.attempt7.txt": {
+      "bytes": 3089,
+      "sha256": "789D2BDD03803D5485D1B8D4EEF8139258E187437B55D99116B65F7E920CAD37"
+    },
+    "04 Design Tools/logs/W1-20261003-01/w1.test.cjs.attempt8.txt": {
+      "bytes": 1109,
+      "sha256": "1A2B1B6E45956DE4D307780B844573CAA8942C3C4B8D8024BCC8B386ADED5542"
+    },
+    "04 Design Tools/logs/W1-20261003-01/w1.test.cjs.attempt9.txt": {
+      "bytes": 1213,
+      "sha256": "9EA113827BB7922803D4312E39E0E65C1CC343BA564FA1E8C77B981B8A54FDB2"
+    },
+    "04 Design Tools/logs/W1-20261003-01/W1Qa.gs": {
+      "bytes": 3227,
+      "sha256": "8ED31DB98F7277725179484C0D1DDE24328E18B0FFF8D59BBBD2E68BB35228C7"
+    },
+    "04 Design Tools/logs/W1-20261003-01/W1UI.js": {
+      "bytes": 8379,
+      "sha256": "68E060C7CDAE1372E0A45E9A2CA01938D376DB355B91E6BF92EAC8D3204C1B30"
+    },
+    "00 Docs/STATE.md": {
+      "bytes": 9666,
+      "sha256": "C4F31E5ACCFC1CCB452012A192F138558D86BE31F92E56722603253981664A6B"
+    },
+    "00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "bytes": 65723,
+      "sha256": "A30808ECF80F59628D3AE652B831503CD7CA8780FD5593B8E1C96E91313CC945"
+    },
+    "00 Docs/HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "bytes": 25658,
+      "sha256": "CC5BEB793EDD9209C4CFF5FCBC5FD2996FDE94C737A4293FFDA8366EABD5D86D"
+    },
+    "00 Docs/IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "bytes": 131126,
+      "sha256": "CE1241AC7A79E4F6B0855F8EF20B7E4F52EBA17851BAA7B6B86CA007DD6F9B80"
+    },
+    "00 Docs/HANDOFF_2026-09-28.md": {
+      "bytes": 69280,
+      "sha256": "131B903CF7861CDC778E5B6B6D6830F6A9D0307835FBD908B462436A460790DE"
+    },
+    "00 Docs/HANDOFF_2026-10-04.md": {
+      "bytes": 2065,
+      "sha256": "6B3A9986344C6B667B358D1ADBCD816B02773DEBB6ECE9EF0258E01B6C042E39"
+    },
+    "03 Apps Script/Web App/README.md": {
+      "bytes": 16535,
+      "sha256": "B855D6BC7D0E86F196FCC2A50FE46D5DE372D51C72F7A049FE79CDFCF107F501"
+    },
+    "04 Design Tools/logs/decisions_20261004.csv": {
+      "bytes": 294,
+      "sha256": "AEB4AEA9F6D763A878207639021BDACFB9434147527FB421CAF443091EBDFC8C"
+    },
+    "04 Design Tools/logs/W1-20261003-01/freeze.attempt1.txt": {
+      "bytes": 240,
+      "sha256": "3E31BA5EB21DB6F1C470F3C345C655F790CF99FFB002F6EFC0FA01B0FB95FE6F"
+    },
+    "04 Design Tools/logs/W1-20261003-01/manifest-refresh.cjs": {
+      "bytes": 2050,
+      "sha256": "BD6B3C023ED7340FFCD0F8A330B27195A5EA57CDBCB4A853C82434884AF5C28C"
+    }
+  }
+}

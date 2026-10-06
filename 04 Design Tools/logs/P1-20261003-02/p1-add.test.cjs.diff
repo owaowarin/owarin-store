@@ -1,0 +1,41 @@
+diff --git a/04 Design Tools/logs/P1-20261003-02/baseline/p1-add.test.cjs b/04 Design Tools/logs/P1-20260929-01/p1-add.test.cjs
+index 252bf87..9123082 100644
+--- a/04 Design Tools/logs/P1-20261003-02/baseline/p1-add.test.cjs	
++++ b/04 Design Tools/logs/P1-20260929-01/p1-add.test.cjs	
+@@ -135,7 +135,9 @@ assert.equal(status(0).data.item.name,'Synthetic 0');
+ original[1]='RENAMED-ORIGINAL';
+ rowsA.push(['Different inventory copy',originalSku,'New Arrival']);
+ assert.equal(status(0).data.item.name,'Synthetic 0');
+-assert.equal(add(0).item.productId,originalSku);
++const historicalReplay=add(0);
++assert.equal(historicalReplay.item.productId,originalSku);
++assert.equal(historicalReplay.historical,true,'every DONE replay must be marked historical');
+ rowsA.push(['Duplicate inventory copy',originalSku,'New Arrival']);
+ assert.equal(status(0).data.item.name,'Synthetic 0');
+ rowsA.splice(rowsA.indexOf(original),1);
+@@ -156,6 +158,9 @@ for(const key of ['cost','price','platform']){
+   assert.throws(()=>add('missing-'+key,'GGB',{[key]:key==='platform'?'PS2':99}),/Inventory header missing/);
+   assert.equal(rowsA.length,beforeRows);assert.equal(rowsJ.length,beforeJournal);
+   columns[key]=col;
++  const recovered=add('missing-'+key,'GGB',{[key]:key==='platform'?'PS2':99});
++  assert.equal(recovered.result.success,true,'same ID may retry after a pre-write schema failure is repaired');
++  assert.equal(rowsA.length,beforeRows+1);
+ }
+ rowsA[0][0]='Item name';rowsA[0][1]='Product ID';rowsA[0][2]='Status';
+ rowsA[0][9]='Original';rowsA[0][10]='Cost';rowsA[0][12]='Price';rowsA[0][20]='Suggested Price';
+@@ -177,6 +182,15 @@ for(const call of [()=>add('bad-source','INVALID_SOURCE'),()=>status('bad-source
+   assert.throws(call,/Invalid Add (source|status)/);
+   assert.equal(rowsA.length,beforeRows);assert.equal(rowsJ.length,beforeJournal);
+ }
++for(const [i,bad] of [false,0,[],['Sold'],{}].entries()){
++  const beforeRows=rowsA.length,beforeJournal=rowsJ.length;
++  assert.throws(()=>add('bad-status-type-'+i,'GGB',{status:bad}),/Invalid Add status/);
++  assert.throws(()=>status('bad-status-type-'+i,'GGB',{status:bad}),/Invalid Add status/);
++  assert.throws(()=>c.addInventoryRow({requestId:'p1-core-bad-type-'+i,sheetName:'GAME GUIDE BOOKS',title:'Bad',status:bad}),/Invalid Add status/);
++  assert.equal(rowsA.length,beforeRows);assert.equal(rowsJ.length,beforeJournal);
++}
++for(const [i,value] of [undefined,null,'','  '].entries())
++  assert.equal(add('blank-status-'+i,'GGB',{status:value}).item.status,'New Arrival');
+ // R4: exercise the real formula writer at every derived destination.
+ Object.assign(columns,{marketplace:15,grossProfit:16,grossProfitMP:22,priceContentLists:24});
+ c._setDerivedFormulasForRow=realFormulas;

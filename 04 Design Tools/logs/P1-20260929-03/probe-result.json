@@ -1,0 +1,16 @@
+{
+  "changeId":"P1-20260929-03",
+  "requestId":"P1-TABLE-PROBE-001",
+  "sourceLogChangeId":"P1-20260929-02",
+  "spreadsheetId":"13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM",
+  "scriptId":"1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd",
+  "started":"2026-09-29 02:44:20 +07:00",
+  "completed":"2026-09-29 02:44:24 +07:00",
+  "status":"Execution completed",
+  "before":"GAME GUIDE BOOKS!A3:Z3 empty",
+  "writes":[{"field":"name","ok":true,"readback":"P1 TEST ONLY"},{"field":"sku","ok":true,"readback":"P1-TEST-001"},{"field":"status","ok":true,"readback":"New Arrival"},{"field":"cost-zero","ok":true,"readback":"0"},{"field":"price","ok":true,"readback":"120"},{"field":"listed-date","ok":true,"readback":"Tue Sep 29 2026 00:00:00 GMT+0700 (Indochina Time)"},{"field":"price-formula","ok":true,"readback":"=120"}],
+  "after":"GAME GUIDE BOOKS!A3:Z3 empty",
+  "independentReadback":"GAME GUIDE BOOKS!A3:Z3 and MAGAZINE!A3:W3 have no CellData values",
+  "shopMutation":false,
+  "limits":"Small guarded probe only; full Add candidate and journal uninstalled."
+}

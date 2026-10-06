@@ -1,0 +1,1 @@
+{"version":2,"provider":"codex","source":"codex/account/rateLimits/read","observedAt":"2026-09-11T06:57:22.9428198+00:00","rows":[{"label":"5 hours","usedPercent":64,"resetText":null,"resetsAt":1789124997,"Remaining":36},{"label":"Weekly","usedPercent":96,"resetText":null,"resetsAt":1789488635,"Remaining":4}]}

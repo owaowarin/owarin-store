@@ -1,0 +1,257 @@
+--- C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-03\before\Index.html
++++ C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\03 Apps Script\Web App\Index.html
+@@ -569,6 +569,22 @@
+ var M = { mode: 'add', source: 'GGB', sku: '', row: null, saving: false, soldChannel: 'SHOP',
+           auto: { genre: false, platform: false, original: false } };
+ var LAST_ADD = null;
++var addSuggestionResets = [], addAutoTimers = [];
++// ponytail: this tab survives reloads; cross-tab recovery needs a server request-status lookup.
++var ADD_PENDING_KEY = 'owarin.add.pending.1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp.v1';
++var addPending = null, addPendingBroken = false;
++try {
++  var savedAdd = sessionStorage.getItem(ADD_PENDING_KEY);
++  if (savedAdd) {
++    addPending = JSON.parse(savedAdd);
++    if (!addPending || !/^[A-Za-z0-9_-]{12,100}$/.test(addPending.requestId) ||
++        !addPending.payload || addPending.payload.requestId !== addPending.requestId ||
++        (addPending.payload.source !== 'GGB' && addPending.payload.source !== 'MAG') ||
++        typeof addPending.payload.title !== 'string' || !addPending.payload.title.trim())
++      throw new Error('Invalid pending Add');
++  }
++} catch (e) { addPending = null; addPendingBroken = true; }
++var addRequestId = addPending ? addPending.requestId : '';
+ 
+ /* ── api bridge: one contract end to end ── */
+ function callApi(action, payload) {
+@@ -623,7 +639,7 @@
+ function inventoryRows(){
+   return S.allSheets ? S.data.GGB.concat(S.data.MAG) : S.data[S.source];
+ }
+-function addToCache(item){ S.data[item.source].push(item); }
++function addToCache(item){ replaceInCache(item.productId, item); }
+ function replaceInCache(prevSku, item){
+   var arr = S.data[item.source];
+   for (var i = 0; i < arr.length; i++) {
+@@ -839,8 +855,12 @@
+ function showModal(id, on){ $(id).classList.toggle('open', !!on); }
+ document.addEventListener('click', function(e){
+   var c = e.target.closest ? e.target.closest('[data-close]') : null;
+-  if (c) { showModal(c.getAttribute('data-close'), false); return; }
++  if (c) {
++    if (M.mode === 'add' && M.saving && c.getAttribute('data-close') === 'modal') return;
++    showModal(c.getAttribute('data-close'), false); return;
++  }
+   if (e.target.classList && e.target.classList.contains('modal-bg')) {
++    if (M.mode === 'add' && M.saving && e.target.id === 'modal') return;
+     e.target.classList.remove('open');
+   }
+ });
+@@ -854,8 +874,8 @@
+   var els = document.querySelectorAll('.ggb-only');
+   for (var i = 0; i < els.length; i++) els[i].style.display = show;
+ }
+-$('mSrcGGB').addEventListener('click', function(){ if (M.mode === 'add') setModalSource('GGB'); });
+-$('mSrcMAG').addEventListener('click', function(){ if (M.mode === 'add') setModalSource('MAG'); });
++$('mSrcGGB').addEventListener('click', function(){ if (M.mode === 'add' && !M.saving) setModalSource('GGB'); });
++$('mSrcMAG').addEventListener('click', function(){ if (M.mode === 'add' && !M.saving) setModalSource('MAG'); });
+ 
+ /* ── SP-2: copy flag chips ── */
+ function setFlagChips(str){
+@@ -930,18 +950,53 @@
+   return ch;
+ }
+ 
++function resetAddForm(){
++  clearTimeout(_flT);
++  addAutoTimers.forEach(clearTimeout); addAutoTimers = [];
++  addSuggestionResets.forEach(function(reset){ reset(); });
++  fillForm({ status: 'New Arrival' });
++  M.auto = { genre: false, platform: false, original: false, type: false };
++  M.sku = ''; M.row = null;
++}
++function setAddBusy(busy){
++  var fields = document.querySelectorAll('#modal input, #modal select, #modal button');
++  for (var i = 0; i < fields.length; i++) fields[i].disabled = busy;
++  if (!busy && addPending) {
++    fields = document.querySelectorAll('#modal input, #modal select');
++    for (var j = 0; j < fields.length; j++) fields[j].disabled = true;
++    $('mSrcGGB').disabled = $('mSrcMAG').disabled = true;
++  }
++  $('mSave').textContent = busy ? 'Saving…' : (addPending ? 'Check / retry request' : 'Save');
++}
+ function openAdd(){
++  if (M.saving) return;
++  if (addPendingBroken) { toast('Browser storage unavailable — Add is disabled to prevent duplicate requests'); return; }
++  if (addPending) {
++    var old = addPending.payload;
++    M.mode = 'add'; M.sku = ''; M.row = null;
++    $('mTitle').textContent = '＋ Add item';
++    $('mSrcRow').style.display = '';
++    setModalSource(old.source);
++    fillForm({ name: old.title, publisher: old.pub, condition: old.cond, status: old.status,
++      original: old.original, cost: old.cost, price: old.price, platform: old.platform,
++      genre: old.genre, subGenre: old.subGenre, type: old.type, copyFlags: old.copyFlags,
++      rarity: old.rarity, marketRef: old.marketRef, refNote: old.refNote });
++    $('mResult').textContent = 'Unresolved Add Request ' + addRequestId + ' — check status before retry';
++    showModal('modal', true);
++    setAddBusy(false);
++    return;
++  }
+   M.mode = 'add'; M.sku = ''; M.row = null;
+-  M.auto = { genre: false, platform: false, original: false, type: false };
+   $('mTitle').textContent = '＋ Add item';
+   $('mSrcRow').style.display = '';
+   setModalSource(S.source);
+-  fillForm({ status: 'New Arrival' });
++  resetAddForm();
+   $('mResult').innerHTML = '';
+   showModal('modal', true);
+   setTimeout(function(){ $('fName').focus(); }, 80);
+ }
+ function openEdit(sku, src){
++  if (M.saving) return;
+   var r = findBySku(src || S.source, sku);
+   if (!r) { toast('Item not found — press REFRESH'); return; }
+   M.mode = 'edit'; M.sku = sku; M.row = r;
+@@ -955,29 +1010,60 @@
+ 
+ $('mSave').addEventListener('click', function(){
+   if (M.saving) return;
+-  var p = collectForm();
++  if (M.mode === 'add' && addPendingBroken) { toast('Browser storage unavailable — Add is disabled'); return; }
++  var p = (M.mode === 'add' && addPending) ? addPending.payload : collectForm();
+   if (!p.title) { toast('Enter the item name first'); return; }
+ 
+   M.saving = true;
+-  $('mSave').disabled = true;
+-  $('mSave').textContent = 'Saving…';
+-
++  if (M.mode === 'add') setAddBusy(true);
++  else { $('mSave').disabled = true; $('mSave').textContent = 'Saving…'; }
++
++  var committedSku = '';
+   var done = function(){
+     M.saving = false;
+-    $('mSave').disabled = false;
+-    $('mSave').textContent = 'Save';
++    if (M.mode === 'add') setAddBusy(false);
++    else { $('mSave').disabled = false; $('mSave').textContent = 'Save'; }
++    if (committedSku && M.mode === 'add') $('fName').focus();
+   };
+ 
+   if (M.mode === 'add') {
+-    callApi('inventory.add', {
+-      source: M.source, title: p.title, pub: p.pub, cond: p.cond,
+-      original: p.original, cost: p.cost, price: p.price, status: p.status,
+-      platform: p.platform, genre: p.genre, subGenre: p.subGenre, type: p.type,
+-      copyFlags: p.copyFlags, rarity: p.rarity, marketRef: p.marketRef, refNote: p.refNote
+-    }).then(function(dd){
+-      addToCache(dd.item);
+-      buildFilterOptions(true);
+-      render(false);
++    var retrying = !!addPending;
++    if (!addPending) {
++      addRequestId = 'add-' + Date.now() + '-' + Math.random().toString(36).slice(2);
++      addPending = { requestId: addRequestId, payload: {
++        requestId: addRequestId, source: M.source, title: p.title, pub: p.pub, cond: p.cond,
++        original: p.original, cost: p.cost, price: p.price, status: p.status,
++        platform: p.platform, genre: p.genre, subGenre: p.subGenre, type: p.type,
++        copyFlags: p.copyFlags, rarity: p.rarity, marketRef: p.marketRef, refNote: p.refNote
++      } };
++      try { sessionStorage.setItem(ADD_PENDING_KEY, JSON.stringify(addPending)); }
++      catch (e) { addPending = null; addRequestId = ''; done(); toast('Could not keep Add Request ID — nothing was sent'); return; }
++    }
++    var frozen = addPending.payload;
++    var addExpired = false, addTimer;
++    var addCall = retrying ? callApi('inventory.addStatus', frozen).then(function(status){
++      if (status && status.state === 'DONE') return status.data;
++      if (status && status.state === 'NOT_FOUND') {
++        if (addExpired) throw new Error('Add status arrived after timeout');
++        return callApi('inventory.add', frozen);
++      }
++      throw new Error('Add Request ' + addRequestId + ' is ' + (status && status.state || 'UNKNOWN') +
++                      ' — inspect ADD REQUESTS before recovery');
++    }) : callApi('inventory.add', frozen);
++    var boundedAdd = new Promise(function(resolve, reject){
++      addTimer = setTimeout(function(){
++        addExpired = true;
++        reject(new Error('Add response timed out; it may have saved — check the same request'));
++      }, 45000);
++      addCall.then(resolve, reject);
++    });
++    boundedAdd.then(function(dd){
++      if (!dd || !dd.item || !dd.item.productId) throw new Error('Save result is unclear — refresh inventory before retrying');
++      committedSku = dd.item.productId;
++      try { sessionStorage.removeItem(ADD_PENDING_KEY); } catch (e) {}
++      addPending = null;
++      addRequestId = '';
++      resetAddForm();
+       var res = dd.result || {};
+       var sugLine;
+       if (res.review) {
+@@ -994,13 +1080,24 @@
+         'Suggested: ' + sugLine +
+         (res.tier ? ' <span style="color:var(--muted-fg)">[' + esc(res.tier) + ']</span>' : '') +
+         '</div>';
++      LAST_ADD = null;
++      if (dd.historical) { toast('Saved — refresh inventory to see current stock'); return; }
+       LAST_ADD = { item: dd.item, matches: dd.bookingMatches || [] };
+       if (LAST_ADD.matches.length) $('mResult').innerHTML += bookingBanner(LAST_ADD);
+       okToast('Added: ' + dd.item.productId);
+-      fillForm({ status: 'New Arrival' });
+-      M.auto = { genre: false, platform: false, original: false, type: false };
+-      $('fName').focus();
+-    }).catch(function(e){ toast(e.message); }).finally(done);
++      try {
++        addToCache(dd.item);
++        buildFilterOptions(true);
++        render(false);
++      } catch (e) { toast('Added — refresh the list to see the item'); }
++    }).catch(function(e){
++      if (!retrying && !committedSku && /^(Original|Cost|Price|Market Ref) must be a (finite )?number$/.test(String(e.message || e))) {
++        try { sessionStorage.removeItem(ADD_PENDING_KEY); } catch (ignored) {}
++        addPending = null; addRequestId = '';
++      }
++      toast(committedSku ? 'Added ' + committedSku + ' — refresh inventory' :
++            e.message + (addRequestId ? ' · Request ID: ' + addRequestId + ' (check same request)' : ''));
++    }).finally(function(){ clearTimeout(addTimer); done(); });
+   } else {
+     var changes = diffChanges(M.row, p);
+     if (!Object.keys(changes).length) { toast('Nothing changed'); done(); return; }
+@@ -1031,8 +1128,9 @@
+ }
+ function attachSuggest(inputId, boxId, listFn, onChoose){
+   var inp = $(inputId), box = $(boxId);
+-  var items = [], active = -1;
++  var items = [], active = -1, blurTimer;
+   function hide(){ box.style.display = 'none'; active = -1; }
++  addSuggestionResets.push(function(){ clearTimeout(blurTimer); items = []; box.innerHTML = ''; hide(); });
+   function paint(){
+     var nodes = box.querySelectorAll('.sug-i');
+     for (var i = 0; i < nodes.length; i++) nodes[i].classList.toggle('on', i === active);
+@@ -1069,7 +1167,7 @@
+     e.preventDefault();
+     choose(it.textContent);
+   });
+-  inp.addEventListener('blur', function(){ setTimeout(hide, 150); });
++  inp.addEventListener('blur', function(){ blurTimer = setTimeout(hide, 150); });
+ }
+ attachSuggest('fName', 'sugName', function(){ return titleList(M.source); }, autofillFromName);
+ attachSuggest('fPubIn', 'sugPub', function(){ return pubListOf(M.source); }, autofillOriginal);
+@@ -1158,14 +1256,14 @@
+   var pub = $('fPubIn').value.trim().toLowerCase();
+   setAuto('fOrig', 'original', (base && pub) ? lookupOriginal(base, pub) : '');
+ }
+-$('fName').addEventListener('blur', function(){ setTimeout(autofillFromName, 160); });
++$('fName').addEventListener('blur', function(){ addAutoTimers.push(setTimeout(autofillFromName, 160)); });
+ $('fName').addEventListener('change', autofillFromName);
+ // เดา flag ระหว่างพิมพ์ด้วย (debounce) — ไม่ต้องรอ blur
+ var _flT;
+ $('fName').addEventListener('input', function(){
+   clearTimeout(_flT); _flT = setTimeout(autofillFlags, 350);
+ });
+-$('fPubIn').addEventListener('blur', function(){ setTimeout(autofillOriginal, 160); });
++$('fPubIn').addEventListener('blur', function(){ addAutoTimers.push(setTimeout(autofillOriginal, 160)); });
+ $('fPubIn').addEventListener('change', autofillOriginal);
+ 
+ /* ── mark sold / revert — SP-2: channel + ฐานหน้าร้าน ── */

@@ -1,0 +1,65 @@
+diff --git a/OWARIN STORE/04 Design Tools/logs/W1-20261004-05/candidate/backup/v36/W1Orders.gs b/OWARIN STORE/04 Design Tools/logs/W1-20261004-05/candidate/W1Orders.gs
+index 0d96840..21294da 100644
+--- a/OWARIN STORE/04 Design Tools/logs/W1-20261004-05/candidate/backup/v36/W1Orders.gs	
++++ b/OWARIN STORE/04 Design Tools/logs/W1-20261004-05/candidate/W1Orders.gs	
+@@ -1,4 +1,4 @@
+-// W1 v36 local/test candidate. Private helpers end in _. No marketplace stock sync.
++// W1 v37 local/test candidate. Private helpers end in _. No marketplace stock sync.
+ var W1_HEADERS = {
+  'ORDERS':['Order ID','Status','Channel','Created At','Sold At','Cancelled At','Client ID','Subtotal','Customer Shipping','Shipping Subsidy','Total','Recipient Snapshot','Revision','Last Request ID'],
+  'ORDER LINES':['Order ID','Line ID','Item UID','Source','SKU Snapshot','Title Snapshot','Condition Snapshot','Cost Snapshot','Entered Price','Ledger Price','Price Basis','Prior Status','Reservation State','Inventory Snapshot'],
+@@ -13,7 +13,9 @@ function _w1Write_(label,fn){
+  SpreadsheetApp.flush();
+ }
+ function _w1String_(v){return v instanceof Date?v.toISOString():String(v==null?'':v);}
+-function _w1Hash_(v){return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,JSON.stringify(v)).map(function(b){return ('0'+((b+256)%256).toString(16)).slice(-2);}).join('');}
++function _w1Hash_(v,utf8){var text=JSON.stringify(v),bytes=utf8?Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,text,Utilities.Charset.UTF_8):Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,text);return bytes.map(function(b){return ('0'+((b+256)%256).toString(16)).slice(-2);}).join('');}
++// New requests use explicit UTF-8; historical request hashes are never rewritten.
++function _w1PayloadHash_(v,prior){return prior&&String(prior).indexOf('u8:')!==0?_w1Hash_(v):'u8:'+_w1Hash_(v,true);}
+ function _w1Money_(v,field){
+  if((typeof v!=='string' && typeof v!=='number') || String(v).trim()==='' || !/^\d+(\.\d{1,2})?$/.test(String(v).trim()))throw new Error('INVALID_MONEY '+field);
+  var n=Number(v);if(!isFinite(n)||n>10000000)throw new Error('INVALID_MONEY '+field);return n;
+@@ -27,7 +29,7 @@ function _w1Table_(name){
+ }
+ function _w1Rows_(name){var sh=_w1Table_(name),n=sh.getLastRow();return n<2?[]:sh.getRange(2,1,n-1,W1_HEADERS[name].length).getValues();}
+ function _w1Event_(req,state,result,error){
+- var sh=_w1Table_('ORDER REQUESTS'),row=[Utilities.getUuid(),new Date().toISOString(),req.id,req.attempt,req.action,req.hash,req.snap.orderId||'',state,_w1Encode_(req.snap),_w1Encode_(result||null),String(error||'').slice(0,1000),req.actor||Session.getActiveUser().getEmail()||'Unknown',req.entrySource||'web/api','Code v36 / WebApp v36','Request '+req.id+'; retry same payload; never a new ID'];
++ var sh=_w1Table_('ORDER REQUESTS'),row=[Utilities.getUuid(),new Date().toISOString(),req.id,req.attempt,req.action,req.hash,req.snap.orderId||'',state,_w1Encode_(req.snap),_w1Encode_(result||null),String(error||'').slice(0,1000),req.actor||Session.getActiveUser().getEmail()||'Unknown',req.entrySource||'web/api','Code v37 / WebApp v37','Request '+req.id+'; retry same payload; never a new ID'];
+  var r=sh.getLastRow()+1;_w1EnsureRow_(sh,r);_w1Write_('journal '+state,function(){sh.getRange(r,1,1,row.length).setValues([row]);});
+  if(JSON.stringify(sh.getRange(r,1,1,row.length).getValues()[0])!==JSON.stringify(row))throw new Error('JOURNAL_READBACK '+req.id);
+ }
+@@ -196,8 +198,8 @@ function _w1ApplyLegacy_(req){
+ function _w1Mutate_(action,p){
+  _w1Access_();if(!p||!/^[A-Za-z0-9_-]{12,100}$/.test(p.requestId||''))throw new Error('REQUEST_ID_REQUIRED');
+  return _w1Locked_(function(){
+-  var hash=_w1Hash_(p),old=_w1TechnicalGate_(p.requestId),req;
+-  if(old){if(old.hash!==hash||old.action!==action)throw new Error('REQUEST_PAYLOAD_CONFLICT');if(old.state==='DONE')return Object.assign({},old.result,{replayed:true});req=old;req.attempt++;}
++  var old=_w1TechnicalGate_(p.requestId),hash=_w1PayloadHash_(p,old&&old.hash),req;
++  if(old){if(old.hash!==hash||old.action!==action||(old.snap.payload&&JSON.stringify(old.snap.payload)!==JSON.stringify(p)))throw new Error('REQUEST_PAYLOAD_CONFLICT');if(old.state==='DONE')return Object.assign({},old.result,{replayed:true});req=old;req.attempt++;}
+   else{req={id:p.requestId,attempt:1,action:action,hash:hash,snap:_w1Prepare_(action,p)};_w1Event_(req,'PREPARED');}
+   try{_w1Event_(req,'APPLYING');var result=_w1Apply_(req);_w1Event_(req,'DONE',result);return result;}
+   catch(e){try{_w1Event_(req,'NEEDS_REVIEW',null,e.message);}catch(a){throw new Error('PARTIAL_AUDIT '+req.id+' '+e.message+'; '+a.message);}throw new Error('RECOVERY_REQUIRED '+req.id+' '+e.message);}
+@@ -214,11 +216,11 @@ function _w1EditGuard_(sh,row,ch,requestId){
+ function _w1Edit_(p){
+  _w1Access_();if(!p||!/^[A-Za-z0-9_-]{12,100}$/.test(p.requestId||''))throw new Error('REQUEST_ID_REQUIRED');
+  return _withLock(function(){
+-  var hash=_w1Hash_(p),old=_w1TechnicalGate_(p.requestId),req;
+-  if(old){if(old.hash!==hash||old.action!=='edit')throw new Error('REQUEST_PAYLOAD_CONFLICT');if(old.state==='DONE')return Object.assign({},old.result,{replayed:true});
++  var old=_w1TechnicalGate_(p.requestId),hash=_w1PayloadHash_(p,old&&old.hash),req;
++  if(old){if(old.hash!==hash||old.action!=='edit'||old.snap.source!==p.source||old.snap.sku!==p.sku||JSON.stringify(old.snap.changes)!==JSON.stringify(p.changes||{}))throw new Error('REQUEST_PAYLOAD_CONFLICT');if(old.state==='DONE')return Object.assign({},old.result,{replayed:true});
+    // Edit's derived SKU/SP-2 work is not automatically replayable. A completed readback can repair only its outcome log.
+    req=old;req.attempt++;if(!req.snap.editResult){_w1Event_(req,'NEEDS_REVIEW',null,'Partial edit requires manual reconciliation');throw new Error('EDIT_MANUAL_RECOVERY '+req.id);}
+-   var current=_w1Inv_(p.source,req.snap.editResult.item.productId,req.snap.editResult.item.itemUid||'');if(_w1Hash_(current.obj)!==req.snap.editHash)throw new Error('EDIT_CHANGED');_w1Event_(req,'DONE',req.snap.editResult);return req.snap.editResult;
++   var current=_w1Inv_(p.source,req.snap.editResult.item.productId,req.snap.editResult.item.itemUid||'');if(JSON.stringify(current.obj)!==JSON.stringify(req.snap.editResult.item))throw new Error('EDIT_CHANGED');_w1Event_(req,'DONE',req.snap.editResult);return req.snap.editResult;
+   }
+   if(p.source!=='GGB'&&p.source!=='MAG')throw new Error('INVALID_SOURCE');
+   var sh=_getSheetOrThrow(_sheetFromCode(p.source)),c=_resolveColumns(sh),row=_findRowBySku(sh,c,p.sku),ch=p.changes||{};
+@@ -315,7 +317,7 @@ function _w1Apply_(req){return req.snap.format===2?_w1ApplyBatched_(req):_w1Appl
+ function _w1Intent_(id){
+  _w1Access_();var r=_w1Requests_()[id];if(!r)throw new Error('REQUEST_NOT_FOUND');
+  if(['create','cancel','confirm'].indexOf(r.action)<0||!r.snap.payload)throw new Error('ORIGINAL_INTENT_REQUIRED manual recovery');
+- if(r.snap.payload.requestId!==id||_w1Hash_(r.snap.payload)!==r.hash)throw new Error('CORRUPT_INTENT');
++ if(r.snap.payload.requestId!==id||_w1PayloadHash_(r.snap.payload,r.hash)!==r.hash)throw new Error('CORRUPT_INTENT');
+  return {action:'orders.'+r.action,payload:r.snap.payload,state:r.state};
+ }
+ // Resume by ID on the server: Google object transport may reorder payload keys.

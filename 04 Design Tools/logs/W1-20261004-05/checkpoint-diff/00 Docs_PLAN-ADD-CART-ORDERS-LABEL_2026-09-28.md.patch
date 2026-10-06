@@ -1,0 +1,38 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05\\checkpoint-before\\00 Docs\\PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md"
+index 132948f..2c7a7d6 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05\\checkpoint-before\\00 Docs\\PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md"	
+@@ -9,7 +9,7 @@
+ | ลำดับ / สถานะ | ผลลัพธ์ที่เจ้าของได้ | ขอบเขต / ของเดิมที่ใช้ต่อ | เกณฑ์จบ / ภาระงานสัมพัทธ์ |
+ |---|---|---|---|
+ | P1 — LIVE ตาม Session34 | Add ต่อเนื่อง, default New Arrival, บันทึกไม่ครบไม่ตอบ DONE, ตรวจคำขอเดิมได้ | Code/WebApp v31 + Index + P1Journal; ADD REQUESTS เท่านั้น | R1–R4 และ local/isolated Google tests ผ่าน; first real-shop Add ยังรอสังเกต ไม่มีงานแก้เพิ่มหากไม่พบบั๊ก |
+-| **1 · W1 — CHANGES REQUIRED: R5 runtime / R6 recovery; review complete** | **Cart → Create order → Pending → Cancel/Confirm sold** และ Orders Bento ใช้งานจบสาย | stable Item UID, shared guards, ORDERS/ORDER LINES/ORDER REQUESTS, SALES เดิม; ปุ่มข้างราคา + 4 คำสั่ง, final review + Label later | QA-B/C/D/E/F/G/K/L + regression ที่กระทบ; review critical diff; สูงสุด เพราะเป็นเงิน/สต็อกและฐานของ W2 |
++| **1 · W1 — v36 local/test; F05 reconciliation + final UI gates OPEN** | **Cart → Create order → Pending → Cancel/Confirm sold** และ Orders Bento ใช้งานจบสาย | stable Item UID, shared guards, ORDERS/ORDER LINES/ORDER REQUESTS, SALES เดิม; ปุ่มข้างราคา + 4 คำสั่ง, final review + Label later | QA-B/C/D/E/F/G/K/L + regression ที่กระทบ; review critical diff; สูงสุด เพราะเป็นเงิน/สต็อกและฐานของ W2 |
+ | **2 · W2 — TODO** | **ค้นหา/บันทึกลูกค้า → Label → Print/Reprint** จากเว็บและ Sheets | CLIENT เดิม, recipient snapshot, renderer เดียวจาก Label Tool, CAUTION asset เดิม; ต่อ final review ของ W1 | QA-H/I/K/L + sale-no-repeat; Google dialog/PDF/print check; ปานกลางถึงสูง |
+ | **3 · W3 — TODO** | **เปิดใช้ workflow ครบชุดพร้อม undo และคู่มือ** | exact reviewed revision + migration dry-run + isolated E2E → release ที่อนุมัติ → readback | รวม QA-A–L ตามความเกี่ยวข้อง, ไม่มี critical issue ค้าง, source/schema/undo ตรงจริง; งานโค้ดต่ำแต่มีขั้น Google/เครื่องพิมพ์ |
+ 
+@@ -45,7 +45,7 @@ flowchart LR
+ 
+ ข้อมูลส่วนนี้อ้าง STATE snapshot เดิม ไม่ใช่การตรวจระบบสดในรอบนี้: (1) รักษางานที่ LIVE; ถ้ามีข้อมูลเสีย/ขายซ้ำให้แก้ก่อน W1, (2) ตรวจผล Meta auto-refresh ที่ค้าง A5 และวินิจฉัย fbaPostBatch error ในงานบำรุงรักษาสั้น ไม่รื้อ pipeline, (3) Shopee relisting: ตรวจ builder/drafts และ mapping item IDs; reconciliation รายการเก่าต้องมี export ราคาสต็อก/options จากเจ้าของ, (4) OWA ads ยัง PARKED รอ budget/posts/break-even และคำสั่งเปิดงาน, (5) storefront/เครื่องมืออื่นสถานะยังไม่ตรวจจึงไม่รวมคำรับรองว่า “ทั้งร้านเสร็จ” ไม่แตะ OWARIN Back House LAB
+ 
+-**ถัดไปเพียงหนึ่งงาน:** focused GPT-6 Astra / High review บน W1-20261004-03/v33@1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20. Session39 ปิด R1–R4 และ local/Google acceptance รวม100-item timeout/retryแล้ว; packet พร้อม ไม่มี model-specific sign-off ที่แต่งขึ้น. ไม่เริ่ม P0/P1 ใหม่ ไม่แตะร้าน/W2; หลักฐาน `04 Design Tools/logs/W1-20261004-03/result.md`.
++**ถัดไปเพียงหนึ่งงาน:** อ่านผล native hash diagnostic เดิมใน test project ตาม 04 Design Tools/logs/W1-20261004-05/CONTINUE.md; W1-20261004-05/v36@D25BAE5207BDBC45BB946FF6F19FE0B5B7A6004E74EEBD422417DFD9DFF00A67. R5/R6 implementation + affected local testsผ่าน แต่ F05 journal repair/final UI+export+focused reviewยังไม่ผ่าน. ไม่เริ่ม P0/P1 ใหม่ ไม่แตะร้าน/W2.
+ 
+ ## 1. ขอบเขตและข้อสรุป
+ 
+@@ -321,7 +321,7 @@ Session38 historical: analysis/repro only; candidate revision unchanged. R1 even
+ 
+ Session39 historical: v33 local/test acceptance complete; R1–R4 plus Google gzip MIME, oversized plain-cell and100-item timeout/helper continuation fixes closed.14 groups/1,032 write positions + affected regressions PASS; Google100 unique owned holds/one Pending/same-ID replay, all technical requests DONE; original SALES/formulas/history preserved. Current-chat focused diff review recorded, exact model/effort unavailable; Astra / High packet and RUNTIME-ASTRA-HANDOFF.md prepared. Formal W1 runtime performance and model-specific focused sign-off remain open; no production/W2 authorization. Exact W1-20261004-03/v33@1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20; `04 Design Tools/logs/W1-20261004-03/result.md` / UNDO.md.
+ 
+-Session40 current (2026-10-03T23:26:08.789Z): focused review completed; CHANGES REQUIRED, not release approval. Fresh unchanged-v33 instrumentation proves per-cell journal/flush amplification (Create100:1,019 flush; Confirm100:2,631);103 after-effect failure/retry positions PASS. R6 lost original payload cannot be reconstructed from normalized journal snapshot/hash; explicit repro retained. Single repair batch and Google exit gates: `04 Design Tools/logs/W1-20261004-04/SOL-HANDOFF.md`; findings/evidence: REVIEW.md / review-results.json. Runtime exact revision unchanged: W1-20261004-03/v33@1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20. No Google/production/W2 action this session. Next implementation lane Sol / High, followed by focused changed-diff review; no new broad audit.
++Session40 historical (2026-10-03T23:26:08.789Z): focused review completed; CHANGES REQUIRED, not release approval. Fresh unchanged-v33 instrumentation proves per-cell journal/flush amplification (Create100:1,019 flush; Confirm100:2,631);103 after-effect failure/retry positions PASS. R6 lost original payload cannot be reconstructed from normalized journal snapshot/hash; explicit repro retained. Single repair batch and Google exit gates: `04 Design Tools/logs/W1-20261004-04/SOL-HANDOFF.md`; findings/evidence: REVIEW.md / review-results.json. Runtime exact revision unchanged: W1-20261004-03/v33@1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20. No Google/production/W2 action this session. Next implementation lane Sol / High, followed by focused changed-diff review; no new broad audit.
+ 
+ | งานย่อยตามลำดับ | ทำอะไร / ตรวจอย่างไร | ส่งมอบที่ตรวจรับได้ |
+ |---|---|---|
+@@ -413,3 +413,6 @@ Archive preflight Session35: แผน/คู่มือ/history/baseline ย
+ ### C. Definition of done
+ 
+ ทุก phase ต้องส่ง Change ID + diff/backup reference + tests + log location; งานข้อมูลต้องส่ง Request ID และ outcome/recovery evidence ด้วย ถ้ายังไม่มี log ให้ถือว่างานยังไม่เสร็จ QA-L อยู่ใน W1/W2/W3 ตาม mutation ที่เปลี่ยน; P1 มี ADD REQUESTS แล้ว แต่ order/client/edit audit ในขอบเขตใหม่ยังต้องพัฒนา ไม่อ้างว่าครอบคลุม legacy sales
++
++
++Session41 checkpoint (2026-10-04T15:43:18.210Z): R5/R6 implemented in local/test v36; F04 ID-only recovery passed actual UI. F05 duplicate isolated QA execution left49 logical journal blanks; explicit repair stopped before writes on hash guard. Fresh native proof equals export exactly,0 differing cells; server hash diagnostic saved/read back, UI result pending after browser kernel stopped. W1 NOT COMPLETE. Exact W1-20261004-05/v36@D25BAE5207BDBC45BB946FF6F19FE0B5B7A6004E74EEBD422417DFD9DFF00A67; ONE next step: read existing native diagnostic result using CONTINUE.md, then verified gap reconciliation + final two-session UI/export gates. Production/LAB/W2 unchanged; no repeated broad audit or fixtures.

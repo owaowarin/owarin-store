@@ -1,0 +1,134 @@
+{
+  "profiles": [
+    {
+      "n": 1,
+      "action": "create",
+      "flush": 16,
+      "writes": 16,
+      "journalEvents": 11,
+      "getValues": 71
+    },
+    {
+      "n": 1,
+      "action": "cancel",
+      "flush": 12,
+      "writes": 12,
+      "journalEvents": 9,
+      "getValues": 67
+    },
+    {
+      "n": 1,
+      "action": "confirm",
+      "flush": 24,
+      "writes": 23,
+      "journalEvents": 17,
+      "getValues": 121
+    },
+    {
+      "n": 1,
+      "action": "shopee",
+      "flush": 31,
+      "writes": 32,
+      "journalEvents": 21,
+      "getValues": 136
+    },
+    {
+      "n": 10,
+      "action": "create",
+      "flush": 16,
+      "writes": 34,
+      "journalEvents": 11,
+      "getValues": 99
+    },
+    {
+      "n": 10,
+      "action": "cancel",
+      "flush": 12,
+      "writes": 21,
+      "journalEvents": 9,
+      "getValues": 86
+    },
+    {
+      "n": 10,
+      "action": "confirm",
+      "flush": 24,
+      "writes": 41,
+      "journalEvents": 17,
+      "getValues": 150
+    },
+    {
+      "n": 10,
+      "action": "shopee",
+      "flush": 31,
+      "writes": 77,
+      "journalEvents": 21,
+      "getValues": 191
+    },
+    {
+      "n": 100,
+      "action": "create",
+      "flush": 99,
+      "writes": 279,
+      "journalEvents": 65,
+      "getValues": 684
+    },
+    {
+      "n": 100,
+      "action": "cancel",
+      "flush": 67,
+      "writes": 157,
+      "journalEvents": 45,
+      "getValues": 491
+    },
+    {
+      "n": 100,
+      "action": "confirm",
+      "flush": 188,
+      "writes": 349,
+      "journalEvents": 125,
+      "getValues": 1113
+    },
+    {
+      "n": 100,
+      "action": "shopee",
+      "flush": 251,
+      "writes": 702,
+      "journalEvents": 165,
+      "getValues": 1622
+    }
+  ],
+  "afterEffect": [
+    {
+      "action": "create",
+      "n": 12,
+      "positions": 45,
+      "passes": 90
+    },
+    {
+      "action": "cancel",
+      "n": 12,
+      "positions": 28,
+      "passes": 56
+    },
+    {
+      "action": "confirm",
+      "n": 12,
+      "positions": 59,
+      "passes": 118
+    },
+    {
+      "action": "shopee",
+      "n": 12,
+      "positions": 106,
+      "passes": 212
+    }
+  ],
+  "groups": [
+    "1/10/100 all actions, mixed sources, sparse selected rows, unchanged unselected cells, unique SALES and same-ID replay",
+    "Native write/journal/capacity failure before and AFTER effect at every boundary; two batches; exact resume and no duplicate SALES",
+    "Arbitrary subset silent-drop in SALES block hidden from reporting, same allocated block repaired without duplication",
+    "R6 exact strings/order restored from server intent; mismatch rejected; owner-only",
+    "Unfinished legacy intent without payload explicitly blocked for server recovery; original payload resumes legacy engine",
+    "Claim changed during stock batch: readback rejects and sibling mutations block; exact restore plus original retry succeeds"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "verifiedAt": "2026-10-06T00:53:52.6331889+07:00",
+  "revision": "W2-20261005-01/v39@7043D1B05E52DEAA3272C4AB3986790592081BD1C2688C5E3867A4D4FBC88D51",
+  "candidateHashesUnchanged": true,
+  "sessionClose": {
+    "state": true,
+    "handoff": true,
+    "csv": true,
+    "relatedDocs": true,
+    "readback": true,
+    "plan": true,
+    "rules": true,
+    "decisions": true
+  },
+  "pdfPhysicalPrint": "OPEN",
+  "newBusinessOrRuntimeMutation": false,
+  "liveDataRechecked": false
+}

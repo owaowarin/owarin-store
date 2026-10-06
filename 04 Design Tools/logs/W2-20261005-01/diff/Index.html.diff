@@ -1,0 +1,143 @@
+--- v38/Index.html
++++ v39/Index.html
+@@ -262,6 +262,7 @@
+ .rv-card:hover{background:var(--card2)}
+ .rv-range{color:var(--gold-bright);font-size:12px;margin-top:4px;font-variant-numeric:tabular-nums}
+ </style>
++<?!= _w2Include_("LabelRenderer") ?>
+ </head>
+ <body>
+ 
+@@ -552,7 +553,7 @@
+   </div>
+ </div>
+ 
+-<div class="modal-bg" id="w1ReviewModal"><div class="modal w1-review"><h2 id="w1ReviewTitle">Final review</h2><div id="w1ReviewContent"></div><div class="cart-actions"><button class="btn" data-close="w1ReviewModal">Back</button><button class="btn primary" id="w1Commit">Confirm sold · Label later</button></div></div></div>
++<div class="modal-bg" id="w1ReviewModal"><div class="modal w1-review"><h2 id="w1ReviewTitle">Final review</h2><div id="w1ReviewContent"></div><div class="cart-actions"><button class="btn" data-close="w1ReviewModal">Back</button><button class="btn primary" id="w2WithLabel" type="button">Customer &amp; Label</button><button class="btn primary" id="w1Commit">Confirm sold · Label later</button></div></div></div>
+ <div id="toast"></div>
+ <footer><span>OWARIN STORE</span><span class="g" id="stamp"></span></footer>
+ 
+@@ -1127,49 +1128,7 @@
+ function genreListOf(src){
+   return uniq(S.data[src].map(function(r){ return r.genre; }));
+ }
+-function attachSuggest(inputId, boxId, listFn, onChoose){
+-  var inp = $(inputId), box = $(boxId);
+-  var items = [], active = -1, blurTimer;
+-  function hide(){ box.style.display = 'none'; active = -1; }
+-  addSuggestionResets.push(function(){ clearTimeout(blurTimer); items = []; box.innerHTML = ''; hide(); });
+-  function paint(){
+-    var nodes = box.querySelectorAll('.sug-i');
+-    for (var i = 0; i < nodes.length; i++) nodes[i].classList.toggle('on', i === active);
+-    if (active >= 0 && nodes[active] && nodes[active].scrollIntoView) nodes[active].scrollIntoView({ block: 'nearest' });
+-  }
+-  function choose(v){ inp.value = v; hide(); if (onChoose) onChoose(v); }
+-  function build(){
+-    var q = inp.value.trim().toLowerCase();
+-    if (!q) { items = []; hide(); return; }
+-    var list = listFn();
+-    var pre = [], mid = [];
+-    for (var i = 0; i < list.length; i++) {
+-      var lv = list[i].toLowerCase();
+-      if (lv.indexOf(q) === 0) pre.push(list[i]);
+-      else if (lv.indexOf(q) !== -1) mid.push(list[i]);
+-    }
+-    items = pre.concat(mid).slice(0, 50);
+-    if (!items.length) { hide(); return; }
+-    box.innerHTML = items.map(function(v){ return '<div class="sug-i">' + esc(v) + '</div>'; }).join('');
+-    active = -1;
+-    box.style.display = 'block';
+-  }
+-  inp.addEventListener('input', build);
+-  inp.addEventListener('keydown', function(e){
+-    if (box.style.display === 'none' || !items.length) return;
+-    if (e.key === 'ArrowDown') { e.preventDefault(); active = (active + 1) % items.length; paint(); }
+-    else if (e.key === 'ArrowUp') { e.preventDefault(); active = (active <= 0 ? items.length - 1 : active - 1); paint(); }
+-    else if (e.key === 'Enter') { if (active >= 0) { e.preventDefault(); choose(items[active]); } }
+-    else if (e.key === 'Escape') { hide(); }
+-  });
+-  box.addEventListener('mousedown', function(e){
+-    var it = e.target.closest ? e.target.closest('.sug-i') : null;
+-    if (!it) return;
+-    e.preventDefault();
+-    choose(it.textContent);
+-  });
+-  inp.addEventListener('blur', function(){ blurTimer = setTimeout(hide, 150); });
+-}
++<?!= _w2Include_("W2Suggest") ?>
+ attachSuggest('fName', 'sugName', function(){ return titleList(M.source); }, autofillFromName);
+ attachSuggest('fPubIn', 'sugPub', function(){ return pubListOf(M.source); }, autofillOriginal);
+ attachSuggest('fPlat', 'sugPlat', function(){ return platListOf(M.source); });
+@@ -2055,7 +2014,7 @@
+  if(w1Broken)return Promise.reject(Error('Recovery record unreadable; manual reconciliation required'));
+  if(w1Pending)return Promise.reject(Error('Resolve request '+w1Pending.payload.requestId+' first'));
+  payload.requestId=payload.requestId||w1Id();w1Pending={action:action,payload:payload,serverRecovery:!!serverRecovery};
+- try{sessionStorage.setItem(W1_KEY,JSON.stringify(w1Pending));}catch(e){w1Pending=null;return Promise.reject(Error('Cannot retain Request ID; no request sent'));}
++ try{sessionStorage.setItem(W1_KEY,JSON.stringify(payload.recipient||payload.clientChoice?{action:action,payload:{requestId:payload.requestId},serverRecovery:true}:w1Pending));}catch(e){w1Pending=null;return Promise.reject(Error('Cannot retain Request ID; no request sent'));}
+  return w1Send();
+ }
+ function w1Send(){
+@@ -2076,7 +2035,7 @@
+  if(action==='orders.create'||action==='orders.confirm'||action==='inventory.markSold'){
+   S.cart=[];S.shipOverride=null;$('cShipShop').value='';updateCartCount();S.sales.loaded=false;showModal('w1ReviewModal',false);showModal('soldModal',false);
+  }
+- okToast(result.status+' · '+result.orderId+' · '+(result.labelReadiness==='MISSING'?'Missing label':''));
++ okToast((result.message||result.status)+' · '+result.orderId+' · '+(result.labelReadiness==='MISSING'?'Missing label':''));
+  showView('orders');load(); // Fresh inventory; do not apply a historical request snapshot to the current cache.
+ }
+ function w1Resume(){
+@@ -2084,7 +2043,7 @@
+  callApi('requests.get',{requestId:w1Pending.payload.requestId}).then(function(state){
+   if(state.state==='DONE'){sessionStorage.removeItem(W1_KEY);w1Pending=null;w1SyncButtons();return state.data;}
+   return w1Send();
+- }).then(function(r){if(action==='inventory.update'){load();okToast('Edit recovered');}else w1Saved(r,action);}).catch(function(e){toast(e.message);});
++ }).then(function(r){if(action==='inventory.update'){load();okToast('Edit recovered');}else if(action==='clients.save'){w1LoadOrders();okToast('Client recovered');}else w1Saved(r,action);}).catch(function(e){toast(e.message);});
+ }
+ function w1CartPayload(){
+  return {channel:S.cartChannel,items:S.cart.map(function(c){return {source:c.source,sku:c.sku,itemUid:c.itemUid||'',price:c.price};}),customerShipping:String(cartShipping()),shippingSubsidy:$('cShipShop').value.trim(),labelLater:true};
+@@ -2097,34 +2056,39 @@
+  else w1OpenReview(p,null);
+ }
+ function w1OpenReview(payload,order){
+- w1Review={payload:payload,order:order,action:'orders.confirm'};$('w1ReviewTitle').textContent='Final review';$('w1Commit').textContent='Confirm sold · Label later';var lines=order?order.lines:payload.items.map(function(it){var r=findBySku(it.source,it.sku);return {title:r?r.baseTitle:it.sku,sku:it.sku,enteredPrice:Number(it.price),ledgerPrice:payload.channel==='SHOPEE'?Math.round(Number(it.price)*0.7-50):Number(it.price)};});
++ w1Review={payload:payload,order:order,action:'orders.confirm'};$('w1ReviewTitle').textContent='Final review';$('w1Commit').textContent='Confirm sold · Label later';$('w2WithLabel').hidden=false;var lines=order?order.lines:payload.items.map(function(it){var r=findBySku(it.source,it.sku);return {title:r?r.baseTitle:it.sku,sku:it.sku,enteredPrice:Number(it.price),ledgerPrice:payload.channel==='SHOPEE'?Math.round(Number(it.price)*0.7-50):Number(it.price)};});
+  var channel=order?order.channel:payload.channel,customer=order?order.customerShipping:payload.customerShipping,subsidy=order?order.shippingSubsidy:payload.shippingSubsidy;
+- $('w1ReviewContent').innerHTML='<p>'+esc(order?order.orderId:'New '+channel+' sale')+'</p>'+lines.map(function(l){return '<p>'+esc(l.title)+' <span class="sku">'+esc(l.sku)+'</span> · entered '+money(l.enteredPrice)+' · SALES '+money(l.ledgerPrice)+'</p>';}).join('')+'<p>Customer Shipping '+money(customer)+' · Shipping Subsidy (shop contribution) '+money(subsidy)+'</p><p>Total '+money(lines.reduce(function(n,l){return n+Number(l.enteredPrice);},0)+Number(customer))+'</p><p class="hint">Label later — CLIENT and label completion will be added in W2.</p>';
++ $('w1ReviewContent').innerHTML='<p>'+esc(order?order.orderId:'New '+channel+' sale')+'</p>'+lines.map(function(l){return '<p>'+esc(l.title)+' <span class="sku">'+esc(l.sku)+'</span> · entered '+money(l.enteredPrice)+' · SALES '+money(l.ledgerPrice)+'</p>';}).join('')+'<p>Customer Shipping '+money(customer)+' · Shipping Subsidy (shop contribution) '+money(subsidy)+'</p><p>Total '+money(lines.reduce(function(n,l){return n+Number(l.enteredPrice);},0)+Number(customer))+'</p><p class="hint">Label later — CLIENT and use Customer &amp; Label to save the recipient now.</p>';
+  showModal('w1ReviewModal',true);w1SyncButtons();
+ }
++var w1OrderLoad=0;
+ function w1LoadOrders(){
+- callApi('orders.list',{status:w1Filter}).then(function(data){w1Orders=data.orders;renderOrders(data.recoveries);}).catch(function(e){$('w1Board').textContent=e.message;});
++ var ticket=++w1OrderLoad;$('w1Board').textContent='Loading orders…';
++ callApi('orders.list',{status:w1Filter}).then(function(data){if(ticket!==w1OrderLoad)return;w1Orders=data.orders;renderOrders(data.recoveries);}).catch(function(e){if(ticket===w1OrderLoad)$('w1Board').textContent=e.message;});
+ }
+ function renderOrders(recoveries){
+- $('w1Board').innerHTML=w1Orders.map(function(o){return '<article class="w1-card"><h3>'+esc(o.orderId)+'</h3><p>'+esc(o.status)+' · '+esc(o.channel)+' · '+o.lines.length+' item(s)</p><p class="hint">'+esc(o.createdAt)+'</p>'+o.lines.slice(0,3).map(function(l){return '<p>'+esc(l.title)+'</p>';}).join('')+(o.lines.length>3?'<p>+'+(o.lines.length-3)+' items</p>':'')+'<p>'+money(o.total)+' · Missing label</p><button class="btn small" data-order="'+esc(o.orderId)+'" data-op="details">Details</button>'+(o.status==='PENDING'&&!o.recovery.length?'<button class="btn small" data-order="'+esc(o.orderId)+'" data-op="cancel">Cancel</button><button class="btn primary small" data-order="'+esc(o.orderId)+'" data-op="confirm">Confirm sold</button>':'')+(o.status==='SOLD'?'<p class="hint">Complete label: W2</p>':'')+(o.recovery.length?'<p class="cl-warn">Recovery required '+esc(o.recovery.join(', '))+'</p>':'')+'</article>';}).join('')||'<div class="empty">No '+esc(w1Filter)+' orders</div>';
++ $('w1Board').innerHTML=w1Orders.map(function(o){return '<article class="w1-card"><h3>'+esc(o.orderId)+'</h3><p>'+esc(o.status)+' · '+esc(o.channel)+' · '+o.lines.length+' item(s)</p><p class="hint">'+esc(o.createdAt)+'</p>'+o.lines.slice(0,3).map(function(l){return '<p>'+esc(l.title)+'</p>';}).join('')+(o.lines.length>3?'<p>+'+(o.lines.length-3)+' items</p>':'')+'<p>'+money(o.total)+' · '+esc(o.labelReadiness==='READY'?'Label ready':'Missing label')+'</p><button class="btn small" data-order="'+esc(o.orderId)+'" data-op="details">Details</button>'+(o.status==='PENDING'&&!o.recovery.length?'<button class="btn small" data-order="'+esc(o.orderId)+'" data-op="cancel">Cancel</button><button class="btn primary small" data-order="'+esc(o.orderId)+'" data-op="confirm">Confirm sold</button>':'')+(['PENDING','SOLD'].indexOf(o.status)>=0?'<button class="btn small" data-order="'+esc(o.orderId)+'" data-op="label">'+(o.labelReadiness==='READY'?'Preview / Print label':'Complete label')+'</button>':'')+(o.recovery.length?'<p class="cl-warn">Recovery required '+esc(o.recovery.join(', '))+'</p>':'')+'</article>';}).join('')||'<div class="empty">No '+esc(w1Filter)+' orders</div>';
+  $('w1ServerRecovery').innerHTML=(recoveries||[]).map(function(r){return '<p>Recovery '+esc(r.requestId)+' · '+esc(r.orderId)+' · '+esc(r.error)+' <button class="btn small" data-recover="'+esc(r.requestId)+'">Recover request</button></p>';}).join('');w1SyncButtons();
+ }
+ $('navOrders').addEventListener('click',function(){showView('orders');});
+ $('w1Filter').addEventListener('change',function(){w1Filter=this.value;w1LoadOrders();});
+ $('w1Refresh').addEventListener('click',w1LoadOrders);
+ $('w1Retry').addEventListener('click',w1Resume);
+-$('w1ServerRecovery').addEventListener('click',function(e){var b=e.target.closest('[data-recover]');if(!b||w1Busy||w1Pending)return;b.disabled=true;var id=b.getAttribute('data-recover');callApi('requests.intent',{requestId:id}).then(function(intent){if(!intent.payload||intent.payload.requestId!==id)throw Error('Original intent required; manual recovery');return w1Run(intent.action,intent.payload,true).then(function(r){w1Saved(r,intent.action);});}).catch(function(e){toast(e.message);}).finally(function(){b.disabled=false;});});
++$('w1ServerRecovery').addEventListener('click',function(e){var b=e.target.closest('[data-recover]');if(!b||w1Busy||w1Pending)return;b.disabled=true;var id=b.getAttribute('data-recover');callApi('requests.intent',{requestId:id}).then(function(intent){if(!intent.payload||intent.payload.requestId!==id)throw Error('Original intent required; manual recovery');return w1Run(intent.action,intent.payload,true).then(function(r){if(intent.action==='clients.save'){w1LoadOrders();okToast('Client recovered');}else w1Saved(r,intent.action);});}).catch(function(e){toast(e.message);}).finally(function(){b.disabled=false;});});
+ $('w1Board').addEventListener('click',function(e){
+  var b=e.target.closest('[data-order]');if(!b)return;var o=w1Orders.filter(function(x){return x.orderId===b.getAttribute('data-order');})[0],op=b.getAttribute('data-op');if(!o)return;
+  if(op==='cancel')w1OpenCancel(o);
++ else if(op==='label')W2UI.open('label',{},o);
+  else if(op==='confirm')w1OpenReview({orderId:o.orderId,expectedRevision:o.revision,labelLater:true},o);
+  else{$('w1Details').textContent=o.orderId+' · '+o.status+'\n'+o.lines.map(function(l){return l.title+' · '+l.sku+' · entered '+l.enteredPrice+' · SALES '+l.ledgerPrice;}).join('\n')+'\nCustomer Shipping '+o.customerShipping+' · Shipping Subsidy '+o.shippingSubsidy;}
+ });
+-function w1OpenCancel(order){w1Review={action:'orders.cancel',payload:{orderId:order.orderId,expectedRevision:order.revision}};$('w1ReviewTitle').textContent='Cancel order';$('w1ReviewContent').innerHTML='<p>'+esc(order.orderId)+'</p><p>Release only this order’s reservation. Other Pending orders remain reserved.</p>';$('w1Commit').textContent='Confirm cancel';showModal('w1ReviewModal',true);w1SyncButtons();}
++function w1OpenCancel(order){w1Review={action:'orders.cancel',payload:{orderId:order.orderId,expectedRevision:order.revision}};$('w1ReviewTitle').textContent='Cancel order';$('w1ReviewContent').innerHTML='<p>'+esc(order.orderId)+'</p><p>Release only this order’s reservation. Other Pending orders remain reserved.</p>';$('w1Commit').textContent='Confirm cancel';$('w2WithLabel').hidden=true;showModal('w1ReviewModal',true);w1SyncButtons();}
++$('w2WithLabel').addEventListener('click',function(){if(w1Review&&w1Review.action==='orders.confirm')W2UI.open('confirm',w1Review.payload,w1Review.order);});
+ $('w1Commit').addEventListener('click',function(){if(!w1Review)return;var action=w1Review.action;w1Run(action,w1Review.payload).then(function(r){showModal('w1ReviewModal',false);w1Saved(r,action);}).catch(function(e){toast(e.message);});});
+ w1SyncButtons();
+ 
+ load();
+ </script>
++<?!= _w2Include_("W2LabelUI") ?>
+ </body>
+ </html>

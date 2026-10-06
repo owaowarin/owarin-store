@@ -1,0 +1,20 @@
+diff --git "a/04 Design Tools\\logs\\P1-20260930-02\\Code-test-before.gs" "b/04 Design Tools\\logs\\P1-20260929-01\\runtime-source\\Code.gs"
+index 8a36f22..a98413c 100644
+--- "a/04 Design Tools\\logs\\P1-20260930-02\\Code-test-before.gs"	
++++ "b/04 Design Tools\\logs\\P1-20260929-01\\runtime-source\\Code.gs"	
+@@ -2082,9 +2082,14 @@ function addInventoryRow(data) {
+     if (prior) {
+       if (prior[9] !== hash) throw new Error('Add Request ID was already used with different item data');
+       if (prior[4] === 'DONE') {
++        var saved;
++        try { saved = JSON.parse(prior[15]); } catch (ignored) {}
++        if (!saved || saved.success !== true || saved.sku !== prior[11] ||
++            Number(saved.row) !== Number(prior[10]) || saved.sheetName !== prior[8])
++          throw new Error('Add DONE result requires recovery; Request ID ' + requestId);
+         _addRequestEvent(journal, requestId, attempt, 'DONE', prior[8], hash, prior[10], prior[11],
+                          'replay of DONE', prior[13], '', prior[15]);
+-        return JSON.parse(prior[15]);
++        return saved;
+       }
+       _addRequestEvent(journal, requestId, attempt, 'ERROR', prior[8], hash, prior[10], prior[11],
+                        'retry of ' + prior[4], '', 'Retry blocked pending recovery', '');

@@ -1,0 +1,5 @@
+
+
+## Session 23 — first normal Add after test source Save (2026-09-30)
+
+Change `P1-20260930-04`, live Request `add-1790703155002-hztup0z5ec`, attempt 1. Fresh separate test Sheet exports before/after SHA256 `AA3D1329.../4C832181...` confirm GGB 19→20 named items, MAG 10 unchanged, journal 68→70 events. A30 landed exactly once at GGB row 22 as `OWA-GGBS020N00` (New Arrival, TEST, Original 300, Cost 100, Price 292); journal rows 70–71 PREPARED→DONE same ID/row/SKU, next business/journal rows blank. All earlier GGB/journal exported values/formulas and all MAG values/formulas are unchanged. UI showed Added and cleared the form. No error/retry/recovery write; synthetic evidence remains in the isolated Sheet. Exact hashes, executable readback, CSV and backup/docs prefixes: `04 Design Tools/logs/P1-20260930-04/`. No shop, Back House LAB or test `/exec` deploy. This is normal-path acceptance only; next is a bounded true timeout/no-callback test with same-ID reconciliation. Sol / High for transaction QA; Astra / High for consequential promotion review.

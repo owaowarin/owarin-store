@@ -1,0 +1,11 @@
+--- C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-01\test-runtime-source\webapp.gs
++++ C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-02\test-runtime-source\webapp.gs
+@@ -221,7 +221,7 @@
+   // P3: match the booking queue on base title — a booking error must not fail the add
+   var matches = [];
+   try { matches = _apiBookingMatch(item.name).matches; } catch (e) { matches = []; }
+-  return { result: res, item: item, bookingMatches: matches };
++  return { result: res, item: item, bookingMatches: matches, historical: res.replayed === true };
+ }
+ 
+ function _apiInvAddStatus(p) {

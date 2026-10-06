@@ -1,0 +1,26 @@
+--- local-v31/Code.gs
++++ fresh-production/Code.gs
+@@ -1,5 +1,6 @@
+ // ============================================================
+-// OWARIN BACK-OFFICE — Code.gs v31 (SP-2 pricing/SKU engine, pairs with WebApp.gs v31)
++// OWARIN BACK-OFFICE — Code.gs v32 (SP-2 pricing/SKU engine, pairs with WebApp.gs v31)
++// v32 (2026-10-04): ALBUM_SHEET = "FB ALBUM CAPTION" (live tab name) + FB Album submenu (fbaMenu_ in FbAlbum.gs). Nothing else changed.
+ // v31 (2026-10-03): durable Add journal, validated money/source/status, committed snapshot replay and formula readback.
+ // v30 (2026-10-02): (1) Identical copies are listed ONCE in META EXPORT: same base title + Publisher + Original
+ //   (cover price) + Condition + Copy Flags -> one row (the first complete copy), quantity_to_sell_on_facebook =
+@@ -3638,7 +3639,7 @@
+ //   Columns: Product ID | Item name | Sheet | Image URL | Caption | Posted
+ //   Copy and paste when uploading photos by hand, or let a later phase post via the Graph API
+ // ============================================================
+-var ALBUM_SHEET   = "ALBUM CAPTION";
++var ALBUM_SHEET   = "FB ALBUM CAPTION";   // v32: matches the live tab name (was "ALBUM CAPTION" -> poster failed 100%)
+ var ALBUM_HEADERS = ["Product ID", "Item name", "Sheet", "Image URL", "Caption", "Posted"];
+ 
+ function buildAlbumCaptions() {
+@@ -3760,5 +3761,6 @@
+       .addItem("✍️ Apply SP-2 price to every row (incl. markdowns)", "sp2ApplySuggestedAll")
+       .addItem("🛠️ Renumber RESTOCK tags ⚠️", "fixAllRestockTags")
+       .addItem("🔄 Rebuild ALL Product IDs ⚠️ breaks image links", "forceRegenerateAllSKUs"))
++    .addSubMenu(fbaMenu_(ui))   // v32: FB Album Auto-Post (defined in FbAlbum.gs)
+     .addToUi();
+ }

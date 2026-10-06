@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OWARIN WATERMARK STUDIO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Shippori+Mincho:wght@400;500;600&family=Archivo:wght@700;800;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+/* ── OWARIN design tokens (same as Back-office) ── */
+:root{
+  --bg:hsl(0 0% 5%); --fg:hsl(0 0% 95%);
+  --card:hsl(0 0% 8%); --card2:hsl(0 0% 10%);
+  --muted:hsl(0 0% 14%); --muted-fg:hsl(0 0% 55%);
+  --border:hsl(0 0% 18%); --input:hsl(0 0% 15%);
+  --gold:hsl(43 76% 52%); --gold-muted:hsl(43 40% 35%); --gold-bright:hsl(43 85% 60%);
+  --destructive:hsl(0 62% 50%); --ok:hsl(140 45% 45%);
+}
+*{box-sizing:border-box;border-color:var(--border)}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);
+  font-family:'Outfit',sans-serif;font-weight:300;font-size:14px;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:hsl(0 0% 20%)}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit}
+
+/* ── header ── */
+header{position:sticky;top:0;z-index:20;background:hsl(0 0% 5%/.94);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);padding:12px 18px;display:flex;align-items:center;gap:14px}
+.brand{font-weight:500;letter-spacing:.35em;font-size:13px;white-space:nowrap}
+.brand .g{color:var(--gold)}
+.brand small{display:block;letter-spacing:.18em;color:var(--muted-fg);font-size:9px;margin-top:3px;
+  font-family:'Shippori Mincho',serif}
+.hd-right{margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+#count{color:var(--muted-fg);font-size:11px;letter-spacing:.1em;white-space:nowrap}
+
+/* ── buttons ── */
+.btn{background:transparent;border:1px solid var(--border);color:var(--fg);
+  padding:8px 15px;font-size:11px;letter-spacing:.14em;transition:.2s;white-space:nowrap}
+.btn:hover:not(:disabled){border-color:var(--gold);color:var(--gold)}
+.btn:disabled{opacity:.35;cursor:default}
+.btn.primary{background:var(--gold);color:hsl(0 0% 5%);border-color:var(--gold);font-weight:500}
+.btn.primary:hover:not(:disabled){background:var(--gold-bright);color:hsl(0 0% 5%)}
+.btn.small{padding:6px 11px;font-size:10px}
+.btn.warn:hover:not(:disabled){border-color:var(--destructive);color:var(--destructive)}
+.btn.block{width:100%;display:block}
+
+/* ── layout ── */
+.wrap{display:grid;grid-template-columns:296px 1fr;align-items:start}
+.panel{border-right:1px solid var(--border);position:sticky;top:59px;
+  height:calc(100vh - 59px);overflow-y:auto}
+.stage{padding:14px 18px 60px;position:relative;min-height:calc(100vh - 59px)}
+
+/* ── panel sections ── */
+.sect{border-bottom:1px solid var(--border)}
+.sect>summary{list-style:none;cursor:pointer;padding:12px 16px;display:flex;align-items:center;gap:8px;
+  font-size:10px;letter-spacing:.22em;color:var(--muted-fg);text-transform:uppercase;user-select:none}
+.sect>summary::-webkit-details-marker{display:none}
+.sect>summary::before{content:'+';color:var(--gold-muted);font-size:13px;line-height:1;width:9px}
+.sect[open]>summary::before{content:'−'}
+.sect[open]>summary{color:var(--gold)}
+.sect .body{padding:2px 16px 16px}
+.field{margin-bottom:13px}
+.field:last-child{margin-bottom:0}
+.field label{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+  font-size:9px;letter-spacing:.18em;color:var(--muted-fg);text-transform:uppercase;margin-bottom:6px}
+.field label .val{color:var(--gold);letter-spacing:.06em;font-size:10px}
+.hint{font-size:10px;color:var(--muted-fg);line-height:1.55;margin-top:6px}
+input[type=text],input[type=number],select,textarea{width:100%;background:var(--input);
+  border:1px solid var(--border);color:var(--fg);padding:8px 10px;font-size:12.5px;outline:none;font-weight:300}
+input[type=text]:focus,input[type=number]:focus,textarea:focus,select:focus{border-color:var(--gold-muted)}
+textarea{resize:vertical;line-height:1.5}
+input[type=color]{width:100%;height:32px;background:var(--input);border:1px solid var(--border);
+  padding:2px;cursor:pointer}
+input[type=range]{width:100%;accent-color:var(--gold);margin:3px 0;background:transparent}
+.row{display:flex;gap:8px}
+.row>*{flex:1;min-width:0}
+.seg{display:flex;border:1px solid var(--border)}
+.seg button{flex:1;background:none;border:none;border-right:1px solid var(--border);
+  color:var(--muted-fg);padding:8px 4px;font-size:10px;letter-spacing:.1em;transition:.15s}
+.seg button:last-child{border-right:none}
+.seg button:hover{color:var(--fg)}
+.seg button.on{background:var(--gold);color:hsl(0 0% 5%);font-weight:500}
+.toggle{display:flex;align-items:center;gap:9px;cursor:pointer;font-size:11.5px;letter-spacing:.08em}
+.toggle input{width:15px;height:15px;accent-color:var(--gold)}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.pgrid .pl{font-size:9px;color:var(--muted-fg);text-align:center;margin-bottom:4px;letter-spacing:.14em}
+.pgrid input{padding:7px 4px;text-align:center;font-size:12px}
+
+/* ── dropzone ── */
+.drop{border:1px dashed var(--border);padding:22px 14px;text-align:center;color:var(--muted-fg);
+  cursor:pointer;transition:.2s;font-size:11.5px;letter-spacing:.06em;line-height:1.6}
+.drop:hover,.drop.hot{border-color:var(--gold);color:var(--gold);background:var(--card)}
+.drop b{display:block;font-size:20px;font-weight:200;margin-bottom:4px;line-height:1}
+
+/* ── stage toolbar ── */
+.bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-bottom:12px;
+  border-bottom:1px solid var(--border);margin-bottom:14px}
+.bar .lbl{font-size:9px;letter-spacing:.2em;color:var(--muted-fg);text-transform:uppercase;margin-right:2px}
+.bar .sp{flex:1}
+
+/* ── grid + cards ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:14px}
+.card{border:1px solid var(--border);background:var(--card);transition:.15s}
+.card:hover{border-color:hsl(0 0% 26%)}
+.card.over{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+.card .cv{display:block;width:100%;aspect-ratio:1;object-fit:contain;background:hsl(0 0% 3%);
+  cursor:ns-resize;touch-action:none;user-select:none;-webkit-user-drag:none}
+.card .szrow{display:flex;border-top:1px solid var(--border)}
+.card .szrow button{flex:1;background:none;border:none;border-right:1px solid var(--border);
+  color:var(--muted-fg);padding:6px 2px;font-size:9px;letter-spacing:.06em;transition:.15s}
+.card .szrow button:last-child{border-right:none}
+.card .szrow button:hover{color:var(--fg)}
+.card .szrow button.on{background:var(--gold);color:hsl(0 0% 5%);font-weight:500}
+.card .zoomrow{display:flex;align-items:center;gap:6px;padding:5px 9px;
+  border-top:1px solid var(--border);font-size:9px;letter-spacing:.12em;color:var(--muted-fg);overflow:hidden}
+.card .zoomrow input{flex:1;min-width:0;margin:0}
+.card .zoomrow b{flex:0 0 auto;min-width:36px;text-align:right;font-weight:400;color:var(--gold);letter-spacing:0}
+.card .zoomrow .rz{flex:0 0 auto;cursor:pointer;color:var(--gold-muted);font-size:11px}
+.card .zoomrow .rz:hover{color:var(--gold)}
+.card .nm{width:100%;border:none;border-top:1px solid var(--border);background:var(--card2);
+  padding:8px 9px;font-size:11.5px;color:var(--fg)}
+.card .nm:focus{outline:none;background:var(--input);box-shadow:inset 0 0 0 1px var(--gold-muted)}
+.card .fbadge{padding:4px 9px;border-top:1px solid var(--border);font-size:9px;letter-spacing:.08em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .fbadge.ok{color:var(--ok)}
+.card .fbadge.bad{color:var(--destructive)}
+.card .fbadge.info{color:var(--muted-fg)}
+.card .meta{display:flex;align-items:center;gap:8px;padding:6px 9px;border-top:1px solid var(--border);
+  font-size:9.5px;letter-spacing:.1em;color:var(--muted-fg)}
+.card .meta a{color:var(--gold-muted);text-decoration:none}
+.card .meta a:hover{color:var(--gold)}
+.card .meta .sp{flex:1}
+.card .meta .drag{cursor:grab;font-size:11px}
+.card .meta .drag:hover{color:var(--fg)}
+.card .meta .x{cursor:pointer}
+.card .meta .x:hover{color:var(--destructive)}
+
+.empty{border:1px dashed var(--border);padding:70px 16px;text-align:center;color:var(--muted-fg);
+  letter-spacing:.12em;font-size:12px}
+.stage.hot::after{content:"DROP TO ADD IMAGES";position:fixed;inset:59px 0 0 296px;z-index:50;
+  display:flex;align-items:center;justify-content:center;background:hsl(0 0% 5%/.93);
+  border:1px dashed var(--gold);color:var(--gold);font-size:13px;letter-spacing:.3em;pointer-events:none}
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr}
+  .panel{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border)}
+  .stage.hot::after{inset:59px 0 0 0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">OWARIN <span class="g">WATERMARK</span> STUDIO<small>オワリン商店</small></div>
+  <div class="hd-right">
+    <span id="count">NO IMAGES</span>
+    <button class="btn small warn" id="clear" disabled>CLEAR</button>
+    <button class="btn primary" id="dlAll" disabled>DOWNLOAD ZIP</button>
+  </div>
+</header>
+
+<div class="wrap">
+<aside class="panel">
+
+  <details class="sect" open>
+    <summary>Source</summary>
+    <div class="body">
+      <div class="drop" id="drop">
+        <b>＋</b>Drop images anywhere<br>or click to browse
+        <input type="file" id="file" accept="image/*" multiple hidden>
+      </div>
+      <button class="btn block" id="folderBtn" style="margin-top:9px">+ ADD FOLDER</button>
+      <input type="file" id="folderInput" webkitdirectory multiple hidden>
+      <div class="field" style="margin-top:13px">
+        <label>Sort Imported Files</label>
+        <div class="seg" id="sortKey">
+          <button data-k="name" class="on">NAME</button>
+          <button data-k="date">DATE MODIFIED</button>
+        </div>
+        <div class="seg" id="sortDir" style="margin-top:7px">
+          <button data-d="asc" class="on">ASCENDING</button>
+          <button data-d="desc">DESCENDING</button>
+        </div>
+        <button class="btn block small" id="resortBtn" style="margin-top:7px">RE-SORT ALL CARDS</button>
+      </div>
+      <div class="hint">Folder mode auto-names each image from its folder and verifies the match on every card. Name sorting is natural (2 before 10) and uses the full folder path.</div>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>Canvas &amp; Framing</summary>
+    <div class="body">
+      <div class="field">
+        <label>Canvas Size <span class="val" id="sizeV">1080 px</span></label>
+        <input type="range" id="size" min="600" max="2000" step="20" value="1080">
+      </div>
+      <div class="field">
+        <label>Layout</label>
+        <div class="seg" id="fit">
+          <button data-f="height" class="on">FILL HEIGHT</button>
+          <button data-f="contain">CONTAIN</button>
+          <button data-f="cover">COVER</button>
+        </div>
+        <div class="hint">Fill Height: 100% = source edges flush with canvas top/bottom. Zoom always scales from the photo center, so margins stay symmetric.</div>
+      </div>
+      <div class="field">
+        <label>Zoom Presets <span class="val">%</span></label>
+        <div class="pgrid">
+          <div><div class="pl">1</div><input type="number" id="pz1" value="110" min="50" max="200"></div>
+          <div><div class="pl">2</div><input type="number" id="pz2" value="127" min="50" max="200"></div>
+          <div><div class="pl">3</div><input type="number" id="pz3" value="140" min="50" max="200"></div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Zoom Applies To</label>
+        <div class="seg" id="zoomScope">
+          <button data-z="one" class="on">THIS IMAGE</button>
+          <button data-z="all">ALL IMAGES</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>Drag to Reposition</label>
+        <div class="seg" id="panMode">
+          <button data-p="one" class="on">THIS IMAGE</button>
+          <button data-p="all">ALL IMAGES</button>
+        </div>
+        <div class="hint">Drag a preview up/down · double-click re-centers.</div>
+      </div>
+      <div class="field">
+        <label>Background</label>
+        <div class="seg" id="bg">
+          <button data-b="auto" class="on">AUTO</button>
+          <button data-b="#ffffff">WHITE</button>
+          <button data-b="#e8e5e0">GRAY</button>
+          <button data-b="custom">CUSTOM</button>
+        </div>
+        <input type="color" id="bgColor" value="#e8e5e0" style="margin-top:8px;display:none">
+        <div class="hint">Auto blends a vertical gradient sampled from each photo's own edges — compensates for uneven lighting.</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>Watermark</summary>
+    <div class="body">
+      <label class="toggle" style="margin-bottom:13px">
+        <input type="checkbox" id="wmOn" checked> <span>Enabled</span>
+      </label>
+      <div class="field">
+        <label>Line 1</label>
+        <input type="text" id="l1" value="OWARIN STORE">
+      </div>
+      <div class="field">
+        <label>Line 2</label>
+        <input type="text" id="l2" value="オワリン商店">
+      </div>
+      <div class="field">
+        <label>Font Size <span class="val" id="wmSizeV">10%</span></label>
+        <input type="range" id="wmSize" min="3" max="16" step="0.5" value="10">
+      </div>
+      <div class="field">
+        <label>Vertical Position <span class="val" id="wmYV">44%</span></label>
+        <input type="range" id="wmY" min="10" max="90" step="1" value="44">
+      </div>
+      <div class="field">
+        <label>Letter Spacing L2 <span class="val" id="wmLsV">20</span></label>
+        <input type="range" id="wmLs" min="0" max="40" step="1" value="20">
+      </div>
+      <div class="field">
+        <label>Opacity <span class="val" id="wmOpV">100%</span></label>
+        <input type="range" id="wmOp" min="20" max="100" step="5" value="100">
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Color</label>
+          <input type="color" id="wmColor" value="#ffffff">
+        </div>
+        <div class="field">
+          <label>Shadow</label>
+          <div class="seg" id="wmShadow">
+            <button data-s="1" class="on">ON</button>
+            <button data-s="0">OFF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>Naming</summary>
+    <div class="body">
+      <div class="field">
+        <label>Book Name List</label>
+        <textarea id="nameList" rows="4" placeholder="Chrono Cross&#10;Final Fantasy VIII&#10;..."></textarea>
+        <button class="btn block" id="applyNames" style="margin-top:8px">APPLY NAMES</button>
+      </div>
+      <div class="field">
+        <label>Auto Numbering</label>
+        <div class="seg" id="numMode">
+          <button data-n="alt" class="on">ODD (1) · EVEN (2)</button>
+          <button data-n="one">ALL (1)</button>
+        </div>
+        <div class="hint">Odd/Even: one list line names a front-back pair → "Name (1)", "Name (2)". All: one line per image.</div>
+      </div>
+      <div class="field">
+        <label>Filename Suffix</label>
+        <input type="text" id="suffix" value="" placeholder="blank = exact name">
+      </div>
+    </div>
+  </details>
+
+  <details class="sect" open>
+    <summary>Export</summary>
+    <div class="body">
+      <div class="field">
+        <label>Format &amp; Quality</label>
+        <div class="row">
+          <select id="fmt">
+            <option value="jpeg">JPG</option>
+            <option value="png">PNG</option>
+          </select>
+          <select id="q">
+            <option value="0.92" selected>HIGH 92%</option>
+            <option value="0.85">MEDIUM 85%</option>
+            <option value="1">MAXIMUM</option>
+          </select>
+        </div>
+        <label class="toggle" style="margin-top:11px">
+          <input type="checkbox" id="limit2" checked> <span>Limit file size ≤ 2 MB</span>
+        </label>
+      </div>
+    </div>
+  </details>
+
+</aside>
+
+<main class="stage" id="stage">
+  <div class="bar" id="bar" style="display:none">
+    <span class="lbl">Bulk</span>
+    <button class="btn small" data-all="auto">ZOOM 100%</button>
+    <button class="btn small" data-all="p1">P1</button>
+    <button class="btn small" data-all="p2">P2</button>
+    <button class="btn small" data-all="p3">P3</button>
+    <button class="btn small" id="recenterAll">RE-CENTER ALL</button>
+    <span class="sp"></span>
+    <span class="lbl" id="dims">1080 × 1080</span>
+  </div>
+  <div id="out"><div class="empty">DROP PRODUCT PHOTOS ANYWHERE TO START</div></div>
+</main>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+let items=[]; // {name,outBase,img,url,zoom,offYF,folder,named}
+let fontsReady=false;
+document.fonts.ready.then(()=>{fontsReady=true;repaintAll();});
+
+const state={
+  size:1080, fit:'height', bg:'auto', bgColor:'#e8e5e0',
+  wmOn:true, l1:'OWARIN STORE', l2:'オワリン商店', wmSize:10, wmY:44,
+  wmLs:20, wmOp:100, wmColor:'#ffffff', wmShadow:1, fmt:'jpeg', q:0.92, suffix:'', limit2:true,
+  presets:{1:110,2:127,3:140}, numMode:'alt', panMode:'one', zoomScope:'one',
+  sortKey:'name', sortDir:'asc'
+};
+const PREVIEW=320;   // preview canvases render at this size, not full canvas size
+const THUMB_MAX=1000; // downscaled copy of each source photo used for previews
+
+/* ---- zoom presets (persisted) ---- */
+try{
+  const p=JSON.parse(localStorage.getItem('owarin_wm_zoom_presets2'));
+  if(p)[1,2,3].forEach(k=>{if(p[k])state.presets[k]=p[k];});
+}catch(e){}
+[1,2,3].forEach(k=>{
+  const el=$('pz'+k);
+  el.value=state.presets[k];
+  el.oninput=()=>{
+    state.presets[k]=+el.value||100;
+    try{localStorage.setItem('owarin_wm_zoom_presets2',JSON.stringify(state.presets));}catch(e){}
+    render(); // preset labels live on the cards
+  };
+});
+
+/* ---- inputs ---- */
+function bindRange(id,key,vid,suf=''){$(id).oninput=e=>{
+  state[key]=+e.target.value;$(vid).textContent=e.target.value+suf;
+  if(key==='size')$('dims').textContent=state.size+' × '+state.size;
+  repaintAll();
+};}
+bindRange('size','size','sizeV',' px');
+bindRange('wmSize','wmSize','wmSizeV','%'); bindRange('wmY','wmY','wmYV','%');
+bindRange('wmLs','wmLs','wmLsV'); bindRange('wmOp','wmOp','wmOpV','%');
+$('l1').oninput=e=>{state.l1=e.target.value;repaintAll();};
+$('l2').oninput=e=>{state.l2=e.target.value;repaintAll();};
+$('wmColor').oninput=e=>{state.wmColor=e.target.value;repaintAll();};
+$('bgColor').oninput=e=>{state.bgColor=e.target.value;repaintAll();};
+$('wmOn').onchange=e=>{state.wmOn=e.target.checked;repaintAll();};
+$('fmt').onchange=e=>{state.fmt=e.target.value;};
+$('q').onchange=e=>{state.q=+e.target.value;};
+$('suffix').oninput=e=>{state.suffix=e.target.value;};
+$('limit2').onchange=e=>{state.limit2=e.target.checked;};
+
+function seg(id,attr,key,cb,full){$(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{
+  $(id).querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); state[key]=isNaN(+b.dataset[attr])?b.dataset[attr]:+b.dataset[attr];
+  if(cb)cb(b.dataset[attr]);
+  full?render():repaintAll();
+});}
+seg('fit','f','fit'); seg('wmShadow','s','wmShadow');
+seg('numMode','n','numMode',()=>renumber(),true);
+seg('panMode','p','panMode'); seg('zoomScope','z','zoomScope');
+seg('sortKey','k','sortKey'); seg('sortDir','d','sortDir');
+$('resortBtn').onclick=()=>{sortItems(items);renumber();render();};
+seg('bg','b','bg',v=>{$('bgColor').style.display=(v==='custom')?'block':'none'; if(v==='custom')state.bgColor=$('bgColor').value;});
+
+$('applyNames').onclick=()=>{
+  const names=$('nameList').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  if(!names.length||!items.length)return;
+  if(state.numMode==='alt'){
+    // one line = one book = 2 images (front + back)
+    names.forEach((n,j)=>{[items[j*2],items[j*2+1]].forEach(it=>{if(it){it.outBase=n;it.named=true;}});});
+  }else{
+    names.forEach((n,j)=>{if(items[j]){items[j].outBase=n;items[j].named=true;}});
+  }
+  renumber();render();
+};
+
+// Auto numbering: 'alt' = odd "(1)" / even "(2)" · 'one' = every image "(1)"
+function renumber(){
+  items.forEach((it,i)=>{
+    if(!it.named)return;
+    const base=(it.outBase||'').replace(/\s*\(\d+\)\s*$/,'').trim();
+    if(!base)return;
+    it.outBase=base+' ('+(state.numMode==='alt'?(i%2===0?1:2):1)+')';
+  });
+}
+
+/* ---- bulk toolbar ---- */
+$('bar').querySelectorAll('button[data-all]').forEach(b=>b.onclick=()=>{
+  const k=b.dataset.all;
+  const v=k==='auto'?100:+state.presets[k.slice(1)];
+  items.forEach(it=>{
+    it.zoom=v;
+    if(it.zs){it.zs.value=v;it.zv.textContent=v+'%';
+      it.szrow.querySelectorAll('button').forEach(x=>x.classList.toggle('on',+x.dataset.z===v));}
+  });
+  repaintAll();
+});
+$('recenterAll').onclick=()=>{items.forEach(it=>it.offYF=0);repaintAll();};
+
+/* ---- upload ---- */
+const drop=$('drop'), stage=$('stage');
+drop.onclick=()=>$('file').click();
+$('file').onchange=e=>{addFiles(e.target.files);e.target.value='';};
+$('folderBtn').onclick=()=>$('folderInput').click();
+$('folderInput').onchange=e=>{addFiles(e.target.files);e.target.value='';};
+
+// natural sort (2 before 10), path-aware
+const collator=new Intl.Collator(undefined,{numeric:true,sensitivity:'base'});
+function sortItems(arr){
+  const dir=state.sortDir==='desc'?-1:1;
+  arr.sort((a,b)=>dir*(state.sortKey==='date'
+    ? (a.mtime||0)-(b.mtime||0) || collator.compare(a.path||a.name,b.path||b.name)
+    : collator.compare(a.path||a.name,b.path||b.name)));
+  return arr;
+}
+
+function addFiles(list){
+  const files=[...list].filter(f=>f.type.startsWith('image/'));
+  if(!files.length)return;
+  // load all, then append as one sorted batch (async loads never scramble the order)
+  Promise.all(files.map(f=>new Promise(res=>{
+    const url=URL.createObjectURL(f);
+    const img=new Image();
+    const rel=f.webkitRelativePath||'';
+    const parts=rel.split('/');
+    const folder=parts.length>1?parts[parts.length-2]:null;
+    const done=()=>{
+      const it={name:f.name,path:rel||f.name,mtime:f.lastModified||0,
+                outBase:f.name.replace(/\.[^.]+$/,''),img,url,folder};
+      if(folder){it.outBase=folder;it.named=true;}
+      // one-time downscaled copy → previews never touch the multi-MB original
+      const sc=Math.min(1,THUMB_MAX/Math.max(img.width,img.height));
+      if(sc<1){
+        const t=document.createElement('canvas');
+        t.width=Math.round(img.width*sc);t.height=Math.round(img.height*sc);
+        t.getContext('2d').drawImage(img,0,0,t.width,t.height);
+        it.thumb=t;
+      }else it.thumb=img;
+      it.bg=edgeColors(img); // cached once instead of per redraw
+      res(it);
+    };
+    img.onload=done;
+    img.onerror=()=>{URL.revokeObjectURL(url);res(null);};
+    img.src=url;
+  }))).then(batch=>{
+    items=items.concat(sortItems(batch.filter(Boolean)));
+    renumber();render();
+  });
+}
+
+// drop anywhere on the page
+let dragDepth=0;
+const hasFiles=e=>e.dataTransfer&&[...(e.dataTransfer.types||[])].includes('Files');
+window.addEventListener('dragenter',e=>{if(!hasFiles(e))return;e.preventDefault();dragDepth++;stage.classList.add('hot');});
+window.addEventListener('dragover',e=>{if(hasFiles(e))e.preventDefault();});
+window.addEventListener('dragleave',e=>{if(!hasFiles(e))return;if(--dragDepth<=0){dragDepth=0;stage.classList.remove('hot');}});
+window.addEventListener('drop',e=>{
+  if(!hasFiles(e))return;
+  e.preventDefault();dragDepth=0;stage.classList.remove('hot');
+  addFiles(e.dataTransfer.files);
+});
+
+$('clear').onclick=()=>{items.forEach(i=>URL.revokeObjectURL(i.url));items=[];render();};
+
+/* ---- core render ---- */
+// sample top/bottom edge colors so the backdrop blends with each photo's lighting
+function edgeColors(img){
+  const s=document.createElement('canvas');s.width=40;s.height=40;
+  const c=s.getContext('2d');c.drawImage(img,0,0,40,40);
+  const d=c.getImageData(0,0,40,40).data;
+  const avg=rows=>{let r=0,g=0,b=0,n=0;
+    rows.forEach(y=>{for(let x=0;x<40;x++){const i=(y*40+x)*4;r+=d[i];g+=d[i+1];b+=d[i+2];n++;}});
+    return Math.round(r/n)+','+Math.round(g/n)+','+Math.round(b/n);};
+  return {top:avg([0,1]),bottom:avg([38,39])};
+}
+
+// size = output pixels; preview passes a small size + the downscaled thumb
+function draw(item,size,useThumb,target){
+  const W=size||state.size, H=W; // always 1:1
+  const cv=target||document.createElement('canvas');
+  if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H;}
+  const ctx=cv.getContext('2d');
+  ctx.clearRect(0,0,W,H);
+
+  // background
+  if(state.bg==='auto'){
+    const e=item.bg||(item.bg=edgeColors(item.img));
+    const gr=ctx.createLinearGradient(0,0,0,H);
+    gr.addColorStop(0,'rgb('+e.top+')');
+    gr.addColorStop(1,'rgb('+e.bottom+')');
+    ctx.fillStyle=gr;
+  }else{
+    ctx.fillStyle=state.bg==='custom'?state.bgColor:state.bg;
+  }
+  ctx.fillRect(0,0,W,H);
+
+  // image — always centered horizontally; zoom scales from the photo center
+  const img=(useThumb&&item.thumb)||item.img, iw=img.width, ih=img.height;
+  const z=(item.zoom||100)/100;
+  let s;
+  if(state.fit==='cover')s=Math.max(W/iw,H/ih)*z;
+  else if(state.fit==='height')s=(H/ih)*z;
+  else s=Math.min(W/iw,H/ih)*z;
+  const w=iw*s, h=ih*s;
+  ctx.drawImage(img,(W-w)/2,(H-h)/2+(item.offYF||0)*H,w,h);
+
+  // watermark
+  if(state.wmOn && fontsReady){
+    ctx.save();
+    ctx.globalAlpha=state.wmOp/100;
+    ctx.fillStyle=state.wmColor;
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    if(+state.wmShadow){ctx.shadowColor='rgba(0,0,0,.45)';ctx.shadowBlur=W*0.006;ctx.shadowOffsetY=W*0.002;}
+    const cx=W/2, cy=H*state.wmY/100;
+    const f1=W*state.wmSize/100;
+    ctx.font=`800 ${f1}px Archivo, Arial, sans-serif`;
+    if(state.l1)ctx.fillText(state.l1,cx,cy);
+    const f2=f1*0.52;
+    ctx.font=`500 ${f2}px "Noto Sans JP", sans-serif`;
+    if('letterSpacing' in ctx)ctx.letterSpacing=`${state.wmLs}px`;
+    const gap=f1*0.72;
+    if(state.l2)ctx.fillText(state.l2,cx,cy+gap);
+    ctx.restore();
+  }
+  return cv;
+}
+
+/* ---- lazy paint scheduler: only visible cards, chunked across frames ---- */
+let paintQueue=[], paintRaf=null;
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    const it=e.target._it;if(!it)return;
+    it.visible=e.isIntersecting;
+    if(e.isIntersecting&&it.dirty)queuePaint(it);
+  });
+},{root:null,rootMargin:'400px 0px'});
+
+function paintNow(it){
+  if(!it.cv)return;
+  draw(it,PREVIEW,true,it.cv);
+  it.dirty=false;
+}
+function queuePaint(it){
+  if(paintQueue.includes(it))return;
+  paintQueue.push(it);
+  if(!paintRaf)paintRaf=requestAnimationFrame(flushPaint);
+}
+function flushPaint(){
+  paintRaf=null;
+  const t0=performance.now();
+  while(paintQueue.length&&performance.now()-t0<10)paintNow(paintQueue.shift()); // ~10ms budget/frame
+  if(paintQueue.length)paintRaf=requestAnimationFrame(flushPaint);
+}
+// mark everything stale; visible cards repaint now, the rest when scrolled into view
+function repaintAll(){
+  items.forEach(it=>{it.dirty=true;if(it.visible)queuePaint(it);});
+}
+
+function render(){
+  const out=$('out');
+  if(!items.length){
+    out.innerHTML='<div class="empty">DROP PRODUCT PHOTOS ANYWHERE TO START</div>';
+    $('count').textContent='NO IMAGES';$('bar').style.display='none';
+    $('dlAll').disabled=true;$('clear').disabled=true;return;
+  }
+  $('count').textContent=items.length+(items.length>1?' IMAGES':' IMAGE');
+  $('dims').textContent=state.size+' × '+state.size;
+  $('bar').style.display='flex';
+  $('dlAll').disabled=false;$('clear').disabled=false;
+  io.disconnect();paintQueue=[];
+  out.innerHTML='<div class="grid" id="g"></div>';
+  const g=$('g');
+  // verification only makes sense when folders map 1:1 to books
+  const folders=new Set(items.filter(x=>x.folder).map(x=>x.folder));
+  const perBookFolders=folders.size>1;
+
+  items.forEach((it,i)=>{
+    const card=document.createElement('div');card.className='card';
+    // preview is a live canvas — no base64 round-trip
+    const im=it.cv||(it.cv=document.createElement('canvas'));
+    im.className='cv';im._it=it;it.dirty=true;it.visible=false;
+
+    // pan up/down (Canva-style)
+    im.title='Drag up/down to reposition · double-click re-centers';
+    im.onpointerdown=e=>{
+      e.preventDefault();im.setPointerCapture(e.pointerId);
+      const all=state.panMode==='all', sy=e.clientY;
+      const start=new Map(items.map(x=>[x,x.offYF||0]));
+      let raf=null;
+      im.onpointermove=ev=>{
+        const d=(ev.clientY-sy)/im.clientHeight;
+        if(all)items.forEach(x=>x.offYF=start.get(x)+d); else it.offYF=start.get(it)+d;
+        if(!raf)raf=requestAnimationFrame(()=>{
+          raf=null;
+          if(all)items.forEach(x=>{if(x.visible)paintNow(x);else x.dirty=true;});
+          else paintNow(it);
+        });
+      };
+      im.onpointerup=im.onpointercancel=()=>{im.onpointermove=null;im.onpointerup=null;im.onpointercancel=null;};
+    };
+    im.ondblclick=()=>{
+      if(state.panMode==='all'){items.forEach(x=>x.offYF=0);repaintAll();}
+      else{it.offYF=0;paintNow(it);}
+    };
+
+    // reorder target
+    card.ondragover=e=>{e.preventDefault();card.classList.add('over');};
+    card.ondragleave=()=>card.classList.remove('over');
+    card.ondrop=e=>{
+      e.preventDefault();card.classList.remove('over');
+      const from=+e.dataTransfer.getData('text/plain');
+      if(isNaN(from)||from===i)return;
+      const[m]=items.splice(from,1);items.splice(i,0,m);
+      renumber();render();
+    };
+
+    // zoom — scope respects the "Zoom Applies To" setting
+    const cur=()=>it.zoom||100;
+    const zr=document.createElement('div');zr.className='zoomrow';
+    zr.innerHTML=`<span>ZOOM</span><input type="range" min="50" max="200" step="1" value="${cur()}"><b>${cur()}%</b><span class="rz" title="Reset zoom &amp; position">↺</span>`;
+    const zs=zr.querySelector('input'),zv=zr.querySelector('b');
+    const sz=document.createElement('div');sz.className='szrow';
+    const applyZoom=(v,repaint)=>{
+      if(state.zoomScope==='all'){
+        items.forEach(x=>{
+          x.zoom=v;
+          if(x.zs){x.zs.value=v;x.zv.textContent=v+'%';
+            x.szrow.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.z===v));}
+        });
+        if(repaint)items.forEach(x=>{if(x.visible)paintNow(x);else x.dirty=true;});
+      }else{
+        it.zoom=v;
+        zs.value=v;zv.textContent=v+'%';
+        sz.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.z===v));
+        if(repaint)paintNow(it);
+      }
+    };
+    it.zs=zs;it.zv=zv;it.szrow=sz;
+    ['auto',1,2,3].forEach(k=>{
+      const b=document.createElement('button');
+      const v=k==='auto'?100:+state.presets[k];
+      b.dataset.z=v;b.textContent=k==='auto'?'AUTO':v+'%';
+      if(cur()===v)b.classList.add('on');
+      b.onclick=()=>applyZoom(v,true);
+      sz.appendChild(b);
+    });
+    let zraf=null;
+    zs.oninput=()=>{
+      const v=+zs.value;
+      applyZoom(v,false);
+      if(!zraf)zraf=requestAnimationFrame(()=>{
+        zraf=null;
+        if(state.zoomScope==='all')items.forEach(x=>{if(x.visible)paintNow(x);else x.dirty=true;});
+        else paintNow(it);
+      });
+    };
+    zr.querySelector('.rz').onclick=()=>{
+      if(state.zoomScope==='all'){items.forEach(x=>x.offYF=0);}else it.offYF=0;
+      applyZoom(100,true);
+    };
+
+    // filename
+    const nm=document.createElement('input');
+    nm.type='text';nm.className='nm';nm.value=it.outBase;
+    nm.title='Output filename · Enter or blur applies auto numbering';
+    nm.oninput=()=>{it.outBase=nm.value;};
+    nm.onchange=()=>{it.named=true;renumber();render();};
+
+    const meta=document.createElement('div');meta.className='meta';
+    meta.innerHTML=`<a href="#" data-i="${i}">↓ DOWNLOAD</a><span class="sp"></span>`+
+      `<span class="drag" draggable="true" title="Drag to reorder">⠿</span>`+
+      `<span class="x" data-x="${i}" title="Remove">✕</span>`;
+    meta.querySelector('.drag').ondragstart=e=>{e.dataTransfer.setData('text/plain',String(i));e.dataTransfer.effectAllowed='move';};
+
+    card.appendChild(im);card.appendChild(sz);card.appendChild(zr);card.appendChild(nm);
+    if(it.folder){
+      const fb=document.createElement('div');
+      if(perBookFolders){
+        // one folder per book → the folder name IS the expected book name, so verify it
+        const base=(it.outBase||'').replace(/\s*\(\d+\)\s*$/,'').trim();
+        const ok=base.toLowerCase()===it.folder.toLowerCase();
+        fb.className='fbadge '+(ok?'ok':'bad');
+        fb.textContent=(ok?'✓ MATCHES FOLDER · ':'✗ DIFFERS FROM FOLDER · ')+it.folder;
+      }else{
+        // all images sit in one folder → nothing to verify, just show the source
+        fb.className='fbadge info';
+        fb.textContent='FOLDER · '+it.folder;
+      }
+      fb.title=it.folder;
+      card.appendChild(fb);
+    }
+    card.appendChild(meta);g.appendChild(card);
+    io.observe(im);
+  });
+
+  g.querySelectorAll('a[data-i]').forEach(a=>a.onclick=e=>{e.preventDefault();dlOne(+a.dataset.i);});
+  g.querySelectorAll('.x').forEach(x=>x.onclick=()=>{
+    URL.revokeObjectURL(items[+x.dataset.x].url);items.splice(+x.dataset.x,1);renumber();render();
+  });
+}
+
+/* ---- export ---- */
+function outName(it){
+  let base=(it.outBase||it.name.replace(/\.[^.]+$/,'')).replace(/[\\/:*?"<>|]/g,'-').trim()||'image';
+  return base+state.suffix+'.'+(state.fmt==='jpeg'?'jpg':'png');
+}
+function blobOf(cv,q){return new Promise(r=>cv.toBlob(r,'image/'+state.fmt,state.fmt==='jpeg'?q:undefined));}
+async function toBlob(cv){
+  let blob=await blobOf(cv,state.q);
+  if(!state.limit2)return blob;
+  const MAX=2*1024*1024;
+  let q=state.q;
+  while(blob.size>MAX && state.fmt==='jpeg' && q>0.5){q-=0.07;blob=await blobOf(cv,q);}
+  let c=cv;
+  while(blob.size>MAX && c.width>600){
+    const n=document.createElement('canvas');
+    n.width=Math.round(c.width*0.9);n.height=Math.round(c.height*0.9);
+    n.getContext('2d').drawImage(c,0,0,n.width,n.height);
+    c=n;blob=await blobOf(c,q);
+  }
+  return blob;
+}
+async function dlOne(i){
+  const blob=await toBlob(draw(items[i],state.size,false));
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=outName(items[i]);a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+$('dlAll').onclick=async()=>{
+  $('dlAll').textContent='PACKING…';$('dlAll').disabled=true;
+  const zip=new JSZip();
+  for(const it of items){const blob=await toBlob(draw(it,state.size,false));zip.file(outName(it),blob);}
+  const content=await zip.generateAsync({type:'blob'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(content);a.download='owarin_watermarked.zip';a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+  $('dlAll').textContent='DOWNLOAD ZIP';$('dlAll').disabled=false;
+};
+</script>
+</body>
+</html>

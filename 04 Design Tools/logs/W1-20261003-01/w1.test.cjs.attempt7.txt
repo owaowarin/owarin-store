@@ -1,0 +1,52 @@
+PASS Create -> Pending -> Cancel; no sale; replay; clear has no server effect
+PASS SHOP confirm snapshot prices, subsidy distinct, one line on timeout/retry
+PASS Two sessions/requests one copy one winner; independent Pending coexist
+PASS Reject unavailable, missing subsidy, malformed price, duplicate before mutation
+PASS Direct Shopee no business Pending; price round(entered*0.7-50)
+PASS UID survives sort/PID rename; source namespaces remain distinct
+PASS Duplicate UID/SKU rejected; manual edits and wrong revision do not get overwritten
+PASS All legacy writers/status edit fail closed; unauthorized rejected
+PASS Allocator includes ORDERS, SALES and intent and supports >99
+BOUNDARIES create 197
+BOUNDARIES cancel 164
+BOUNDARIES confirm 296
+BOUNDARIES shopee 375
+PASS Every actual write boundary: Create/Cancel/Confirm, throw before or response lost -> same-ID recovery
+PASS W1 10 groups
+node:assert:604
+    throw err;
+    ^
+
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /MANAGED_ITEMS|Sheet not found/. Input:
+
+'Error: SP-2 supports only GAME GUIDE BOOKS / MAGAZINE'
+
+    at C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:34:68
+    at test (C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:2:34)
+    at Object.<anonymous> (C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:32:1)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Object..js (node:internal/modules/cjs/loader:1943:10)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: Error: SP-2 supports only GAME GUIDE BOOKS / MAGAZINE
+      at _sp2Sheet (Code_v32.gs:972:55)
+      at Object._sp2MigrateFlagsCore (Code_v32.gs:1314:11)
+      at C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:34:88
+      at getActual (node:assert:611:5)
+      at strict.throws (node:assert:759:24)
+      at C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:34:68
+      at test (C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:2:34)
+      at Object.<anonymous> (C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:32:1)
+      at Module._compile (node:internal/modules/cjs/loader:1812:14)
+      at Object..js (node:internal/modules/cjs/loader:1943:10),
+  expected: /MANAGED_ITEMS|Sheet not found/,
+  operator: 'throws',
+  diff: 'simple'
+}
+
+Node.js v24.14.0

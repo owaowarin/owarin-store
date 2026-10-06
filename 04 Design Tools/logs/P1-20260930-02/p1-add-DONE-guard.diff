@@ -1,0 +1,18 @@
+diff --git "a/04 Design Tools\\logs\\P1-20260930-02\\p1-add-before.test.cjs" "b/04 Design Tools\\logs\\P1-20260929-01\\p1-add.test.cjs"
+index 5142d6c..ca58501 100644
+--- "a/04 Design Tools\\logs\\P1-20260930-02\\p1-add-before.test.cjs"	
++++ "b/04 Design Tools\\logs\\P1-20260929-01\\p1-add.test.cjs"	
+@@ -64,6 +64,13 @@ const replay=add(0);assert.equal(replay.item.productId,'TEST-1');assert.equal(ro
+ const beforeStatus=rowsJ.length, doneStatus=status(0);
+ assert.equal(doneStatus.state,'DONE');assert.equal(doneStatus.data.item.productId,'TEST-1');
+ assert.equal(rowsJ.length,beforeStatus,'DONE status lookup must be read-only');
++const corruptDone=[...rowsJ].reverse().find(r=>r[2]==='p1-test-request-0');
++const validResult=corruptDone[15], beforeCorrupt=rowsJ.length;
++corruptDone[15]='{';
++assert.throws(()=>status(0),/requires recovery/);
++assert.throws(()=>add(0),/requires recovery/);
++assert.equal(rowsJ.length,beforeCorrupt,'corrupt DONE result must not append another DONE event');
++corruptDone[15]=validResult;
+ assert.throws(()=>status(0,'GGB',{title:'Changed'}),/different item data/);
+ assert.throws(()=>add(0,'GGB',{title:'Changed'}),/different item data/);
+ const explicit=add('explicit','GGB',{status:'Hold'});assert.equal(explicit.item.status,'Hold');

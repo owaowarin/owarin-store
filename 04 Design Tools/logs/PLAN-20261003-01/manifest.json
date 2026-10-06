@@ -1,0 +1,97 @@
+{
+  "change_id": "PLAN-20261003-01",
+  "request_id": "PLAN-REMAINING-EFFICIENCY-001",
+  "timestamp": "2026-10-03 22:19:06 +0700",
+  "files": {
+    "00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "before_sha256": "ea57e0b3c55ee5518b9217683ad508c9463dbe2cfc0eb271dd49148d466b4238",
+      "after_sha256": "2a40d8fc125b1e677596bf632c569147ebd091bcaca7bc772997ffa1c663cdad",
+      "bytes": 65194,
+      "backup": "before\\00 Docs\\PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md",
+      "diff": "diff\\00 Docs__PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md.diff"
+    },
+    "00 Docs/HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "before_sha256": "c4ab1df1893b9363842d97e734db1c14baf2f20310031b63564930be2cc3e1db",
+      "after_sha256": "004be97212c4e39024099754e9d72ff19b27b40b2e6e9b28028448b1f7c52b9c",
+      "bytes": 23747,
+      "backup": "before\\00 Docs\\HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md",
+      "diff": "diff\\00 Docs__HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md.diff"
+    },
+    "00 Docs/IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md": {
+      "before_sha256": "a7e220854e9c7b5e9d1562600d11914d9840e7529632db2eb849f33e7647f97a",
+      "after_sha256": "d8c34f782feb67572aefe2cec8cef4ec23a06c042bf3bc620124c4323294e452",
+      "bytes": 128090,
+      "backup": "before\\00 Docs\\IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md",
+      "diff": "diff\\00 Docs__IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md.diff"
+    },
+    "00 Docs/HANDOFF_2026-09-28.md": {
+      "before_sha256": "fb57692453b8eb167424b958216f150c01c8591261fa81e12ee96465e88a6294",
+      "after_sha256": "5d4a0880276d623cd1d6d72cc915adf126762e4af69da2322c92727af39c2507",
+      "bytes": 66627,
+      "backup": "before\\00 Docs\\HANDOFF_2026-09-28.md",
+      "diff": "diff\\00 Docs__HANDOFF_2026-09-28.md.diff"
+    },
+    "00 Docs/STATE.md": {
+      "before_sha256": "dc984c1848951f8fc1be4f417098f80b129a0b8d8d923765598aeaffbe9973e9",
+      "after_sha256": "50669fe760d5ddbc5cd35a419dd57589481f16c1f8c3e34436b0ac6725ed6778",
+      "bytes": 9704,
+      "backup": "before\\00 Docs\\STATE.md",
+      "diff": "diff\\00 Docs__STATE.md.diff"
+    },
+    "00 Docs/HANDOFF_2026-10-03.md": {
+      "before_sha256": "7c5110662a96a99cf0549a99db5259fefb63e6a55c9b23809dd1d9c87a7441cb",
+      "after_sha256": "0420355698b71f313a79a7a4d0d579607861d77dd97f3519b2b3d6108c965243",
+      "bytes": 1996,
+      "backup": "before\\00 Docs\\HANDOFF_2026-10-03.md",
+      "diff": "diff\\00 Docs__HANDOFF_2026-10-03.md.diff"
+    },
+    "OWARI-MASTER-CONTEXT_EN_2026-09-13.md": {
+      "before_sha256": "2fea96ab35c842e379e46a01c7c18420a6ef78b5c97710cd5a6b64a31d0dd3bd",
+      "after_sha256": "32e7bff0cd31a0e76837e4afaa24369ca1192998e26a568ec907b6389ddeb81a",
+      "bytes": 47363,
+      "backup": "before\\OWARI-MASTER-CONTEXT_EN_2026-09-13.md",
+      "diff": "diff\\OWARI-MASTER-CONTEXT_EN_2026-09-13.md.diff"
+    },
+    "03 Apps Script/Web App/README.md": {
+      "before_sha256": "b368ad3ca80c7920bdb800a953953f01bad27df2005fb41da30ba0400fc16832",
+      "after_sha256": "bacd0c038c001e6b6a94dac208157d923cfcfe137ebf3d8be107bdabb88b1f6e",
+      "bytes": 15721,
+      "backup": "before\\03 Apps Script\\Web App\\README.md",
+      "diff": "diff\\03 Apps Script__Web App__README.md.diff"
+    },
+    "04 Design Tools/logs/decisions_20261003.csv": {
+      "before_sha256": "26ccc54da576f9142e7eac33552fa35df877b0aa534d0fb27304730f90a39520",
+      "after_sha256": "b4c47a6caff6d841fdf25c84df595ce012c64994e097999fd68dec26046150b1",
+      "bytes": 1624,
+      "backup": "before\\04 Design Tools\\logs\\decisions_20261003.csv",
+      "diff": "diff\\04 Design Tools__logs__decisions_20261003.csv.diff"
+    },
+    "00 Docs/ORDERS-CRM-LABEL-DESIGN.md": {
+      "before_sha256": "be3c9385cdb30420d49d7c9b7a24030e151b1377182392c1902a5334e76a0f7f",
+      "after_sha256": "e4771ab46fb39e93dc4a5d547ea68ac6f141c7747cf243cbb4e04f53ecfe912f",
+      "bytes": 10023,
+      "backup": "before\\00 Docs\\ORDERS-CRM-LABEL-DESIGN.md",
+      "diff": "diff\\00 Docs__ORDERS-CRM-LABEL-DESIGN.md.diff"
+    },
+    "AGENTS.md": {
+      "before_sha256": "76483e39fdc57a16b7a0a224c1886041f7b8f4e9117edd6985775ac5259783b3",
+      "after_sha256": "faa038e90c5434f9d37e01784cc9aff9fa72ee8aa3ae7a73f0487d132a8a5f03",
+      "bytes": 8158,
+      "backup": "before\\AGENTS.md",
+      "diff": "diff\\AGENTS.md.diff"
+    },
+    "CLAUDE.md": {
+      "before_sha256": "fd9624850356a39bedacd175f14c7f073823d3efae735a7549cd5b184d23676c",
+      "after_sha256": "222a1d8a533da8f5309a4b655ecb7100915d55a33fd1333fb08f5e97b2c32212",
+      "bytes": 13650,
+      "backup": "before\\CLAUDE.md",
+      "diff": "diff\\CLAUDE.md.diff"
+    }
+  },
+  "source_unchanged": {
+    "03 Apps Script\\Web App\\Code_v31.gs": "6ef098cd39f5b82f888d60a41577c71ecd3c81c26d4e4604e41eefb27e87cd5d",
+    "03 Apps Script\\Web App\\WebApp_v31.gs": "7102cc7fa4735f5859b7e8f11092b0cadc2bf155e5d204658949a11696ace67d",
+    "03 Apps Script\\Web App\\Index.html": "5ece912bc9ae2f7d7fbb9662c2e417b125f78930c68c0d9a03619de44eb69aeb",
+    "03 Apps Script\\Web App\\P1Journal.gs": "fdf4b656488ea92db4ccb50b573ac75bfd8aa27c91769b425e03ff06509890bf"
+  }
+}

@@ -1,0 +1,13 @@
+# Focused review packet — GPT-6 Astra / High
+
+Review prepared; not performed. No model switch, new agent/chat, or message to another chat is claimed/authorized. Select GPT-6 Astra / High in the app selector for the next bounded review.
+
+Exact revision: `W1-20261003-01/v32@3B0D1F63B06C4196578FFEA9714BEC50EC6AD060B3BAC95D8190582175B2BB08` ([revision.json](revision.json)). Scope: four candidate files and their diff; tests, issues.md, schema.json, source-readback.json, result.md, UNDO.md. Production source remains v31/deployment4 per dated evidence; test source is sanitized. Do not open Back House LAB or mutate production.
+
+Review money/stock/security/data integrity only. Check every sale/status writer and callable compatibility path, UID ownership after sort/PID rename/manual UID change, only Instock eligibility, multiple Pending vs global technical gate, partial cancellation releasing own claim, locked allocation incl >99/Bangkok midnight, immutable SALES identity/profit/subsidy and table/spill handling. Inspect PREPARED→ARMED→readback→DONE event sequence under execution termination, silent write, partial setValues, lost response and payload mismatch; malformed journal manual recovery must remain fail-closed. Check owner-only GAS effective/active identity and constrained test scopes, public menu/private suffix exposure, post-dialog lock reacquisition and direct Sheets trigger limitations.
+
+Material open validation: actual Google typed SALES (test currently lacks SALES until fixture), true LockService contention/timeout/quota, trigger multi-row/UID edits, audit actor attribution for menu/external entry points, journal cell size at maximum cart, capacity allocation and formula readback latency, caller interaction with P1 unfinished Add and Meta/R2. The source-inspection guards and synthetic browser run do not close these environment checks. Do not broaden unrelated refactors/dependencies or weaken failure tests.
+
+Already run: 14 VM transaction groups with1,032 injected cell-write positions, UI lost-response/storage/double-click tests, and six impact regressions. Local browser uses mock Sheets/lock and final Index; final UID-preflight change is covered by unit test, not fresh Google UI. Google Run blocked before execution by Authorization; W1 gate remains open.
+
+First complete isolated-Google fixture/recovery/UI acceptance after owner authorization, then issue focused findings with file/line, reproduction and fix recommendation against this exact manifest. One writer implements scoped fixes and repeats the failing steps; two materially different failed fixes require a compact unresolved handoff. Do not claim review PASS without that review.

@@ -1,0 +1,71 @@
+{
+  "result": "PASS",
+  "tests": [
+    {
+      "test": "Index.test.js",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "5516e9",
+        "wall_time_seconds": 0.0000269,
+        "exit_code": 0,
+        "original_token_count": 9,
+        "output": "Index inventory smoke test passed\n"
+      }
+    },
+    {
+      "test": "p1-ui.test.cjs",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "ff9e11",
+        "wall_time_seconds": 0.7427564,
+        "exit_code": 0,
+        "original_token_count": 44,
+        "output": "PASS: 20 UI resets, DONE/NOT_FOUND/ERROR retries, historical DONE skips live cache, frozen reload, storage/render failure, timeout/no-callback/late callback, suggestion clear\n"
+      }
+    },
+    {
+      "test": "p1-add.test.cjs",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "b4f1f6",
+        "wall_time_seconds": 1.1945818,
+        "exit_code": 0,
+        "original_token_count": 57,
+        "output": "PASS: 20 Add calls; R1 committed snapshot after sort/SKU reuse/duplicate/removal; R2 fresh header and supplied-field gates; R3 source/status gates; R4 four formula readbacks and blocked retries; existing journal/write failures\n"
+      }
+    },
+    {
+      "test": "image-url.test.js",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "b3c3ac",
+        "wall_time_seconds": 1.205501,
+        "exit_code": 0,
+        "original_token_count": 6,
+        "output": "image-url test passed\n"
+      }
+    },
+    {
+      "test": "fb-catalogue.test.js",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "6e24fe",
+        "wall_time_seconds": 0.6669063,
+        "exit_code": 0,
+        "original_token_count": 11,
+        "output": "fb-catalogue.test.js: all assertions passed\n"
+      }
+    },
+    {
+      "test": "meta-pipeline.test.js",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "140a16",
+        "wall_time_seconds": 0.5221828,
+        "exit_code": 0,
+        "original_token_count": 31,
+        "output": "meta-pipeline.test.js: all assertions passed\nv28 headless tests passed\nv29 title tests passed\nv30 dedup/title tests passed\n"
+      }
+    }
+  ]
+}

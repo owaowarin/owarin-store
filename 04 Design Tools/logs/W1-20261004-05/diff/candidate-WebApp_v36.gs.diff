@@ -1,0 +1,20 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05/before/candidate/WebApp_v33.gs" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05/candidate/WebApp_v36.gs"
+index d087d8a..0b26c96 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05/before/candidate/WebApp_v33.gs"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05/candidate/WebApp_v36.gs"	
+@@ -1,5 +1,5 @@
+ // ============================================================
+-// OWARIN BACK-OFFICE — WebApp.gs v33 (SP-2, pairs with Code.gs v33)
++// OWARIN BACK-OFFICE — WebApp.gs v36 (SP-2, pairs with Code.gs v36)
+ // v31 (2026-10-03): validated Add payload and read-only same-ID recovery; pairs with Code.gs v32.
+ // v28: no functional change -- bumped only to stay paired with Code.gs v30 (identical copies listed once; all-caps titles).
+ // v27: no functional change -- bumped only to stay paired with Code.gs v29 (Meta title without RESTOCK).
+@@ -46,6 +46,8 @@ function _route(action, p) {
+     case "orders.list": return _w1List_(p.status);
+     case "orders.get": return _w1Get_(p.orderId);
+     case "requests.get": return _w1Status_(p.requestId);
++    case "requests.intent": return _w1Intent_(p.requestId);
++    case "requests.resume": return _w1Resume_(p.requestId);
+     case "requests.reconcile": return _w1ReconcileMaintenance_(p.requestId);
+     case "ping":                  return { now: new Date().toISOString() };
+     case "inventory.bootstrap":   return _invBootstrap();

@@ -1,0 +1,42 @@
+{
+  "recordedAt": "2026-09-29T02:03:49.147690+07:00",
+  "sourceUnchanged": true,
+  "implementationHistoryPreserved": true,
+  "liveMutations": "none",
+  "documents": [
+    {
+      "change_id": "P0-20260928-01-CLOSE-20260929",
+      "request_id": "N/A",
+      "path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md",
+      "before": "2AE1A9F0656E9B0D2D9320499604CF4906D84D0EC4F34995940BFD9F388730D5",
+      "after": "4C2AEDA64746E4409D71A609AB37185233076AC351F4E2FC8776A412D342BD91",
+      "result": "PASS",
+      "error_retry": "none",
+      "recovery": "Reverse closing append only; preserve prior and future history"
+    },
+    {
+      "change_id": "P0-20260928-01-CLOSE-20260929",
+      "request_id": "N/A",
+      "path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\HANDOFF_2026-09-29.md",
+      "before": "ABSENT",
+      "after": "0FD010857B5ADDFFB1BB8F0D5FCE02A2C8D42E618587A84A1E2BFED9DABD85F4",
+      "result": "PASS",
+      "error_retry": "none",
+      "recovery": "Reverse closing append only; preserve prior and future history"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "changes.csv",
+      "sha256": "21608F9D70E4602DCA84CBD899B6AA2C12D4623C3E90C35BE6B99B9FBC1880B9"
+    },
+    {
+      "path": "docs.diff",
+      "sha256": "FA07FAAAD5B76A35722BE2C6A84E1B77D52A0826B9B118884FFF57C0B31B7C20"
+    },
+    {
+      "path": "implementation-before.md",
+      "sha256": "2AE1A9F0656E9B0D2D9320499604CF4906D84D0EC4F34995940BFD9F388730D5"
+    }
+  ]
+}

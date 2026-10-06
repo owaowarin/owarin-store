@@ -1,0 +1,13 @@
+# Focused money / stock / security review — Session39
+
+W1-20261004-03/v33@1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20
+
+Performed in this active chat; exact model/effort is not exposed by available controls. This is not a claimed GPT-6 Astra / High sign-off. Requested Astra / High packet is separate.
+
+Money: transaction conversion/subsidy allocation and SALES profit formulas unchanged from v32; strict validated money, immutable line IDs and same-payload replay remain.14 transaction groups including1,032 simulated write positions passed after compression/MIME fixes; final plain-cell bound has a zero-write rejection test.
+Stock: native ScriptLock remains shared; external audit now acquires it. Range audit covers all managed rows plus missing/duplicate UID; ownership/Instock/Auction/cancel invariants remain failclosed. R1 lock contention and R2 old reproductions now pass. Stable UID follows permitted sort. No automatic overwrite of owner conflicts.
+Integrity: compressed journal reads old plain JSON; encoded limit45,000 and plain line/value limit45,000 preflight before PREPARED; capacity checked before appends. Derived maintenance write failures propagate to NEEDS_REVIEW; exact-before values/formulas required for reconciliation. Explicit Blob content type fixed actual Google failure. No new dependency/scopes/permissions; private helpers retain trailing underscore and reconciliation enforces owner access.
+
+Residual platform limits: direct Sheets edits cannot be prevented or fully audited by a simple trigger (queue/runtime/lock timeouts); Unknown remains honest. Sorting restores legacy formulas including row2; before manual reconciliation inspect derived columns/row2 against export, not just the journal range. No external marketplace reservation sync. Maximum100 cart is accepted only within byte/cell bounds and may require same-ID continuation if Google execution limit is reached. No production release or W2/printing sign-off.
+
+Google outcome must be read from final export/assertions; this review does not predeclare the running BULK100 PASS.

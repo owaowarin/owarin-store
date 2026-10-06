@@ -1,0 +1,24 @@
+diff --git "a/04 Design Tools\\logs\\P1-20261003-01\\before\\p1-ui.test.cjs" "b/04 Design Tools\\logs\\P1-20260929-01\\p1-ui.test.cjs"
+index 85850e7..c89418e 100644
+--- "a/04 Design Tools\\logs\\P1-20261003-01\\before\\p1-ui.test.cjs"	
++++ "b/04 Design Tools\\logs\\P1-20260929-01\\p1-ui.test.cjs"	
+@@ -55,6 +55,12 @@ function make(backing=new Map(),storageFailure=false){
+   assert.equal(u.requests.length,2,'DONE status must not send another Add');
+   assert.equal(u.c.addRequestId,'');
+   assert.equal(u.backing.size,0,'committed request must clear browser storage');
++  u=make();u.c.openAdd();u.$('fName').value='Old item';u.fire('mSave','click');
++  u.pending.shift().reject(Error('INJECTED NETWORK ERROR'));await u.settle();
++  u.fire('mSave','click');
++  u.pending.shift().resolve({state:'DONE',data:{...u.saved(99),historical:true}});await u.settle();
++  assert.equal(u.c.S.data.GGB.length,0,'historical DONE must not insert a stale item into live cache');
++  assert(u.notices.includes('Saved — refresh inventory to see current stock'));
+   const store=new Map();u=make(store);u.c.S.source='MAG';u.c.openAdd();u.$('fName').value='After reload';
+   u.$('fCost').value='1,200.50';u.fire('mSave','click');
+   const frozen=JSON.stringify(u.requests[0].payload), oldId=u.requests[0].payload.requestId;
+@@ -141,5 +147,5 @@ function make(backing=new Map(),storageFailure=false){
+   u.fire('fName','keydown',{key:'ArrowDown',preventDefault(){}});
+   u.fire('fName','keydown',{key:'Enter',preventDefault(){}});
+   assert.equal(u.$('fName').value,'');
+-  console.log('PASS: 20 UI resets, status-before-retry DONE/NOT_FOUND/ERROR, frozen reload, storage failure, safe validation release, render failure, in-flight guard, Add timeout/no-callback reload/late callback, stale suggestion clear');
++  console.log('PASS: 20 UI resets, DONE/NOT_FOUND/ERROR retries, historical DONE skips live cache, frozen reload, storage/render failure, timeout/no-callback/late callback, suggestion clear');
+ })().catch(e=>{console.error(e);process.exitCode=1;});

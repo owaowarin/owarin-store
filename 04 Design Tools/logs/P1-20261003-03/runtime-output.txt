@@ -1,0 +1,12 @@
+Production Apps Script UI execution logs observed 2026-10-03 Bangkok:
+21:38:10 Notice Execution started (p1PrepareAddJournal)
+21:38:11 Info P1 journal ready: sheetId=1424987581; eventRows=0
+21:38:12 Notice Execution completed
+21:42:16 Notice Execution started (p1CheckAddReady)
+21:42:15 Info PASS header resolution: GAME GUIDE BOOKS
+21:42:16 Info PASS header resolution: MAGAZINE
+21:42:16 Info PASS P1 readiness: Code v31 / WebApp v31; exact schema; both inventories; invalid input rejected; no inventory/SALES/journal events written; existing events=0
+21:42:17 Notice Execution completed
+The UI's first readiness Info precedes its Notice timestamp by one second; preserved as observed.
+Deployment UI: Deployment successfully updated. Version 4 on Oct3 2026 21:44.
+Production /exec loaded and Add modal opened: default New Arrival; blank Cost/Price; Save available. Closed without submission. No synthetic business row created in shop.

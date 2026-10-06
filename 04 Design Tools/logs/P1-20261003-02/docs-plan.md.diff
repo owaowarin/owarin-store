@@ -1,0 +1,11 @@
+--- C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-02\before\plan.md
++++ C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\00 Docs\PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md
+@@ -2,7 +2,7 @@
+ 
+ วันที่ 2026-09-28 · Stream B · สถานะ: **ออกแบบเพื่อส่งต่อ ยังไม่ได้แก้ source หรือ deploy**
+ 
+-P1 board update 2026-10-03: R1–R4 local candidate + VM regression **DONE**; isolated Google test source Save/readback, normal Add and same-ID reload/retry **DONE**. Before/after/retry XLSX exports: 28,531 / 29,078 / 29,587 bytes; only synthetic GGB rows 25–26 and ADD REQUESTS rows 76–79 added; `verify-test-add.py` and `verify-test-retry.py` PASS. Direct Google fault injection for R1–R4 **NOT RUN**; GPT-6 Astra / High rereview **TODO**; shop promotion **NO-GO**. Evidence `04 Design Tools/logs/P1-20261003-01/` (Change `P1-20261003-01`, Request `P1-R1-R4-LOCAL-FIX-001`); exact candidate revision Code `695A2EAA4FB9...`, webapp `6168CEA9DE2B...`, Index `F87ADF6B67B0...`. Test `/exec` and shop were not changed.
++P1 board update 2026-10-03 Session33: focused rereview found R1 replay provenance/UI-cache and R3 status-type defects; targeted repair + red→green VM regressions **DONE**. Actual isolated Google R1–R4 failure/retry **PASS** at 16:20:32–16:20:43; fresh exports 29,576/30,982 bytes, only GGB27–29/journal80–87 (158 added cells), all prior cells unchanged. Helper removed; saved source reload/readback **PASS**. Exact revised candidate Code `279140CB27CF...`, webapp `057840A5F2E9...`, Index `5ECE912BC9AE...`; evidence `04 Design Tools/logs/P1-20261003-02/review.md`, Change `P1-20261003-02` / Request `P1-R1-R4-REREVIEW-001`. Bounded R1–R4 acceptance **DONE**; shop promotion **NO-GO** pending separate current-source rebase/pairing and journal migration review. Test `/exec`, shop and Back House LAB unchanged.
+ 
+ ## 1. ขอบเขตและข้อสรุป
+ 

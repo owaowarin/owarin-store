@@ -1,0 +1,11 @@
+const fs=require('node:fs'),crypto=require('node:crypto'),path=require('node:path'),dir=__dirname;
+let stage=fs.readFileSync(dir+'/stage.cjs','utf8').replace('ISOLATED TEST v34','ISOLATED TEST v35');fs.writeFileSync(dir+'/stage.cjs',stage);
+let serve=fs.readFileSync(dir+'/serve.cjs','utf8');fs.copyFileSync(dir+'/serve.cjs',dir+'/attempts/F04/serve-before.cjs');
+serve=serve.replaceAll("req.url.startsWith('/backup-current/')","(req.url.startsWith('/backup-current/')||req.url.startsWith('/backup-v35/'))");
+serve=serve.replace("current?dir+'/attempts/F02/google-source-readback'","req.url.startsWith('/backup-v35/')?dir+'/google-source-readback':current?dir+'/attempts/F02/google-source-readback'");
+serve=serve.replace("current?'fresh-source-before-final'","req.url.startsWith('/backup-v35/')?'fresh-source-before-v35':current?'fresh-source-before-final'");
+fs.writeFileSync(dir+'/serve.cjs',serve);
+const files=['Code_v35.gs','WebApp_v35.gs','Index.html','W1Orders.gs'].map(file=>({file,sha256LF:crypto.createHash('sha256').update(fs.readFileSync(dir+'/candidate/'+file,'utf8').replaceAll('\r\n','\n')).digest('hex').toUpperCase()}));
+const hash=crypto.createHash('sha256').update(JSON.stringify(files)).digest('hex').toUpperCase();
+fs.writeFileSync(dir+'/revision.json',JSON.stringify({revision:'W1-20261004-05/v35@'+hash,time:new Date().toISOString(),git:'No Git repository; SHA256 JSON of four LF file hashes',base:'W1-20261004-03/v33@1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20',files},null,2)+'\n');
+console.log('v35@'+hash);

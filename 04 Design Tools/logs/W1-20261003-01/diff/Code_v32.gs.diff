@@ -1,0 +1,141 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\before\\03 Apps Script\\Web App\\Code_v31.gs" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\candidate\\Code_v32.gs"
+index d9f84c0..2c582b1 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\before\\03 Apps Script\\Web App\\Code_v31.gs"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\candidate\\Code_v32.gs"	
+@@ -1,5 +1,5 @@
+ // ============================================================
+-// OWARIN BACK-OFFICE — Code.gs v31 (SP-2 pricing/SKU engine, pairs with WebApp.gs v31)
++// OWARIN BACK-OFFICE — Code.gs v32 (SP-2 pricing/SKU engine, pairs with WebApp.gs v32)
+ // v31 (2026-10-03): durable Add journal, validated money/source/status, committed snapshot replay and formula readback.
+ // v30 (2026-10-02): (1) Identical copies are listed ONCE in META EXPORT: same base title + Publisher + Original
+ //   (cover price) + Condition + Copy Flags -> one row (the first complete copy), quantity_to_sell_on_facebook =
+@@ -171,6 +171,8 @@ var _colCache = {}; // header -> index cache, per execution
+ 
+ // Header map: normalised header text -> logical key
+ var HEADER_MAP = {
++  "item uid": "itemUid",
++  "order line id": "orderLineId",
+   "item name":            "name",
+   "status":               "status",
+   "publisher":            "publisher",
+@@ -324,6 +326,7 @@ function onEdit(e) {
+ 
+   try {
+     var COL     = _resolveColumns(sheet);
++    if (typeof _w1ExternalEdit_ === "function" && _w1ExternalEdit_(e)) return;
+     var lastRow = sheet.getLastRow();
+     if (lastRow < 3) { _isEditRunning = false; return; }
+ 
+@@ -1185,6 +1188,7 @@ function sp2Layout() {
+ // ============================================================
+ function _sp2ApplyCore(dryRun, mode, sheetName) {
+   var t = _sp2Sheet(sheetName), sheet = t.sheet;
++  if(!dryRun && typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet);
+   var COL = _resolveColumns(sheet);
+   if (!COL.price || !COL.suggested) throw new Error("Columns Price / Suggested Price not found");
+ 
+@@ -1308,6 +1312,7 @@ function _sp2FlagsFromName(name) {
+ 
+ function _sp2MigrateFlagsCore(dryRun, sheetName) {
+   var t = _sp2Sheet(sheetName), sheet = t.sheet;
++  if(!dryRun && typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet);
+   var COL = _resolveColumns(sheet);
+   if (!COL.copyFlags) throw new Error("Column Copy Flags not found — run SP-2 Setup first");
+ 
+@@ -1593,6 +1598,7 @@ function _sp2SuspectAuctionCore(sheetName, dryRun, ratioOverride) {
+   out.found.sort(function (x, y) { return x.pct - y.pct; });
+ 
+   if (!dryRun && out.found.length) {
++    if (typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet);
+     var stRange = sheet.getRange(3, COL.status, data.length, 1);
+     var st = stRange.getValues();
+     var sd = COL.soldDate ? sheet.getRange(3, COL.soldDate, data.length, 1).getValues() : null;
+@@ -2019,7 +2025,8 @@ function _natCmp(a, b) {
+ // ============================================================
+ // [I] sortInventory — v17: + repaint REVIEW after the sort
+ // ============================================================
+-function sortInventory() {
++function sortInventory() { return _withLock(function(){ if(typeof _w1TechnicalGate_ === "function") _w1TechnicalGate_(""); return sortInventoryCore_(); }); }
++function sortInventoryCore_() {
+   var sheet     = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+   var sheetName = sheet.getName();
+   if (sheetName !== GGB_SHEET && sheetName !== MAG_SHEET) return;
+@@ -2261,13 +2268,15 @@ function addInventoryRow(data) {
+ // keys on Cloudflare R2 (library/<Product ID>/1.jpg) stay valid. Only rows with
+ // an empty Product ID get a new number, continuing from the highest number
+ // already used in that category letter.
+-function regenerateAllSKUs() {
++function regenerateAllSKUs() { if(typeof _w1TechnicalGate_ === "function") _w1TechnicalGate_(""); return regenerateAllSKUsCore_(); }
++function regenerateAllSKUsCore_() {
+   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+   var sheetName = sheet.getName();
+   if (sheetName !== GGB_SHEET && sheetName !== MAG_SHEET) {
+     SpreadsheetApp.getUi().alert("Open the GAME GUIDE BOOKS or MAGAZINE sheet first.");
+     return;
+   }
++  if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet);
+   var COL = _resolveColumns(sheet);
+   if (!COL.productId) { SpreadsheetApp.getUi().alert("Column 'Product ID' not found."); return; }
+ 
+@@ -2318,7 +2327,7 @@ function regenerateAllSKUs() {
+   }
+ 
+   if (!minted) { ui.alert("Product ID", "Every row already has an ID. Nothing to do.", ui.ButtonSet.OK); return; }
+-  _tryWrite("fill Product ID", function () { sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut); });
++  _withLock(function(){ if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet); if(typeof _w1Write_ === "function") _w1Write_("fill Product ID",function(){sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut);}); else _tryWrite("fill Product ID", function () { sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut); }); });
+   ui.alert("Product ID", "Done for " + sheetName + ".\n\nKept: " + kept + " existing IDs\nCreated: " + minted + " new IDs", ui.ButtonSet.OK);
+ }
+ 
+@@ -2326,13 +2335,15 @@ function regenerateAllSKUs() {
+ // are already in use, which breaks the R2 image keys built from them. After
+ // running this you MUST re-export the sheet, rebuild the image staging folder
+ // and re-run "rclone sync" so the images follow their new IDs.
+-function forceRegenerateAllSKUs() {
++function forceRegenerateAllSKUs() { if(typeof _w1TechnicalGate_ === "function") _w1TechnicalGate_(""); return forceRegenerateAllSKUsCore_(); }
++function forceRegenerateAllSKUsCore_() {
+   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+   var sheetName = sheet.getName();
+   if (sheetName !== GGB_SHEET && sheetName !== MAG_SHEET) {
+     SpreadsheetApp.getUi().alert("Open the GAME GUIDE BOOKS or MAGAZINE sheet first.");
+     return;
+   }
++  if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet);
+   var COL = _resolveColumns(sheet);
+   if (!COL.productId) { SpreadsheetApp.getUi().alert("Column 'Product ID' not found."); return; }
+ 
+@@ -2370,7 +2381,7 @@ function forceRegenerateAllSKUs() {
+     colOut.push([_composeSKU(catLetter, gameNumStr, pub, cond, title, prefix)]);
+   }
+ 
+-  _tryWrite("regen Product ID", function () { sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut); });
++  _withLock(function(){ if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet); if(typeof _w1Write_ === "function") _w1Write_("regen Product ID",function(){sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut);}); else _tryWrite("regen Product ID", function () { sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut); }); });
+   ui.alert("Product ID", "All Product IDs on " + sheetName + " have been rebuilt.", ui.ButtonSet.OK);
+ }
+ 
+@@ -2481,7 +2492,8 @@ function setupInstallableTrigger() {
+ // ============================================================
+ // [O] fixAllRestockTags
+ // ============================================================
+-function fixAllRestockTags() {
++function fixAllRestockTags() { if(typeof _w1TechnicalGate_ === "function") _w1TechnicalGate_(""); return fixAllRestockTagsCore_(); }
++function fixAllRestockTagsCore_() {
+   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+   var sheetName = sheet.getName();
+   if (sheetName !== GGB_SHEET && sheetName !== MAG_SHEET) {
+@@ -2489,6 +2501,7 @@ function fixAllRestockTags() {
+     return;
+   }
+ 
++  if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet);
+   var COL = _resolveColumns(sheet);
+   if (!COL.name) return;
+ 
+@@ -2525,7 +2538,7 @@ function fixAllRestockTags() {
+     updated.push([newTitle]);
+   }
+ 
+-  _tryWrite("fix RESTOCK names", function () { sheet.getRange(3, COL.name, updated.length, 1).setValues(updated); });
++  _withLock(function(){ if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet); if(typeof _w1Write_ === "function") _w1Write_("fix RESTOCK names",function(){sheet.getRange(3, COL.name, updated.length, 1).setValues(updated);}); else _tryWrite("fix RESTOCK names", function () { sheet.getRange(3, COL.name, updated.length, 1).setValues(updated); }); });
+   ui.alert("✅ RESTOCK tags renumbered.\n\n⚠️ Titles changed — run 'Fill missing Product IDs' afterwards.");
+ }
+ 

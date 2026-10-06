@@ -1,0 +1,42 @@
+diff --git a/04 Design Tools/logs/P1-20260929-13/p1-add-before.test.cjs b/04 Design Tools/logs/P1-20260929-01/p1-add.test.cjs
+index 633d07c..5142d6c 100644
+--- a/04 Design Tools/logs/P1-20260929-13/p1-add-before.test.cjs	
++++ b/04 Design Tools/logs/P1-20260929-01/p1-add.test.cjs	
+@@ -44,6 +44,9 @@ c._setDerivedFormulasForRow=()=>{};
+ c._readRow=(s,r,source)=>({source,productId:s.rows[r-1][1],name:s.rows[r-1][0],status:s.rows[r-1][2],suggested:300});
+ c._apiBookingMatch=()=>({matches:[]});
+ const add=(i,source='GGB',extra={})=>c._apiInvAdd({requestId:'p1-test-request-'+i,source,title:'Synthetic '+i,price:'0',...extra});
++const status=(i,source='GGB',extra={})=>c._apiInvAddStatus({requestId:'p1-test-request-'+i,source,title:'Synthetic '+i,price:'0',...extra});
++assert.equal(status('missing').state,'NOT_FOUND');
++assert.equal(rowsJ.length,1,'status lookup must not append a journal event');
+ for(const [field,bad] of [['original','1,2'],['cost','NOT_A_NUMBER'],['price','120abc'],['marketRef','Infinity']]){
+   const before=rowsJ.length;
+   assert.throws(()=>add('invalid-'+field,'GGB',{[field]:bad}),/must be a number/);
+@@ -58,6 +61,10 @@ assert.equal(rowsA.length,12);assert.equal(rowsB.length,12);
+ assert.equal(rowsJ.filter(r=>r[4]==='DONE').length,20);
+ assert.equal(shA.rows[2][12],0,'zero price must be preserved');
+ const replay=add(0);assert.equal(replay.item.productId,'TEST-1');assert.equal(rowsA.length,12);
++const beforeStatus=rowsJ.length, doneStatus=status(0);
++assert.equal(doneStatus.state,'DONE');assert.equal(doneStatus.data.item.productId,'TEST-1');
++assert.equal(rowsJ.length,beforeStatus,'DONE status lookup must be read-only');
++assert.throws(()=>status(0,'GGB',{title:'Changed'}),/different item data/);
+ assert.throws(()=>add(0,'GGB',{title:'Changed'}),/different item data/);
+ const explicit=add('explicit','GGB',{status:'Hold'});assert.equal(explicit.item.status,'Hold');
+ failure=(name,row,col)=>name==='GAME GUIDE BOOKS' && col===3 && row===14;
+@@ -67,6 +74,9 @@ failure=null;
+ assert.throws(()=>add('fail','GGB'),/recovery/);
+ assert.equal(rowsA.length,14,'failed request must not append a duplicate');
+ assert.equal(rowsJ.filter(r=>r[4]==='ERROR').length,2,'initial failure and blocked retry must both be logged');
++const beforeFailureStatus=rowsJ.length, failedStatus=status('fail');
++assert.equal(failedStatus.state,'ERROR');assert.equal(failedStatus.row,14);
++assert.equal(rowsJ.length,beforeFailureStatus,'ERROR status lookup must be read-only');
+ const beforeLogFailure=rowsA.length;
+ failure=(name,row,col,value)=>name==='ADD REQUESTS' && col===5 && value==='DONE';
+ assert.throws(()=>add('done-log-fail','GGB'),/recovery/);
+@@ -99,5 +109,5 @@ failure=null;
+ assert.equal(rowsA.length,beforeSilentDone+1,'business row exists after silent DONE result loss');
+ assert.throws(()=>add('silent-done','GGB'),/recovery/);
+ assert.equal(rowsA.length,beforeSilentDone+1,'retry after silent DONE failure must not duplicate row');
+-console.log('PASS: syntax, 20 Add calls, numeric validation, replay, partial/failed writes, silent inventory/PREPARED/DONE readback failures');
++console.log('PASS: syntax, 20 Add calls, read-only status lookup, numeric validation, replay, partial/failed writes, silent inventory/PREPARED/DONE readback failures');
+ 

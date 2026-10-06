@@ -1,0 +1,26 @@
+PASS Create -> Pending -> Cancel; no sale; replay; clear has no server effect
+PASS SHOP confirm snapshot prices, subsidy distinct, one line on timeout/retry
+PASS Two sessions/requests one copy one winner; independent Pending coexist
+PASS Reject unavailable, missing subsidy, malformed price, duplicate before mutation
+PASS Direct Shopee no business Pending; price round(entered*0.7-50)
+PASS UID survives sort/PID rename; source namespaces remain distinct
+PASS Duplicate UID/SKU rejected; manual edits and wrong revision do not get overwritten
+PASS All legacy writers/status edit fail closed; unauthorized rejected
+PASS Allocator includes ORDERS, SALES and intent and supports >99
+W1Orders.gs:194
+  catch(e){try{_w1Event_(req,'NEEDS_REVIEW',null,e.message);}catch(a){throw new Error('PARTIAL_AUDIT '+req.id+' '+e.message+'; '+a.message);}throw new Error('RECOVERY_REQUIRED '+req.id+' '+e.message);}
+                                                                                                                                             ^
+
+Error: RECOVERY_REQUIRED create-000000001 RECORD_CHANGED OWA-20261003-01-L1
+    at W1Orders.gs:194:148
+    at _withLock (Code_v32.gs:272:12)
+    at Object._w1Mutate_ (W1Orders.gs:189:9)
+    at create (C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:3:64)
+    at run (C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:18:359)
+    at C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:24:16
+    at test (C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:2:34)
+    at Object.<anonymous> (C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\W1-20261003-01\w1.test.cjs:16:1)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Object..js (node:internal/modules/cjs/loader:1943:10)
+
+Node.js v24.14.0

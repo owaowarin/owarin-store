@@ -1,0 +1,12 @@
+const fs=require('node:fs'),path=require('node:path'),w=require('./work.cjs');
+const prior=path.join(w.dir,'../W1-20261003-01/test-runtime');
+for(const name of ['Code.gs','Webapp.gs','Index.html','W1Orders.gs','W1Qa.gs','appsscript.json'])w.write('04 Design Tools/logs/W1-20261004-01/test-runtime/'+name,fs.readFileSync(path.join(prior,name)));
+let html=fs.readFileSync(path.join(prior,'Index.html'),'utf8');
+const controls=`<aside style="background:#fff3cd;color:#111;padding:8px"><strong>ISOLATED TEST QA — W1-20261004-01</strong>
+<button id="qaFixture">Prepare fixture once</button><button id="qaRecovery">Run recovery once</button><pre id="qaResult">QA idle; inspect Sheet before each run</pre></aside>
+<script>(function(){function run(name){document.getElementById('qaFixture').disabled=true;document.getElementById('qaRecovery').disabled=true;var out=document.getElementById('qaResult');out.textContent='RUNNING '+name+'; do not retry blindly';var r=google.script.run.withSuccessHandler(function(v){out.textContent='PASS '+v;}).withFailureHandler(function(e){out.textContent='ERROR '+e.message+'; inspect readback before retry';});if(name==='fixture')r.w1QaPrepare20261004();else r.w1QaRecovery20261004();}document.getElementById('qaFixture').onclick=function(){run('fixture');};document.getElementById('qaRecovery').onclick=function(){run('recovery');};})();</script>`;
+if(!html.includes('<body>'))throw Error('Body anchor');
+w.write('04 Design Tools/logs/W1-20261004-01/test-runtime/Index.html',html.replace('<body>','<body>'+controls));
+let qa=fs.readFileSync(path.join(prior,'W1Qa.gs'),'utf8').replace("Logger.log('PASS W1 synthetic fixture ready; no shop data copied');","Logger.log('PASS W1 synthetic fixture ready; no shop data copied');return 'Fixture ready: eight synthetic copies; exact test Sheet';").replace("Logger.log('PASS W1 real-Google partial Hold/SALES recovery '+sold.orderId+'; exact Request IDs '+p.requestId+' / '+confirm.requestId);","Logger.log('PASS W1 real-Google partial Hold/SALES recovery '+sold.orderId+'; exact Request IDs '+p.requestId+' / '+confirm.requestId);return 'Partial Hold + SALES recovery '+sold.orderId+'; same-ID confirm replay verified';");
+new(require('node:vm').Script)(qa);w.write('04 Design Tools/logs/W1-20261004-01/test-runtime/W1Qa.gs',qa);
+w.log('QA-UI-01','Stage test-only two-button harness','Syntax PASS; candidate business files unchanged; helper exact Sheet/owner/one-shot guards retained');

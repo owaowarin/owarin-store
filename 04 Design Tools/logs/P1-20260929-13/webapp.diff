@@ -1,0 +1,78 @@
+diff --git a/04 Design Tools/logs/P1-20260929-13/candidate-webapp-before.gs b/04 Design Tools/logs/P1-20260929-01/candidate/webapp.gs
+index 4e5e9bc..f6f9c04 100644
+--- a/04 Design Tools/logs/P1-20260929-13/candidate-webapp-before.gs	
++++ b/04 Design Tools/logs/P1-20260929-01/candidate/webapp.gs	
+@@ -38,6 +38,7 @@ function _route(action, p) {
+     case "inventory.bootstrap":   return _invBootstrap();
+     case "inventory.list":        return _readInventory(_sheetFromCode(p.source));
+     case "inventory.add":         return _apiInvAdd(p);
++    case "inventory.addStatus":   return _apiInvAddStatus(p);
+     case "inventory.update":      return _apiInvUpdate(p);
+     case "inventory.markSold":    return _apiMarkSold(p);
+     case "sales.confirm":         return _apiSalesConfirm(p);
+@@ -180,12 +181,12 @@ function _addNumber(v, field) {
+ // ── WRITE: ADD ──
+ // Uses addInventoryRow from Code.gs (lock + SP-2 + Listed Date all included)
+ // then fills the fields the old sidebar did not have (platform / genre), header-driven
+-function _apiInvAdd(p) {
++function _apiInvAddData(p) {
+   var title = String(p.title || "").trim();
+   if (!title) throw new Error("Please enter a product title");
+ 
+   var sheetName = _sheetFromCode(p.source);
+-  var res = addInventoryRow({
++  return {
+     requestId: String(p.requestId || '').trim(),
+     sheetName: sheetName,
+     title:    title,
+@@ -204,8 +205,15 @@ function _apiInvAdd(p) {
+     rarity:    String(p.rarity    || "").trim(),
+     marketRef: _addNumber(p.marketRef, 'Market Ref'),
+     refNote:   String(p.refNote   || "").trim()
+-  });
++  };
++}
+ 
++function _apiInvAdd(p) {
++  var data = _apiInvAddData(p);
++  return _apiInvAddResult(addInventoryRow(data), data.sheetName);
++}
++
++function _apiInvAddResult(res, sheetName) {
+   var sheet = _getSheetOrThrow(sheetName);
+   var itemRow = _findRowBySku(sheet, _resolveColumns(sheet), res.sku);
+   var item = _readRow(sheet, itemRow, _srcCode(sheetName));
+@@ -215,6 +223,33 @@ function _apiInvAdd(p) {
+   return { result: res, item: item, bookingMatches: matches };
+ }
+ 
++function _apiInvAddStatus(p) {
++  var data = _apiInvAddData(p);
++  var id = data.requestId;
++  if (!/^[A-Za-z0-9_-]{12,100}$/.test(id)) throw new Error('Valid Add Request ID required');
++  var hash = _addRequestHash(data);
++  var status = _withLock(function () {
++    var journal = _addRequestSheet(SpreadsheetApp.getActiveSpreadsheet());
++    var last = journal.getLastRow();
++    if (last < 2) return { state: 'NOT_FOUND' };
++    var events = journal.getRange(2, 1, last - 1, 17).getValues();
++    var prior = null;
++    for (var i = 0; i < events.length; i++) if (String(events[i][2]) === id) prior = events[i];
++    if (!prior) return { state: 'NOT_FOUND' };
++    if (prior[9] !== hash) throw new Error('Add Request ID was already used with different item data');
++    if (prior[4] !== 'DONE') return { state: String(prior[4] || 'UNKNOWN'), row: prior[10],
++                                   sku: String(prior[11] || ''), error: String(prior[14] || '') };
++    var result;
++    try { result = JSON.parse(prior[15]); } catch (e) {}
++    if (!result || result.success !== true || result.sku !== prior[11] ||
++        Number(result.row) !== Number(prior[10]))
++      throw new Error('Add DONE result requires recovery; Request ID ' + id);
++    return { state: 'DONE', result: result };
++  });
++  if (status.state === 'DONE') return { state: 'DONE', data: _apiInvAddResult(status.result, data.sheetName) };
++  return status;
++}
++
+ // ── WRITE: UPDATE (edit a row) ──
+ // payload: { source, sku, changes: {name?, status?, publisher?, platform?, genre?,
+ //            condition?, original?, cost?, price?} }

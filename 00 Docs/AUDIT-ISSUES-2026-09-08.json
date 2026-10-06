@@ -1,0 +1,5944 @@
+{
+  "audited_date": "2026-09-08",
+  "timezone": "Asia/Bangkok",
+  "spreadsheet_id": "16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0",
+  "scope": "Read-only live Sheets audit; issues can overlap; missing dates are historical completeness gaps, not proven application failures. Image checks cover index presence, not live object accessibility.",
+  "issues": [
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 8,
+      "product_id": "OWA-GGBA004TBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 9,
+      "product_id": "OWA-GGBA004TBAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 10,
+      "product_id": "OWA-GGBA016INAN00",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 23,
+      "product_id": "OWA-GGBA014YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 26,
+      "product_id": "OWA-GGBA015YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 29,
+      "product_id": "OWA-GGBB003SBSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 32,
+      "product_id": "OWA-GGBB005YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 33,
+      "product_id": "OWA-GGBB005YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 38,
+      "product_id": "OWA-GGBB008BRAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 39,
+      "product_id": "OWA-GGBB008BRAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 40,
+      "product_id": "OWA-GGBB008BRAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 41,
+      "product_id": "OWA-GGBB008BRAR04",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 42,
+      "product_id": "OWA-GGBB008BRCR05",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 43,
+      "product_id": "OWA-GGBB008BRAR06",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 45,
+      "product_id": "OWA-GGBB008BRAR08",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 47,
+      "product_id": "OWA-GGBB010TBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 48,
+      "product_id": "OWA-GGBB010YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 50,
+      "product_id": "OWA-GGBB011YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 51,
+      "product_id": "OWA-GGBB011YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 53,
+      "product_id": "OWA-GGBB011YKAR03",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 54,
+      "product_id": "OWA-GGBB012YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 55,
+      "product_id": "OWA-GGBB012YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 56,
+      "product_id": "OWA-GGBB012YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 57,
+      "product_id": "OWA-GGBB012YKAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 58,
+      "product_id": "OWA-GGBB012YKAR04",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 59,
+      "product_id": "OWA-GGBB013YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 60,
+      "product_id": "OWA-GGBB013YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 70,
+      "product_id": "OWA-GGBB018YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 76,
+      "product_id": "OWA-GGBB021CTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 79,
+      "product_id": "OWA-GGBB024YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 80,
+      "product_id": "OWA-GGBB025YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 87,
+      "product_id": "OWA-GGBB028BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 90,
+      "product_id": "OWA-GGBB030YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 93,
+      "product_id": "OWA-GGBB031YKSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 99,
+      "product_id": "OWA-GGBC003YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 100,
+      "product_id": "OWA-GGBC003YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 104,
+      "product_id": "OWA-GGBC004BRAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 106,
+      "product_id": "OWA-GGBC005ZNAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 107,
+      "product_id": "OWA-GGBC005ZNAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 108,
+      "product_id": "OWA-GGBC005ZNAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 109,
+      "product_id": "OWA-GGBC005ZNAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 110,
+      "product_id": "OWA-GGBC005ZNAR04",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 111,
+      "product_id": "OWA-GGBC005ZNAR05",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 112,
+      "product_id": "OWA-GGBC005ZNAR06",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 114,
+      "product_id": "OWA-GGBC007YKCN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 118,
+      "product_id": "OWA-GGBC009GBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 119,
+      "product_id": "OWA-GGBC009YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 132,
+      "product_id": "OWA-GGBD001SBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 142,
+      "product_id": "OWA-GGBD011YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 145,
+      "product_id": "OWA-GGBD011YKAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 146,
+      "product_id": "OWA-GGBD011YKAR04",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 155,
+      "product_id": "OWA-GGBD015YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 161,
+      "product_id": "OWA-GGBD017FWAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 165,
+      "product_id": "OWA-GGBD019FGAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 168,
+      "product_id": "OWA-GGBD021BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 169,
+      "product_id": "OWA-GGBD021BRAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 170,
+      "product_id": "OWA-GGBD021BRAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 171,
+      "product_id": "OWA-GGBD021BRAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 172,
+      "product_id": "OWA-GGBD021BRAR04",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 173,
+      "product_id": "OWA-GGBD021BRAR05",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 174,
+      "product_id": "OWA-GGBD021BRAR06",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 175,
+      "product_id": "OWA-GGBD021BRAR07",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 176,
+      "product_id": "OWA-GGBD021BRSR08",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 177,
+      "product_id": "OWA-GGBD022FWAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 179,
+      "product_id": "OWA-GGBD023BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 180,
+      "product_id": "OWA-GGBD023BRAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 181,
+      "product_id": "OWA-GGBD023BRAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 182,
+      "product_id": "OWA-GGBD023BRAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 183,
+      "product_id": "OWA-GGBD023BRAR04",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 184,
+      "product_id": "OWA-GGBD024AN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 186,
+      "product_id": "OWA-GGBD025UKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 191,
+      "product_id": "OWA-GGBD028YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 192,
+      "product_id": "OWA-GGBD028YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 196,
+      "product_id": "OWA-GGBD029JGAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 197,
+      "product_id": "OWA-GGBD029YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 198,
+      "product_id": "OWA-GGBD029YKBR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 199,
+      "product_id": "OWA-GGBD029YKAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 205,
+      "product_id": "OWA-GGBD031INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 208,
+      "product_id": "OWA-GGBD034INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 209,
+      "product_id": "OWA-GGBD034INAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 210,
+      "product_id": "OWA-GGBD073SBAN00",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 212,
+      "product_id": "OWA-GGBD072FCDN00",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 213,
+      "product_id": "OWA-GGBD036AGSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 214,
+      "product_id": "OWA-GGBD071FCAN00",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 216,
+      "product_id": "OWA-GGBD038VLTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 217,
+      "product_id": "OWA-GGBD039VLTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 218,
+      "product_id": "OWA-GGBD040TBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 219,
+      "product_id": "OWA-GGBD040TBAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 220,
+      "product_id": "OWA-GGBD041INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 225,
+      "product_id": "OWA-GGBD042YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 230,
+      "product_id": "OWA-GGBD042MGAR05",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 231,
+      "product_id": "OWA-GGBD043PAGAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 233,
+      "product_id": "OWA-GGBD044JZAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 239,
+      "product_id": "OWA-GGBD044FWAR06",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 242,
+      "product_id": "OWA-GGBD046FWAR01",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 243,
+      "product_id": "OWA-GGBD047FWAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 244,
+      "product_id": "OWA-GGBD048ENAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 246,
+      "product_id": "OWA-GGBD050INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 247,
+      "product_id": "OWA-GGBD051YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 248,
+      "product_id": "OWA-GGBD052FWAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 250,
+      "product_id": "OWA-GGBD052FWAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 257,
+      "product_id": "OWA-GGBD055MLAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 258,
+      "product_id": "OWA-GGBD056YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 259,
+      "product_id": "OWA-GGBD056YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 260,
+      "product_id": "OWA-GGBD056GBAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 263,
+      "product_id": "OWA-GGBD058INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 264,
+      "product_id": "OWA-GGBD059YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 276,
+      "product_id": "OWA-GGBD066YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 277,
+      "product_id": "OWA-GGBD066YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 280,
+      "product_id": "OWA-GGBD069YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 285,
+      "product_id": "OWA-GGBF001FWAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 289,
+      "product_id": "OWA-GGBF003YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 294,
+      "product_id": "OWA-GGBF005YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 301,
+      "product_id": "OWA-GGBF007GBPAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 303,
+      "product_id": "OWA-GGBF008YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 305,
+      "product_id": "OWA-GGBF009YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 307,
+      "product_id": "OWA-GGBF010YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 308,
+      "product_id": "OWA-GGBF011PGKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 309,
+      "product_id": "OWA-GGBF012YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 310,
+      "product_id": "OWA-GGBF013BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 313,
+      "product_id": "OWA-GGBF013BRAR03",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 314,
+      "product_id": "OWA-GGBF014YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 316,
+      "product_id": "OWA-GGBF014YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 318,
+      "product_id": "OWA-GGBF015INAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 319,
+      "product_id": "OWA-GGBF015TBAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 320,
+      "product_id": "OWA-GGBF015ZNAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 328,
+      "product_id": "OWA-GGBF015TBAR12",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 331,
+      "product_id": "OWA-GGBF017UKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 332,
+      "product_id": "OWA-GGBF017UKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 333,
+      "product_id": "OWA-GGBF017UKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 334,
+      "product_id": "OWA-GGBF017YKAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 335,
+      "product_id": "OWA-GGBF017GSAR04",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 336,
+      "product_id": "OWA-GGBF017UKAR05",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 345,
+      "product_id": "OWA-GGBF017TBDR14",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 346,
+      "product_id": "OWA-GGBF018YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 347,
+      "product_id": "OWA-GGBF018CTAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 348,
+      "product_id": "OWA-GGBF018CTAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 349,
+      "product_id": "OWA-GGBF018JGAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 353,
+      "product_id": "OWA-GGBF055JGAN00",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 355,
+      "product_id": "OWA-GGBF020YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 356,
+      "product_id": "OWA-GGBF020YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 360,
+      "product_id": "OWA-GGBF021YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 361,
+      "product_id": "OWA-GGBF021YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 362,
+      "product_id": "OWA-GGBF021BRAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 368,
+      "product_id": "OWA-GGBF023YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 369,
+      "product_id": "OWA-GGBF023YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 370,
+      "product_id": "OWA-GGBF024YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 372,
+      "product_id": "OWA-GGBF024YKAR02",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 373,
+      "product_id": "OWA-GGBF025AN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 380,
+      "product_id": "OWA-GGBF028AN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 384,
+      "product_id": "OWA-GGBF029BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 388,
+      "product_id": "OWA-GGBF031INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 389,
+      "product_id": "OWA-GGBF031INAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 391,
+      "product_id": "OWA-GGBF031TBAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 394,
+      "product_id": "OWA-GGBF033GBPAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 402,
+      "product_id": "OWA-GGBF036YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 403,
+      "product_id": "OWA-GGBF036YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 405,
+      "product_id": "OWA-GGBF036YKAR03",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 408,
+      "product_id": "OWA-GGBF038GBPCN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 414,
+      "product_id": "OWA-GGBF039CTAR05",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 415,
+      "product_id": "OWA-GGBF040YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 418,
+      "product_id": "OWA-GGBF041YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 419,
+      "product_id": "OWA-GGBF041YKAR01",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 420,
+      "product_id": "OWA-GGBF042YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 429,
+      "product_id": "OWA-GGBF049CTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 430,
+      "product_id": "OWA-GGBF049CTAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 431,
+      "product_id": "OWA-GGBF049GBAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 434,
+      "product_id": "OWA-GGBF050BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 435,
+      "product_id": "OWA-GGBF050CTAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 458,
+      "product_id": "OWA-GGBG014GMSAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 463,
+      "product_id": "OWA-GGBG017GMSAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 467,
+      "product_id": "OWA-GGBG019GMSAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 490,
+      "product_id": "OWA-GGBG035GMSAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 491,
+      "product_id": "OWA-GGBG036GMSAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 500,
+      "product_id": "OWA-GGBG040GMSAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 501,
+      "product_id": "OWA-GGBG040GMSAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 508,
+      "product_id": "OWA-GGBG044GMSAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 528,
+      "product_id": "OWA-GGBG060GMSAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 529,
+      "product_id": "OWA-GGBG061GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 530,
+      "product_id": "OWA-GGBG061GMAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 531,
+      "product_id": "OWA-GGBG062GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 541,
+      "product_id": "OWA-GGBG069GMCN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 542,
+      "product_id": "OWA-GGBG070GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 544,
+      "product_id": "OWA-GGBG071GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 547,
+      "product_id": "OWA-GGBG074GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 548,
+      "product_id": "OWA-GGBG074GMAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 549,
+      "product_id": "OWA-GGBG075GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 550,
+      "product_id": "OWA-GGBG076GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 551,
+      "product_id": "OWA-GGBG077GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 552,
+      "product_id": "OWA-GGBG078GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 553,
+      "product_id": "OWA-GGBG079GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 554,
+      "product_id": "OWA-GGBG079GMAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 558,
+      "product_id": "OWA-GGBG082GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 560,
+      "product_id": "OWA-GGBG084GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 563,
+      "product_id": "OWA-GGBG087GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 566,
+      "product_id": "OWA-GGBG088GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 569,
+      "product_id": "OWA-GGBG089GMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 595,
+      "product_id": "OWA-GGBG107BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 597,
+      "product_id": "OWA-GGBG108YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 599,
+      "product_id": "OWA-GGBG110INSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 603,
+      "product_id": "OWA-GGBG114YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 605,
+      "product_id": "OWA-GGBG115YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 610,
+      "product_id": "OWA-GGBG117SPAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 615,
+      "product_id": "OWA-GGBG120YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 618,
+      "product_id": "OWA-GGBG121YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 623,
+      "product_id": "OWA-GGBG121YKSR05",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 624,
+      "product_id": "OWA-GGBG122YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 625,
+      "product_id": "OWA-GGBG122YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 626,
+      "product_id": "OWA-GGBG122YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 630,
+      "product_id": "OWA-GGBG123YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 633,
+      "product_id": "OWA-GGBG124YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 635,
+      "product_id": "OWA-GGBG126INDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 637,
+      "product_id": "OWA-GGBG128BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 640,
+      "product_id": "OWA-GGBG129YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 641,
+      "product_id": "OWA-GGBG129YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 643,
+      "product_id": "OWA-GGBG131YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 646,
+      "product_id": "OWA-GGBG132YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 647,
+      "product_id": "OWA-GGBG132YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 649,
+      "product_id": "OWA-GGBG133YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 650,
+      "product_id": "OWA-GGBG133YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 655,
+      "product_id": "OWA-GGBH001INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 657,
+      "product_id": "OWA-GGBH001INAR02",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 661,
+      "product_id": "OWA-GGBH005MGAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 673,
+      "product_id": "OWA-GGBH015VGMAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 674,
+      "product_id": "OWA-GGBH015JGAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 675,
+      "product_id": "OWA-GGBH015YKAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 676,
+      "product_id": "OWA-GGBH015VGMAR04",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 677,
+      "product_id": "OWA-GGBH015VGMAR05",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 678,
+      "product_id": "OWA-GGBH015VGMAR06",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 682,
+      "product_id": "OWA-GGBH016GBPAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 683,
+      "product_id": "OWA-GGBH017YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 684,
+      "product_id": "OWA-GGBH018YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 685,
+      "product_id": "OWA-GGBH019JGAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 686,
+      "product_id": "OWA-GGBH019YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 687,
+      "product_id": "OWA-GGBH019YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 688,
+      "product_id": "OWA-GGBH019YKCR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 689,
+      "product_id": "OWA-GGBH019YKAR04",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 690,
+      "product_id": "OWA-GGBH019JGAR05",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 691,
+      "product_id": "OWA-GGBH019YKAR06",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 693,
+      "product_id": "OWA-GGBH019JGAR08",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 695,
+      "product_id": "OWA-GGBH020BMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 696,
+      "product_id": "OWA-GGBH020MGAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 697,
+      "product_id": "OWA-GGBH020BMAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 698,
+      "product_id": "OWA-GGBH020MGAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 699,
+      "product_id": "OWA-GGBH020MGAR04",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 701,
+      "product_id": "OWA-GGBH021YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 704,
+      "product_id": "OWA-GGBH021YKAR03",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 706,
+      "product_id": "OWA-GGBH023YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 708,
+      "product_id": "OWA-GGBH024FWAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 709,
+      "product_id": "OWA-GGBH024FWAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 712,
+      "product_id": "OWA-GGBH025YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 713,
+      "product_id": "OWA-GGBH026YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 720,
+      "product_id": "OWA-GGBH031INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 722,
+      "product_id": "OWA-GGBI002INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 723,
+      "product_id": "OWA-GGBI003CTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 734,
+      "product_id": "OWA-GGBK006CTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 735,
+      "product_id": "OWA-GGBK007CTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 736,
+      "product_id": "OWA-GGBK007CTAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 738,
+      "product_id": "OWA-GGBK007CTAR03",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 739,
+      "product_id": "OWA-GGBK008CTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 746,
+      "product_id": "OWA-GGBK012YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 749,
+      "product_id": "OWA-GGBL002INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 751,
+      "product_id": "OWA-GGBL003BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 756,
+      "product_id": "OWA-GGBL006PSPAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 758,
+      "product_id": "OWA-GGBL008GBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 760,
+      "product_id": "OWA-GGBL009GBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 764,
+      "product_id": "OWA-GGBL019INAN00",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 773,
+      "product_id": "OWA-GGBL020YKAN00",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 774,
+      "product_id": "OWA-GGBL017YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 786,
+      "product_id": "OWA-GGBM008INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 788,
+      "product_id": "OWA-GGBM009YKAR01",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 789,
+      "product_id": "OWA-GGBM046YKAN00",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 800,
+      "product_id": "OWA-GGBM018YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 801,
+      "product_id": "OWA-GGBM047BRAN00",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 803,
+      "product_id": "OWA-GGBM020INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 809,
+      "product_id": "OWA-GGBM025BRBN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 810,
+      "product_id": "OWA-GGBM026BRBN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 811,
+      "product_id": "OWA-GGBM027YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 812,
+      "product_id": "OWA-GGBM027YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 813,
+      "product_id": "OWA-GGBM027YKAR02",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 818,
+      "product_id": "OWA-GGBM029VTGAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 821,
+      "product_id": "OWA-GGBM030YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 822,
+      "product_id": "OWA-GGBM030MGAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 823,
+      "product_id": "OWA-GGBM030EGAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 824,
+      "product_id": "OWA-GGBM030YKAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 830,
+      "product_id": "OWA-GGBM033SBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 833,
+      "product_id": "OWA-GGBM036YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 834,
+      "product_id": "OWA-GGBM037YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 836,
+      "product_id": "OWA-GGBM038YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 837,
+      "product_id": "OWA-GGBM038YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 838,
+      "product_id": "OWA-GGBM038YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 841,
+      "product_id": "OWA-GGBM039YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 844,
+      "product_id": "OWA-GGBM041GPAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 845,
+      "product_id": "OWA-GGBM042TBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 849,
+      "product_id": "OWA-GGBM045BRSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 864,
+      "product_id": "OWA-GGBO001YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 867,
+      "product_id": "OWA-GGBO002INSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 871,
+      "product_id": "OWA-GGBO003INAR01",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 875,
+      "product_id": "OWA-GGBO006CTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 878,
+      "product_id": "OWA-GGBO008YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 883,
+      "product_id": "OWA-GGBO009YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 884,
+      "product_id": "OWA-GGBO009YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 885,
+      "product_id": "OWA-GGBO009YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 889,
+      "product_id": "OWA-GGBO009YKR06",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 890,
+      "product_id": "OWA-GGBO010YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 892,
+      "product_id": "OWA-GGBO010YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 896,
+      "product_id": "OWA-GGBO012BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 897,
+      "product_id": "OWA-GGBO012YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 898,
+      "product_id": "OWA-GGBO012YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 901,
+      "product_id": "OWA-GGBO012YKAR05",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 904,
+      "product_id": "OWA-GGBP002VTGAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 905,
+      "product_id": "OWA-GGBP002VTGAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 908,
+      "product_id": "OWA-GGBP003YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 909,
+      "product_id": "OWA-GGBP003YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 910,
+      "product_id": "OWA-GGBP003YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 927,
+      "product_id": "OWA-GGBP011YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 928,
+      "product_id": "OWA-GGBP011YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 931,
+      "product_id": "OWA-GGBP014GBPAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 932,
+      "product_id": "OWA-GGBP014YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 934,
+      "product_id": "OWA-GGBP014GBPAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 935,
+      "product_id": "OWA-GGBP014YKAR04",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 936,
+      "product_id": "OWA-GGBP015YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 937,
+      "product_id": "OWA-GGBP015YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 938,
+      "product_id": "OWA-GGBP015YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 939,
+      "product_id": "OWA-GGBP015GBPAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 940,
+      "product_id": "OWA-GGBP016INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 941,
+      "product_id": "OWA-GGBP016INAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 942,
+      "product_id": "OWA-GGBP016INAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 943,
+      "product_id": "OWA-GGBP016GGAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 944,
+      "product_id": "OWA-GGBP016GBPAR04",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 945,
+      "product_id": "OWA-GGBP017GBPAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 948,
+      "product_id": "OWA-GGBP018BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 949,
+      "product_id": "OWA-GGBP019DSPAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 950,
+      "product_id": "OWA-GGBP020ENAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 951,
+      "product_id": "OWA-GGBP020YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 952,
+      "product_id": "OWA-GGBP020ENAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 953,
+      "product_id": "OWA-GGBP020GBPCR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 954,
+      "product_id": "OWA-GGBP020YKAR04",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 955,
+      "product_id": "OWA-GGBP020YKAR05",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 957,
+      "product_id": "OWA-GGBP021INAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 963,
+      "product_id": "OWA-GGBP026YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 967,
+      "product_id": "OWA-GGBP027YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 968,
+      "product_id": "OWA-GGBP027YKCR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 972,
+      "product_id": "OWA-GGBP029YKSR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 980,
+      "product_id": "OWA-GGBR002FWAR04",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 981,
+      "product_id": "OWA-GGBR003FGAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 983,
+      "product_id": "OWA-GGBR004BRAR01",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 984,
+      "product_id": "OWA-GGBR005GSAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 986,
+      "product_id": "OWA-GGBR007YKSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 989,
+      "product_id": "OWA-GGBR034FCCN00",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 990,
+      "product_id": "OWA-GGBR009ZNAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 991,
+      "product_id": "OWA-GGBR010YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 992,
+      "product_id": "OWA-GGBR010YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 996,
+      "product_id": "OWA-GGBR011YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1000,
+      "product_id": "OWA-GGBR012YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1001,
+      "product_id": "OWA-GGBR013CTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1010,
+      "product_id": "OWA-GGBR036YKAN00",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1011,
+      "product_id": "OWA-GGBR017FGAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1013,
+      "product_id": "OWA-GGBR019GBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1015,
+      "product_id": "OWA-GGBR020ZNAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1016,
+      "product_id": "OWA-GGBR021YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1020,
+      "product_id": "OWA-GGBR022INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1026,
+      "product_id": "OWA-GGBR025BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1031,
+      "product_id": "OWA-GGBR027FWAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1034,
+      "product_id": "OWA-GGBR035YKAN00",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1035,
+      "product_id": "OWA-GGBR029YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1036,
+      "product_id": "OWA-GGBR030YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1039,
+      "product_id": "OWA-GGBR032FWSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1042,
+      "product_id": "OWA-GGBR033INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1046,
+      "product_id": "OWA-GGBS001TBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1048,
+      "product_id": "OWA-GGBS002BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1056,
+      "product_id": "OWA-GGBS007YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1058,
+      "product_id": "OWA-GGBS008YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1063,
+      "product_id": "OWA-GGBS012TBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1068,
+      "product_id": "OWA-GGBS015CTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1074,
+      "product_id": "OWA-GGBS020MGAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1076,
+      "product_id": "OWA-GGBS021YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1078,
+      "product_id": "OWA-GGBS022FWAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1079,
+      "product_id": "OWA-GGBS023FWAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1080,
+      "product_id": "OWA-GGBS023FWAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1094,
+      "product_id": "OWA-GGBS031INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1095,
+      "product_id": "OWA-GGBS031INAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1096,
+      "product_id": "OWA-GGBS031INBR02",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1097,
+      "product_id": "OWA-GGBS032INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1098,
+      "product_id": "OWA-GGBS032INAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1099,
+      "product_id": "OWA-GGBS032INAR02",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1101,
+      "product_id": "OWA-GGBS033BRAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1104,
+      "product_id": "OWA-GGBS036INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1105,
+      "product_id": "OWA-GGBS036INAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1107,
+      "product_id": "OWA-GGBS038CTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1110,
+      "product_id": "OWA-GGBS040YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1114,
+      "product_id": "OWA-GGBS042INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1118,
+      "product_id": "OWA-GGBS043YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1123,
+      "product_id": "OWA-GGBS044YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1124,
+      "product_id": "OWA-GGBS044YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1125,
+      "product_id": "OWA-GGBS044YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1133,
+      "product_id": "OWA-GGBS046YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1140,
+      "product_id": "OWA-GGBS050INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1145,
+      "product_id": "OWA-GGBS055VLTBN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1153,
+      "product_id": "OWA-GGBS059CTAR02",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1163,
+      "product_id": "OWA-GGBS068FWAR01",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1164,
+      "product_id": "OWA-GGBS069BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1165,
+      "product_id": "OWA-GGBS070FCSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1167,
+      "product_id": "OWA-GGBS072FWAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1171,
+      "product_id": "OWA-GGBS073CTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1173,
+      "product_id": "OWA-GGBS073CTAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1175,
+      "product_id": "OWA-GGBS074ALAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1177,
+      "product_id": "OWA-GGBS074CTAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1178,
+      "product_id": "OWA-GGBS074CTAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1179,
+      "product_id": "OWA-GGBS074ALAR04",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1182,
+      "product_id": "OWA-GGBS075DBAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1183,
+      "product_id": "OWA-GGBS075AR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1185,
+      "product_id": "OWA-GGBS076YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1186,
+      "product_id": "OWA-GGBS076YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1187,
+      "product_id": "OWA-GGBS076PGKCR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1190,
+      "product_id": "OWA-GGBS077YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1192,
+      "product_id": "OWA-GGBS077YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1193,
+      "product_id": "OWA-GGBS078BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1195,
+      "product_id": "OWA-GGBS079YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1202,
+      "product_id": "OWA-GGBS083INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1206,
+      "product_id": "OWA-GGBS086FGBR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1210,
+      "product_id": "OWA-GGBT001BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1212,
+      "product_id": "OWA-GGBT001BRAR02",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1213,
+      "product_id": "OWA-GGBT002TBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1216,
+      "product_id": "OWA-GGBT002YKAR03",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1222,
+      "product_id": "OWA-GGBT003INAR05",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1225,
+      "product_id": "OWA-GGBT005YKCR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1227,
+      "product_id": "OWA-GGBT006YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1229,
+      "product_id": "OWA-GGBT006YKAR02",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1230,
+      "product_id": "OWA-GGBT007BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1232,
+      "product_id": "OWA-GGBT008YKR01",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1233,
+      "product_id": "OWA-GGBT009YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1236,
+      "product_id": "OWA-GGBT009YKAR03",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1240,
+      "product_id": "OWA-GGBT010YKAR03",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1241,
+      "product_id": "OWA-GGBT052INSN00",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1243,
+      "product_id": "OWA-GGBT011YKAR01",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1261,
+      "product_id": "OWA-GGBT025FWAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1262,
+      "product_id": "OWA-GGBT025FWAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1267,
+      "product_id": "OWA-GGBT026YKAR04",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1276,
+      "product_id": "OWA-GGBT034NTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1277,
+      "product_id": "OWA-GGBT035PSAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1279,
+      "product_id": "OWA-GGBT037TBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1291,
+      "product_id": "OWA-GGBT048PSPAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1297,
+      "product_id": "OWA-GGBV001YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1298,
+      "product_id": "OWA-GGBV001YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1304,
+      "product_id": "OWA-GGBV003YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1311,
+      "product_id": "OWA-GGBV004FWSR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1314,
+      "product_id": "OWA-GGBV005YKSR01",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1316,
+      "product_id": "OWA-GGBV006FWAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1322,
+      "product_id": "OWA-GGBW001YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1324,
+      "product_id": "OWA-GGBW002YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1325,
+      "product_id": "OWA-GGBW002YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1326,
+      "product_id": "OWA-GGBW003TBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1330,
+      "product_id": "OWA-GGBW005CTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1333,
+      "product_id": "OWA-GGBW006CTAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1336,
+      "product_id": "OWA-GGBW007CTSR01",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1347,
+      "product_id": "OWA-GGBX005BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1352,
+      "product_id": "OWA-GGBX005INAR05",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1353,
+      "product_id": "OWA-GGBX006MGAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1355,
+      "product_id": "OWA-GGBX007INAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1359,
+      "product_id": "OWA-GGBY001YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "missing_status",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1365,
+      "product_id": "OWA-GGBY004YKAR01",
+      "detail": "Status is blank"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1370,
+      "product_id": "OWA-GGBY007YKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1375,
+      "product_id": "OWA-GGBY011YKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1376,
+      "product_id": "OWA-GGBY011YKAR02",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1377,
+      "product_id": "OWA-GGBY011YKAR03",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1384,
+      "product_id": "OWA-GGBY015BRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1385,
+      "product_id": "OWA-GGBZ001PCRAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1387,
+      "product_id": "OWA-GGBZ002ZNAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1390,
+      "product_id": "OWA-GGBT051GBAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1391,
+      "product_id": "OWA-GGBS089YKAN00",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1392,
+      "product_id": "OWA-GGBD021BRAR09",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1393,
+      "product_id": "OWA-GGBF023YKAR02",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1394,
+      "product_id": "OWA-GGBS090BRAN00",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1395,
+      "product_id": "OWA-GGBJ001YKAR01",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1396,
+      "product_id": "OWA-GGBY017YKAN00",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1397,
+      "product_id": "OWA-GGBV006FWAR02",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1398,
+      "product_id": "OWA-GGBF056CTAN00",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1399,
+      "product_id": "OWA-GGBD037YKAR01",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1400,
+      "product_id": "OWA-GGBS091CTAN00",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1401,
+      "product_id": "OWA-GGBD074BRAN00",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1402,
+      "product_id": "OWA-GGBA015YKAR01",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1403,
+      "product_id": "OWA-GGBD028YKAR05",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1404,
+      "product_id": "OWA-GGBS092INAN00",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1405,
+      "product_id": "OWA-GGBD023BRAR05",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1406,
+      "product_id": "OWA-GGBS093AN00",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1407,
+      "product_id": "OWA-GGBS094AN00",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "instock_missing_valid_price",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1408,
+      "product_id": "OWA-GGBG073GMAR01",
+      "detail": "Price must be a positive number"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 3,
+      "product_id": "OWA-MAGA002AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 4,
+      "product_id": "OWA-MAGA003AMBN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 5,
+      "product_id": "OWA-MAGA004AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 7,
+      "product_id": "OWA-MAGA006AMBN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 8,
+      "product_id": "OWA-MAGA007AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 13,
+      "product_id": "OWA-MAGA012AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 19,
+      "product_id": "OWA-MAGA017AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 21,
+      "product_id": "OWA-MAGA018AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 22,
+      "product_id": "OWA-MAGA019AMBN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 23,
+      "product_id": "OWA-MAGA020AMBN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 25,
+      "product_id": "OWA-MAGA021AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 28,
+      "product_id": "OWA-MAGA023AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 29,
+      "product_id": "OWA-MAGA024AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 30,
+      "product_id": "OWA-MAGA025AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 32,
+      "product_id": "OWA-MAGA026AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 35,
+      "product_id": "OWA-MAGA029AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 74,
+      "product_id": "OWA-MAGD002KDKBN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 75,
+      "product_id": "OWA-MAGG037DEXSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 77,
+      "product_id": "OWA-MAGG039DEXAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 78,
+      "product_id": "OWA-MAGG040DEXSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 80,
+      "product_id": "OWA-MAGG042DEXSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 81,
+      "product_id": "OWA-MAGG043DEXAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 82,
+      "product_id": "OWA-MAGG044DEXSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 83,
+      "product_id": "OWA-MAGG045DEXAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 91,
+      "product_id": "OWA-MAGH019DEXAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 92,
+      "product_id": "OWA-MAGH020DEXBN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 94,
+      "product_id": "OWA-MAGH021DEXAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 109,
+      "product_id": "OWA-MAGH034DEXAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 114,
+      "product_id": "OWA-MAGH039DEXSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 117,
+      "product_id": "OWA-MAGH042DEXBN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 118,
+      "product_id": "OWA-MAGH043DEXAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 119,
+      "product_id": "OWA-MAGM356DEXSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 120,
+      "product_id": "OWA-MAGM357LPAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 125,
+      "product_id": "OWA-MAGH004AMCN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 156,
+      "product_id": "OWA-MAGH065AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 159,
+      "product_id": "OWA-MAGH068AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 161,
+      "product_id": "OWA-MAGH070AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 166,
+      "product_id": "OWA-MAGH074AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 167,
+      "product_id": "OWA-MAGH075AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 169,
+      "product_id": "OWA-MAGH076AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 170,
+      "product_id": "OWA-MAGH077AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 171,
+      "product_id": "OWA-MAGH078AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 172,
+      "product_id": "OWA-MAGH079AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 173,
+      "product_id": "OWA-MAGH080AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 174,
+      "product_id": "OWA-MAGH081AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 175,
+      "product_id": "OWA-MAGH082AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 176,
+      "product_id": "OWA-MAGH083AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 177,
+      "product_id": "OWA-MAGH084AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 178,
+      "product_id": "OWA-MAGH085AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 180,
+      "product_id": "OWA-MAGH087AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 181,
+      "product_id": "OWA-MAGH088AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 183,
+      "product_id": "OWA-MAGH090AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 184,
+      "product_id": "OWA-MAGH091AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 185,
+      "product_id": "OWA-MAGH092AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 186,
+      "product_id": "OWA-MAGH093AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 187,
+      "product_id": "OWA-MAGH094AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 188,
+      "product_id": "OWA-MAGH095AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 189,
+      "product_id": "OWA-MAGH096AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 190,
+      "product_id": "OWA-MAGH097AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 191,
+      "product_id": "OWA-MAGH098AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 192,
+      "product_id": "OWA-MAGH099AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 193,
+      "product_id": "OWA-MAGH100AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 194,
+      "product_id": "OWA-MAGH101AMBN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 195,
+      "product_id": "OWA-MAGH102AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 196,
+      "product_id": "OWA-MAGH103AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 197,
+      "product_id": "OWA-MAGH104AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 198,
+      "product_id": "OWA-MAGH105AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 199,
+      "product_id": "OWA-MAGH106AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 200,
+      "product_id": "OWA-MAGH107AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 201,
+      "product_id": "OWA-MAGH108AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 202,
+      "product_id": "OWA-MAGH109AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 203,
+      "product_id": "OWA-MAGH110AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 204,
+      "product_id": "OWA-MAGH111AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 205,
+      "product_id": "OWA-MAGH112AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 206,
+      "product_id": "OWA-MAGH113AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 207,
+      "product_id": "OWA-MAGH114AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 208,
+      "product_id": "OWA-MAGH115AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 209,
+      "product_id": "OWA-MAGH116AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 210,
+      "product_id": "OWA-MAGH117AMBN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 211,
+      "product_id": "OWA-MAGH118AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 212,
+      "product_id": "OWA-MAGH119AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 213,
+      "product_id": "OWA-MAGH120AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 214,
+      "product_id": "OWA-MAGH121AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 215,
+      "product_id": "OWA-MAGH122AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 216,
+      "product_id": "OWA-MAGH123AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 217,
+      "product_id": "OWA-MAGH124AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 218,
+      "product_id": "OWA-MAGH125AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 219,
+      "product_id": "OWA-MAGH126AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 220,
+      "product_id": "OWA-MAGH127AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 221,
+      "product_id": "OWA-MAGH128AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 222,
+      "product_id": "OWA-MAGH129AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 223,
+      "product_id": "OWA-MAGH130AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 224,
+      "product_id": "OWA-MAGH131AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 225,
+      "product_id": "OWA-MAGH132AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 226,
+      "product_id": "OWA-MAGH133AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 227,
+      "product_id": "OWA-MAGH134AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 228,
+      "product_id": "OWA-MAGH135AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 229,
+      "product_id": "OWA-MAGH136AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 230,
+      "product_id": "OWA-MAGH137AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 231,
+      "product_id": "OWA-MAGH138AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 232,
+      "product_id": "OWA-MAGH139AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 233,
+      "product_id": "OWA-MAGH140AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 234,
+      "product_id": "OWA-MAGH141AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 235,
+      "product_id": "OWA-MAGH142AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 236,
+      "product_id": "OWA-MAGH143AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 237,
+      "product_id": "OWA-MAGH144AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 238,
+      "product_id": "OWA-MAGH145AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 239,
+      "product_id": "OWA-MAGH146AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 240,
+      "product_id": "OWA-MAGH147AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 241,
+      "product_id": "OWA-MAGH148AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 242,
+      "product_id": "OWA-MAGH149AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 243,
+      "product_id": "OWA-MAGH150AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 244,
+      "product_id": "OWA-MAGH151AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 245,
+      "product_id": "OWA-MAGH152AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 246,
+      "product_id": "OWA-MAGH153AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 247,
+      "product_id": "OWA-MAGH154AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 248,
+      "product_id": "OWA-MAGH155AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 249,
+      "product_id": "OWA-MAGH156AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 250,
+      "product_id": "OWA-MAGH157AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 251,
+      "product_id": "OWA-MAGH158AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 252,
+      "product_id": "OWA-MAGH159AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 253,
+      "product_id": "OWA-MAGH160AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 254,
+      "product_id": "OWA-MAGH161AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 255,
+      "product_id": "OWA-MAGH162AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 256,
+      "product_id": "OWA-MAGH163AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 258,
+      "product_id": "OWA-MAGH164AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 260,
+      "product_id": "OWA-MAGH165AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 262,
+      "product_id": "OWA-MAGH166AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 265,
+      "product_id": "OWA-MAGH167AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 267,
+      "product_id": "OWA-MAGH168AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 269,
+      "product_id": "OWA-MAGH169AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 270,
+      "product_id": "OWA-MAGH170AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 271,
+      "product_id": "OWA-MAGH171AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 273,
+      "product_id": "OWA-MAGH172AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 275,
+      "product_id": "OWA-MAGH173AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 277,
+      "product_id": "OWA-MAGH174AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 279,
+      "product_id": "OWA-MAGH175AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 281,
+      "product_id": "OWA-MAGH176AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 283,
+      "product_id": "OWA-MAGH177AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 284,
+      "product_id": "OWA-MAGH178AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 286,
+      "product_id": "OWA-MAGH179AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 287,
+      "product_id": "OWA-MAGH180AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 288,
+      "product_id": "OWA-MAGH181AMDN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 289,
+      "product_id": "OWA-MAGH182AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 291,
+      "product_id": "OWA-MAGH183AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 292,
+      "product_id": "OWA-MAGH184AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 293,
+      "product_id": "OWA-MAGH185AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 294,
+      "product_id": "OWA-MAGH186AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 296,
+      "product_id": "OWA-MAGH187AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 298,
+      "product_id": "OWA-MAGH188AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 299,
+      "product_id": "OWA-MAGH189AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 300,
+      "product_id": "OWA-MAGH190AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 301,
+      "product_id": "OWA-MAGH191AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 303,
+      "product_id": "OWA-MAGH192AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 305,
+      "product_id": "OWA-MAGH193AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 307,
+      "product_id": "OWA-MAGH194AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 308,
+      "product_id": "OWA-MAGH195AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 309,
+      "product_id": "OWA-MAGH196AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 311,
+      "product_id": "OWA-MAGH197AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 312,
+      "product_id": "OWA-MAGH198AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 314,
+      "product_id": "OWA-MAGH199AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 315,
+      "product_id": "OWA-MAGH200AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 316,
+      "product_id": "OWA-MAGH201AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 319,
+      "product_id": "OWA-MAGH202AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 321,
+      "product_id": "OWA-MAGH203AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 322,
+      "product_id": "OWA-MAGH204AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 325,
+      "product_id": "OWA-MAGH206AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 326,
+      "product_id": "OWA-MAGH207AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 327,
+      "product_id": "OWA-MAGH208AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 329,
+      "product_id": "OWA-MAGH209AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 331,
+      "product_id": "OWA-MAGH210AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 332,
+      "product_id": "OWA-MAGH211AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 333,
+      "product_id": "OWA-MAGH212AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 337,
+      "product_id": "OWA-MAGH214AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 342,
+      "product_id": "OWA-MAGH215AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 344,
+      "product_id": "OWA-MAGH216AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 347,
+      "product_id": "OWA-MAGH217AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 349,
+      "product_id": "OWA-MAGH218AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 351,
+      "product_id": "OWA-MAGH219AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 353,
+      "product_id": "OWA-MAGH220AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 356,
+      "product_id": "OWA-MAGH222AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 358,
+      "product_id": "OWA-MAGH223AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 360,
+      "product_id": "OWA-MAGH224AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 362,
+      "product_id": "OWA-MAGH225AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 364,
+      "product_id": "OWA-MAGH226AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 366,
+      "product_id": "OWA-MAGH227AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 368,
+      "product_id": "OWA-MAGH228AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 370,
+      "product_id": "OWA-MAGH229AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 372,
+      "product_id": "OWA-MAGH230AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 374,
+      "product_id": "OWA-MAGH231AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 376,
+      "product_id": "OWA-MAGH232AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 378,
+      "product_id": "OWA-MAGH233AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 380,
+      "product_id": "OWA-MAGH234AMAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 381,
+      "product_id": "OWA-MAGH235AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 382,
+      "product_id": "OWA-MAGH236AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 383,
+      "product_id": "OWA-MAGH237AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 385,
+      "product_id": "OWA-MAGH238AMAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 386,
+      "product_id": "OWA-MAGH239AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 387,
+      "product_id": "OWA-MAGH240AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 388,
+      "product_id": "OWA-MAGH241AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 389,
+      "product_id": "OWA-MAGH241AMAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 390,
+      "product_id": "OWA-MAGH242AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 391,
+      "product_id": "OWA-MAGH243AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 392,
+      "product_id": "OWA-MAGH244AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 393,
+      "product_id": "OWA-MAGH245AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 394,
+      "product_id": "OWA-MAGH246AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 395,
+      "product_id": "OWA-MAGH247AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 396,
+      "product_id": "OWA-MAGH248AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 397,
+      "product_id": "OWA-MAGH249AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 398,
+      "product_id": "OWA-MAGM010VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 399,
+      "product_id": "OWA-MAGM011VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 400,
+      "product_id": "OWA-MAGM012VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 401,
+      "product_id": "OWA-MAGM013VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 402,
+      "product_id": "OWA-MAGM014VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 403,
+      "product_id": "OWA-MAGM015VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 404,
+      "product_id": "OWA-MAGM016VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 412,
+      "product_id": "OWA-MAGM024VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 446,
+      "product_id": "OWA-MAGM055VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 447,
+      "product_id": "OWA-MAGM056VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 477,
+      "product_id": "OWA-MAGM080VKCN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 479,
+      "product_id": "OWA-MAGM081VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 502,
+      "product_id": "OWA-MAGM097VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 505,
+      "product_id": "OWA-MAGM099VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 512,
+      "product_id": "OWA-MAGM104VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 521,
+      "product_id": "OWA-MAGM112VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 525,
+      "product_id": "OWA-MAGM114VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "duplicate_product_id",
+      "sheet": "MAGAZINE",
+      "row": 531,
+      "product_id": "OWA-MAGM117VKAR01",
+      "detail": "Product ID appears on multiple inventory rows"
+    },
+    {
+      "type": "duplicate_product_id",
+      "sheet": "MAGAZINE",
+      "row": 532,
+      "product_id": "OWA-MAGM117VKAR01",
+      "detail": "Product ID appears on multiple inventory rows"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 532,
+      "product_id": "OWA-MAGM117VKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 533,
+      "product_id": "OWA-MAGM119VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 546,
+      "product_id": "OWA-MAGM127VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 549,
+      "product_id": "OWA-MAGM128VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 558,
+      "product_id": "OWA-MAGM133VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 568,
+      "product_id": "OWA-MAGM140VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 569,
+      "product_id": "OWA-MAGM140VKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 570,
+      "product_id": "OWA-MAGM141VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 576,
+      "product_id": "OWA-MAGM147VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 578,
+      "product_id": "OWA-MAGM148VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 581,
+      "product_id": "OWA-MAGM150VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 584,
+      "product_id": "OWA-MAGM152VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 594,
+      "product_id": "OWA-MAGM159VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 595,
+      "product_id": "OWA-MAGM159VKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 597,
+      "product_id": "OWA-MAGM160VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 598,
+      "product_id": "OWA-MAGM160VKAR01",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 600,
+      "product_id": "OWA-MAGM162VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 603,
+      "product_id": "OWA-MAGM164VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 608,
+      "product_id": "OWA-MAGM167VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 613,
+      "product_id": "OWA-MAGM170VKAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 802,
+      "product_id": "OWA-MAGA001HAAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 804,
+      "product_id": "OWA-MAGH001DEXAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 806,
+      "product_id": "OWA-MAGM001DEXSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 807,
+      "product_id": "OWA-MAGM002TBPCN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 809,
+      "product_id": "OWA-MAGM004TBPCN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 813,
+      "product_id": "OWA-MAGM006TBPAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 814,
+      "product_id": "OWA-MAGM007TBPAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 817,
+      "product_id": "OWA-MAGS002DEXSN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 820,
+      "product_id": "OWA-MAGY001FGAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 821,
+      "product_id": "OWA-MAGY002FGAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "sold_missing_date",
+      "sheet": "MAGAZINE",
+      "row": 834,
+      "product_id": "OWA-MAGT011AMAN00",
+      "detail": "Historical sale date not recorded; do not invent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 98,
+      "product_id": "OWA-GGBC002GBPAR01",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 311,
+      "product_id": "OWA-GGBF013BRBR01",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 762,
+      "product_id": "OWA-GGBL018BRAN00",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1372,
+      "product_id": "OWA-GGBY016YKAN00",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1391,
+      "product_id": "OWA-GGBS089YKAN00",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1392,
+      "product_id": "OWA-GGBD021BRAR09",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1393,
+      "product_id": "OWA-GGBF023YKAR02",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1394,
+      "product_id": "OWA-GGBS090BRAN00",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1395,
+      "product_id": "OWA-GGBJ001YKAR01",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1396,
+      "product_id": "OWA-GGBY017YKAN00",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1397,
+      "product_id": "OWA-GGBV006FWAR02",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1398,
+      "product_id": "OWA-GGBF056CTAN00",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1399,
+      "product_id": "OWA-GGBD037YKAR01",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1400,
+      "product_id": "OWA-GGBS091CTAN00",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1401,
+      "product_id": "OWA-GGBD074BRAN00",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1402,
+      "product_id": "OWA-GGBA015YKAR01",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1403,
+      "product_id": "OWA-GGBD028YKAR05",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1404,
+      "product_id": "OWA-GGBS092INAN00",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1405,
+      "product_id": "OWA-GGBD023BRAR05",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1406,
+      "product_id": "OWA-GGBS093AN00",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1407,
+      "product_id": "OWA-GGBS094AN00",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "GAME GUIDE BOOKS",
+      "row": 1408,
+      "product_id": "OWA-GGBG073GMAR01",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "MAGAZINE",
+      "row": 531,
+      "product_id": "OWA-MAGM117VKAR01",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "instock_missing_image_index",
+      "sheet": "MAGAZINE",
+      "row": 839,
+      "product_id": "OWA-MAGT016AMAN00",
+      "detail": "Not in R2 IMAGES E:F; does not prove object is absent"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 11,
+      "product_id": "OWA-GGBB010YKBR02",
+      "detail": "Inventory status: Auction"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 11,
+      "product_id": "OWA-GGBB010YKBR02",
+      "detail": "Export: 260.00 THB; inventory Price: 100"
+    },
+    {
+      "type": "export_unknown_product_id",
+      "sheet": "META EXPORT",
+      "row": 31,
+      "product_id": "OWA-GGBC002GBPSR01",
+      "detail": "Not found in current inventory"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 56,
+      "product_id": "OWA-GGBD028YKAR04",
+      "detail": "Inventory status: Sold"
+    },
+    {
+      "type": "export_unknown_product_id",
+      "sheet": "META EXPORT",
+      "row": 96,
+      "product_id": "OWA-GGBF013BRAR01",
+      "detail": "Not found in current inventory"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 99,
+      "product_id": "OWA-GGBF015TBAR08",
+      "detail": "Inventory status: Sold"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 158,
+      "product_id": "OWA-GGBG007GMSBN00",
+      "detail": "Inventory status: Sold"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 159,
+      "product_id": "OWA-GGBG007GMSCR01",
+      "detail": "Inventory status: Sold"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 160,
+      "product_id": "OWA-GGBG008GMSBN00",
+      "detail": "Inventory status: Sold"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 179,
+      "product_id": "OWA-GGBG023GMSAN00",
+      "detail": "Export: 430.00 THB; inventory Price: 220"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 180,
+      "product_id": "OWA-GGBG024GMSAN00",
+      "detail": "Inventory status: Sold"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 180,
+      "product_id": "OWA-GGBG024GMSAN00",
+      "detail": "Export: 350.00 THB; inventory Price: 430"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 225,
+      "product_id": "OWA-GGBG058GMSBN00",
+      "detail": "Inventory status: Sold"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 280,
+      "product_id": "OWA-GGBG121YKAR02",
+      "detail": "Inventory status: Auction"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 280,
+      "product_id": "OWA-GGBG121YKAR02",
+      "detail": "Export: 230.00 THB; inventory Price: 50"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 312,
+      "product_id": "OWA-GGBL008BRAR01",
+      "detail": "Export: 140.00 THB; inventory Price: 160"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 314,
+      "product_id": "OWA-GGBL010BRAN00",
+      "detail": "Export: 160.00 THB; inventory Price: 140"
+    },
+    {
+      "type": "export_unknown_product_id",
+      "sheet": "META EXPORT",
+      "row": 315,
+      "product_id": "OWA-GGBL011BRAN00",
+      "detail": "Not found in current inventory"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 320,
+      "product_id": "OWA-GGBM022YKAN00",
+      "detail": "Inventory status: Sold"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 377,
+      "product_id": "OWA-GGBR021GBAR01",
+      "detail": "Inventory status: Hold"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 442,
+      "product_id": "OWA-GGBT003YKAR02",
+      "detail": "Inventory status: Sold"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 487,
+      "product_id": "OWA-GGBX005INAR03",
+      "detail": "Inventory status: Auction"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 487,
+      "product_id": "OWA-GGBX005INAR03",
+      "detail": "Export: 220.00 THB; inventory Price: 100"
+    },
+    {
+      "type": "export_unknown_product_id",
+      "sheet": "META EXPORT",
+      "row": 499,
+      "product_id": "OWA-GGBY009GBPAN00",
+      "detail": "Not found in current inventory"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 715,
+      "product_id": "OWA-MAGM049VKAN00",
+      "detail": "Export: 380.00 THB; inventory Price: 280"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 720,
+      "product_id": "OWA-MAGM053VKAN00",
+      "detail": "Export: 230.00 THB; inventory Price: 180"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 721,
+      "product_id": "OWA-MAGM053VKAR01",
+      "detail": "Export: 230.00 THB; inventory Price: 180"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 729,
+      "product_id": "OWA-MAGM061VKAN00",
+      "detail": "Export: 350.00 THB; inventory Price: 320"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 730,
+      "product_id": "OWA-MAGM062VKAN00",
+      "detail": "Export: 300.00 THB; inventory Price: 240"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 733,
+      "product_id": "OWA-MAGM065VKAN00",
+      "detail": "Export: 300.00 THB; inventory Price: 270"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 734,
+      "product_id": "OWA-MAGM066VKAN00",
+      "detail": "Inventory status: Sold"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 735,
+      "product_id": "OWA-MAGM067VKAN00",
+      "detail": "Export: 250.00 THB; inventory Price: 260"
+    },
+    {
+      "type": "export_not_instock",
+      "sheet": "META EXPORT",
+      "row": 762,
+      "product_id": "OWA-MAGM086VKAN00",
+      "detail": "Inventory status: Sold"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 766,
+      "product_id": "OWA-MAGM090VKAN00",
+      "detail": "Export: 300.00 THB; inventory Price: 320"
+    },
+    {
+      "type": "export_price_mismatch",
+      "sheet": "META EXPORT",
+      "row": 767,
+      "product_id": "OWA-MAGM090VKAR01",
+      "detail": "Export: 300.00 THB; inventory Price: 320"
+    },
+    {
+      "type": "export_ambiguous_product_id",
+      "sheet": "META EXPORT",
+      "row": 771,
+      "product_id": "OWA-MAGM117VKAR01",
+      "detail": "Multiple inventory rows; cannot resolve uniquely"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 327,
+      "product_id": "OWA-GGBM029YKAR03",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 328,
+      "product_id": "OWA-GGBM030YKAR06",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 329,
+      "product_id": "OWA-GGBM035BRAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 332,
+      "product_id": "OWA-GGBO003INAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 333,
+      "product_id": "OWA-GGBO004YKAR01",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 340,
+      "product_id": "OWA-GGBO010JGAR04",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 341,
+      "product_id": "OWA-GGBO010YKAR03",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 342,
+      "product_id": "OWA-GGBO011YKAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 343,
+      "product_id": "OWA-GGBO012YKAR03",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 344,
+      "product_id": "OWA-GGBP002GBAR02",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 345,
+      "product_id": "OWA-GGBP002VTGAR03",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 346,
+      "product_id": "OWA-GGBP003AR05",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 353,
+      "product_id": "OWA-GGBP004GPBN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 354,
+      "product_id": "OWA-GGBP005INAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 355,
+      "product_id": "OWA-GGBP006BRAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 356,
+      "product_id": "OWA-GGBP007BRAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 357,
+      "product_id": "OWA-GGBP010BRAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 358,
+      "product_id": "OWA-GGBP012GGAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 359,
+      "product_id": "OWA-GGBP013FGAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 362,
+      "product_id": "OWA-GGBP024MGAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 363,
+      "product_id": "OWA-GGBR002FWAR01",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 364,
+      "product_id": "OWA-GGBR002FWAR03",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 365,
+      "product_id": "OWA-GGBR004BRAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 366,
+      "product_id": "OWA-GGBR007YKAR01",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 367,
+      "product_id": "OWA-GGBR008BRAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 372,
+      "product_id": "OWA-GGBR013CTAR03",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 373,
+      "product_id": "OWA-GGBR014YKAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 374,
+      "product_id": "OWA-GGBR015YKAR02",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 375,
+      "product_id": "OWA-GGBR016YKAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 376,
+      "product_id": "OWA-GGBR018AN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 377,
+      "product_id": "OWA-GGBR019GBAR01",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 378,
+      "product_id": "OWA-GGBR021GBAR01",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 379,
+      "product_id": "OWA-GGBR021INAR03",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 380,
+      "product_id": "OWA-GGBR021YKBR02",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 381,
+      "product_id": "OWA-GGBR022INAR03",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 382,
+      "product_id": "OWA-GGBR022INBR02",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 383,
+      "product_id": "OWA-GGBR024MGAN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 384,
+      "product_id": "OWA-GGBR026AN00",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 392,
+      "product_id": "OWA-GGBS001TBAR01",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 393,
+      "product_id": "OWA-GGBS002BRAR01",
+      "detail": "ERROR 100: Unsupported post request. Object with ID '122195741756903319' does not exist, cannot be loaded due to missing permissions, or does not support this op"
+    },
+    {
+      "type": "facebook_post_error",
+      "sheet": "ALBUM CAPTION",
+      "row": 1077,
+      "product_id": "OWA-MAGT016AMAN00",
+      "detail": "ERROR 324: (#324) Missing or invalid image file"
+    }
+  ]
+}

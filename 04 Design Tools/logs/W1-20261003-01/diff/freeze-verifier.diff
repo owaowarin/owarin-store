@@ -1,0 +1,14 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\before\\04 Design Tools\\logs\\W1-20261003-01\\freeze.cjs" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\freeze.cjs"
+index 069280b..e92c446 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\before\\04 Design Tools\\logs\\W1-20261003-01\\freeze.cjs"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\freeze.cjs"	
+@@ -9,7 +9,8 @@ const html=read('candidate/Index.html');for(const m of html.matchAll(/<script\b[
+ assert.equal(read('test-runtime/W1Orders.gs'),read('candidate/W1Orders.gs'));
+ assert.equal(read('test-runtime/Webapp.gs'),read('candidate/WebApp_v32.gs'));
+ assert.equal(read('test-runtime/Code.gs').replace(/var BANK_INFO = \{[\s\S]*?\};/,'BANK'),read('candidate/Code_v32.gs').replace(/var BANK_INFO = \{[\s\S]*?\};/,'BANK'));
+-assert.equal(read('test-runtime/Index.html').replaceAll('1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd','1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp'),html);
++const testIndexExpected=html.replaceAll('1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp','1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd').replace('TEST_OR_PROJECT','1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd');
++assert.equal(w.sha(read('test-runtime/Index.html')),w.sha(testIndexExpected),'Staged Index must match both project-key transforms');
+ const latest=(name)=>fs.readdirSync(w.dir).filter(f=>f.startsWith(name+'.attempt')).sort((a,b)=>Number(a.match(/attempt(\d+)/)[1])-Number(b.match(/attempt(\d+)/)[1])).at(-1);
+ assert.match(read(latest('w1.test.cjs')),/PASS W1 14 groups final accepted/);assert.match(read(latest('ui.test.cjs')),/PASS lost successful response/);
+ for(const f of ['p1-add.test.cjs','p1-ui.test.cjs','Index.test.js','image-url.test.js','fb-catalogue.test.js','meta-pipeline.test.js'])assert.ok(read('regression-'+f+'.txt').length>0);

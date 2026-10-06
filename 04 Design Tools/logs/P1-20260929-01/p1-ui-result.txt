@@ -1,0 +1,1 @@
+PASS: 20 UI resets, failure draft/request retention, retry ID reuse, render failure, in-flight guard, stale suggestion clear

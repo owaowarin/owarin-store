@@ -1,0 +1,2 @@
+
+Verification follow-up: the first `python verify-package.py` attempt failed before running the script because `python.exe` resolved to an inaccessible Windows Store stub. Retried with the Codex workspace-bundled Python executable, which passed: original doc bytes are intact, all 17 headers match the candidate source, test hash and CSV events match. No Google or business retry occurred. This local environment error and recovery are preserved as event `P1-25-004` in `changes.csv`.

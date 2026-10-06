@@ -1,0 +1,12 @@
+const fs=require('node:fs'),assert=require('node:assert/strict'),path=require('node:path'),d=__dirname,f=d+'/candidate/LabelRenderer.html',tool=path.resolve(d,'../../OWARIN — LABEL TOOL.html');
+const backup=d+'/before-renderer-fix';fs.mkdirSync(backup,{recursive:true});for(const [src,name] of [[f,'LabelRenderer.html'],[tool,'standalone.html']])if(!fs.existsSync(backup+'/'+name))fs.copyFileSync(src,backup+'/'+name);
+let s=fs.readFileSync(f,'utf8').replace(/\r\n/g,'\n');
+s=s.replace('.dn-col{flex:1 1 0;min-width:0;padding-right:3mm}', '.dn-col{flex:1 1 0;min-width:0;padding-right:3mm;overflow-wrap:anywhere}');
+s=s.replaceAll("shown.push('__MORE__'+cut)","shown.push({remaining:cut})").replaceAll("t.startsWith('__MORE__')","typeof t==='object'").replaceAll('t.slice(8)','t.remaining');
+s=s.replaceAll('cut<list.length;','cut<=list.length;');
+s=s.replaceAll("const list=(sp.items&&sp.items.length)?sp.items:[];","const list=(sp.items&&sp.items.length)?sp.items.slice().sort((a,b)=>a.localeCompare(b,undefined,{numeric:true})):[];");
+s=s.replaceAll('labels[i].itemTitles));','labels[i].itemTitles.slice().sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}))));');
+const css=s.match(/<style[^>]*>([\s\S]*?)<\/style>/)[1],runtime=s.slice(s.indexOf('\nconst esc=')+1,s.indexOf('\nfunction html(p)'));
+assert(runtime.startsWith('const esc='));s=s.replace(/^const CSS=.*$/m,()=>'const CSS='+JSON.stringify(css)+';').replace(/^const RUNTIME=.*$/m,()=>'const RUNTIME='+JSON.stringify(runtime)+';');fs.writeFileSync(f,s);
+let standalone=fs.readFileSync(tool,'utf8'),count=0;standalone=standalone.replace(/<!-- W2 SHARED RENDERER BEGIN -->\r?\n[\s\S]*?\r?\n<!-- W2 SHARED RENDERER END -->/,()=>{count++;return '<!-- W2 SHARED RENDERER BEGIN -->\n'+s.trim()+'\n<!-- W2 SHARED RENDERER END -->';});assert.equal(count,1);fs.writeFileSync(tool,standalone);
+console.log('PASS canonical CSS/runtime regenerated and standalone synchronized');

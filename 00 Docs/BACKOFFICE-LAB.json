@@ -1,0 +1,70 @@
+{
+  "project": "OWARIN BACKOFFICE LAB v2",
+  "created_date": "2026-09-09",
+  "production": {
+    "spreadsheet_id": "16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0",
+    "access_for_this_work": "read_only",
+    "url": "https://docs.google.com/spreadsheets/d/16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0/edit"
+  },
+  "lab": {
+    "spreadsheet_id": "158ekdEhxQC0hLIaUCz7cV3hx_XAVBeHuKYsD82HSszE",
+    "url": "https://docs.google.com/spreadsheets/d/158ekdEhxQC0hLIaUCz7cV3hx_XAVBeHuKYsD82HSszE/edit?usp=drivesdk",
+    "folder_id": "16xEZLDFy9QgjPUtGWSo-iQDAp7jiqU-H",
+    "data_mode": "snapshot_not_live_sync",
+    "copied_tabs": 12,
+    "visible_new_tabs": 8,
+    "item_rows": 2243,
+    "fb_album_active": false,
+    "apps_script_deployed": false
+  },
+  "rules": {
+    "price": "actual_item_price_excluding_customer_shipping",
+    "cost": "preserve_recorded_per_item_cost_no_double_add",
+    "purchase": "multiple_items_priced_individually",
+    "shipping": {
+      "first": 50,
+      "additional": 10,
+      "cap": 100,
+      "empty_order": 0,
+      "cod": false
+    },
+    "auction": "already_sold_with_per_item_winning_price"
+  },
+  "sheet_ids": {
+    "START HERE": 810001,
+    "ITEMS V2": 810002,
+    "TAXONOMY": 810003,
+    "ORDERS V2": 810004,
+    "ORDER LINES V2": 810005,
+    "PAYMENTS V2": 810006,
+    "SHIPPING TEST": 810007,
+    "PROJECT SETTINGS": 810008
+  },
+  "verification": {
+    "authored_cell_mismatches": 0,
+    "authored_formula_errors": 0,
+    "shipping_cases": "0 through 8 items, all PASS",
+    "native_tables": "5 verified, full used ranges; dropdown columns verified",
+    "visual": "Google browser unauthenticated; exported XLSX returned sediment URI with no available local materialization tool; native formatting inspected by API instead"
+  },
+  "deployment_contract": "Test Apps Script against copied legacy tabs; eventual code must run on old production layout without requiring redesigned schema; no production deployment performed",
+  "local_apps_script_candidate": {
+    "path": "03 Apps Script/Backoffice Update",
+    "status": "local_tested_not_deployed",
+    "test_suites_passed": 19,
+    "browser_qa": "synthetic_data_only",
+    "requires_live_source_comparison": true,
+    "new_runtime_sheet": "OWA SALES REQUESTS",
+    "legacy_schema_preserved": true,
+    "explicit_lab_target": true,
+    "live_apps_script_tested": false
+  },
+  "owner_update_2026_09_10": {
+    "store_uses_test_deployment_only": true,
+    "source_basis": "current_saved_editor",
+    "lab_existing_data_mutation_for_testing_authorized": true,
+    "lab_goal": "functional_parity_with_store",
+    "autonomous_work_authorized": true,
+    "avoid_unnecessary_token_usage": true
+  }
+}

@@ -1,0 +1,15 @@
+# P1-21 delayed-callback watchdog probe — prepared, NOT INSTALLED
+
+Change/Request: P1-20260930-05 / P1-QA-WATCHDOG-001. Exact destination is only the separate test Apps Script project `1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd`, bound to the synthetic Sheet `13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM`. Never install in the shop or Back House LAB.
+
+Current saved test Code.gs LF SHA256: `6006FE13F41F4C156E1FC623C9D77FCF2A219EC02D1703AE13F1C55807A9C3F8`. Temporary suffix `watchdog-probe.gs` SHA256: `811C89AE6A583E861E59A4D86A28FB2B163500D087B440435FE0F06D8C91B4F2`. Exact concatenated full file `Code-expected-with-probe.gs` SHA256: `D594821526DE45F03217906522256A4D60EC8791F689C9BADC7EF36B85146DB3`. Local syntax and exact-Sheet/no-write guard tests pass. **No Apps Script source change has been made for this probe.**
+
+1. In the exact test project only, append the contents of `watchdog-probe.gs` to the end of Code.gs, Save, then full-copy/read back. Stop if the prefix/suffix or full LF hash differs from above. The helper checks Sheet ID *before* delegating any Add.
+2. Freshly export the separate test Sheet immediately before the write; verify the expected next GGB/journal rows are empty. Use one `/dev` tab and submit only `Synthetic QA Watchdog 20260930 A31` with publisher TEST, Original 300, Cost 100, Price 293, status New Arrival. Record the actual Request ID from the pending UI/journal; do not invent one.
+3. Observe at ~45 seconds: expect the UI's presentation timeout and frozen same-ID draft. The server wrapper sleeps 52 seconds only **after** `addInventoryRow` commits and releases the lock. If a Google callback/failure arrives earlier, record the actual behavior, stop the timing claim, and reconcile before another action.
+4. After the delayed callback arrives, verify the frozen draft still has its original Request ID. Export/read the Sheet **before retry**: expect exactly one business row and one PREPARED→DONE pair for that ID. Press `Check / retry request` only after this readback; it should take the read-only DONE path, clear the form, and append no journal event. Export/read again.
+5. Remove only the exact helper suffix; Save and reload the editor. Confirm Code.gs returns to SHA256 `6006FE13F41F4C156E1FC623C9D77FCF2A219EC02D1703AE13F1C55807A9C3F8`; confirm test `/dev` still loads. Do not redeploy test `/exec`. Preserve synthetic row/events as evidence, not cleanup.
+
+Stop/recovery: on a mismatch, unclear result, partial write, or missing Request ID, do not create a second ID or submit a new Add. Filter `ADD REQUESTS` by the original ID and inspect latest event, hash, row/SKU and the referenced inventory row; keep the form frozen and record error/retry. If helper removal fails, restore the backed-up `Code-before.gs` in the test project and verify its hash; source rollback does not reverse business rows. Apps Script project history is a second source backup.
+
+This controlled delayed callback would verify the 45-second UI watchdog and stale callback handling in live test Google, but **not a true transport outage**. A real network timeout remains a separate gate if required.

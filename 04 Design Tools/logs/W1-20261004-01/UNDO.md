@@ -1,0 +1,10 @@
+# Recovery — W1-20261004-01
+
+W1-20261004-01/v32@AECC03651A1CD7EC62650EF1611582E4B77580EB8629F68B4A6ABE17D18AC2D3. Production untouched; no shop rollback needed.
+
+- Candidate/test source: compare newer changes then restore only touched files from before/, attempts/clear-before/ or fresh-source-before/. Frozen Session36 source remains W1-20261003-01. Test sources include QA controls/helper; do not install those into production. Preserve current Google work before any restoration.
+- Data: test-before.xlsx is fresh pre-fixture; fixture-ready.xlsx pre-injection; typed-sales-before.xlsx pre-typed-table sale; pending6-before-external.xlsx and external-conflict.xlsx show390→391. Only M31 restored391→390; retain both EXTERNAL_EDIT events. Copy8 intentionally remains Auction for QA. Final state is google-final.xlsx; never blindly import an older whole workbook over later work.
+- Fixture/recovery helpers are one-shot. ORDERS exists; do not rerun fixture or recovery helper. They use w1-20261004-fixture-1..8 and w1-20261004-recovery-create / -confirm. Their normal web-app buttons are test-only.
+- Browser pending intent: Check / retry request with original stored payload/Request ID. Cancel02 lost-response ID w1-1791059465888-wzpaj3c0gl reached canonical DONE once. Inspect ORDERS/ORDER LINES/ORDER REQUESTS/SALES/inventory UID together; a new ID is allowed only after canonical NOT_FOUND and rejected preflight, as external-price confirm demonstrated.
+- Corrupt journal/external conflict/lost IDs/partial edit: stop writes, export state, preserve successful cells/events; target reconciliation from actual before/after evidence. Do not clear claims/journal or fabricate stock/SALES to unblock. Native dialog can suspend browser control: reload the affected test tab only after journal readback proves no request or retain the original durable intent; do not repeatedly press the original action.
+- Local transfer server is loopback8765; Ctrl+C stops it without affecting Google data. Historical logs/handoffs must retain byte-prefix; append corrections rather than truncate.

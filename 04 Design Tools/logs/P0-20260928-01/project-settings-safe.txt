@@ -1,0 +1,6 @@
+					29 heading General settings, Value: 2
+					32 combo box (collapsed) Time zone (GMT+07:00) Indochina Time – Bangkok, Value: (GMT+07:00) Indochina Time – Bangkok, Secondary Actions: Expand
+					34 checkbox (settable, integer) Description: Enable Chrome V8 runtime, Value: 1, ID: c21
+					35 checkbox (settable, integer) Description: Show "appsscript.json" manifest file in editor, Value: 0, ID: c22
+					38 text IDs are the unique identifiers of your Apps Script project. Script ID 1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp
+The focused UI element is 32 combo box (collapsed) Time zone (GMT+07:00) Indochina Time – Bangkok, Value: (GMT+07:00) Indochina Time – Bangkok, Secondary Actions: Expand

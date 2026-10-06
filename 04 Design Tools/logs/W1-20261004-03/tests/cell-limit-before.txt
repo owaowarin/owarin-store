@@ -1,0 +1,1 @@
+REPRO: compressed journal preflight accepted, but plain ORDER LINES Inventory Snapshot length=72135 exceeds one Google cell. No Google oversized write attempted.

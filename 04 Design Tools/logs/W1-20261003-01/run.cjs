@@ -1,0 +1,3 @@
+const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),{log,sha}=require('../../w1-work.cjs');
+const name=process.argv[2];if(!name)throw Error('test filename required');const attempt=fs.readdirSync(__dirname).filter(n=>n.startsWith(name+'.attempt')).length+1;
+const r=cp.spawnSync(process.execPath,[name],{cwd:__dirname,encoding:'utf8'}),out=(r.stdout||'')+(r.stderr||'');const file=path.join(__dirname,name+'.attempt'+attempt+'.txt');fs.writeFileSync(file,out);log('TEST_'+name+'_ATTEMPT_'+attempt,name,file,'candidate',sha(out),'exit '+r.status,r.status===0?'results retained':'retain failure, targeted repair, retry same reproduction');process.stdout.write(out);process.exitCode=r.status||0;

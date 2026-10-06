@@ -1,0 +1,10 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-04\\before\\04 Design Tools\\logs\\decisions_2026-10-04.csv" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\decisions_2026-10-04.csv"
+index bb1c97f..faac65d 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-04\\before\\04 Design Tools\\logs\\decisions_2026-10-04.csv"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\decisions_2026-10-04.csv"	
+@@ -1,3 +1,5 @@
+ timestamp,change_id,decision,status,source
+ "2026-10-04 04:11:40 +0700","W1-20261004-02","Bound remaining work; analyze actual blockers; compact handoff; no aimless repeated verification","CLOSED","Owner request in current chat"
+ "2026-10-04 05:51:03 +0700","W1-20261004-03","Close scoped R1–R4; preserve original100-item request across timeout; no cache that weakens identity checks; exact review packet; production/W2 excluded","CLOSED implementation/test; Astra specific sign-off pending","Owner current chat and actual Google runtime evidence"
++
++"2026-10-03T23:26:08.789Z","W1-20261004-04","Owner selected Astra review in same chat; notify at Sol implementation boundary; scoped R5+R6 repair plan","Review COMPLETE; R5/R6 OPEN; no release approval","Owner latest request; REVIEW.md/review-results.json"

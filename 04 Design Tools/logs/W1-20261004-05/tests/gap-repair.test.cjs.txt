@@ -1,0 +1,2 @@
+PASS49 explicit gap notes, durable intent/partial replay, original events unchanged, source hash guard and owner-only; no blank-row skipping
+PASS observed Google charset reproduction; explicit UTF-8 proof, legacy events preserved, Unicode tamper rejected before writes

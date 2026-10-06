@@ -1,0 +1,133 @@
+{
+  "revision": "W1-20261005-01/v38@3E7CF8A86790DF274D2EEC0D01EFD09DB65C8BBCCB224A07F895F7F7069F0C42",
+  "groups": 21,
+  "checks": [
+    {
+      "engine": "batch20",
+      "small": false,
+      "status": "SOLD",
+      "oldEventsUnchanged": true
+    },
+    {
+      "engine": "batch20",
+      "small": true,
+      "status": "SOLD",
+      "oldEventsUnchanged": true
+    },
+    {
+      "engine": "legacy",
+      "small": false,
+      "status": "SOLD",
+      "oldEventsUnchanged": true
+    },
+    {
+      "engine": "legacy",
+      "small": true,
+      "status": "SOLD",
+      "oldEventsUnchanged": true
+    },
+    {
+      "engine": "batch20",
+      "afterEffect": "sales",
+      "sameIdRecovery": "SOLD",
+      "salesRows": 2,
+      "siblingBlocked": true
+    },
+    {
+      "engine": "batch20",
+      "afterEffect": "order",
+      "sameIdRecovery": "SOLD",
+      "salesRows": 2,
+      "siblingBlocked": true
+    },
+    {
+      "engine": "legacy",
+      "afterEffect": "sales",
+      "sameIdRecovery": "SOLD",
+      "salesRows": 2,
+      "siblingBlocked": true
+    },
+    {
+      "engine": "legacy",
+      "afterEffect": "order",
+      "sameIdRecovery": "SOLD",
+      "salesRows": 2,
+      "siblingBlocked": true
+    },
+    {
+      "engine": "batch20",
+      "bad": "0.01",
+      "rejected": true,
+      "sameIdRecovery": "SOLD"
+    },
+    {
+      "engine": "batch20",
+      "bad": "-0.01",
+      "rejected": true,
+      "sameIdRecovery": "SOLD"
+    },
+    {
+      "engine": "batch20",
+      "bad": "280.03",
+      "rejected": true,
+      "sameIdRecovery": "SOLD"
+    },
+    {
+      "engine": "batch20",
+      "bad": "#VALUE!",
+      "rejected": true,
+      "sameIdRecovery": "SOLD"
+    },
+    {
+      "engine": "batch20",
+      "bad": "NaN",
+      "rejected": true,
+      "sameIdRecovery": "SOLD"
+    },
+    {
+      "engine": "batch20",
+      "bad": "Infinity",
+      "rejected": true,
+      "sameIdRecovery": "SOLD"
+    },
+    {
+      "engine": "legacy",
+      "bad": "0.01",
+      "rejected": true,
+      "sameIdRecovery": "SOLD"
+    },
+    {
+      "engine": "legacy",
+      "bad": "-0.01",
+      "rejected": true,
+      "sameIdRecovery": "SOLD"
+    },
+    {
+      "engine": "legacy",
+      "bad": "280.03",
+      "rejected": true,
+      "sameIdRecovery": "SOLD"
+    },
+    {
+      "engine": "legacy",
+      "bad": "#VALUE!",
+      "rejected": true,
+      "sameIdRecovery": "SOLD"
+    },
+    {
+      "engine": "legacy",
+      "bad": "NaN",
+      "rejected": true,
+      "sameIdRecovery": "SOLD"
+    },
+    {
+      "engine": "legacy",
+      "bad": "Infinity",
+      "rejected": true,
+      "sameIdRecovery": "SOLD"
+    },
+    {
+      "integerZeroNegativeBoundedNoise": "PASS"
+    }
+  ]
+}

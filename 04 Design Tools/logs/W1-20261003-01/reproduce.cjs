@@ -1,0 +1,7 @@
+const assert=require('node:assert/strict'),{fixture}=require('./harness.cjs');
+for(const status of ['Auction','Hold','New Arrival']){const f=fixture();f.item('ONE',status);const r=f.c._apiSalesConfirm({items:[{source:'GGB',sku:'ONE',price:390}],shipping:0,channel:'SHOP'});assert.equal(r.count,1);assert.equal(f.c._readRow(f.sheets['GAME GUIDE BOOKS'],3,'GGB').status,'Sold');console.log('REPRO baseline unavailable sale '+status);}
+{const f=fixture();f.item('ONE');const r=f.c._apiSalesConfirm({items:[{source:'GGB',sku:'ONE',price:390},{source:'GGB',sku:'ONE',price:390}],shipping:0});assert.equal(r.count,2);console.log('REPRO duplicate cart -> two SALES lines');}
+{const f=fixture();f.item('ONE');f.c._appendSalesRows=()=>{throw Error('ledger unavailable');};const r=f.c._apiMarkSold({source:'GGB',sku:'ONE',price:390});assert.equal(r.item.status,'Sold');assert.equal(r.sales.error,'ledger unavailable');console.log('REPRO partial Sold returned success with no ledger');}
+{const f=fixture();f.item('ONE');f.c._apiInvUpdate({source:'GGB',sku:'ONE',changes:{status:'Sold'}});assert.equal(f.c._readRow(f.sheets['GAME GUIDE BOOKS'],3,'GGB').status,'Sold');console.log('REPRO status edit bypass');}
+{const f=fixture();f.item('ONE');const r=f.c._apiSalesConfirm({items:[{source:'GGB',sku:'ONE',price:390}]});assert.equal(r.shipping,50);console.log('REPRO omitted subsidy -> customer shipping 50');}
+console.log('PASS reproduction asserts baseline defects; not acceptance');

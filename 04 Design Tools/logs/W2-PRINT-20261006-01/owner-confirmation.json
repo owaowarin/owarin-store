@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "basis": "OWNER_CONFIRMED",
+  "ownerMessage": "ผ่านหมดแล้ว",
+  "recordedAt": "2026-10-06T02:36:16+07:00",
+  "testExecutionTime": null,
+  "context": "Reply to Print/PDF, physical Print/Reprint, label content/private-field exclusion and no additional business-write checklist for web/Sheets test entry points",
+  "candidateRevision": "W2-20261005-01/v39@7043D1B05E52DEAA3272C4AB3986790592081BD1C2688C5E3867A4D4FBC88D51",
+  "agentInspectedPdf": false,
+  "agentInspectedPhysicalOutput": false,
+  "pdfArtifactProvided": false,
+  "printerDriverPaperDetails": "Not supplied",
+  "freshGoogleReadOrExportThisPhase": false,
+  "productionReleaseAuthorized": false
+}

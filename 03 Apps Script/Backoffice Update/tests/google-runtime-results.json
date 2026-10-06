@@ -1,0 +1,92 @@
+{
+  "executedAt": "2026-09-10T00:40:41.978Z",
+  "environment": "LAB",
+  "source": "Google Apps Script execution log, owaLabSmokeTest, completed 07:41:16 Asia/Bangkok",
+  "passedGroups": 7,
+  "failed": [],
+  "checks": {
+    "shipping_0_1_2_6_7": [
+      0,
+      50,
+      60,
+      100,
+      100
+    ],
+    "readCountsBeforeTest": {
+      "GGB": 1406,
+      "MAG": 837,
+      "booking": 33,
+      "contents": 6
+    },
+    "checkout": {
+      "orderId": "OWA-20260910-01",
+      "ledgerLastRow": 72,
+      "GGB": {
+        "sku": "OWA-GGBA001YKAR01",
+        "price": 271,
+        "method": "DIRECT"
+      },
+      "MAG": {
+        "sku": "OWA-MAGA005AMAN00",
+        "price": 83,
+        "method": "AUCTION"
+      },
+      "soldDate": "2026-09-09",
+      "customerShipping": 60,
+      "carrierExpense": 40,
+      "replayNoDuplicate": true,
+      "resaleRejected": true
+    },
+    "add": {
+      "sku": "OWA-GGBL021YKAN00",
+      "row": 1409,
+      "formulaPresent": true,
+      "updatePassed": true,
+      "emptyTitleRejectedWithoutWrite": true,
+      "writeWarnings": []
+    },
+    "bookingCRUD": true,
+    "contentsCRUD": true,
+    "salesAfterTest": {
+      "ledger": 21,
+      "history": 1112,
+      "pending": []
+    }
+  },
+  "preflight": {
+    "ready": true,
+    "missingHeaders": [],
+    "duplicateMAG": "OWA-MAGM117VKAR01",
+    "GGBInstockWithoutPrice": 18,
+    "pending": []
+  },
+  "devUrl": "https://script.google.com/macros/s/AKfycbxKDGZ1LPYZi7xyOZ88nIMNnXkIm7nC_EyM3hVfeu8/dev",
+  "deploymentAccess": "Only myself",
+  "uiChecks": {
+    "ALLLoaded": 2246,
+    "SALESDisplayed": true,
+    "AddReset": true,
+    "nextTitleSuggestion": "Final Fantasy suggestions populated",
+    "invalidAdd": "Enter the item name first; publisher input retained",
+    "quoteInsertionOrder": [
+      "Book 10",
+      "Book 2"
+    ],
+    "quoteOutput": [
+      {
+        "title": "LAB UI 20260910 Book 2",
+        "price": 70
+      },
+      {
+        "title": "LAB UI 20260910 Book 10",
+        "price": 110
+      }
+    ],
+    "quoteShipping": 60,
+    "quoteTotal": 240,
+    "addedCopies": [
+      "OWA-GGBL022YKAN00",
+      "OWA-GGBL023YKBN00"
+    ]
+  }
+}

@@ -1,0 +1,129 @@
+--- C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\03 Apps Script\Web App\WebApp_v31.gs
++++ C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-03\stage\WebApp_v31.gs
+@@ -1,5 +1,6 @@
+ // ============================================================
+-// OWARIN BACK-OFFICE — WebApp.gs v28 (SP-2, pairs with Code.gs v30)
++// OWARIN BACK-OFFICE — WebApp.gs v31 (SP-2, pairs with Code.gs v31)
++// v31 (2026-10-03): validated Add payload and read-only same-ID recovery; pairs with Code.gs v31.
+ // v28: no functional change -- bumped only to stay paired with Code.gs v30 (identical copies listed once; all-caps titles).
+ // v27: no functional change -- bumped only to stay paired with Code.gs v29 (Meta title without RESTOCK).
+ // v26: no functional change -- bumped only to stay paired with Code.gs v28 (nightly Refresh Meta feed).
+@@ -41,6 +42,7 @@
+     case "inventory.bootstrap":   return _invBootstrap();
+     case "inventory.list":        return _readInventory(_sheetFromCode(p.source));
+     case "inventory.add":         return _apiInvAdd(p);
++    case "inventory.addStatus":   return _apiInvAddStatus(p);
+     case "inventory.update":      return _apiInvUpdate(p);
+     case "inventory.markSold":    return _apiMarkSold(p);
+     case "sales.confirm":         return _apiSalesConfirm(p);
+@@ -169,44 +171,91 @@
+   return isNaN(n) ? s : n;
+ }
+ 
++function _addNumber(v, field) {
++  var s = String(v === undefined || v === null ? '' : v).trim();
++  if (!s) return '';
++  if (!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(s) &&
++      !/^[+-]?\d{1,3}(?:,\d{3})+(?:\.\d+)?$/.test(s)) throw new Error(field + ' must be a number');
++  var n = Number(s.replace(/,/g, ''));
++  if (!isFinite(n)) throw new Error(field + ' must be a finite number');
++  return n;
++}
++
+ // ── WRITE: ADD ──
+ // Uses addInventoryRow from Code.gs (lock + SP-2 + Listed Date all included)
+ // then fills the fields the old sidebar did not have (platform / genre), header-driven
+-function _apiInvAdd(p) {
++function _apiInvAddData(p) {
+   var title = String(p.title || "").trim();
+   if (!title) throw new Error("Please enter a product title");
+-
++  if (p.source !== 'GGB' && p.source !== 'MAG') throw new Error('Invalid Add source');
+   var sheetName = _sheetFromCode(p.source);
+-  var res = addInventoryRow({
++  return {
++    requestId: String(p.requestId || '').trim(),
+     sheetName: sheetName,
+     title:    title,
+     pub:      String(p.pub || "").trim(),
+     cond:     String(p.cond || "").trim(),
+-    original: _numOrRaw(p.original),
+-    cost:     _numOrRaw(p.cost),
+-    price:    _numOrRaw(p.price),
+-    status:   String(p.status || "Instock").trim() || "Instock",
++    original: _addNumber(p.original, 'Original'),
++    cost:     _addNumber(p.cost, 'Cost'),
++    price:    _addNumber(p.price, 'Price'),
++    status:   _addStatus(p.status),
+     // SP-2: handled inside addInventoryRow (platform affects the curve, so it must be set first)
+     platform:  String(p.platform  || "").trim(),
+     genre:     String(p.genre     || "").trim(),
++    subGenre:  String(p.subGenre  || "").trim(),
++    type:      String(p.type      || "").trim(),
+     copyFlags: String(p.copyFlags || "").trim(),
+     rarity:    String(p.rarity    || "").trim(),
+-    marketRef: _numOrRaw(p.marketRef),
++    marketRef: _addNumber(p.marketRef, 'Market Ref'),
+     refNote:   String(p.refNote   || "").trim()
+-  });
+-
+-  var sheet = _getSheetOrThrow(sheetName);
+-  // P5.1: Type (category / book format) — header-driven, written after the row is created
+-  var typeVal = String(p.type || "").trim();
+-  if (typeVal) {
+-    var _tCOL = _resolveColumns(sheet);
+-    if (_tCOL.type) { sheet.getRange(res.row, _tCOL.type).setValue(typeVal); SpreadsheetApp.flush(); }
+-  }
+-  var item = _readRow(sheet, res.row, _srcCode(sheetName));
++  };
++}
++
++function _apiInvAdd(p) {
++  var data = _apiInvAddData(p);
++  return _apiInvAddResult(addInventoryRow(data), data.sheetName);
++}
++
++function _apiInvAddResult(res, sheetName) {
++  if (!res.itemSnapshot || res.itemSnapshot.productId !== res.sku ||
++      res.itemSnapshot.name !== res.title || res.sheetName !== sheetName)
++    throw new Error('Add DONE result requires recovery; item snapshot missing or inconsistent');
++  var item = res.itemSnapshot;
+   // P3: match the booking queue on base title — a booking error must not fail the add
+   var matches = [];
+   try { matches = _apiBookingMatch(item.name).matches; } catch (e) { matches = []; }
+-  return { result: res, item: item, bookingMatches: matches };
++  return { result: res, item: item, bookingMatches: matches, historical: res.replayed === true };
++}
++
++function _apiInvAddStatus(p) {
++  var data = _apiInvAddData(p);
++  var id = data.requestId;
++  if (!/^[A-Za-z0-9_-]{12,100}$/.test(id)) throw new Error('Valid Add Request ID required');
++  var hash = _addRequestHash(data);
++  var status = _withLock(function () {
++    var journal = _addRequestSheet(SpreadsheetApp.getActiveSpreadsheet());
++    var last = journal.getLastRow();
++    if (last < 2) return { state: 'NOT_FOUND' };
++    var events = journal.getRange(2, 1, last - 1, 17).getValues();
++    var prior = null;
++    for (var i = 0; i < events.length; i++) if (String(events[i][2]) === id) prior = events[i];
++    if (!prior) return { state: 'NOT_FOUND' };
++    if (prior[9] !== hash) throw new Error('Add Request ID was already used with different item data');
++    if (prior[4] !== 'DONE') return { state: String(prior[4] || 'UNKNOWN'), row: prior[10],
++                                   sku: String(prior[11] || ''), error: String(prior[14] || '') };
++    var result;
++    try { result = JSON.parse(prior[15]); } catch (e) {}
++    if (!result || result.success !== true || result.sku !== prior[11] ||
++        Number(result.row) !== Number(prior[10]) || result.sheetName !== prior[8])
++      throw new Error('Add DONE result requires recovery; Request ID ' + id);
++    return { state: 'DONE', result: result };
++  });
++  if (status.state === 'DONE') {
++    var recovered = _apiInvAddResult(status.result, data.sheetName);
++    recovered.historical = true;
++    return { state: 'DONE', data: recovered };
++  }
++  return status;
+ }
+ 
+ // ── WRITE: UPDATE (edit a row) ──

@@ -1,0 +1,405 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-before\\Code.gs" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-runtime\\Code.gs"
+index 763da9f..412e13e 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-before\\Code.gs"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-runtime\\Code.gs"	
+@@ -1,5 +1,21 @@
+ // ============================================================
+-// OWARIN BACK-OFFICE — Code.gs v27 (SP-2 pricing/SKU engine, pairs with WebApp.gs v25)
++// OWARIN BACK-OFFICE — Code.gs v32 (SP-2 pricing/SKU engine, pairs with WebApp.gs v32)
++// v31 (2026-10-03): durable Add journal, validated money/source/status, committed snapshot replay and formula readback.
++// v30 (2026-10-02): (1) Identical copies are listed ONCE in META EXPORT: same base title + Publisher + Original
++//   (cover price) + Condition + Copy Flags -> one row (the first complete copy), quantity_to_sell_on_facebook =
++//   number of copies. Any difference in those fields keeps the copies as separate rows. (2) A title with Latin
++//   letters but no lowercase letter (GAMEMAG, HOBBY HORROR) is exported as "Gamemag", "Hobby Horror" (words of
++//   4+ capitals only; the sheet is not changed). (3) D6 documented: FB CATALOGUE "Price"/"Description" ARE the
++//   Meta price/description columns (case-insensitive header match) -- by design, nothing to fix.
++// v29 (2026-10-02): Meta title never carries (RESTOCK-NN). Root cause: the v20b "add missing products" step
++//   wrote the raw inventory name (with RESTOCK) into FB CATALOGUE!FB Title and the export used FB Title verbatim.
++//   Fix: the v20b step now writes _capTitle(name), and buildFbCatalogue passes every FB Title (also old/manual
++//   ones) through _capTitle, so legacy cells are cleaned at export time without editing any data.
++// v28 (2026-10-02): nightly automatic Refresh Meta feed. refreshMetaFeedAuto() = the same build+export
++//   with no popups (_ui() stub while _headless), a drop guard (aborts, META EXPORT untouched, when Ready <
++//   80% of the current META EXPORT or 0), one row per run in REFRESH LOG, MailApp email on GUARD/ERROR/BUSY.
++//   installMetaRefreshTrigger() creates the daily trigger (run once from the editor). Menu path unchanged.
++//   Plan: 00 Docs/PLAN-META-AUTO-REFRESH_2026-10-02.md
+ // v27 (2026-09-25): P1 PID CHANGES ledger (onEdit/web-app Product ID rewrites are logged old -> new;
+ //   buildFbCatalogue follows them and archives rows whose PID left the inventory) · F2 blank
+ //   Description is filled from the caption template · F4 image index read live from R2
+@@ -38,7 +54,7 @@ var SHOPEE_MIN  = 60;     // minimum listing price
+ var ORDER_PREFIX = "OWA";
+ var SALES_SHEET  = "";
+ 
+-var BANK_INFO = { no: "TEST", bank: "TEST", account: "TEST" };
++var BANK_INFO = { no:'TEST-BANK', bank:'TEST', account:'TEST' };
+ 
+ // ───────────────── SP-2 PRICING PARAMETERS (locked, per design §8) ─────────────────
+ var SP2 = {
+@@ -151,6 +167,8 @@ var _colCache = {}; // header -> index cache, per execution
+ 
+ // Header map: normalised header text -> logical key
+ var HEADER_MAP = {
++  "item uid": "itemUid",
++  "order line id": "orderLineId",
+   "item name":            "name",
+   "status":               "status",
+   "publisher":            "publisher",
+@@ -304,6 +322,7 @@ function onEdit(e) {
+ 
+   try {
+     var COL     = _resolveColumns(sheet);
++    if (typeof _w1ExternalEdit_ === "function" && _w1ExternalEdit_(e)) return;
+     var lastRow = sheet.getLastRow();
+     if (lastRow < 3) { _isEditRunning = false; return; }
+ 
+@@ -1165,6 +1184,7 @@ function sp2Layout() {
+ // ============================================================
+ function _sp2ApplyCore(dryRun, mode, sheetName) {
+   var t = _sp2Sheet(sheetName), sheet = t.sheet;
++  if(!dryRun && typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet);
+   var COL = _resolveColumns(sheet);
+   if (!COL.price || !COL.suggested) throw new Error("Columns Price / Suggested Price not found");
+ 
+@@ -1288,6 +1308,7 @@ function _sp2FlagsFromName(name) {
+ 
+ function _sp2MigrateFlagsCore(dryRun, sheetName) {
+   var t = _sp2Sheet(sheetName), sheet = t.sheet;
++  if(!dryRun && typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet);
+   var COL = _resolveColumns(sheet);
+   if (!COL.copyFlags) throw new Error("Column Copy Flags not found — run SP-2 Setup first");
+ 
+@@ -1573,6 +1594,7 @@ function _sp2SuspectAuctionCore(sheetName, dryRun, ratioOverride) {
+   out.found.sort(function (x, y) { return x.pct - y.pct; });
+ 
+   if (!dryRun && out.found.length) {
++    if (typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet);
+     var stRange = sheet.getRange(3, COL.status, data.length, 1);
+     var st = stRange.getValues();
+     var sd = COL.soldDate ? sheet.getRange(3, COL.soldDate, data.length, 1).getValues() : null;
+@@ -1999,7 +2021,8 @@ function _natCmp(a, b) {
+ // ============================================================
+ // [I] sortInventory — v17: + repaint REVIEW after the sort
+ // ============================================================
+-function sortInventory() {
++function sortInventory() { return _withLock(function(){ if(typeof _w1TechnicalGate_ === "function") _w1TechnicalGate_(""); return sortInventoryCore_(); }); }
++function sortInventoryCore_() {
+   var sheet     = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+   var sheetName = sheet.getName();
+   if (sheetName !== GGB_SHEET && sheetName !== MAG_SHEET) return;
+@@ -2062,15 +2085,15 @@ function _addRequestEvent(sh, id, attempt, state, source, hash, row, sku, before
+   var eventRow = sh.getLastRow() + 1;
+   var actor = 'Unknown';
+   var eventId = id + '-' + attempt + '-' + state;
+-  sh.getRange(eventRow, 1, 1, 17).setValues([[
+-    eventId, new Date(), id, attempt, state, actor, 'inventory.add API', 'P1 candidate',
++  if (!_tryWrite('Add journal ' + state, function () { sh.getRange(eventRow, 1, 1, 17).setValues([[
++    eventId, new Date(), id, attempt, state, actor, 'inventory.add API', 'Code v31 / WebApp v31',
+     source, hash, row || '', sku || '', before || '', after || '', error || '', result || '', id
+-  ]]);
++  ]]); })) throw new Error('ADD REQUESTS journal write failed: ' + state + _sp2WriteErrMsg());
+   SpreadsheetApp.flush();
+   var check = sh.getRange(eventRow, 1, 1, 17).getValues()[0];
+   if (!check[1]) throw new Error('ADD REQUESTS event readback failed at column 2');
+   var required = {0:eventId, 2:id, 3:attempt, 4:state, 5:actor,
+-                  6:'inventory.add API', 7:'P1 candidate', 8:source, 9:hash,
++                  6:'inventory.add API', 7:'Code v31 / WebApp v31', 8:source, 9:hash,
+                   10:row || '', 11:sku || '', 12:before || '', 13:after || '',
+                   14:error || '', 15:result || '', 16:id};
+   Object.keys(required).forEach(function (col) {
+@@ -2241,13 +2264,15 @@ function addInventoryRow(data) {
+ // keys on Cloudflare R2 (library/<Product ID>/1.jpg) stay valid. Only rows with
+ // an empty Product ID get a new number, continuing from the highest number
+ // already used in that category letter.
+-function regenerateAllSKUs() {
++function regenerateAllSKUs() { if(typeof _w1TechnicalGate_ === "function") _w1TechnicalGate_(""); return regenerateAllSKUsCore_(); }
++function regenerateAllSKUsCore_() {
+   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+   var sheetName = sheet.getName();
+   if (sheetName !== GGB_SHEET && sheetName !== MAG_SHEET) {
+     SpreadsheetApp.getUi().alert("Open the GAME GUIDE BOOKS or MAGAZINE sheet first.");
+     return;
+   }
++  if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet);
+   var COL = _resolveColumns(sheet);
+   if (!COL.productId) { SpreadsheetApp.getUi().alert("Column 'Product ID' not found."); return; }
+ 
+@@ -2298,7 +2323,7 @@ function regenerateAllSKUs() {
+   }
+ 
+   if (!minted) { ui.alert("Product ID", "Every row already has an ID. Nothing to do.", ui.ButtonSet.OK); return; }
+-  _tryWrite("fill Product ID", function () { sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut); });
++  _withLock(function(){ if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet); if(typeof _w1Write_ === "function") _w1Write_("fill Product ID",function(){sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut);}); else _tryWrite("fill Product ID", function () { sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut); }); });
+   ui.alert("Product ID", "Done for " + sheetName + ".\n\nKept: " + kept + " existing IDs\nCreated: " + minted + " new IDs", ui.ButtonSet.OK);
+ }
+ 
+@@ -2306,13 +2331,15 @@ function regenerateAllSKUs() {
+ // are already in use, which breaks the R2 image keys built from them. After
+ // running this you MUST re-export the sheet, rebuild the image staging folder
+ // and re-run "rclone sync" so the images follow their new IDs.
+-function forceRegenerateAllSKUs() {
++function forceRegenerateAllSKUs() { if(typeof _w1TechnicalGate_ === "function") _w1TechnicalGate_(""); return forceRegenerateAllSKUsCore_(); }
++function forceRegenerateAllSKUsCore_() {
+   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+   var sheetName = sheet.getName();
+   if (sheetName !== GGB_SHEET && sheetName !== MAG_SHEET) {
+     SpreadsheetApp.getUi().alert("Open the GAME GUIDE BOOKS or MAGAZINE sheet first.");
+     return;
+   }
++  if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet);
+   var COL = _resolveColumns(sheet);
+   if (!COL.productId) { SpreadsheetApp.getUi().alert("Column 'Product ID' not found."); return; }
+ 
+@@ -2350,7 +2377,7 @@ function forceRegenerateAllSKUs() {
+     colOut.push([_composeSKU(catLetter, gameNumStr, pub, cond, title, prefix)]);
+   }
+ 
+-  _tryWrite("regen Product ID", function () { sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut); });
++  _withLock(function(){ if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet); if(typeof _w1Write_ === "function") _w1Write_("regen Product ID",function(){sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut);}); else _tryWrite("regen Product ID", function () { sheet.getRange(3, COL.productId, colOut.length, 1).setValues(colOut); }); });
+   ui.alert("Product ID", "All Product IDs on " + sheetName + " have been rebuilt.", ui.ButtonSet.OK);
+ }
+ 
+@@ -2461,7 +2488,8 @@ function setupInstallableTrigger() {
+ // ============================================================
+ // [O] fixAllRestockTags
+ // ============================================================
+-function fixAllRestockTags() {
++function fixAllRestockTags() { if(typeof _w1TechnicalGate_ === "function") _w1TechnicalGate_(""); return fixAllRestockTagsCore_(); }
++function fixAllRestockTagsCore_() {
+   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+   var sheetName = sheet.getName();
+   if (sheetName !== GGB_SHEET && sheetName !== MAG_SHEET) {
+@@ -2469,6 +2497,7 @@ function fixAllRestockTags() {
+     return;
+   }
+ 
++  if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet);
+   var COL = _resolveColumns(sheet);
+   if (!COL.name) return;
+ 
+@@ -2505,7 +2534,7 @@ function fixAllRestockTags() {
+     updated.push([newTitle]);
+   }
+ 
+-  _tryWrite("fix RESTOCK names", function () { sheet.getRange(3, COL.name, updated.length, 1).setValues(updated); });
++  _withLock(function(){ if(typeof _w1MenuGuard_ === "function") _w1MenuGuard_(sheet); if(typeof _w1Write_ === "function") _w1Write_("fix RESTOCK names",function(){sheet.getRange(3, COL.name, updated.length, 1).setValues(updated);}); else _tryWrite("fix RESTOCK names", function () { sheet.getRange(3, COL.name, updated.length, 1).setValues(updated); }); });
+   ui.alert("✅ RESTOCK tags renumbered.\n\n⚠️ Titles changed — run 'Fill missing Product IDs' afterwards.");
+ }
+ 
+@@ -2721,6 +2750,9 @@ var FB_HEADER_RENAMES = [
+ ];
+ // Export block — the names must match the Meta spec exactly (lower case). Do not change them.
+ var META_FIELDS = ["id", "title", "description", "availability", "condition", "price", "link", "image_link", "brand"];
++// v30 (D6): "price" and "description" have no column of their own on FB CATALOGUE -- the header match is case-insensitive,
++//   so the sheet's own "Price" / "Description" columns ARE the Meta fields. The "price (Meta format)" / "mp price (Meta format)"
++//   columns are legacy and unused. Price is always re-written from the inventory by Product ID, so nothing can drift.
+ 
+ function _fbFindCol(headers, text) {
+   for (var i = 0; i < headers.length; i++) {
+@@ -2748,6 +2780,74 @@ var FB_ARCHIVE_SHEET = "FB CATALOGUE ARCHIVE";
+ var FB_ARCHIVE_MAX_SHARE = 0.05;   // safety stop: never auto-archive more than 5% of rows (min 50)
+ var _lastFbBuildLog = null;        // set by buildFbCatalogue, shown by exportMetaCsv (Refresh Meta feed)
+ 
++// ───── v28: headless (time-driven) refresh ─────
++var REFRESH_LOG_SHEET = "REFRESH LOG";
++var META_GUARD_MIN_SHARE = 0.8;    // headless export aborts when Ready < 80% of the rows already in META EXPORT
++var _headless = false;
++var _headlessLog = [];
++var _lastMetaStats = null;
++
++// Real UI from the menu; inside a time-driven trigger getUi() throws, so alerts are captured instead.
++function _ui() {
++  if (!_headless) return SpreadsheetApp.getUi();
++  return {
++    alert: function (t, m) { _headlessLog.push(String(t) + (m && typeof m === "string" ? "\n" + m : "")); return "OK"; },
++    Button: { YES: "YES", NO: "NO", OK: "OK" },
++    ButtonSet: { OK: "OK", YES_NO: "YES_NO" }
++  };
++}
++
++function refreshMetaFeedAuto() {
++  var status = "OK", err = "", st = null, line = "";
++  try {
++    _withLock(function () {
++      _headless = true; _headlessLog = []; _lastMetaStats = null; _lastFbBuildLog = null;
++      buildFbCatalogue({ silent: true });
++      if (!_lastFbBuildLog) {
++        status = "ERROR"; err = "FB CATALOGUE build stopped: " + String(_headlessLog[0] || "no message").split("\n")[0];
++        return;
++      }
++      exportMetaCsv();
++      st = _lastMetaStats;
++      if (!st) { status = "ERROR"; err = "Export stopped: " + String(_headlessLog[0] || "no message").split("\n")[0]; }
++      else if (st.guard) { status = "GUARD"; err = st.guard; }
++    });
++  } catch (e) {
++    err = String(e && e.message ? e.message : e);
++    status = /lock/i.test(err) ? "BUSY" : "ERROR";
++  } finally {
++    _headless = false;
++  }
++  if (_headlessLog.length) line = String(_headlessLog[_headlessLog.length - 1]).split("\n")[0];
++  try {
++    var ss = SpreadsheetApp.getActiveSpreadsheet();
++    var sh = ss.getSheetByName(REFRESH_LOG_SHEET);
++    if (!sh) {
++      sh = ss.insertSheet(REFRESH_LOG_SHEET);
++      sh.getRange(1, 1, 1, 8).setValues([["Time", "Mode", "Status", "Ready", "Wrong status", "Incomplete", "Note", "Error"]]);
++      sh.setFrozenRows(1);
++    }
++    sh.getRange(sh.getLastRow() + 1, 1, 1, 8).setValues([[new Date(), "auto", status,
++      st ? st.ready : "", st ? st.wrongStatus : "", st ? st.incomplete : "", line, err]]);
++  } catch (e2) { Logger.log("REFRESH LOG write failed: " + e2); }
++  if (status !== "OK") {
++    try {
++      MailApp.sendEmail(Session.getEffectiveUser().getEmail(), "[OWARIN] Meta feed refresh " + status,
++        "Status: " + status + "\n" + err + "\n\nThe previous META EXPORT is still in place unless the error says otherwise.\n" +
++        "Check the REFRESH LOG tab, then run 🚀 Refresh Meta feed from the menu.");
++    } catch (e3) { Logger.log("Alert email failed: " + e3); }
++  }
++}
++
++// Run ONCE from the Apps Script editor. Replaces any earlier trigger for the same function.
++function installMetaRefreshTrigger() {
++  ScriptApp.getProjectTriggers().forEach(function (t) {
++    if (t.getHandlerFunction() === "refreshMetaFeedAuto") ScriptApp.deleteTrigger(t);
++  });
++  ScriptApp.newTrigger("refreshMetaFeedAuto").timeBased().atHour(4).nearMinute(30).everyDays(1).inTimezone("Asia/Bangkok").create();
++  Logger.log("Trigger installed: refreshMetaFeedAuto daily ~04:30 Asia/Bangkok");
++}
++
+ function _logPidChange(sheet, row, oldPid, newPid, itemName) {
+   if (!oldPid || !newPid || oldPid === newPid) return;
+   var ss = sheet.getParent();
+@@ -2810,7 +2910,7 @@ function refreshMetaFeed() {
+ 
+ function buildFbCatalogue(opts) {
+   var silent = !!(opts && opts.silent === true);
+-  var ui = SpreadsheetApp.getUi();
++  var ui = _ui();
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+   var fb = ss.getSheetByName(FB_SHEET);
+   if (!fb) { ui.alert("Sheet " + FB_SHEET + " not found"); return; }
+@@ -2909,7 +3009,7 @@ function buildFbCatalogue(opts) {
+           .setValues(add.map(function (pd) { return [pd]; }));
+         if (cTitleH) {
+           fb.getRange(startRow, cTitleH, add.length, 1)
+-            .setValues(add.map(function (pd) { return [invIdx[pd].name]; }));
++            .setValues(add.map(function (pd) { return [_capTitle(invIdx[pd].name)]; }));   // v29: no RESTOCK in FB Title
+         }
+       });
+       log.push("✓ added " + add.length + " new rows (products that were missing from this sheet)");
+@@ -3006,7 +3106,7 @@ function buildFbCatalogue(opts) {
+ 
+     out.id.push([pid]);
+     var fbTitle = vTitle ? String(vTitle[i][0] || "").trim() : "";
+-    out.title.push([fbTitle || (inv ? _capTitle(inv.name) : "")]);   // v25: fall back to the inventory name
++    out.title.push([_metaTitleCase(_capTitle(fbTitle) || (inv ? _capTitle(inv.name) : ""))]);   // v25 fallback to the inventory name; v29 strips RESTOCK from FB Title too
+     out.description.push([desc]);
+     out.availability.push([inv ? (inv.status === "Sold" ? "out of stock" : "in stock") : ""]);
+     // Everything is second-hand -> Meta accepts only new / refurbished / used
+@@ -3151,7 +3251,21 @@ var META_EXPORT_SHEET = "META EXPORT";
+ var META_REQUIRED = ["id", "title", "description", "availability", "condition", "price", "link", "image_link", "brand"];
+ // Optional for Meta, but without it a product shows as "Not visible in Shops".
+ // Second-hand books are one copy per SKU -> always 1.
+-var META_EXTRA = { "quantity_to_sell_on_facebook": "1" };
++var META_EXTRA = { "quantity_to_sell_on_facebook": "1" };   // v30: overwritten per row with the number of identical copies
++
++// v30: copies that look the same to a buyer share one feed row. Key = base title | Publisher | Original | Condition | sorted Copy Flags.
++function _metaDupKey(it) {
++  var flags = String(it.copyFlags || "").toUpperCase().split(/\s+/).filter(Boolean).sort().join("+");
++  return [_getBaseTitle(it.name).toLowerCase(), String(it.publisher || "").toUpperCase(),
++          String(it.original || "").replace(/[^\d.]/g, ""), String(it.condition || "").toUpperCase(), flags].join("|");
++}
++
++// v30: Meta flags titles with no lowercase letter. Only such titles change; words of 4+ capitals become Capitalised (PS2, RPG, VII stay).
++function _metaTitleCase(t) {
++  t = String(t == null ? "" : t);
++  if (!/[A-Za-z]/.test(t) || /[a-z]/.test(t)) return t;
++  return t.replace(/[A-Z]{4,}/g, function (w) { return w.charAt(0) + w.slice(1).toLowerCase(); });
++}
+ 
+ // ══════════════════════════════════════════════════════════
+ //  Facebook catalogue scope — the single place that controls every tool.
+@@ -3199,6 +3313,8 @@ function _metaInvIndex() {
+         genre:     (_val(vals[i], C, "genre")     || "").toString().trim(),
+         price:     (_val(vals[i], C, "price")       || "").toString().trim(),
+         mktPrice:  (_val(vals[i], C, "marketplace") || "").toString().trim(),
++        original:  (_val(vals[i], C, "original")  || "").toString().trim(),     // v30: cover price, part of the duplicate key
++        copyFlags: (_val(vals[i], C, "copyFlags") || "").toString().trim(),     // v30: MAP / COLOUR / ... make a copy distinct
+         sheet:     sn
+       };
+     }
+@@ -3207,7 +3323,7 @@ function _metaInvIndex() {
+ }
+ 
+ function exportMetaCsv() {
+-  var ui = SpreadsheetApp.getUi();
++  var ui = _ui();
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+   var fb = ss.getSheetByName(FB_SHEET);
+   if (!fb) { ui.alert("Sheet " + FB_SHEET + " not found"); return; }
+@@ -3240,6 +3356,7 @@ function exportMetaCsv() {
+   var out = [META_REQUIRED.concat(extraKeys)];   // header row = Meta field names
+   var skipped = [], reasons = {};
+   var outScope = 0, wrongStatus = 0, notInv = [], missByPid = {};
++  var dupSeen = {}, dupPids = {}, qtyCol = META_REQUIRED.length + extraKeys.indexOf("quantity_to_sell_on_facebook");   // v30
+   for (var i = 0; i < n; i++) {
+     // ── Scope filter first ──
+     var thisPid = String(data.id[i][0] == null ? "" : data.id[i][0]).trim();
+@@ -3268,12 +3385,32 @@ function exportMetaCsv() {
+       miss.forEach(function (f) { reasons[f] = (reasons[f] || 0) + 1; });
+       continue;
+     }
++    // v30: identical copy already in the feed -> count it there instead of adding a second row
++    var dk = it ? _metaDupKey(it) : "";
++    if (dk && dupSeen[dk]) {
++      dupSeen[dk].count++;
++      out[dupSeen[dk].idx][qtyCol] = String(dupSeen[dk].count);
++      dupPids[row[0]] = true;
++      continue;
++    }
+     extraKeys.forEach(function (k) { row.push(META_EXTRA[k]); });
+     out.push(row);
++    if (dk) dupSeen[dk] = { idx: out.length - 1, count: 1 };
+   }
+ 
+-  // Write the new sheet
++  // v28: drop guard (headless only) — never replace a good META EXPORT with a much smaller one
+   var ex = ss.getSheetByName(META_EXPORT_SHEET);
++  _lastMetaStats = { ready: out.length - 1, wrongStatus: wrongStatus, incomplete: skipped.length, merged: Object.keys(dupPids).length, guard: "" };
++  if (_headless && ex) {
++    var prevRows = Math.max(ex.getLastRow() - 1, 0);
++    if (out.length - 1 === 0 || (prevRows > 0 && out.length - 1 < prevRows * META_GUARD_MIN_SHARE)) {
++      _lastMetaStats.guard = "Ready " + (out.length - 1) + " vs " + prevRows + " in current META EXPORT (min " +
++        Math.ceil(prevRows * META_GUARD_MIN_SHARE) + "). META EXPORT left untouched.";
++      _lastFbBuildLog = null;
++      return;
++    }
++  }
++  // Write the new sheet
+   if (!ex) ex = ss.insertSheet(META_EXPORT_SHEET);
+   else ex.clear();
+   var nCols = out[0].length;                 // = required + extra (safe when fields are added)
+@@ -3281,13 +3418,13 @@ function exportMetaCsv() {
+   ex.setFrozenRows(1);
+   ex.getRange(1, 1, 1, nCols).setFontWeight("bold");
+   SpreadsheetApp.flush();
+-  ss.setActiveSheet(ex);
++  if (!_headless) ss.setActiveSheet(ex);
+ 
+   // v27: health check — every in-scope Instock product must be in the feed; name the ones that are not and why
+   var exportedIds = {}, gaps = [];
+   for (var x = 1; x < out.length; x++) exportedIds[out[x][0]] = true;
+   Object.keys(inv).forEach(function (pid) {
+-    if (exportedIds[pid] || !_metaInScope(inv[pid], true).ok) return;
++    if (exportedIds[pid] || dupPids[pid] || !_metaInScope(inv[pid], true).ok) return;   // v30: merged copies are not gaps
+     gaps.push(pid + " " + inv[pid].name + " — " +
+       (missByPid[pid] ? _metaFixHint(missByPid[pid]) : "no row in FB CATALOGUE → run 🚀 Refresh Meta feed"));
+   });
+@@ -3300,6 +3437,7 @@ function exportMetaCsv() {
+             "Scope: game guide books + magazines · status " + (META_ONLY_STATUS.join("/") || "any") + "\n\n" +
+             "• Ready to upload: " + (out.length - 1) + " products\n" +
+             "• Out of scope: " + outScope + "\n" +
++            "• Merged identical copies (listed once, quantity = copies): " + Object.keys(dupPids).length + "\n" +
+             "• Wrong status (sold / auction / hold / new arrival): " + wrongStatus + "\n" +
+             "• Incomplete data: " + skipped.length + "\n" +
+             "• Not in inventory (FB CATALOGUE rows to clean up): " + notInv.length + "\n";

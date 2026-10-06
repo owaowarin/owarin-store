@@ -1,0 +1,613 @@
+{
+  "spreadsheetId": "158ekdEhxQC0hLIaUCz7cV3hx_XAVBeHuKYsD82HSszE",
+  "date": "2026-09-11",
+  "edits": [
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 0,
+      "col": 1,
+      "old": "รายละเอียด",
+      "value": "Details"
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 0,
+      "col": 2,
+      "old": "สถานะ",
+      "value": "Status"
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 1,
+      "col": 0,
+      "old": "วัตถุประสงค์",
+      "value": "Purpose"
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 1,
+      "col": 1,
+      "old": "ออกแบบหลังบ้านและทดสอบโค้ดในไฟล์แยก",
+      "value": "Design the back office and test code in a separate file."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 2,
+      "col": 0,
+      "old": "ข้อมูลฐาน",
+      "value": "Source snapshot"
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 2,
+      "col": 1,
+      "old": "สำเนาเต็ม 12 แท็บของ OWARIN STORE; แท็บเดิมซ่อนไว้ ใช้เมนู View → Hidden sheets เปิดได้",
+      "value": "Full copy of 12 OWARIN STORE tabs. Legacy tabs are hidden; open them via View > Hidden sheets."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 3,
+      "col": 0,
+      "old": "จำนวนเล่มที่นำเข้า",
+      "value": "Imported item count"
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 3,
+      "col": 2,
+      "old": "คงแต่ละแถวแยกกัน",
+      "value": "Each physical copy remains a separate row."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 4,
+      "col": 1,
+      "old": "รวม Guide Book และ Magazine; LAB-ITEM เป็นรหัสทดสอบ ไม่เขียนทับ SKU เดิม",
+      "value": "Combines guide books and magazines. LAB-ITEM IDs are for testing; legacy SKUs are preserved."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 5,
+      "col": 1,
+      "old": "mapping ประเภทเป็นข้อเสนอทั้งหมด ยังไม่ยืนยันฉบับ/ชื่อชุด",
+      "value": "All classification mappings are proposals. Verify each edition and series."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 6,
+      "col": 1,
+      "old": "ตารางว่างสำหรับทดสอบธุรกรรมใหม่ ไม่สร้างยอดขายย้อนหลัง",
+      "value": "Empty templates for testing new transactions; no historical sales are fabricated."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 7,
+      "col": 1,
+      "old": "กรณีทดสอบ 0–8 เล่ม ราคาเล่มละ 100 บาทเป็นข้อมูลสมมติสำหรับตรวจสูตร",
+      "value": "Tests for 0–8 books at a fictional THB 100 per book to verify formulas."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 8,
+      "col": 1,
+      "old": "ราคาสินค้ารายเล่ม ไม่รวมค่าส่งถึงลูกค้า",
+      "value": "Actual price per item, excluding customer shipping."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 9,
+      "col": 1,
+      "old": "เก็บต้นทุนเดิมรายเล่ม ไม่บวกต้นทุนเพิ่มซ้ำ",
+      "value": "Keep the recorded cost per item; do not add the same cost twice."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 10,
+      "col": 0,
+      "old": "ค่าส่งถึงลูกค้า",
+      "value": "Customer shipping"
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 10,
+      "col": 1,
+      "old": "50 บาทเล่มแรก + 10 บาทต่อเล่มถัดไป ไม่เกิน 100 บาท",
+      "value": "THB 50 for the first book + THB 10 per additional book, capped at THB 100."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 11,
+      "col": 1,
+      "old": "ไม่มีบริการเก็บเงินปลายทาง",
+      "value": "Cash on delivery is unavailable."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 12,
+      "col": 1,
+      "old": "ขายผ่านประมูลแล้ว ราคาชนะต่อเล่ม ห้ามขายซ้ำ",
+      "value": "Already sold through auction, with an individual winning price per book. Prevent resale."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 13,
+      "col": 1,
+      "old": "Apps Script ฉบับปรับต้องรองรับโครงสร้างชีตเดิม; schema ใหม่ไม่ใช่เงื่อนไขบังคับก่อนใช้ 5 ฟีเจอร์",
+      "value": "Updated Apps Script must support the legacy sheets. The new schema is not required for the five initial improvements."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 14,
+      "col": 0,
+      "old": "การนำไปใช้จริง",
+      "value": "Store rollout"
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 14,
+      "col": 1,
+      "old": "ทดสอบบนสำเนา → ตรวจ diff/ผลทดสอบ → ใช้ Apps Script กับชีตเก่า; ยังไม่ deploy ในรอบนี้",
+      "value": "Test in LAB, review changes and results, then apply to the original store script. Store workflow uses test deployments (/dev)."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 15,
+      "col": 0,
+      "old": "การแยกระบบ",
+      "value": "Environment separation"
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 15,
+      "col": 1,
+      "old": "ไม่มีสูตร IMPORTRANGE หรือคำสั่งเขียนกลับไปต้นฉบับที่เพิ่มโดยโครงการนี้",
+      "value": "This project adds no IMPORTRANGE formulas or writes back to the original store."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 16,
+      "col": 0,
+      "old": "ข้อมูลเดิม",
+      "value": "Original data"
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 16,
+      "col": 1,
+      "old": "ชื่อ ราคา วันที่ และรูปในแท็บต้นฉบับคงไว้; URL รูปเป็น index reference ยังไม่ยืนยัน HTTP ทุกใบ",
+      "value": "Source titles, prices, dates and images were copied. Image URLs are index references; individual URLs have not all been HTTP-verified."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 17,
+      "col": 0,
+      "old": "ไฟล์ร้านจริง",
+      "value": "Original store spreadsheet"
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 18,
+      "col": 0,
+      "old": "ข้อควรตรวจ",
+      "value": "Review required"
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 18,
+      "col": 1,
+      "old": "Legacy SKU ซ้ำ/ราคาไม่ครบอยู่ใน Review Note; Catalog ID และชั้นยังว่างจนตรวจจริง",
+      "value": "Review Note flags duplicate legacy SKUs and missing prices. Catalog IDs and shelf locations await verification."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 19,
+      "col": 0,
+      "old": "ขอบเขตหน้าเว็บ",
+      "value": "Website scope"
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 19,
+      "col": 1,
+      "old": "พักงานเว็บไซต์สาธารณะ มุ่งหลังบ้านก่อน",
+      "value": "Public website work is paused; focus on the back office."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 20,
+      "col": 0,
+      "old": "Facebook ในไฟล์ทดสอบ",
+      "value": "Facebook in LAB"
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 20,
+      "col": 1,
+      "old": "ตั้ง FB ALBUMS active เป็น FALSE เฉพาะสำเนา; ไม่ได้เปลี่ยนร้านจริงหรือเปิด trigger",
+      "value": "FB ALBUMS active flags are FALSE in LAB only. No store changes or posting triggers were installed."
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 21,
+      "col": 0,
+      "old": "ขอบเขตการตรวจรับ",
+      "value": "Verification scope"
+    },
+    {
+      "sheet": "START HERE",
+      "sheetId": 810001,
+      "row": 21,
+      "col": 1,
+      "old": "ตรวจค่า/สูตรทุกช่วงใหม่และ native table metadata ผ่าน; ยังไม่ได้ตรวจหน้าตาใน Google UI เพราะเบราว์เซอร์ไม่ได้ลงชื่อเข้าใช้",
+      "value": "Initial V2 values, formulas and table metadata were checked. Later Apps Script tests are recorded in LAB-STATUS.md; not every function is verified."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 1,
+      "col": 5,
+      "old": "ตรวจฉบับพิเศษที่แฝงอยู่",
+      "value": "Check for special editions within this group."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 2,
+      "col": 5,
+      "old": "รูปเล่ม ไม่ใช่ชื่อชุด",
+      "value": "Physical format, not a series name."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 3,
+      "col": 5,
+      "old": "แยกบทสรุป/ฉบับภาพสะสม",
+      "value": "Distinguish strategy guides from collectible illustration editions."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 4,
+      "col": 5,
+      "old": "ชื่อชุดจริงต่างกันได้ เช่น BIG SPECIAL",
+      "value": "Actual series names may differ, e.g. BIG SPECIAL."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 5,
+      "col": 5,
+      "old": "ตรวจเนื้อหารายฉบับ",
+      "value": "Check the content of each edition."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 6,
+      "col": 5,
+      "old": "ตรวจฉบับพิเศษ",
+      "value": "Check for special editions."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 7,
+      "col": 5,
+      "old": "ตรวจฉบับพิเศษ",
+      "value": "Check for special editions."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 8,
+      "col": 5,
+      "old": "ตรวจฉบับพิเศษ",
+      "value": "Check for special editions."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 9,
+      "col": 5,
+      "old": "รักษาเครื่องหมายชื่อเดิม",
+      "value": "Preserve the original title punctuation."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 10,
+      "col": 5,
+      "old": "ตรวจจากปก",
+      "value": "Verify against the cover."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 11,
+      "col": 5,
+      "old": "ตรวจจากปก",
+      "value": "Verify against the cover."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 12,
+      "col": 5,
+      "old": "มี Dengeki Hobby / Gundam Weapons / คู่มือโมเดล",
+      "value": "Includes Dengeki Hobby, Gundam Weapons and model guides."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 13,
+      "col": 5,
+      "old": "มีชื่อ HOBBY GAME; ไม่จัดทั้งกลุ่มอัตโนมัติ",
+      "value": "Includes HOBBY GAME; do not classify the entire group automatically."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 14,
+      "col": 5,
+      "old": "ตรวจเลขฉบับ/ปี",
+      "value": "Verify issue number and year."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 15,
+      "col": 5,
+      "old": "เนื้อหาผสมและฉบับพิเศษ",
+      "value": "Mixed content and special editions."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 16,
+      "col": 5,
+      "old": "มี Photo Album",
+      "value": "Includes photo albums."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 17,
+      "col": 5,
+      "old": "จัดรายฉบับ",
+      "value": "Classify each edition individually."
+    },
+    {
+      "sheet": "TAXONOMY",
+      "sheetId": 810003,
+      "row": 18,
+      "col": 5,
+      "old": "Type เดิมว่าง",
+      "value": "Legacy Type is blank."
+    },
+    {
+      "sheet": "SHIPPING TEST",
+      "sheetId": 810007,
+      "row": 0,
+      "col": 0,
+      "old": "จำนวนเล่ม (ทดสอบ)",
+      "value": "Book count (test)"
+    },
+    {
+      "sheet": "SHIPPING TEST",
+      "sheetId": 810007,
+      "row": 0,
+      "col": 1,
+      "old": "ค่าส่งจากสูตร",
+      "value": "Calculated shipping"
+    },
+    {
+      "sheet": "SHIPPING TEST",
+      "sheetId": 810007,
+      "row": 0,
+      "col": 2,
+      "old": "ค่าส่งที่คาดหวัง",
+      "value": "Expected shipping"
+    },
+    {
+      "sheet": "SHIPPING TEST",
+      "sheetId": 810007,
+      "row": 0,
+      "col": 3,
+      "old": "ผลตรวจ",
+      "value": "Result"
+    },
+    {
+      "sheet": "SHIPPING TEST",
+      "sheetId": 810007,
+      "row": 0,
+      "col": 4,
+      "old": "ยอดสินค้า (ทดสอบ)",
+      "value": "Item subtotal (test)"
+    },
+    {
+      "sheet": "SHIPPING TEST",
+      "sheetId": 810007,
+      "row": 0,
+      "col": 5,
+      "old": "ยอดรวมพร้อมส่ง",
+      "value": "Total incl. shipping"
+    },
+    {
+      "sheet": "PROJECT SETTINGS",
+      "sheetId": 810008,
+      "row": 1,
+      "col": 2,
+      "old": "ไฟล์ทดสอบ ไม่ใช่ฐานขายจริง",
+      "value": "Test file; not the live sales database."
+    },
+    {
+      "sheet": "PROJECT SETTINGS",
+      "sheetId": 810008,
+      "row": 2,
+      "col": 2,
+      "old": "บาทสำหรับเล่มแรก",
+      "value": "THB for the first book."
+    },
+    {
+      "sheet": "PROJECT SETTINGS",
+      "sheetId": 810008,
+      "row": 3,
+      "col": 2,
+      "old": "บาทต่อเล่มถัดไป",
+      "value": "THB per additional book."
+    },
+    {
+      "sheet": "PROJECT SETTINGS",
+      "sheetId": 810008,
+      "row": 4,
+      "col": 2,
+      "old": "เพดานต่อออร์เดอร์",
+      "value": "Maximum shipping charge per order."
+    },
+    {
+      "sheet": "PROJECT SETTINGS",
+      "sheetId": 810008,
+      "row": 5,
+      "col": 2,
+      "old": "ไม่มีเก็บเงินปลายทาง",
+      "value": "Cash on delivery is unavailable."
+    },
+    {
+      "sheet": "PROJECT SETTINGS",
+      "sheetId": 810008,
+      "row": 6,
+      "col": 2,
+      "old": "Price ไม่รวมค่าส่งถึงลูกค้า",
+      "value": "Price excludes customer shipping."
+    },
+    {
+      "sheet": "PROJECT SETTINGS",
+      "sheetId": 810008,
+      "row": 7,
+      "col": 2,
+      "old": "คงต้นทุนรายเล่มเดิม ไม่บวกต้นทุนซ้ำ",
+      "value": "Keep recorded item costs; do not double-count."
+    },
+    {
+      "sheet": "PROJECT SETTINGS",
+      "sheetId": 810008,
+      "row": 8,
+      "col": 2,
+      "old": "ซื้อหลายเล่มแต่คิดราคาต่อเล่ม",
+      "value": "Multiple books are purchased at individual prices."
+    },
+    {
+      "sheet": "PROJECT SETTINGS",
+      "sheetId": 810008,
+      "row": 9,
+      "col": 2,
+      "old": "ราคาปิดแยกเล่ม; ขายแล้ว",
+      "value": "Individual winning price per book; already sold."
+    },
+    {
+      "sheet": "PROJECT SETTINGS",
+      "sheetId": 810008,
+      "row": 10,
+      "col": 2,
+      "old": "เจ้าของใช้งานคนเดียว",
+      "value": "Single owner/operator."
+    },
+    {
+      "sheet": "PROJECT SETTINGS",
+      "sheetId": 810008,
+      "row": 11,
+      "col": 2,
+      "old": "เป้าหมายนำ Apps Script ไปใช้จริงภายหลัง",
+      "value": "Target spreadsheet for a later store script update."
+    },
+    {
+      "sheet": "PROJECT SETTINGS",
+      "sheetId": 810008,
+      "row": 12,
+      "col": 2,
+      "old": "แก้และทดสอบในไฟล์นี้",
+      "value": "Make changes and run tests in this file."
+    },
+    {
+      "sheet": "PROJECT SETTINGS",
+      "sheetId": 810008,
+      "row": 13,
+      "col": 2,
+      "old": "สิ่งพิมพ์โมเดล ไม่ใช่ฟิกเกอร์",
+      "value": "Model-related publications, not figurines."
+    },
+    {
+      "sheet": "PROJECT SETTINGS",
+      "sheetId": 810008,
+      "row": 14,
+      "col": 2,
+      "old": "ปิด active ทุกอัลบั้มในสำเนาทดสอบเท่านั้น ไม่ติดตั้ง trigger และไม่โพสต์",
+      "value": "Disable all album active flags in LAB only. No triggers or posts."
+    }
+  ],
+  "reviewRange": "'ITEMS V2'!T2:T2244",
+  "reviewEdits": [
+    {
+      "old": "จัดประเภทเป็นข้อเสนอ รอตรวจฉบับ | ไม่ทราบวันที่ขาย",
+      "value": "Proposed classification; verify the edition | Sale date unknown"
+    },
+    {
+      "old": "จัดประเภทเป็นข้อเสนอ รอตรวจฉบับ | ไม่พบ image URL ใน index",
+      "value": "Proposed classification; verify the edition | Image URL not found in the index"
+    },
+    {
+      "old": "จัดประเภทเป็นข้อเสนอ รอตรวจฉบับ | สถานะเดิมว่าง",
+      "value": "Proposed classification; verify the edition | Legacy status is blank"
+    },
+    {
+      "old": "จัดประเภทเป็นข้อเสนอ รอตรวจฉบับ",
+      "value": "Proposed classification; verify the edition"
+    },
+    {
+      "old": "จัดประเภทเป็นข้อเสนอ รอตรวจฉบับ | ราคาพร้อมขายไม่ครบ | ไม่พบ image URL ใน index",
+      "value": "Proposed classification; verify the edition | In-stock item is missing a sale price | Image URL not found in the index"
+    },
+    {
+      "old": "จัดประเภทเป็นข้อเสนอ รอตรวจฉบับ | Legacy SKU ซ้ำ: ห้ามใช้ขายจนแก้ mapping | ไม่พบ image URL ใน index",
+      "value": "Proposed classification; verify the edition | Duplicate legacy SKU: block sale until mapping is corrected | Image URL not found in the index"
+    },
+    {
+      "old": "จัดประเภทเป็นข้อเสนอ รอตรวจฉบับ | Legacy SKU ซ้ำ: ห้ามใช้ขายจนแก้ mapping | ไม่ทราบวันที่ขาย",
+      "value": "Proposed classification; verify the edition | Duplicate legacy SKU: block sale until mapping is corrected | Sale date unknown"
+    }
+  ]
+}

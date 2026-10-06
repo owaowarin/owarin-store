@@ -1,0 +1,21 @@
+{
+  "verified_utc": "2026-09-22T18:06:43.010898+00:00",
+  "live_confirmation_utc": "2026-09-22T18:04:22.495887+00:00",
+  "inventory_unchanged": true,
+  "fresh_byte_rechecks": 3077,
+  "rename_records": 327,
+  "rename_rows_with_basename_only_ambiguity": 8,
+  "product_rows": 2465,
+  "status": "BASELINE-VERIFIED-NOT-PUBLISH-AUTHORITY",
+  "report_sha256": {
+    "alias-and-route-review.csv": "42fe506a079013b731ea9f217701265b9a76c37ad959d6e940c2109a2ce36387",
+    "archive-reconciliation.csv": "137de305c3d7a2c4af5de046cfbf369ab8385d02dd088f56743f688605272df8",
+    "candidate-manifest.csv": "70e9dc7350db29e4d338b7c2ee816ad75c1daed2fcda1e613bc50bd3da51c625",
+    "exceptions.csv": "55007d800655a5119523bd03ea10f9e65f196bba1646fdf73fce450830b36f5d",
+    "image-content-problems.csv": "da0daac16691f2535b586f4e88a617309e5867ac9f488282213053859c258d61",
+    "preservation-manifest.csv": "011cb4af58731a019fb0e9b3c461a0a731cd77761284876a64c945ea4658094b",
+    "priority-exceptions.csv": "babef1fc7381ae70458dcffd68c080ddedeaf021dbfe5fb72a69312847f75158",
+    "products.csv": "719c20129f38cb091e908c754f9723abfaa0772e0b6aa67505cf5863f957e703",
+    "rename-reconciliation.csv": "ec04c78583927446efc498fdaafcbb1ac3e13f3cd24d04a2f58dd5229a2429ea"
+  }
+}

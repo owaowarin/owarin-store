@@ -1,0 +1,15 @@
+# Production undo — W1/W2 v40
+
+Original Sheet: `16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0`; original project: `1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp`.
+
+Verified private native backup: [OWARIN STORE — BACKUP before W1-W2 — 2026-10-06](https://docs.google.com/spreadsheets/d/1OegftlJuM0glHqymOcMU0G3KhiF_AoYlNR3m1tDoZgY/edit). Restricted; owner alone; no service-account editors. Do not enable its external-formula access or automation. The fresh original export `shop-before.xlsx` is the exact stored-cell snapshot; native-copy export differs in derived R2 IMAGES after recalculation. Other 21 tabs compare identically after normalizing ArrayFormula objects. Keep both exports.
+
+Before any rollback, freshly export the original Sheet and save current source, deployment and unfinished requests; pause user mutations while reconciling. Never overwrite later SALES, CLIENT, stock, PID, order or request history with this backup.
+
+1. Runtime rollback: manage the existing deployment and select **Version 4** (2026-10-03 21:44; owner; Only myself); keep the existing URL/access. This returns the executable version without undoing stored data. Verify the actual selected version afterward.
+2. Head/trigger source rollback: restore exact `before/source/Code.gs` (fresh v32), `webapp.gs` (v31), `Index.html`, and unchanged `FbAlbum.gs`, `R2Upload.gs`, `P1Journal.gs`; manifest is the verified 203-character `appsscript.json`, not the stale first capture. Restore source only after inspecting active W1 claims/recoveries because old Head guards do not understand those claims. Preserve all newly installed helper files as archived/inert evidence; do not execute migrations or delete tables/IDs.
+3. Data rollback is a separate reconciliation: retain CLIENT G:H stable identities/revisions, Item UID, Order Line ID and ORDERS/ORDER LINES/ORDER REQUESTS with all events. Complete the same original request and payload after failure; do not create a new migration ID or reset PREPARED/NEEDS_REVIEW events. If source rollback is required while managed orders exist, stop ordinary edits and reconcile claims first.
+
+Fresh source hashes: `backup-verification.json`; all seven source files in `before/source/`. The stale manifest attempt remains `before/manifest-stale-attempt.txt` and `sources-before.json` solely as diagnostic evidence. Settings (including private properties), deployment and two original triggers are captured locally; do not paste those property values into logs or chat. Original Sheet public-view permission is needed by Meta and remains unchanged.
+
+Native-copy comparison: `copy-review.json`; initial comparison overcounted four ArrayFormula instances by object identity. Derived R2 IMAGES contains 9,183 differences; this native copy alone is not an exact frozen export of calculated cells. The original XLSX preserves the original values/formulas for recovery without changing the R2 feed.

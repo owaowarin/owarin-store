@@ -1,0 +1,19 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\before\\00 Docs\\HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md"
+index e4e4395..8366200 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\before\\00 Docs\\HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md"	
+@@ -154,3 +154,14 @@ One next step + recommended model/effort:
+ ฟิลด์ที่ต้องเติมใน handoff template: `Change ID`, `Audit/request IDs`, `Backup/diff location`, `Error + failed stage`, `Recovery attempted/result` และ `Log verification` ถ้าไม่มีการเขียนข้อมูลจริงให้ระบุ `Live mutations: none` ไม่สร้าง request ID ปลอม
+ 
+ เพิ่มท้าย prompt ส่งโมเดลถัดไป: **ทุก update/fix ต้องมี log ตามแผน §15; เก็บก่อน–หลัง ผลทดสอบ error/retry และวิธีกู้คืน ห้ามถือ phase เสร็จโดยไม่มีหลักฐาน log และห้ามอ้าง runtime audit พร้อมใช้จน QA-L ผ่าน**
++
++
++## Session36 — W1 candidate/test continuation
++
++W1 local source and synthetic browser verified; Google test saved source ready, runtime gate pending Authorization. Shop buttons still v31; do not use these instructions as installed shop behavior. Exact revision/limitations/recovery in `04 Design Tools/logs/W1-20261003-01/result.md` and UNDO.md.
++
++Test project → W1Qa.gs → function dropdown w1QaPrepare20261004 → Run → Review permissions (bound Sheet/UI/own email identity/external requests only). Inspect Execution log; helper refuses rerun when ORDERS exists. Then w1QaRecovery20261004 once, preserve request IDs and export/readback. Open Deploy → Test deployments and use observed /dev URL only for isolated UI; keep access MYSELF and do not change production deployment.
++
++SHOP: INVENTORY → Add to cart beside price → CART → confirm Customer Shipping and Shipping Subsidy (0 explicitly allowed) → Create order → ORDERS/Pending. Cancel releases only that order; Clear cart never cancels it. Confirm sold → Final review → Back makes no sale; Confirm sold · Label later commits once. SHOPEE cart: Confirm sold opens review showing entered and ledger round(entered*0.7-50); commit Label later once. Single Review sale uses the same journal. Every new cart/sale requires subsidy again. Sold cards show Missing label/Complete label: W2.
++
++If timeout/error: retain stored Request ID → Check / retry request; only DONE canonical readback clears recovery. Never use a new ID. If corrupt journal/external conflict/partial derived edit: stop mutations, export and reconcile exact cells/events; successful writes stay intact. Script cannot prevent direct owner Sheet edits; managed UID orphan/duplicates fail closed. Local preview command `node 04 Design Tools/logs/W1-20261003-01/preview.cjs` serves unchanged UI + mock transport at127.0.0.1:8766; it is synthetic and not Google acceptance.

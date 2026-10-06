@@ -1,0 +1,5 @@
+PASS uncertain response/reload/same-ID retry; concurrent double click blocked
+PASS storage failure stops before API
+PASS final review/back no mutation; explicit subsidy; Shopee ledger basis
+PASS syntax and collapsed-row button structure; UI interaction verified separately
+PASS W1 UI

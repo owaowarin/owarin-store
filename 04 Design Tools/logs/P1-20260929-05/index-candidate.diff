@@ -1,0 +1,115 @@
+diff --git a/04 Design Tools/logs/P1-20260929-05/index-before.html b/04 Design Tools/logs/P1-20260929-01/candidate/Index.html
+index cab318f..f33a4c2 100644
+--- a/04 Design Tools/logs/P1-20260929-05/index-before.html	
++++ b/04 Design Tools/logs/P1-20260929-01/candidate/Index.html	
+@@ -570,7 +570,21 @@ var M = { mode: 'add', source: 'GGB', sku: '', row: null, saving: false, soldCha
+           auto: { genre: false, platform: false, original: false } };
+ var LAST_ADD = null;
+ var addSuggestionResets = [], addAutoTimers = [];
+-var addRequestId = '';
++// ponytail: this tab survives reloads; cross-tab recovery needs a server request-status lookup.
++var ADD_PENDING_KEY = 'owarin.add.pending.1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp.v1';
++var addPending = null, addPendingBroken = false;
++try {
++  var savedAdd = sessionStorage.getItem(ADD_PENDING_KEY);
++  if (savedAdd) {
++    addPending = JSON.parse(savedAdd);
++    if (!addPending || !/^[A-Za-z0-9_-]{12,100}$/.test(addPending.requestId) ||
++        !addPending.payload || addPending.payload.requestId !== addPending.requestId ||
++        (addPending.payload.source !== 'GGB' && addPending.payload.source !== 'MAG') ||
++        typeof addPending.payload.title !== 'string' || !addPending.payload.title.trim())
++      throw new Error('Invalid pending Add');
++  }
++} catch (e) { addPending = null; addPendingBroken = true; }
++var addRequestId = addPending ? addPending.requestId : '';
+ 
+ /* ── api bridge: one contract end to end ── */
+ function callApi(action, payload) {
+@@ -947,13 +961,29 @@ function resetAddForm(){
+ function setAddBusy(busy){
+   var fields = document.querySelectorAll('#modal input, #modal select, #modal button');
+   for (var i = 0; i < fields.length; i++) fields[i].disabled = busy;
+-  $('mSave').textContent = busy ? 'Saving…' : 'Save';
++  if (!busy && addPending) {
++    fields = document.querySelectorAll('#modal input, #modal select');
++    for (var j = 0; j < fields.length; j++) fields[j].disabled = true;
++    $('mSrcGGB').disabled = $('mSrcMAG').disabled = true;
++  }
++  $('mSave').textContent = busy ? 'Saving…' : (addPending ? 'Retry same request' : 'Save');
+ }
+ function openAdd(){
+   if (M.saving) return;
+-  if (addRequestId) {
++  if (addPendingBroken) { toast('Browser storage unavailable — Add is disabled to prevent duplicate requests'); return; }
++  if (addPending) {
++    var old = addPending.payload;
++    M.mode = 'add'; M.sku = ''; M.row = null;
++    $('mTitle').textContent = '＋ Add item';
++    $('mSrcRow').style.display = '';
++    setModalSource(old.source);
++    fillForm({ name: old.title, publisher: old.pub, condition: old.cond, status: old.status,
++      original: old.original, cost: old.cost, price: old.price, platform: old.platform,
++      genre: old.genre, subGenre: old.subGenre, type: old.type, copyFlags: old.copyFlags,
++      rarity: old.rarity, marketRef: old.marketRef, refNote: old.refNote });
++    $('mResult').textContent = 'Unresolved Add Request ' + addRequestId + ' — retry this request or reconcile the journal';
+     showModal('modal', true);
+-    toast('Unresolved Add Request ' + addRequestId + ' — check inventory before starting another item');
++    setAddBusy(false);
+     return;
+   }
+   M.mode = 'add'; M.sku = ''; M.row = null;
+@@ -980,7 +1010,8 @@ function openEdit(sku, src){
+ 
+ $('mSave').addEventListener('click', function(){
+   if (M.saving) return;
+-  var p = collectForm();
++  if (M.mode === 'add' && addPendingBroken) { toast('Browser storage unavailable — Add is disabled'); return; }
++  var p = (M.mode === 'add' && addPending) ? addPending.payload : collectForm();
+   if (!p.title) { toast('Enter the item name first'); return; }
+ 
+   M.saving = true;
+@@ -996,16 +1027,22 @@ $('mSave').addEventListener('click', function(){
+   };
+ 
+   if (M.mode === 'add') {
+-    if (!addRequestId) addRequestId = 'add-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+-    callApi('inventory.add', {
+-      requestId: addRequestId,
+-      source: M.source, title: p.title, pub: p.pub, cond: p.cond,
+-      original: p.original, cost: p.cost, price: p.price, status: p.status,
+-      platform: p.platform, genre: p.genre, subGenre: p.subGenre, type: p.type,
+-      copyFlags: p.copyFlags, rarity: p.rarity, marketRef: p.marketRef, refNote: p.refNote
+-    }).then(function(dd){
++    if (!addPending) {
++      addRequestId = 'add-' + Date.now() + '-' + Math.random().toString(36).slice(2);
++      addPending = { requestId: addRequestId, payload: {
++        requestId: addRequestId, source: M.source, title: p.title, pub: p.pub, cond: p.cond,
++        original: p.original, cost: p.cost, price: p.price, status: p.status,
++        platform: p.platform, genre: p.genre, subGenre: p.subGenre, type: p.type,
++        copyFlags: p.copyFlags, rarity: p.rarity, marketRef: p.marketRef, refNote: p.refNote
++      } };
++      try { sessionStorage.setItem(ADD_PENDING_KEY, JSON.stringify(addPending)); }
++      catch (e) { addPending = null; addRequestId = ''; done(); toast('Could not keep Add Request ID — nothing was sent'); return; }
++    }
++    callApi('inventory.add', addPending.payload).then(function(dd){
+       if (!dd || !dd.item || !dd.item.productId) throw new Error('Save result is unclear — refresh inventory before retrying');
+       committedSku = dd.item.productId;
++      try { sessionStorage.removeItem(ADD_PENDING_KEY); } catch (e) {}
++      addPending = null;
+       addRequestId = '';
+       resetAddForm();
+       var res = dd.result || {};
+@@ -1033,8 +1070,12 @@ $('mSave').addEventListener('click', function(){
+         render(false);
+       } catch (e) { toast('Added — refresh the list to see the item'); }
+     }).catch(function(e){
++      if (!committedSku && /^(Original|Cost|Price|Market Ref) must be a (finite )?number$/.test(String(e.message || e))) {
++        try { sessionStorage.removeItem(ADD_PENDING_KEY); } catch (ignored) {}
++        addPending = null; addRequestId = '';
++      }
+       toast(committedSku ? 'Added ' + committedSku + ' — refresh inventory' :
+-            e.message + ' · Request ID: ' + addRequestId + ' (check inventory before a new item)');
++            e.message + (addRequestId ? ' · Request ID: ' + addRequestId + ' (retry same request)' : ''));
+     }).finally(done);
+   } else {
+     var changes = diffChanges(M.row, p);

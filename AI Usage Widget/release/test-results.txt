@@ -1,0 +1,1 @@
+PASS: conversion, missing/stale, provider isolation, validation, Codex bucket mapping, UTF-8 framing, malformed frames, native dragging, monitor recovery and three rendered states.

@@ -1,0 +1,13 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\before\\03 Apps Script\\Web App\\README.md" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\03 Apps Script\\Web App\\README.md"
+index f2a9d93..f14c6d0 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\before\\03 Apps Script\\Web App\\README.md"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\03 Apps Script\\Web App\\README.md"	
+@@ -111,3 +111,8 @@ P1 Add v31 พร้อมใช้: headers 17 ช่องใน ADD REQUESTS
+ ## `_archive/` — ของที่เลิกใช้แล้ว
+ 
+ แผนเวอร์ชันเก่า · แนวทาง Supabase (เปลี่ยนไปใช้ Cloudflare R2 แทน) · ไฟล์ zip เก่า
++
++
++## Session36 — W1 candidate is separate from production v31
++
++Candidate paired Code_v32.gs/WebApp_v32.gs + Index.html/W1Orders.gs: `../../04 Design Tools/logs/W1-20261003-01/candidate/`. Exact revision `W1-20261003-01/v32@3B0D1F63B06C4196578FFEA9714BEC50EC6AD060B3BAC95D8190582175B2BB08`; previous candidate v31 backups/stubs kept inside that package. This README's root v31 table remains the installed-shop source; do not copy candidate files to shop. Local tests/synthetic browser pass; separate test source saved/read back, but Google fixture/schema/UI/retry/LockService acceptance is blocked by Authorization. W1 is not DONE; full CLIENT/Label W2 later. See result.md, UNDO.md, issues.md and REVIEW-ASTRA-HIGH.md in that package;14 groups +1,032 simulated write positions and six impact regressions passed.

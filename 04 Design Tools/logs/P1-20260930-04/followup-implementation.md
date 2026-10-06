@@ -1,0 +1,9 @@
+
+
+## P1 first isolated Add after saved test source — P1-20260930-04 (2026-09-30 00:33–00:35 +07)
+
+Change `P1-20260930-04`, actual synthetic Request `add-1790703155002-hztup0z5ec` attempt 1; one writer, only separate [test Sheet](https://docs.google.com/spreadsheets/d/13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM/edit) and its test `/dev`. Fresh before export `04 Design Tools/logs/P1-20260930-04/test-sheet-before.xlsx` SHA256 `AA3D1329E1327AB1457ED1B9C0CC6E049C80C6A79C4283C1C9DA829AAD6655BD`: GGB 19 named rows, MAG 10, journal 68 events; GGB row 22 and journal row 70 empty. After the newly saved test Code/Index, the UI submitted only A30 (TEST, Original 300, Cost 100, Price 292, New Arrival), showed Saving then Added `OWA-GGBS020N00`, and reset.
+
+Independent after export SHA256 `4C83218198C79811D5D7E6CA8944EF6487450813BD4A5909878125600BE32919` confirms one A30 at GGB row 22, formulas N/O/P present, row 23 blank, and journal rows 70–71 PREPARED→DONE with the same Request ID/row/SKU and attempt 1; journal row 72 empty. Existing GGB and journal prefixes plus all MAG exported values/formulas are unchanged. Final GGB 20, MAG 10, journal 70 events. No error, business retry or recovery mutation. Exact before→after assertions and restore refs: `P1-20260930-04/inspect-after.py`, `readback.txt`, `changes.csv`, and the before/after XLSX exports. Preserve the synthetic row/events; do not clean them from the test Sheet.
+
+This verifies the normal Add path on the newly saved isolated source, **not** the 45-second timeout or malformed DONE failure branch. No test `/exec` deploy, shop source/schema/data/deploy or Back House LAB work; the shop still lacks ADD REQUESTS. Next: bounded same-ID delayed/no-callback QA in test only, with reconciliation before retry, then focused promotion review.

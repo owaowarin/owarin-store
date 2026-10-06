@@ -1,0 +1,49 @@
+{
+  "time": "2026-10-04 03:03:34 +0700",
+  "projectId": "1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd",
+  "method": "fresh Google editor file name selected, clipboard read after Save/reload; cloud_done; no Run/deploy during final reads",
+  "files": [
+    {
+      "file": "Code.gs",
+      "clipboardChars": 185105,
+      "match": true,
+      "comparison": "LF normalized exact source",
+      "sha256StagedLF": "EA6A1139E14B022EB1EF88C7A8F4DDE79BBAE94A4BC9F52F03A0B6F0130EC519"
+    },
+    {
+      "file": "Webapp.gs",
+      "clipboardChars": 33109,
+      "match": true,
+      "comparison": "LF normalized exact source",
+      "sha256StagedLF": "3E371C14DA33E66A89E6DBF8B2A10154AD76C7F37F21018A6486E334B91CBEE3"
+    },
+    {
+      "file": "Index.html",
+      "clipboardChars": 112617,
+      "match": true,
+      "comparison": "LF normalized exact source",
+      "sha256StagedLF": "3238C2EF3A19F25977F137A15E15690A5B3D46D204D63E8E391418CBFAE860FF"
+    },
+    {
+      "file": "W1Orders.gs",
+      "clipboardChars": 26463,
+      "match": true,
+      "comparison": "LF normalized exact source",
+      "sha256StagedLF": "3596CCE53149A15A5A58D226D1525200C0129A5901FDDDE991E09C9D48F8ACC2"
+    },
+    {
+      "file": "W1Qa.gs",
+      "clipboardChars": 3249,
+      "match": true,
+      "comparison": "LF normalized exact source",
+      "sha256StagedLF": "8ED31DB98F7277725179484C0D1DDE24328E18B0FFF8D59BBBD2E68BB35228C7"
+    },
+    {
+      "file": "appsscript.json",
+      "clipboardChars": 472,
+      "match": true,
+      "comparison": "semantic JSON",
+      "sha256StagedLF": "5BE1C5B8A215FE3BCED90564B7C083989A2B71E182D8B8AA0046BB9A756A8D4A"
+    }
+  ]
+}

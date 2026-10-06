@@ -1,0 +1,112 @@
+[
+  {
+    "requestId": "qa-fixture-W1V33CHECK",
+    "action": "QA_FIXTURE",
+    "state": "DONE",
+    "attempt": 1.0,
+    "orderId": "",
+    "timestamp": "2026-10-03T21:42:56.585Z",
+    "diff": "diff/candidate-W1Orders.gs.diff; frozen full baseline W1-20261003-01",
+    "recovery": "original ID/payload; exported before/after; exact-before maintenance reconcile; no fresh fixture"
+  },
+  {
+    "requestId": "v33-check-create-20261004",
+    "action": "create",
+    "state": "DONE",
+    "attempt": 1.0,
+    "orderId": "OWA-20261004-07",
+    "timestamp": "2026-10-03T21:43:15.077Z",
+    "diff": "diff/candidate-W1Orders.gs.diff; frozen full baseline W1-20261003-01",
+    "recovery": "original ID/payload; exported before/after; exact-before maintenance reconcile; no fresh fixture"
+  },
+  {
+    "requestId": "external-22376908-b731-4c20-aace-adbafcaf4826",
+    "action": "EXTERNAL_EDIT",
+    "state": "DONE",
+    "attempt": 1.0,
+    "orderId": "OWA-20261004-07",
+    "timestamp": "2026-10-03T21:43:18.052Z",
+    "diff": "diff/candidate-W1Orders.gs.diff; frozen full baseline W1-20261003-01",
+    "recovery": "original ID/payload; exported before/after; exact-before maintenance reconcile; no fresh fixture"
+  },
+  {
+    "requestId": "external-1baa4a76-5fe3-45b0-b9f1-71aa7b2670f4",
+    "action": "EXTERNAL_EDIT",
+    "state": "DONE",
+    "attempt": 1.0,
+    "orderId": "OWA-20261004-07",
+    "timestamp": "2026-10-03T21:43:20.986Z",
+    "diff": "diff/candidate-W1Orders.gs.diff; frozen full baseline W1-20261003-01",
+    "recovery": "original ID/payload; exported before/after; exact-before maintenance reconcile; no fresh fixture"
+  },
+  {
+    "requestId": "v33-check-cancel-20261004",
+    "action": "cancel",
+    "state": "DONE",
+    "attempt": 1.0,
+    "orderId": "OWA-20261004-07",
+    "timestamp": "2026-10-03T21:43:36.858Z",
+    "diff": "diff/candidate-W1Orders.gs.diff; frozen full baseline W1-20261003-01",
+    "recovery": "original ID/payload; exported before/after; exact-before maintenance reconcile; no fresh fixture"
+  },
+  {
+    "requestId": "maintenance-5a75a114-94dd-43a8-8bcc-4b1f18ac5bf3",
+    "action": "MAINTENANCE",
+    "state": "DONE",
+    "attempt": 2.0,
+    "orderId": "",
+    "timestamp": "2026-10-03T21:43:40.560Z",
+    "diff": "diff/candidate-W1Orders.gs.diff; frozen full baseline W1-20261003-01",
+    "recovery": "original ID/payload; exported before/after; exact-before maintenance reconcile; no fresh fixture"
+  },
+  {
+    "requestId": "maintenance-5a162b6c-f91d-458b-9ad1-eae272ac9987",
+    "action": "MAINTENANCE",
+    "state": "DONE",
+    "attempt": 1.0,
+    "orderId": "",
+    "timestamp": "2026-10-03T21:43:43.297Z",
+    "diff": "diff/candidate-W1Orders.gs.diff; frozen full baseline W1-20261003-01",
+    "recovery": "original ID/payload; exported before/after; exact-before maintenance reconcile; no fresh fixture"
+  },
+  {
+    "requestId": "maintenance-16c14b83-81a0-472c-8556-5deaeb2274b3",
+    "action": "MAINTENANCE",
+    "state": "DONE",
+    "attempt": 1.0,
+    "orderId": "",
+    "timestamp": "2026-10-03T21:43:46.323Z",
+    "diff": "diff/candidate-W1Orders.gs.diff; frozen full baseline W1-20261003-01",
+    "recovery": "original ID/payload; exported before/after; exact-before maintenance reconcile; no fresh fixture"
+  },
+  {
+    "requestId": "qa-gzip-20261004",
+    "action": "QA_GZIP",
+    "state": "DONE",
+    "attempt": 1.0,
+    "orderId": "",
+    "timestamp": "2026-10-03T21:49:12.165Z",
+    "diff": "diff/candidate-W1Orders.gs.diff; frozen full baseline W1-20261003-01",
+    "recovery": "original ID/payload; exported before/after; exact-before maintenance reconcile; no fresh fixture"
+  },
+  {
+    "requestId": "qa-fixture-W1V33BULK",
+    "action": "QA_FIXTURE",
+    "state": "DONE",
+    "attempt": 1.0,
+    "orderId": "",
+    "timestamp": "2026-10-03T21:50:25.503Z",
+    "diff": "diff/candidate-W1Orders.gs.diff; frozen full baseline W1-20261003-01",
+    "recovery": "original ID/payload; exported before/after; exact-before maintenance reconcile; no fresh fixture"
+  },
+  {
+    "requestId": "v33-bulk-create-20261004",
+    "action": "create",
+    "state": "DONE",
+    "attempt": 5.0,
+    "orderId": "OWA-20261004-08",
+    "timestamp": "2026-10-03T22:34:12.091Z",
+    "diff": "diff/candidate-W1Orders.gs.diff; frozen full baseline W1-20261003-01",
+    "recovery": "original ID/payload; exported before/after; exact-before maintenance reconcile; no fresh fixture"
+  }
+]

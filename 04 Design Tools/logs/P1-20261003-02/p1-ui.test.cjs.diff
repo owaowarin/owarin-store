@@ -1,0 +1,20 @@
+diff --git a/04 Design Tools/logs/P1-20261003-02/baseline/p1-ui.test.cjs b/04 Design Tools/logs/P1-20260929-01/p1-ui.test.cjs
+index c89418e..e6c48e4 100644
+--- a/04 Design Tools/logs/P1-20261003-02/baseline/p1-ui.test.cjs	
++++ b/04 Design Tools/logs/P1-20260929-01/p1-ui.test.cjs	
+@@ -61,6 +61,15 @@ function make(backing=new Map(),storageFailure=false){
+   u.pending.shift().resolve({state:'DONE',data:{...u.saved(99),historical:true}});await u.settle();
+   assert.equal(u.c.S.data.GGB.length,0,'historical DONE must not insert a stale item into live cache');
+   assert(u.notices.includes('Saved — refresh inventory to see current stock'));
++  u=make();u.c.openAdd();u.$('fName').value='Historical replay';u.fire('mSave','click');
++  u.pending.shift().reject(Error('RESPONSE INTERRUPTED'));await u.settle();
++  u.fire('mSave','click');u.pending.shift().resolve({state:'NOT_FOUND'});await u.settle();
++  assert.equal(u.requests.at(-1).action,'inventory.add');
++  const current={source:'GGB',productId:'TEST-99',name:'Different current copy',status:'Sold'};
++  u.c.S.data.GGB.push(current);
++  u.pending.shift().resolve({...u.saved(99),historical:true,bookingMatches:[{name:'Waiting customer'}]});await u.settle();
++  assert.equal(u.c.S.data.GGB[0],current,'Add replay must preserve the current inventory cache');
++  assert.equal(u.c.LAST_ADD,null,'historical result must not enable an Instock notification');
+   const store=new Map();u=make(store);u.c.S.source='MAG';u.c.openAdd();u.$('fName').value='After reload';
+   u.$('fCost').value='1,200.50';u.fire('mSave','click');
+   const frozen=JSON.stringify(u.requests[0].payload), oldId=u.requests[0].payload.requestId;

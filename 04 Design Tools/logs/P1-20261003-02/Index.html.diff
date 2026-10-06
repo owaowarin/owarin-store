@@ -1,0 +1,17 @@
+diff --git a/04 Design Tools/logs/P1-20261003-02/baseline/candidate/Index.html b/04 Design Tools/logs/P1-20260929-01/candidate/Index.html
+index e9d11ae..5a8a70e 100644
+--- a/04 Design Tools/logs/P1-20261003-02/baseline/candidate/Index.html	
++++ b/04 Design Tools/logs/P1-20260929-01/candidate/Index.html	
+@@ -1080,10 +1080,11 @@ $('mSave').addEventListener('click', function(){
+         'Suggested: ' + sugLine +
+         (res.tier ? ' <span style="color:var(--muted-fg)">[' + esc(res.tier) + ']</span>' : '') +
+         '</div>';
++      LAST_ADD = null;
++      if (dd.historical) { toast('Saved — refresh inventory to see current stock'); return; }
+       LAST_ADD = { item: dd.item, matches: dd.bookingMatches || [] };
+       if (LAST_ADD.matches.length) $('mResult').innerHTML += bookingBanner(LAST_ADD);
+       okToast('Added: ' + dd.item.productId);
+-      if (dd.historical) { toast('Saved — refresh inventory to see current stock'); return; }
+       try {
+         addToCache(dd.item);
+         buildFilterOptions(true);

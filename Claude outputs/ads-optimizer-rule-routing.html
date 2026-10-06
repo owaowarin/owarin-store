@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>กฎของ Ads Optimizer โหลดยังไงให้ประหยัด token</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Trirong:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#121110; --ink:#f4f1ea; --muted:#a8a093; --soft:#7a736a;
+           --accent:#e2603f; --rule:rgba(244,241,234,0.12); }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans Thai',sans-serif;
+         line-height:1.45; padding:48px 24px 64px; }
+  .wrap { max-width:920px; margin:0 auto; }
+  .eyebrow { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.18em;
+              text-transform:uppercase; color:var(--soft); margin:0 0 10px; }
+  h1 { font-family:'Trirong',serif; font-weight:400; font-size:1.75rem; margin:0 0 8px; }
+  .sub { color:var(--muted); font-size:14px; margin:0; max-width:62ch; }
+  .rule { border:0; border-top:1px solid var(--rule); margin:28px 0; }
+  figure { margin:0; overflow-x:auto; }
+  figcaption { font-family:'Trirong',serif; font-style:italic; color:var(--muted); font-size:14px;
+                margin-top:18px; max-width:62ch; }
+  footer { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; color:var(--soft);
+            border-top:1px solid var(--rule); margin-top:40px; padding-top:14px; }
+  @media (max-width:640px) { body { padding:32px 16px 48px; } h1 { font-size:1.35rem; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">OWARIN — Ads Optimizer · Rule routing</p>
+  <h1>session ใหม่หากฎเจอโดยไม่ต้องอ่านทั้งกอง</h1>
+  <p class="sub">ทุกกล่องคือของที่มีอยู่แล้ว ไม่ได้เพิ่มโฟลเดอร์ใหม่ — สิ่งที่เปลี่ยนคือกฎคงที่ย้ายไปอยู่ใน skill และแผนที่กฎทำหน้าที่ชี้ทางอย่างเดียว ไม่เก็บเนื้อกฎ</p>
+  <hr class="rule">
+  <figure><svg viewBox="0 0 880 856" width="100%" role="img" aria-labelledby="rules-routing-title rules-routing-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="rules-routing-title">How a session loads OWARIN ads rules without wasting tokens</title>
+<desc id="rules-routing-desc">Decision flow: non-report work loads no rules at all; report work gets the invariant Core rules automatically from a skill; only when those are not enough does the session open the rules map and read the single branch file it points to, then do the work and update the reference files in the same pass.</desc>
+<defs>
+<pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="11" cy="11" r="0.8" fill="rgba(244,241,234,0.10)"/></pattern>
+<marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#a8a093"/></marker>
+<marker id="arr-a" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#e2603f"/></marker>
+</defs>
+<rect width="880" height="856" fill="#121110"/>
+<rect width="880" height="856" fill="url(#dots)" opacity="0.55"/>
+<path d="M 380 80 V 108" fill="none" stroke="#a8a093" stroke-width="1" marker-end="url(#arr)"/>
+<path d="M 260 160 H 156 Q 140 160 140 176 V 236" fill="none" stroke="#a8a093" stroke-width="1" marker-end="url(#arr)"/>
+<path d="M 140 296 V 684 Q 140 700 156 700 H 272" fill="none" stroke="#a8a093" stroke-width="1" marker-end="url(#arr)"/>
+<path d="M 380 204 V 244" fill="none" stroke="#a8a093" stroke-width="1" marker-end="url(#arr)"/>
+<path d="M 380 312 V 360" fill="none" stroke="#a8a093" stroke-width="1" marker-end="url(#arr)"/>
+<path d="M 512 412 H 556" fill="none" stroke="#a8a093" stroke-width="1" marker-end="url(#arr)"/>
+<path d="M 680 444 V 496" fill="none" stroke="#a8a093" stroke-width="1" marker-end="url(#arr)"/>
+<path d="M 680 564 V 576 Q 680 592 664 592 H 534" fill="none" stroke="#a8a093" stroke-width="1" marker-end="url(#arr)"/>
+<path d="M 380 460 V 556" fill="none" stroke="#e2603f" stroke-width="1.2" marker-end="url(#arr-a)"/>
+<path d="M 380 624 V 676" fill="none" stroke="#a8a093" stroke-width="1" marker-end="url(#arr)"/>
+<rect x="164" y="137" width="64" height="18" rx="2" fill="#121110"/>
+<text x="196" y="150" fill="#a8a093" font-size="12" font-weight="500" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">ไม่ใช่</text>
+<rect x="388" y="215" width="48" height="18" rx="2" fill="#121110"/>
+<text x="412" y="228" fill="#a8a093" font-size="12" font-weight="500" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">ใช่</text>
+<rect x="504" y="387" width="64" height="18" rx="2" fill="#121110"/>
+<text x="536" y="400" fill="#a8a093" font-size="12" font-weight="500" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">ไม่พอ</text>
+<rect x="400" y="499" width="72" height="18" rx="2" fill="#121110"/>
+<text x="436" y="512" fill="#e2603f" font-size="12" font-weight="500" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">พอแล้ว</text>
+<rect x="250" y="40" width="260" height="40" rx="20" fill="#121110"/>
+<rect x="250" y="40" width="260" height="40" rx="20" fill="rgba(244,241,234,0.04)" stroke="rgba(244,241,234,0.25)" stroke-width="1"/>
+<text x="380" y="65" fill="#f4f1ea" font-size="12" font-weight="500" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">งานใหม่เข้า session</text>
+<polygon points="256,160 380,108 504,160 380,212" fill="#121110"/>
+<polygon points="256,160 380,108 504,160 380,212" fill="rgba(244,241,234,0.04)" stroke="rgba(244,241,234,0.25)" stroke-width="1"/>
+<text x="380" y="165" fill="#f4f1ea" font-size="12" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">เป็นงานฝั่ง ads / รายงาน?</text>
+<rect x="50" y="240" width="180" height="56" rx="6" fill="#121110"/>
+<rect x="50" y="240" width="180" height="56" rx="6" fill="rgba(244,241,234,0.04)" stroke="rgba(244,241,234,0.25)" stroke-width="1"/>
+<text x="140" y="266" fill="#f4f1ea" font-size="12" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">ทำงานตามปกติ</text>
+<text x="140" y="286" fill="#7a736a" font-size="9" font-family="'IBM Plex Mono', monospace" text-anchor="middle">no rules loaded</text>
+<rect x="244" y="244" width="272" height="68" rx="6" fill="#121110"/>
+<rect x="244" y="244" width="272" height="68" rx="6" fill="rgba(244,241,234,0.04)" stroke="rgba(244,241,234,0.25)" stroke-width="1"/>
+<text x="380" y="270" fill="#f4f1ea" font-size="12" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">Core โหลดเองจาก skill</text>
+<text x="380" y="290" fill="#7a736a" font-size="9" font-family="'IBM Plex Mono', monospace" text-anchor="middle">description free · body on trigger</text>
+<polygon points="240,412 380,356 520,412 380,468" fill="#121110"/>
+<polygon points="240,412 380,356 520,412 380,468" fill="rgba(226,96,63,0.12)" stroke="#e2603f" stroke-width="1"/>
+<text x="380" y="410" fill="#f4f1ea" font-size="12" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">Core พอสำหรับ</text>
+<text x="380" y="428" fill="#f4f1ea" font-size="12" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">งานนี้ไหม?</text>
+<rect x="560" y="380" width="240" height="64" rx="6" fill="#121110"/>
+<rect x="560" y="380" width="240" height="64" rx="6" fill="rgba(244,241,234,0.04)" stroke="rgba(244,241,234,0.25)" stroke-width="1"/>
+<text x="680" y="406" fill="#f4f1ea" font-size="12" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">เปิดแผนที่กฎ</text>
+<text x="680" y="426" fill="#7a736a" font-size="9" font-family="'IBM Plex Mono', monospace" text-anchor="middle">00_RULES-OVERVIEW.md</text>
+<rect x="560" y="496" width="240" height="68" rx="6" fill="#121110"/>
+<rect x="560" y="496" width="240" height="68" rx="6" fill="rgba(244,241,234,0.04)" stroke="rgba(244,241,234,0.25)" stroke-width="1"/>
+<text x="680" y="522" fill="#f4f1ea" font-size="12" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">อ่านเฉพาะไฟล์ที่แผนที่ชี้</text>
+<text x="680" y="542" fill="#7a736a" font-size="9" font-family="'IBM Plex Mono', monospace" text-anchor="middle">one branch, not the tree</text>
+<rect x="226" y="556" width="308" height="68" rx="6" fill="#121110"/>
+<rect x="226" y="556" width="308" height="68" rx="6" fill="rgba(244,241,234,0.04)" stroke="rgba(244,241,234,0.25)" stroke-width="1"/>
+<text x="380" y="582" fill="#f4f1ea" font-size="12" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">ลงมือ แล้วอัปเดตไฟล์อ้างอิง</text>
+<text x="380" y="602" fill="#7a736a" font-size="9" font-family="'IBM Plex Mono', monospace" text-anchor="middle">same pass, not later</text>
+<rect x="270" y="676" width="220" height="40" rx="20" fill="#121110"/>
+<rect x="270" y="676" width="220" height="40" rx="20" fill="rgba(244,241,234,0.04)" stroke="rgba(244,241,234,0.25)" stroke-width="1"/>
+<text x="380" y="701" fill="#f4f1ea" font-size="12" font-weight="500" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">จบงาน</text>
+<line x1="40" y1="760" x2="840" y2="760" stroke="rgba(244,241,234,0.10)" stroke-width="0.8"/>
+<text x="40" y="780" fill="#7a736a" font-size="8" font-family="'IBM Plex Mono', monospace" letter-spacing="0.16em">LEGEND</text>
+<rect x="130" y="769" width="26" height="13" rx="6" fill="none" stroke="rgba(244,241,234,0.25)"/>
+<text x="164" y="780" fill="#a8a093" font-size="9" font-family="'IBM Plex Mono', monospace">start / end</text>
+<rect x="300" y="769" width="26" height="13" rx="3" fill="none" stroke="rgba(244,241,234,0.25)"/>
+<text x="334" y="780" fill="#a8a093" font-size="9" font-family="'IBM Plex Mono', monospace">step</text>
+<polygon points="430,776 443,767 456,776 443,785" fill="none" stroke="rgba(244,241,234,0.25)"/>
+<text x="464" y="780" fill="#a8a093" font-size="9" font-family="'IBM Plex Mono', monospace">decision</text>
+<line x1="580" y1="776" x2="606" y2="776" stroke="#e2603f" stroke-width="1.2"/>
+<text x="614" y="780" fill="#a8a093" font-size="9" font-family="'IBM Plex Mono', monospace">cheapest path</text>
+</svg></figure>
+  <figcaption>เส้นสีคือทางที่ถูกที่สุด — งานส่วนใหญ่จบตรงนั้นโดยไม่เปิดไฟล์กฎเลยสักไฟล์ ทุกครั้งที่ต้องแตกออกขวา แปลว่าแผนที่ยังชี้ไม่พอ และนั่นคือจุดที่ควรแก้ ไม่ใช่ไปเพิ่มโฟลเดอร์</figcaption>
+  <footer>OWARIN SKIN · TRIRONG + IBM PLEX SANS THAI + IBM PLEX MONO · DIAGRAM-DESIGN</footer>
+</div>
+</body>
+</html>

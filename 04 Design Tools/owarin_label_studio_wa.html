@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OWARIN · Label Studio 和 (JP Edition)</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Space+Mono:wght@400;700&family=Sarabun:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+  :root{
+    --bg:#0C0B0A; --panel:#141210; --panel2:#191613;
+    --gold:#C9A24B; --gold-dim:#8A7233; --line:rgba(201,162,75,.22);
+    --line-soft:rgba(201,162,75,.12); --ink:#ECE7DB; --mute:#7C766B;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Sarabun',sans-serif;font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased}
+
+  /* ───────── APP SHELL (screen only) ───────── */
+  .app{max-width:1180px;margin:0 auto;padding:22px 22px 40px;display:flex;flex-direction:column;gap:14px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .brand{font-family:'Space Mono',monospace;font-weight:700;letter-spacing:3px;font-size:15px;color:var(--gold)}
+  .brand span{color:var(--mute);font-weight:400;letter-spacing:2px}
+  .actions{display:flex;gap:8px;align-items:center}
+
+  .phead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+  .phead>span:first-child{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold)}
+  .hint{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.3px;color:var(--mute)}
+
+  .grid-main{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+  @media(max-width:980px){.grid-main{grid-template-columns:1fr}}
+
+  .panel{background:var(--panel);border:1px solid var(--line);padding:14px}
+  .sender{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .sender .lab{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);flex-shrink:0}
+
+  input,textarea,select{background:#0E0C0A;border:1px solid var(--line-soft);color:var(--ink);font-family:'Sarabun',sans-serif;font-size:13px;padding:8px 10px;width:100%;outline:none;border-radius:0;transition:border-color .15s}
+  input:focus,textarea:focus{border-color:var(--gold)}
+  textarea{resize:vertical;line-height:1.6}
+  .sender input{flex:1;min-width:160px}
+  .sender input.tel{flex:0 0 150px;font-family:'IBM Plex Mono',monospace}
+  .sender input.jp{flex:0 0 190px;font-family:'Noto Sans JP',sans-serif}
+
+  #input{min-height:190px;font-size:12.5px}
+  .row{display:flex;align-items:center;gap:8px;margin-top:10px}
+  .count{margin-left:auto;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--mute)}
+
+  .btn{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:transparent;color:var(--gold);border:1px solid var(--gold);padding:8px 14px;cursor:pointer;border-radius:0;transition:.15s;white-space:nowrap}
+  .btn:hover{background:rgba(201,162,75,.1)}
+  .btn.primary{background:var(--gold);color:#0C0B0A;border-color:var(--gold)}
+  .btn.primary:hover{background:#dab85f}
+  .btn.ghost{border-color:var(--line);color:var(--mute)}
+  .btn.ghost:hover{color:var(--ink);border-color:var(--gold-dim)}
+  .btn.sm{padding:5px 10px;font-size:10px}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .toggle{display:flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--mute);cursor:pointer;white-space:nowrap}
+  .toggle input{width:auto;padding:0;accent-color:var(--gold)}
+
+  #cards{display:flex;flex-direction:column;gap:10px;max-height:620px;overflow:auto;padding-right:2px}
+  .empty{font-family:'Space Mono',monospace;font-size:11px;color:var(--mute);letter-spacing:.5px;padding:22px 4px;text-align:center;border:1px dashed var(--line-soft)}
+  .card{background:var(--panel2);border:1px solid var(--line-soft);padding:11px}
+  .card-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .card-h .idx{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--gold);border:1px solid var(--line);width:22px;height:22px;display:flex;align-items:center;justify-content:center}
+  .x{background:none;border:none;color:var(--mute);cursor:pointer;font-size:13px;padding:4px}
+  .x:hover{color:#d98a8a}
+  .fld{display:flex;flex-direction:column;gap:3px;margin-bottom:7px}
+  .fld>span{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mute)}
+  .fld input,.fld textarea{padding:6px 8px;font-size:12.5px}
+  .fld textarea{min-height:38px;font-size:11.5px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .name-wrap{display:flex;align-items:stretch;border:1px solid var(--line-soft);background:#0E0C0A;transition:border-color .15s}
+  .name-wrap:focus-within{border-color:var(--gold)}
+  .name-fix{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:12.5px;color:var(--gold);background:rgba(201,162,75,.08);padding:6px 8px;display:flex;align-items:center;border-right:1px solid var(--line-soft);flex-shrink:0;user-select:none}
+  .name-wrap input{border:none!important;background:transparent}
+
+  .status{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--gold-dim)}
+
+  /* ───────── PREVIEW / PRINT ───────── */
+  .paper-head{display:flex;align-items:center;gap:10px;margin:4px 0 12px}
+  .paper-head span{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold)}
+  .paper-head .ln{flex:1;height:1px;background:var(--line-soft)}
+  .paper-wrap{padding:0 22px 60px}
+  #pages{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;align-items:flex-start}
+
+  .pmark{font-family:'Space Mono',monospace;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mute);margin-bottom:6px;display:flex;justify-content:space-between}
+
+  /* ═══════════════════════════════════════════════════════════
+     THE LABEL — 100 × 150 mm · 1-bit · pure #000 on #fff
+     no grey, no tint, no halftone — safe for thermal printers
+     ═══════════════════════════════════════════════════════════ */
+  .label{
+    width:100mm;height:150mm;min-width:100mm;max-width:100mm;flex:0 0 auto;
+    padding:2.6mm;background:#fff;color:#000;
+    font-family:'Sarabun','Noto Sans Thai',sans-serif;
+    display:flex;flex-direction:column;overflow:hidden;
+  }
+  .sheet{flex:0 0 auto}
+  .sheet .label{box-shadow:0 0 0 1px var(--line),0 16px 40px rgba(0,0,0,.55)}
+  .lab-in{flex:1;border:1.1mm solid #000;display:flex;flex-direction:column;overflow:hidden;background:#fff}
+
+  .label svg{display:block}
+  .ink{fill:#000}
+  .paper{fill:#fff}
+
+  /* ── 1 · MASTHEAD (black) 14mm ─────────────────────────── */
+  .mast{height:14mm;flex:0 0 14mm;background:#000;color:#fff;display:flex;align-items:center;padding:0 3.4mm;overflow:hidden}
+  .mast .kamon{width:9.4mm;height:9.4mm;flex:0 0 9.4mm;margin-right:3mm}
+  .mast .wordmark{font-family:'Archivo',sans-serif;font-weight:800;font-size:16.5pt;letter-spacing:.055em;line-height:1;flex:1;text-align:right}
+
+  /* ── 2 · JP BAND (white) 12mm ──────────────────────────── */
+  .mast2{height:12mm;flex:0 0 12mm;display:flex;align-items:center;justify-content:space-between;
+         padding:0 3.4mm;border-bottom:0.5mm solid #000;overflow:hidden}
+  .mast2 .jp{font-family:'Noto Serif JP','Noto Sans JP',serif;font-weight:600;font-size:14pt;letter-spacing:.16em;line-height:1}
+  .mast2 .tel{display:flex;align-items:center;gap:1.6mm;font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:11.5pt;letter-spacing:.02em}
+  .mast2 .tel svg{width:4.2mm;height:4.2mm}
+
+  /* ── 3 · FROM 7mm ──────────────────────────────────────── */
+  .from{height:7mm;flex:0 0 7mm;display:flex;align-items:center;padding:0 3.4mm;
+        border-bottom:0.25mm solid #000;overflow:hidden}
+  .from .tag{font-family:'Space Mono',monospace;font-size:5.5pt;font-weight:700;letter-spacing:.22em;
+             border:0.25mm solid #000;padding:0.5mm 1.2mm;flex-shrink:0;margin-right:2.4mm;line-height:1}
+  .from .nm{font-size:8pt;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .from .tl{font-family:'Noto Serif JP',serif;font-size:7pt;font-weight:600;letter-spacing:.26em;flex-shrink:0;margin-left:2.4mm}
+
+  /* ── 4 · RECIPIENT 44mm ────────────────────────────────── */
+  .recv{height:42mm;flex:0 0 42mm;padding:3mm 3.4mm 0;display:flex;flex-direction:column;overflow:hidden}
+  .r-head{height:4.6mm;flex:0 0 4.6mm;display:flex;align-items:center;gap:2.2mm}
+  .r-head .tag{font-family:'Space Mono',monospace;font-size:5.5pt;font-weight:700;letter-spacing:.22em;
+               background:#000;color:#fff;padding:0.7mm 1.6mm;line-height:1}
+  .r-head .jp{font-family:'Noto Serif JP',serif;font-weight:600;font-size:7pt;letter-spacing:.3em}
+  .r-head .rule{flex:1;height:0.25mm;background:#000}
+  .r-name{font-size:21pt;font-weight:700;line-height:1.16;height:16mm;flex:0 0 16mm;
+          overflow:hidden;display:flex;align-items:center;letter-spacing:-.005em}
+  .r-tel{height:7mm;flex:0 0 7mm;display:flex;align-items:center;gap:1.8mm;
+         font-family:'IBM Plex Mono',monospace;font-size:13pt;font-weight:700;letter-spacing:.02em}
+  .r-tel svg{width:4.4mm;height:4.4mm;flex-shrink:0}
+  .r-addr{font-size:10.5pt;line-height:1.42;height:14.4mm;flex:0 0 14.4mm;overflow:hidden;
+          border-top:0.25mm solid #000;padding-top:1.8mm}
+
+  /* ── 5 · POSTAL 13mm ───────────────────────────────────── */
+  .postal{height:12mm;flex:0 0 12mm;padding:0 3.4mm;display:flex;align-items:center;
+          justify-content:flex-end;gap:2.4mm;border-top:0.25mm solid #000}
+  .zipwrap{display:flex;align-items:center;gap:0.8mm;margin-right:1.4mm;flex-shrink:0}
+  .zw-l{display:flex;flex-direction:column;align-items:flex-end;gap:0.55mm}
+  .zw-l b{font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:5.4pt;line-height:1;letter-spacing:.04em}
+  .zw-l i{display:block;width:5.6mm;height:0.3mm;background:#000}
+  .zw-l i:last-child{width:4.4mm}
+  .zw-mark{width:6.6mm;height:6.6mm;border-radius:50%;background:#000;color:#fff;
+           display:flex;align-items:center;justify-content:center;
+           font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:9pt;line-height:1}
+  .pd{font-family:'IBM Plex Mono',monospace;font-size:15pt;font-weight:700;width:10mm;height:9.4mm;
+      border:0.55mm solid #000;display:flex;align-items:center;justify-content:center;line-height:1;
+      background:#fff;margin-right:1.4mm}
+  .pd:last-child{margin-right:0}
+
+  /* ── 6 · MIZUHIKI divider 9mm ──────────────────────────── */
+  .knot{height:9mm;flex:0 0 9mm;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .knot svg{width:100%;height:8.6mm}
+
+  /* ── 7 · DELIVERY NOTE (fills) ─────────────────────────── */
+  .dn{flex:1;border-top:0.25mm solid #000;padding:2mm 3.4mm 2mm;display:flex;flex-direction:column;overflow:hidden}
+  .dn-head{display:flex;align-items:baseline;justify-content:space-between;height:4mm;flex:0 0 4mm}
+  .dn-tag{font-family:'Space Mono',monospace;font-size:5.5pt;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+  .dn-tag i{font-style:normal;font-family:'Noto Serif JP',serif;letter-spacing:.24em;margin-left:1.6mm}
+  .dn-qty{font-family:'IBM Plex Mono',monospace;font-size:6.5pt;font-weight:700}
+  .dn-items{flex:1;font-size:9.5pt;line-height:1.45;overflow:hidden;padding-top:1mm;display:flex;align-items:flex-start}
+  .dn-col{flex:1 1 0;min-width:0;padding-right:3mm}
+  .dn-col:last-child{padding-right:0}
+  .dn-more{font-weight:700}
+
+  /* ── 8 · CAUTION strip 20mm ────────────────────────────── */
+  .caution{height:18mm;flex:0 0 18mm;background:#000;display:flex;align-items:stretch;overflow:hidden}
+  .c-tab{width:6.4mm;flex:0 0 6.4mm;color:#fff;display:flex;align-items:center;justify-content:center}
+  .c-tab span{writing-mode:vertical-rl;font-family:'Space Mono',monospace;font-weight:700;
+              font-size:5.2pt;letter-spacing:.16em;white-space:nowrap}
+  .c-tab span i{font-style:normal;font-family:'Noto Sans JP',sans-serif;letter-spacing:.1em}
+  .c-grid{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:1mm;padding:1.4mm 1.6mm 1.4mm 0}
+  .c-cell{background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+          padding:0.9mm 0.4mm 0.8mm;overflow:hidden}
+  .c-cell svg{width:7.8mm;height:7.8mm;flex:0 0 7.8mm}
+  .c-cell b{font-family:'Space Mono',monospace;font-weight:700;font-size:4.9pt;letter-spacing:.03em;
+            line-height:1.15;text-align:center;margin-top:0.6mm;white-space:nowrap}
+  .c-cell em{font-style:normal;font-family:'Noto Sans JP',sans-serif;font-weight:500;font-size:5.2pt;
+             letter-spacing:.05em;line-height:1.1;margin-top:0.3mm;white-space:nowrap}
+
+  .measure{position:fixed!important;left:-99999px!important;top:0!important}
+
+  @media print{
+    @page{size:100mm 150mm;margin:0}
+    html,body{background:#fff;margin:0;padding:0}
+    .app,.paper-head,.pmark{display:none!important}
+    .paper-wrap{padding:0}
+    #pages{display:block;gap:0}
+    .sheet{page-break-after:always;break-after:page;margin:0}
+    .sheet:last-child{page-break-after:auto;break-after:auto}
+    .label{box-shadow:none!important;width:100mm;height:150mm}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ SHARED SVG SYMBOLS (defined once, reused per label) ══════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+
+  <!-- OWARIN kamon — 5 heart petals + sun centre.
+       Drawn WHITE-ON-BLACK for the masthead: petals #fff, separations #000.
+       Hard-coded (not currentColor) so html2canvas/thermal output is deterministic. -->
+  <symbol id="ic-kamon" viewBox="0 0 100 100">
+    <g fill="#fff" stroke="#000" stroke-width="3.4" stroke-linejoin="round">
+      <path transform="rotate(0 50 50)"   d="M50,50 C50,50 22,36 22,24 C22,13.5 32.5,9.5 40.5,11.8 C45.2,13.1 48.2,16.8 50,20.8 C51.8,16.8 54.8,13.1 59.5,11.8 C67.5,9.5 78,13.5 78,24 C78,36 50,50 50,50 Z"/>
+      <path transform="rotate(72 50 50)"  d="M50,50 C50,50 22,36 22,24 C22,13.5 32.5,9.5 40.5,11.8 C45.2,13.1 48.2,16.8 50,20.8 C51.8,16.8 54.8,13.1 59.5,11.8 C67.5,9.5 78,13.5 78,24 C78,36 50,50 50,50 Z"/>
+      <path transform="rotate(144 50 50)" d="M50,50 C50,50 22,36 22,24 C22,13.5 32.5,9.5 40.5,11.8 C45.2,13.1 48.2,16.8 50,20.8 C51.8,16.8 54.8,13.1 59.5,11.8 C67.5,9.5 78,13.5 78,24 C78,36 50,50 50,50 Z"/>
+      <path transform="rotate(216 50 50)" d="M50,50 C50,50 22,36 22,24 C22,13.5 32.5,9.5 40.5,11.8 C45.2,13.1 48.2,16.8 50,20.8 C51.8,16.8 54.8,13.1 59.5,11.8 C67.5,9.5 78,13.5 78,24 C78,36 50,50 50,50 Z"/>
+      <path transform="rotate(288 50 50)" d="M50,50 C50,50 22,36 22,24 C22,13.5 32.5,9.5 40.5,11.8 C45.2,13.1 48.2,16.8 50,20.8 C51.8,16.8 54.8,13.1 59.5,11.8 C67.5,9.5 78,13.5 78,24 C78,36 50,50 50,50 Z"/>
+    </g>
+    <g stroke="#000" stroke-width="3.4" stroke-linecap="round" fill="none">
+      <path d="M50.0,40.0 L50.0,28.5 M57.1,42.9 L65.2,34.8 M60.0,50.0 L71.5,50.0 M57.1,57.1 L65.2,65.2 M50.0,60.0 L50.0,71.5 M42.9,57.1 L34.8,65.2 M40.0,50.0 L28.5,50.0 M42.9,42.9 L34.8,34.8"/>
+    </g>
+    <circle cx="50" cy="50" r="12.6" fill="#000"/>
+    <circle cx="50" cy="50" r="7.2"  fill="#fff"/>
+  </symbol>
+
+  <!-- phone glyph -->
+  <symbol id="ic-tel" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M6.6 10.8c1.6 3.1 4.1 5.6 7.2 7.2l2.4-2.4c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.6 22 2 13.4 2 2.9c0-.6.4-1 1-1h4.1c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1l-2.8 2z"/>
+  </symbol>
+
+  <!-- CAUTION 1 · keep dry -->
+  <symbol id="ic-dry" viewBox="0 0 64 64">
+    <g fill="currentColor">
+      <path d="M32 8c-12.2 0-22 9.4-22.6 21.2-.1 1.3 1 2.3 2.3 2.1 1.9-.3 3.6.4 5 2 .8.9 2.2.9 3 0 1.5-1.7 3.4-2.4 5.5-2.1v18.9c0 3.9-3.2 7-7 7s-7-3.1-7-7h-6c0 7.2 5.9 13 13 13s13-5.8 13-13V31.2c2.1-.3 4 .4 5.5 2.1.8.9 2.2.9 3 0 1.4-1.6 3.1-2.3 5-2 1.3.2 2.4-.8 2.3-2.1C54 17.4 44.2 8 32 8z"/>
+      <path d="M9 6c0 2-1.6 3.2-1.6 5A1.6 1.6 0 0 0 10.6 11c0-1.8-1.6-3-1.6-5zM55 6c0 2-1.6 3.2-1.6 5A1.6 1.6 0 0 0 56.6 11c0-1.8-1.6-3-1.6-5zM55 44c0 2.6-2 4.1-2 6.4a2 2 0 0 0 4 0c0-2.3-2-3.8-2-6.4z"/>
+    </g>
+  </symbol>
+
+  <!-- CAUTION 2 · open carefully — carton with flaps open -->
+  <symbol id="ic-cut" viewBox="0 0 64 64">
+    <g fill="currentColor">
+      <path d="M9 27h46v29H9z"/>
+      <path d="M9 27L2 12l19-5 9 15z"/>
+      <path d="M55 27l7-15-19-5-9 15z"/>
+      <rect x="27" y="34" width="10" height="15" rx="1.5" fill="#fff"/>
+    </g>
+  </symbol>
+
+  <!-- CAUTION 3 · do not bend — outlined card, bent, with slash -->
+  <symbol id="ic-bend" viewBox="0 0 64 64">
+    <path fill="none" stroke="currentColor" stroke-width="5.2" stroke-linejoin="round"
+          d="M5 48V32h28L59 20v16L33 48z"/>
+    <g stroke-linecap="round">
+      <path d="M11 9L55 55" stroke="#fff" stroke-width="10"/>
+      <path d="M11 9L55 55" stroke="currentColor" stroke-width="4.8"/>
+    </g>
+  </symbol>
+
+  <!-- CAUTION 4 · handle with care -->
+  <symbol id="ic-care" viewBox="0 0 64 64">
+    <g fill="currentColor">
+      <path d="M32 6l14 7-14 7-14-7z"/>
+      <path d="M17 17l13 6.5V38l-13-6.5zM47 17L34 23.5V38l13-6.5z"/>
+      <path d="M4 30c3.4 0 5.5 2 6.6 4.6l6.4 14.6c1 2.3 3.2 3.8 5.8 3.8h18.4c2.6 0 4.8-1.5 5.8-3.8l6.4-14.6C54.5 32 56.6 30 60 30c1.8 0 3 1.6 2.4 3.3l-7.6 20.2C53.2 57.8 49.1 61 44.3 61H19.7c-4.8 0-8.9-3.2-10.5-7.5L1.6 33.3C1 31.6 2.2 30 4 30z"/>
+    </g>
+  </symbol>
+
+  <!-- mizuhiki (awaji musubi) divider -->
+  <symbol id="ic-mizuhiki" viewBox="0 0 540 78" preserveAspectRatio="xMidYMid meet">
+    <g fill="none" stroke="#000" stroke-linecap="round">
+      <path d="M0 51.5h540M0 54.5h540M0 57.5h540" stroke-width="1.5"/>
+      <g stroke="#fff" stroke-width="5.6"><path d="M310.0,35.8L311.8,35.9L313.6,36.0L315.4,36.3L317.1,36.6L318.8,37.1L320.4,37.7L322.0,38.3L323.5,39.0L324.9,39.9L326.3,40.7L327.5,41.7L328.7,42.7L329.7,43.8L330.6,44.9L331.4,46.0L332.1,47.2L332.6,48.4L333.1,49.6L333.3,50.8L333.5,52.0L333.5,53.1L333.4,54.2L333.2,55.3L332.8,56.3L332.3,57.3L331.7,58.2L331.0,59.0L330.2,59.8L329.3,60.4L328.3,61.0L327.2,61.4L326.0,61.8L324.8,62.0L323.5,62.1L322.1,62.1L320.7,62.0L319.3,61.8L317.9,61.4L316.4,60.9L315.0,60.3L313.5,59.6L312.1,58.8L310.7,57.8L309.4,56.8L308.1,55.7L306.8,54.4L305.6,53.1L304.5,51.7L303.5,50.2L302.6,48.7L301.7,47.1L300.9,45.5L300.3,43.8L299.7,42.1L299.3,40.4L298.9,38.7L298.7,37.1L298.6,35.4L298.6,33.7L298.7,32.1L298.9,30.6L299.2,29.1L299.6,27.6L300.1,26.3L300.7,25.0L301.4,23.9L302.1,22.8L303.0,21.8L303.9,21.0L304.8,20.3L305.8,19.7L306.8,19.2L307.9,18.9L308.9,18.7L310.0,18.6L311.1,18.7L312.1,18.9L313.2,19.2L314.2,19.7L315.2,20.3L316.1,21.0L317.0,21.8L317.9,22.8L318.6,23.9L319.3,25.0L319.9,26.3L320.4,27.6L320.8,29.1L321.1,30.6L321.3,32.1L321.4,33.7L321.4,35.4L321.3,37.1L321.1,38.7L320.7,40.4L320.3,42.1L319.7,43.8L319.1,45.5L318.3,47.1L317.4,48.7L316.5,50.2L315.5,51.7L314.4,53.1L313.2,54.4L311.9,55.7L310.6,56.8L309.3,57.8L307.9,58.8L306.5,59.6L305.0,60.3L303.6,60.9L302.1,61.4L300.7,61.8L299.3,62.0L297.9,62.1L296.5,62.1L295.2,62.0L294.0,61.8L292.8,61.4L291.7,61.0L290.7,60.4L289.8,59.8L289.0,59.0L288.3,58.2L287.7,57.3L287.2,56.3L286.8,55.3L286.6,54.2L286.5,53.1L286.5,52.0L286.7,50.8L286.9,49.6L287.4,48.4L287.9,47.2L288.6,46.0L289.4,44.9L290.3,43.8L291.3,42.7L292.5,41.7L293.7,40.7L295.1,39.9L296.5,39.0L298.0,38.3L299.6,37.7L301.2,37.1L302.9,36.6L304.6,36.3L306.4,36.0L308.2,35.9L310.0,35.8Z"/><path d="M310.0,34.4L312.1,34.5L314.2,34.6L316.2,34.9L318.2,35.4L320.2,35.9L322.1,36.6L324.0,37.3L325.7,38.2L327.4,39.1L328.9,40.2L330.4,41.3L331.7,42.4L332.9,43.7L334.0,45.0L334.9,46.3L335.7,47.7L336.3,49.0L336.8,50.4L337.1,51.8L337.3,53.2L337.4,54.5L337.2,55.8L337.0,57.1L336.5,58.3L336.0,59.4L335.3,60.4L334.5,61.4L333.5,62.3L332.4,63.0L331.3,63.7L330.0,64.2L328.6,64.6L327.2,64.9L325.7,65.0L324.1,65.0L322.5,64.9L320.8,64.6L319.2,64.2L317.5,63.6L315.8,62.9L314.1,62.1L312.5,61.1L310.8,60.0L309.3,58.8L307.8,57.5L306.3,56.1L304.9,54.5L303.6,52.9L302.4,51.2L301.3,49.4L300.3,47.6L299.5,45.7L298.7,43.7L298.1,41.8L297.5,39.8L297.1,37.8L296.9,35.9L296.7,33.9L296.7,32.0L296.9,30.1L297.1,28.3L297.5,26.6L297.9,24.9L298.5,23.4L299.2,21.9L300.0,20.5L300.9,19.3L301.8,18.2L302.9,17.2L303.9,16.3L305.1,15.7L306.3,15.1L307.5,14.7L308.7,14.5L310.0,14.4L311.3,14.5L312.5,14.7L313.7,15.1L314.9,15.7L316.1,16.3L317.1,17.2L318.2,18.2L319.1,19.3L320.0,20.5L320.8,21.9L321.5,23.4L322.1,24.9L322.5,26.6L322.9,28.3L323.1,30.1L323.3,32.0L323.3,33.9L323.1,35.9L322.9,37.8L322.5,39.8L321.9,41.8L321.3,43.7L320.5,45.7L319.7,47.6L318.7,49.4L317.6,51.2L316.4,52.9L315.1,54.5L313.7,56.1L312.2,57.5L310.7,58.8L309.2,60.0L307.5,61.1L305.9,62.1L304.2,62.9L302.5,63.6L300.8,64.2L299.2,64.6L297.5,64.9L295.9,65.0L294.3,65.0L292.8,64.9L291.4,64.6L290.0,64.2L288.7,63.7L287.6,63.0L286.5,62.3L285.5,61.4L284.7,60.4L284.0,59.4L283.5,58.3L283.0,57.1L282.8,55.8L282.6,54.5L282.7,53.2L282.9,51.8L283.2,50.4L283.7,49.0L284.3,47.7L285.1,46.3L286.0,45.0L287.1,43.7L288.3,42.4L289.6,41.3L291.1,40.2L292.6,39.1L294.3,38.2L296.0,37.3L297.9,36.6L299.8,35.9L301.8,35.4L303.8,34.9L305.8,34.6L307.9,34.5L310.0,34.4Z"/><path d="M310.0,33.0L312.4,33.1L314.8,33.3L317.1,33.6L319.4,34.1L321.6,34.7L323.8,35.5L325.9,36.3L327.9,37.3L329.8,38.4L331.6,39.6L333.2,40.8L334.7,42.2L336.1,43.6L337.3,45.1L338.4,46.6L339.3,48.1L340.0,49.7L340.6,51.3L340.9,52.9L341.1,54.4L341.2,55.9L341.0,57.4L340.7,58.9L340.3,60.2L339.6,61.5L338.8,62.7L337.9,63.8L336.8,64.8L335.6,65.6L334.2,66.4L332.8,67.0L331.2,67.4L329.6,67.7L327.9,67.9L326.1,67.9L324.2,67.7L322.4,67.4L320.4,66.9L318.5,66.3L316.6,65.5L314.7,64.6L312.8,63.5L311.0,62.2L309.2,60.8L307.4,59.3L305.8,57.7L304.2,55.9L302.7,54.1L301.4,52.1L300.1,50.1L299.0,48.0L298.0,45.8L297.1,43.6L296.4,41.4L295.8,39.2L295.3,36.9L295.0,34.7L294.9,32.4L294.9,30.3L295.0,28.1L295.3,26.1L295.7,24.1L296.2,22.2L296.9,20.4L297.7,18.7L298.6,17.2L299.6,15.8L300.7,14.5L301.9,13.4L303.1,12.4L304.4,11.6L305.8,11.0L307.2,10.6L308.6,10.3L310.0,10.2L311.4,10.3L312.8,10.6L314.2,11.0L315.6,11.6L316.9,12.4L318.1,13.4L319.3,14.5L320.4,15.8L321.4,17.2L322.3,18.7L323.1,20.4L323.8,22.2L324.3,24.1L324.7,26.1L325.0,28.1L325.1,30.3L325.1,32.4L325.0,34.7L324.7,36.9L324.2,39.2L323.6,41.4L322.9,43.6L322.0,45.8L321.0,48.0L319.9,50.1L318.6,52.1L317.3,54.1L315.8,55.9L314.2,57.7L312.6,59.3L310.8,60.8L309.0,62.2L307.2,63.5L305.3,64.6L303.4,65.5L301.5,66.3L299.6,66.9L297.6,67.4L295.8,67.7L293.9,67.9L292.1,67.9L290.4,67.7L288.8,67.4L287.2,67.0L285.8,66.4L284.4,65.6L283.2,64.8L282.1,63.8L281.2,62.7L280.4,61.5L279.7,60.2L279.3,58.9L279.0,57.4L278.8,55.9L278.9,54.4L279.1,52.9L279.4,51.3L280.0,49.7L280.7,48.1L281.6,46.6L282.7,45.1L283.9,43.6L285.3,42.2L286.8,40.8L288.4,39.6L290.2,38.4L292.1,37.3L294.1,36.3L296.2,35.5L298.4,34.7L300.6,34.1L302.9,33.6L305.2,33.3L307.6,33.1L310.0,33.0Z"/></g>
+      <g stroke-width="1.7"><path d="M310.0,35.8L311.8,35.9L313.6,36.0L315.4,36.3L317.1,36.6L318.8,37.1L320.4,37.7L322.0,38.3L323.5,39.0L324.9,39.9L326.3,40.7L327.5,41.7L328.7,42.7L329.7,43.8L330.6,44.9L331.4,46.0L332.1,47.2L332.6,48.4L333.1,49.6L333.3,50.8L333.5,52.0L333.5,53.1L333.4,54.2L333.2,55.3L332.8,56.3L332.3,57.3L331.7,58.2L331.0,59.0L330.2,59.8L329.3,60.4L328.3,61.0L327.2,61.4L326.0,61.8L324.8,62.0L323.5,62.1L322.1,62.1L320.7,62.0L319.3,61.8L317.9,61.4L316.4,60.9L315.0,60.3L313.5,59.6L312.1,58.8L310.7,57.8L309.4,56.8L308.1,55.7L306.8,54.4L305.6,53.1L304.5,51.7L303.5,50.2L302.6,48.7L301.7,47.1L300.9,45.5L300.3,43.8L299.7,42.1L299.3,40.4L298.9,38.7L298.7,37.1L298.6,35.4L298.6,33.7L298.7,32.1L298.9,30.6L299.2,29.1L299.6,27.6L300.1,26.3L300.7,25.0L301.4,23.9L302.1,22.8L303.0,21.8L303.9,21.0L304.8,20.3L305.8,19.7L306.8,19.2L307.9,18.9L308.9,18.7L310.0,18.6L311.1,18.7L312.1,18.9L313.2,19.2L314.2,19.7L315.2,20.3L316.1,21.0L317.0,21.8L317.9,22.8L318.6,23.9L319.3,25.0L319.9,26.3L320.4,27.6L320.8,29.1L321.1,30.6L321.3,32.1L321.4,33.7L321.4,35.4L321.3,37.1L321.1,38.7L320.7,40.4L320.3,42.1L319.7,43.8L319.1,45.5L318.3,47.1L317.4,48.7L316.5,50.2L315.5,51.7L314.4,53.1L313.2,54.4L311.9,55.7L310.6,56.8L309.3,57.8L307.9,58.8L306.5,59.6L305.0,60.3L303.6,60.9L302.1,61.4L300.7,61.8L299.3,62.0L297.9,62.1L296.5,62.1L295.2,62.0L294.0,61.8L292.8,61.4L291.7,61.0L290.7,60.4L289.8,59.8L289.0,59.0L288.3,58.2L287.7,57.3L287.2,56.3L286.8,55.3L286.6,54.2L286.5,53.1L286.5,52.0L286.7,50.8L286.9,49.6L287.4,48.4L287.9,47.2L288.6,46.0L289.4,44.9L290.3,43.8L291.3,42.7L292.5,41.7L293.7,40.7L295.1,39.9L296.5,39.0L298.0,38.3L299.6,37.7L301.2,37.1L302.9,36.6L304.6,36.3L306.4,36.0L308.2,35.9L310.0,35.8Z"/><path d="M310.0,34.4L312.1,34.5L314.2,34.6L316.2,34.9L318.2,35.4L320.2,35.9L322.1,36.6L324.0,37.3L325.7,38.2L327.4,39.1L328.9,40.2L330.4,41.3L331.7,42.4L332.9,43.7L334.0,45.0L334.9,46.3L335.7,47.7L336.3,49.0L336.8,50.4L337.1,51.8L337.3,53.2L337.4,54.5L337.2,55.8L337.0,57.1L336.5,58.3L336.0,59.4L335.3,60.4L334.5,61.4L333.5,62.3L332.4,63.0L331.3,63.7L330.0,64.2L328.6,64.6L327.2,64.9L325.7,65.0L324.1,65.0L322.5,64.9L320.8,64.6L319.2,64.2L317.5,63.6L315.8,62.9L314.1,62.1L312.5,61.1L310.8,60.0L309.3,58.8L307.8,57.5L306.3,56.1L304.9,54.5L303.6,52.9L302.4,51.2L301.3,49.4L300.3,47.6L299.5,45.7L298.7,43.7L298.1,41.8L297.5,39.8L297.1,37.8L296.9,35.9L296.7,33.9L296.7,32.0L296.9,30.1L297.1,28.3L297.5,26.6L297.9,24.9L298.5,23.4L299.2,21.9L300.0,20.5L300.9,19.3L301.8,18.2L302.9,17.2L303.9,16.3L305.1,15.7L306.3,15.1L307.5,14.7L308.7,14.5L310.0,14.4L311.3,14.5L312.5,14.7L313.7,15.1L314.9,15.7L316.1,16.3L317.1,17.2L318.2,18.2L319.1,19.3L320.0,20.5L320.8,21.9L321.5,23.4L322.1,24.9L322.5,26.6L322.9,28.3L323.1,30.1L323.3,32.0L323.3,33.9L323.1,35.9L322.9,37.8L322.5,39.8L321.9,41.8L321.3,43.7L320.5,45.7L319.7,47.6L318.7,49.4L317.6,51.2L316.4,52.9L315.1,54.5L313.7,56.1L312.2,57.5L310.7,58.8L309.2,60.0L307.5,61.1L305.9,62.1L304.2,62.9L302.5,63.6L300.8,64.2L299.2,64.6L297.5,64.9L295.9,65.0L294.3,65.0L292.8,64.9L291.4,64.6L290.0,64.2L288.7,63.7L287.6,63.0L286.5,62.3L285.5,61.4L284.7,60.4L284.0,59.4L283.5,58.3L283.0,57.1L282.8,55.8L282.6,54.5L282.7,53.2L282.9,51.8L283.2,50.4L283.7,49.0L284.3,47.7L285.1,46.3L286.0,45.0L287.1,43.7L288.3,42.4L289.6,41.3L291.1,40.2L292.6,39.1L294.3,38.2L296.0,37.3L297.9,36.6L299.8,35.9L301.8,35.4L303.8,34.9L305.8,34.6L307.9,34.5L310.0,34.4Z"/><path d="M310.0,33.0L312.4,33.1L314.8,33.3L317.1,33.6L319.4,34.1L321.6,34.7L323.8,35.5L325.9,36.3L327.9,37.3L329.8,38.4L331.6,39.6L333.2,40.8L334.7,42.2L336.1,43.6L337.3,45.1L338.4,46.6L339.3,48.1L340.0,49.7L340.6,51.3L340.9,52.9L341.1,54.4L341.2,55.9L341.0,57.4L340.7,58.9L340.3,60.2L339.6,61.5L338.8,62.7L337.9,63.8L336.8,64.8L335.6,65.6L334.2,66.4L332.8,67.0L331.2,67.4L329.6,67.7L327.9,67.9L326.1,67.9L324.2,67.7L322.4,67.4L320.4,66.9L318.5,66.3L316.6,65.5L314.7,64.6L312.8,63.5L311.0,62.2L309.2,60.8L307.4,59.3L305.8,57.7L304.2,55.9L302.7,54.1L301.4,52.1L300.1,50.1L299.0,48.0L298.0,45.8L297.1,43.6L296.4,41.4L295.8,39.2L295.3,36.9L295.0,34.7L294.9,32.4L294.9,30.3L295.0,28.1L295.3,26.1L295.7,24.1L296.2,22.2L296.9,20.4L297.7,18.7L298.6,17.2L299.6,15.8L300.7,14.5L301.9,13.4L303.1,12.4L304.4,11.6L305.8,11.0L307.2,10.6L308.6,10.3L310.0,10.2L311.4,10.3L312.8,10.6L314.2,11.0L315.6,11.6L316.9,12.4L318.1,13.4L319.3,14.5L320.4,15.8L321.4,17.2L322.3,18.7L323.1,20.4L323.8,22.2L324.3,24.1L324.7,26.1L325.0,28.1L325.1,30.3L325.1,32.4L325.0,34.7L324.7,36.9L324.2,39.2L323.6,41.4L322.9,43.6L322.0,45.8L321.0,48.0L319.9,50.1L318.6,52.1L317.3,54.1L315.8,55.9L314.2,57.7L312.6,59.3L310.8,60.8L309.0,62.2L307.2,63.5L305.3,64.6L303.4,65.5L301.5,66.3L299.6,66.9L297.6,67.4L295.8,67.7L293.9,67.9L292.1,67.9L290.4,67.7L288.8,67.4L287.2,67.0L285.8,66.4L284.4,65.6L283.2,64.8L282.1,63.8L281.2,62.7L280.4,61.5L279.7,60.2L279.3,58.9L279.0,57.4L278.8,55.9L278.9,54.4L279.1,52.9L279.4,51.3L280.0,49.7L280.7,48.1L281.6,46.6L282.7,45.1L283.9,43.6L285.3,42.2L286.8,40.8L288.4,39.6L290.2,38.4L292.1,37.3L294.1,36.3L296.2,35.5L298.4,34.7L300.6,34.1L302.9,33.6L305.2,33.3L307.6,33.1L310.0,33.0Z"/></g>
+    </g>
+  </symbol>
+
+</defs></svg>
+
+<div class="app">
+  <div class="topbar">
+    <div class="brand">OWARIN <span>· LABEL STUDIO 和</span></div>
+    <div class="actions">
+      <span class="status" id="status"></span>
+      <label class="toggle"><input type="checkbox" id="cautionChk" checked> CAUTION STRIP</label>
+      <label class="toggle"><input type="checkbox" id="knotChk" checked> MIZUHIKI</label>
+      <button class="btn ghost" id="sampleBtn">Sample</button>
+      <button class="btn" id="printBtn">⎙ Print</button>
+      <button class="btn primary" id="zipBtn">⬇ Export ZIP</button>
+    </div>
+  </div>
+
+  <div class="panel sender">
+    <span class="lab">FROM</span>
+    <input id="senderName" value="OWA ― OWARIN's STORE" placeholder="Sender name">
+    <input id="senderJP" class="jp" value="オワリン商店" placeholder="屋号 (JP)">
+    <input id="senderTel" class="tel" value="065-208-3088" placeholder="Tel">
+  </div>
+
+  <div class="grid-main">
+    <div class="panel">
+      <div class="phead">
+        <span>Bulk Paste</span>
+        <span class="hint">1 order per block · blank line between</span>
+      </div>
+      <textarea id="input" placeholder="รายการสินค้า
+:
+ผู้รับ
+คุณสมชาย ใจดี
+089-123-4567
+123/4 ถ.สุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพ 10110
+
+(เว้นบรรทัดว่างแล้วขึ้นรายการถัดไป)"></textarea>
+      <div class="row">
+        <button class="btn" id="parseBtn">Parse</button>
+        <button class="btn ghost sm" id="clearBtn">Clear</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="phead">
+        <span>Shipments — Edit</span>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="count" id="count"></span>
+          <button class="btn sm" id="addBtn">+ Add blank</button>
+        </div>
+      </div>
+      <div id="cards"></div>
+    </div>
+  </div>
+
+  <div class="paper-head">
+    <span>Preview · 100 × 150 mm · 1-bit B/W · 1 label = 1 file</span><div class="ln"></div>
+  </div>
+</div>
+
+<div class="paper-wrap"><div id="pages"></div></div>
+
+<script>
+/* ════════════════ STATE ════════════════ */
+let shipments = [];
+
+/* ════════════════ HELPERS ════════════════ */
+const esc  = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const attr = s => esc(s).replace(/"/g,'&quot;');
+
+const ADDR_KW = /(เลขที่|หมู่บ้าน|หมู่|ม\.\s*\d|ซอย|ซ\.|ถนน|ถ\.|ตำบล|ต\.|อำเภอ|อ\.|จังหวัด|จ\.|แขวง|เขต|อาคาร|ตึก|กทม|กรุงเทพ|คอนโด|แมนชั่น)/;
+const NAME_LAB  = ['ผู้รับ','ชื่อผู้รับ','ชื่อ','name','to'];
+const PHONE_LAB = ['โทร','โทรศัพท์','เบอร์โทร','เบอร์','มือถือ','tel','phone'];
+const ADDR_LAB  = ['ที่อยู่','จัดส่ง','address','addr'];
+
+function stripLabel(line){
+  const m = line.match(/^\s*(ผู้รับ|ชื่อผู้รับ|ชื่อ|ที่อยู่|จัดส่ง|โทรศัพท์|โทร|เบอร์โทร|เบอร์|มือถือ|tel|name|to|address|addr|phone)\s*[:：\-)]*\s*(.*)$/i);
+  if(m) return {label:m[1].toLowerCase(), value:m[2].trim()};
+  return {label:'', value:line.trim()};
+}
+
+function fmtPhone(d){
+  d=(d||'').replace(/\D/g,'');
+  if(d.length===10) return d.replace(/(\d{3})(\d{3})(\d{4})/,'$1-$2-$3');
+  if(d.length===9)  return d.replace(/(\d{2})(\d{3})(\d{4})/,'$1-$2-$3');
+  return d;
+}
+
+/* live input masks — keep every field in one canonical shape so copy/paste matches */
+function maskPhone(v){
+  const d=(v||'').replace(/\D/g,'').slice(0,10);
+  return [d.slice(0,3), d.slice(3,6), d.slice(6,10)].filter(x=>x!=='').join('-');
+}
+function maskPostal(v){ return (v||'').replace(/\D/g,'').slice(0,5); }
+
+function extractPhone(s){
+  let m = s.match(/(?:โทร\.?|tel\.?|โทรศัพท์|☎|มือถือ|เบอร์โทร|เบอร์|T\.)\s*[:：\-]?\s*([0-9][0-9\s\-]{7,12})/i);
+  if(m){ const d=m[1].replace(/\D/g,'').slice(0,10); if(d.length>=9) return {tel:d, str:m[0].trim()}; }
+  let p = s.match(/(?:^|[\s(])(0[0-9][0-9\s\-]{6,11}[0-9])(?=[\s)]|$)/);
+  if(p){ const d=p[1].replace(/\D/g,''); if(d.length===9||d.length===10) return {tel:d, str:p[1]}; }
+  return {tel:'', str:''};
+}
+
+/* strip a phone (and any trailing โทร/เบอร์/tel marker) out of a text fragment */
+function removePhone(s){
+  const ph=extractPhone(' '+s+' ');
+  let clean=s, tel='';
+  if(ph.tel){
+    tel=ph.tel;
+    const i=s.indexOf(ph.str);
+    if(i>=0) clean=(s.slice(0,i)+' '+s.slice(i+ph.str.length)).replace(/\s+/g,' ').trim();
+  }
+  clean=clean.replace(/(โทร\.?|tel\.?|โทรศัพท์|เบอร์โทร|เบอร์|มือถือ)\s*[:：\-]?\s*$/i,'').trim();
+  return {clean, tel};
+}
+
+/* customers are individuals → store the bare name, always render with a locked "K." */
+function bareName(nm){
+  return (nm||'').trim().replace(/^(คุณ|K\.|นาย|นางสาว|นาง|น\.ส\.|ด\.ช\.|ด\.ญ\.|Mr\.|Ms\.|Mrs\.)\s*/i,'').trim();
+}
+function displayName(nm){
+  const b=bareName(nm);
+  return b ? 'K. '+b : 'K. —';
+}
+
+function pullPostal(addr){
+  let postal='';
+  const ms=[...(' '+addr+' ').matchAll(/(?<!\d)(\d{5})(?!\d)/g)];
+  if(ms.length){
+    postal=ms[ms.length-1][1];
+    const i=addr.lastIndexOf(postal);
+    if(i>=0) addr=(addr.slice(0,i)+' '+addr.slice(i+5)).replace(/\s+/g,' ').trim();
+  }
+  return {postal, addr};
+}
+
+function splitNameAddr(s){
+  s=s.replace(/\s+/g,' ').trim(); if(!s) return {name:'',addr:''};
+  const toks=s.split(' '); let name=[],addr=[],sw=false;
+  for(const t of toks){ if(!sw && (/\d/.test(t)||ADDR_KW.test(t))) sw=true; (sw?addr:name).push(t); }
+  if(!name.length){ name=[toks[0]]; addr=toks.slice(1); }
+  return {name:name.join(' ').trim(), addr:addr.join(' ').trim()};
+}
+
+/* recipient on a single line: name + address + phone + postal all mixed */
+function parseBlob(line){
+  let {value}=stripLabel(line); let s=value||line;
+  const r=removePhone(s);
+  const pp=pullPostal(r.clean.replace(/\s+/g,' ').trim());
+  const na=splitNameAddr(pp.addr);
+  return {name:bareName(na.name), tel:fmtPhone(r.tel), postal:pp.postal, addr:na.addr};
+}
+
+/* recipient across several lines, often with labels (ผู้รับ / name / phone / addr) */
+function parseLines(lines){
+  let name='', tel='', addrLines=[], expectName=false;
+  for(const raw of lines){
+    const {label,value}=stripLabel(raw);
+    if(NAME_LAB.includes(label)){ if(value){name=value} else {expectName=true} continue; }
+    if(PHONE_LAB.includes(label)){
+      const d=value.replace(/\D/g,'');
+      if(d.length>=9) tel=d.slice(0,10);
+      else { const p=extractPhone(' '+value+' '); if(p.tel) tel=p.tel; }
+      continue;
+    }
+    if(ADDR_LAB.includes(label)){ if(value) addrLines.push(value); continue; }
+    if(!value) continue;
+    if(expectName){ name=value; expectName=false; continue; }
+    if(/^[\d\s\-()+]+$/.test(value)){ const p=extractPhone(' '+value+' '); if(p.tel){ tel=tel||p.tel; continue; } }
+    if(/\d/.test(value) || ADDR_KW.test(value)){ const r=removePhone(value); if(r.tel&&!tel)tel=r.tel; if(r.clean)addrLines.push(r.clean); continue; }
+    if(!name){ name=value; continue; }
+    addrLines.push(value);
+  }
+  if(!name && addrLines.length){
+    const na=splitNameAddr(addrLines[0]); name=na.name;
+    if(na.addr) addrLines[0]=na.addr; else addrLines.shift();
+  }
+  const pp=pullPostal(addrLines.join(' ').replace(/\s+/g,' ').trim());
+  return {name:bareName(name), tel:fmtPhone(tel), postal:pp.postal, addr:pp.addr};
+}
+
+function isRecipientStart(l){
+  const {label}=stripLabel(l);
+  if(NAME_LAB.includes(label)||ADDR_LAB.includes(label)) return true;
+  if(/0\d[\d\-\s]{7,}/.test(l)) return true;
+  if(ADDR_KW.test(l)) return true;
+  return false;
+}
+
+function parseBulk(text){
+  const entries = text.split(/\n\s*\n/).filter(e=>e.trim());
+  const out=[];
+  for(const e of entries){
+    const lines = e.split('\n').map(l=>l.trim());
+    const sep = lines.findIndex(l=>/^[:：.\-–—=~_·•]{1,3}$/.test(l));
+    let itemLines, recvLines;
+    if(sep>=0){ itemLines=lines.slice(0,sep); recvLines=lines.slice(sep+1); }
+    else {
+      const ri=lines.findIndex(isRecipientStart);
+      if(ri>0){ itemLines=lines.slice(0,ri); recvLines=lines.slice(ri); }
+      else { itemLines=[]; recvLines=lines; }
+    }
+    itemLines = itemLines.filter(Boolean).map(p=>p.replace(/^[·\-•*●○\s]+/,'').trim()).filter(Boolean);
+    recvLines = recvLines.filter(Boolean);
+    if(!recvLines.length) continue;
+    const r = recvLines.length===1 ? parseBlob(recvLines[0]) : parseLines(recvLines);
+    out.push({...r, items:itemLines});
+  }
+  return out;
+}
+
+/* ════════════════ LABEL RENDER — fixed 100×150mm ════════════════ */
+function postalBoxes(p){
+  const d=(p||'').replace(/\D/g,'').slice(0,5);
+  let o=''; for(let i=0;i<5;i++) o+=`<span class="pd">${d[i]||''}</span>`;
+  return o;
+}
+
+function itemsHTML(list, cut){
+  const shown = cut>0 ? list.slice(0, list.length-cut) : list.slice();
+  if(cut>0) shown.push('__MORE__'+cut);
+  const cell = t => t.startsWith('__MORE__')
+      ? `<div class="dn-more">+ ${t.slice(8)} รายการ</div>`
+      : `<div>· ${esc(t)}</div>`;
+  if(!shown.length) return '<div class="dn-col">—</div>';
+  if(shown.length<=4) return `<div class="dn-col">${shown.map(cell).join('')}</div>`;
+  const half=Math.ceil(shown.length/2);
+  return `<div class="dn-col">${shown.slice(0,half).map(cell).join('')}</div>`
+       + `<div class="dn-col">${shown.slice(half).map(cell).join('')}</div>`;
+}
+
+const CAUTIONS = [
+  ['ic-dry',  'Keep Dry',        '水濡厳禁'],
+  ['ic-cut',  'Open Carefully',  '開封時注意'],
+  ['ic-bend', 'Do Not Bend',     '折曲厳禁'],
+  ['ic-care', 'Handle w/ Care',  '取扱注意'],
+];
+
+function cautionHTML(){
+  return `<div class="caution">
+    <div class="c-tab"><span>CAUTION</span></div>
+    <div class="c-grid">${CAUTIONS.map(([id,en,jp])=>
+      `<div class="c-cell"><svg viewBox="0 0 64 64"><use href="#${id}"/></svg><b>${en}</b><em>${jp}</em></div>`
+    ).join('')}</div>
+  </div>`;
+}
+
+function labelHTML(sp, from, fromJP, ftel){
+  const list=(sp.items&&sp.items.length)?sp.items:[];
+  const items=itemsHTML(list,0);
+  const qty=list.length ? list.length+' ITEM'+(list.length>1?'S':'') : '';
+  const showKnot = document.getElementById('knotChk').checked;
+  const showCaution = document.getElementById('cautionChk').checked;
+
+  return `<div class="label"><div class="lab-in">
+
+    <div class="mast">
+      <svg class="kamon" viewBox="0 0 100 100" style="color:#fff"><use href="#ic-kamon"/></svg>
+      <div class="wordmark">OWARIN STORE</div>
+    </div>
+
+    <div class="mast2">
+      <div class="jp">${esc(fromJP||'オワリン商店')}</div>
+      <div class="tel"><svg viewBox="0 0 24 24"><use href="#ic-tel"/></svg>${esc(ftel)}</div>
+    </div>
+
+    <div class="from">
+      <span class="tag">FROM</span>
+      <span class="nm">${esc(from)}</span>
+      <span class="tl">差出人</span>
+    </div>
+
+    <div class="recv">
+      <div class="r-head"><span class="tag">TO</span><span class="jp">御届先</span><span class="rule"></span></div>
+      <div class="r-name" data-fit="name">${esc(displayName(sp.name))}</div>
+      <div class="r-tel"><svg viewBox="0 0 24 24"><use href="#ic-tel"/></svg>${esc(sp.tel||'—')}</div>
+      <div class="r-addr" data-fit="addr">${esc(sp.addr||'—')}</div>
+    </div>
+
+    <div class="postal">
+      <div class="zipwrap">
+        <div class="zw-l"><b>郵便</b><i></i><i></i></div>
+        <div class="zw-mark">〒</div>
+      </div>
+      ${postalBoxes(sp.postal)}
+    </div>
+
+    ${showKnot ? `<div class="knot"><svg viewBox="0 0 540 78" preserveAspectRatio="xMidYMid meet"><use href="#ic-mizuhiki"/></svg></div>` : ''}
+
+    <div class="dn">
+      <div class="dn-head"><span class="dn-tag">Delivery Note<i>納品書</i></span><span class="dn-qty">${qty}</span></div>
+      <div class="dn-items" data-fit="items">${items}</div>
+    </div>
+
+    ${showCaution ? cautionHTML() : ''}
+
+  </div></div>`;
+}
+
+/* shrink text until it fits its fixed box — the layout never reflows */
+const FIT = { name:[21,10.5], addr:[10.5,6.5], items:[9.5,5.5] };
+const over = el => el.scrollHeight > el.clientHeight + 0.5;
+function fitBox(el){
+  const key=el.dataset.fit; if(!FIT[key]) return;
+  const [start,min]=FIT[key];
+  let s=start, guard=0;
+  el.style.fontSize=s+'pt';
+  while(s>min && over(el) && guard++<90){
+    s=Math.round((s-0.25)*100)/100;
+    el.style.fontSize=s+'pt';
+  }
+  return s;
+}
+function fitItems(el, list){
+  fitBox(el);
+  if(!over(el) || !list.length) return;
+  for(let cut=1; cut<list.length; cut++){
+    el.innerHTML=itemsHTML(list, cut);
+    fitBox(el);
+    if(!over(el)) return;
+  }
+}
+function fitAll(root){
+  const r=root||document;
+  r.querySelectorAll('[data-fit="name"],[data-fit="addr"]').forEach(fitBox);
+  r.querySelectorAll('.sheet').forEach(sh=>{
+    const el=sh.querySelector('[data-fit="items"]'); if(!el) return;
+    fitItems(el, (shipments[+sh.dataset.i]||{}).items||[]);
+  });
+}
+
+function renderLabels(){
+  const from=document.getElementById('senderName').value;
+  const fromJP=document.getElementById('senderJP').value;
+  const ftel=document.getElementById('senderTel').value;
+  const pagesEl=document.getElementById('pages');
+  const cnt=document.getElementById('count');
+  if(!shipments.length){ pagesEl.innerHTML=''; cnt.textContent=''; return; }
+  pagesEl.innerHTML=shipments.map((sp,i)=>
+    `<div class="sheet" data-i="${i}">
+       <div class="pmark"><span>${String(i+1).padStart(2,'0')} · ${esc(displayName(sp.name))}</span><span>100×150</span></div>
+       ${labelHTML(sp,from,fromJP,ftel)}
+     </div>`).join('');
+  fitAll(pagesEl);
+  cnt.textContent=`${shipments.length} LABEL${shipments.length>1?'S':''} · ${shipments.length} FILE${shipments.length>1?'S':''}`;
+}
+
+/* ════════════════ EDITOR ════════════════ */
+function cardHTML(sp,i){
+  return `<div class="card">
+    <div class="card-h"><span class="idx">${i+1}</span><button class="x" data-act="del" data-i="${i}" title="Remove">✕</button></div>
+    <div class="grid2">
+      <label class="fld"><span>Name</span><div class="name-wrap"><span class="name-fix">K.</span><input data-i="${i}" data-f="name" value="${attr(bareName(sp.name))}" placeholder="ชื่อผู้รับ"></div></label>
+      <label class="fld"><span>Tel</span><input data-i="${i}" data-f="tel" value="${attr(sp.tel)}"></label>
+    </div>
+    <label class="fld"><span>Address</span><input data-i="${i}" data-f="addr" value="${attr(sp.addr)}"></label>
+    <div class="grid2">
+      <label class="fld"><span>Postal</span><input data-i="${i}" data-f="postal" maxlength="5" value="${attr(sp.postal)}"></label>
+      <label class="fld"><span>Items (1/line)</span><textarea data-i="${i}" data-f="items" rows="2">${esc((sp.items||[]).join('\n'))}</textarea></label>
+    </div>
+  </div>`;
+}
+function renderEditor(){
+  const w=document.getElementById('cards');
+  w.innerHTML=shipments.length?shipments.map((sp,i)=>cardHTML(sp,i)).join('')
+    :'<div class="empty">No shipments yet — paste on the left, or click + Add blank</div>';
+}
+function renderAll(){ renderEditor(); renderLabels(); }
+
+let rlTimer=null;
+function renderLabelsSoon(){ clearTimeout(rlTimer); rlTimer=setTimeout(renderLabels,180); }
+
+/* ════════════════ EXPORT — 1 recipient = 1 PDF, all zipped ════════════════ */
+function safeFile(n){
+  return (n||'label').replace(/[\\\/:*?"<>|\n\r\t]/g,' ').replace(/\s+/g,' ').trim().slice(0,90) || 'label';
+}
+function setStatus(t){ document.getElementById('status').textContent=t||''; }
+
+/* html2canvas cannot resolve <use href="#…"> against a document-level <defs>
+   in its cloned iframe — inline every symbol into the clone before capture. */
+function inlineSymbols(doc){
+  const src=document.querySelectorAll('symbol[id]');
+  const map={}; src.forEach(s=>map[s.id]=s);
+  doc.querySelectorAll('use').forEach(u=>{
+    const id=(u.getAttribute('href')||u.getAttribute('xlink:href')||'').replace('#','');
+    const sym=map[id]; if(!sym) return;
+    const g=doc.createElementNS('http://www.w3.org/2000/svg','g');
+    g.innerHTML=sym.innerHTML;
+    u.parentNode.replaceChild(g,u);
+  });
+}
+
+async function exportZip(){
+  if(!shipments.length){ alert('ยังไม่มีรายการ'); return; }
+  const btn=document.getElementById('zipBtn'), pbtn=document.getElementById('printBtn');
+  btn.disabled=pbtn.disabled=true;
+  try{
+    if(document.fonts && document.fonts.ready) await document.fonts.ready;
+    const zip=new JSZip();
+    const {jsPDF}=window.jspdf;
+    const used=Object.create(null);
+    const sheets=[...document.querySelectorAll('#pages .sheet')];
+
+    for(let i=0;i<sheets.length;i++){
+      setStatus(`RENDERING ${i+1}/${sheets.length}`);
+      const el=sheets[i].querySelector('.label');
+      // NOTE: do not pass width/windowWidth here — it narrows html2canvas's
+      // cloned viewport and collapses the flex layout.
+      const canvas=await html2canvas(el,{
+        scale:3, backgroundColor:'#ffffff', logging:false, useCORS:true,
+        onclone:(doc)=>inlineSymbols(doc)
+      });
+      const pdf=new jsPDF({unit:'mm',format:[100,150],orientation:'portrait',compress:true});
+      pdf.addImage(canvas.toDataURL('image/png'),'PNG',0,0,100,150,undefined,'FAST');
+
+      let base=safeFile(displayName(shipments[i].name));
+      if(used[base]!==undefined){ used[base]++; base=`${base} (${used[base]})`; } else used[base]=1;
+      zip.file(base+'.pdf', pdf.output('blob'));
+      await new Promise(r=>setTimeout(r,0));
+    }
+
+    setStatus('ZIPPING…');
+    const blob=await zip.generateAsync({type:'blob'});
+    const d=new Date(), pad=n=>String(n).padStart(2,'0');
+    const stamp=`${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`;
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download=`OWARIN Labels ${stamp}.zip`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+    setStatus(`✓ ${sheets.length} FILES`);
+    setTimeout(()=>setStatus(''),4000);
+  }catch(err){
+    console.error(err);
+    setStatus('');
+    alert('Export ล้มเหลว: '+err.message);
+  }finally{
+    btn.disabled=pbtn.disabled=false;
+  }
+}
+
+/* ════════════════ EVENTS ════════════════ */
+document.getElementById('addBtn').onclick=()=>{ shipments.push({name:'',tel:'',postal:'',addr:'',items:[]}); renderAll(); };
+document.getElementById('printBtn').onclick=()=>window.print();
+document.getElementById('zipBtn').onclick=exportZip;
+document.getElementById('knotChk').onchange=renderLabels;
+document.getElementById('cautionChk').onchange=renderLabels;
+document.getElementById('parseBtn').onclick=()=>{
+  const t=document.getElementById('input').value.trim();
+  if(!t) return;
+  const parsed=parseBulk(t);
+  if(!parsed.length){ alert('อ่านรายการไม่ออก — ลองเว้นบรรทัดว่างระหว่างแต่ละออเดอร์'); return; }
+  shipments=shipments.concat(parsed);
+  document.getElementById('input').value='';
+  renderAll();
+};
+document.getElementById('clearBtn').onclick=()=>{
+  if(shipments.length && !confirm('ล้างรายการทั้งหมด?')) return;
+  shipments=[]; document.getElementById('input').value=''; renderAll();
+};
+
+document.getElementById('cards').addEventListener('input',e=>{
+  const t=e.target,i=+t.dataset.i,f=t.dataset.f;
+  if(isNaN(i)||!f) return;
+  if(f==='items') shipments[i].items=t.value.split('\n').map(s=>s.replace(/^[·\-•\s]+/,'').trim()).filter(Boolean);
+  else if(f==='tel'){ const m=maskPhone(t.value); shipments[i].tel=m; if(t.value!==m) t.value=m; }
+  else if(f==='postal'){ const m=maskPostal(t.value); shipments[i].postal=m; if(t.value!==m) t.value=m; }
+  else shipments[i][f]=t.value;
+  renderLabelsSoon();
+});
+document.getElementById('cards').addEventListener('click',e=>{
+  const b=e.target.closest('[data-act="del"]'); if(!b) return;
+  shipments.splice(+b.dataset.i,1); renderAll();
+});
+document.getElementById('senderName').addEventListener('input',renderLabelsSoon);
+document.getElementById('senderJP').addEventListener('input',renderLabelsSoon);
+document.getElementById('senderTel').addEventListener('input',e=>{ e.target.value=maskPhone(e.target.value); renderLabelsSoon(); });
+
+document.getElementById('sampleBtn').onclick=()=>{
+  shipments=parseBulk(
+`Super Robot War Z2 Saisei-hen
+:
+ผู้รับ
+คุณโบ๊ท
+0897456803
+923/60ค (ค.ควาย) ซ.เอกชัย9/1
+ถ.เอกชัย ต.มหาชัย อ.เมือง
+จ.สมุทรสาคร 74000
+
+Hobby Game vol 5
+:
+ธนรัตน์ ร่วมวัง 580/432 อาคารพรปิยะแมนชั่น ถนนประชาราษฏร์สาย 1 บางซื่อ กทม. 10800 โทร 089-660-1911
+
+Bully (Incl. Map)
+Dynasty Warriors 5
+Dynasty Warriors 5 - Empire
+Dynasty Warriors 5 - Xtreme Legends
+Yu-Gi-Oh! 5D's - Tag Force 4
+:
+ผู้รับ
+ว่าที่ ร.ต. กฤป นุชเรือน
+063-359-1614
+121/1 ม.10 ต.ลาดใหญ่ อ.เมือง จ.สมุทรสงคราม 75000`);
+  renderAll();
+};
+
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>fitAll());
+window.addEventListener('load',()=>fitAll());
+renderAll();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "changeId": "P1-20260929-02",
+  "targetSpreadsheetId": "13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM",
+  "shopSpreadsheetId": "16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0",
+  "before": "three header-only tabs; no table; no data rows; no source installed in test Apps Script",
+  "action": "prepare native Table behavior in isolated Google Sheet",
+  "requestId": "N/A — schema setup only",
+  "recovery": "delete test-only table via tableId after capturing metadata, or retain test fixture"
+}

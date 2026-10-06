@@ -1,0 +1,1 @@
+PASS: 20 Add calls; R1 committed snapshot after sort/SKU reuse/duplicate/removal; R2 fresh header and supplied-field gates; R3 source/status gates; R4 four formula readbacks and blocked retries; existing journal/write failures

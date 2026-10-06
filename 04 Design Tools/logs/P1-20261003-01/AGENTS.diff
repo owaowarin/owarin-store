@@ -1,0 +1,13 @@
+diff --git "a/04 Design Tools\\logs\\P1-20261003-01\\before-followup\\AGENTS.md" b/AGENTS.md
+index 4cf0eab..761ae91 100644
+--- "a/04 Design Tools\\logs\\P1-20261003-01\\before-followup\\AGENTS.md"	
++++ b/AGENTS.md
+@@ -16,6 +16,8 @@ Read `OWARI-MASTER-CONTEXT_EN_2026-09-13.md` in this folder before starting any
+ 
+ 10. **Session-close checklist is mandatory every session** (full list: `CLAUDE.md` § "Session-close checklist"): log CSV, decisions CSV, plan board evidence, STATE.md overwrite, one-page HANDOFF, related files/README/rules/version pairs updated in the same pass, read-back verification. A task missing any item is not finished. Applies to both streams (Stream A keeps its own log location).
+ 
++11. **Issue and model handoff rule (owner decision 2026-10-03):** Log every issue, failed attempt, fix, retry, result, and recovery reference in the task CSV and Implementation log. If GPT-5.6 Sol / High cannot resolve a reproducible issue, record the unresolved problem and exact revision, then hand the repair to GPT-6 Astra / High. Do not claim a model switch or create an agent/chat automatically; use the app model selector when available. Keep one writer per change.
++
+ ## Code
+ 
+ Ponytail is ON by default at level **full** (master context §6, full text in `skills/` if the plugin copy is unavailable).

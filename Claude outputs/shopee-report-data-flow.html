@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pipeline รายงาน Shopee — Data Flow</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Trirong:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#121110; --paper-2:#1c1a18; --ink:#f4f1ea; --muted:#a8a093;
+           --soft:#7a736a; --accent:#e2603f; --rule:rgba(244,241,234,0.12); }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink);
+         font-family:'IBM Plex Sans Thai',sans-serif; line-height:1.45;
+         padding:48px 24px 64px; }
+  .wrap { max-width:920px; margin:0 auto; }
+  .eyebrow { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.18em;
+              text-transform:uppercase; color:var(--soft); margin:0 0 10px; }
+  h1 { font-family:'Trirong',serif; font-weight:400; font-size:1.75rem; margin:0 0 8px;
+        letter-spacing:0.01em; }
+  .sub { color:var(--muted); font-size:14px; margin:0 0 8px; max-width:62ch; }
+  .rule { border:0; border-top:1px solid var(--rule); margin:28px 0; }
+  figure { margin:0; overflow-x:auto; }
+  figcaption { font-family:'Trirong',serif; font-style:italic; color:var(--muted);
+                font-size:14px; margin-top:18px; max-width:62ch; }
+  footer { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em;
+            color:var(--soft); border-top:1px solid var(--rule); margin-top:40px; padding-top:14px; }
+  @media (max-width:640px) { body { padding:32px 16px 48px; } h1 { font-size:1.35rem; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">OWARIN — Ads Optimizer · Data flow</p>
+  <h1>Pipeline รายงาน Shopee รายสัปดาห์</h1>
+  <p class="sub">ใครทำอะไรในแต่ละขั้น และข้อมูลเปลี่ยนรูปเป็นอะไรระหว่างทาง — จากไฟล์ export ดิบ ไปจนถึงเด็ค HTML ที่ส่งลูกค้า</p>
+  <hr class="rule">
+  <figure>
+    <svg viewBox="0 0 840 456" width="100%" role="img" aria-labelledby="shopee-flow-title shopee-flow-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="shopee-flow-title">Shopee weekly report pipeline, data flow by role</title>
+<desc id="shopee-flow-desc">Four role lanes across six steps: spec rules gate the run, data is exported and parsed into a PARSE-PACK, the analysis session runs the deep-dive and assembles deck.json, a QA gate checks the rendered deck, and the finished HTML deck goes to the client.</desc>
+<defs>
+<pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="11" cy="11" r="0.8" fill="rgba(244,241,234,0.10)"/></pattern>
+<marker id="arr-muted" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#a8a093"/></marker>
+<marker id="arr-accent" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e2603f"/></marker>
+<marker id="arr-link" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6fa391"/></marker>
+</defs>
+<rect width="840" height="456" fill="#121110"/>
+<rect width="840" height="456" fill="url(#dots)" opacity="0.6"/>
+<rect x="0" y="36" width="840" height="80" fill="rgba(244,241,234,0.025)"/>
+<rect x="0" y="196" width="840" height="80" fill="rgba(244,241,234,0.025)"/>
+<line x1="0" y1="36" x2="840" y2="36" stroke="rgba(244,241,234,0.12)" stroke-width="0.8"/>
+<line x1="0" y1="116" x2="840" y2="116" stroke="rgba(244,241,234,0.12)" stroke-width="0.8"/>
+<line x1="0" y1="196" x2="840" y2="196" stroke="rgba(244,241,234,0.12)" stroke-width="0.8"/>
+<line x1="0" y1="276" x2="840" y2="276" stroke="rgba(244,241,234,0.12)" stroke-width="0.8"/>
+<line x1="0" y1="356" x2="840" y2="356" stroke="rgba(244,241,234,0.12)" stroke-width="0.8"/>
+<line x1="140" y1="36" x2="140" y2="356" stroke="rgba(244,241,234,0.12)" stroke-width="0.8"/>
+<rect x="180" y="6" width="32" height="16" rx="8" fill="rgba(244,241,234,0.12)"/>
+<text x="196" y="15" fill="#f4f1ea" font-size="7" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.10em">01</text>
+<text x="196" y="29" fill="#a8a093" font-size="7" font-weight="500" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.16em">EXPORT</text>
+<rect x="292" y="6" width="32" height="16" rx="8" fill="rgba(244,241,234,0.12)"/>
+<text x="308" y="15" fill="#f4f1ea" font-size="7" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.10em">02</text>
+<text x="308" y="29" fill="#a8a093" font-size="7" font-weight="500" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.16em">PARSE</text>
+<rect x="404" y="6" width="32" height="16" rx="8" fill="rgba(226,96,63,0.22)"/>
+<text x="420" y="15" fill="#e2603f" font-size="7" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.10em">03</text>
+<text x="420" y="29" fill="#e2603f" font-size="7" font-weight="500" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.16em">ANALYZE</text>
+<rect x="516" y="6" width="32" height="16" rx="8" fill="rgba(244,241,234,0.12)"/>
+<text x="532" y="15" fill="#f4f1ea" font-size="7" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.10em">04</text>
+<text x="532" y="29" fill="#a8a093" font-size="7" font-weight="500" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.16em">ASSEMBLE</text>
+<rect x="628" y="6" width="32" height="16" rx="8" fill="rgba(244,241,234,0.12)"/>
+<text x="644" y="15" fill="#f4f1ea" font-size="7" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.10em">05</text>
+<text x="644" y="29" fill="#a8a093" font-size="7" font-weight="500" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.16em">QA</text>
+<rect x="740" y="6" width="32" height="16" rx="8" fill="rgba(244,241,234,0.12)"/>
+<text x="756" y="15" fill="#f4f1ea" font-size="7" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.10em">06</text>
+<text x="756" y="29" fill="#a8a093" font-size="7" font-weight="500" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.16em">DELIVER</text>
+<text x="70" y="72" fill="#a8a093" font-size="8" font-weight="500" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.16em">SPEC</text>
+<text x="70" y="86" fill="#7a736a" font-size="9" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">กฎ</text>
+<text x="70" y="152" fill="#a8a093" font-size="8" font-weight="500" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.16em">DATA</text>
+<text x="70" y="166" fill="#7a736a" font-size="9" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">ข้อมูล</text>
+<text x="70" y="232" fill="#a8a093" font-size="8" font-weight="500" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.16em">ANALYSIS</text>
+<text x="70" y="246" fill="#7a736a" font-size="9" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">วิเคราะห์</text>
+<text x="70" y="312" fill="#a8a093" font-size="8" font-weight="500" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.16em">CLIENT</text>
+<text x="70" y="326" fill="#7a736a" font-size="9" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">ลูกค้า</text>
+<path d="M 196 110 L 196 122" fill="none" stroke="#a8a093" stroke-width="1.0" stroke-dasharray="4,3" marker-end="url(#arr-muted)"/>
+<path d="M 246 156 L 256 156" fill="none" stroke="#a8a093" stroke-width="1.0" marker-end="url(#arr-muted)"/>
+<path d="M 358 156 H 412 Q 420 156 420 164 V 202" fill="none" stroke="#e2603f" stroke-width="1.2" marker-end="url(#arr-accent)"/>
+<path d="M 470 236 L 480 236" fill="none" stroke="#a8a093" stroke-width="1.0" marker-end="url(#arr-muted)"/>
+<path d="M 582 236 L 592 236" fill="none" stroke="#a8a093" stroke-width="1.0" marker-end="url(#arr-muted)"/>
+<path d="M 644 110 L 644 202" fill="none" stroke="#a8a093" stroke-width="1.0" stroke-dasharray="4,3" marker-end="url(#arr-muted)"/>
+<path d="M 694 236 H 748 Q 756 236 756 244 V 282" fill="none" stroke="#6fa391" stroke-width="1.0" marker-end="url(#arr-link)"/>
+<rect x="430" y="173" width="72" height="12" rx="2" fill="#121110"/>
+<text x="466" y="182" fill="#e2603f" font-size="8" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.06em">PARSE-PACK</text>
+<rect x="146" y="44" width="100" height="64" rx="6" fill="#121110"/>
+<rect x="146" y="44" width="100" height="64" rx="6" fill="rgba(217,122,120,0.10)" stroke="rgba(217,122,120,0.45)" stroke-width="1"/>
+<rect x="150" y="48" width="18" height="10" rx="3" fill="rgba(217,122,120,0.22)"/>
+<text x="159" y="55" fill="#d97a78" font-size="6" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.08em">SPC</text>
+<text x="196" y="67" fill="#d97a78" font-size="9" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">Core v1.7</text>
+<text x="196" y="79" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">invariant + delta</text>
+<text x="196" y="91" fill="#7a736a" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">_specs/00_RULES</text>
+<rect x="594" y="44" width="100" height="64" rx="6" fill="#121110"/>
+<rect x="594" y="44" width="100" height="64" rx="6" fill="rgba(217,122,120,0.10)" stroke="rgba(217,122,120,0.45)" stroke-width="1"/>
+<rect x="598" y="48" width="18" height="10" rx="3" fill="rgba(217,122,120,0.22)"/>
+<text x="607" y="55" fill="#d97a78" font-size="6" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.08em">SPC</text>
+<text x="644" y="67" fill="#d97a78" font-size="9" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">QA Gate</text>
+<text x="644" y="79" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">must-exist / not</text>
+<text x="644" y="91" fill="#7a736a" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">render_check</text>
+<rect x="146" y="124" width="100" height="64" rx="6" fill="#121110"/>
+<rect x="146" y="124" width="100" height="64" rx="6" fill="rgba(244,241,234,0.04)" stroke="rgba(244,241,234,0.20)" stroke-width="1"/>
+<rect x="150" y="128" width="18" height="10" rx="3" fill="rgba(244,241,234,0.12)"/>
+<text x="159" y="135" fill="#a8a093" font-size="6" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.08em">DAT</text>
+<text x="196" y="147" fill="#f4f1ea" font-size="9" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">Export</text>
+<text x="196" y="159" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">Shopee · Meta</text>
+<text x="196" y="171" fill="#7a736a" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">Weekly/{period}/data</text>
+<rect x="226" y="178" width="16" height="8" rx="3" fill="#5e7a9b"/>
+<text x="234" y="184" fill="#fff" font-size="5" font-weight="700" font-family="'IBM Plex Mono', monospace" text-anchor="middle">DB</text>
+<rect x="258" y="124" width="100" height="64" rx="6" fill="#121110"/>
+<rect x="258" y="124" width="100" height="64" rx="6" fill="rgba(244,241,234,0.04)" stroke="rgba(244,241,234,0.20)" stroke-width="1"/>
+<rect x="262" y="128" width="18" height="10" rx="3" fill="rgba(244,241,234,0.12)"/>
+<text x="271" y="135" fill="#a8a093" font-size="6" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.08em">DAT</text>
+<text x="308" y="147" fill="#f4f1ea" font-size="9" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">PARSE-PACK</text>
+<text x="308" y="159" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">equal windows</text>
+<text x="308" y="171" fill="#7a736a" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">Phase A session</text>
+<rect x="262" y="178" width="16" height="8" rx="3" fill="#5e7a9b"/>
+<text x="270" y="184" fill="#fff" font-size="5" font-weight="700" font-family="'IBM Plex Mono', monospace" text-anchor="middle">DB</text>
+<rect x="338" y="178" width="16" height="8" rx="3" fill="#b8915a"/>
+<text x="346" y="184" fill="#fff" font-size="5" font-weight="700" font-family="'IBM Plex Mono', monospace" text-anchor="middle">TB</text>
+<rect x="370" y="204" width="100" height="64" rx="6" fill="#121110"/>
+<rect x="370" y="204" width="100" height="64" rx="6" fill="rgba(226,96,63,0.12)" stroke="#e2603f" stroke-width="1"/>
+<rect x="374" y="208" width="18" height="10" rx="3" fill="rgba(226,96,63,0.22)"/>
+<text x="383" y="215" fill="#e2603f" font-size="6" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.08em">ANL</text>
+<text x="420" y="227" fill="#f4f1ea" font-size="9" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">Deep-Dive</text>
+<text x="420" y="239" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">ROAS · TACoS · ROT</text>
+<text x="420" y="251" fill="#7a736a" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">analysis session</text>
+<rect x="374" y="258" width="16" height="8" rx="3" fill="#b8915a"/>
+<text x="382" y="264" fill="#fff" font-size="5" font-weight="700" font-family="'IBM Plex Mono', monospace" text-anchor="middle">TB</text>
+<rect x="450" y="258" width="16" height="8" rx="3" fill="#b8915a"/>
+<text x="458" y="264" fill="#fff" font-size="5" font-weight="700" font-family="'IBM Plex Mono', monospace" text-anchor="middle">TB</text>
+<rect x="482" y="204" width="100" height="64" rx="6" fill="#121110"/>
+<rect x="482" y="204" width="100" height="64" rx="6" fill="rgba(244,241,234,0.04)" stroke="rgba(244,241,234,0.20)" stroke-width="1"/>
+<rect x="486" y="208" width="18" height="10" rx="3" fill="rgba(244,241,234,0.12)"/>
+<text x="495" y="215" fill="#a8a093" font-size="6" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.08em">ANL</text>
+<text x="532" y="227" fill="#f4f1ea" font-size="9" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">deck.json</text>
+<text x="532" y="239" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">assembler output</text>
+<text x="532" y="251" fill="#7a736a" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">_engine/assembler</text>
+<rect x="486" y="258" width="16" height="8" rx="3" fill="#b8915a"/>
+<text x="494" y="264" fill="#fff" font-size="5" font-weight="700" font-family="'IBM Plex Mono', monospace" text-anchor="middle">TB</text>
+<rect x="562" y="258" width="16" height="8" rx="3" fill="#9c6b50"/>
+<text x="570" y="264" fill="#fff" font-size="5" font-weight="700" font-family="'IBM Plex Mono', monospace" text-anchor="middle">FL</text>
+<rect x="594" y="204" width="100" height="64" rx="6" fill="#121110"/>
+<rect x="594" y="204" width="100" height="64" rx="6" fill="rgba(244,241,234,0.04)" stroke="rgba(244,241,234,0.20)" stroke-width="1"/>
+<rect x="598" y="208" width="18" height="10" rx="3" fill="rgba(244,241,234,0.12)"/>
+<text x="607" y="215" fill="#a8a093" font-size="6" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.08em">ANL</text>
+<text x="644" y="227" fill="#f4f1ea" font-size="9" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">render_check</text>
+<text x="644" y="239" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">real browser</text>
+<text x="644" y="251" fill="#7a736a" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">QA session</text>
+<rect x="598" y="258" width="16" height="8" rx="3" fill="#9c6b50"/>
+<text x="606" y="264" fill="#fff" font-size="5" font-weight="700" font-family="'IBM Plex Mono', monospace" text-anchor="middle">FL</text>
+<rect x="674" y="258" width="16" height="8" rx="3" fill="#9c6b50"/>
+<text x="682" y="264" fill="#fff" font-size="5" font-weight="700" font-family="'IBM Plex Mono', monospace" text-anchor="middle">FL</text>
+<rect x="706" y="284" width="100" height="64" rx="6" fill="#121110"/>
+<rect x="706" y="284" width="100" height="64" rx="6" fill="rgba(244,241,234,0.04)" stroke="rgba(244,241,234,0.20)" stroke-width="1"/>
+<rect x="710" y="288" width="18" height="10" rx="3" fill="rgba(244,241,234,0.12)"/>
+<text x="719" y="295" fill="#a8a093" font-size="6" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle" letter-spacing="0.08em">CLI</text>
+<text x="756" y="307" fill="#f4f1ea" font-size="9" font-weight="600" font-family="'IBM Plex Sans Thai', sans-serif" text-anchor="middle">Client Deck</text>
+<text x="756" y="319" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">HTML slide deck</text>
+<text x="756" y="331" fill="#7a736a" font-size="6.5" font-family="'IBM Plex Mono', monospace" text-anchor="middle">Weekly/{period}/out</text>
+<rect x="710" y="338" width="16" height="8" rx="3" fill="#9c6b50"/>
+<text x="718" y="344" fill="#fff" font-size="5" font-weight="700" font-family="'IBM Plex Mono', monospace" text-anchor="middle">FL</text>
+<text x="144" y="372" fill="#7a736a" font-size="7" font-family="'IBM Plex Mono', monospace" letter-spacing="0.16em">STEPS</text>
+<text x="144" y="393" fill="#7a736a" font-size="7" font-family="'IBM Plex Mono', monospace" letter-spacing="0.16em">DATA TYPE</text>
+<text x="144" y="414" fill="#7a736a" font-size="7" font-family="'IBM Plex Mono', monospace" letter-spacing="0.16em">CONCERN</text>
+<text x="144" y="436" fill="#7a736a" font-size="7" font-family="'IBM Plex Mono', monospace" letter-spacing="0.16em">FLOW</text>
+<rect x="224" y="362" width="26" height="13" rx="6" fill="rgba(244,241,234,0.12)"/>
+<text x="237" y="371" fill="#f4f1ea" font-size="6.5" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle">01</text>
+<text x="256" y="371" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace" letter-spacing="0.10em">EXPORT</text>
+<rect x="301.6" y="362" width="26" height="13" rx="6" fill="rgba(244,241,234,0.12)"/>
+<text x="314.6" y="371" fill="#f4f1ea" font-size="6.5" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle">02</text>
+<text x="333.6" y="371" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace" letter-spacing="0.10em">PARSE</text>
+<rect x="374.6" y="362" width="26" height="13" rx="6" fill="rgba(226,96,63,0.22)"/>
+<text x="387.6" y="371" fill="#e2603f" font-size="6.5" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle">03</text>
+<text x="406.6" y="371" fill="#e2603f" font-size="6.5" font-family="'IBM Plex Mono', monospace" letter-spacing="0.10em">ANALYZE</text>
+<rect x="456.8" y="362" width="26" height="13" rx="6" fill="rgba(244,241,234,0.12)"/>
+<text x="469.8" y="371" fill="#f4f1ea" font-size="6.5" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle">04</text>
+<text x="488.8" y="371" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace" letter-spacing="0.10em">ASSEMBLE</text>
+<rect x="543.6" y="362" width="26" height="13" rx="6" fill="rgba(244,241,234,0.12)"/>
+<text x="556.6" y="371" fill="#f4f1ea" font-size="6.5" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle">05</text>
+<text x="575.6" y="371" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace" letter-spacing="0.10em">QA</text>
+<rect x="602.8000000000001" y="362" width="26" height="13" rx="6" fill="rgba(244,241,234,0.12)"/>
+<text x="615.8000000000001" y="371" fill="#f4f1ea" font-size="6.5" font-weight="600" font-family="'IBM Plex Mono', monospace" text-anchor="middle">06</text>
+<text x="634.8000000000001" y="371" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace" letter-spacing="0.10em">DELIVER</text>
+<rect x="224" y="384" width="16" height="8" rx="3" fill="#5e7a9b"/>
+<text x="232" y="390" fill="#fff" font-size="5" font-weight="700" font-family="'IBM Plex Mono', monospace" text-anchor="middle">DB</text>
+<text x="246" y="391" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace">raw export</text>
+<rect x="310.0" y="384" width="16" height="8" rx="3" fill="#b8915a"/>
+<text x="318.0" y="390" fill="#fff" font-size="5" font-weight="700" font-family="'IBM Plex Mono', monospace" text-anchor="middle">TB</text>
+<text x="332.0" y="391" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace">analysis table</text>
+<rect x="412.8" y="384" width="16" height="8" rx="3" fill="#9c6b50"/>
+<text x="420.8" y="390" fill="#fff" font-size="5" font-weight="700" font-family="'IBM Plex Mono', monospace" text-anchor="middle">FL</text>
+<text x="434.8" y="391" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace">report file</text>
+<text x="503.0" y="391" fill="#7a736a" font-size="6.5" font-family="'IBM Plex Mono', monospace">left chip = input · right chip = output</text>
+<rect x="224" y="405" width="10" height="8" rx="2" fill="#d97a78" opacity="0.85"/>
+<text x="240" y="412" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace">Spec · governance gate</text>
+<rect x="358.4" y="405" width="10" height="8" rx="2" fill="#e2603f" opacity="0.85"/>
+<text x="374.4" y="412" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace">Focal step · the analysis pivot</text>
+<line x1="224" y1="431" x2="246" y2="431" stroke="#a8a093" stroke-width="1"/>
+<text x="252" y="434" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace">hand-off</text>
+<line x1="311.6" y1="431" x2="333.6" y2="431" stroke="#a8a093" stroke-width="1" stroke-dasharray="4,3"/>
+<text x="339.6" y="434" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace">rule gate (dashed)</text>
+<line x1="441.20000000000005" y1="431" x2="463.20000000000005" y2="431" stroke="#e2603f" stroke-width="1.2"/>
+<text x="469.20000000000005" y="434" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace">focal hand-off</text>
+<line x1="554.0" y1="431" x2="576.0" y2="431" stroke="#6fa391" stroke-width="1"/>
+<text x="582.0" y="434" fill="#a8a093" font-size="6.5" font-family="'IBM Plex Mono', monospace">delivered</text>
+</svg>
+  </figure>
+  <figcaption>จุดหักของทั้ง pipeline อยู่ที่ขั้น 03 — PARSE-PACK คือสัญญาระหว่าง session ถ้าขั้นนี้ผิดงวดหรือผิดสูตร ทุกอย่างหลังจากนั้นผิดตามโดยที่หน้าเด็คยังดูสวยเหมือนเดิม</figcaption>
+  <footer>OWARIN SKIN · TRIRONG + IBM PLEX SANS THAI + IBM PLEX MONO · DIAGRAM-DESIGN</footer>
+</div>
+</body>
+</html>

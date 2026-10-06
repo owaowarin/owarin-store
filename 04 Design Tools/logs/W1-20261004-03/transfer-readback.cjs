@@ -1,0 +1,5 @@
+const fs=require('node:fs'),path=require('node:path'),w=require('./work.cjs');let s=fs.readFileSync(path.join(w.dir,'serve.cjs'),'utf8');
+const start=s.indexOf("if(req.method==='POST'&&req.url.startsWith('/readback/'))"),end=s.indexOf("if(req.method==='POST'&&req.url.startsWith('/backup/'))");
+s=s.slice(0,start)+String.raw`if(req.method==='POST'&&req.url.startsWith('/readback/')){const f=req.url.slice(10);if(!allowed.includes(f))throw Error('FILE');if(body.replace(/\r\n/g,'\n')!==fs.readFileSync(path.join(w.dir,'test-runtime',f),'utf8').replace(/\r\n/g,'\n'))throw Error('READBACK_MISMATCH');w.write('04 Design Tools/logs/W1-20261004-03/google-source-readback/'+f,body);res.end('PASS source readback '+f);return;}`+s.slice(end);
+s=s.replace("req.url.startsWith('/backup/')||req.url==='/proof'","req.url.startsWith('/backup/')||req.url.startsWith('/readback/')||req.url==='/proof'").replace('google-proof.jpg','google-proof.png');
+w.write('04 Design Tools/logs/W1-20261004-03/serve.cjs',s);w.log('TRANSFER-F02','Shell quote failure before any write; switch to saved script','No Google/code mutation in failed command; loopback readback route added');

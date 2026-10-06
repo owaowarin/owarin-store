@@ -1,0 +1,18 @@
+ADD-01: 20/20 synthetic successful callbacks reset fields; not Google runtime E2E.
+ADD-02: Server rejection preserves entered fields and releases Save.
+ADD-03: Injected render exception after successful server response skips reset and displays generic error. Production trigger remains unproven.
+ADD-04: Suggestion closure survives successful reset; keyboard Save without blur then Down/Enter can restore the old title in DOM mock.
+ADD-05: In-flight double-click is blocked, but reopening and entering a new draft before old response lets old callback erase it.
+MONEY-01: 500 Shopee maps to 300 ledger base; malformed 390abc accepted as 390; 60 maps to -8; shipping 0/1/2/6/20 = 0/50/60/100/100. Synthetic only.
+RES-01: Cart server accepts Hold, Auction and New Arrival without reservation ownership.
+RES-02: Single sold consumes Hold; inventory.update releases Hold directly, no order-owner check.
+SALE-01: Duplicate cart payload for one physical SKU produces two SALES lines.
+SALE-02: Failure at inventory Status after ledger append leaves one SALES line; retry creates a second line with a new Order ID.
+SALE-03: Single sold writes inventory first; injected ledger failure returns Sold plus sales.error, with no durable recovery journal.
+ID-01: Allocator supports >99, but merely scans SALES; two allocations without a SALES write return the same ID.
+ID-02: Duplicate SKU lookup fails closed; source+SKU remains mutable and is not an immutable item identity.
+ADD-06: Injected Status write failure is swallowed by _tryWrite; addInventoryRow still returns success:true.
+ADD-07: Omitted Add status defaults to Instock on server, while UI opens New Arrival.
+SOURCE-01: One existing declaration collision: _colLetter in Code/webapp; equivalent for columns 1..16384. All four .gs files parse/load.
+SOURCE-02: Captured Index inline scripts pass syntax compilation.
+PASS: 17 diagnostic checks; no live writes.

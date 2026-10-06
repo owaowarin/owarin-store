@@ -1,0 +1,2 @@
+PASS UTF-8 new request hashes, Unicode conflict rejected before writes, same-ID legacy failure recovery preserves every original event/hash
+PASS Unicode edit conflict/replay and UTF-8 sale after-effect failure recovery without duplicate SALES

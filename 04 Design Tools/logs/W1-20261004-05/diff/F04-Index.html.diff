@@ -1,0 +1,34 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05/attempts/F04/before/candidate/Index.html" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05/candidate/Index.html"
+index bbd985a..f7f71bc 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05/attempts/F04/before/candidate/Index.html"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05/candidate/Index.html"	
+@@ -2051,17 +2051,17 @@ function w1SyncButtons(){
+  $('w1Retry').disabled=w1Busy||w1Broken||!w1Pending;
+  $('w1Recovery').textContent=w1Broken?'Recovery record unreadable — reconcile server journal before another mutation':w1Pending?'Uncertain request '+w1Pending.payload.requestId+' — Check / retry same request':'';
+ }
+-function w1Run(action,payload){
++function w1Run(action,payload,serverRecovery){
+  if(w1Broken)return Promise.reject(Error('Recovery record unreadable; manual reconciliation required'));
+  if(w1Pending)return Promise.reject(Error('Resolve request '+w1Pending.payload.requestId+' first'));
+- payload.requestId=payload.requestId||w1Id();w1Pending={action:action,payload:payload};
++ payload.requestId=payload.requestId||w1Id();w1Pending={action:action,payload:payload,serverRecovery:!!serverRecovery};
+  try{sessionStorage.setItem(W1_KEY,JSON.stringify(w1Pending));}catch(e){w1Pending=null;return Promise.reject(Error('Cannot retain Request ID; no request sent'));}
+  return w1Send();
+ }
+ function w1Send(){
+  if(w1Busy)return Promise.reject(Error('Request already in progress'));var pending=w1Pending;
+  w1Busy=true;w1SyncButtons();
+- return callApi(pending.action,pending.payload).then(function(result){
++ return callApi(pending.serverRecovery?'requests.resume':pending.action,pending.serverRecovery?{requestId:pending.payload.requestId}:pending.payload).then(function(result){
+   // Remove recovery record only after canonical server result; a lost response retains it.
+   sessionStorage.removeItem(W1_KEY);w1Pending=null;return result;
+  }).catch(function(err){
+@@ -2113,7 +2113,7 @@ $('navOrders').addEventListener('click',function(){showView('orders');});
+ $('w1Filter').addEventListener('change',function(){w1Filter=this.value;w1LoadOrders();});
+ $('w1Refresh').addEventListener('click',w1LoadOrders);
+ $('w1Retry').addEventListener('click',w1Resume);
+-$('w1ServerRecovery').addEventListener('click',function(e){var b=e.target.closest('[data-recover]');if(!b||w1Busy||w1Pending)return;b.disabled=true;var id=b.getAttribute('data-recover');callApi('requests.intent',{requestId:id}).then(function(intent){if(!intent.payload||intent.payload.requestId!==id)throw Error('Original intent required; manual recovery');return w1Run(intent.action,intent.payload).then(function(r){w1Saved(r,intent.action);});}).catch(function(e){toast(e.message);}).finally(function(){b.disabled=false;});});
++$('w1ServerRecovery').addEventListener('click',function(e){var b=e.target.closest('[data-recover]');if(!b||w1Busy||w1Pending)return;b.disabled=true;var id=b.getAttribute('data-recover');callApi('requests.intent',{requestId:id}).then(function(intent){if(!intent.payload||intent.payload.requestId!==id)throw Error('Original intent required; manual recovery');return w1Run(intent.action,intent.payload,true).then(function(r){w1Saved(r,intent.action);});}).catch(function(e){toast(e.message);}).finally(function(){b.disabled=false;});});
+ $('w1Board').addEventListener('click',function(e){
+  var b=e.target.closest('[data-order]');if(!b)return;var o=w1Orders.filter(function(x){return x.orderId===b.getAttribute('data-order');})[0],op=b.getAttribute('data-op');if(!o)return;
+  if(op==='cancel')w1OpenCancel(o);

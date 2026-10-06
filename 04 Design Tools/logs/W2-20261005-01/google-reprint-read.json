@@ -1,0 +1,11 @@
+{
+  "action": "Reopen SOLD05 saved label; Preview / Print / Reprint; Back; Read native proof",
+  "saleCount": 2,
+  "clientCount": 2,
+  "journalRows": 1295,
+  "journalHash": "b146cc23d1c921931e08a2167dcf70ceea9bffc9420773cceb083a78cb499d1b",
+  "exactUnchangedFromNativeFinal": true,
+  "nativePopupVisibleToTool": false,
+  "pdfAndPhysicalPrint": "OPEN",
+  "ordersUi": "Fresh final source: Pending to Sold to Refresh; only SOLD cards loaded"
+}

@@ -1,0 +1,9 @@
+		211 container Protected sheets & ranges
+			212 text Protected sheets & ranges
+			214 container waffle-ritz-protection-view-pills-container
+				215 button Add a sheet or range, ID: waffle-ritz-protection-add-range
+					216 text Add a sheet or range
+				217 container waffle-ritz-protection-promo
+						219 container Protect ranges to control who can edit specific data on the sheet.
+							220 text Protect ranges to control who can edit specific data on the sheet.
+The focused UI element is 215 button Add a sheet or range, ID: waffle-ritz-protection-add-range

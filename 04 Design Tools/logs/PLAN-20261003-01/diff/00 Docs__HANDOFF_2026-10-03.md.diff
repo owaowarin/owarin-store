@@ -1,0 +1,21 @@
+--- before/00 Docs/HANDOFF_2026-10-03.md
++++ 00 Docs/HANDOFF_2026-10-03.md
+@@ -1,9 +1,9 @@
+-# HANDOFF — 2026-10-03 — Stream B P1 Session34
+-
+-จัดทำ: 2026-10-03 21:56:32 +0700. §§2,5,6,9; Change `P1-20261003-03`; Request `P1-PRODUCTION-READY-001`; one writer.
+-
+-1. **Done:** P1 Add promoted onto current shop source, Code/WebApp v31 + Index/P1Journal saved/read back; exact17-header ADD REQUESTS installed; existing deployment3→4 at21:44, same URL/owner-only access. Local files `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\03 Apps Script\Web App`; previous pair copied to backup with stubs; README/tests updated. Full hashes/diffs: `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-03\result.md`.
+-2. **Data / tests:** Fresh shop exports before/after; backup1,535,818 bytes; verifier PASS17 prior tabs/195246 stored values/formulas unchanged, only new journal headers/events0. P1 Add/UI/schema/readiness and Meta/image/FB suites PASS. Production readiness and Add modal New Arrival PASS; form closed without fake inventory/sale.
+-3. **Decisions / issues:** Owner explicitly approved source/schema/deploy and required backup before real-shop tests for undo; decisions_20261003.csv updated. Two initial production approval rejections and Save-state deferred reload, journal-wrapper diagnostic repair and export tab-order/ArrayFormula-object comparison corrections logged in changes.csv/Implementation log. No workaround/model switch/agent/chat.
+-4. **Risks / not done:** First real production Add/DONE not yet performed; normal and failure/retry proven locally/in isolated Google test. Lost-ID/new-device recovery remains manual; actual network outage unproven. Orders/reservation/Label P2 remains uninstalled; no SALES/CLIENT or Back House LAB edit.
+-5. **Next / undo:** Use next real P1 Add with its original Request ID and confirm one row/PREPARED→DONE; P2 separate phase. `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-03\UNDO.md`: deployment3 restores old pinned /exec; before/v30/v28/Index restores previous saved head. Preserve journal/newer data; never full-workbook overwrite or uncertain retry with fresh ID.
++# HANDOFF — 2026-10-03 — Stream B Session35
++
++จัดทำ: 2026-10-03 22:19:06 +0700 · §§2,5,6,9 · Change `PLAN-20261003-01` · Request `PLAN-REMAINING-EFFICIENCY-001`
++
++1. **Done:** updated the remaining architecture/priority plan to W1 Cart+Orders+transactions → W2 CLIENT+Label → W3 acceptance/release. All R01–R14/QA-A–L retained; six owner priorities applied in master §5.2.1 and linked rules. Active PLAN/HANDBOOK/STATE/README and stale reference corrected; historical Sessions1–34 preserved.
++2. **Evidence / files:** docs-only; read local v31 source and dated Session34 evidence, no new live numbers. Full paths, backup/diff and checks: `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\PLAN-20261003-01\result.md`. Production remains last verified v31/deployment4 per `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-03\result.md`.
++3. **Decisions:** one writer/no agents; plan/checks before code, minimal scoped fix/backup, reproduce-root-cause-retest, verify/UI/failure-retry, actionable lessons. Shipping Cost=shop subsidy; Auction unavailable; CLIENT reused; Facebook off-label. No fresh deployment authorization inferred.
++4. **Not done / risks:** W1/W2/W3 runtime not implemented in this docs task; no source/Sheet/deploy/LAB changes. First real P1 Add/DONE remains to observe when a real item is available; outage unproven and lost-ID recovery manual. No code suite rerun because code unchanged.
++5. **Next / recovery:** W1.1 bounded transaction baseline/callers/headers, then W1 local+isolated implementation with failure/retry evidence. Restore docs from `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\PLAN-20261003-01\before` only after checking newer edits; preserve appended histories. Shop undo stays `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-03\UNDO.md`.

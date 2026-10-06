@@ -1,0 +1,24 @@
+// Read-only verification of the exact final review inputs. No Google calls or fixture writes.
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),vm=require('node:vm'),assert=require('node:assert/strict');
+const p=path.resolve(__dirname,'../W1-20261005-01'),old=path.resolve(__dirname,'../W1-20261004-05');
+const read=f=>fs.readFileSync(f,'utf8').replace(/\r\n/g,'\n');
+const json=f=>JSON.parse(read(f));
+const hash=x=>crypto.createHash('sha256').update(x).digest('hex').toUpperCase();
+const rev=json(p+'/revision.json');
+for(const f of rev.files)assert.equal(hash(read(p+'/candidate/'+f.file)),f.sha256LF);
+assert.equal(rev.revision.split('@')[1],hash(JSON.stringify(rev.files)));
+for(const stem of ['Code','WebApp'])assert.equal(read(p+'/candidate/'+stem+'_v38.gs'),read(p+'/candidate/backup/v37/'+stem+'_v37.gs').replaceAll('v37','v38'));
+assert.equal(read(p+'/candidate/Index.html'),read(p+'/candidate/backup/v37/Index.html'));
+for(const f of ['Code.gs','Webapp.gs','W1Orders.gs','Index.html','W1Qa.gs','appsscript.json'])assert.equal(read(p+'/test-runtime/'+f),read(p+'/google-source-readback/'+f));
+assert.equal(read(p+'/google-source-before/appsscript.json'),read(p+'/google-source-readback/appsscript.json'));
+for(const f of rev.files.filter(f=>f.file.endsWith('.gs')))new vm.Script(read(p+'/candidate/'+f.file),{filename:f.file});
+for(const [i,m] of [...read(p+'/candidate/Index.html').matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].entries())new vm.Script(m[1],{filename:'Index-script-'+i});
+const decimal=json(p+'/decimal-results.json'),google=json(p+'/google-v38-assertions.json'),native=json(p+'/google-native-decimal.json'),s42=json(old+'/session42-final-assertions.json');
+assert.equal(decimal.revision,rev.revision);assert.equal(decimal.groups,21);assert.equal(decimal.checks.length,21);
+assert.equal(google.revision,rev.revision);assert(google.oldTabsCellsAndEventsPreserved&&google.allLatestRequestsDone);
+assert.equal(google.oldJournalPrefixRows,1151);assert.equal(google.addedSales,3);assert.equal(google.sameIdReplays.length,4);assert(google.sameIdReplays.every(r=>r.replayed));
+assert.deepEqual(google.nativeScratch,native.nativeScratch);assert.deepEqual(google.nativeLedger,native.ledger);
+assert.equal(fs.statSync(p+'/google-final-v38.xlsx').size,google.finalXlsxBytes);assert.equal(hash(fs.readFileSync(p+'/google-final-v38.xlsx')).toLowerCase(),google.finalXlsxSHA256);
+assert.equal(s42.result,'PASS');assert(s42.baselineRowsAndUnrelatedTabsPreserved&&s42.originalPending08Preserved);
+const batch=json(old+'/batch-results.json');assert(batch.groups.includes('R6 exact strings/order restored from server intent; mismatch rejected; owner-only'));
+console.log(JSON.stringify({checkedAt:new Date().toISOString(),result:'PASS',revision:rev.revision,candidateHashes:4,googleSourceReadbackFiles:6,manifestUnchanged:true,syntax:'PASS',versionOnlyPairedDiff:true,indexUnchanged:true,recordedDecimalGroups:21,datedGoogleEvidence:'2026-10-05; read locally, no new live claim',finalExportHash:google.finalXlsxSHA256,sourceOrBusinessWrites:0},null,2));

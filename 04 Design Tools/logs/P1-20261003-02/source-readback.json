@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-10-03 21:17 +0700",
+  "project_id": "1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd",
+  "method": "Fresh editor reload; deliberately focused Select All/Copy; CRLF normalized to LF; exact string comparison and SHA256 in browser tool",
+  "saved_to_drive_observed": true,
+  "temporary_helper_absent": true,
+  "sha256_normalized_lf": {
+    "Code.gs": "3F906DA2F078A943A3F2C7C5176FF1D6971CA95648FECC25BFBAB5DD64AA21D0",
+    "webapp.gs": "057840A5F2E9675121FA0CB8E03EEE7F0B4593750CB7EB4A4C83E3E204E0B621",
+    "Index.html": "271313D0D0674EDF2D6642D3D5788C7495EAF2302EBA4F794E3F1F8BD2486A12"
+  },
+  "deployment": "No /exec deployment"
+}

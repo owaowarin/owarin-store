@@ -1,0 +1,37 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\candidate\\WebApp_v32.gs" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-03\\candidate\\WebApp_v33.gs"
+index 233c4db..d087d8a 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\candidate\\WebApp_v32.gs"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-03\\candidate\\WebApp_v33.gs"	
+@@ -1,5 +1,5 @@
+ // ============================================================
+-// OWARIN BACK-OFFICE — WebApp.gs v32 (SP-2, pairs with Code.gs v32)
++// OWARIN BACK-OFFICE — WebApp.gs v33 (SP-2, pairs with Code.gs v33)
+ // v31 (2026-10-03): validated Add payload and read-only same-ID recovery; pairs with Code.gs v32.
+ // v28: no functional change -- bumped only to stay paired with Code.gs v30 (identical copies listed once; all-caps titles).
+ // v27: no functional change -- bumped only to stay paired with Code.gs v29 (Meta title without RESTOCK).
+@@ -46,6 +46,7 @@ function _route(action, p) {
+     case "orders.list": return _w1List_(p.status);
+     case "orders.get": return _w1Get_(p.orderId);
+     case "requests.get": return _w1Status_(p.requestId);
++    case "requests.reconcile": return _w1ReconcileMaintenance_(p.requestId);
+     case "ping":                  return { now: new Date().toISOString() };
+     case "inventory.bootstrap":   return _invBootstrap();
+     case "inventory.list":        return _readInventory(_sheetFromCode(p.source));
+@@ -510,12 +511,12 @@ function _toolsSort(source) {
+       return _natCmp(va, vb);
+     });
+ 
+-    _w1Write_("sort inventory",function(){range.setValues(data);});
+-    if(JSON.stringify(range.getValues())!==JSON.stringify(data))throw new Error("SORT_READBACK");
+-    _fixDerivedFormulasForSheet(sheet, COL); // setValues overwrote the formulas -> put them back
+-    if (sheetName === GGB_SHEET) _sp2RepaintFromRange(sheet, COL); // REVIEW colours do not follow the sort -> repaint
++    var audit=_w1MaintenanceWrite_("sort inventory",sheet,range,data,function(){
++      _fixDerivedFormulasForSheet(sheet,COL);
++      if(sheetName===GGB_SHEET)_sp2RepaintFromRange(sheet,COL);
++    },true);
+     SpreadsheetApp.flush();
+-    return { rows: data.length };
++    return { rows: data.length,requestId:audit.requestId };
+   });
+ }
+ 

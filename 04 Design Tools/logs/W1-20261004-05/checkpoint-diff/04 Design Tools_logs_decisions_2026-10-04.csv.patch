@@ -1,0 +1,9 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05\\checkpoint-before\\04 Design Tools\\logs\\decisions_2026-10-04.csv" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\decisions_2026-10-04.csv"
+index faac65d..7b02982 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05\\checkpoint-before\\04 Design Tools\\logs\\decisions_2026-10-04.csv"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\decisions_2026-10-04.csv"	
+@@ -3,3 +3,4 @@ timestamp,change_id,decision,status,source
+ "2026-10-04 05:51:03 +0700","W1-20261004-03","Close scoped R1–R4; preserve original100-item request across timeout; no cache that weakens identity checks; exact review packet; production/W2 excluded","CLOSED implementation/test; Astra specific sign-off pending","Owner current chat and actual Google runtime evidence"
+ 
+ "2026-10-03T23:26:08.789Z","W1-20261004-04","Owner selected Astra review in same chat; notify at Sol implementation boundary; scoped R5+R6 repair plan","Review COMPLETE; R5/R6 OPEN; no release approval","Owner latest request; REVIEW.md/review-results.json"
++"2026-10-04T15:43:18.210Z","W1-20261004-05","Owner asks new-chat continuation; preserve one writer, exact v36 checkpoint and existing F05 diagnostic; production/LAB/W2 excluded","CHECKPOINT; W1 final gates OPEN","Current chat; CONTINUE.md; no new agent/chat created"

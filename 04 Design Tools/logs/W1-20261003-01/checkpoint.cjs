@@ -1,0 +1,2 @@
+const fs=require('node:fs'),path=require('node:path'),{log,sha}=require('../../w1-work.cjs');
+const label=process.argv[2];if(!label)throw Error('label required');const dir=path.join(__dirname,'attempts',label);fs.mkdirSync(dir,{recursive:true});for(const name of fs.readdirSync(path.join(__dirname,'candidate'))){const f=path.join(__dirname,'candidate',name);if(fs.statSync(f).isFile()){const dest=path.join(dir,name);if(!fs.existsSync(dest))fs.copyFileSync(f,dest);log(label,f,dest,sha(fs.readFileSync(f)),sha(fs.readFileSync(dest)),'candidate snapshot before targeted fix');}}

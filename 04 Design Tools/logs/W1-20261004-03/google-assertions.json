@@ -1,0 +1,25 @@
+{
+  "result": "PASS",
+  "export": "google-final.xlsx",
+  "bulk": {
+    "orderId": "OWA-20261004-08",
+    "count": 100,
+    "status": "PENDING",
+    "attempt": 5.0,
+    "sameIDReplay": true
+  },
+  "checkOrder": "CANCELLED",
+  "uniqueEventIDs": 787,
+  "allRequestsDONE": true,
+  "compressedJournalEvents": 610,
+  "existingSALES": 4,
+  "SALES_Formula_Add_GGB_HistoryUnchanged": true,
+  "R2": "Google helper invoked real audit function for multi-range / UID removal; not a new physical Sheet trigger UI edit",
+  "R4": "real injected write failure and exact-before reconcile/success",
+  "capacity": "100 MAG fixtures grew physical grid; journal/line growth verified in local bounded-grid harness",
+  "limits": [
+    "Owner direct-edit audit not exhaustive; simple trigger runtime/queue/lock timeout remains",
+    "No marketplace sync / W2 / production install",
+    "Astra High specific sign-off prepared, not claimed"
+  ]
+}

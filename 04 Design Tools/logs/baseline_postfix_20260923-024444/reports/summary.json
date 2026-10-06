@@ -1,0 +1,39 @@
+{
+  "snapshot_utc": "2026-09-22T19:46:00+00:00",
+  "snapshot_digest": "9a287fb1266dbce51f068f2fd1b635dc80e1b3d5467c6fed2e37f500d6191311",
+  "master_files": 2913,
+  "master_bytes": 860194527,
+  "freshly_hashed": 2913,
+  "archive_files": 164,
+  "archive_hash_states": {
+    "HASH-VERIFIED": 164
+  },
+  "archive_references": {
+    "LIVE-EXACT": 164
+  },
+  "archive_reference_statuses": {
+    "Sold": 164
+  },
+  "archive_files_with_same_hash_master": 4,
+  "product_states": {
+    "EXACT-ROUTE-CHECKED": 1853,
+    "NO-FILES": 444,
+    "NEEDS-REVIEW": 168
+  },
+  "exception_statuses": {
+    "Auction": 139,
+    "Sold": 472,
+    "Hold": 1
+  },
+  "candidate_images": 2905,
+  "candidate_key_collisions": 0,
+  "source_owner_collisions": 0,
+  "image_content_problems": 0,
+  "rename_states": {
+    "SNAPSHOT-HASH-VERIFIED": 135,
+    "PATH-VERIFIED-NO-PREHASH": 192
+  },
+  "preservation_files": 3077,
+  "preservation_bytes": 897894338,
+  "ready_for_cloud_execution": false
+}

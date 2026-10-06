@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "verifiedAt": "2026-10-06T01:02:10+07:00",
+  "revision": "W2-20261005-01/v39@7043D1B05E52DEAA3272C4AB3986790592081BD1C2688C5E3867A4D4FBC88D51",
+  "candidateFilesUnchanged": 9,
+  "recordedSourceFilesUnchanged": 12,
+  "stateLines": 48,
+  "ownerDeferralRecorded": true,
+  "pdfPhysicalPrint": "DEFERRED_UNTESTED_NOT_PASS",
+  "readinessPacketPrepared": true,
+  "migrationDryRunExecuted": false,
+  "newRuntimeOrBusinessMutation": false,
+  "sessionClose": [
+    "CSV",
+    "decisions",
+    "plan",
+    "STATE",
+    "HANDOFF",
+    "related docs",
+    "dated rule",
+    "readback"
+  ]
+}

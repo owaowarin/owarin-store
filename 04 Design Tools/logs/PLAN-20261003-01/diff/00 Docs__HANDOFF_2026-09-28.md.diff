@@ -1,0 +1,19 @@
+--- before/00 Docs/HANDOFF_2026-09-28.md
++++ 00 Docs/HANDOFF_2026-09-28.md
+@@ -261,3 +261,16 @@
+ All P1 Add/UI, guarded schema/readiness, Index/image/FB/Meta tests PASS. Fresh workbook backup1,535,818 bytes SHA256 `D9989BA034C1744819C78870A53B1EE45039FF4673544EB98A63FCC203C733C2`; after export and verifier prove all17 original tabs/195246 stored values/formulas unchanged, only new journal headers and no events. Full paths/hashes/backup/diffs/error/retry/undo are in `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-03\result.md`, changes.csv, UNDO.md. Initial journal wrapper diagnostic test repaired once; Save-state deferred reload completed safely; literal/glob, stale AX and export ArrayFormula/tab-position assertions corrected without business mutation. Full runtime timestamps and details in runtime-output.txt. Historical logs/HANDOFF prefix bytes preserved; authoritative local pair archived with stubs and README/tests re-pointed to v31.
+ 
+ P1 Add ready; first real production Add/DONE has not been performed by the agent. Retain Request ID; ERROR/uncertain/lost ID requires journal↔inventory reconciliation before retry, never a fresh ID. Actual network outage/new-device auto-recovery remains unproven/manual. No Orders/reservations/Label P2 installed, no SALES/CLIENT data or Back House LAB change. Undo: deployment3 for previous pinned /exec; before/v30/v28/Index for pre-install saved head; preserve journal/newer business edits rather than blind full-workbook restore. One next step: use P1 on the next real Add and reconcile its first DONE; P2 remains a separate bounded phase.
++
++
++## Session 35 — remaining structure and efficient delivery plan (2026-10-03)
++
++จัดทำ: 2026-10-03 22:19:06 +0700. Stream B §§2,5,6,9. Change `PLAN-20261003-01`; Request `PLAN-REMAINING-EFFICIENCY-001`; one writer, no agents/chats.
++
++Owner requested a detailed remaining structure and a shorter value-focused plan plus six delivery priorities. Before: stale unstarted P1/P0 prompts, v20/v27 references and Carrier Expense mapping contradicted Session34 and closed D10/D11. After: one W1→W2→W3 board with architecture, dependency/QA/done criteria and old-phase mapping; W1 joins Cart/Orders/transactions, W2 joins CLIENT/Label, W3 handles acceptance/release. Preserved all R01–R14 and QA-A–L. Current P1 is dated LIVE evidence; first real-shop Add and true outage/new-device limits remain disclosed.
++
++Updated active PLAN/HANDBOOK/STATE/README, AGENTS/CLAUDE/master §5.2.1 and supersession note on the older design; appended this log and historical HANDOFF without changing earlier bytes; dated HANDOFF kept compact. Backup/diffs/exact before→after hashes and per-file events: `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\PLAN-20261003-01`. Six priorities and closed subsidy/Auction/CLIENT rules propagated; no new business policy invented. Other STATE streams preserved.
++
++Verification: local source four-file hashes unchanged, all requirements/gates retained, stale active prompts removed, docs readback/diffs/history-prefix/links/STATE≤80 checked by verify_docs.py (result in verification.txt). No runtime tests rerun for this docs-only change; existing P1 results are historical evidence, not fresh runs. Issue: initial batched long read was truncated; bounded section reads recovered the necessary contracts. No code/runtime failure or business retry occurred. Archive reference check found active historical dependencies; no move/delete.
++
++Recovery: restore only affected docs from before/ after checking newer edits; diff/ shows exact changes. For appended history retain newer sessions and append a correction rather than erasing history. Production unchanged; P1 rollback remains P1-20261003-03/UNDO.md. Next: W1.1 scoped baseline/risks then local+isolated W1 implementation; no P0/P1 restart, no Back House LAB work.

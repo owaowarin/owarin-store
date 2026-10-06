@@ -1,0 +1,6 @@
+PASS: syntax, missing/mismatched journal fail closed, 20 Add calls, read-only status lookup, numeric validation, replay, partial/failed writes, silent inventory/PREPARED/DONE readback failures
+CONFIRMED R1: DONE journal title Synthetic 0 returns another item after unique SKU reuse
+CONFIRMED R2: absent Cost mapping silently drops requested 99 yet records DONE
+CONFIRMED R3: arbitrary status Pending-without-order accepted and recorded DONE
+CONFIRMED R3: invalid source silently selects GAME GUIDE BOOKS and records DONE
+CONFIRMED R4 (injected silent write loss): missing marketplace formula is not checked before DONE

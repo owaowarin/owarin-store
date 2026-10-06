@@ -1,0 +1,9 @@
+const fs=require('node:fs'),path=require('node:path'),w=require('./work.cjs'),rel='04 Design Tools/logs/W1-20261004-03/';
+let s=fs.readFileSync(path.join(w.dir,'candidate/W1Orders.gs'),'utf8');
+s=s.replace("values=s.getLastRow()<3?[]:s.getRange(3,cc.itemUid,s.getLastRow()-2,1).getValues();","values=n===sh.getName()?data.map(function(r){return [r[c.itemUid-1]];}):s.getLastRow()<3?[]:s.getRange(3,cc.itemUid,s.getLastRow()-2,1).getValues();");
+s=s.replace(" _findRowBySku(sh,c,String(obj.productId));"," if(data.filter(function(r){return String(r[c.productId-1]||'').trim()===String(obj.productId);}).length!==1)throw new Error('IDENTITY_CONFLICT duplicate SKU '+obj.productId);");
+s=s.replace("   if(_w1Inv_(l.source,l.sku,l.uid).obj.itemUid!==l.uid)throw new Error('UID_READBACK');","   if(x.obj.itemUid===l.uid)return;\n   if(_w1Inv_(l.source,l.sku,l.uid).obj.itemUid!==l.uid)throw new Error('UID_READBACK');");
+w.write(rel+'candidate/W1Orders.gs',s);
+let q=fs.readFileSync(path.join(w.dir,'W1CloseQa.gs'),'utf8');q=q.replace("var id='qa-fixture-'+prefix,old=_w1TechnicalGate_(id),sh=", "var id='qa-fixture-'+prefix,old=_w1Requests_()[id];if(old&&old.state==='DONE')return old.result;_w1TechnicalGate_(id);var sh=");w.write(rel+'W1CloseQa.gs',q);
+w.log('GOOGLE-BULK-TIMEOUT-01','Real100-item execution hit6min limit; durable APPLYING at UID78,77 complete','Export google-bulk-timeout.xlsx; no new SALES/order; current original orderID08 reserved intent','Retain v33-bulk-create-20261004; same payload continuation only');
+w.log('BULK-FIX-01','Reuse same fresh scan for source UID count and SKU uniqueness; remove duplicate lookup only for already verified UID; test fixture DONE replay before mutation gate','No cross-call inventory cache; all identity/status/readback validation retained; tests pending','No live scope change; resume existing request after readback');

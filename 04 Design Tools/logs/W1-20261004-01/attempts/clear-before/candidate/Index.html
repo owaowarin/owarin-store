@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OWARIN BACK-OFFICE</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── Design tokens: lifted from index.css of src (OWARIN storefront) ── */
+:root{
+  --bg:hsl(0 0% 5%); --fg:hsl(0 0% 95%);
+  --card:hsl(0 0% 8%); --card2:hsl(0 0% 10%);
+  --muted:hsl(0 0% 14%); --muted-fg:hsl(0 0% 55%);
+  --border:hsl(0 0% 18%); --input:hsl(0 0% 15%);
+  --gold:hsl(43 76% 52%); --gold-muted:hsl(43 40% 35%); --gold-bright:hsl(43 85% 60%);
+  --destructive:hsl(0 62% 50%); --ok:hsl(140 45% 45%);
+}
+*{box-sizing:border-box;border-color:var(--border)}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);
+  font-family:'Outfit',sans-serif;font-weight:300;font-size:14px;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:2px;height:2px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:hsl(0 0% 20%)}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+button{font-family:inherit;cursor:pointer}
+input,select{font-family:inherit}
+
+/* ── layout ── */
+header{position:sticky;top:0;z-index:20;background:hsl(0 0% 5%/.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);padding:14px 16px;display:flex;align-items:center;gap:12px}
+.brand{font-weight:500;letter-spacing:.35em;font-size:13px}
+.brand .g{color:var(--gold)}
+.brand small{display:block;letter-spacing:.18em;color:var(--muted-fg);font-size:9px;margin-top:2px}
+.hd-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+#count{color:var(--muted-fg);font-size:11px;letter-spacing:.08em}
+.btn{background:transparent;border:1px solid var(--border);color:var(--fg);
+  padding:7px 14px;font-size:11px;letter-spacing:.14em;transition:.2s}
+.btn:hover{border-color:var(--gold);color:var(--gold)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.primary{background:var(--gold);color:hsl(0 0% 5%);border-color:var(--gold);font-weight:500}
+.btn.primary:hover{background:var(--gold-bright);color:hsl(0 0% 5%)}
+.btn.small{padding:6px 12px;font-size:10px}
+.btn.warn:hover{border-color:var(--destructive);color:var(--destructive)}
+
+nav{display:flex;gap:2px;padding:0 16px;border-bottom:1px solid var(--border);
+  overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{background:none;border:none;border-bottom:1px solid transparent;color:var(--muted-fg);
+  padding:12px 12px 10px;font-size:11px;letter-spacing:.18em;white-space:nowrap}
+nav button.on{color:var(--gold);border-bottom-color:var(--gold)}
+nav button:disabled{opacity:.45}
+nav button small{font-size:8px;color:var(--gold-muted);letter-spacing:.1em;margin-left:4px}
+
+main{padding:14px 16px 90px;max-width:960px;margin:0 auto}
+
+/* ── controls ── */
+.seg{display:inline-flex;border:1px solid var(--border)}
+.seg button{background:none;border:none;color:var(--muted-fg);padding:8px 16px;
+  font-size:11px;letter-spacing:.15em}
+.seg button.on{background:var(--gold);color:hsl(0 0% 5%);font-weight:500}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px;align-items:center}
+#q{flex:1;min-width:180px;background:var(--input);border:1px solid var(--border);color:var(--fg);
+  padding:9px 12px;font-size:13px;outline:none}
+#q:focus{border-color:var(--gold-muted)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.chip{background:none;border:1px solid var(--border);color:var(--muted-fg);
+  padding:5px 12px;font-size:10px;letter-spacing:.12em}
+.chip.on{border-color:var(--gold);color:var(--gold)}
+.selrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.selrow select{background:var(--input);border:1px solid var(--border);color:var(--fg);
+  padding:7px 10px;font-size:12px;max-width:46vw}
+
+/* ── list ── */
+.item{border:1px solid var(--border);border-top:none;background:var(--card);padding:11px 13px}
+.item:first-child{border-top:1px solid var(--border)}
+.item:hover{background:var(--card2)}
+.i-top{display:flex;gap:10px;align-items:baseline}
+.i-name{font-weight:400;font-size:13.5px;line-height:1.35;flex:1;word-break:break-word}
+.i-price{color:var(--gold);font-weight:500;white-space:nowrap;font-family:'Shippori Mincho',serif;
+  font-size:18px;line-height:1;display:inline-flex;align-items:baseline;gap:3px;
+  font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"lnum" 1,"tnum" 1}
+.i-price .cur{font-family:'Outfit',sans-serif;font-size:10px;font-weight:400;color:var(--gold-muted);
+  letter-spacing:.04em}
+.i-price.dim{color:var(--gold-muted)}
+.i-price.dim .cur{color:var(--gold-muted)}
+.sum-card v,.cart-row.total,.cart-line input.cl-price{font-variant-numeric:tabular-nums lining-nums}
+.i-sub{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px;
+  color:var(--muted-fg);font-size:10.5px;letter-spacing:.05em}
+.sku{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--muted-fg)}
+.badge{display:inline-block;border:1px solid var(--border);padding:1px 7px;font-size:9px;letter-spacing:.12em}
+.st-Instock{border-color:var(--gold-muted);color:var(--gold)}
+.st-Auction{border-color:var(--border);color:var(--muted-fg)}
+.st-Sold{color:var(--muted-fg)}
+.st-Hold{border-color:var(--border);color:var(--muted-fg)}
+.st-New-Arrival{border-color:var(--gold-muted);color:var(--gold)}
+.item.sold .i-name,.item.auction .i-name{color:var(--muted-fg)}
+.item.auction .i-price{color:var(--gold-muted)}
+.item.auction .i-price .cur{color:var(--gold-muted)}
+.cond{border-color:hsl(0 0% 30%);color:var(--fg)}
+.rst{color:var(--gold-muted);border-color:var(--gold-muted)}
+.typ{color:hsl(200 45% 62%);border-color:hsl(200 30% 34%)}
+.rev{color:var(--gold-bright);border-color:var(--gold-bright)}   /* SP-2: REVIEW badge */
+.days{color:var(--muted-fg)}
+
+.detail{display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.item.open .detail{display:block}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.d k{display:block;font-size:9px;letter-spacing:.16em;color:var(--muted-fg);margin-bottom:2px}
+.d v{font-size:12px}
+.refline{margin-top:8px;color:var(--muted-fg);font-size:10.5px;line-height:1.6;word-break:break-word}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+.morewrap{text-align:center;padding:16px}
+.empty{border:1px dashed var(--border);padding:36px 16px;text-align:center;color:var(--muted-fg);
+  letter-spacing:.1em;font-size:12px}
+.skel{height:58px;border:1px solid var(--border);border-top:none;background:
+  linear-gradient(90deg,var(--card) 25%,var(--card2) 50%,var(--card) 75%);
+  background-size:200% 100%;animation:sh 1.2s infinite}
+.skel:first-child{border-top:1px solid var(--border)}
+@keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ── FAB / toast / footer ── */
+.fab{position:fixed;right:18px;bottom:52px;z-index:30;background:var(--gold);color:hsl(0 0% 5%);
+  border:none;width:52px;height:52px;font-size:26px;line-height:1;font-weight:300;
+  box-shadow:0 4px 18px hsl(0 0% 0%/.5)}
+.fab:active{background:var(--gold-bright)}
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--card2);
+  border:1px solid var(--destructive);color:var(--fg);padding:10px 18px;font-size:12px;
+  display:none;z-index:60;max-width:88vw}
+#toast.ok{border-color:var(--gold)}
+footer{position:fixed;bottom:0;left:0;right:0;border-top:1px solid var(--border);
+  background:hsl(0 0% 5%/.94);backdrop-filter:blur(8px);padding:8px 16px;
+  color:var(--muted-fg);font-size:10px;letter-spacing:.1em;display:flex;gap:12px;z-index:25}
+footer .g{color:var(--gold-muted)}
+
+/* ── modal ── */
+.modal-bg{position:fixed;inset:0;background:hsl(0 0% 0%/.65);z-index:40;display:none;
+  align-items:flex-end;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);width:100%;max-width:560px;
+  max-height:92vh;display:flex;flex-direction:column}
+@media(min-width:700px){ .modal-bg{align-items:center} html,body{font-size:15px} }
+.m-head{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:13px 16px;
+  border-bottom:1px solid var(--border);letter-spacing:.12em;font-size:12px}
+.m-head span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-body{padding:14px 16px;overflow-y:auto}
+.m-foot{display:flex;gap:8px;justify-content:flex-end;padding:12px 16px;border-top:1px solid var(--border)}
+.x{background:none;border:none;color:var(--muted-fg);font-size:16px}
+label.f{display:block;margin-bottom:10px;font-size:10px;letter-spacing:.14em;color:var(--muted-fg)}
+label.f input,label.f select{display:block;width:100%;margin-top:4px;background:var(--input);
+  border:1px solid var(--border);color:var(--fg);padding:9px 10px;font-size:13px;outline:none}
+label.f input:focus,label.f select:focus{border-color:var(--gold-muted)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.sugwrap{position:relative}
+.sug{position:absolute;left:0;right:0;top:100%;background:var(--card2);border:1px solid var(--gold-muted);
+  z-index:5;display:none;max-height:260px;overflow-y:auto}
+.sug-i{padding:8px 10px;font-size:12.5px;border-bottom:1px solid var(--border);cursor:pointer}
+.sug-i:hover,.sug-i.on{background:var(--muted);color:var(--gold)}
+.result-ok{border:1px solid var(--gold-muted);padding:10px 12px;margin:4px 0 8px;font-size:12px;line-height:1.7}
+.hint{color:var(--muted-fg);font-size:11px;line-height:1.6}
+
+/* ── tools ── */
+.tools-grid{display:grid;gap:10px;grid-template-columns:1fr;max-width:520px}
+.tool{text-align:left;padding:13px 14px;letter-spacing:.06em;font-size:12px;
+  text-decoration:none;display:block;color:var(--fg)}
+.report{margin-top:16px;border:1px solid var(--border);background:var(--card);padding:12px 14px;
+  font-size:12px;white-space:pre-wrap;word-break:break-word;line-height:1.7}
+.report:empty{display:none}
+
+.w1-board{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}.w1-card{border:1px solid var(--border);background:var(--card);padding:16px}.w1-card p{overflow-wrap:anywhere}.w1-card .btn{margin:4px}.i-top{flex-wrap:wrap}.i-top .btn{margin-left:8px}.w1-card h3{font-family:monospace}.w1-review{max-width:780px}pre#w1Details{white-space:pre-wrap}.i-top .i-name{min-width:150px}
+/* ── cart ── */
+nav button small#cartCount:empty{display:none}
+nav button small#cartCount{background:var(--gold);color:hsl(0 0% 5%);border-radius:0;padding:1px 5px;
+  margin-left:5px;font-size:9px;letter-spacing:0;font-weight:600}
+nav button small#revCount:empty{display:none}
+nav button small#revCount{background:var(--gold-bright);color:hsl(0 0% 5%);border-radius:0;padding:1px 5px;
+  margin-left:5px;font-size:9px;letter-spacing:0;font-weight:600}
+.cart-line{border:1px solid var(--border);border-top:none;background:var(--card);padding:10px 12px;
+  display:flex;gap:10px;align-items:center}
+.cart-line:first-child{border-top:1px solid var(--border)}
+.cart-line .cl-name{flex:1;font-size:13px;word-break:break-word}
+.cart-line .cl-name .sku{display:block;margin-top:2px}
+.cart-line .cl-warn{color:var(--gold-bright);font-size:9px;letter-spacing:.1em}
+.cart-line input.cl-price{width:88px;background:var(--input);border:1px solid var(--border);color:var(--gold);
+  font-family:'Shippori Mincho',serif;font-size:16px;text-align:right;padding:5px 8px;outline:none}
+.cart-line input.cl-price:focus{border-color:var(--gold-muted)}
+.cart-line .cl-rm{background:none;border:none;color:var(--muted-fg);font-size:15px;padding:2px 6px}
+.cart-line .cl-rm:hover{color:var(--destructive)}
+.cart-foot{border:1px solid var(--border);border-top:none;background:var(--card2);padding:12px 14px}
+.cart-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;margin:4px 0}
+.cart-row.total{font-size:16px;color:var(--gold);font-family:'Shippori Mincho',serif;
+  border-top:1px solid var(--border);margin-top:8px;padding-top:8px}
+.cart-row input.ship{width:88px;background:var(--input);border:1px solid var(--border);color:var(--fg);
+  text-align:right;padding:5px 8px;font-size:13px;outline:none}
+.cart-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.cart-actions .btn{flex:1;min-width:130px;text-align:center}
+
+/* ── sales dashboard ── */
+.sum-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px;margin-bottom:6px}
+.sum-card{border:1px solid var(--border);background:var(--card);padding:10px 12px}
+.sum-card k{display:block;font-size:9px;letter-spacing:.14em;color:var(--muted-fg);margin-bottom:4px}
+.sum-card v{font-size:17px;font-family:'Shippori Mincho',serif;color:var(--gold)}
+.sum-card.np v{color:var(--ok)}
+.chart-title{font-size:10px;letter-spacing:.14em;color:var(--muted-fg);margin:16px 0 2px}
+.chart{display:flex;align-items:flex-end;gap:6px;height:150px;border-bottom:1px solid var(--border);
+  padding:8px 0;overflow-x:auto}
+.chart .bar{flex:1;min-width:28px;display:flex;flex-direction:column;justify-content:flex-end;
+  align-items:center;height:100%}
+.chart .bar i{width:72%;background:var(--gold-muted);display:block}
+.chart .bar:hover i{background:var(--gold)}
+.chart .bar b{font-size:8px;color:var(--gold);margin-bottom:3px}
+.chart .bar span{font-size:8px;color:var(--muted-fg);margin-top:4px;letter-spacing:.03em;white-space:nowrap}
+.stbl{width:100%;border-collapse:collapse;font-size:12px;margin-top:16px}
+.stbl th,.stbl td{border:1px solid var(--border);padding:6px 8px;text-align:right;white-space:nowrap}
+.stbl th{color:var(--muted-fg);font-weight:400;letter-spacing:.08em;font-size:10px;background:var(--card2)}
+.stbl td.m,.stbl th.m{text-align:left}
+.stbl tr:hover td{background:var(--card2)}
+
+/* ── booking ── */
+.bk-add{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.bk-add input{background:var(--input);border:1px solid var(--border);color:var(--fg);padding:8px 10px;
+  font-size:12px;outline:none;flex:1;min-width:120px}
+.bk-add input:focus{border-color:var(--gold-muted)}
+.bk-add input.bk-q{flex:0 0 60px;min-width:60px;text-align:center}
+.bk-row{border:1px solid var(--border);border-top:none;background:var(--card);padding:9px 12px;
+  display:flex;gap:10px;align-items:center}
+.bk-row:first-child{border-top:1px solid var(--border)}
+.bk-row:hover{background:var(--card2)}
+.bk-main{flex:1;min-width:0}
+.bk-name{font-size:12.5px}
+.bk-title{font-size:11px;color:var(--muted-fg);margin-top:2px;word-break:break-word}
+.bk-row select.bk-st{background:var(--input);border:1px solid var(--border);color:var(--fg);
+  font-size:10px;padding:5px 6px;outline:none}
+.bk-row input.bk-queue{width:48px;background:var(--input);border:1px solid var(--border);color:var(--gold);
+  text-align:center;padding:5px 4px;font-size:11px;outline:none}
+.bk-row .bk-del{background:none;border:none;color:var(--muted-fg);font-size:14px;padding:2px 6px}
+.bk-row .bk-del:hover{color:var(--destructive)}
+.bk-st[data-v="Notified"]{color:var(--gold)}
+.bk-st[data-v="Purchased"]{color:var(--ok)}
+.bk-st[data-v="Cancelled"]{color:var(--muted-fg)}
+
+/* ── contents ── */
+.ct-card{border:1px solid var(--border);background:var(--card);margin-bottom:10px}
+.ct-head{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 12px;
+  border-bottom:1px solid var(--border)}
+.ct-head b{font-size:12px;letter-spacing:.08em;color:var(--gold)}
+.ct-head .ct-btns{display:flex;gap:4px}
+.ct-head button{background:none;border:1px solid var(--border);color:var(--muted-fg);font-size:10px;
+  padding:4px 9px;letter-spacing:.06em}
+.ct-head button:hover{border-color:var(--gold);color:var(--gold)}
+.ct-head button.del:hover{border-color:var(--destructive);color:var(--destructive)}
+.ct-card textarea{width:100%;min-height:120px;background:var(--input);border:none;color:var(--fg);
+  padding:10px 12px;font-family:inherit;font-size:12.5px;line-height:1.7;outline:none;resize:vertical}
+.ct-add{display:flex;gap:6px;margin-top:12px}
+.ct-add input{flex:1;background:var(--input);border:1px solid var(--border);color:var(--fg);
+  padding:8px 10px;font-size:12px;outline:none}
+.ct-add input:focus{border-color:var(--gold-muted)}
+
+/* ── SP-2: review tab ── */
+.rv-card{border:1px solid var(--border);border-top:none;background:var(--card);padding:11px 13px}
+.rv-card:first-child{border-top:1px solid var(--border)}
+.rv-card:hover{background:var(--card2)}
+.rv-range{color:var(--gold-bright);font-size:12px;margin-top:4px;font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">OWARIN <span class="g">BACK-OFFICE</span>
+    <small>GAME GUIDE BOOKS × MAGAZINE</small>
+  </div>
+  <div class="hd-right">
+    <span id="count"></span>
+    <button class="btn" id="refresh">REFRESH</button>
+  </div>
+</header>
+
+<nav>
+  <button id="navInv" class="on">INVENTORY</button>
+  <button id="navCart">CART<small id="cartCount"></small></button>
+  <button id="navOrders">ORDERS</button>
+  <button id="navSales">SALES</button>
+  <button id="navReview">REVIEW<small id="revCount"></small></button>
+  <button id="navBooking">BOOKING</button>
+  <button id="navContents">CONTENTS</button>
+  <button id="navTools">TOOLS</button>
+</nav>
+
+<main>
+  <!-- ══ INVENTORY ══ -->
+  <section id="view-inventory">
+    <div class="controls">
+      <div class="seg">
+        <button id="srcALL" class="on">ALL SHEETS</button>
+        <button id="srcGGB">GUIDE BOOKS</button>
+        <button id="srcMAG">MAGAZINE</button>
+      </div>
+      <input id="q" type="search" placeholder="Search name / SKU / publisher…" autocomplete="off">
+    </div>
+
+    <div class="chips" id="statusChips">
+      <button class="chip on" data-st="">ALL STATUS</button>
+      <button class="chip" data-st="Instock">INSTOCK</button>
+      <button class="chip" data-st="Auction">AUCTION</button>
+      <button class="chip" data-st="Sold">SOLD</button>
+      <button class="chip" data-st="Hold">HOLD</button>
+      <button class="chip" data-st="New Arrival">NEW ARRIVAL</button>
+    </div>
+
+    <div class="selrow">
+      <select id="fPub"><option value="">Publisher — All</option></select>
+      <select id="fCond"><option value="">Condition — All</option></select>
+      <select id="fType"><option value="">Type — All</option></select>
+      <select id="fGen"><option value="">Genre — All</option></select>
+    </div>
+
+    <div id="list"></div>
+    <div class="morewrap" id="morewrap" style="display:none">
+      <button class="btn" id="more">Show more</button>
+    </div>
+  </section>
+
+  <!-- ══ TOOLS ══ -->
+  <section id="view-tools" style="display:none">
+    <p class="hint" style="margin:2px 0 14px">Works on the sheet selected in the INVENTORY tab (currently: <b id="toolsSrc"></b>)
+      — the 📦 Inventory Tools menu brought onto the web, identical results.</p>
+    <div class="tools-grid">
+      <button class="btn tool" id="tSp2Setup">🧱 SP-2 Setup columns — run once per sheet</button>
+      <button class="btn tool" id="tLayout">🎨 จัดหน้าชีต — เรียง/ซ่อน/dropdown (run once)</button>
+      <button class="btn tool" id="tMigFlags">🏷️ เติม Copy Flags จากชื่อ (Incl. Maps/สีทั้งเล่ม)</button>
+      <button class="btn tool" id="tRarity">💎 เติม Rarity อัตโนมัติ (จากราคาขายจริง)</button>
+      <button class="btn tool warn" id="tSuspAuc">🔍 หา Sold ที่น่าจะเป็น Auction (ราคาตกผิดปกติ)</button>
+      <button class="btn tool" id="tFill">💰 Suggested Price (SP-2) — whole sheet</button>
+      <button class="btn tool" id="tApplyPre">👀 พรีวิว: เอาราคา SP-2 ไปใส่ Price</button>
+      <button class="btn tool" id="tApplyUp">✍️ ใช้ราคา SP-2 (ขึ้น + เติมช่องว่าง)</button>
+      <button class="btn tool warn" id="tApplyAll">✍️ ใช้ราคา SP-2 (ทับทุกกรณี รวมลดราคา)</button>
+      <button class="btn tool" id="tAudit">🚨 Audit underpriced Instock (SP-2)</button>
+      <button class="btn tool" id="tDerived">🧮 Fill Market·Profit·Content formulas (both sheets)</button>
+      <button class="btn tool" id="tValidate">✅ Validate Product ID</button>
+      <button class="btn tool" id="tPub">🔍 Publishers without a Code</button>
+      <button class="btn tool warn" id="tSort">🔤 Sort A-Z (natural sort) — reorder whole sheet</button>
+      <a class="btn tool" id="tOpen" target="_blank" rel="noopener">↗ Open Google Sheet</a>
+    </div>
+    <div class="report" id="toolReport"></div>
+  </section>
+
+  <!-- ══ CART ══ -->
+  <section id="view-cart" style="display:none">
+    <div id="cartEmpty" class="empty">Cart is empty — add Instock items from the INVENTORY tab (🛒).</div>
+    <div id="cartWrap" style="display:none">
+      <div id="cartLines"></div>
+      <div class="cart-foot">
+        <div class="cart-row"><span>Channel</span>
+          <div class="seg" id="cartCh">
+            <button type="button" data-ch="SHOP" class="on">หน้าร้าน / FB</button>
+            <button type="button" data-ch="SHOPEE">SHOPEE</button>
+          </div>
+        </div>
+        <div class="cart-row" id="cartChHintRow" style="display:none">
+          <span class="hint">SHOPEE: SALES = round(entered × 0.7 − 50)</span>
+        </div>
+        <div class="cart-row"><span>Subtotal</span><span id="cSub">฿0</span></div>
+        <div class="cart-row">
+          <span>Shipping <small class="hint" id="cShipHint"></small></span>
+          <input id="cShip" class="ship" inputmode="decimal" autocomplete="off">
+        </div>
+        <div class="cart-row total"><span>TOTAL</span><span id="cTotal">฿0</span></div>
+        <div class="cart-row" style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px">
+          <span>Shipping Subsidy — shop contribution <small class="hint">(เข้าบัญชี SALES)</small></span>
+          <input id="cShipShop" class="ship" inputmode="decimal" autocomplete="off" placeholder="Confirm subsidy, e.g. 0">
+        </div>
+      </div>
+      <p class="hint" style="margin:8px 0 0">ค่าส่งด้านบน = ที่เก็บลูกค้า (รวมในยอดที่ส่งให้ลูกค้า) · ช่องล่าง = ที่<b>ร้านออกเอง</b> ใส่ 0 ถ้าลูกค้าจ่ายเต็ม ใส่จำนวนจริงเมื่อส่งฟรี/ลดค่าส่งให้</p>
+      <div class="cart-actions">
+        <button class="btn" id="cActNotify">📋 Price notify</button>
+        <button class="btn" id="cActQuote">📋 Quotation</button>
+        <button class="btn primary" id="cActConfirm">✓ Confirm Sold</button>
+      </div>
+      <div class="cart-actions" style="margin-top:8px">
+        <button class="btn warn small" id="cClear">Clear cart</button>
+      </div>
+      <div class="report" id="cartMsg"></div>
+    </div>
+  </section>
+
+  <section id="view-orders" style="display:none"><div class="cart-actions"><label>Orders <select id="w1Filter"><option value="PENDING">Pending</option><option value="ALL">All</option><option value="SOLD">Sold</option><option value="CANCELLED">Cancelled</option></select></label><button class="btn" id="w1Refresh">Refresh orders</button><button class="btn" id="w1Retry">Check / retry request</button></div><p id="w1Recovery" role="status"></p><p class="hint">Reservations protect back-office stock. Manage external Shopee/Meta listings using the existing process.</p><pre id="w1ServerRecovery"></pre><div id="w1Board" class="w1-board"></div><pre id="w1Details"></pre></section>
+  <!-- ══ SALES ══ -->
+  <section id="view-sales" style="display:none">
+    <div class="controls" style="justify-content:space-between">
+      <span class="hint" id="salesStamp"></span>
+      <button class="btn small" id="salesRefresh">REFRESH</button>
+    </div>
+    <div id="salesEmpty" class="empty" style="display:none">No sales recorded yet — close a cart in the CART tab.</div>
+    <div id="salesWrap" style="display:none">
+      <div class="sum-cards" id="sumCards"></div>
+      <div id="salesChart"></div>
+      <div id="salesTable"></div>
+      <p class="hint" style="margin-top:12px">Rows are written automatically on Confirm Sold. Manual edits stay in the sheet — <a id="salesOpen" target="_blank" rel="noopener" style="color:var(--gold-muted)">open Google Sheet</a>.</p>
+    </div>
+  </section>
+
+  <!-- ══ REVIEW (SP-2) ══ -->
+  <section id="view-review" style="display:none">
+    <p class="hint" style="margin:2px 0 12px">🔶 ของหายาก/ราคาสูงที่ระบบไม่ตั้งราคาอัตโนมัติ (Instock · ชีตที่เลือกในแท็บ INVENTORY) —
+      ดูช่วงแนะนำแล้วเคาะราคาเองในช่อง PRICE ผ่านปุ่ม Edit · ใส่ Market Ref / Rarity เพิ่มได้ ·
+      รายการอัปเดตเมื่อรัน "Suggested Price (SP-2)"</p>
+    <div class="cart-actions" style="margin:0 0 12px">
+      <button class="btn small" id="revRecalc">💰 Recalculate (SP-2)</button>
+      <button class="btn small" id="revAudit">🚨 Run underpriced audit</button>
+    </div>
+    <div id="revList"></div>
+    <div class="report" id="revReport"></div>
+  </section>
+
+  <!-- ══ BOOKING ══ -->
+  <section id="view-booking" style="display:none">
+    <div class="controls" style="justify-content:space-between">
+      <input id="bkQ" type="search" placeholder="Search name / game…">
+      <button class="btn small" id="bkRefresh">REFRESH</button>
+    </div>
+    <div class="bk-add">
+      <input id="bkNewName" placeholder="Booking name" autocomplete="off">
+      <input id="bkNewTitle" placeholder="Game title" autocomplete="off">
+      <input id="bkNewQueue" class="bk-q" placeholder="Q" autocomplete="off">
+      <button class="btn small primary" id="bkAdd">+ Add</button>
+    </div>
+    <div id="bkList"></div>
+  </section>
+
+  <!-- ══ CONTENTS ══ -->
+  <section id="view-contents" style="display:none">
+    <div class="controls" style="justify-content:space-between">
+      <span class="hint" style="max-width:70%">Placeholders auto-filled on copy: {{bank_no}} {{bank_name}} {{account_name}} {{date}} · cart fills {{items}} {{total}} {{shipping}}</span>
+      <button class="btn small" id="ctRefresh">REFRESH</button>
+    </div>
+    <div id="ctList"></div>
+    <div class="ct-add">
+      <input id="ctNewTitle" placeholder="New template title" autocomplete="off">
+      <button class="btn small primary" id="ctAdd">+ Add template</button>
+    </div>
+  </section>
+</main>
+
+<button class="fab" id="fab" title="Add item">+</button>
+
+<!-- ══ ADD / EDIT MODAL ══ -->
+<div id="modal" class="modal-bg">
+  <div class="modal">
+    <div class="m-head"><span id="mTitle">Add item</span><button class="x" data-close="modal">✕</button></div>
+    <div class="m-body">
+      <div id="mSrcRow" style="margin-bottom:12px">
+        <div class="seg">
+          <button id="mSrcGGB" class="on">GUIDE BOOKS</button>
+          <button id="mSrcMAG">MAGAZINE</button>
+        </div>
+      </div>
+      <div id="mResult"></div>
+      <label class="f">NAME (ITEM NAME) *
+        <div class="sugwrap"><input id="fName" autocomplete="off"><div class="sug" id="sugName"></div></div>
+      </label>
+      <label class="f">PUBLISHER
+        <div class="sugwrap"><input id="fPubIn" autocomplete="off"><div class="sug" id="sugPub"></div></div>
+      </label>
+      <div class="grid2 ggb-only">
+        <label class="f">PLATFORM
+          <div class="sugwrap"><input id="fPlat" autocomplete="off"><div class="sug" id="sugPlat"></div></div>
+        </label>
+        <label class="f">GENRE
+          <div class="sugwrap"><input id="fGenre" autocomplete="off"><div class="sug" id="sugGenre"></div></div>
+        </label>
+      </div>
+      <label class="f ggb-only">SUB GENRE <small class="hint">(แนวรอง คั่นด้วย , — เล่มรวมหลายเกม)</small>
+        <div class="sugwrap"><input id="fSubGen" autocomplete="off"><div class="sug" id="sugSubGen"></div></div>
+      </label>
+      <label class="f">TYPE / SERIES
+        <div class="sugwrap"><input id="fType2" autocomplete="off" placeholder="e.g. POCKET BOOK · SPECIAL · TOP SECRET"><div class="sug" id="sugType"></div></div>
+      </label>
+      <div class="grid2">
+        <label class="f">CONDITION
+          <select id="fCondSel">
+            <option value="">—</option><option>S</option><option>A</option>
+            <option>B</option><option>C</option><option>D</option>
+          </select>
+        </label>
+        <label class="f">STATUS
+          <select id="fStatusSel">
+            <option>Instock</option><option>Auction</option><option>Sold</option><option>Hold</option><option>New Arrival</option>
+          </select>
+        </label>
+      </div>
+      <div class="grid3">
+        <label class="f">ORIGINAL<input id="fOrig" inputmode="decimal" autocomplete="off"></label>
+        <label class="f">COST<input id="fCost" inputmode="decimal" autocomplete="off"></label>
+        <label class="f">PRICE<input id="fPrice" inputmode="decimal" autocomplete="off"></label>
+      </div>
+      <!-- ══ SP-2: ตัวแปรระดับเล่ม ══ -->
+      <div class="ggb-only">
+        <div style="font-size:10px;letter-spacing:.14em;color:var(--muted-fg);margin:2px 0 4px">COPY FLAGS — เฉพาะเล่มนี้</div>
+        <div class="chips" id="flagChips" style="margin:0 0 10px">
+          <button type="button" class="chip" data-fl="POSTER">POSTER +10%</button>
+          <button type="button" class="chip" data-fl="FC">FULL COLOR +15%</button>
+          <button type="button" class="chip" data-fl="STAMP">ตราปั๊มเช่า −10%</button>
+          <button type="button" class="chip" data-fl="NAME">เขียนชื่อ −5%</button>
+          <button type="button" class="chip" data-fl="TAPE">ปกซ่อม −10%</button>
+        </div>
+        <div class="grid3">
+          <label class="f">RARITY
+            <select id="fRarity">
+              <option value="">R3 — ทั่วไป</option>
+              <option value="R2">R2 — หายากปานกลาง</option>
+              <option value="R1">R1 — หายาก (REVIEW)</option>
+            </select>
+          </label>
+          <label class="f">MARKET REF ฿<input id="fMRef" inputmode="decimal" autocomplete="off"></label>
+          <label class="f">REF NOTE<input id="fRefNote" placeholder="เช่น shopee sold 6/26" autocomplete="off"></label>
+        </div>
+      </div>
+      <p class="hint">SKU · Suggested Price (SP-2: target + ช่วงราคา + เหตุผล) · RESTOCK number — calculated automatically on save
+        (editing name/publisher/condition = SKU is regenerated)</p>
+    </div>
+    <div class="m-foot">
+      <button class="btn" data-close="modal">Close</button>
+      <button class="btn primary" id="mSave">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MARK SOLD MODAL ══ -->
+<div id="soldModal" class="modal-bg">
+  <div class="modal" style="max-width:420px">
+    <div class="m-head"><span>✓ MARK SOLD</span><button class="x" data-close="soldModal">✕</button></div>
+    <div class="m-body">
+      <div id="soldName" style="margin-bottom:12px;font-size:13px;line-height:1.5"></div>
+      <label class="f">CHANNEL
+        <div class="seg" id="soldCh" style="margin-top:4px">
+          <button type="button" data-ch="SHOP" class="on">หน้าร้าน / FB</button>
+          <button type="button" data-ch="SHOPEE">SHOPEE</button>
+        </div>
+      </label>
+      <div class="grid2">
+        <label class="f">Actual sold price<input id="soldPrice" inputmode="decimal" autocomplete="off"></label>
+        <label class="f">Shipping Subsidy — shop contribution<input id="soldShip" inputmode="decimal" autocomplete="off" placeholder="Confirm subsidy, e.g. 0"></label>
+      </div>
+      <p class="hint" id="soldConvHint" style="color:var(--gold-bright)"></p>
+      <p class="hint">Status → Sold · Sold Date = today (if still empty) · SHOPEE = ระบบแปลงกลับฐานหน้าร้านให้อัตโนมัติ (×0.7 −50)<br>
+        ค่าส่ง: ใส่ <b>0</b> ถ้าลูกค้าจ่ายค่าส่งเต็ม (เงินผ่านทาง) · ใส่จำนวนจริงเฉพาะตอน<b>ที่ร้านออกให้</b> เช่น ส่งฟรี/ลดค่าส่ง</p>
+    </div>
+    <div class="m-foot">
+      <button class="btn" data-close="soldModal">Cancel</button>
+      <button class="btn primary" id="soldGo">✓ CONFIRM</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="w1ReviewModal"><div class="modal w1-review"><h2 id="w1ReviewTitle">Final review</h2><div id="w1ReviewContent"></div><div class="cart-actions"><button class="btn" data-close="w1ReviewModal">Back</button><button class="btn primary" id="w1Commit">Confirm sold · Label later</button></div></div></div>
+<div id="toast"></div>
+<footer><span>OWARIN STORE</span><span class="g" id="stamp"></span></footer>
+
+<script>
+/* ── state ── */
+var S = {
+  source: 'GGB', allSheets: true,
+  q: '', status: '', pub: '', cond: '', type: '', gen: '',
+  data: { GGB: [], MAG: [] },
+  shown: 150, sheetUrl: '',
+  cart: [], shipOverride: null, cartChannel: 'SHOP',
+  sales: { loaded: false, rows: [] },
+  booking: { loaded: false, rows: [], hasStatus: false },
+  contents: { loaded: false, rows: [] },
+  settings: { ship: { base: 50, step: 10, cap: 100 }, bank: { no: '', bank: '', account: '' }, orderPrefix: 'OWA' }
+};
+var PAGE = 150;
+var M = { mode: 'add', source: 'GGB', sku: '', row: null, saving: false, soldChannel: 'SHOP',
+          auto: { genre: false, platform: false, original: false } };
+var LAST_ADD = null;
+var addSuggestionResets = [], addAutoTimers = [];
+// ponytail: this tab survives reloads; cross-tab recovery needs a server request-status lookup.
+var ADD_PENDING_KEY = 'owarin.add.pending.1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp.v1';
+var addPending = null, addPendingBroken = false;
+try {
+  var savedAdd = sessionStorage.getItem(ADD_PENDING_KEY);
+  if (savedAdd) {
+    addPending = JSON.parse(savedAdd);
+    if (!addPending || !/^[A-Za-z0-9_-]{12,100}$/.test(addPending.requestId) ||
+        !addPending.payload || addPending.payload.requestId !== addPending.requestId ||
+        (addPending.payload.source !== 'GGB' && addPending.payload.source !== 'MAG') ||
+        typeof addPending.payload.title !== 'string' || !addPending.payload.title.trim())
+      throw new Error('Invalid pending Add');
+  }
+} catch (e) { addPending = null; addPendingBroken = true; }
+var addRequestId = addPending ? addPending.requestId : '';
+
+/* ── api bridge: one contract end to end ── */
+function callApi(action, payload) {
+  return new Promise(function (res, rej) {
+    google.script.run
+      .withSuccessHandler(function (t) {
+        try {
+          var r = JSON.parse(t);
+          if (r.ok) res(r.data); else rej(new Error(r.error || 'unknown error'));
+        } catch (e) { rej(e); }
+      })
+      .withFailureHandler(function (e) { rej(e); })
+      .api(action, payload);
+  });
+}
+
+/* ── utils ── */
+function $(id){ return document.getElementById(id); }
+function esc(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function money(v){
+  var n = parseFloat(v);
+  if (isNaN(n)) return '';
+  return '฿' + n.toLocaleString('en-US');
+}
+// price with the ฿ symbol split out (balanced look in cards) — returns HTML
+function priceHtml(v){
+  var n = parseFloat(v);
+  if (isNaN(n)) return '—';
+  return '<span class="cur">฿</span>' + n.toLocaleString('en-US');
+}
+function restockNo(name){
+  var m = String(name || '').match(/RESTOCK-(\d+)/i);
+  return m ? m[1] : '';
+}
+function toast(msg, ok){
+  var t = $('toast'); t.textContent = msg;
+  t.className = ok ? 'ok' : '';
+  t.style.display = 'block';
+  clearTimeout(t._h); t._h = setTimeout(function(){ t.style.display = 'none'; }, 4200);
+}
+function okToast(msg){ toast(msg, true); }
+function findBySku(source, sku){
+  var arr = S.data[source];
+  for (var i = 0; i < arr.length; i++) {
+    if (String(arr[i].productId).trim() === sku) return arr[i];
+  }
+  return null;
+}
+function inventoryRows(){
+  return S.allSheets ? S.data.GGB.concat(S.data.MAG) : S.data[S.source];
+}
+function addToCache(item){ replaceInCache(item.productId, item); }
+function replaceInCache(prevSku, item){
+  var arr = S.data[item.source];
+  for (var i = 0; i < arr.length; i++) {
+    if (String(arr[i].productId).trim() === prevSku) { arr[i] = item; return; }
+  }
+  arr.push(item);
+}
+/* ── SP-2 helpers ── */
+function isReviewRow(r){
+  return String(r.status).trim() === 'Instock' && String(r.priceRange || '').indexOf('REVIEW') === 0;
+}
+function daysOnShelf(r){
+  if (!r.listedDate) return null;
+  var dt = new Date(r.listedDate);
+  if (isNaN(dt.getTime())) return null;
+  var n = Math.floor((Date.now() - dt.getTime()) / 86400000);
+  return n < 0 ? null : n;
+}
+// ผกผันสูตร Market Place Price: base = ราคาตั้งขาย × (1−fee) − ค่าส่ง
+var SHOPEE_FEE = 0.30, SHOPEE_SHIP = 50;
+function shopeeToBase(v){
+  var n = parseFloat(v);
+  if (isNaN(n)) return null;
+  return Math.round(n * (1 - SHOPEE_FEE) - SHOPEE_SHIP);
+}
+function updateReviewCount(){
+  var n = 0, arr = S.data[S.source];
+  for (var i = 0; i < arr.length; i++) if (isReviewRow(arr[i])) n++;
+  $('revCount').textContent = n ? String(n) : '';
+  return n;
+}
+
+/* ── load ── */
+function load(){
+  $('list').innerHTML = '<div class="skel"></div>'.repeat(8);
+  $('count').textContent = '';
+  $('refresh').disabled = true;
+  callApi('inventory.bootstrap', {})
+    .then(function(d){
+      S.data.GGB = d.GGB || [];
+      S.data.MAG = d.MAG || [];
+      if (d.settings) S.settings = d.settings;
+      S.sheetUrl = d.sheetUrl || '';
+      if (S.sheetUrl) { $('tOpen').href = S.sheetUrl; $('salesOpen').href = S.sheetUrl; }
+      pruneCart();
+      $('stamp').textContent = 'LOADED ' + new Date(d.generatedAt).toLocaleTimeString();
+      buildFilterOptions(false);
+      render(true);
+    })
+    .catch(function(e){
+      $('list').innerHTML = '<div class="empty">Failed to load data — ' + esc(e.message) + '</div>';
+      toast('Failed to load data: ' + e.message);
+    })
+    .finally(function(){ $('refresh').disabled = false; });
+}
+
+/* ── filter options (preserve=true keeps current selection if still available) ── */
+function buildFilterOptions(preserve){
+  var rows = inventoryRows();
+  var keep = preserve ? { pub: S.pub, cond: S.cond, type: S.type, gen: S.gen }
+                      : { pub: '', cond: '', type: '', gen: '' };
+  fillSelect('fPub',  uniq(rows.map(function(r){ return r.publisher; })), 'Publisher — All', keep.pub);
+  fillSelect('fCond', uniq(rows.map(function(r){ return r.condition; })), 'Condition — All', keep.cond);
+  var types = uniq(rows.map(function(r){ return r.type; }));
+  fillSelect('fType', types, 'Type — All', keep.type);
+  $('fType').style.display = types.length ? '' : 'none';   // ซ่อนถ้ายังไม่มีคอลัมน์/ข้อมูล Type
+  if (!types.length) $('fType').value = '';
+  // Genre: รวมทั้งแนวหลักและแนวรองเป็นตัวเลือกเดียวกัน
+  var gset = [];
+  rows.forEach(function(r){
+    gset.push(r.genre);
+    String(r.subGenre || '').split(',').forEach(function(x){ gset.push(x); });
+  });
+  fillSelect('fGen', uniq(gset), 'Genre — All', keep.gen);
+  S.pub = $('fPub').value; S.cond = $('fCond').value;
+  S.type = $('fType').value; S.gen = $('fGen').value;
+}
+function uniq(arr){
+  var seen = {}, out = [];
+  arr.forEach(function(v){
+    v = String(v == null ? '' : v).trim();
+    if (v && !seen[v]) { seen[v] = 1; out.push(v); }
+  });
+  return out.sort();
+}
+function fillSelect(id, values, allLabel, selected){
+  var el = $(id);
+  el.innerHTML = '<option value="">' + esc(allLabel) + '</option>' +
+    values.map(function(v){ return '<option value="' + esc(v) + '">' + esc(v) + '</option>'; }).join('');
+  if (selected && values.indexOf(selected) !== -1) el.value = selected;
+}
+
+/* ── filtering ── */
+function filtered(){
+  var q = S.q.toLowerCase();
+  return inventoryRows().filter(function(r){
+    if (S.status && String(r.status).trim() !== S.status) return false;
+    if (S.pub  && String(r.publisher).trim() !== S.pub)  return false;
+    if (S.cond && String(r.condition).trim() !== S.cond) return false;
+    if (S.type && String(r.type).trim() !== S.type) return false;
+    // Genre: ตรงกับแนวหลัก หรือแนวรอง (Sub Genre คั่นด้วย ,) ก็ถือว่าเจอ
+    if (S.gen) {
+      var gl = [String(r.genre || '').trim()]
+        .concat(String(r.subGenre || '').split(',').map(function(x){ return x.trim(); }));
+      if (gl.indexOf(S.gen) === -1) return false;
+    }
+    if (q) {
+      var hay = (r.baseTitle + ' ' + r.name + ' ' + r.productId + ' ' + r.publisher + ' ' +
+                 (r.type || '') + ' ' + (r.genre || '') + ' ' + (r.subGenre || '')).toLowerCase();
+      if (hay.indexOf(q) === -1) return false;
+    }
+    return true;
+  });
+}
+
+/* ── render ── */
+function render(reset){
+  if (reset) S.shown = PAGE;
+  var rows = filtered();
+  var total = inventoryRows().length;
+  $('count').textContent = rows.length.toLocaleString() + ' / ' + total.toLocaleString();
+  updateReviewCount();
+
+  if (!rows.length) {
+    $('list').innerHTML = '<div class="empty">No items match the filters</div>';
+    $('morewrap').style.display = 'none';
+    return;
+  }
+  var slice = rows.slice(0, S.shown);
+  $('list').innerHTML = slice.map(itemHtml).join('');
+  $('morewrap').style.display = rows.length > S.shown ? 'block' : 'none';
+}
+
+function itemHtml(r){
+  var st = String(r.status).trim();
+  var rn = restockNo(r.name);
+  var sku = String(r.productId).trim();
+  var priceMain = r.price !== '' ? priceHtml(r.price) : (r.suggested !== '' ? priceHtml(r.suggested) : '—');
+  var priceDim  = r.price === '' ? ' dim' : '';
+  var dos = (st === 'Instock') ? daysOnShelf(r) : null;
+  var inCart=S.cart.some(function(c){return c.itemUid&&r.itemUid?c.itemUid===r.itemUid:c.sku===sku&&c.source===r.source;});
+  var cartButton=sku&&st==='Instock'?'<button class="btn small" data-act="cart" data-sku="'+esc(sku)+'" aria-label="Add to cart: '+esc(r.baseTitle)+'" '+(inCart?'disabled':'')+'>'+(inCart?'In cart ✓':'Add to cart')+'</button>':'';
+  var actions;
+  if (!sku) {
+    actions = '<span class="badge">NO SKU — manage in sheet</span>';
+  } else {
+    actions = '<button class="btn small" data-act="edit" data-sku="'+esc(sku)+'">Edit</button>'+(st==='Instock'?'<button class="btn small primary" data-act="sold" data-sku="'+esc(sku)+'">Review sale</button>':'');
+  }
+  var itemCls = st === 'Sold' ? ' sold' : (st === 'Auction' ? ' auction' : '');
+  return '' +
+  '<div class="item' + itemCls + '" data-src="' + esc(r.source) + '">' +
+    '<div class="i-top">' +
+      '<div class="i-name">' + esc(r.baseTitle) + '</div>' +
+      '<div class="i-price' + priceDim + '">' + priceMain + cartButton + '</div>' +
+    '</div>' +
+    '<div class="i-sub">' +
+      (st ? '<span class="badge st-' + esc(st).replace(/\s+/g,'-') + '">' + esc(st.toUpperCase()) + '</span>' : '') +
+      (r.condition ? '<span class="badge cond">' + esc(r.condition) + '</span>' : '') +
+      (r.type ? '<span class="badge typ">' + esc(r.type) + '</span>' : '') +
+      (rn ? '<span class="badge rst">R' + esc(rn) + '</span>' : '') +
+      (isReviewRow(r) ? '<span class="badge rev">🔶 REVIEW</span>' : '') +
+      (String(r.rarity).trim() === 'R1' ? '<span class="badge rev">R1</span>' : '') +
+      (r.copyFlags ? '<span class="badge">' + esc(r.copyFlags) + '</span>' : '') +
+      '<span>' + esc(r.publisher) + (r.platform ? ' · ' + esc(r.platform) : '') + '</span>' +
+      (dos !== null ? '<span class="days">⏳ ' + dos + 'd</span>' : '') +
+      '<span class="sku">' + esc(sku) + '</span>' +
+    '</div>' +
+    '<div class="detail">' +
+      '<div class="dgrid">' +
+        d('ORIGINAL', r.original !== '' ? money(r.original) : '—') +
+        d('COST', r.cost !== '' ? money(r.cost) : '—') +
+        d('SP-2 แนะนำ', (r.priceRange !== '' && r.priceRange != null) ? esc(r.priceRange) : (isReviewRow(r) ? '🔶 REVIEW' : '—')) +
+        d('PRICE', r.price !== '' ? money(r.price) : '—') +
+        d('MARKET PLACE', r.marketplace !== '' ? money(r.marketplace) : '—') +
+        d('GROSS PROFIT', r.grossProfit !== '' ? esc(r.grossProfit) : '—') +
+        d('GENRE', r.genre !== '' ? esc(r.genre) : '—') +
+        d('TYPE', r.type ? esc(r.type) : '—') +
+        d('RARITY', String(r.rarity || '').trim() || 'R3') +
+        d('MARKET REF', (r.marketRef !== '' && r.marketRef != null) ? money(r.marketRef) : '—') +
+        d('LISTED', r.listedDate ? esc(String(r.listedDate).slice(0, 10)) : '—') +
+        d('SOLD DATE', r.soldDate ? esc(String(r.soldDate).slice(0, 10)) : '—') +
+        d('FULL NAME', esc(r.name)) +
+      '</div>' +
+      (r.maxGRef ? '<div class="refline">🧾 ' + esc(r.maxGRef) + '</div>' : '') +
+      '<div class="actions">' + actions + '</div>' +
+    '</div>' +
+  '</div>';
+}
+function d(k, v){ return '<div class="d"><k>' + k + '</k><v>' + v + '</v></div>'; }
+
+/* ── list: delegation (tap row = expand / action button) ── */
+$('list').addEventListener('click', function(e){
+  var act = e.target.closest ? e.target.closest('[data-act]') : null;
+  if (act) {
+    e.stopPropagation();
+    var sku = act.getAttribute('data-sku');
+    var src = act.closest('.item').getAttribute('data-src');
+    var a = act.getAttribute('data-act');
+    if (a === 'edit') openEdit(sku, src);
+    else if (a === 'sold') openSold(sku, src);
+    else if (a === 'revert') revertSold(sku, src);
+    else if (a === 'cart') addToCart(sku, src);
+    return;
+  }
+  var item = e.target.closest ? e.target.closest('.item') : null;
+  if (item) item.classList.toggle('open');
+});
+
+/* ── modal helpers ── */
+function showModal(id, on){ $(id).classList.toggle('open', !!on); }
+document.addEventListener('click', function(e){
+  var c = e.target.closest ? e.target.closest('[data-close]') : null;
+  if (c) {
+    if (M.mode === 'add' && M.saving && c.getAttribute('data-close') === 'modal') return;
+    showModal(c.getAttribute('data-close'), false); return;
+  }
+  if (e.target.classList && e.target.classList.contains('modal-bg')) {
+    if (M.mode === 'add' && M.saving && e.target.id === 'modal') return;
+    e.target.classList.remove('open');
+  }
+});
+
+function setModalSource(src){
+  M.source = src;
+  $('mSrcGGB').classList.toggle('on', src === 'GGB');
+  $('mSrcMAG').classList.toggle('on', src === 'MAG');
+  // platform/genre + SP-2 fields = GGB only
+  var show = src === 'GGB' ? '' : 'none';
+  var els = document.querySelectorAll('.ggb-only');
+  for (var i = 0; i < els.length; i++) els[i].style.display = show;
+}
+$('mSrcGGB').addEventListener('click', function(){ if (M.mode === 'add' && !M.saving) setModalSource('GGB'); });
+$('mSrcMAG').addEventListener('click', function(){ if (M.mode === 'add' && !M.saving) setModalSource('MAG'); });
+
+/* ── SP-2: copy flag chips ── */
+function setFlagChips(str){
+  var set = {};
+  String(str || '').toUpperCase().split(/[\s,+·\/|]+/).forEach(function(t){ if (t) set[t] = 1; });
+  var chips = document.querySelectorAll('#flagChips .chip');
+  for (var i = 0; i < chips.length; i++) {
+    chips[i].classList.toggle('on', !!set[chips[i].getAttribute('data-fl')]);
+  }
+}
+function getFlagStr(){
+  var out = [];
+  var chips = document.querySelectorAll('#flagChips .chip.on');
+  for (var i = 0; i < chips.length; i++) out.push(chips[i].getAttribute('data-fl'));
+  return out.join(' ');
+}
+$('flagChips').addEventListener('click', function(e){
+  var ch = e.target.closest ? e.target.closest('.chip') : null;
+  if (ch) ch.classList.toggle('on');
+});
+
+function fillForm(r){
+  $('fName').value   = r.name || '';
+  $('fPubIn').value  = r.publisher || '';
+  $('fPlat').value   = r.platform || '';
+  $('fGenre').value  = r.genre || '';
+  $('fSubGen').value = r.subGenre || '';
+  $('fType2').value  = r.type || '';
+  $('fCondSel').value   = r.condition || '';
+  $('fStatusSel').value = r.status || 'Instock';
+  $('fOrig').value   = (r.original === undefined || r.original === null) ? '' : r.original;
+  $('fCost').value   = (r.cost === undefined || r.cost === null) ? '' : r.cost;
+  $('fPrice').value  = (r.price === undefined || r.price === null) ? '' : r.price;
+  setFlagChips(r.copyFlags || '');
+  var rv = String(r.rarity || '').trim();
+  $('fRarity').value  = (rv === 'R1' || rv === 'R2') ? rv : '';
+  $('fMRef').value    = (r.marketRef === undefined || r.marketRef === null) ? '' : r.marketRef;
+  $('fRefNote').value = r.refNote || '';
+}
+function collectForm(){
+  return {
+    title:    $('fName').value.trim(),
+    pub:      $('fPubIn').value.trim(),
+    platform: $('fPlat').value.trim(),
+    genre:    $('fGenre').value.trim(),
+    subGenre: $('fSubGen').value.trim(),
+    type:     $('fType2').value.trim(),
+    cond:     $('fCondSel').value.trim(),
+    status:   $('fStatusSel').value.trim(),
+    original: $('fOrig').value.trim(),
+    cost:     $('fCost').value.trim(),
+    price:    $('fPrice').value.trim(),
+    copyFlags: getFlagStr(),
+    rarity:    $('fRarity').value.trim(),
+    marketRef: $('fMRef').value.trim(),
+    refNote:   $('fRefNote').value.trim()
+  };
+}
+function diffChanges(row, p){
+  var map = { name: p.title, publisher: p.pub, platform: p.platform, genre: p.genre,
+              subGenre: p.subGenre, type: p.type,
+              condition: p.cond, status: p.status, original: p.original, cost: p.cost,
+              price: p.price, copyFlags: p.copyFlags, rarity: p.rarity,
+              marketRef: p.marketRef, refNote: p.refNote };
+  var ch = {};
+  Object.keys(map).forEach(function(k){
+    var cur = String(row[k] == null ? '' : row[k]).trim();
+    var nv  = String(map[k] == null ? '' : map[k]).trim();
+    if (k === 'condition') nv = nv.toUpperCase();
+    if (nv !== cur) ch[k] = nv;
+  });
+  return ch;
+}
+
+function resetAddForm(){
+  clearTimeout(_flT);
+  addAutoTimers.forEach(clearTimeout); addAutoTimers = [];
+  addSuggestionResets.forEach(function(reset){ reset(); });
+  fillForm({ status: 'New Arrival' });
+  M.auto = { genre: false, platform: false, original: false, type: false };
+  M.sku = ''; M.row = null;
+}
+function setAddBusy(busy){
+  var fields = document.querySelectorAll('#modal input, #modal select, #modal button');
+  for (var i = 0; i < fields.length; i++) fields[i].disabled = busy;
+  if (!busy && addPending) {
+    fields = document.querySelectorAll('#modal input, #modal select');
+    for (var j = 0; j < fields.length; j++) fields[j].disabled = true;
+    $('mSrcGGB').disabled = $('mSrcMAG').disabled = true;
+  }
+  $('mSave').textContent = busy ? 'Saving…' : (addPending ? 'Check / retry request' : 'Save');
+}
+function openAdd(){
+  if (M.saving) return;
+  if (addPendingBroken) { toast('Browser storage unavailable — Add is disabled to prevent duplicate requests'); return; }
+  if (addPending) {
+    var old = addPending.payload;
+    M.mode = 'add'; M.sku = ''; M.row = null;
+    $('mTitle').textContent = '＋ Add item';
+    $('mSrcRow').style.display = '';
+    setModalSource(old.source);
+    fillForm({ name: old.title, publisher: old.pub, condition: old.cond, status: old.status,
+      original: old.original, cost: old.cost, price: old.price, platform: old.platform,
+      genre: old.genre, subGenre: old.subGenre, type: old.type, copyFlags: old.copyFlags,
+      rarity: old.rarity, marketRef: old.marketRef, refNote: old.refNote });
+    $('mResult').textContent = 'Unresolved Add Request ' + addRequestId + ' — check status before retry';
+    showModal('modal', true);
+    setAddBusy(false);
+    return;
+  }
+  M.mode = 'add'; M.sku = ''; M.row = null;
+  $('mTitle').textContent = '＋ Add item';
+  $('mSrcRow').style.display = '';
+  setModalSource(S.source);
+  resetAddForm();
+  $('mResult').innerHTML = '';
+  showModal('modal', true);
+  setTimeout(function(){ $('fName').focus(); }, 80);
+}
+function openEdit(sku, src){
+  if (M.saving) return;
+  var r = findBySku(src || S.source, sku);
+  if (!r) { toast('Item not found — press REFRESH'); return; }
+  M.mode = 'edit'; M.sku = sku; M.row = r;
+  $('mTitle').textContent = '✎ ' + r.baseTitle;
+  $('mSrcRow').style.display = 'none';
+  setModalSource(r.source);
+  fillForm(r);
+  $('mResult').innerHTML = '';
+  showModal('modal', true);
+}
+
+$('mSave').addEventListener('click', function(){
+  if (M.saving) return;
+  if (M.mode === 'add' && addPendingBroken) { toast('Browser storage unavailable — Add is disabled'); return; }
+  var p = (M.mode === 'add' && addPending) ? addPending.payload : collectForm();
+  if (!p.title) { toast('Enter the item name first'); return; }
+
+  M.saving = true;
+  if (M.mode === 'add') setAddBusy(true);
+  else { $('mSave').disabled = true; $('mSave').textContent = 'Saving…'; }
+
+  var committedSku = '';
+  var done = function(){
+    M.saving = false;
+    if (M.mode === 'add') setAddBusy(false);
+    else { $('mSave').disabled = false; $('mSave').textContent = 'Save'; }
+    if (committedSku && M.mode === 'add') $('fName').focus();
+  };
+
+  if (M.mode === 'add') {
+    var retrying = !!addPending;
+    if (!addPending) {
+      addRequestId = 'add-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+      addPending = { requestId: addRequestId, payload: {
+        requestId: addRequestId, source: M.source, title: p.title, pub: p.pub, cond: p.cond,
+        original: p.original, cost: p.cost, price: p.price, status: p.status,
+        platform: p.platform, genre: p.genre, subGenre: p.subGenre, type: p.type,
+        copyFlags: p.copyFlags, rarity: p.rarity, marketRef: p.marketRef, refNote: p.refNote
+      } };
+      try { sessionStorage.setItem(ADD_PENDING_KEY, JSON.stringify(addPending)); }
+      catch (e) { addPending = null; addRequestId = ''; done(); toast('Could not keep Add Request ID — nothing was sent'); return; }
+    }
+    var frozen = addPending.payload;
+    var addExpired = false, addTimer;
+    var addCall = retrying ? callApi('inventory.addStatus', frozen).then(function(status){
+      if (status && status.state === 'DONE') return status.data;
+      if (status && status.state === 'NOT_FOUND') {
+        if (addExpired) throw new Error('Add status arrived after timeout');
+        return callApi('inventory.add', frozen);
+      }
+      throw new Error('Add Request ' + addRequestId + ' is ' + (status && status.state || 'UNKNOWN') +
+                      ' — inspect ADD REQUESTS before recovery');
+    }) : callApi('inventory.add', frozen);
+    var boundedAdd = new Promise(function(resolve, reject){
+      addTimer = setTimeout(function(){
+        addExpired = true;
+        reject(new Error('Add response timed out; it may have saved — check the same request'));
+      }, 45000);
+      addCall.then(resolve, reject);
+    });
+    boundedAdd.then(function(dd){
+      if (!dd || !dd.item || !dd.item.productId) throw new Error('Save result is unclear — refresh inventory before retrying');
+      committedSku = dd.item.productId;
+      try { sessionStorage.removeItem(ADD_PENDING_KEY); } catch (e) {}
+      addPending = null;
+      addRequestId = '';
+      resetAddForm();
+      var res = dd.result || {};
+      var sugLine;
+      if (res.review) {
+        sugLine = '<span style="color:var(--gold-bright)">🔶 REVIEW — เคาะราคาเอง · ' +
+                  esc(res.priceRange || '') + '</span>';
+      } else {
+        sugLine = (dd.item.suggested !== '' ? money(dd.item.suggested) : '—') +
+                  (res.priceRange ? ' <span style="color:var(--muted-fg)">(' + esc(res.priceRange) + ')</span>' : '');
+      }
+      $('mResult').innerHTML =
+        '<div class="result-ok">✓ Added — <b>' + esc(dd.item.productId) + '</b><br>' +
+        'Name: ' + esc(dd.item.name) +
+        (res.isRestock ? ' <span style="color:var(--gold)">← auto RESTOCK</span>' : '') + '<br>' +
+        'Suggested: ' + sugLine +
+        (res.tier ? ' <span style="color:var(--muted-fg)">[' + esc(res.tier) + ']</span>' : '') +
+        '</div>';
+      LAST_ADD = null;
+      if (dd.historical) { toast('Saved — refresh inventory to see current stock'); return; }
+      LAST_ADD = { item: dd.item, matches: dd.bookingMatches || [] };
+      if (LAST_ADD.matches.length) $('mResult').innerHTML += bookingBanner(LAST_ADD);
+      okToast('Added: ' + dd.item.productId);
+      try {
+        addToCache(dd.item);
+        buildFilterOptions(true);
+        render(false);
+      } catch (e) { toast('Added — refresh the list to see the item'); }
+    }).catch(function(e){
+      if (!retrying && !committedSku && /^(Original|Cost|Price|Market Ref) must be a (finite )?number$/.test(String(e.message || e))) {
+        try { sessionStorage.removeItem(ADD_PENDING_KEY); } catch (ignored) {}
+        addPending = null; addRequestId = '';
+      }
+      toast(committedSku ? 'Added ' + committedSku + ' — refresh inventory' :
+            e.message + (addRequestId ? ' · Request ID: ' + addRequestId + ' (check same request)' : ''));
+    }).finally(function(){ clearTimeout(addTimer); done(); });
+  } else {
+    var changes = diffChanges(M.row, p);
+    if (!Object.keys(changes).length) { toast('Nothing changed'); done(); return; }
+    w1Run('inventory.update', { source: M.row.source, sku: M.sku, changes: changes })
+      .then(function(dd){
+        replaceInCache(dd.prevSku, dd.item);
+        buildFilterOptions(true);
+        render(false);
+        renderReview();
+        okToast('Saved' + (dd.item.productId !== dd.prevSku ? ' · new SKU: ' + dd.item.productId : ''));
+        showModal('modal', false);
+      }).catch(function(e){ toast(e.message); }).finally(done);
+  }
+});
+
+/* ── autosuggest (base title + publisher from in-memory index) ── */
+function titleList(src){
+  return uniq(S.data[src].map(function(r){ return r.baseTitle; }));
+}
+function pubListOf(src){
+  return uniq(S.data[src].map(function(r){ return r.publisher; }));
+}
+function platListOf(src){
+  return uniq(S.data[src].map(function(r){ return r.platform; }));
+}
+function genreListOf(src){
+  return uniq(S.data[src].map(function(r){ return r.genre; }));
+}
+function attachSuggest(inputId, boxId, listFn, onChoose){
+  var inp = $(inputId), box = $(boxId);
+  var items = [], active = -1, blurTimer;
+  function hide(){ box.style.display = 'none'; active = -1; }
+  addSuggestionResets.push(function(){ clearTimeout(blurTimer); items = []; box.innerHTML = ''; hide(); });
+  function paint(){
+    var nodes = box.querySelectorAll('.sug-i');
+    for (var i = 0; i < nodes.length; i++) nodes[i].classList.toggle('on', i === active);
+    if (active >= 0 && nodes[active] && nodes[active].scrollIntoView) nodes[active].scrollIntoView({ block: 'nearest' });
+  }
+  function choose(v){ inp.value = v; hide(); if (onChoose) onChoose(v); }
+  function build(){
+    var q = inp.value.trim().toLowerCase();
+    if (!q) { items = []; hide(); return; }
+    var list = listFn();
+    var pre = [], mid = [];
+    for (var i = 0; i < list.length; i++) {
+      var lv = list[i].toLowerCase();
+      if (lv.indexOf(q) === 0) pre.push(list[i]);
+      else if (lv.indexOf(q) !== -1) mid.push(list[i]);
+    }
+    items = pre.concat(mid).slice(0, 50);
+    if (!items.length) { hide(); return; }
+    box.innerHTML = items.map(function(v){ return '<div class="sug-i">' + esc(v) + '</div>'; }).join('');
+    active = -1;
+    box.style.display = 'block';
+  }
+  inp.addEventListener('input', build);
+  inp.addEventListener('keydown', function(e){
+    if (box.style.display === 'none' || !items.length) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); active = (active + 1) % items.length; paint(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); active = (active <= 0 ? items.length - 1 : active - 1); paint(); }
+    else if (e.key === 'Enter') { if (active >= 0) { e.preventDefault(); choose(items[active]); } }
+    else if (e.key === 'Escape') { hide(); }
+  });
+  box.addEventListener('mousedown', function(e){
+    var it = e.target.closest ? e.target.closest('.sug-i') : null;
+    if (!it) return;
+    e.preventDefault();
+    choose(it.textContent);
+  });
+  inp.addEventListener('blur', function(){ blurTimer = setTimeout(hide, 150); });
+}
+attachSuggest('fName', 'sugName', function(){ return titleList(M.source); }, autofillFromName);
+attachSuggest('fPubIn', 'sugPub', function(){ return pubListOf(M.source); }, autofillOriginal);
+attachSuggest('fPlat', 'sugPlat', function(){ return platListOf(M.source); });
+attachSuggest('fGenre', 'sugGenre', function(){ return genreListOf(M.source); });
+attachSuggest('fType2', 'sugType', function(){ return typeListOf(M.source); });
+attachSuggest('fSubGen', 'sugSubGen', function(){
+  var out = [];
+  S.data[M.source].forEach(function(r){
+    String(r.subGenre || '').split(',').forEach(function(x){ out.push(x); });
+    out.push(r.genre);
+  });
+  return uniq(out);
+});
+function typeListOf(src){
+  return uniq(S.data[src].map(function(r){ return r.type; }));
+}
+
+/* ── auto-fill on match (add mode only) ── */
+function baseTitleOf(t){
+  return String(t || '').replace(/・RESTOCK-\d+/i, '').replace(/\s*\(RESTOCK-\d+\)/i, '').trim();
+}
+function lookupByBase(base, key){
+  var arr = S.data[M.source];
+  for (var i = 0; i < arr.length; i++) {
+    if (String(arr[i].baseTitle).trim().toLowerCase() === base) {
+      var v = arr[i][key];
+      if (v !== '' && v != null) return v;
+    }
+  }
+  return '';
+}
+function lookupOriginal(base, pub){
+  var arr = S.data[M.source];
+  for (var i = 0; i < arr.length; i++) {
+    var r = arr[i];
+    if (String(r.baseTitle).trim().toLowerCase() === base &&
+        String(r.publisher).trim().toLowerCase() === pub &&
+        r.original !== '' && r.original != null) return r.original;
+  }
+  return '';
+}
+function setAuto(inputId, key, val){
+  var el = $(inputId);
+  if (el.value.trim() === '' || M.auto[key]) {
+    el.value = (val == null ? '' : val);
+    M.auto[key] = (String(val).trim() !== '');
+  }
+}
+/* SP-2 v17.4: อ่านชื่อ → เดา Copy Flags (กติกาเดียวกับฝั่ง Apps Script) */
+var FLAG_RULES = [
+  [/incl\.?[^)]*map/i, 'POSTER'],
+  [/แผนที่/,           'POSTER'],
+  [/โปสเตอร์|poster/i, 'POSTER'],
+  [/สีทั้งเล่ม/,        'FC']
+];
+function flagsFromName(name){
+  var out = [];
+  for (var i = 0; i < FLAG_RULES.length; i++) {
+    if (FLAG_RULES[i][0].test(name) && out.indexOf(FLAG_RULES[i][1]) === -1) out.push(FLAG_RULES[i][1]);
+  }
+  return out.join(' ');
+}
+// เติม flag ที่เดาได้ลง chips — ไม่ลบอันที่ผู้ใช้กดเอง (union) และไม่ทำงานตอน Edit
+function autofillFlags(){
+  if (M.mode !== 'add' || M.source !== 'GGB') return;
+  var det = flagsFromName($('fName').value);
+  if (!det) return;
+  var have = getFlagStr();
+  var set = {};
+  (have + ' ' + det).trim().split(/\s+/).forEach(function(t){ if (t) set[t] = 1; });
+  setFlagChips(Object.keys(set).join(' '));
+}
+function autofillFromName(){
+  if (M.mode !== 'add') return;
+  var base = baseTitleOf($('fName').value).toLowerCase();
+  setAuto('fGenre', 'genre', base ? lookupByBase(base, 'genre') : '');
+  setAuto('fPlat', 'platform', base ? lookupByBase(base, 'platform') : '');
+  setAuto('fType2', 'type', base ? lookupByBase(base, 'type') : '');
+  autofillFlags();
+  autofillOriginal();
+}
+function autofillOriginal(){
+  if (M.mode !== 'add') return;
+  var base = baseTitleOf($('fName').value).toLowerCase();
+  var pub = $('fPubIn').value.trim().toLowerCase();
+  setAuto('fOrig', 'original', (base && pub) ? lookupOriginal(base, pub) : '');
+}
+$('fName').addEventListener('blur', function(){ addAutoTimers.push(setTimeout(autofillFromName, 160)); });
+$('fName').addEventListener('change', autofillFromName);
+// เดา flag ระหว่างพิมพ์ด้วย (debounce) — ไม่ต้องรอ blur
+var _flT;
+$('fName').addEventListener('input', function(){
+  clearTimeout(_flT); _flT = setTimeout(autofillFlags, 350);
+});
+$('fPubIn').addEventListener('blur', function(){ addAutoTimers.push(setTimeout(autofillOriginal, 160)); });
+$('fPubIn').addEventListener('change', autofillOriginal);
+
+/* ── mark sold / revert — SP-2: channel + ฐานหน้าร้าน ── */
+function setSoldChannel(ch){
+  M.soldChannel = ch;
+  var btns = document.querySelectorAll('#soldCh button');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.toggle('on', btns[i].getAttribute('data-ch') === ch);
+  // SHOPEE → เสนอราคาหน้า Shopee (marketplace) ให้เลย · SHOP → ราคาฐาน
+  if (M.row) {
+    if (ch === 'SHOPEE' && M.row.marketplace !== '' && M.row.marketplace != null) {
+      $('soldPrice').value = M.row.marketplace;
+    } else if (ch === 'SHOP') {
+      $('soldPrice').value = M.row.price !== '' ? M.row.price : (M.row.suggested !== '' ? M.row.suggested : '');
+    }
+  }
+  updateSoldHint();
+}
+function updateSoldHint(){
+  var h = $('soldConvHint'), ship = $('soldShip');
+  if (M.soldChannel === 'SHOPEE') {
+    // Shopee: ค่าส่งถูกถอดออกตอนแปลงราคาแล้ว → ไม่ให้กรอกซ้ำ
+    ship.disabled = false; // Actual shop subsidy is independent of the listing-price conversion.
+    var b = shopeeToBase($('soldPrice').value);
+    h.textContent = (b !== null)
+      ? ('→ จะบันทึกลงชีตเป็นฐานหน้าร้าน ≈ ฿' + b.toLocaleString('en-US') + ' · ค่าส่งถอดออกแล้ว')
+      : '';
+  } else {
+    ship.disabled = false;
+    h.textContent = '';
+  }
+}
+$('soldCh').addEventListener('click', function(e){
+  var b = e.target.closest ? e.target.closest('button[data-ch]') : null;
+  if (b) setSoldChannel(b.getAttribute('data-ch'));
+});
+$('soldPrice').addEventListener('input', updateSoldHint);
+
+function openSold(sku, src){
+  var r = findBySku(src || S.source, sku);
+  if (!r) { toast('Item not found — press REFRESH'); return; }
+  M.sku = sku; M.row = r;
+  var rn = restockNo(r.name);
+  var dos = daysOnShelf(r);
+  $('soldName').innerHTML = esc(r.baseTitle) + (rn ? ' <span class="badge rst">R' + esc(rn) + '</span>' : '') +
+    (dos !== null ? ' <span class="badge days">⏳ ' + dos + 'd on shelf</span>' : '') +
+    '<br><span class="sku">' + esc(sku) + '</span>';
+  M.soldChannel = 'SHOP';
+  var btns = document.querySelectorAll('#soldCh button');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.toggle('on', btns[i].getAttribute('data-ch') === 'SHOP');
+  $('soldPrice').value = r.price !== '' ? r.price : (r.suggested !== '' ? r.suggested : '');
+  $('soldShip').value = '';
+  updateSoldHint();
+  showModal('soldModal', true);
+}
+$('soldGo').addEventListener('click',function(){
+ var price=$('soldPrice').value.trim(),subsidy=$('soldShip').value.trim();if(w1StrictMoney(price)===null||w1StrictMoney(subsidy)===null){toast('Valid price/subsidy required');return;}
+ showModal('soldModal',false);w1OpenReview({single:true,channel:M.soldChannel,items:[{source:M.row.source,sku:M.sku,itemUid:M.row.itemUid||'',price:price}],customerShipping:'0',shippingSubsidy:subsidy,labelLater:true},null);
+});
+
+function revertSold(sku, src){
+  var r = findBySku(src || S.source, sku);
+  if (!r) { toast('Item not found — press REFRESH'); return; }
+  if (!confirm('Change "' + r.baseTitle + '" back to Instock and clear the Sold Date?')) return;
+  w1Run('inventory.update', { source: r.source, sku: sku, changes: { status: 'Instock' } })
+    .then(function(dd){
+      replaceInCache(sku, dd.item);
+      render(false);
+      okToast('↩ Back to INSTOCK');
+    })
+    .catch(function(e){ toast(e.message); });
+}
+
+/* ── tools ── */
+function runTool(btn, action, payload, fmt, reloadAfter){
+  var t = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Working…';
+  callApi(action, payload)
+    .then(function(dd){
+      $('toolReport').textContent = fmt(dd);
+      if (reloadAfter) load();
+    })
+    .catch(function(e){ toast(e.message); })
+    .finally(function(){ btn.disabled = false; btn.textContent = t; });
+}
+function fmtFillReport(dd){
+  return '✅ Suggested Price SP-2 (' + (dd.sheet || S.source) + ') — ' + dd.rows + ' rows\n' +
+    '🎯 EXACT (base+pub+orig): ' + dd.exact + '\n' +
+    '📗 TITLE-PUB: ' + dd.titlePub + '\n' +
+    '📘 TITLE (cross-publisher): ' + dd.title + '\n' +
+    '📈 CURVE (cover-price multiple): ' + dd.curve + '\n' +
+    '🧭 REF (market ref): ' + dd.ref + '\n' +
+    '🔶 REVIEW (waiting for you): ' + dd.review + '\n' +
+    '⬜ MANUAL (no data at all): ' + dd.manual + '\n' +
+    '⚓ Hit COST-FLOOR: ' + dd.floor + '\n\n' +
+    'REVIEW/MANUAL = orange Suggested cell · range in "Price Range" · reason in "Max G Ref"';
+}
+function fmtAuditReport(dd){
+  var rows = dd.rows || [];
+  if (!rows.length) return '✅ No Instock priced >20% below SP-2 target';
+  return '🚨 Underpriced Instock (' + rows.length + ') — Price cells painted red in the sheet\n\n' +
+    rows.map(function(r){
+      return 'row ' + r.row + ': ' + r.title + ' [' + r.cond + '] ฿' + r.price + ' → target ฿' + r.target;
+    }).join('\n');
+}
+$('tSp2Setup').addEventListener('click', function(){
+  runTool(this, 'tools.sp2Setup', { source: S.source }, function(dd){
+    var out = '🧱 SP-2 Setup (' + (dd.sheet || S.source) + ')\n';
+    if (dd.added.length)   out += '\n➕ Added:\n' + dd.added.join('\n');
+    if (dd.existed.length) out += '\n\n✓ Already present: ' + dd.existed.join(', ');
+    if (!dd.added.length)  out += '\n(nothing to add — safe to run again anytime)';
+    return out;
+  }, true);
+});
+$('tLayout').addEventListener('click', function(){
+  runTool(this, 'tools.sp2Layout', { source: S.source }, function(dd){
+    return '🎨 จัดหน้าชีต ' + (dd.sheet || S.source) + ' เรียบร้อย\n' +
+      '↔️ ย้ายคอลัมน์: ' + dd.moved.length + ' ครั้ง\n' +
+      (dd.moved.length ? '   ' + dd.moved.join('\n   ') + '\n' : '') +
+      '🔒 ซ่อน: ' + (dd.hidden.join(', ') || '-') + '\n' +
+      '🫥 ซ่อนคอลัมน์ว่าง: ' + dd.emptyHidden + '\n' +
+      '💬 คำอธิบายหัวคอลัมน์: ' + dd.noted + ' ช่อง (hover ในชีตเพื่ออ่าน)\n' +
+      (dd.missing.length ? '\n⚠️ ไม่พบ: ' + dd.missing.join(', ') : '');
+  }, false);
+});
+$('tMigFlags').addEventListener('click', function(){
+  if (!confirm('เติม Copy Flags อัตโนมัติจากชื่อสินค้า (Incl. Maps → POSTER · สีทั้งเล่ม → FC)\nเติมเฉพาะช่องที่ว่าง · ชื่อ/SKU ไม่ถูกแตะ · เสร็จแล้วควรกดคำนวณ SP-2 ใหม่\nยืนยันหรือไม่?')) return;
+  runTool(this, 'tools.migrateFlags', { dryRun: false, source: S.source }, function(dd){
+    var out = '🏷️ เติม Copy Flags แล้ว ' + dd.filled.length + ' เล่ม';
+    if (dd.skippedHasValue) out += ' · ข้ามที่มีค่าแล้ว ' + dd.skippedHasValue;
+    out += '\n\n' + dd.filled.slice(0, 20).map(function(x){
+      return 'แถว ' + x.row + ' [' + x.flags + '] ' + x.title;
+    }).join('\n');
+    if (dd.filled.length > 20) out += '\n… อีก ' + (dd.filled.length - 20) + ' เล่ม';
+    out += '\n\n→ อย่าลืมกด 💰 Suggested Price (SP-2) ใหม่';
+    return out;
+  }, true);
+});
+$('tRarity').addEventListener('click', function(){
+  var btn = this, t0 = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Working…';
+  callApi('tools.autoRarity', { dryRun: true, source: S.source })
+    .then(function(pre){
+      var c = pre.counts || {};
+      var msg = '💎 เติม Rarity อัตโนมัติ (' + pre.sheet + ')\n' +
+        'จากราคาขายจริง ' + pre.thresholds.soldN + ' รายการ\n' +
+        'เกณฑ์: R1 ≥ ฿' + pre.thresholds.r1 + ' หรือ ≥1.8× เพื่อนร่วมสำนักพิมพ์ · R2 ≥ ฿' + pre.thresholds.r2 + ' หรือ ≥1.4×\n\n' +
+        'ผลที่จะได้: ' + ['R1','R2','R3','NEW'].map(function(k){ return k + ' ' + (c[k]||0); }).join(' · ') + '\n' +
+        'เปลี่ยน ' + pre.changed.length + ' แถว\n\n⚠️ เขียนทับค่า Rarity ที่กรอกเองไว้ทั้งหมด — ยืนยันหรือไม่?';
+      if (!confirm(msg)) { btn.disabled = false; btn.textContent = t0; return null; }
+      return callApi('tools.autoRarity', { dryRun: false, source: S.source });
+    })
+    .then(function(dd){
+      if (!dd) return;
+      var c = dd.counts || {};
+      $('toolReport').textContent = '✅ เติม Rarity เรียบร้อย (' + dd.sheet + ')\n' +
+        ['R1','R2','R3','NEW'].map(function(k){ return k + ': ' + (c[k]||0); }).join(' · ') + '\n\n' +
+        dd.changed.slice(0, 20).map(function(x){ return '  แถว ' + x.row + ' ' + x.from + '→' + x.to + '  ' + x.title; }).join('\n') +
+        (dd.changed.length > 20 ? '\n  … อีก ' + (dd.changed.length - 20) + ' แถว' : '') +
+        '\n\n→ กด 💰 Suggested Price (SP-2) ใหม่';
+      load();
+      btn.disabled = false; btn.textContent = t0;
+    })
+    .catch(function(e){ toast(e.message); btn.disabled = false; btn.textContent = t0; });
+});
+$('tSuspAuc').addEventListener('click', function(){
+  var btn = this, t0 = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Working…';
+  callApi('tools.suspectAuction', { dryRun: true, source: S.source })
+    .then(function(pre){
+      if (!pre.found.length) {
+        $('toolReport').textContent = '✅ ไม่พบ Sold ที่ราคาต่ำผิดปกติ (' + pre.sheet + ') — เทียบ ' + pre.groups + ' กลุ่ม';
+        btn.disabled = false; btn.textContent = t0; return null;
+      }
+      var lines = pre.found.slice(0, 20).map(function(x){
+        return '  แถว ' + x.row + ' ฿' + x.price + ' [' + (x.cond||'-') + '] = ' + x.pct + '% ของ ฿' + x.topA + '  ' + x.title.slice(0, 44);
+      }).join('\n');
+      if (!confirm('🔍 พบ ' + pre.found.length + ' แถวที่ราคาต่ำกว่า ' + Math.round(pre.ratio*100) +
+          '% ของเล่มสูงสุดในกลุ่มเดียวกัน (ชื่อ+สำนักพิมพ์+เครื่อง)\n\n' + lines +
+          '\n\nเปลี่ยน Status → Auction และล้าง Sold Date · ยืนยันหรือไม่?')) {
+        $('toolReport').textContent = lines; btn.disabled = false; btn.textContent = t0; return null;
+      }
+      return callApi('tools.suspectAuction', { dryRun: false, source: S.source });
+    })
+    .then(function(dd){
+      if (!dd) return;
+      $('toolReport').textContent = '✅ เปลี่ยนเป็น Auction แล้ว ' + dd.changed + ' แถว (' + dd.sheet + ')\n\n' +
+        dd.found.map(function(x){ return '  แถว ' + x.row + ' ฿' + x.price + ' (' + x.pct + '%)  ' + x.title.slice(0, 46); }).join('\n') +
+        '\n\n→ กด 💰 Suggested Price (SP-2) ใหม่';
+      load(); btn.disabled = false; btn.textContent = t0;
+    })
+    .catch(function(e){ toast(e.message); btn.disabled = false; btn.textContent = t0; });
+});
+$('tFill').addEventListener('click', function(){
+  runTool(this, 'tools.fillSuggested', { source: S.source }, fmtFillReport, true);
+});
+function fmtApplyReport(dd, dryRun, mode){
+  var sumUp = 0, sumDown = 0;
+  dd.up.forEach(function(x){ sumUp += x.to - x.from; });
+  dd.down.forEach(function(x){ sumDown += x.from - x.to; });
+  var isAll = mode === 'ALL';
+  function lines(arr, n){
+    return arr.slice(0, n).map(function(x){
+      return '  แถว ' + x.row + ' ' + x.title.slice(0, 36) + ': ' +
+             (x.from === '' ? '(ว่าง)' : '฿' + x.from) + ' → ฿' + x.to;
+    }).join('\n') + (arr.length > n ? '\n  … อีก ' + (arr.length - n) + ' เล่ม' : '');
+  }
+  var m = (dryRun ? '👀 พรีวิว (ยังไม่เขียนลงชีต)' : '✅ เขียนราคา SP-2 ลงช่อง Price แล้ว') +
+    '\nโหมด: ' + (isAll ? 'ทับทุกกรณี (รวมลดราคา)' : 'ขึ้นราคา + เติมช่องว่างเท่านั้น') + '\n\n' +
+    '⬆️ ขึ้นราคา: ' + dd.up.length + ' เล่ม (+฿' + sumUp.toLocaleString() + ')\n' +
+    '➕ เติมช่องว่าง: ' + dd.fill.length + ' เล่ม\n' +
+    '= เท่าเดิม: ' + dd.same + ' เล่ม\n' +
+    (isAll ? '⬇️ ลดราคา: ' + dd.down.length + ' เล่ม (−฿' + sumDown.toLocaleString() + ')\n'
+           : '⏸️ ราคาปัจจุบันสูงกว่า SP-2: ' + dd.down.length + ' เล่ม — ไม่ถูกแตะ\n') +
+    '🔶 ข้าม REVIEW/ของหายาก: ' + dd.skipReview + ' เล่ม\n' +
+    'รวมที่เปลี่ยน: ' + dd.changed + ' เล่ม\n';
+  if (dd.up.length) m += '\n⬆️ ขึ้นราคามากสุด:\n' +
+    lines(dd.up.slice().sort(function(a,b){ return (b.to-b.from)-(a.to-a.from); }), 12) + '\n';
+  if (dd.down.length) m += '\n' + (isAll ? '⬇️ ลดราคา:' : '⏸️ สูงกว่า SP-2 (ไม่ถูกแตะ — เช็กเองว่าตั้งแพงเพราะรู้ว่าเล่มดีหรือตั้งเกิน):') +
+    '\n' + lines(dd.down.slice().sort(function(a,b){ return (b.from-b.to)-(a.from-a.to); }), 10) + '\n';
+  return m;
+}
+$('tApplyPre').addEventListener('click', function(){
+  runTool(this, 'tools.applySuggested', { mode: 'UP', dryRun: true, source: S.source },
+    function(dd){ return fmtApplyReport(dd, true, 'UP'); }, false);
+});
+$('tApplyUp').addEventListener('click', function(){
+  if (!confirm('เขียนราคา SP-2 ลงช่อง Price — เฉพาะที่ราคาขึ้นและช่องที่ยังว่าง (ไม่ลดราคาเล่มไหนเลย) ยืนยันหรือไม่?')) return;
+  runTool(this, 'tools.applySuggested', { mode: 'UP', dryRun: false, source: S.source },
+    function(dd){ return fmtApplyReport(dd, false, 'UP'); }, true);
+});
+$('tApplyAll').addEventListener('click', function(){
+  if (!confirm('⚠️ ทับราคาทุกกรณี รวมการ "ลดราคา" ลงมาหา SP-2 ด้วย — เล่มที่คุณตั้งราคาสูงไว้เองจะถูกลดลง ยืนยันหรือไม่?')) return;
+  runTool(this, 'tools.applySuggested', { mode: 'ALL', dryRun: false, source: S.source },
+    function(dd){ return fmtApplyReport(dd, false, 'ALL'); }, true);
+});
+$('tAudit').addEventListener('click', function(){
+  runTool(this, 'tools.auditUnderpriced', { source: S.source }, fmtAuditReport, false);
+});
+$('tDerived').addEventListener('click', function(){
+  runTool(this, 'tools.fixDerived', {}, function(dd){
+    return '✅ Formulas filled\n' + dd.report.map(function(r){
+      return '• ' + r.sheet + (r.error ? ': ' + r.error : ': rows 2–' + r.lastRow);
+    }).join('\n');
+  }, true);
+});
+$('tValidate').addEventListener('click', function(){
+  runTool(this, 'tools.validateSkus', { source: S.source }, function(dd){
+    var out = '📋 Validate Product ID (' + S.source + ')\n✅ Correct: ' + dd.ok + ' rows';
+    if (dd.missing.length)   out += '\n\n❌ No SKU (' + dd.missing.length + '):\n' + dd.missing.slice(0, 12).join('\n');
+    if (dd.duplicate.length) out += '\n\n🔁 Duplicate (' + dd.duplicate.length + '):\n' + dd.duplicate.slice(0, 12).join('\n');
+    if (dd.badFormat.length) out += '\n\n⚠️ Bad format (' + dd.badFormat.length + '):\n' + dd.badFormat.slice(0, 12).join('\n');
+    if (!dd.missing.length && !dd.duplicate.length && !dd.badFormat.length) out += '\n🎉 All correct!';
+    return out;
+  }, false);
+});
+$('tPub').addEventListener('click', function(){
+  runTool(this, 'tools.checkPublishers', { source: S.source }, function(dd){
+    if (!dd.unmapped.length) return '✅ Every publisher has a Code (' + S.source + ')';
+    return '⚠️ Publishers without a Code (' + dd.unmapped.length + '):\n' +
+      dd.unmapped.map(function(u){ return '• ' + u.publisher + ' (' + u.count + ')'; }).join('\n');
+  }, false);
+});
+$('tSort').addEventListener('click', function(){
+  if (!confirm('Sort the entire ' + S.source + ' sheet A-Z? (all rows will be reordered)')) return;
+  runTool(this, 'tools.sortInventory', { source: S.source }, function(dd){
+    return '✅ Sorted ' + dd.rows + ' rows + derived formulas refilled';
+  }, true);
+});
+
+/* ── REVIEW tab (SP-2) — client-side จาก cache · Edit เปิด modal เดิม ── */
+function reviewRows(){
+  return S.data[S.source].filter(isReviewRow);
+}
+function renderReview(){
+  var rows = reviewRows();
+  updateReviewCount();
+  if (!rows.length) {
+    $('revList').innerHTML = '<div class="empty">🎉 Review queue is empty — press "Recalculate (SP-2)" to refresh</div>';
+    return;
+  }
+  $('revList').innerHTML = rows.map(function(r){
+    var sku = String(r.productId).trim();
+    return '<div class="rv-card">' +
+      '<div class="i-top"><div class="i-name">' + esc(r.baseTitle) + '</div>' +
+        '<div class="i-price dim">' + (r.price !== '' ? priceHtml(r.price) : '—') + '</div></div>' +
+      '<div class="i-sub">' +
+        (r.condition ? '<span class="badge cond">' + esc(r.condition) + '</span>' : '') +
+        (String(r.rarity || '').trim() === 'R1' ? '<span class="badge rev">R1</span>' : '') +
+        (r.copyFlags ? '<span class="badge">' + esc(r.copyFlags) + '</span>' : '') +
+        '<span>' + esc(r.publisher) + (r.platform ? ' · ' + esc(r.platform) : '') + '</span>' +
+        '<span class="sku">' + esc(sku) + '</span>' +
+      '</div>' +
+      '<div class="rv-range">' + esc(r.priceRange || '') + '</div>' +
+      (r.maxGRef ? '<div class="refline">🧾 ' + esc(r.maxGRef) + '</div>' : '') +
+      '<div class="actions">' +
+        (sku ? '<button class="btn small" data-rvedit="' + esc(sku) + '">✎ Edit / set price</button>' : '') +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+$('revList').addEventListener('click', function(e){
+  var b = e.target.closest ? e.target.closest('[data-rvedit]') : null;
+  if (b) openEdit(b.getAttribute('data-rvedit'), S.source);
+});
+$('revAudit').addEventListener('click', function(){
+  var btn = this, t = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Working…';
+  callApi('tools.auditUnderpriced', { source: S.source })
+    .then(function(dd){ $('revReport').textContent = fmtAuditReport(dd); })
+    .catch(function(e){ toast(e.message); })
+    .finally(function(){ btn.disabled = false; btn.textContent = t; });
+});
+$('revRecalc').addEventListener('click', function(){
+  var btn = this, t = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Working…';
+  callApi('tools.fillSuggested', { source: S.source })
+    .then(function(dd){
+      $('revReport').textContent = fmtFillReport(dd);
+      return callApi('inventory.bootstrap', {});
+    })
+    .then(function(dd2){
+      S.data.GGB = dd2.GGB || []; S.data.MAG = dd2.MAG || [];
+      pruneCart(); buildFilterOptions(true); render(false); renderReview();
+    })
+    .catch(function(e){ toast(e.message); })
+    .finally(function(){ btn.disabled = false; btn.textContent = t; });
+});
+
+/* ── cart (P3 + SP-2 channel) ── */
+function fmtNum(v){
+  var n = parseFloat(v);
+  if (isNaN(n)) return String(v == null ? '' : v);
+  return n.toLocaleString('en-US');
+}
+function calcShip(n){
+  if (n <= 0) return 0;
+  var sp = S.settings.ship || { base: 50, step: 10, cap: 100 };
+  return Math.min(sp.base + sp.step * (n - 1), sp.cap);
+}
+function cartShipping(){ return S.shipOverride != null ? (w1StrictMoney(S.shipOverride)===null ? NaN : Number(S.shipOverride)) : calcShip(S.cart.length); }
+function cartSubtotal(){
+  var s = 0;
+  S.cart.forEach(function(c){ var n = parseFloat(c.price); if (!isNaN(n)) s += n; });
+  return s;
+}
+function updateCartCount(){
+  var el = $('cartCount'); if (el) el.textContent = S.cart.length ? String(S.cart.length) : '';
+}
+function pruneCart(){
+  S.cart = S.cart.filter(function(c){
+    var r = findBySku(c.source, c.sku);
+    return r && String(r.status).trim() !== 'Sold';
+  });
+  updateCartCount();
+}
+function addToCart(sku, src){
+  var r = findBySku(src || S.source, sku);
+  if (!r) { toast('Item not found — press REFRESH'); return; }
+  var st = String(r.status).trim();
+  if (st !== 'Instock' || w1Pending || w1Broken) { toast('Only available Instock items can enter cart; resolve pending request first'); return; }
+  for (var i = 0; i < S.cart.length; i++) {
+    if (S.cart[i].sku === sku && S.cart[i].source === r.source) { toast('Already in cart'); return; }
+  }
+  var price = r.price !== '' ? r.price : (r.suggested !== '' ? r.suggested : '');
+  S.cart.push({ itemUid:r.itemUid||'', source: r.source, sku: sku, baseTitle: r.baseTitle, status: st, price: price, suggested: r.suggested });
+  updateCartCount();
+  render(false);okToast('Added to cart: ' + r.baseTitle);
+}
+function removeFromCart(idx){
+  S.cart.splice(idx, 1);render(false);
+  updateCartCount();
+  renderCart();
+}
+function setCartChannel(ch){
+  S.cartChannel = ch;
+  var btns = document.querySelectorAll('#cartCh button');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.toggle('on', btns[i].getAttribute('data-ch') === ch);
+  $('cartChHintRow').style.display = ch === 'SHOPEE' ? '' : 'none';
+  $('cActConfirm').textContent=ch==='SHOPEE'?'Confirm sold':'Create order';
+}
+$('cartCh').addEventListener('click', function(e){
+  var b = e.target.closest ? e.target.closest('button[data-ch]') : null;
+  if (b) setCartChannel(b.getAttribute('data-ch'));
+});
+function renderCart(){
+  var wrap = $('cartWrap'), empty = $('cartEmpty');
+  if (!S.cart.length) { wrap.style.display = 'none'; empty.style.display = ''; $('cartMsg').textContent = ''; return; }
+  empty.style.display = 'none'; wrap.style.display = '';
+  $('cartLines').innerHTML = S.cart.map(function(c, i){
+    return '<div class="cart-line">' +
+      '<div class="cl-name">' + esc(c.baseTitle) +
+        (c.status === 'Auction' ? ' <span class="cl-warn">AUCTION</span>' : '') +
+        '<span class="sku">' + esc(c.sku) + '</span></div>' +
+      '<input class="cl-price" data-idx="' + i + '" inputmode="decimal" value="' + esc(c.price) + '">' +
+      '<button class="cl-rm" data-rm="' + i + '" title="Remove">✕</button>' +
+    '</div>';
+  }).join('');
+  setCartChannel(S.cartChannel);
+  var sub = cartSubtotal(), ship = cartShipping();
+  $('cSub').textContent = money(sub);
+  $('cShip').value = ship;
+  $('cShipHint').textContent = '(auto ฿' + calcShip(S.cart.length) + ')';
+  w1SyncButtons();
+  $('cTotal').textContent = money(sub + ship);
+}
+function cartRecalcTotals(){
+  var sub = cartSubtotal(), ship = cartShipping();
+  $('cSub').textContent = money(sub);
+  $('cTotal').textContent = money(sub + ship);
+}
+function buildItemsLines(){
+  return S.cart.map(function(c){
+    var p = (c.price !== '' && c.price != null) ? c.price : (c.suggested || '');
+    return c.baseTitle + ' — ' + fmtNum(p);
+  }).join('\n');
+}
+function tplNotify(){
+  return 'ขออนุญาตแจ้งราคานะคะ\n.\n' + buildItemsLines() + '\n:\n' +
+    '📦 ค่าส่งเริ่มต้น : 50.- 「เล่มต่อไปเพิ่มเล่มละ 10 บาท | สูงสุดไม่เกิน 100 บาท」\n' +
+    '🚫 ไม่มีบริการเก็บเงินปลายทางนะคะ\n—————\nขอบคุณค่าาาา (ㅅ´ ˘ `)';
+}
+function tplQuote(){
+  var sub = cartSubtotal(), ship = cartShipping(), total = sub + ship;
+  var b = S.settings.bank || {};
+  return 'ขออนุญาตสรุปยอดค่าหนังสือนะคะ\n.\n' + buildItemsLines() + '\n:\n' +
+    (b.no || '') + '\n' + (b.bank || '') + ' | ' + (b.account || '') + '\n' +
+    'ยอด ' + fmtNum(total) + ' (รวมค่าจัดส่งไปรษณีย์ไทย ' + fmtNum(ship) + '.- แล้ว)  —  บาทค่ะ';
+}
+function tplInstock(item){
+  var price = item.price !== '' ? item.price : (item.suggested !== '' ? item.suggested : '');
+  return 'ขออนุญาตแจ้งหนังสือเข้านะคะ\n.\n' + item.baseTitle + ' — ' + fmtNum(price) + '\n.\nขอบคุณค่าาาา (ㅅ´ ˘ `)';
+}
+function bookingBanner(la){
+  var people = la.matches.map(function(m){ return esc(m.name) + (m.queue ? ' (' + esc(m.queue) + ')' : ''); }).join(', ');
+  return '<div class="result-ok" style="border-color:var(--gold-bright)">🔔 <b>' + la.matches.length +
+    ' waiting</b> in booking for this title<br><span class="hint">' + people + '</span><br>' +
+    '<button class="btn small" id="biNotify" style="margin-top:8px">📋 Copy Instock notification</button></div>';
+}
+function copyText(text, okMsg){
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function(){ okToast(okMsg || 'Copied'); }, function(){ fallbackCopy(text, okMsg); });
+  } else { fallbackCopy(text, okMsg); }
+}
+function fallbackCopy(text, okMsg){
+  var ta = document.createElement('textarea');
+  ta.value = text; ta.style.position = 'fixed'; ta.style.top = '-1000px'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try { document.execCommand('copy'); okToast((okMsg || 'Copied') + ' — if nothing pasted, copy from the box below'); }
+  catch (e) { toast('Copy blocked — select the text in the box below and copy manually'); }
+  document.body.removeChild(ta);
+}
+/* cart events */
+$('cartLines').addEventListener('input', function(e){
+  var inp = e.target.closest ? e.target.closest('.cl-price') : null;
+  if (!inp) return;
+  S.cart[+inp.getAttribute('data-idx')].price = inp.value.trim();
+  cartRecalcTotals();
+});
+$('cartLines').addEventListener('click', function(e){
+  var rm = e.target.closest ? e.target.closest('[data-rm]') : null;
+  if (rm) removeFromCart(+rm.getAttribute('data-rm'));
+});
+$('cShip').addEventListener('input', function(e){
+  var v = e.target.value.trim();
+  S.shipOverride = v; // Keep invalid input for strict validation; never silently use a default.
+  cartRecalcTotals();
+});
+$('cActNotify').addEventListener('click', function(){
+  if (!S.cart.length) { toast('Cart is empty'); return; }
+  var t = tplNotify(); $('cartMsg').textContent = t; copyText(t, 'Price notify copied');
+});
+$('cActQuote').addEventListener('click', function(){
+  if (!S.cart.length) { toast('Cart is empty'); return; }
+  var t = tplQuote(); $('cartMsg').textContent = t; copyText(t, 'Quotation copied');
+});
+$('cActConfirm').addEventListener('click', confirmSold);
+$('cClear').addEventListener('click', function(){
+  if (!S.cart.length) return;
+  if (!confirm('Clear all items from the cart?')) return;
+  S.cart = []; S.shipOverride = null; $('cShipShop').value=''; updateCartCount(); renderCart(); render(false);
+});
+$('mResult').addEventListener('click', function(e){
+  var b = e.target.closest ? e.target.closest('#biNotify') : null;
+  if (b && LAST_ADD) copyText(tplInstock(LAST_ADD.item), 'Instock notification copied');
+});
+
+/* ── sales dashboard (P4) ── */
+function loadSales(force){
+  if (S.sales.loaded && !force) { renderSales(); return; }
+  $('salesWrap').style.display = 'none'; $('salesEmpty').style.display = 'none';
+  $('salesStamp').textContent = 'Loading…';
+  $('salesRefresh').disabled = true;
+  callApi('sales.list', {})
+    .then(function(dd){
+      S.sales.rows = dd.rows || []; S.sales.loaded = true;
+      $('salesStamp').textContent = 'LOADED ' + new Date().toLocaleTimeString();
+      renderSales();
+    })
+    .catch(function(e){ $('salesStamp').textContent = ''; toast('Failed to load sales: ' + e.message); })
+    .finally(function(){ $('salesRefresh').disabled = false; });
+}
+function monthKey(d){ return (d && d.length >= 7) ? d.slice(0, 7) : '—'; }
+function kFmt(n){
+  n = +n || 0;
+  if (Math.abs(n) >= 1000) return (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1) + 'k';
+  return String(Math.round(n));
+}
+function sCard(k, v, cls){ return '<div class="sum-card' + (cls ? ' ' + cls : '') + '"><k>' + k + '</k><v>' + v + '</v></div>'; }
+function renderSales(){
+  var rows = S.sales.rows || [];
+  if (!rows.length) { $('salesWrap').style.display = 'none'; $('salesEmpty').style.display = ''; return; }
+  $('salesEmpty').style.display = 'none'; $('salesWrap').style.display = '';
+
+  var T = { price: 0, cost: 0, ship: 0, np: 0, items: 0 }, orders = {}, months = {};
+  rows.forEach(function(r){
+    var p = +r.price || 0, c = +r.cost || 0, s = +r.shipingCost || 0;
+    var np = (r.netProfit !== '' && r.netProfit != null) ? (+r.netProfit || 0) : (p - c - s);
+    T.price += p; T.cost += c; T.ship += s; T.np += np; T.items++;
+    if (r.order) orders[r.order] = 1;
+    var mk = monthKey(r.orderDate);
+    if (!months[mk]) months[mk] = { price: 0, cost: 0, ship: 0, np: 0, items: 0, orders: {} };
+    var m = months[mk];
+    m.price += p; m.cost += c; m.ship += s; m.np += np; m.items++;
+    if (r.order) m.orders[r.order] = 1;
+  });
+
+  $('sumCards').innerHTML =
+    sCard('ORDERS', Object.keys(orders).length) + sCard('ITEMS SOLD', T.items) +
+    sCard('REVENUE', money(T.price)) + sCard('COST', money(T.cost)) +
+    sCard('SHIPPING', money(T.ship)) + sCard('NET PROFIT', money(T.np), 'np');
+
+  var mkeys = Object.keys(months).sort();              // asc (chart chronological)
+  var maxNp = 0; mkeys.forEach(function(k){ if (months[k].np > maxNp) maxNp = months[k].np; });
+  $('salesChart').innerHTML = '<div class="chart-title">NET PROFIT BY MONTH</div><div class="chart">' +
+    mkeys.map(function(k){
+      var np = months[k].np;
+      var h = maxNp > 0 ? Math.max(2, Math.round(np / maxNp * 100)) : 0;
+      return '<div class="bar" title="' + esc(k) + ': ' + money(np) + '">' +
+        '<b>' + kFmt(np) + '</b><i style="height:' + h + '%"></i>' +
+        '<span>' + esc(k === '—' ? '—' : k.slice(2)) + '</span></div>';
+    }).join('') + '</div>';
+
+  var head = '<tr><th class="m">MONTH</th><th>ORDERS</th><th>ITEMS</th><th>REVENUE</th>' +
+             '<th>COST</th><th>SHIP</th><th>NET</th></tr>';
+  var body = mkeys.slice().reverse().map(function(k){       // desc (newest first) in table
+    var m = months[k];
+    return '<tr><td class="m">' + esc(k) + '</td><td>' + Object.keys(m.orders).length + '</td>' +
+      '<td>' + m.items + '</td><td>' + money(m.price) + '</td><td>' + money(m.cost) + '</td>' +
+      '<td>' + money(m.ship) + '</td><td>' + money(m.np) + '</td></tr>';
+  }).join('');
+  $('salesTable').innerHTML = '<table class="stbl">' + head + body + '</table>';
+}
+$('salesRefresh').addEventListener('click', function(){ loadSales(true); });
+
+/* ── booking (P5) ── */
+var BK_STATUSES = ['', 'Waiting', 'Notified', 'Purchased', 'Cancelled'];
+function loadBooking(force){
+  if (S.booking.loaded && !force) { renderBooking(); return; }
+  $('bkList').innerHTML = '<div class="skel"></div>'.repeat(4);
+  $('bkRefresh').disabled = true;
+  callApi('booking.list', {})
+    .then(function(dd){
+      S.booking.rows = dd.rows || []; S.booking.hasStatus = !!dd.hasStatus; S.booking.loaded = true;
+      renderBooking();
+    })
+    .catch(function(e){ $('bkList').innerHTML = '<div class="empty">' + esc(e.message) + '</div>'; toast(e.message); })
+    .finally(function(){ $('bkRefresh').disabled = false; });
+}
+function bookingFiltered(){
+  var q = ($('bkQ').value || '').trim().toLowerCase();
+  if (!q) return S.booking.rows;
+  return S.booking.rows.filter(function(r){ return (r.name + ' ' + r.gameTitle).toLowerCase().indexOf(q) !== -1; });
+}
+function renderBooking(){
+  var rows = bookingFiltered();
+  if (!rows.length) { $('bkList').innerHTML = '<div class="empty">No bookings</div>'; return; }
+  $('bkList').innerHTML = rows.map(function(r){
+    var opts = BK_STATUSES.map(function(s){
+      return '<option value="' + esc(s) + '"' + (s === r.status ? ' selected' : '') + '>' + esc(s || '—') + '</option>';
+    }).join('');
+    return '<div class="bk-row" data-row="' + r.row + '">' +
+      '<div class="bk-main"><div class="bk-name">' + esc(r.name || '—') + '</div>' +
+        '<div class="bk-title">' + esc(r.gameTitle || '') + '</div></div>' +
+      '<select class="bk-st" data-row="' + r.row + '" data-v="' + esc(r.status) + '">' + opts + '</select>' +
+      '<input class="bk-queue" data-row="' + r.row + '" value="' + esc(r.queue) + '" title="Queue">' +
+      '<button class="bk-del" data-row="' + r.row + '" title="Delete">✕</button>' +
+    '</div>';
+  }).join('');
+}
+function bookingSave(payload, el){
+  if (el) el.disabled = true;
+  callApi('booking.save', payload)
+    .then(function(){
+      S.booking.rows.forEach(function(r){
+        if (String(r.row) === String(payload.row)) {
+          if (payload.status !== undefined) r.status = payload.status;
+          if (payload.queue !== undefined) r.queue = payload.queue;
+        }
+      });
+      S.booking.hasStatus = true;
+      okToast('Saved');
+    })
+    .catch(function(e){ toast(e.message); })
+    .finally(function(){ if (el) el.disabled = false; });
+}
+$('bkList').addEventListener('change', function(e){
+  var st = e.target.closest ? e.target.closest('.bk-st') : null;
+  if (st) { st.setAttribute('data-v', st.value); bookingSave({ row: st.getAttribute('data-row'), status: st.value }, st); return; }
+  var q = e.target.closest ? e.target.closest('.bk-queue') : null;
+  if (q) bookingSave({ row: q.getAttribute('data-row'), queue: q.value.trim() }, q);
+});
+$('bkList').addEventListener('click', function(e){
+  var dl = e.target.closest ? e.target.closest('.bk-del') : null;
+  if (!dl) return;
+  var row = dl.getAttribute('data-row');
+  var o = S.booking.rows.filter(function(x){ return String(x.row) === String(row); })[0];
+  if (!confirm('Delete booking' + (o ? ' "' + (o.name || o.gameTitle) + '"' : '') + '?')) return;
+  callApi('booking.delete', { row: row })
+    .then(function(){ S.booking.loaded = false; loadBooking(true); okToast('Deleted'); })
+    .catch(function(e){ toast(e.message); });
+});
+$('bkAdd').addEventListener('click', function(){
+  var name = $('bkNewName').value.trim(), title = $('bkNewTitle').value.trim(), queue = $('bkNewQueue').value.trim();
+  if (!name && !title) { toast('Enter a name or game title'); return; }
+  var btn = $('bkAdd'); btn.disabled = true;
+  callApi('booking.save', { name: name, gameTitle: title, queue: queue, status: 'Waiting' })
+    .then(function(){
+      $('bkNewName').value = ''; $('bkNewTitle').value = ''; $('bkNewQueue').value = '';
+      S.booking.loaded = false; loadBooking(true); okToast('Added');
+    })
+    .catch(function(e){ toast(e.message); })
+    .finally(function(){ btn.disabled = false; });
+});
+$('bkRefresh').addEventListener('click', function(){ loadBooking(true); });
+var _bkT;
+$('bkQ').addEventListener('input', function(){ clearTimeout(_bkT); _bkT = setTimeout(renderBooking, 120); });
+
+/* ── contents (P5) ── */
+function loadContents(force){
+  if (S.contents.loaded && !force) { renderContents(); return; }
+  $('ctList').innerHTML = '<div class="skel"></div>'.repeat(3);
+  $('ctRefresh').disabled = true;
+  callApi('contents.list', {})
+    .then(function(dd){ S.contents.rows = dd.rows || []; S.contents.loaded = true; renderContents(); })
+    .catch(function(e){ $('ctList').innerHTML = '<div class="empty">' + esc(e.message) + '</div>'; toast(e.message); })
+    .finally(function(){ $('ctRefresh').disabled = false; });
+}
+function renderContents(){
+  var rows = S.contents.rows;
+  if (!rows.length) { $('ctList').innerHTML = '<div class="empty">No templates</div>'; return; }
+  $('ctList').innerHTML = rows.map(function(r){
+    return '<div class="ct-card" data-row="' + r.row + '">' +
+      '<div class="ct-head"><b>' + esc(r.title) + '</b><span class="ct-btns">' +
+        '<button data-copy="' + r.row + '">📋 Copy</button>' +
+        '<button data-save="' + r.row + '">Save</button>' +
+        '<button class="del" data-del="' + r.row + '">✕</button></span></div>' +
+      '<textarea data-row="' + r.row + '">' + esc(r.content) + '</textarea>' +
+    '</div>';
+  }).join('');
+}
+function fillPlaceholders(t){
+  var b = S.settings.bank || {}; var dt = new Date();
+  function p2(x){ return (x < 10 ? '0' : '') + x; }
+  var ds = dt.getFullYear() + '-' + p2(dt.getMonth() + 1) + '-' + p2(dt.getDate());
+  return String(t).replace(/\{\{bank_no\}\}/g, b.no || '').replace(/\{\{bank_name\}\}/g, b.bank || '')
+    .replace(/\{\{account_name\}\}/g, b.account || '').replace(/\{\{date\}\}/g, ds);
+}
+function ctFindRow(row){ return S.contents.rows.filter(function(x){ return String(x.row) === String(row); })[0]; }
+function ctTextarea(row){ return document.querySelector('.ct-card[data-row="' + row + '"] textarea'); }
+$('ctList').addEventListener('click', function(e){
+  var cp = e.target.closest ? e.target.closest('[data-copy]') : null;
+  if (cp) { var ta = ctTextarea(cp.getAttribute('data-copy')); if (ta) copyText(fillPlaceholders(ta.value), 'Copied'); return; }
+  var sv = e.target.closest ? e.target.closest('[data-save]') : null;
+  if (sv) {
+    var rw = sv.getAttribute('data-save'), tx = ctTextarea(rw);
+    sv.disabled = true;
+    callApi('contents.save', { row: rw, content: tx.value })
+      .then(function(){ var o = ctFindRow(rw); if (o) o.content = tx.value; okToast('Saved'); })
+      .catch(function(e){ toast(e.message); })
+      .finally(function(){ sv.disabled = false; });
+    return;
+  }
+  var dl = e.target.closest ? e.target.closest('[data-del]') : null;
+  if (dl) {
+    var row = dl.getAttribute('data-del'), o = ctFindRow(row);
+    if (!confirm('Delete template "' + (o ? o.title : '') + '"?')) return;
+    callApi('contents.delete', { row: row })
+      .then(function(){ S.contents.loaded = false; loadContents(true); okToast('Deleted'); })
+      .catch(function(e){ toast(e.message); });
+  }
+});
+$('ctAdd').addEventListener('click', function(){
+  var title = $('ctNewTitle').value.trim();
+  if (!title) { toast('Enter a template title'); return; }
+  var btn = $('ctAdd'); btn.disabled = true;
+  callApi('contents.save', { title: title, content: '' })
+    .then(function(){ $('ctNewTitle').value = ''; S.contents.loaded = false; loadContents(true); okToast('Added'); })
+    .catch(function(e){ toast(e.message); })
+    .finally(function(){ btn.disabled = false; });
+});
+$('ctRefresh').addEventListener('click', function(){ loadContents(true); });
+
+/* ── nav / views ── */
+function showView(v){
+  $('view-inventory').style.display = v === 'inv' ? '' : 'none';
+  $('view-tools').style.display     = v === 'tools' ? '' : 'none';
+  $('view-cart').style.display      = v === 'cart' ? '' : 'none';
+  $('view-orders').style.display=v==='orders'?'':'none';
+  $('navOrders').classList.toggle('on',v==='orders');
+  $('view-sales').style.display     = v === 'sales' ? '' : 'none';
+  $('view-review').style.display    = v === 'review' ? '' : 'none';
+  $('view-booking').style.display   = v === 'booking' ? '' : 'none';
+  $('view-contents').style.display  = v === 'contents' ? '' : 'none';
+  $('navInv').classList.toggle('on', v === 'inv');
+  $('navTools').classList.toggle('on', v === 'tools');
+  $('navCart').classList.toggle('on', v === 'cart');
+  $('navSales').classList.toggle('on', v === 'sales');
+  $('navReview').classList.toggle('on', v === 'review');
+  $('navBooking').classList.toggle('on', v === 'booking');
+  $('navContents').classList.toggle('on', v === 'contents');
+  $('fab').style.display = v === 'inv' ? '' : 'none';
+  if (v === 'tools') $('toolsSrc').textContent = S.source === 'MAG' ? 'MAGAZINE' : 'GAME GUIDE BOOKS';
+  if (v === 'orders') w1LoadOrders();
+  if (v === 'cart') renderCart();
+  if (v === 'sales') loadSales(false);
+  if (v === 'review') renderReview();
+  if (v === 'booking') loadBooking(false);
+  if (v === 'contents') loadContents(false);
+}
+$('navInv').addEventListener('click', function(){ showView('inv'); });
+$('navTools').addEventListener('click', function(){ showView('tools'); });
+$('navCart').addEventListener('click', function(){ showView('cart'); });
+$('navSales').addEventListener('click', function(){ showView('sales'); });
+$('navReview').addEventListener('click', function(){ showView('review'); });
+$('navBooking').addEventListener('click', function(){ showView('booking'); });
+$('navContents').addEventListener('click', function(){ showView('contents'); });
+
+/* ── main events ── */
+$('refresh').addEventListener('click', load);
+$('fab').addEventListener('click', openAdd);
+$('srcALL').addEventListener('click', function(){ setSource('ALL'); });
+$('srcGGB').addEventListener('click', function(){ setSource('GGB'); });
+$('srcMAG').addEventListener('click', function(){ setSource('MAG'); });
+function setSource(s){
+  S.allSheets = s === 'ALL';
+  if (!S.allSheets) S.source = s;
+  $('srcALL').classList.toggle('on', S.allSheets);
+  $('srcGGB').classList.toggle('on', !S.allSheets && S.source === 'GGB');
+  $('srcMAG').classList.toggle('on', !S.allSheets && S.source === 'MAG');
+  buildFilterOptions(false);
+  render(true);
+}
+var _qT;
+$('q').addEventListener('input', function(e){
+  clearTimeout(_qT);
+  _qT = setTimeout(function(){ S.q = e.target.value.trim(); render(true); }, 120);
+});
+(function(){
+  var chips = document.querySelectorAll('#statusChips .chip');
+  for (var i = 0; i < chips.length; i++) {
+    (function(ch){
+      ch.addEventListener('click', function(){
+        for (var j = 0; j < chips.length; j++) chips[j].classList.remove('on');
+        ch.classList.add('on');
+        S.status = ch.getAttribute('data-st');
+        render(true);
+      });
+    })(chips[i]);
+  }
+})();
+$('fPub').addEventListener('change',  function(e){ S.pub  = e.target.value; render(true); });
+$('fCond').addEventListener('change', function(e){ S.cond = e.target.value; render(true); });
+$('fType').addEventListener('change', function(e){ S.type = e.target.value; render(true); });
+$('fGen').addEventListener('change',  function(e){ S.gen  = e.target.value; render(true); });
+$('more').addEventListener('click', function(){ S.shown += PAGE; render(false); });
+
+/* W1 Orders UI. Recipient/CLIENT/printing belongs to W2. No PII in browser storage. */
+var w1Pending=null,w1Broken=false,w1Busy=false,w1Orders=[],w1Review=null,w1Filter='PENDING';
+var W1_KEY='owarin.w1.pending.TEST_OR_PROJECT.v32';
+try{var w1Stored=sessionStorage.getItem(W1_KEY);if(w1Stored){w1Pending=JSON.parse(w1Stored);if(!w1Pending||!w1Pending.action||!w1Pending.payload||!/^[A-Za-z0-9_-]{12,100}$/.test(w1Pending.payload.requestId))throw Error('Invalid pending intent');}}catch(e){w1Broken=true;}
+function w1Id(){return 'w1-'+Date.now()+'-'+Math.random().toString(36).slice(2);}
+function w1SyncButtons(){
+ ['cActConfirm','cClear','w1Commit','soldGo'].forEach(function(id){$(id).disabled=w1Busy||!!w1Pending||w1Broken;});
+ document.querySelectorAll('#cartLines input,#cartCh button,#cartLines button,#cShip,#cShipShop').forEach(function(el){el.disabled=w1Busy||!!w1Pending||w1Broken;});
+ $('w1Retry').disabled=w1Busy||w1Broken||!w1Pending;
+ $('w1Recovery').textContent=w1Broken?'Recovery record unreadable — reconcile server journal before another mutation':w1Pending?'Uncertain request '+w1Pending.payload.requestId+' — Check / retry same request':'';
+}
+function w1Run(action,payload){
+ if(w1Broken)return Promise.reject(Error('Recovery record unreadable; manual reconciliation required'));
+ if(w1Pending)return Promise.reject(Error('Resolve request '+w1Pending.payload.requestId+' first'));
+ payload.requestId=payload.requestId||w1Id();w1Pending={action:action,payload:payload};
+ try{sessionStorage.setItem(W1_KEY,JSON.stringify(w1Pending));}catch(e){w1Pending=null;return Promise.reject(Error('Cannot retain Request ID; no request sent'));}
+ return w1Send();
+}
+function w1Send(){
+ if(w1Busy)return Promise.reject(Error('Request already in progress'));var pending=w1Pending;
+ w1Busy=true;w1SyncButtons();
+ return callApi(pending.action,pending.payload).then(function(result){
+  // Remove recovery record only after canonical server result; a lost response retains it.
+  sessionStorage.removeItem(W1_KEY);w1Pending=null;return result;
+ }).catch(function(err){
+  return callApi('requests.get',{requestId:pending.payload.requestId}).then(function(state){
+   if(state.state==='DONE'){sessionStorage.removeItem(W1_KEY);w1Pending=null;return state.data;}
+   if(state.state==='NOT_FOUND'){sessionStorage.removeItem(W1_KEY);w1Pending=null;}
+   throw Error(err.message+' · Request '+pending.payload.requestId+(state.state!=='NOT_FOUND'?' · Check / retry same request':''));
+  },function(){throw Error(err.message+' · Request '+pending.payload.requestId+' · manual journal recovery if lookup fails');});
+ }).finally(function(){w1Busy=false;w1SyncButtons();});
+}
+function w1Saved(result,action){
+ if(action==='orders.create'||action==='orders.confirm'||action==='inventory.markSold'){
+  S.cart=[];S.shipOverride=null;$('cShipShop').value='';updateCartCount();S.sales.loaded=false;showModal('w1ReviewModal',false);showModal('soldModal',false);
+ }
+ okToast(result.status+' · '+result.orderId+' · '+(result.labelReadiness==='MISSING'?'Missing label':''));
+ showView('orders');load(); // Fresh inventory; do not apply a historical request snapshot to the current cache.
+}
+function w1Resume(){
+ if(!w1Pending||w1Busy)return;var action=w1Pending.action;
+ callApi('requests.get',{requestId:w1Pending.payload.requestId}).then(function(state){
+  if(state.state==='DONE'){sessionStorage.removeItem(W1_KEY);w1Pending=null;w1SyncButtons();return state.data;}
+  return w1Send();
+ }).then(function(r){if(action==='inventory.update'){load();okToast('Edit recovered');}else w1Saved(r,action);}).catch(function(e){toast(e.message);});
+}
+function w1CartPayload(){
+ return {channel:S.cartChannel,items:S.cart.map(function(c){return {source:c.source,sku:c.sku,itemUid:c.itemUid||'',price:c.price};}),customerShipping:String(cartShipping()),shippingSubsidy:$('cShipShop').value.trim(),labelLater:true};
+}
+function w1StrictMoney(v){return /^\d+(\.\d{1,2})?$/.test(String(v).trim())?Number(v):null;}
+function confirmSold(){
+ if(!S.cart.length){toast('Cart is empty');return;}var p=w1CartPayload();
+ if(w1StrictMoney(p.customerShipping)===null||w1StrictMoney(p.shippingSubsidy)===null||p.items.some(function(i){return w1StrictMoney(i.price)===null;})){toast('Enter valid prices, Customer Shipping and Shipping Subsidy (0 is allowed)');return;}
+ if(S.cartChannel==='SHOP')w1Run('orders.create',p).then(function(r){w1Saved(r,'orders.create');}).catch(function(e){toast(e.message);});
+ else w1OpenReview(p,null);
+}
+function w1OpenReview(payload,order){
+ w1Review={payload:payload,order:order,action:'orders.confirm'};$('w1ReviewTitle').textContent='Final review';$('w1Commit').textContent='Confirm sold · Label later';var lines=order?order.lines:payload.items.map(function(it){var r=findBySku(it.source,it.sku);return {title:r?r.baseTitle:it.sku,sku:it.sku,enteredPrice:Number(it.price),ledgerPrice:payload.channel==='SHOPEE'?Math.round(Number(it.price)*0.7-50):Number(it.price)};});
+ var channel=order?order.channel:payload.channel,customer=order?order.customerShipping:payload.customerShipping,subsidy=order?order.shippingSubsidy:payload.shippingSubsidy;
+ $('w1ReviewContent').innerHTML='<p>'+esc(order?order.orderId:'New '+channel+' sale')+'</p>'+lines.map(function(l){return '<p>'+esc(l.title)+' <span class="sku">'+esc(l.sku)+'</span> · entered '+money(l.enteredPrice)+' · SALES '+money(l.ledgerPrice)+'</p>';}).join('')+'<p>Customer Shipping '+money(customer)+' · Shipping Subsidy (shop contribution) '+money(subsidy)+'</p><p>Total '+money(lines.reduce(function(n,l){return n+Number(l.enteredPrice);},0)+Number(customer))+'</p><p class="hint">Label later — CLIENT and label completion will be added in W2.</p>';
+ showModal('w1ReviewModal',true);w1SyncButtons();
+}
+function w1LoadOrders(){
+ callApi('orders.list',{status:w1Filter}).then(function(data){w1Orders=data.orders;renderOrders(data.recoveries);}).catch(function(e){$('w1Board').textContent=e.message;});
+}
+function renderOrders(recoveries){
+ $('w1Board').innerHTML=w1Orders.map(function(o){return '<article class="w1-card"><h3>'+esc(o.orderId)+'</h3><p>'+esc(o.status)+' · '+esc(o.channel)+' · '+o.lines.length+' item(s)</p><p class="hint">'+esc(o.createdAt)+'</p>'+o.lines.slice(0,3).map(function(l){return '<p>'+esc(l.title)+'</p>';}).join('')+(o.lines.length>3?'<p>+'+(o.lines.length-3)+' items</p>':'')+'<p>'+money(o.total)+' · Missing label</p><button class="btn small" data-order="'+esc(o.orderId)+'" data-op="details">Details</button>'+(o.status==='PENDING'&&!o.recovery.length?'<button class="btn small" data-order="'+esc(o.orderId)+'" data-op="cancel">Cancel</button><button class="btn primary small" data-order="'+esc(o.orderId)+'" data-op="confirm">Confirm sold</button>':'')+(o.status==='SOLD'?'<p class="hint">Complete label: W2</p>':'')+(o.recovery.length?'<p class="cl-warn">Recovery required '+esc(o.recovery.join(', '))+'</p>':'')+'</article>';}).join('')||'<div class="empty">No '+esc(w1Filter)+' orders</div>';
+ $('w1ServerRecovery').textContent=(recoveries||[]).map(function(r){return 'Recovery '+r.requestId+' · '+r.orderId+' · '+r.error;}).join('\n');w1SyncButtons();
+}
+$('navOrders').addEventListener('click',function(){showView('orders');});
+$('w1Filter').addEventListener('change',function(){w1Filter=this.value;w1LoadOrders();});
+$('w1Refresh').addEventListener('click',w1LoadOrders);
+$('w1Retry').addEventListener('click',w1Resume);
+$('w1Board').addEventListener('click',function(e){
+ var b=e.target.closest('[data-order]');if(!b)return;var o=w1Orders.filter(function(x){return x.orderId===b.getAttribute('data-order');})[0],op=b.getAttribute('data-op');if(!o)return;
+ if(op==='cancel')w1OpenCancel(o);
+ else if(op==='confirm')w1OpenReview({orderId:o.orderId,expectedRevision:o.revision,labelLater:true},o);
+ else{$('w1Details').textContent=o.orderId+' · '+o.status+'\n'+o.lines.map(function(l){return l.title+' · '+l.sku+' · entered '+l.enteredPrice+' · SALES '+l.ledgerPrice;}).join('\n')+'\nCustomer Shipping '+o.customerShipping+' · Shipping Subsidy '+o.shippingSubsidy;}
+});
+function w1OpenCancel(order){w1Review={action:'orders.cancel',payload:{orderId:order.orderId,expectedRevision:order.revision}};$('w1ReviewTitle').textContent='Cancel order';$('w1ReviewContent').innerHTML='<p>'+esc(order.orderId)+'</p><p>Release only this order’s reservation. Other Pending orders remain reserved.</p>';$('w1Commit').textContent='Confirm cancel';showModal('w1ReviewModal',true);w1SyncButtons();}
+$('w1Commit').addEventListener('click',function(){if(!w1Review)return;var action=w1Review.action;w1Run(action,w1Review.payload).then(function(r){showModal('w1ReviewModal',false);w1Saved(r,action);}).catch(function(e){toast(e.message);});});
+w1SyncButtons();
+
+load();
+</script>
+</body>
+</html>

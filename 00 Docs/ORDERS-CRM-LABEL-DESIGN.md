@@ -1,0 +1,102 @@
+# OWARIN · Orders, CRM & Shipping Labels
+
+Design proposal · 11 September 2026 · The backend features below are not installed.
+
+> Superseded for active Add/Cart/Orders/CLIENT/Label scope on 2026-10-03: use [current plan](PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md) and its W1–W3 board. This historical proposal does not authorize CUSTOMERS, payments, shipments, or deployment.
+
+## Screens and workflow
+
+Keep Inventory, Cart and Sales. Add Orders and Customers, with Labels as a view inside Orders. Retain the dark background, thin borders and gold accent. Statuses always include text; narrow screens use one column.
+
+Cart → Select customer → Review recipient → Confirm sale awaiting payment or paid in full → Order card → Record payment → Preview label → Record shipment.
+
+### Cart and CRM
+
+- Search by Facebook name, customer name or phone. Suggestions show buyer, recipient and phone ending; choose a match explicitly rather than automatically selecting a same-name customer.
+- Selecting a customer fills recipient name, phone, address, postal code and delivery note. Buyer and recipient remain separate for gifts and alternate addresses.
+- Save new customers with the order. Address changes offer “This order only” or “Save as customer default”. Facebook names are manually entered; no Messenger import is implied.
+- Main actions: **Confirm sale · Awaiting payment** and **Confirm sale · Paid in full**. Price notification and quotation do not create a sale.
+- A buyer identifier is required. Recipient details may be incomplete while awaiting payment, with a **Missing address** badge and label printing blocked.
+- Keep individual prices and Direct/Auction methods per book. Sort quotation and label titles naturally: Book 2 precedes Book 10.
+- Customers shows saved addresses, linked orders and outstanding balance. Use immutable customer_id values; names and phone numbers are not primary keys. Store phones/postal codes as text.
+- Each order stores its own recipient snapshot. CRM edits never rewrite old orders. Explicit recipient changes before shipping require a fresh label preview.
+- No automatic customer merging, loyalty points, coupons or marketing automation in this version.
+
+### Order cards
+
+Filters: All, Awaiting payment, Part paid, Ready to pack, Shipped and Cancelled. Search by buyer, order ID or SKU. Cards show sale date, Facebook/customer name, recipient, item count, total, received, outstanding, address completeness and shipping state.
+
+| State | Main action | Other actions |
+|---|---|---|
+| Awaiting payment / Part paid | Record payment | Edit recipient, copy balance, cancel under the rules below |
+| Paid with complete recipient | Preview label | Edit recipient, record shipment |
+| Paid with incomplete recipient | Complete address | View payments |
+| Shipped | View tracking | View history, inspect before reprinting |
+
+Payments record amount, date/time, method and reference. A shortcut fills the outstanding balance. Payment state is calculated from entries, not changed through a dropdown. Reversal entries correct mistakes without deleting history.
+
+## Sale, payment and shipment rules
+
+**Proposed sale point: order confirmation.** Awaiting payment is a confirmed sale, consistent with the owner's definition of Auction as already sold.
+
+1. Quotation/draft does not sell or reserve stock. Revalidate availability at confirmation.
+2. Confirm awaiting payment: write SALES once, mark each copy Sold or Auction, set payment to unpaid and fulfillment to unfulfilled. Prevent another sale of that copy.
+3. Later payment appends PAYMENTS to the same order; never call sales.confirm again. Sale date and payment date remain separate.
+4. Calculate outstanding from net payment entries. Reject overpayment initially instead of creating implicit credit.
+5. Subtotal is the sum of actual individual prices. Customer shipping is THB 50 + THB 10 per additional book, capped at THB 100; zero books costs zero. Preserve recorded item costs.
+6. Carrier expense may stay blank until known. Blank is not zero; mark profit incomplete until recorded.
+7. Printing does not mean shipped. Record carrier, tracking number and shipment date separately.
+8. Cancelling an unshipped order requires a reason, an auditable sale reversal and stock release. If paid, track the refund separately; never represent an outstanding refund as completed.
+9. Allow recipient/note edits before shipping. Changing confirmed books/prices initially uses cancellation plus a linked replacement order, preserving SALES history.
+
+## Labels: reuse the existing tool
+
+Reference: `04 Design Tools/OWARIN — LABEL TOOL.html` (internal title: OWA · Label Studio). Reuse its labelHTML, postalBoxes, itemsHTML, fitBox/fitItems and CAUTION_STICKER artwork.
+
+Preserve **100 × 150 mm** paper, FROM strip, large recipient name, phone/address/delivery note, five postal-code boxes, Contents and caution artwork. Use the order recipient snapshot and confirmed item titles. Do not print Facebook names, internal notes, prices or costs.
+
+- Sheets stores data and the queue; Apps Script opens an HTML preview/dialog for browser print or Save as PDF at the correct size.
+- Queue paid orders with complete recipient details automatically. The owner reviews before printing; no silent printing trigger.
+- Print one order or a selected batch. Retain text fitting and the “+ N items” overflow indicator; provide a full packing list if all titles cannot fit.
+- Opening a print dialog does not prove physical printing. Store print_requested_at separately from print_confirmed_at. Reprints never affect sales or stock.
+- This is the shop's address label, not a prepaid carrier label or tracking API integration.
+- Use native print/PDF first; add the existing ZIP export only when needed.
+
+## LAB structure
+
+Existing V2 headers were inspected. The following are proposed target fields, not a claim they all exist. Extend the empty templates during implementation and preserve existing formula columns.
+
+| Sheet | Record / essential fields |
+|---|---|
+| CUSTOMERS — new | customer_id, facebook_name, display_name, aliases, internal_note, created_at, updated_at |
+| CUSTOMER ADDRESSES — new | address_id, customer_id, recipient_name, phone, address_text, postal_code, delivery_note, is_default |
+| ORDERS V2 — extend | order_id, customer_id, order_state, sold_at, channel, subtotal, customer_shipping, total, recipient_snapshot, revision |
+| ORDER LINES V2 — extend | order_id, line_id, source, legacy_sku, title/condition/cost/sold_price snapshots, sale_method, sales_reference |
+| PAYMENTS V2 — extend | payment_id, order_id, paid_at, signed amount, method, reference, entry_type, reversal_of, request_id |
+| SHIPMENTS — new | shipment_id, order_id, fulfillment_state, carrier, tracking, shipped_at, carrier_expense, label_revision, print_requested_at, print_confirmed_at |
+| LABEL QUEUE — derived view | order_id, buyer, recipient, item count, outstanding, address completeness, print state and preview link |
+| PROJECT SETTINGS — extend | sender name/phone, label dimensions, shipping base/step/cap |
+
+Orders owns recipient snapshots. Label Queue derives from orders/payments/shipments rather than duplicating customer records. One order equals one parcel initially; batch printing is supported. Combining orders or splitting shipments needs a later workflow decision.
+
+Payment status, balance and ready-to-pack state are calculated. SALES records sales, PAYMENTS records actual money. Do not invent received payments for historical sales.
+
+## Apps Script integration
+
+Current sales.confirm and its journal prevent duplicate sales but lack customer/payment records and currently require carrier expense at sale time. Extend this shared flow for recoverable order creation and unknown carrier expenses.
+
+Use one stable request_id for order/sale confirmation and separate request IDs for payments. Reuse the lock and server stock validation. Persist recoverable progress across Sheets writes. Receiving payment or printing must never add SALES rows. Journal PENDING means an unfinished save command, not awaiting customer payment.
+
+Validate prices, payment amounts and recipients on the server. Escape HTML and prevent spreadsheet formula injection from customer text. Reject ambiguous legacy SKUs; use a unique source+SKU mapping. Do not regenerate the entire inventory or migrate the live stock flow to ITEMS V2 for this change.
+
+## English language policy
+
+Use English for new menus, buttons, statuses, validation messages, column descriptions and generated system notes. Preserve original publication titles, customer names, addresses and historical free-text records. Keep legacy status keys and column contracts compatible; translate presentation separately when required.
+
+The LAB update translates system descriptions in START HERE, TAXONOMY, PROJECT SETTINGS, SHIPPING TEST and generated ITEMS V2 Review Notes. The before/after record is LAB-ENGLISH-CHANGES.json. This does not install the proposed backend or translate every existing Apps Script screen.
+
+## Acceptance checks
+
+Test new/existing/same-name customers, alternate recipients, reopening orders, partial/full payments, retries and reversals. Verify CRM edits preserve old snapshots, payments preserve sale dates, and duplicate stock sales are blocked. Check shipping for 1/2/6/7 books and unknown expenses. Block incomplete-address labels; inspect long Thai addresses, leading-zero phones, long item lists and batch pages. Confirm cancellation/refund entries agree with stock and money totals.
+
+The companion HTML demonstrates customer selection, awaiting-payment confirmation, partial/full payment, recipient editing, filters and label previews with fictional data in memory. Reloading resets it. It does not access Google Sheets, receive money, send messages or print parcels, and does not prove backend or physical print accuracy.

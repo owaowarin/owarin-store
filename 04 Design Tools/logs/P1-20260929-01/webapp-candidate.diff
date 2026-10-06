@@ -1,0 +1,42 @@
+diff --git a/03 Apps Script/Web App/WebApp_v25.gs b/04 Design Tools/logs/P1-20260929-01/candidate/webapp.gs
+index 4a9f79b..cc8e481 100644
+--- a/03 Apps Script/Web App/WebApp_v25.gs	
++++ b/04 Design Tools/logs/P1-20260929-01/candidate/webapp.gs	
+@@ -175,6 +175,7 @@ function _apiInvAdd(p) {
+ 
+   var sheetName = _sheetFromCode(p.source);
+   var res = addInventoryRow({
++    requestId: String(p.requestId || '').trim(),
+     sheetName: sheetName,
+     title:    title,
+     pub:      String(p.pub || "").trim(),
+@@ -182,10 +183,12 @@ function _apiInvAdd(p) {
+     original: _numOrRaw(p.original),
+     cost:     _numOrRaw(p.cost),
+     price:    _numOrRaw(p.price),
+-    status:   String(p.status || "Instock").trim() || "Instock",
++    status:   String(p.status || "").trim() || "New Arrival",
+     // SP-2: handled inside addInventoryRow (platform affects the curve, so it must be set first)
+     platform:  String(p.platform  || "").trim(),
+     genre:     String(p.genre     || "").trim(),
++    subGenre:  String(p.subGenre  || "").trim(),
++    type:      String(p.type      || "").trim(),
+     copyFlags: String(p.copyFlags || "").trim(),
+     rarity:    String(p.rarity    || "").trim(),
+     marketRef: _numOrRaw(p.marketRef),
+@@ -193,13 +196,8 @@ function _apiInvAdd(p) {
+   });
+ 
+   var sheet = _getSheetOrThrow(sheetName);
+-  // P5.1: Type (category / book format) — header-driven, written after the row is created
+-  var typeVal = String(p.type || "").trim();
+-  if (typeVal) {
+-    var _tCOL = _resolveColumns(sheet);
+-    if (_tCOL.type) { sheet.getRange(res.row, _tCOL.type).setValue(typeVal); SpreadsheetApp.flush(); }
+-  }
+-  var item = _readRow(sheet, res.row, _srcCode(sheetName));
++  var itemRow = _findRowBySku(sheet, _resolveColumns(sheet), res.sku);
++  var item = _readRow(sheet, itemRow, _srcCode(sheetName));
+   // P3: match the booking queue on base title — a booking error must not fail the add
+   var matches = [];
+   try { matches = _apiBookingMatch(item.name).matches; } catch (e) { matches = []; }

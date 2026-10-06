@@ -1,0 +1,12 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
+const root=__dirname, read=p=>fs.readFileSync(path.join(root,p),'utf8');
+for(const name of ['Code.gs','webapp.gs'])new vm.Script(read('test-runtime-source/'+name));
+for(const m of read('test-runtime-source/Index.html').matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi))if(m[1].trim())new vm.Script(m[1]);
+const helper=read('runtime-qa.gs');
+const c=vm.createContext({SpreadsheetApp:{getActiveSpreadsheet(){return {getId(){return 'WRONG';},getSheetByName(){throw Error('Must not access sheets');}};}}});
+vm.runInContext(helper,c);
+assert.throws(()=>c.p1ReviewQa20261003(),/Wrong QA Sheet/);
+const combined=read('test-runtime-source/Code.gs')+'\n'+helper;
+new vm.Script(combined);
+fs.writeFileSync(path.join(root,'Code-with-qa.gs'),combined);
+console.log('PASS: staged scripts/helper parse; wrong-Sheet guard stops before sheet access; Code-with-qa.gs prepared');

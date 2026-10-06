@@ -1,0 +1,11 @@
+P1-20260929-14 / P1-QA-STATUS-001 / test Apps Script project 1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd
+2026-09-29 16:20:14 +07 Notice Execution started
+2026-09-29 16:20:16 +07 Info {"requestId":"p1qa-status-fixture-20260929-01","state":"NOT_FOUND","sheetRows":[19,12],"journalLastRow":62,"readOnly":true}
+2026-09-29 16:20:16 +07 Info {"requestId":"add-1790671871715-48yh8n9gtrn","mismatchRejected":true,"journalLastRow":62}
+2026-09-29 16:20:18 +07 Info {"requestId":"p1qa-status-fixture-20260929-01","state":"PREPARED","sheetRows":[19,12],"journalLastRow":63,"readOnly":true}
+2026-09-29 16:20:21 +07 Info {"requestId":"p1qa-status-fixture-20260929-01","state":"ERROR","sheetRows":[19,12],"journalLastRow":64,"readOnly":true}
+2026-09-29 16:20:22 +07 Info {"requestId":"p1qa-status-fixture-20260929-01","state":"RECOVERED","sheetRows":[19,12],"journalLastRow":65,"readOnly":true}
+2026-09-29 16:20:22 +07 Info P1-20260929-14 PASS: no business row; status read-only at each state
+2026-09-29 16:20:22 +07 Notice Execution completed
+
+Transcribed from the test editor execution log. The ERROR state is an intentional synthetic journal event, not a failed probe execution.

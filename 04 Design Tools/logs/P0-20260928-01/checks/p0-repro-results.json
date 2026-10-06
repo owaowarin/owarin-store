@@ -1,0 +1,73 @@
+{
+  "scope": "OFFLINE DIAGNOSTIC; PASS means observed baseline behavior reproduced, not acceptance passed",
+  "findings": [
+    {
+      "id": "ADD-01",
+      "observed": "20/20 synthetic successful callbacks reset fields; not Google runtime E2E."
+    },
+    {
+      "id": "ADD-02",
+      "observed": "Server rejection preserves entered fields and releases Save."
+    },
+    {
+      "id": "ADD-03",
+      "observed": "Injected render exception after successful server response skips reset and displays generic error. Production trigger remains unproven."
+    },
+    {
+      "id": "ADD-04",
+      "observed": "Suggestion closure survives successful reset; keyboard Save without blur then Down/Enter can restore the old title in DOM mock."
+    },
+    {
+      "id": "ADD-05",
+      "observed": "In-flight double-click is blocked, but reopening and entering a new draft before old response lets old callback erase it."
+    },
+    {
+      "id": "MONEY-01",
+      "observed": "500 Shopee maps to 300 ledger base; malformed 390abc accepted as 390; 60 maps to -8; shipping 0/1/2/6/20 = 0/50/60/100/100. Synthetic only."
+    },
+    {
+      "id": "RES-01",
+      "observed": "Cart server accepts Hold, Auction and New Arrival without reservation ownership."
+    },
+    {
+      "id": "RES-02",
+      "observed": "Single sold consumes Hold; inventory.update releases Hold directly, no order-owner check."
+    },
+    {
+      "id": "SALE-01",
+      "observed": "Duplicate cart payload for one physical SKU produces two SALES lines."
+    },
+    {
+      "id": "SALE-02",
+      "observed": "Failure at inventory Status after ledger append leaves one SALES line; retry creates a second line with a new Order ID."
+    },
+    {
+      "id": "SALE-03",
+      "observed": "Single sold writes inventory first; injected ledger failure returns Sold plus sales.error, with no durable recovery journal."
+    },
+    {
+      "id": "ID-01",
+      "observed": "Allocator supports >99, but merely scans SALES; two allocations without a SALES write return the same ID."
+    },
+    {
+      "id": "ID-02",
+      "observed": "Duplicate SKU lookup fails closed; source+SKU remains mutable and is not an immutable item identity."
+    },
+    {
+      "id": "ADD-06",
+      "observed": "Injected Status write failure is swallowed by _tryWrite; addInventoryRow still returns success:true."
+    },
+    {
+      "id": "ADD-07",
+      "observed": "Omitted Add status defaults to Instock on server, while UI opens New Arrival."
+    },
+    {
+      "id": "SOURCE-01",
+      "observed": "One existing declaration collision: _colLetter in Code/webapp; equivalent for columns 1..16384. All four .gs files parse/load."
+    },
+    {
+      "id": "SOURCE-02",
+      "observed": "Captured Index inline scripts pass syntax compilation."
+    }
+  ]
+}

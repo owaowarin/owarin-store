@@ -1,0 +1,1 @@
+FAILED evidence-verifier assertion at freeze.cjs:12: inverse Index project-key transform omitted the TEST_OR_PROJECT replacement. Runtime candidate/staging unchanged. Fixed forward transform; retry PASS. Full verifier before/diff retained.

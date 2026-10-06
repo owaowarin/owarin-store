@@ -1,0 +1,41 @@
+{
+  "status": "LAB_DEV_READY_CORE_WORKFLOWS_VERIFIED",
+  "date": "2026-09-10",
+  "lab_spreadsheet_id": "158ekdEhxQC0hLIaUCz7cV3hx_XAVBeHuKYsD82HSszE",
+  "lab_script_id": "1bupxRQ_TdiMQwdCh7UZYyjd42trmCQ_AbXlC8RlBmj1ZUbyCGBfc6Cgz",
+  "original_script_id": "1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp",
+  "source_basis": "Actual current Apps Script editor snapshot; original /dev source",
+  "tests_passed": 19,
+  "google_runtime_tests_passed": 7,
+  "editor_copy_verification": "All seven files match candidate after CRLF/LF normalization",
+  "browser_qa": "Google /dev: ALL, SALES, Add success reset, fresh suggestion, invalid Add retained fields, cart quotation natural sort and shipping verified",
+  "deployment": "LAB Version 1 initialized, Execute as Me / Only myself; use current-source /dev for tests",
+  "files": {
+    "Core.gs": "26e09c5343c4670d81646c6586f43b9a0a9d865ed63c31f97e5bdada6d0d7925",
+    "FbAlbum.gs": "268602999b1f1a3b7237ce56c15294b467b900a2ceeed0170ce642eb7d4beed2",
+    "Index.html": "67ead6e2cc5d207f29c32961a625c093a3af1d05ab2deae09df381d3b631460d",
+    "LabChecks.gs": "acd890f33b2a7ce2d57df9d8a13faa448ce4fbaf21687ad5066490c15a384b60",
+    "Runtime.gs": "bf6b0616671fb0cf7536ada6692f58a7c5bdc4db1a57d86f425eccb3e6d3c919",
+    "SalesService.gs": "b10991c01ffc22c25e3b89c008a814162883f7bf389647632a33950971c1f28c",
+    "WebApp.gs": "b31c895792db60fc83671cd83b2257cd8227cab9d1250e9db5e71b568935b9a4"
+  },
+  "live_snapshot": {
+    "Code.gs": "7ed9c5b38ca495a4196a13d557b4f6f5ec3fbc20f7fa7c2c0e2ecf796f12597e",
+    "FbAlbum.gs": "f8912f40e9118dd558debc9f811e2dca6c05c1dfe31aeb52c3db018f2aa12f08",
+    "Index.html": "f9854f6fc6551a6b26b51ec068a548c565a51edfac58353d5f9d87a5c03a5c6f",
+    "webapp.gs": "a44cc499b3061b3936e9acb4e2fb3fe74ae15c9397fa657ef732e661a4495062"
+  },
+  "source_differences": [
+    "Core built from actual Code.gs including Facebook menu; spreadsheet resolver points only to LAB.",
+    "WebApp built from actual webapp.gs (local v20 differs only by newline).",
+    "Index local baseline preserves live features and adds Genre filter / Sub Genre inputs before five requested UI fixes.",
+    "FbAlbum preserves actual _fbaOriginalIndex and duplicate helpers; token access and posting trigger installation throw LAB-only errors.",
+    "LabChecks is manual LAB-only integration runner; never install in store."
+  ],
+  "dev_url": "https://script.google.com/macros/s/AKfycbxKDGZ1LPYZi7xyOZ88nIMNnXkIm7nC_EyM3hVfeu8/dev",
+  "remaining": [
+    "Full legacy maintenance/tools regression and Facebook dry-run not yet executed",
+    "New V2 schema is design-only; not migrated",
+    "Duplicate MAG SKU and 18 GGB copies missing prices need operator review before use outside LAB"
+  ]
+}

@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><title>OWA Label Tool</title>
+<style>body{margin:16px;background:#111;color:#eee;font-family:Arial,sans-serif}button,input,select{padding:10px;margin:5px}#dialogState{white-space:pre-wrap}</style>
+<?!= _w2Include_('LabelRenderer') ?>
+</head><body><h2>OWA · Label Tool</h2><p>Search an order to complete its label, or preview the selected ORDERS rows.</p>
+<label>Search order<input id="orderSearch" placeholder="OWA-YYYYMMDD-NN"></label><select id="orderSelect" aria-label="Order"></select><button id="openOrder">Open selected order</button><button id="printSelection">Preview / Print selection</button><button id="recoverRequest" hidden>Recover original request</button><p id="dialogState" role="status"></p>
+<script>
+var $=id=>document.getElementById(id),esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'),addSuggestionResets=[];
+function callApi(action,p){return new Promise((resolve,reject)=>google.script.run.withSuccessHandler(raw=>{try{var r=JSON.parse(raw);if(!r.ok)throw Error(r.error);resolve(r.data);}catch(e){reject(e);}}).withFailureHandler(reject).api(action,p));}
+var DIALOG_KEY='owarin.w2.dialog.1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp',dialogPending=null,dialogBusy=false;
+try{dialogPending=JSON.parse(sessionStorage.getItem(DIALOG_KEY)||'null');}catch(e){$('dialogState').textContent='Unreadable recovery record; reconcile server journal first.';dialogBusy=true;}
+function w1Run(action,p){if(dialogBusy||dialogPending)return Promise.reject(Error('Recover the original request first'));p.requestId=p.requestId||'w2-'+Date.now()+'-'+Math.random().toString(36).slice(2);dialogPending={requestId:p.requestId,action};try{sessionStorage.setItem(DIALOG_KEY,JSON.stringify(dialogPending));}catch(e){dialogPending=null;return Promise.reject(Error('Cannot retain Request ID; no request sent'));}dialogBusy=true;
+ return callApi(action,p).then(r=>{sessionStorage.removeItem(DIALOG_KEY);dialogPending=null;return r;}).catch(async e=>{var state=await callApi('requests.get',{requestId:p.requestId});if(state.state==='DONE'){sessionStorage.removeItem(DIALOG_KEY);dialogPending=null;return state.data;}if(state.state==='NOT_FOUND'){sessionStorage.removeItem(DIALOG_KEY);dialogPending=null;}throw e;}).finally(()=>{dialogBusy=false;$('recoverRequest').hidden=!dialogPending;});}
+<?!= _w2Include_('W2Suggest') ?>
+var selectedOrderIds=<?!= orderIds ?>,dialogOrders=[];
+function dialogRender(){var q=$('orderSearch').value.trim().toLowerCase();$('orderSelect').innerHTML=dialogOrders.filter(o=>o.orderId.toLowerCase().includes(q)).map(o=>'<option value="'+esc(o.orderId)+'">'+esc(o.orderId+' · '+o.status+' · '+o.labelReadiness)+'</option>').join('');}
+</script>
+<?!= _w2Include_('W2LabelUI') ?>
+<script>
+$('openOrder').onclick=()=>{var o=dialogOrders.find(o=>o.orderId===$('orderSelect').value);if(o)W2UI.open('label',{},o);};$('orderSearch').oninput=dialogRender;
+$('printSelection').onclick=()=>{var ids=selectedOrderIds.length?selectedOrderIds:[$('orderSelect').value],win=window.open('','_blank');if(!win){$('dialogState').textContent='Allow the label window, then click again.';return;}win.document.write('<p>Loading saved labels…</p>');callApi('labels.get',{orderIds:ids}).then(r=>{win.document.open();win.document.write(W2Label.documentHTML(r.labels));win.document.close();}).catch(e=>{win.document.body.textContent=e.message;});};
+$('recoverRequest').hidden=!dialogPending;$('recoverRequest').onclick=async()=>{if(!dialogPending||dialogBusy)return;dialogBusy=true;try{var r=await callApi('requests.resume',{requestId:dialogPending.requestId});sessionStorage.removeItem(DIALOG_KEY);dialogPending=null;$('dialogState').textContent='Recovered original request';$('recoverRequest').hidden=true;}catch(e){$('dialogState').textContent=e.message;}finally{dialogBusy=false;}};
+callApi('orders.list',{status:'ALL'}).then(r=>{dialogOrders=r.orders.filter(o=>o.status==='PENDING'||o.status==='SOLD');dialogRender();if(selectedOrderIds.length===1){$('orderSelect').value=selectedOrderIds[0];$('openOrder').click();}}).catch(e=>$('dialogState').textContent=e.message);
+</script></body></html>

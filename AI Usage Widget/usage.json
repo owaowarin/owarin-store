@@ -1,0 +1,23 @@
+{
+  "demo": true,
+  "updatedAt": "2026-09-11T12:00:00+07:00",
+  "providers": [
+    {
+      "name": "Claude",
+      "accent": "#d97757",
+      "rows": [
+        { "label": "Current session", "percent": 68, "reset": "resets in 2h 14m" },
+        { "label": "Weekly · all models", "percent": 42, "reset": "resets in 6d" },
+        { "label": "Weekly · Sonnet", "percent": 27, "reset": "resets in 6d" }
+      ]
+    },
+    {
+      "name": "ChatGPT",
+      "accent": "#35c991",
+      "rows": [
+        { "label": "Current plan", "percent": 54, "reset": "resets in 3h 08m" },
+        { "label": "Weekly · reasoning", "percent": 31, "reset": "resets in 4d" }
+      ]
+    }
+  ]
+}

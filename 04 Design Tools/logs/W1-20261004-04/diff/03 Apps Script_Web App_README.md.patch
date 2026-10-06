@@ -1,0 +1,23 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-04\\before\\03 Apps Script\\Web App\\README.md" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\03 Apps Script\\Web App\\README.md"
+index 3e97371..2057a4d 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-04\\before\\03 Apps Script\\Web App\\README.md"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\03 Apps Script\\Web App\\README.md"	
+@@ -127,10 +127,17 @@ ORDERS → Cancel → Cancel order modal → Back leaves it unchanged, Confirm c
+ Test fixture and recovery already ran; do not press Prepare fixture once / Run recovery once again or use editor Run blindly. Editor consent popup could not be exposed by automation; guarded helpers succeeded through the normal test web app using existing authorization, without granting wider scopes. Pending request → Check / retry request with the exact ID; external conflict → export/reconcile exact cells first. Current test state and recovery IDs are in google-final.xlsx, google-assertions.json and UNDO.md; backups/diffs/logs retained.
+ 
+ 
+-## Session39 — current local/test v33
++## Session39 — historical local/test v33 evidence
+ 
+ W1-20261004-03/v33@1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20; current source is only in `04 Design Tools/logs/W1-20261004-03/candidate/`, paired Code_v33.gs/WebApp_v33.gs + W1Orders.gs + unchanged business Index. Root v31 remains production source. Test /dev HEAD has saved v33; numbered /exec unchanged. Local/test W1 acceptance complete, Astra specific sign-off packet prepared; formal review gate open. W2/production not installed. Details/result/recovery at `04 Design Tools/logs/W1-20261004-03/result.md` / UNDO.md / REVIEW-ASTRA-HIGH.md.
+ 
+ Use the existing Cart → Create → Orders/Pending → Cancel or Confirm sold → Final review → Label later flow. Clear cart affects only client cart. If timeout keep exact Request ID/payload and use Check / retry request; max100 can need continuation. Do not create new ID or rerun one-shot fixtures. GZIP-prefixed ORDER REQUESTS Snapshot/Result must be read through the decoder; older plain JSON still works. Oversized payload rejects before intent.
+ 
+ Touched sort/PID/restock/SP2 maintenance writes now have durable MAINTENANCE intent. Failure blocks sibling writes; export and restore evidenced before values/formulas (sort: inspect derived columns/row2 too), then owner-only api requests.reconcile with original Request ID. It verifies restoration and appends outcome, never automatically restores data. Owner direct-edit audit detects managed multi-range/missing UID when trigger is delivered; queue/runtime/lock delivery remains a limit. Preserve Unknown values and version-history evidence.
++
++
++## Session40 — current W1 review: changes required
++
++Runtime remains W1-20261004-03/v33@1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20; source at `04 Design Tools/logs/W1-20261004-03/candidate/`. Requested focused review completed; release sign-off withheld for R5 per-cell journal/flush performance and R6 lost-original-payload recovery. New evidence is local only; Google /dev and production were not read or changed this session. Next: Sol / High implements the bounded batch in `04 Design Tools/logs/W1-20261004-04/SOL-HANDOFF.md`; see REVIEW.md and review-results.json.
++
++Recovery correction: keep the exact browser Request ID AND payload. The v33 server journal stores normalized snapshots and a hash, not the complete original payload; it cannot reliably reconstruct the original after browser intent is lost. An unfinished request in that condition requires manual reconciliation; do not invent a payload, alter a journal hash, or issue a new ID. DONE results remain canonical. This supersedes the exact-payload-reconstruction sentence in frozen Session39 UNDO.md. New server-intent recovery is planned, not implemented. W1 remains test-only and incomplete; W2/production remain pending.

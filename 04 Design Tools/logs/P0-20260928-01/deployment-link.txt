@@ -1,0 +1,3 @@
+Browser tab: 4, Title: "webapp - Project Editor - Apps Script", URL: "https://script.google.com/home/projects/1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp/edit".
+There has been no change in the accessibility tree.
+The focused UI element is 0 AXWebArea webapp - Project Editor - Apps Script, URL: script.google.com/home/projects/1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp/edit

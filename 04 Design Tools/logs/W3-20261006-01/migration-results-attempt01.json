@@ -1,0 +1,422 @@
+{
+  "result": "FAIL",
+  "executedAt": "2026-10-05T18:29:10.833Z",
+  "scope": "LOCAL_VM_SYNTHETIC_ONLY",
+  "runtime": "v39 unchanged",
+  "checks": [
+    {
+      "name": "Six-column dry-run is read-only; migrate preserves values/formulas, blanks, numeric legacy values and duplicate-name identities",
+      "result": "PASS"
+    },
+    {
+      "name": "journal PREPARED before-effect failure retries original migration without business effects",
+      "result": "PASS"
+    },
+    {
+      "name": "journal PREPARED after-effect failure retries original migration without business effects",
+      "result": "PASS"
+    },
+    {
+      "name": "CLIENT headers after-effect failure retries original migration without business effects",
+      "result": "PASS"
+    },
+    {
+      "name": "CLIENT identities after-effect failure retries original migration without business effects",
+      "result": "PASS"
+    },
+    {
+      "name": "journal DONE after-effect failure retries original migration without business effects",
+      "result": "PASS"
+    },
+    {
+      "name": "Partial identity metadata completes only original allocated IDs and revision",
+      "result": "PASS"
+    },
+    {
+      "name": "Unexpected external edit in A:F rejects migration retry without overwriting it",
+      "result": "PASS"
+    },
+    {
+      "name": "Unexpected external edit in G:H rejects migration retry without overwriting it",
+      "result": "PASS"
+    },
+    {
+      "name": "Wrong owner, wrong test ID, unexpected headers, duplicate IDs and missing revisions fail closed",
+      "result": "PASS"
+    },
+    {
+      "name": "Already valid eight-column CLIENT requires no migration or new journal event",
+      "result": "PASS"
+    },
+    {
+      "name": "SHOP create/cancel/recreate then migrated-client selection, label snapshot and SHOPEE label-later flow",
+      "result": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\nundefined !== 300\n\n    at C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W3-20261006-01\\migration.test.cjs:110:76\n    at run (C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W3-20261006-01\\migration.test.cjs:25:6)\n    at Object.<anonymous> (C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W3-20261006-01\\migration.test.cjs:88:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47"
+    }
+  ],
+  "evidence": [
+    {
+      "case": "baseline",
+      "dryRun": {
+        "changes": [
+          "Append Client ID / Updated At; initialize identities only"
+        ],
+        "rows": 4
+      },
+      "before": [
+        [
+          "FB-A",
+          "ชื่อซ้ำ",
+          "0890000001",
+          "ที่อยู่ ก",
+          "00123",
+          "=1+1"
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "FB-B",
+          "ชื่อซ้ำ",
+          "0890000002",
+          "ที่อยู่ ข",
+          "00124",
+          "private"
+        ],
+        [
+          "",
+          "legacy numeric",
+          890000003,
+          "old address",
+          123,
+          "leave unchanged"
+        ]
+      ],
+      "formulas": [
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "=1+1"
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "after": [
+        [
+          "FB-A",
+          "ชื่อซ้ำ",
+          "0890000001",
+          "ที่อยู่ ก",
+          "00123",
+          "=1+1",
+          "CL-uid-000000000001",
+          "2026-10-05T18:29:10.476Z"
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "FB-B",
+          "ชื่อซ้ำ",
+          "0890000002",
+          "ที่อยู่ ข",
+          "00124",
+          "private",
+          "CL-uid-000000000002",
+          "2026-10-05T18:29:10.476Z"
+        ],
+        [
+          "",
+          "legacy numeric",
+          890000003,
+          "old address",
+          123,
+          "leave unchanged",
+          "CL-uid-000000000003",
+          "2026-10-05T18:29:10.476Z"
+        ]
+      ],
+      "writes": [
+        [
+          "CLIENT",
+          1,
+          1,
+          "Facebook Account"
+        ],
+        [
+          "CLIENT",
+          1,
+          2,
+          "Name"
+        ],
+        [
+          "CLIENT",
+          1,
+          3,
+          "Phone Number"
+        ],
+        [
+          "CLIENT",
+          1,
+          4,
+          "Address"
+        ],
+        [
+          "CLIENT",
+          1,
+          5,
+          "Post Code"
+        ],
+        [
+          "CLIENT",
+          1,
+          6,
+          "Note"
+        ],
+        [
+          "CLIENT",
+          1,
+          7,
+          "Client ID"
+        ],
+        [
+          "CLIENT",
+          1,
+          8,
+          "Updated At"
+        ],
+        [
+          "CLIENT",
+          2,
+          7,
+          "CL-uid-000000000001"
+        ],
+        [
+          "CLIENT",
+          2,
+          8,
+          "2026-10-05T18:29:10.476Z"
+        ],
+        [
+          "CLIENT",
+          3,
+          7,
+          ""
+        ],
+        [
+          "CLIENT",
+          3,
+          8,
+          ""
+        ],
+        [
+          "CLIENT",
+          4,
+          7,
+          "CL-uid-000000000002"
+        ],
+        [
+          "CLIENT",
+          4,
+          8,
+          "2026-10-05T18:29:10.476Z"
+        ],
+        [
+          "CLIENT",
+          5,
+          7,
+          "CL-uid-000000000003"
+        ],
+        [
+          "CLIENT",
+          5,
+          8,
+          "2026-10-05T18:29:10.476Z"
+        ]
+      ]
+    },
+    {
+      "case": "journal PREPARED",
+      "afterEffect": false,
+      "allocatedBeforeRetry": null,
+      "identitiesAfterRetry": [
+        [
+          "CL-uid-000000000005",
+          "2026-10-05T18:29:10.560Z"
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "CL-uid-000000000006",
+          "2026-10-05T18:29:10.560Z"
+        ],
+        [
+          "CL-uid-000000000007",
+          "2026-10-05T18:29:10.560Z"
+        ]
+      ],
+      "businessSheetsUnchanged": true
+    },
+    {
+      "case": "journal PREPARED",
+      "afterEffect": true,
+      "allocatedBeforeRetry": [
+        "CL-uid-000000000001",
+        "",
+        "CL-uid-000000000002",
+        "CL-uid-000000000003"
+      ],
+      "identitiesAfterRetry": [
+        [
+          "CL-uid-000000000001",
+          "2026-10-05T18:29:10.576Z"
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "CL-uid-000000000002",
+          "2026-10-05T18:29:10.576Z"
+        ],
+        [
+          "CL-uid-000000000003",
+          "2026-10-05T18:29:10.576Z"
+        ]
+      ],
+      "businessSheetsUnchanged": true
+    },
+    {
+      "case": "CLIENT headers",
+      "afterEffect": true,
+      "allocatedBeforeRetry": [
+        "CL-uid-000000000001",
+        "",
+        "CL-uid-000000000002",
+        "CL-uid-000000000003"
+      ],
+      "identitiesAfterRetry": [
+        [
+          "CL-uid-000000000001",
+          "2026-10-05T18:29:10.587Z"
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "CL-uid-000000000002",
+          "2026-10-05T18:29:10.587Z"
+        ],
+        [
+          "CL-uid-000000000003",
+          "2026-10-05T18:29:10.587Z"
+        ]
+      ],
+      "businessSheetsUnchanged": true
+    },
+    {
+      "case": "CLIENT identities",
+      "afterEffect": true,
+      "allocatedBeforeRetry": [
+        "CL-uid-000000000001",
+        "",
+        "CL-uid-000000000002",
+        "CL-uid-000000000003"
+      ],
+      "identitiesAfterRetry": [
+        [
+          "CL-uid-000000000001",
+          "2026-10-05T18:29:10.598Z"
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "CL-uid-000000000002",
+          "2026-10-05T18:29:10.598Z"
+        ],
+        [
+          "CL-uid-000000000003",
+          "2026-10-05T18:29:10.598Z"
+        ]
+      ],
+      "businessSheetsUnchanged": true
+    },
+    {
+      "case": "journal DONE",
+      "afterEffect": true,
+      "allocatedBeforeRetry": [
+        "CL-uid-000000000001",
+        "",
+        "CL-uid-000000000002",
+        "CL-uid-000000000003"
+      ],
+      "identitiesAfterRetry": [
+        [
+          "CL-uid-000000000001",
+          "2026-10-05T18:29:10.608Z"
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "CL-uid-000000000002",
+          "2026-10-05T18:29:10.608Z"
+        ],
+        [
+          "CL-uid-000000000003",
+          "2026-10-05T18:29:10.608Z"
+        ]
+      ],
+      "businessSheetsUnchanged": true
+    }
+  ],
+  "limitations": [
+    "Not a fresh Google export/native migration",
+    "Mock formulas are preserved raw; no claim of native evaluation or coercion",
+    "Injected partial writes are recovery simulations, not proof of native Range batch atomicity",
+    "PDF/physical Print-Reprint DEFERRED, untested"
+  ]
+}

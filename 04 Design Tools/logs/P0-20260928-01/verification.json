@@ -1,0 +1,48 @@
+{
+  "recordedAt": "2026-09-28T21:41:55.511683+07:00",
+  "sourceUnchanged": [
+    {
+      "path": "03 Apps Script\\Web App\\Code_v27.gs",
+      "before": "EF8C6D347E7EC4235AEFFDB6EED2925C4BFA7F1E36726E60D61F2466F58A6832",
+      "after": "EF8C6D347E7EC4235AEFFDB6EED2925C4BFA7F1E36726E60D61F2466F58A6832"
+    },
+    {
+      "path": "03 Apps Script\\Web App\\WebApp_v25.gs",
+      "before": "2CEE59212CC5DB464330EE91E476E35D8DAF89700D1CE3D056C61BC2099E3D0A",
+      "after": "2CEE59212CC5DB464330EE91E476E35D8DAF89700D1CE3D056C61BC2099E3D0A"
+    },
+    {
+      "path": "03 Apps Script\\Web App\\Index.html",
+      "before": "0F7C099C761DCE35DFC27D562AA98D3A34EF4B6A0A6224670BB18ED61E384FD3",
+      "after": "0F7C099C761DCE35DFC27D562AA98D3A34EF4B6A0A6224670BB18ED61E384FD3"
+    },
+    {
+      "path": "03 Apps Script\\Web App\\R2Upload.gs",
+      "before": "B3219C742E03DF97283AA0DB686D9D912303A2F2E1F43B9EBDF2E8FB7EECD960",
+      "after": "B3219C742E03DF97283AA0DB686D9D912303A2F2E1F43B9EBDF2E8FB7EECD960"
+    },
+    {
+      "path": "03 Apps Script\\FbAlbum.gs",
+      "before": "8D806616D60352A2249E2F6371D35E2017C04A0776205D2FBC0512CFBB2E0E30",
+      "after": "8D806616D60352A2249E2F6371D35E2017C04A0776205D2FBC0512CFBB2E0E30"
+    }
+  ],
+  "handoffOriginalBytesPreserved": true,
+  "implementationOldHistoryPreserved": true,
+  "unicodeReadback": true,
+  "jsonReadback": true,
+  "diagnosticChecks": 17,
+  "runtimeAcceptance": false,
+  "liveMutations": "none",
+  "documents": [
+    {
+      "path": "00 Docs\\IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md",
+      "sha256": "2AE1A9F0656E9B0D2D9320499604CF4906D84D0EC4F34995940BFD9F388730D5"
+    },
+    {
+      "path": "00 Docs\\HANDOFF_2026-09-28.md",
+      "sha256": "E823BE2BFCDBD9FF8E0FEDFB10F50361E3E7BC126B1FCFAF59973ACD5019C457"
+    }
+  ],
+  "csvRows": 13
+}

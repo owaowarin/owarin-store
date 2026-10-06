@@ -1,0 +1,50 @@
+{
+  "id": "16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0",
+  "title": "OWARIN STORE",
+  "mime_type": "application/vnd.google-apps.spreadsheet",
+  "size": null,
+  "url": null,
+  "file_or_folder": "file",
+  "created_time": null,
+  "modified_time": "2026-09-28T12:42:08.503Z",
+  "parent_ids": null,
+  "drive_id": null,
+  "current_user_can_share": null,
+  "has_augmented_permissions": null,
+  "shared": true,
+  "permissions": [
+    {
+      "type": "anyone",
+      "role": "reader",
+      "emailAddress": null,
+      "domain": null,
+      "displayName": null,
+      "allowFileDiscovery": false
+    },
+    {
+      "type": "user",
+      "role": "owner",
+      "emailAddress": null,
+      "domain": null,
+      "displayName": null,
+      "allowFileDiscovery": null
+    },
+    {
+      "type": "user",
+      "role": "writer",
+      "emailAddress": null,
+      "domain": null,
+      "displayName": null,
+      "allowFileDiscovery": null
+    },
+    {
+      "type": "user",
+      "role": "writer",
+      "emailAddress": null,
+      "domain": null,
+      "displayName": null,
+      "allowFileDiscovery": null
+    }
+  ],
+  "source_visibility_status": "permission_metadata_available"
+}

@@ -1,0 +1,5 @@
+PASS existing GGB rows 1:21, all MAGAZINE, journal rows 1:69 unchanged
+GGB row22 ['Synthetic QA SavedSource 20260930 A30', 'OWA-GGBS020N00', 'New Arrival', None, None, None, 'TEST', None, None, 300.0, 100.0, None, 292.0]
+journal rows70:71 [('add-1790703155002-hztup0z5ec', 1.0, 'PREPARED', 22.0, 'OWA-GGBS020N00', None), ('add-1790703155002-hztup0z5ec', 1.0, 'DONE', 22.0, 'OWA-GGBS020N00', None)]
+GGB named 20 MAG named 10
+journal events 70

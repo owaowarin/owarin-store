@@ -1,0 +1,40 @@
+{
+  "changeId": "P1-20260929-05",
+  "documents": [
+    {
+      "sha256": "D2DF7510F9E6047B22218DB54279BAF534E0A362A1E0FBD835A0970CC295FF8A",
+      "path": "00 Docs/IMPLEMENTATION-LOG-ADD-CART-ORDERS-LABEL_2026-09-28.md",
+      "historyPreserved": true
+    },
+    {
+      "sha256": "3A534995D36AC8EAB8FE8C35C4016F71EC5E47453CED6E3C80D227FC48DF89E3",
+      "path": "00 Docs/HANDOFF_2026-09-29.md",
+      "historyPreserved": true
+    }
+  ],
+  "productionSources": [
+    {
+      "unchanged": true,
+      "path": "03 Apps Script\\Web App\\Code_v27.gs"
+    },
+    {
+      "unchanged": true,
+      "path": "03 Apps Script\\Web App\\WebApp_v25.gs"
+    },
+    {
+      "unchanged": true,
+      "path": "03 Apps Script\\Web App\\Index.html"
+    },
+    {
+      "unchanged": true,
+      "path": "03 Apps Script\\Web App\\R2Upload.gs"
+    },
+    {
+      "unchanged": true,
+      "path": "03 Apps Script\\FbAlbum.gs"
+    }
+  ],
+  "candidateIndexSha256": "80A52EE06155BF65B5AFCFC116F9B117DF2F303905C184E65BF3C0F1AED1825A",
+  "testRuntimeIndexSha256": "AE34E8BDAE5FB33DB0450F4EBD1CA64D5826158623B8CA1D5DDCF95C78A9C745",
+  "candidateInstalledInGoogle": false
+}

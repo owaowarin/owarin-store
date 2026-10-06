@@ -1,0 +1,68 @@
+{
+  "GAME GUIDE BOOKS": {
+    "statusValues": [
+      "Auction",
+      "Hold",
+      "Instock",
+      "Sold"
+    ],
+    "missingPIDCells": [],
+    "formulaPIDCells": [],
+    "duplicatePIDGroups": 0,
+    "immutableUIDHeaderPresent": false
+  },
+  "MAGAZINE": {
+    "statusValues": [
+      "Hold",
+      "Instock",
+      "Sold"
+    ],
+    "missingPIDCells": [],
+    "formulaPIDCells": [],
+    "duplicatePIDGroups": 0,
+    "immutableUIDHeaderPresent": false
+  },
+  "SALES": {
+    "G2": {
+      "text": "=IF(ROW(E2:E51)-ROW(E2)+1<=ROWS(E2:E51),\n  IF(E2:E51<>\"\",(E2:E51 - D2:D51) - F2:F51,\"\"),\n \"\")",
+      "ref": "G2:G51"
+    },
+    "formulaCells": [
+      "G2",
+      "G52",
+      "G53",
+      "G54",
+      "G55",
+      "G56",
+      "G57",
+      "G58",
+      "G59",
+      "G60",
+      "G61",
+      "G62",
+      "G63",
+      "G64",
+      "G65",
+      "G66",
+      "G67",
+      "G68",
+      "G69",
+      "G70",
+      "G71",
+      "G72",
+      "G73",
+      "G74",
+      "G75",
+      "G76",
+      "G77",
+      "G78",
+      "G79",
+      "G80",
+      "G81",
+      "G82",
+      "G83",
+      "G84"
+    ],
+    "lastNonemptyOrderIDRow": 84
+  }
+}

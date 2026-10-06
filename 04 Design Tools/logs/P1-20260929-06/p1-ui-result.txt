@@ -1,0 +1,1 @@
+PASS: 20 UI resets, frozen retry, reload same ID/payload, storage failure, validation release, render failure, in-flight guard, stale suggestion clear

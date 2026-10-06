@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "candidate": "W1-20261004-05/v37@4495CECEB8821B2CFF4B04482B7395A922E371766F0A1E650A956C953B9DE38E",
+  "newOrder": "OWA-20261005-01",
+  "createRequest": "w1-1791153252195-hx9e08l17e6",
+  "confirmRequest": "w1-1791153462270-cw715xj4mec",
+  "newEvents": 28,
+  "uniqueSalesLines": 106,
+  "baselineRowsAndUnrelatedTabsPreserved": true,
+  "originalPending08Preserved": true
+}

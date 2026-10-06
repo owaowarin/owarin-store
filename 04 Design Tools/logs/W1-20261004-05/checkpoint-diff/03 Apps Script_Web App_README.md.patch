@@ -1,0 +1,21 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05\\checkpoint-before\\03 Apps Script\\Web App\\README.md" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\03 Apps Script\\Web App\\README.md"
+index 2057a4d..e9a0f2a 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05\\checkpoint-before\\03 Apps Script\\Web App\\README.md"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\03 Apps Script\\Web App\\README.md"	
+@@ -136,8 +136,15 @@ Use the existing Cart → Create → Orders/Pending → Cancel or Confirm sold 
+ Touched sort/PID/restock/SP2 maintenance writes now have durable MAINTENANCE intent. Failure blocks sibling writes; export and restore evidenced before values/formulas (sort: inspect derived columns/row2 too), then owner-only api requests.reconcile with original Request ID. It verifies restoration and appends outcome, never automatically restores data. Owner direct-edit audit detects managed multi-range/missing UID when trigger is delivered; queue/runtime/lock delivery remains a limit. Preserve Unknown values and version-history evidence.
+ 
+ 
+-## Session40 — current W1 review: changes required
++## Session40 — historical W1 review: changes required
+ 
+ Runtime remains W1-20261004-03/v33@1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20; source at `04 Design Tools/logs/W1-20261004-03/candidate/`. Requested focused review completed; release sign-off withheld for R5 per-cell journal/flush performance and R6 lost-original-payload recovery. New evidence is local only; Google /dev and production were not read or changed this session. Next: Sol / High implements the bounded batch in `04 Design Tools/logs/W1-20261004-04/SOL-HANDOFF.md`; see REVIEW.md and review-results.json.
+ 
+ Recovery correction: keep the exact browser Request ID AND payload. The v33 server journal stores normalized snapshots and a hash, not the complete original payload; it cannot reliably reconstruct the original after browser intent is lost. An unfinished request in that condition requires manual reconciliation; do not invent a payload, alter a journal hash, or issue a new ID. DONE results remain canonical. This supersedes the exact-payload-reconstruction sentence in frozen Session39 UNDO.md. New server-intent recovery is planned, not implemented. W1 remains test-only and incomplete; W2/production remain pending.
++
++
++## Session41 — current checkpoint, W1 final gates open
++
++Session41 checkpoint (2026-10-04T15:43:18.210Z): R5/R6 implemented in local/test v36; F04 ID-only recovery passed actual UI. F05 duplicate isolated QA execution left49 logical journal blanks; explicit repair stopped before writes on hash guard. Fresh native proof equals export exactly,0 differing cells; server hash diagnostic saved/read back, UI result pending after browser kernel stopped. W1 NOT COMPLETE. Exact W1-20261004-05/v36@D25BAE5207BDBC45BB946FF6F19FE0B5B7A6004E74EEBD422417DFD9DFF00A67; ONE next step: read existing native diagnostic result using CONTINUE.md, then verified gap reconciliation + final two-session UI/export gates. Production/LAB/W2 unchanged; no repeated broad audit or fixtures.
++
++v36 owner-only Recover request loads exact stored intent then sends ID-only requests.resume; normal browser requests retain original payload and sessionStorage recovery mode. Clear cart affects only browser cart; Pending/Cancel/Final review/Label later contracts unchanged. Current test journal fails closed until explicitly reconciled; do not try business writes during CORRUPT_JOURNAL. Full recovery/next actions in CONTINUE.md; helpers are isolated-test only and never production.

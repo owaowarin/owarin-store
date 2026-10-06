@@ -1,0 +1,26 @@
+[
+  {
+    "file": "local-ui.png",
+    "pixels": [
+      1280,
+      720
+    ],
+    "bytes": 271344
+  },
+  {
+    "file": "google-ui.png",
+    "pixels": [
+      1280,
+      720
+    ],
+    "bytes": 233069
+  },
+  {
+    "file": "google-print.png",
+    "pixels": [
+      1280,
+      720
+    ],
+    "bytes": 358282
+  }
+]

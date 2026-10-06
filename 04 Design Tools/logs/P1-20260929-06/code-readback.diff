@@ -1,0 +1,62 @@
+diff --git a/04 Design Tools/logs/P1-20260929-06/code-before.gs b/04 Design Tools/logs/P1-20260929-01/candidate/Code.gs
+index 011167e..d029700 100644
+--- a/04 Design Tools/logs/P1-20260929-06/code-before.gs	
++++ b/04 Design Tools/logs/P1-20260929-01/candidate/Code.gs	
+@@ -2063,8 +2063,15 @@ function _addRequestEvent(sh, id, attempt, state, source, hash, row, sku, before
+     source, hash, row || '', sku || '', before || '', after || '', error || '', result || '', id
+   ]]);
+   SpreadsheetApp.flush();
+-  var check = sh.getRange(eventRow, 1, 1, 5).getValues()[0];
+-  if (check[0] !== eventId || check[2] !== id || check[4] !== state) throw new Error('ADD REQUESTS event readback failed');
++  var check = sh.getRange(eventRow, 1, 1, 17).getValues()[0];
++  if (!check[1]) throw new Error('ADD REQUESTS event readback failed at column 2');
++  var required = {0:eventId, 2:id, 3:attempt, 4:state, 5:actor,
++                  6:'inventory.add API', 7:'P1 candidate', 8:source, 9:hash,
++                  10:row || '', 11:sku || '', 12:before || '', 13:after || '',
++                  14:error || '', 15:result || '', 16:id};
++  Object.keys(required).forEach(function (col) {
++    if (String(check[col]) !== String(required[col])) throw new Error('ADD REQUESTS event readback failed at column ' + (Number(col) + 1));
++  });
+ }
+ function addInventoryRow(data) {
+   return _withLock(function () {
+@@ -2162,20 +2169,30 @@ function addInventoryRow(data) {
+     if (_SP2_WRITE_ERRORS.length) throw new Error('Add formula/write error: ' + _sp2WriteErrMsg());
+ 
+     SpreadsheetApp.flush();
+-    var checkName = String(sheet.getRange(newRow, COL.name).getValue()).trim();
+-    var checkSku = String(sheet.getRange(newRow, COL.productId).getValue()).trim();
+-    var checkStatus = String(sheet.getRange(newRow, COL.status).getValue()).trim();
+-    if (checkName !== finalTitle || checkSku !== sku || checkStatus !== status) throw new Error('Add readback mismatch');
++    var expected = { name: finalTitle, productId: sku, status: status, publisher: pub,
++      platform: platform, genre: genre, subGenre: String(data.subGenre || '').trim(),
++      type: String(data.type || '').trim(), condition: cond, original: original,
++      cost: cost, price: price, suggested: result.price, copyFlags: copyFlags,
++      rarity: rarity, marketRef: marketRef, refNote: refNote,
++      priceRange: result.rangeStr || '', maxGRef: result.refStr || '' };
++    var rowValues = sheet.getRange(newRow, 1, 1, lastCol).getValues()[0];
++    var after = {};
++    Object.keys(expected).forEach(function (key) {
++      if (!COL[key]) return;
++      var actual = rowValues[COL[key] - 1];
++      if (String(actual === null || actual === undefined ? '' : actual) !== String(expected[key]))
++        throw new Error('Add readback mismatch: ' + key);
++      after[key] = actual;
++    });
++    if (status !== 'Sold' && COL.listedDate && !rowValues[COL.listedDate - 1]) throw new Error('Add readback mismatch: listedDate');
++    if (status === 'Sold' && COL.soldDate && !rowValues[COL.soldDate - 1]) throw new Error('Add readback mismatch: soldDate');
++    if (COL.listedDate) after.listedDate = rowValues[COL.listedDate - 1] || '';
++    if (COL.soldDate) after.soldDate = rowValues[COL.soldDate - 1] || '';
+     var saved = { success: true, row: newRow, title: finalTitle, sku: sku,
+              suggested: result.price, target: result.target, open: result.open,
+              priceRange: result.rangeStr, refStr: result.refStr,
+              tier: result.tier, label: result.label, review: result.review,
+              isRestock: restockResult.isRestock, sheetName: sheetName };
+-    var after = { name: checkName, productId: checkSku, status: checkStatus,
+-                  publisher: pub, condition: cond, original: original, cost: cost, price: price,
+-                  platform: platform, genre: genre, subGenre: String(data.subGenre || '').trim(),
+-                  type: String(data.type || '').trim(), copyFlags: copyFlags, rarity: rarity,
+-                  marketRef: marketRef, refNote: refNote, suggested: result.price };
+     _addRequestEvent(journal, requestId, attempt, 'DONE', sheetName, hash, newRow, sku,
+                      'absent', JSON.stringify(after), '', JSON.stringify(saved));
+     return saved;

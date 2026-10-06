@@ -1,0 +1,18 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-before\\appsscript.json" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-runtime\\appsscript.json"
+index 4ff58c2..ea6b5e6 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-before\\appsscript.json"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-runtime\\appsscript.json"	
+@@ -6,5 +6,11 @@
+   "webapp": {
+     "executeAs": "USER_DEPLOYING",
+     "access": "MYSELF"
+-  }
++  },
++  "oauthScopes": [
++    "https://www.googleapis.com/auth/spreadsheets.currentonly",
++    "https://www.googleapis.com/auth/script.container.ui",
++    "https://www.googleapis.com/auth/userinfo.email",
++    "https://www.googleapis.com/auth/script.external_request"
++  ]
+ }
+\ No newline at end of file

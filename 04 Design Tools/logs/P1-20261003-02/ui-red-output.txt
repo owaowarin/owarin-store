@@ -1,0 +1,26 @@
+AssertionError [ERR_ASSERTION]: historical result must not enable an Instock notification
++ actual - expected
+
++ {
++   item: {
++     name: 'Synthetic 99',
++     productId: 'TEST-99',
++     source: 'GGB',
++     suggested: 300
++   },
++   matches: [
++     {
++       name: 'Waiting customer'
++     }
++   ]
++ }
+- null
+
+    at C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20260929-01\p1-ui.test.cjs:72:10 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [Object],
+  expected: null,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

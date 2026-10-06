@@ -1,0 +1,16 @@
+--- v38/Code_v38.gs
++++ v39/Code_v39.gs
+@@ -1,5 +1,5 @@
+ // ============================================================
+-// OWARIN BACK-OFFICE — Code.gs v38 (SP-2 pricing/SKU engine, pairs with WebApp.gs v38)
++// OWARIN BACK-OFFICE — Code.gs v39 (SP-2 pricing/SKU engine, pairs with WebApp.gs v39)
+ // v31 (2026-10-03): durable Add journal, validated money/source/status, committed snapshot replay and formula readback.
+ // v30 (2026-10-02): (1) Identical copies are listed ONCE in META EXPORT: same base title + Publisher + Original
+ //   (cover price) + Condition + Copy Flags -> one row (the first complete copy), quantity_to_sell_on_facebook =
+@@ -3772,5 +3772,6 @@
+       .addItem("✍️ Apply SP-2 price to every row (incl. markdowns)", "sp2ApplySuggestedAll")
+       .addItem("🛠️ Renumber RESTOCK tags ⚠️", "fixAllRestockTags")
+       .addItem("🔄 Rebuild ALL Product IDs ⚠️ breaks image links", "forceRegenerateAllSKUs"))
++    .addSubMenu(ui.createMenu("Labels").addItem("Open Label Tool", "openLabelTool"))
+     .addToUi();
+ }

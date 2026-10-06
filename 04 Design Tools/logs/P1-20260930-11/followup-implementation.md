@@ -1,0 +1,9 @@
+
+
+### P1 focused integrity review — promotion rejected pending fixes (2026-09-30)
+
+Stream B, master context §§2,5,6,9; Change/Request `P1-20260930-11` / `P1-FOCUSED-INTEGRITY-REVIEW-001`; one writer. Local candidate-only review after the owner reported selecting Astra / High. No Google reads/writes or fresh live counts in this review. Frozen source/harness copies and raw hashes are under `04 Design Tools/logs/P1-20260930-11/baseline/`; Code `C977093F...`, webapp `5A818FC2...`, Index `2F15FBBF...` remain unchanged.
+
+`review-repro.cjs` confirms: R1 historical DONE resolves to a different item after unique SKU reuse; R2 missing Cost mapping drops entered 99 and still reports DONE; R3 invalid source defaults GGB and arbitrary status persists; R4 injected silent derived-formula loss is not checked before DONE. R1/R2 block shop promotion. R4 is local fault injection, not a Google incident. Original Add and UI suites pass, exposing their coverage limits; the new reproduction exits 0 because it asserts the observed defects, not release correctness. Full evidence, source line anchors, minimal fix acceptance criteria and limitations: `review.md`, `repro-output.txt`, `ui-output.txt`, `changes.csv`.
+
+Before→after: unreviewed promotion assumptions → concrete NO-GO with runnable defects; only evidence/docs added. No failed fix or business retry, no candidate/runtime/shop source or schema change, no deploy and no Back House LAB work. Keep historical live interrupted-response tests as evidence, without claiming actual network outage. Next single change: Sol / High fixes R1/R2 plus bounded source/status and formula-readback guards locally, then isolated test install/readback and Astra / High review of the revised source. Shop journal migration/promotion remains a separate logged action; no production runtime journal or reservation claim.

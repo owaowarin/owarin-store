@@ -1,0 +1,37 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05/attempts/F05/before/candidate/W1Orders.gs" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05/candidate/W1Orders.gs"
+index 7631ce9..0d96840 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05/attempts/F05/before/candidate/W1Orders.gs"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05/candidate/W1Orders.gs"	
+@@ -1,4 +1,4 @@
+-// W1 v35 local/test candidate. Private helpers end in _. No marketplace stock sync.
++// W1 v36 local/test candidate. Private helpers end in _. No marketplace stock sync.
+ var W1_HEADERS = {
+  'ORDERS':['Order ID','Status','Channel','Created At','Sold At','Cancelled At','Client ID','Subtotal','Customer Shipping','Shipping Subsidy','Total','Recipient Snapshot','Revision','Last Request ID'],
+  'ORDER LINES':['Order ID','Line ID','Item UID','Source','SKU Snapshot','Title Snapshot','Condition Snapshot','Cost Snapshot','Entered Price','Ledger Price','Price Basis','Prior Status','Reservation State','Inventory Snapshot'],
+@@ -27,7 +27,7 @@ function _w1Table_(name){
+ }
+ function _w1Rows_(name){var sh=_w1Table_(name),n=sh.getLastRow();return n<2?[]:sh.getRange(2,1,n-1,W1_HEADERS[name].length).getValues();}
+ function _w1Event_(req,state,result,error){
+- var sh=_w1Table_('ORDER REQUESTS'),row=[Utilities.getUuid(),new Date().toISOString(),req.id,req.attempt,req.action,req.hash,req.snap.orderId||'',state,_w1Encode_(req.snap),_w1Encode_(result||null),String(error||'').slice(0,1000),req.actor||Session.getActiveUser().getEmail()||'Unknown',req.entrySource||'web/api','Code v35 / WebApp v35','Request '+req.id+'; retry same payload; never a new ID'];
++ var sh=_w1Table_('ORDER REQUESTS'),row=[Utilities.getUuid(),new Date().toISOString(),req.id,req.attempt,req.action,req.hash,req.snap.orderId||'',state,_w1Encode_(req.snap),_w1Encode_(result||null),String(error||'').slice(0,1000),req.actor||Session.getActiveUser().getEmail()||'Unknown',req.entrySource||'web/api','Code v36 / WebApp v36','Request '+req.id+'; retry same payload; never a new ID'];
+  var r=sh.getLastRow()+1;_w1EnsureRow_(sh,r);_w1Write_('journal '+state,function(){sh.getRange(r,1,1,row.length).setValues([row]);});
+  if(JSON.stringify(sh.getRange(r,1,1,row.length).getValues()[0])!==JSON.stringify(row))throw new Error('JOURNAL_READBACK '+req.id);
+ }
+@@ -195,7 +195,7 @@ function _w1ApplyLegacy_(req){
+ }
+ function _w1Mutate_(action,p){
+  _w1Access_();if(!p||!/^[A-Za-z0-9_-]{12,100}$/.test(p.requestId||''))throw new Error('REQUEST_ID_REQUIRED');
+- return _withLock(function(){
++ return _w1Locked_(function(){
+   var hash=_w1Hash_(p),old=_w1TechnicalGate_(p.requestId),req;
+   if(old){if(old.hash!==hash||old.action!==action)throw new Error('REQUEST_PAYLOAD_CONFLICT');if(old.state==='DONE')return Object.assign({},old.result,{replayed:true});req=old;req.attempt++;}
+   else{req={id:p.requestId,attempt:1,action:action,hash:hash,snap:_w1Prepare_(action,p)};_w1Event_(req,'PREPARED');}
+@@ -319,7 +319,7 @@ function _w1Intent_(id){
+  return {action:'orders.'+r.action,payload:r.snap.payload,state:r.state};
+ }
+ // Resume by ID on the server: Google object transport may reorder payload keys.
+-function _w1Resume_(id){var intent=_w1Intent_(id);return _w1Mutate_(intent.action.slice(7),intent.payload);}
++function _w1Resume_(id){_w1Access_();return _w1Locked_(function(){var intent=_w1Intent_(id);return _w1Mutate_(intent.action.slice(7),intent.payload);});}
+ function _w1View_(){
+  var view={sources:{},uids:{},lines:_w1Rows_('ORDER LINES')};
+  [GGB_SHEET,MAG_SHEET].forEach(function(name){

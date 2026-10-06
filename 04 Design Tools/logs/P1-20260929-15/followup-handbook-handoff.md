@@ -1,0 +1,3 @@
+
+
+**Session 18 follow-up — Handbook accuracy:** Current isolated P1 UI has no client watchdog for a callback that never returns. The Handbook now says to reload the **same tab** and use `INVENTORY → + → Check / retry request`; new tab/device with lost Request ID must stop for journal/inventory reconciliation. This is a four-line addition after the Error table, with the original 212 lines intact. Backup and exact diff check are recorded under P1-15; both local Add/UI regression commands pass. No new source or Google Sheet write arose from this documentation fix. The next gate remains a true timeout and fail-closed lost-ID recovery design/test before shop promotion.

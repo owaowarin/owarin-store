@@ -1,0 +1,16 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-02\\before\\00 Docs\\HANDOFF_2026-10-04.md" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\HANDOFF_2026-10-04.md"
+index 95a3f6f..693bd15 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-02\\before\\00 Docs\\HANDOFF_2026-10-04.md"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\HANDOFF_2026-10-04.md"	
+@@ -16,3 +16,11 @@
+ 3. **Sources:** fresh test exports2026-10-04, google-final.xlsx/assertions: six synthetic orders/four managed SALES, profits280/290/281/280, typedfooter/formulas unchanged; real UI screenshot. Shop baseline belongs to Session36 read-only; deployment4 dated Session34. No old evidence presented as fresh shop QA.
+ 4. **Not done/why:** critical Astra / High review not performed (cannot self-switch); W2/production/LAB untouched; no numbered deployment update (/dev HEAD tested). Max-cart/quota/multi-cell/menu trigger coverage and manual recovery limitations explicitly remain for focused review. Native-dialog automation block fixed in Index; original steps passed; failed attempt/checker errors preserved.
+ 5. **Next/recovery:** select GPT-6 Astra / High here and review exact packet `04 Design Tools/logs/W1-20261004-01/REVIEW-ASTRA-HIGH.md`; do not rerun one-shot fixture/helpers. Original IDs and exports govern recovery; compare newer work before targeted restore, preserve claims/journal/SALES.
++
++
++## Session38 — current compact (W1-20261004-02)
++1. Done: bounded remaining-work analysis; R1/R2 confirmed in harness, R3 measured, R4 source finding; no business/Google writes.
++2. State: W1 IN PROGRESS; exact candidate remains W1-20261004-01/v32@AECC03651A1CD7EC62650EF1611582E4B77580EB8629F68B4A6ABE17D18AC2D3.
++3. Decisions: finish in A audit → B journal bounds → C focused close; reuse unaffected evidence; no repeated whole-suite/docs loops.
++4. Next: fix shared external-edit lock/range R1/R2; all detail/exit criteria in 04 Design Tools/logs/W1-20261004-02/COMPACT.md.
++5. Risks/recovery: audit overwrite/missing events remain unresolved; preserve frozen packages/original IDs; before/ + diff/ for docs; no self-compact/model-switch claim.

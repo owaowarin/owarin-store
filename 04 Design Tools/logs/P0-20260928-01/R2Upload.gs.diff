@@ -1,0 +1,149 @@
+--- 03 Apps Script\Web App\R2Upload.gs
++++ captured-live/R2Upload.gs
+@@ -1,7 +1,7 @@
+ // Request queue for the Windows image worker. This file is pasted into the bound Apps Script project as R2Upload.gs.
+ var R2_QUEUE_SHEET = "R2 JOBS";
+ var R2_RESULTS_SHEET = "IMAGE UPLOADS";
+-var R2_SCOPE_VERSION = "r2-hybrid-v4";
++var R2_SCOPE_VERSION = "r2-hybrid-v3";
+ var R2_QUEUE_HEADERS = [
+   "Request ID", "Batch ID", "Requested UTC", "Mode", "Source", "Product ID",
+   "Item name", "Type", "Requested Status", "Input fingerprint", "Plan ID",
+@@ -57,57 +57,12 @@
+   SpreadsheetApp.getActiveSpreadsheet().setActiveSheet(_r2ResultsSheet_());
+ }
+ 
+-// Controlled fallback for the Apps Script editor when the Sheet UI is unavailable.
+-function r2QueueInstockSnapshotNoUi() {
+-  return _r2WithLock_(function () {
+-    var fresh = _r2ReadTargets_("Instock");
+-    if (!fresh.targets.length) throw new Error("No Instock rows remained at enqueue time.");
+-    var result = _r2EnqueueBatch_("EXPORT_INSTOCK", "Instock", fresh);
+-    Logger.log(JSON.stringify(result));
+-    return result;
+-  });
+-}
+-
+-// Compatibility helper for the bound project if its older source does not expose LockService.
+-function _r2WithLock_(fn) {
+-  var lock = LockService.getDocumentLock();
+-  lock.waitLock(30000);
+-  try { return fn(); } finally { lock.releaseLock(); }
+-}
+-
+-var R2_GGB_SHEET = "GAME GUIDE BOOKS";
+-var R2_MAG_SHEET = "MAGAZINE";
+-
+-function _r2ResolveColumns_(sheet) {
+-  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getDisplayValues()[0];
+-  var out = {};
+-  headers.forEach(function (h, i) {
+-    var key = String(h).trim().toLowerCase().replace(/\s+/g, " ");
+-    if (key === "item name" || key === "name" || key === "title") out.itemName = out.itemName || i + 1;
+-    if (key === "product id" || key === "productid" || key === "sku") out.productId = out.productId || i + 1;
+-    if (key === "status") out.status = out.status || i + 1;
+-    if (key === "type") out.type = out.type || i + 1;
+-  });
+-  return out;
+-}
+-
+-function _r2Val_(row, columns, key) {
+-  var index = columns[key];
+-  return index && index <= row.length ? row[index - 1] : null;
+-}
+-
+-function _r2ResetWriteErrors_() {}
+-
+-function _r2TryWrite_(label, fn) {
+-  try { fn(); return true; } catch (e) { Logger.log(label + ": " + e); return false; }
+-}
+-
+ function _r2ReadTargets_(requestedStatus) {
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+   var targets = [];
+   var pidCounts = {};
+   var problems = [];
+-  [R2_GGB_SHEET, R2_MAG_SHEET].forEach(function (sheetName) {
++  [GGB_SHEET, MAG_SHEET].forEach(function (sheetName) {
+     var sheet = ss.getSheetByName(sheetName);
+     if (!sheet) throw new Error("Inventory sheet not found: " + sheetName);
+     var col = _r2ResolveColumns_(sheet);
+@@ -173,7 +128,7 @@
+ }
+ 
+ function _r2BuildRequestRows_(targets, mode, requestedStatus, requestedUtc, batchId, snapshotReadUtc) {
+-  var rows = targets.map(function (target) {
++  return targets.map(function (target) {
+     var fingerprint = _r2Sha256_([
+       target.source, target.productId, target.itemName, target.type, target.status
+     ].join("\u001f"));
+@@ -183,15 +138,6 @@
+       R2_SCOPE_VERSION, snapshotReadUtc
+     ];
+   });
+-  var ordered = rows.slice().sort(function (a, b) { return a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0; });
+-  var batchHash = _r2Sha256_(ordered.map(function (row) {
+-    return row.filter(function (_value, index) { return index !== 10 && index !== 11; }).join("\u001f");
+-  }).join("\n"));
+-  rows.forEach(function (row) {
+-    row[10] = "COUNT:" + rows.length;
+-    row[11] = batchHash;
+-  });
+-  return rows;
+ }
+ 
+ function _r2ResultsSheet_() {
+@@ -230,9 +176,7 @@
+   var actual = sheet.getRange(startRow, 1, expectedRows.length, R2_QUEUE_HEADERS.length).getDisplayValues();
+   if (actual.length !== expectedRows.length) return false;
+   for (var i = 0; i < expectedRows.length; i++) {
+-    for (var col = 0; col < R2_QUEUE_HEADERS.length; col++) {
+-      if (actual[i][col] !== expectedRows[i][col]) return false;
+-    }
++    if (actual[i][0] !== expectedRows[i][0] || actual[i][1] !== expectedRows[i][1]) return false;
+   }
+   return true;
+ }
+@@ -247,3 +191,42 @@
+     .map(function (byte) { return (byte + 256).toString(16).slice(-2); })
+     .join("");
+ }
++
++
++// Controlled fallback for the Apps Script editor when the Sheet UI is unavailable.
++function r2QueueInstockSnapshotNoUi() {
++  return _r2WithLock_(function () {
++    var fresh = _r2ReadTargets_("Instock");
++    if (!fresh.targets.length) throw new Error("No Instock rows remained at enqueue time.");
++    var result = _r2EnqueueBatch_("EXPORT_INSTOCK", "Instock", fresh);
++    Logger.log(JSON.stringify(result));
++    return result;
++  });
++}
++
++
++// Compatibility helper for the bound project if its older source does not expose LockService.
++function _r2WithLock_(fn) {
++  var lock = LockService.getDocumentLock();
++  lock.waitLock(30000);
++  try { return fn(); } finally { lock.releaseLock(); }
++}
++
++
++var GGB_SHEET = "GAME GUIDE BOOKS";
++var MAG_SHEET = "MAGAZINE";
++function _r2ResolveColumns_(sheet) {
++  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getDisplayValues()[0];
++  var out = {};
++  headers.forEach(function (h, i) {
++    var key = String(h).trim().toLowerCase().replace(/\s+/g, " ");
++    if (key === "item name" || key === "name" || key === "title") out.itemName = out.itemName || i + 1;
++    if (key === "product id" || key === "productid" || key === "sku") out.productId = out.productId || i + 1;
++    if (key === "status") out.status = out.status || i + 1;
++    if (key === "type") out.type = out.type || i + 1;
++  });
++  return out;
++}
++function _r2Val_(row, columns, key) { var index = columns[key]; return index && index <= row.length ? row[index - 1] : null; }
++function _r2ResetWriteErrors_() {}
++function _r2TryWrite_(label, fn) { try { fn(); return true; } catch (e) { Logger.log(label + ": " + e); return false; } }

@@ -1,0 +1,8 @@
+Observed Apps Script execution log, isolated test project, 2026-10-03 Bangkok.
+4:20:32 PM Notice Execution started
+4:20:32 PM Info PASS R3: malformed status/source rejected before writes
+4:20:35 PM Info PASS R2: missing Cost stopped before writes; header restored; same-ID retry DONE row 27
+4:20:38 PM Info PASS R1: unique SKU reuse; replay/status returned historical committed snapshot; SKUs restored
+4:20:41 PM Info PASS R4: injected marketplace formula loss -> ERROR; same-ID retry blocked; row 29 retained for evidence
+4:20:41 PM Info PASS ALL: R1-R4 isolated runtime; requests p1-review-20261003-02-R2/R1/R4; final GGB row 29, journal row 87
+4:20:43 PM Notice Execution completed

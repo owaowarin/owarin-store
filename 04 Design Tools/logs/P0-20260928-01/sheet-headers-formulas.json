@@ -1,0 +1,587 @@
+{
+  "spreadsheetId": "16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0",
+  "spreadsheetUrl": "https://docs.google.com/spreadsheets/d/16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0/edit",
+  "properties": {
+    "title": "OWARIN STORE",
+    "locale": "en_US",
+    "timeZone": "Asia/Bangkok"
+  },
+  "sheets": [
+    {
+      "properties": {
+        "sheetId": 220950620,
+        "title": "SALES",
+        "index": 0,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 84,
+          "columnCount": 26,
+          "frozenRowCount": 1,
+          "frozenColumnCount": 1
+        }
+      },
+      "data": [
+        {
+          "rowData": [
+            {
+              "values": [
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Order ID"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Item Name Sold"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Order date"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Cost"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Price"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Shipping Cost"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Net Profit"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Note"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Product ID"
+                  }
+                }
+              ]
+            },
+            {
+              "values": [
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {
+                  "userEnteredValue": {
+                    "formulaValue": "=ARRAYFORMULA(\n IF(ROW(E2:E51)-ROW(E2)+1<=ROWS(E2:E51),\n  IF(E2:E51<>\"\",(E2:E51 - D2:D51) - F2:F51,\"\"),\n \"\")\n)"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "properties": {
+        "sheetId": 286842017,
+        "title": "GAME GUIDE BOOKS",
+        "index": 1,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 1615,
+          "columnCount": 32,
+          "frozenRowCount": 2,
+          "frozenColumnCount": 3
+        }
+      },
+      "data": [
+        {
+          "rowData": [
+            {
+              "values": [
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Item name"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Product ID"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Status"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Condition"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Copy Flags"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Rarity"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Publisher"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Platform"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Genre"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Original"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Cost"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Price Range"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Price"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Gross Profit"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Market Place\nPrice"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Gross Profit MP"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Market Ref"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Ref Note"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Listed Date"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Sold Date"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Suggested Price"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Price Content Lists"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Max G Ref"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Shopee Upload"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Type"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Sub Genre"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Column 25"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Column 26"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Column 27"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Column 28"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Column 29"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Column 30"
+                  }
+                }
+              ]
+            },
+            {
+              "values": [
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {
+                  "userEnteredValue": {
+                    "formulaValue": "=IF(OR(M2=\"\",NOT(ISNUMBER(M2)),K2=\"\",NOT(ISNUMBER(K2))),\"\",IF(K2=0,M2-K2,TEXT(M2-K2,\"#,##0;(#,##0)\")&\" (\"&TEXT((M2-K2)/K2,\"0%\")&\")\"))"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "formulaValue": "=IF(OR(M2=\"\",NOT(ISNUMBER(M2))),\"\",MAX(60,CEILING((M2+50)/0.7,10)))"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "formulaValue": "=IF(OR(O2=\"\",NOT(ISNUMBER(O2)),K2=\"\",NOT(ISNUMBER(K2))),\"\",IF(K2=0,ROUND((O2*0.7-50)-K2,0),TEXT(ROUND((O2*0.7-50)-K2,0),\"#,##0;(#,##0)\")&\" (\"&TEXT(((O2*0.7-50)-K2)/K2,\"0%\")&\")\"))"
+                  }
+                },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {
+                  "userEnteredValue": {
+                    "formulaValue": "=IF(OR(A2=\"\",NOT(ISNUMBER(M2))),\"\",TRIM(REGEXREPLACE(A2,\"(?i)・RESTOCK-\\d+|\\s*\\(RESTOCK-\\d+\\)\",\"\"))&\" — \"&TEXT(M2,\"0\"))"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "properties": {
+        "sheetId": 2075440050,
+        "title": "MAGAZINE",
+        "index": 2,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 854,
+          "columnCount": 30,
+          "frozenColumnCount": 4
+        }
+      },
+      "data": [
+        {
+          "rowData": [
+            {
+              "values": [
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Item name"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Product ID"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Status"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Condition"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Copy Flags"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Rarity"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Publisher"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Original"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Cost"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Price Range"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Price"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Gross Profit"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Market Place\nPrice"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Gross Profit MP"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Market Ref"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Ref Note"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Listed Date"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Sold Date"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Suggested Price"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Price Content Lists"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Max G Ref"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Shopee Upload"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Type"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Column 24"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Column 25"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Column 26"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Column 27"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Column 28"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Column 29"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Column 30"
+                  }
+                }
+              ]
+            },
+            {
+              "values": [
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {
+                  "userEnteredValue": {
+                    "formulaValue": "=IF(OR(K2=\"\",NOT(ISNUMBER(K2)),I2=\"\",NOT(ISNUMBER(I2))),\"\",IF(I2=0,K2-I2,TEXT(K2-I2,\"#,##0;(#,##0)\")&\" (\"&TEXT((K2-I2)/I2,\"0%\")&\")\"))"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "formulaValue": "=IF(OR(K2=\"\",NOT(ISNUMBER(K2))),\"\",MAX(60,CEILING((K2+50)/0.7,10)))"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "formulaValue": "=IF(OR(M2=\"\",NOT(ISNUMBER(M2)),I2=\"\",NOT(ISNUMBER(I2))),\"\",IF(I2=0,ROUND((M2*0.7-50)-I2,0),TEXT(ROUND((M2*0.7-50)-I2,0),\"#,##0;(#,##0)\")&\" (\"&TEXT(((M2*0.7-50)-I2)/I2,\"0%\")&\")\"))"
+                  }
+                },
+                {},
+                {},
+                {},
+                {},
+                {},
+                {
+                  "userEnteredValue": {
+                    "formulaValue": "=IF(OR(A2=\"\",NOT(ISNUMBER(K2))),\"\",TRIM(REGEXREPLACE(A2,\"(?i)・RESTOCK-\\d+|\\s*\\(RESTOCK-\\d+\\)\",\"\"))&\" — \"&TEXT(K2,\"0\"))"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "properties": {
+        "sheetId": 751459385,
+        "title": "CLIENT",
+        "index": 3,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 1000,
+          "columnCount": 6,
+          "frozenRowCount": 1
+        }
+      },
+      "data": [
+        {
+          "rowData": [
+            {
+              "values": [
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Facebook Account"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Name"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Phone Number"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Address"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Post Code"
+                  }
+                },
+                {
+                  "userEnteredValue": {
+                    "stringValue": "Note"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

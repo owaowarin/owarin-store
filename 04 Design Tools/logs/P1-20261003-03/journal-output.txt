@@ -1,0 +1,1 @@
+PASS: exact Sheet guard; failed-header retry; idempotent valid schema; existing mismatch/events never overwritten; helper syntax

@@ -1,0 +1,1 @@
+PASS: 80 exact file sizes/hashes; installed staged source mirrors; previous pair backups/stubs; historical prefixes; other STATE streams unchanged; <=80lines; 14 complete audit events; deployment4/rollback3; production content readback

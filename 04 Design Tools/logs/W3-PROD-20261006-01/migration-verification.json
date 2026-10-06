@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "oldTabs": 22,
+  "newTabs": 25,
+  "oldStoredCellsUnchanged": true,
+  "CLIENToriginalAFUnchanged": true,
+  "allocatedClientIDsPreservedFromFailedAttempt": 6,
+  "requestId": "prod-w1w2-schema-20261006-v40",
+  "attempt": 2,
+  "finalState": "DONE",
+  "orders": 0,
+  "lines": 0,
+  "events": 9,
+  "workbookSha256": "d22a02643662c33fee736b90130ecab7cc9e29bcef42cbfe39c9ed42e35f19c0"
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OWARIN — Independent Web App LAB</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Trirong:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;padding:32px;background:#121110;color:#f4f1ea;font-family:'IBM Plex Sans Thai',sans-serif}main{max-width:1120px;margin:auto}.eyebrow,footer{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#a8a093}.eyebrow{letter-spacing:.12em}h1{font:400 28px/1.4 Trirong,serif;margin:12px 0}p{line-height:1.6;color:#a8a093}.diagram{overflow-x:auto}svg{display:block;width:100%;min-width:720px}svg .node{fill:#121110;stroke:#a8a093;stroke-width:1}svg .name{font-family:'IBM Plex Sans Thai',sans-serif;font-size:20px;font-weight:500;fill:#f4f1ea}svg .detail{font-family:'IBM Plex Sans Thai',sans-serif;font-size:16px;fill:#a8a093}svg .tag{font:12px 'IBM Plex Mono',monospace;fill:#a8a093}svg .edge{fill:none;stroke:#a8a093;stroke-width:1.2;marker-end:url(#lab-architecture-arrow)}footer{border-top:1px solid rgba(244,241,234,.12);padding-top:16px;line-height:1.7}.note{font:italic 16px/1.6 Trirong,serif;color:#f4f1ea}@media(max-width:600px){body{padding:16px}}@media print{body{padding:0}svg{min-width:0}}
+</style></head>
+<body><main>
+<div class="eyebrow">OWARIN STORE / STREAM B / DESIGN PROPOSAL</div>
+<h1>Independent Web App LAB</h1>
+<p>A new application and its own data store. The old shop provides workflow reference only.</p>
+<div class="diagram">
+<svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="lab-architecture-title lab-architecture-desc">
+<title id="lab-architecture-title">Independent Web App LAB architecture</title>
+<desc id="lab-architecture-desc">A new LAB interface uses new order, customer, payment and shipment workflows with a dedicated LAB data store and label preview, without an operational connection to the old shop.</desc>
+<defs><marker id="lab-architecture-arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#a8a093"/></marker></defs>
+<path class="edge" d="M280 232 H304 Q312 232 312 224 V168 Q312 160 320 160 H360"/>
+<path class="edge" d="M280 296 H304 Q312 296 312 304 V368 Q312 376 320 376 H360"/>
+<path class="edge" d="M600 160 H680"/>
+<path class="edge" d="M480 224 V312"/>
+<path class="edge" d="M520 312 V272 Q520 264 528 264 H792 Q800 264 800 256 V224"/>
+<path class="edge" d="M600 376 H680"/>
+<rect x="40" y="184" width="240" height="160" rx="4" class="node"/>
+<text x="56" y="208" class="tag">NEW INTERFACE</text><text x="56" y="244" class="name">LAB Web App</text><text x="56" y="276" class="detail">Inventory · Cart · Orders</text><text x="56" y="304" class="detail">Customers · Sales</text>
+<rect x="360" y="96" width="240" height="128" rx="4" fill="#281913" stroke="#e2603f"/>
+<text x="376" y="120" class="tag">NEW WORKFLOW</text><text x="376" y="152" class="name">Orders &amp; customers</text><text x="376" y="184" class="detail">Confirm sale once</text><text x="376" y="208" class="detail">Save recipient snapshot</text>
+<rect x="360" y="312" width="240" height="128" rx="4" class="node"/>
+<text x="376" y="336" class="tag">NEW WORKFLOW</text><text x="376" y="368" class="name">Payments &amp; shipping</text><text x="376" y="400" class="detail">Money and delivery states</text><text x="376" y="424" class="detail">Validated, retry-safe saves</text>
+<rect x="680" y="96" width="240" height="128" rx="4" class="node"/>
+<text x="696" y="120" class="tag">DEDICATED LAB SHEETS</text><text x="696" y="152" class="name">New data model</text><text x="696" y="184" class="detail">Own copy and order IDs</text><text x="696" y="208" class="detail">No legacy data import</text>
+<rect x="680" y="312" width="240" height="128" rx="4" class="node"/>
+<text x="696" y="336" class="tag">NEW OUTPUT</text><text x="696" y="368" class="name">Label preview</text><text x="696" y="400" class="detail">Paid + complete address</text><text x="696" y="424" class="detail">Print is not shipment</text>
+<line x1="40" y1="508" x2="920" y2="508" stroke="rgba(244,241,234,.12)"/>
+<text x="40" y="536" class="tag">LEGEND</text><path d="M136 532 H168" class="edge"/><text x="184" y="536" class="detail">Proposed interaction</text><rect x="448" y="520" width="16" height="16" rx="4" fill="#281913" stroke="#e2603f"/><text x="480" y="536" class="detail">First durable workflow to build</text>
+<text x="40" y="572" class="detail">Old shop: process reference only — no code, sheet or data connection.</text>
+</svg></div>
+<p class="note">Build customer → awaiting-payment order → reload → payment first. Add labels and shipment recording once that path is reliable.</p>
+<footer>13 September 2026 · Architecture / doc-inline / static · Proposed components, not installed services.<br>OWARIN skin: sumi, washi, vermilion · Trirong / IBM Plex Sans Thai / IBM Plex Mono.</footer>
+</main></body></html>

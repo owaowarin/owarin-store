@@ -1,0 +1,11 @@
+--- C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-03\before\PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md
++++ C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\00 Docs\PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md
+@@ -2,7 +2,7 @@
+ 
+ วันที่ 2026-09-28 · Stream B · สถานะ: **ออกแบบเพื่อส่งต่อ ยังไม่ได้แก้ source หรือ deploy**
+ 
+-P1 board update 2026-10-03 Session33: focused rereview found R1 replay provenance/UI-cache and R3 status-type defects; targeted repair + red→green VM regressions **DONE**. Actual isolated Google R1–R4 failure/retry **PASS** at 16:20:32–16:20:43; fresh exports 29,576/30,982 bytes, only GGB27–29/journal80–87 (158 added cells), all prior cells unchanged. Helper removed; saved source reload/readback **PASS**. Exact revised candidate Code `279140CB27CF...`, webapp `057840A5F2E9...`, Index `5ECE912BC9AE...`; evidence `04 Design Tools/logs/P1-20261003-02/review.md`, Change `P1-20261003-02` / Request `P1-R1-R4-REREVIEW-001`. Bounded R1–R4 acceptance **DONE**; shop promotion **NO-GO** pending separate current-source rebase/pairing and journal migration review. Test `/exec`, shop and Back House LAB unchanged.
++P1 board update 2026-10-03 Session34: R1–R4 integrity acceptance **DONE**; rebase onto current production v30 Meta source **DONE**; source pair v31/v31 + reviewed UI/P1Journal Save/readback **DONE**; exact17-header ADD REQUESTS migration **DONE**; existing /exec deployment Version4 at21:44 **LIVE** (owner Only myself). All P1/Meta tests and production read-only readiness/modal smoke **PASS**. Fresh backup1,535,818 bytes + after export verify17 prior tabs/195246 values/formulas unchanged; only new journal headers, events0. Change `P1-20261003-03`, Request `P1-PRODUCTION-READY-001`, evidence `04 Design Tools/logs/P1-20261003-03/result.md`/`UNDO.md`. First real production Add/DONE **NOT YET RUN**; no fake stock/sale/customer writes. Orders/reservation/Label P2 remains **TODO**; P1 does not cover legacy sales.
+ 
+ ## 1. ขอบเขตและข้อสรุป
+ 

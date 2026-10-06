@@ -1,0 +1,40 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-04\\before\\00 Docs\\STATE.md" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\STATE.md"
+index f10a4d0..f7ad18c 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-04\\before\\00 Docs\\STATE.md"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\STATE.md"	
+@@ -1,21 +1,23 @@
+ # STATE — OWARIN STORE (read this FIRST; open other files only when a line below points to them)
+ 
+-จัดทำ: 2026-10-04 05:51:03 +0700 — Stream B Session39. Other streams retain prior snapshots.
++จัดทำ: 2026-10-03T23:26:08.789Z — Stream B Session40 focused review; other streams retain prior snapshots.
+ Rule: OVERWRITE at session close; ≤80 lines. Active PLAN holds scope; dated logs are lookup evidence.
+ 
+ ## Streams
+ 
+-### 1. Add / Cart / Orders / Label (Stream B) — P1 LIVE; W1 correctness verified, runtime open
+-- Status: W1 v33 local correctness/recovery PASS; R1/R2/R3 bounds/R4 closed. Formal W1 IN PROGRESS:100-item runtime latency + requested GPT-6 Astra / High review; packet prepared, current-chat review recorded without model claim.
+-- Next ONE step: review unresolved100-item runtime plus exact v33 money/stock/security packet with GPT-6 Astra / High in this chat; no agents/new chats/self-switch. No repeated full tests unless critical findings change code.
+-- Plan: `00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md` §0/§10; no P0/P1 restart. W2 CLIENT/Label and W3 production are outside current authorization.
+-- Shop: root production v31 four files unchanged; no source/schema/data/Run/Save/deploy mutation. Fresh shop baseline belongs to Session36 read-only evidence; deployment4 dated Session34. First real P1 Add observation still pending.
+-- Test: exact isolated Sheet13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM / project1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd; five fresh source readbacks. /dev HEAD usable; numbered /exec unchanged. Synthetic bulk order08 Pending100; check07 Cancelled; original six orders/four SALES preserved.
+-- Tests:14 groups/1,032 write positions; R1 lock/R2 multi-range+UID/R3 compression/bounds/grid/R4 durable maintenance and failure/reconcile; affected P1/image/Meta regressions PASS. Real Google max100 timeout → same-ID continuation → DONE/replay; all technical requests DONE.
+-- Closed rules: Pending reserves, Cancel only own order; only Instock/Auction unavailable; SALES Shipping Cost=shop subsidy separate from customer shipping; reuse CLIENT/Facebook off Label; preserve pricing/SALES/Meta/R2.
+-- Limits: max100 may require same-ID continuation; oversized cell/journal rejected before intent; direct owner edits cannot be prevented/exhaustively audited; conflict/corrupt journal/partial derived edit needs manual reconcile. Injected Google audit payload is not a fresh physical trigger claim. No external marketplace sync. W2 absent/Label later=MISSING.
+-- Evidence: `04 Design Tools/logs/W1-20261004-03/result.md`, revision.json/diff/tests/google-final.xlsx/assertions/readbacks/UNDO/REVIEW-ASTRA-HIGH + CSV/implementation. Exact W1-20261004-03/v33@1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20. Frozen Session36/37/38 evidence retained.
+-- History: HANDOFF_2026-10-04.md is current one-page handoff; prior complete history copied to `00 Docs/_archive/handoffs_old/HANDOFF_2026-10-04_before-Session39.md`; implementation log appended, old prefixes kept.
++### 1. Add / Cart / Orders / Label (Stream B) — P1 LIVE; W1 CHANGES REQUIRED
++- Status: requested Astra-phase focused review completed in this chat; R5 runtime amplification and R6 lost-original-payload recovery need scoped implementation. No W1 release sign-off. R1–R4 remain closed; v33 source unchanged.
++- Next ONE step: user selects Sol / High, implement the single R5+R6 batch from `04 Design Tools/logs/W1-20261004-04/SOL-HANDOFF.md`, then affected local/isolated-Google tests and changed-critical-diff review. One writer; no agents/new chats.
++- Plan: `00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md` §0/§10. No P0/P1 restart. W2 CLIENT/Label and W3 production remain outside current authorization.
++- Runtime: W1-20261004-03/v33@1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20; four source hashes checked this session. Root production v31 unchanged; shop deployment4 is Session34 evidence, source baseline Session36; no fresh shop inspection or mutation.
++- Test environment (historical Session39): project1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd / Sheet13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM; /dev v33, /exec unchanged;100 Pending order08, check07 Cancelled, technical requests DONE. Not re-read or changed this session.
++- New local evidence: unchanged v33 Create100 calls flush1,019 / Confirm100 calls flush2,631; counts are synthetic method invocations, not Google timings.103 after-effect failure positions pass; lost payload recovery conflict reproduced. See review-results.json/REVIEW.md.
++- Historical tests:14 groups/1,032 write positions + R1–R4/affected P1/image/Meta PASS; Google100 required5 attempts then DONE/replay. These do not close R5/R6 or establish a fresh live test.
++- Closed rules: Pending reserves; Cancel own order; Instock only/Auction unavailable; SALES shipping=shop subsidy separate from customer shipping; reuse CLIENT/Facebook off Label; preserve price/SALES/Meta/R2.
++- Recovery correction: v33 journal does NOT retain exact original request payload. Keep browser payload/ID; if lost during unfinished request, stop for manual reconciliation. Never reconstruct a new payload/hash or ID to bypass a block. Frozen Session39 UNDO wording is superseded by Session40 REVIEW.md.
++- Limits:100-item runtime unresolved; direct owner edits/simple-trigger delivery/external marketplace sync limits unchanged; W2 absent/Label later=MISSING. New batching must retain durable intent/readback/fresh guards and old-event compatibility.
++- Evidence: `04 Design Tools/logs/W1-20261004-04/REVIEW.md`, SOL-HANDOFF.md, review.cjs/results, CSV/implementation, before/diff/manifest. Session36–39 frozen packages retained unchanged; reviewed runtime lives in W1-20261004-03/candidate.
++- History: current one-page HANDOFF_2026-10-04.md; exact Session39 handoff archived at `00 Docs/_archive/handoffs_old/HANDOFF_2026-10-04_before-Session40.md`; implementation history preserved.
+ 
+ ### 2. Meta catalog feed / R2 images — v29 pipeline LIVE, plan closed (S0–S4 DONE 2026-10-02)
+ - Verified live 2026-10-02 00:3x +07 (Meta connector): feed 1048143251023664 pulled daily 2026-09-26→10-01 05:50 Bangkok, all `succeeded_with_warnings`, 1,342 detected = 1,342 persisted, 0 invalid, 1 warning (3 all-caps titles, should_fix only). Next pull 2026-10-02 ~05:50.

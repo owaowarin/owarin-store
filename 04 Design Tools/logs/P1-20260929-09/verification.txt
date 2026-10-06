@@ -1,0 +1,11 @@
+2026-09-29 07:52 +07 — P1-20260929-09
+Target: isolated Sheet 13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM and bound test script only.
+Fresh Google XLSX exports: pre-probe 21775 bytes; post-recovery 22302 bytes.
+Bounded connector readback: GGB 12 business rows, MAG 10; GGB A15:Z15 blank; ADD REQUESTS 50 events, last four states PREPARED,ERROR,ERROR,RECOVERED for p1qa-partial-20260929-01.
+Apps Script execution 07:49:35–07:49:38 completed guarded recovery. Code.gs editor copy after removal exactly equals pre-probe copy; LF SHA256 D1D4DEE32188B35807DD8B3C5A0F6DEAEE7EF14C4C8A1B14769E4844E0A090AD; Saved to Drive.
+/dev reload: 22/22, no synthetic partial item. Google Sheet normal-zoom visual inspection: row 15 blank.
+node p1-add.test.cjs: PASS — syntax, 20 Add calls, numeric validation, replay, partial/failed writes, silent readback failures.
+node p1-ui.test.cjs: PASS — 20 resets, frozen retry/reload, storage failure, validation release, render failure, in-flight guard, stale suggestion clear.
+changes.csv: 7 unique event IDs. Implementation/HANDOFF history preserved and new sections appended.
+Implementation SHA256 8FDA66BE5410F4056E73171CE12E54AAEAB61A31650D60F19BD4C2A684002DB0
+HANDOFF SHA256 A1E95640FD147419A2D57D3A7A6EB388F3027DE3D0B86F414F3984B710D93138

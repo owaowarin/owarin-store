@@ -1,0 +1,66 @@
+--- v38/WebApp_v38.gs
++++ v39/WebApp_v39.gs
+@@ -1,5 +1,5 @@
+ // ============================================================
+-// OWARIN BACK-OFFICE — WebApp.gs v38 (SP-2, pairs with Code.gs v38)
++// OWARIN BACK-OFFICE — WebApp.gs v39 (SP-2, pairs with Code.gs v39)
+ // v31 (2026-10-03): validated Add payload and read-only same-ID recovery; pairs with Code.gs v32.
+ // v28: no functional change -- bumped only to stay paired with Code.gs v30 (identical copies listed once; all-caps titles).
+ // v27: no functional change -- bumped only to stay paired with Code.gs v29 (Meta title without RESTOCK).
+@@ -22,7 +22,7 @@
+ 
+ function doGet(e) {
+   _w1Access_();
+-  return HtmlService.createHtmlOutputFromFile("Index")
++  return HtmlService.createTemplateFromFile("Index").evaluate()
+     .setTitle("OWARIN BACK-OFFICE")
+     .addMetaTag("viewport", "width=device-width, initial-scale=1, maximum-scale=1");
+ }
+@@ -42,13 +42,19 @@
+   switch (action) {
+     case "orders.create": return _w1Mutate_("create",p);
+     case "orders.cancel": return _w1Mutate_("cancel",p);
+-    case "orders.confirm": return _w1Mutate_("confirm",p);
+-    case "orders.list": return _w1List_(p.status);
++    case "orders.confirm": return _w2Confirm_(p);
++    case "orders.list": return _w2List_(p.status);
+     case "orders.get": return _w1Get_(p.orderId);
+-    case "requests.get": return _w1Status_(p.requestId);
+-    case "requests.intent": return _w1Intent_(p.requestId);
+-    case "requests.resume": return _w1Resume_(p.requestId);
++    case "requests.get": return _w2Status_(p.requestId);
++    case "requests.intent": return _w2Intent_(p.requestId);
++    case "requests.resume": return _w2Resume_(p.requestId);
+     case "requests.reconcile": return _w1ReconcileMaintenance_(p.requestId);
++    case "clients.search": return _w2Search_(p);
++    case "clients.get": _w1Access_(); return _w2FindClient_(p.clientId).client;
++    case "clients.save": return _w2SaveClient_(p);
++    case "labels.save": return _w2SaveLabel_(p);
++    case "labels.get": return _w2Labels_(p);
++    case "labels.draft": return _w2Draft_(p.orderId);
+     case "ping":                  return { now: new Date().toISOString() };
+     case "inventory.bootstrap":   return _invBootstrap();
+     case "inventory.list":        return _readInventory(_sheetFromCode(p.source));
+@@ -341,7 +347,7 @@
+ // payload: { source, sku, price?, channel? } — price = the actual price for that channel
+ //   channel "SHOPEE" -> converted back to the shop-front base before saving (SP-2 §6)
+ function _apiMarkSold(p) {
+-  return _w1Mutate_("confirm",{requestId:p.requestId,channel:p.channel,items:[{source:p.source,sku:p.sku,itemUid:p.itemUid,price:p.price}],customerShipping:p.customerShipping,shippingSubsidy:p.shippingSubsidy,labelLater:p.labelLater,single:true});
++  return _w2Confirm_({requestId:p.requestId,channel:p.channel,items:[{source:p.source,sku:p.sku,itemUid:p.itemUid,price:p.price}],customerShipping:p.customerShipping,shippingSubsidy:p.shippingSubsidy,labelLater:p.labelLater,recipient:p.recipient,clientChoice:p.clientChoice,single:true});
+ }
+ 
+ // ── Write rows into SALES (shared by markSold and cart checkout) ──
+@@ -568,11 +574,11 @@
+ // ── CONFIRM SOLD: write SALES + Status=Sold + Sold Date (locked; current Status checked first) ──
+ // payload: { items:[{source, sku, price}], shipping?, channel? }
+ //   channel "SHOPEE" -> every price converted back to the shop-front base · Note = SKU · channel
+-function _apiSalesConfirm(p) { return _w1Mutate_("confirm",p); }
++function _apiSalesConfirm(p) { return _w2Confirm_(p); }
+ 
+ function _apiSalesList() {
+   _w1Access_();
+-  var unsettled={};var requests=_w1Requests_();Object.keys(requests).forEach(function(k){if(requests[k].state!=="DONE")unsettled[requests[k].snap.orderId]=true;});
++  var unsettled={};var requests=_w1Requests_();Object.keys(requests).forEach(function(k){if(requests[k].state!=="DONE"&&requests[k].action==="confirm")unsettled[requests[k].snap.orderId]=true;});
+   var sheet = _getSalesSheet();
+   var COL = _resolveColumns(sheet);
+   var lastRow = sheet.getLastRow();

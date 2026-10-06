@@ -1,0 +1,116 @@
+Browser tab: 4, Title: "webapp - Project Details - Apps Script", URL: "https://script.google.com/home/projects/1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp".
+0 AXWebArea webapp - Project Details - Apps Script, URL: script.google.com/home/projects/1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp
+	1 container
+		2 container yDmH0d
+			3 container gb
+				4 container
+					5 link Description: Google Apps Script, Value: script.google.com/home, ID: sdgBod
+					6 button Rename
+					7 pop up button (collapsed) Deploy, ID: ow13, Secondary Actions: Expand
+					11 pop up button (collapsed) Description: Support, Secondary Actions: Expand
+					9 button (collapsed) Description: Google apps, Secondary Actions: Expand
+					10 button (collapsed) Description: Google Account: OWARI Anannsonghirunn (anannsonghirunn.a@gmail.com), Secondary Actions: Expand
+			12 container
+				13 container Apps Script project pages
+					14 link Overview
+						15 text Overview
+					16 link Editor
+						17 text Editor
+					18 link Project History
+						19 text Project History
+					20 link Triggers
+						21 text Triggers
+					22 link Executions
+						23 text Executions
+					24 link Project Settings
+						25 text Project Settings
+				26 heading Overview, Value: 1
+					27 text Overview
+				28 container
+					29 container Project details summary
+						30 heading Project Details, Value: 2
+							31 text Project Details
+						32 button Make a copy
+						33 button Add to Starred
+						34 button Delete project forever
+						35 text Apps Script
+						36 text Container
+						37 container Container
+							38 link Description: OWARIN STORE, Value: docs.google.com/spreadsheets/d/16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0/edit?usp=drive_web
+						39 text Owner
+						40 container Owned by Me.
+							41 text Me
+						42 text Your role
+						43 text Owner
+						44 text Created
+						45 container Created on Feb 26, 2026.
+							46 text Feb 26, 2026
+						47 text Status
+						48 text Deployed
+						49 text Last modified
+						50 container Sep 25, 2026 by me
+							51 text Sep 25, 2026
+							52 text by me
+						53 text Last ran
+						54 text 9:06 PM
+					55 heading Deployments, Value: 2
+						56 text Deployments
+					57 container
+						58 tab group
+							59 tab (selected, settable, boolean) All, Value: 1, ID: deployment-head
+							60 tab (selectable, settable, boolean) Head, Value: 0, ID: AKfycbwncq04Ab1-ZvB_Q293w49qctLABh_JLQ_vSCLdChlR
+							61 tab (selectable, settable, boolean) v27 - Meta pipeline hardening 2026-09-25, Value: 0, ID: AKfycbxk-2PAuL3asvDlF0VmftrF7pwkMuQr3qUnTtej0j9MfxLaG1l4Mb39oQ1Q-2CkSYOn
+						62 container All
+					63 heading 7 Day Summary, Value: 3
+						64 text 7 Day Summary
+					65 container
+						66 container Error rate.
+							67 text Error rate
+						68 text 15.68%
+						69 container undefined.
+							70 text % of executions w/ errors
+						71 container Executions.
+							72 text Executions
+						73 text 338
+						74 container undefined.
+							75 text # of times your scripts ran
+						76 container Users.
+							77 text Users
+						78 text 1
+						79 container undefined.
+							80 text # of users for your script
+					81 heading Health, Value: 3
+						82 text Health
+					83 container Viewing a time series line chart. Sep 22, Users is 1. Error rate is 0.1553398058252427. Sep 23, Users is 1. Error rate is 0.1891891891891892. Sep 24, Users is 1. Error rate is 0.14285714285714285. Sep 25, Users is 1. Error rate is 0.12121212121212122. Sep 26, Users is 1. Error rate is 0.42857142857142855. Sep 27, Users is 0. Error rate is 1. Sep 28, Users is 1. Error rate is 0.05714285714285714.
+						84 text Viewing a time series line chart. Sep 22, Users is 1. Error rate is 0.1553398058252427. Sep 23, Users is 1. Error rate is 0.1891891891891892. Sep 24, Users is 1. Error rate is 0.14285714285714285. Sep 25, Users is 1. Error rate is 0.12121212121212122. Sep 26, Users is 1. Error rate is 0.42857142857142855. Sep 27, Users is 0. Error rate is 1. Sep 28, Users is 1. Error rate is 0.05714285714285714.
+						85 container
+							86 checkbox Users, Value: 1, ID: labelDiv-1
+								87 text Users
+							88 checkbox Error rate, Value: 1, ID: labelDiv-0
+								89 text Error rate
+					90 heading Project OAuth Scopes, Value: 3
+						91 text Project OAuth Scopes
+					92 text 4 Scopes Requested
+					93 table
+						94 row
+							95 cell
+								96 text Allow this application to run when you are not present
+							97 cell
+								98 text https://www.googleapis.com/auth/script.scriptapp
+						99 row
+							100 cell
+								101 text See, edit, create, and delete all your Google Sheets spreadsheets
+							102 cell
+								103 text https://www.googleapis.com/auth/spreadsheets
+						104 row
+							105 cell
+								106 text Connect to an external service
+							107 cell
+								108 text https://www.googleapis.com/auth/script.external_request
+						109 row
+							110 cell
+								111 text Display and run third-party web content in prompts and sidebars inside Google applications
+							112 cell
+								113 text https://www.googleapis.com/auth/script.container.ui
+
+The focused UI element is 0 AXWebArea webapp - Project Details - Apps Script, URL: script.google.com/home/projects/1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp

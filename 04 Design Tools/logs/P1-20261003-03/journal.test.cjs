@@ -1,0 +1,15 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const text=fs.readFileSync(__dirname+'/stage/P1Journal.gs','utf8');
+let id='WRONG',rows=[],writes=0,inserts=0,fail=false;
+const sh={getSheetId:()=>123,getLastRow:()=>rows.length,getRange(){return {setValues(v){writes++;if(fail)throw Error('FAIL');rows=v;},getValues:()=>rows};}};
+const ss={getId:()=>id,getSheetByName:()=>inserts?sh:null,insertSheet(){inserts++;return sh;}};
+const c=vm.createContext({SpreadsheetApp:{getActiveSpreadsheet:()=>ss,flush(){}},_withLock:fn=>fn(),_tryWrite(label,fn){try{fn();return true;}catch{return false;}},Logger:{log(){}}});
+vm.runInContext(text,c);
+assert.throws(()=>c.p1PrepareAddJournal(),/Wrong production Sheet/);assert.equal(inserts,0);
+id='16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0';fail=true;
+assert.throws(()=>c.p1PrepareAddJournal(),/header write failed/);assert.equal(inserts,1);assert.equal(rows.length,0);
+fail=false;c.p1PrepareAddJournal();assert.equal(rows[0].length,17);assert.equal(writes,2);
+c.p1PrepareAddJournal();assert.equal(writes,2,'valid existing journal untouched');
+rows.push(['Existing event']);rows[0][5]='Wrong';
+assert.throws(()=>c.p1PrepareAddJournal(),/header mismatch/);assert.equal(writes,2);assert.equal(rows[1][0],'Existing event');
+console.log('PASS: exact Sheet guard; failed-header retry; idempotent valid schema; existing mismatch/events never overwritten; helper syntax');

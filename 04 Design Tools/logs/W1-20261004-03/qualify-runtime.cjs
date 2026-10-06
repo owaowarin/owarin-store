@@ -1,0 +1,16 @@
+const fs=require('node:fs'),path=require('node:path'),w=require('./work.cjs'),rel='04 Design Tools/logs/W1-20261004-03/';
+let s=fs.readFileSync(path.join(w.dir,'close.cjs'),'utf8');
+s=s.replaceAll('W1 local/test implementation acceptance is complete; formal plan gate stays IN PROGRESS until that model-specific focused review.','W1 correctness/recovery evidence is complete; formal plan gate stays IN PROGRESS for unresolved100-item runtime latency and Astra / High focused review. Two bounded read optimizations did not achieve a single-execution100-item completion; RUNTIME-ASTRA-HANDOFF.md is the required exact-revision escalation.');
+s=s.replaceAll('W1 v33 local implementation/test acceptance PASS; R1–R4 closed. Formal W1 IN PROGRESS only for requested GPT-6 Astra / High specific focused review sign-off;','W1 v33 local correctness/recovery PASS; R1/R2/R3 bounds/R4 closed. Formal W1 IN PROGRESS:100-item runtime latency + requested GPT-6 Astra / High review;');
+s=s.replaceAll('review exact v33 money/stock/security packet with GPT-6 Astra / High','review unresolved100-item runtime plus exact v33 money/stock/security packet with GPT-6 Astra / High');
+s=s.replaceAll('W1 — local/test acceptance PASS; Astra focused sign-off pending','W1 — correctness/recovery PASS; runtime/Astra review pending');
+s=s.replaceAll('formal model-specific gate open','runtime/model-specific gates open');
+s=s.replaceAll('Formal W1 model-specific focused sign-off remains open;','Formal W1 runtime performance and model-specific focused sign-off remain open;');
+s=s.replaceAll('Formal W1 gate stays open for this model-specific review.','Formal W1 gate stays open for100-item runtime performance and this model-specific review.');
+s=s.replaceAll('Formal model-specific sign-off next; no production/LAB/W2','Unresolved100-item runtime + Astra focused review next; no production/LAB/W2');
+s=s.replaceAll('Astra model-specific sign-off remains','100-item runtime + Astra model-specific sign-off remain');
+w.write(rel+'close.cjs',s);
+let f=fs.readFileSync(path.join(w.dir,'freeze.cjs'),'utf8').replaceAll('Only Astra model-specific sign-off remains','100-item runtime + Astra model-specific sign-off remain');w.write(rel+'freeze.cjs',f);
+let t=fs.readFileSync(path.join(w.dir,'RUNTIME-ASTRA-HANDOFF.md'),'utf8');t+='\nFourth unchanged-revision continuation: same ID attempt4 APPLYING,100 UID/100 line/76 Hold DONE;276 completed steps, Hold77 ARMED. Fresh export google-bulk-timeout-4.xlsx. Fifth continuation is recovery only, no additional attempted code fix. Final outcome must be read from google-final.xlsx/assertions. Functional continuation progress does not resolve single-execution latency.\n';w.write(rel+'RUNTIME-ASTRA-HANDOFF.md',t);
+w.log('GOOGLE-BULK-TIMEOUT-04','Readback100 UID/100 lines/76 holds DONE; Hold77 ARMED;276 steps','Same-ID positive progress; original order08; no sales/new order','Continue originalID to close partial state; remaining runtime issue escalated via exact packet');
+w.log('RUNTIME-ESCALATION','Two bounded read fixes failed to eliminate single-execution100-item timeouts','OPEN performance; exact revision1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20; Astra High packet prepared; no model switch/agent','Complete already-authorized original-request recovery, then focused Astra review; do not claim W1 gate DONE');

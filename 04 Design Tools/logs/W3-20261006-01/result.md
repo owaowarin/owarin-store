@@ -1,0 +1,12 @@
+# W3 local/test preparation result — Session48
+
+## Session48 — local migration / non-print readiness
+
+จัดทำ: 2026-10-06T01:43:47+07:00. Local synthetic legacy CLIENT migration and combined SHOP/SHOPEE backend flow PASS13groups at unchanged `W2-20261005-01/v39@7043D1B05E52DEAA3272C4AB3986790592081BD1C2688C5E3867A4D4FBC88D51`. A:F values/formulas, blank rows, equal-name distinct IDs, numeric legacy values, stable original IDs/revisions, owner/test-ID/schema guards and failure/retry preserved; migrated-client selection/default order-only and recipient snapshots never add a second sale. Syntax PASS. Fresh isolated Google regression: seven DONE original confirm/CLIENT/label replays PASS with identical native proof and complete before/after XLSX values/formulas. Nine candidate hashes/twelve recorded source readbacks unchanged; no fresh source upload/readback claimed. Test installation/recovery packet: `04 Design Tools/logs/W3-20261006-01/TEST-RUNBOOK.md`; results/verification/CSV in that package.
+
+Fresh export reconciles a prior-session `labels.save` request `w1-1791222331322-mxgbvwmbbv` (2026-10-06 00:45:53–59 +07): order05 revision3→4, +5 append-only events, identical recipient/client/other order fields and all seven other sheets. Current W2 proof SALES2/CLIENT2/journal1300 rows; prior Session46/47 statements of no service mutation were incomplete historical reports, not the current baseline. No sale/stock/client change or repair was needed; actor provenance is not inferred. Complete evidence `fresh-export-delta.json` and `verification.json`.
+
+PDF/physical Print-Reprint remains **DEFERRED — ยังไม่ได้ทดสอบ (not PASS)**. Native six-column migration and a fresh complete two-channel Google UI flow remain untested; local VM and DONE replay do not close them. Production/numbered deployments/real CLIENT migration/P0/P1/LAB excluded. Next ONE: Fresh isolated two-channel UI E2E using newly scoped synthetic fixtures and original-ID recovery; export first, never rerun old Prepare/Repair. Native six-column migration fixture remains a separate untested gate.
+
+
+No runtime defect reproduced and no runtime/source/schema installation performed. Current-writer review of the exercised helpers found no blocker for these local checks; no model switch or Astra-specific review is claimed. Existing W1/W2 code and dated evidence are retained. `TEST-RUNBOOK.md` supplements original W2 `UNDO.md`, never replaces original recovery intent or authorizes data rollback.

@@ -1,0 +1,33 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-02\\before\\00 Docs\\PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md"
+index e7385c2..6215309 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-02\\before\\00 Docs\\PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md"	
+@@ -9,7 +9,7 @@
+ | ลำดับ / สถานะ | ผลลัพธ์ที่เจ้าของได้ | ขอบเขต / ของเดิมที่ใช้ต่อ | เกณฑ์จบ / ภาระงานสัมพัทธ์ |
+ |---|---|---|---|
+ | P1 — LIVE ตาม Session34 | Add ต่อเนื่อง, default New Arrival, บันทึกไม่ครบไม่ตอบ DONE, ตรวจคำขอเดิมได้ | Code/WebApp v31 + Index + P1Journal; ADD REQUESTS เท่านั้น | R1–R4 และ local/isolated Google tests ผ่าน; first real-shop Add ยังรอสังเกต ไม่มีงานแก้เพิ่มหากไม่พบบั๊ก |
+-| **1 · W1 — IN PROGRESS: local/Google core acceptance PASS; focused review pending** | **Cart → Create order → Pending → Cancel/Confirm sold** และ Orders Bento ใช้งานจบสาย | stable Item UID, shared guards, ORDERS/ORDER LINES/ORDER REQUESTS, SALES เดิม; ปุ่มข้างราคา + 4 คำสั่ง, final review + Label later | QA-B/C/D/E/F/G/K/L + regression ที่กระทบ; review critical diff; สูงสุด เพราะเป็นเงิน/สต็อกและฐานของ W2 |
++| **1 · W1 — IN PROGRESS: core tests retained; R1–R4 focused findings open** | **Cart → Create order → Pending → Cancel/Confirm sold** และ Orders Bento ใช้งานจบสาย | stable Item UID, shared guards, ORDERS/ORDER LINES/ORDER REQUESTS, SALES เดิม; ปุ่มข้างราคา + 4 คำสั่ง, final review + Label later | QA-B/C/D/E/F/G/K/L + regression ที่กระทบ; review critical diff; สูงสุด เพราะเป็นเงิน/สต็อกและฐานของ W2 |
+ | **2 · W2 — TODO** | **ค้นหา/บันทึกลูกค้า → Label → Print/Reprint** จากเว็บและ Sheets | CLIENT เดิม, recipient snapshot, renderer เดียวจาก Label Tool, CAUTION asset เดิม; ต่อ final review ของ W1 | QA-H/I/K/L + sale-no-repeat; Google dialog/PDF/print check; ปานกลางถึงสูง |
+ | **3 · W3 — TODO** | **เปิดใช้ workflow ครบชุดพร้อม undo และคู่มือ** | exact reviewed revision + migration dry-run + isolated E2E → release ที่อนุมัติ → readback | รวม QA-A–L ตามความเกี่ยวข้อง, ไม่มี critical issue ค้าง, source/schema/undo ตรงจริง; งานโค้ดต่ำแต่มีขั้น Google/เครื่องพิมพ์ |
+ 
+@@ -45,7 +45,7 @@ flowchart LR
+ 
+ ข้อมูลส่วนนี้อ้าง STATE snapshot เดิม ไม่ใช่การตรวจระบบสดในรอบนี้: (1) รักษางานที่ LIVE; ถ้ามีข้อมูลเสีย/ขายซ้ำให้แก้ก่อน W1, (2) ตรวจผล Meta auto-refresh ที่ค้าง A5 และวินิจฉัย fbaPostBatch error ในงานบำรุงรักษาสั้น ไม่รื้อ pipeline, (3) Shopee relisting: ตรวจ builder/drafts และ mapping item IDs; reconciliation รายการเก่าต้องมี export ราคาสต็อก/options จากเจ้าของ, (4) OWA ads ยัง PARKED รอ budget/posts/break-even และคำสั่งเปิดงาน, (5) storefront/เครื่องมืออื่นสถานะยังไม่ตรวจจึงไม่รวมคำรับรองว่า “ทั้งร้านเสร็จ” ไม่แตะ OWARIN Back House LAB
+ 
+-**ถัดไปเพียงหนึ่งงาน:** focused GPT-6 Astra / High review บน W1-20261004-01/v32@AECC03651A1CD7EC62650EF1611582E4B77580EB8629F68B4A6ABE17D18AC2D3. Session37 core isolated-Google acceptance ผ่านแล้ว; W1 ยังไม่ DONE จน critical review ผ่าน. ไม่ย้อนเริ่ม P0/P1. หลักฐาน `04 Design Tools/logs/W1-20261004-01/result.md` / revision.json / UNDO.md / REVIEW-ASTRA-HIGH.md.
++**ถัดไปเพียงหนึ่งงาน:** แก้ R1/R2 audit journal lock/range ตาม `04 Design Tools/logs/W1-20261004-02/COMPACT.md`: A audit → B journal bounds → C focused close. Session38 repro ยืนยันบั๊ก audit; จึงไม่ใช่แค่รอ reviewer เซ็นผ่าน. ใช้ baseline/tests เดิมเฉพาะส่วนไม่กระทบ ไม่รันใหม่ทั้งชุด; ไม่แตะร้าน/W2.
+ 
+ ## 1. ขอบเขตและข้อสรุป
+ 
+@@ -315,7 +315,9 @@ asset `caution-v2.png` ที่มีอยู่แก้ข้อความ
+ 
+ Historical Session36: W1.1 baseline/source/schema/callers + reproduction DONE; W1.2/W1.3 local implementation/unit/browser mock PASS, saved Google test source ready; actual Google fixture/schema/UI/failure/retry/concurrency and critical review pending Authorization. Exact v32 revision/evidence at `04 Design Tools/logs/W1-20261003-01/`; no shop install/deploy. This status qualifies the planned deliverables below; it does not mark their Google/review gates passed.
+ 
+-Session37 current: W1.1 DONE; W1.2/W1.3 implementation/core Google acceptance PASS (fixture, partial Hold/SALES recovery, true two-tabs conflict, own Cancel/reload, review/SHOP/Shopee/single, external edit guards, typed SALES/footer/formulas). Six synthetic orders/four unique SALES; Index Cancel/Clear corrections and touched UI regressions PASS. Critical review pending, not W1 DONE; maximum/multi-cell/menu/runtime limits listed in focused packet. Exact revision W1-20261004-01/v32@AECC03651A1CD7EC62650EF1611582E4B77580EB8629F68B4A6ABE17D18AC2D3; evidence W1-20261004-01. Production untouched; /dev only, no numbered test deployment change.
++Session37 historical: W1.1 DONE; W1.2/W1.3 implementation/core Google acceptance PASS (fixture, partial Hold/SALES recovery, true two-tabs conflict, own Cancel/reload, review/SHOP/Shopee/single, external edit guards, typed SALES/footer/formulas). Six synthetic orders/four unique SALES; Index Cancel/Clear corrections and touched UI regressions PASS. Critical review pending, not W1 DONE; maximum/multi-cell/menu/runtime limits listed in focused packet. Exact revision W1-20261004-01/v32@AECC03651A1CD7EC62650EF1611582E4B77580EB8629F68B4A6ABE17D18AC2D3; evidence W1-20261004-01. Production untouched; /dev only, no numbered test deployment change.
++
++Session38 current: analysis/repro only; candidate revision unchanged. R1 event overwrite + R2 missed multi-row/UID audit confirmed in bounded harness; R3 size/capacity and R4 touched maintenance audit open. Three bounded batches and stop criteria: `04 Design Tools/logs/W1-20261004-02/COMPACT.md`; no completed Astra review/model-switch claim.
+ 
+ | งานย่อยตามลำดับ | ทำอะไร / ตรวจอย่างไร | ส่งมอบที่ตรวจรับได้ |
+ |---|---|---|

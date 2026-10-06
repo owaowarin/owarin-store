@@ -1,0 +1,56 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-runtime\\Index.html" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\test-runtime\\Index.html"
+index 67edbe5..bccf843 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-runtime\\Index.html"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\test-runtime\\Index.html"	
+@@ -263,7 +263,9 @@ nav button small#revCount{background:var(--gold-bright);color:hsl(0 0% 5%);borde
+ .rv-range{color:var(--gold-bright);font-size:12px;margin-top:4px;font-variant-numeric:tabular-nums}
+ </style>
+ </head>
+-<body>
++<body><aside style="background:#fff3cd;color:#111;padding:8px"><strong>ISOLATED TEST QA — W1-20261004-01</strong>
++<button id="qaFixture">Prepare fixture once</button><button id="qaRecovery">Run recovery once</button><pre id="qaResult">QA idle; inspect Sheet before each run</pre></aside>
++<script>(function(){function run(name){document.getElementById('qaFixture').disabled=true;document.getElementById('qaRecovery').disabled=true;var out=document.getElementById('qaResult');out.textContent='RUNNING '+name+'; do not retry blindly';var r=google.script.run.withSuccessHandler(function(v){out.textContent='PASS '+v;}).withFailureHandler(function(e){out.textContent='ERROR '+e.message+'; inspect readback before retry';});if(name==='fixture')r.w1QaPrepare20261004();else r.w1QaRecovery20261004();}document.getElementById('qaFixture').onclick=function(){run('fixture');};document.getElementById('qaRecovery').onclick=function(){run('recovery');};})();</script>
+ 
+ <header>
+   <div class="brand">OWARIN <span class="g">BACK-OFFICE</span>
+@@ -552,7 +554,7 @@ nav button small#revCount{background:var(--gold-bright);color:hsl(0 0% 5%);borde
+   </div>
+ </div>
+ 
+-<div class="modal-bg" id="w1ReviewModal"><div class="modal w1-review"><h2>Final review</h2><div id="w1ReviewContent"></div><div class="cart-actions"><button class="btn" data-close="w1ReviewModal">Back</button><button class="btn primary" id="w1Commit">Confirm sold · Label later</button></div></div></div>
++<div class="modal-bg" id="w1ReviewModal"><div class="modal w1-review"><h2 id="w1ReviewTitle">Final review</h2><div id="w1ReviewContent"></div><div class="cart-actions"><button class="btn" data-close="w1ReviewModal">Back</button><button class="btn primary" id="w1Commit">Confirm sold · Label later</button></div></div></div>
+ <div id="toast"></div>
+ <footer><span>OWARIN STORE</span><span class="g" id="stamp"></span></footer>
+ 
+@@ -1743,7 +1745,6 @@ $('cActQuote').addEventListener('click', function(){
+ $('cActConfirm').addEventListener('click', confirmSold);
+ $('cClear').addEventListener('click', function(){
+   if (!S.cart.length) return;
+-  if (!confirm('Clear all items from the cart?')) return;
+   S.cart = []; S.shipOverride = null; $('cShipShop').value=''; updateCartCount(); renderCart(); render(false);
+ });
+ $('mResult').addEventListener('click', function(e){
+@@ -2098,7 +2099,7 @@ function confirmSold(){
+  else w1OpenReview(p,null);
+ }
+ function w1OpenReview(payload,order){
+- w1Review={payload:payload,order:order};var lines=order?order.lines:payload.items.map(function(it){var r=findBySku(it.source,it.sku);return {title:r?r.baseTitle:it.sku,sku:it.sku,enteredPrice:Number(it.price),ledgerPrice:payload.channel==='SHOPEE'?Math.round(Number(it.price)*0.7-50):Number(it.price)};});
++ w1Review={payload:payload,order:order,action:'orders.confirm'};$('w1ReviewTitle').textContent='Final review';$('w1Commit').textContent='Confirm sold · Label later';var lines=order?order.lines:payload.items.map(function(it){var r=findBySku(it.source,it.sku);return {title:r?r.baseTitle:it.sku,sku:it.sku,enteredPrice:Number(it.price),ledgerPrice:payload.channel==='SHOPEE'?Math.round(Number(it.price)*0.7-50):Number(it.price)};});
+  var channel=order?order.channel:payload.channel,customer=order?order.customerShipping:payload.customerShipping,subsidy=order?order.shippingSubsidy:payload.shippingSubsidy;
+  $('w1ReviewContent').innerHTML='<p>'+esc(order?order.orderId:'New '+channel+' sale')+'</p>'+lines.map(function(l){return '<p>'+esc(l.title)+' <span class="sku">'+esc(l.sku)+'</span> · entered '+money(l.enteredPrice)+' · SALES '+money(l.ledgerPrice)+'</p>';}).join('')+'<p>Customer Shipping '+money(customer)+' · Shipping Subsidy (shop contribution) '+money(subsidy)+'</p><p>Total '+money(lines.reduce(function(n,l){return n+Number(l.enteredPrice);},0)+Number(customer))+'</p><p class="hint">Label later — CLIENT and label completion will be added in W2.</p>';
+  showModal('w1ReviewModal',true);w1SyncButtons();
+@@ -2116,11 +2117,12 @@ $('w1Refresh').addEventListener('click',w1LoadOrders);
+ $('w1Retry').addEventListener('click',w1Resume);
+ $('w1Board').addEventListener('click',function(e){
+  var b=e.target.closest('[data-order]');if(!b)return;var o=w1Orders.filter(function(x){return x.orderId===b.getAttribute('data-order');})[0],op=b.getAttribute('data-op');if(!o)return;
+- if(op==='cancel'){if(!confirm('Cancel '+o.orderId+' and release only its reservation?'))return;w1Run('orders.cancel',{orderId:o.orderId,expectedRevision:o.revision}).then(function(r){w1Saved(r,'orders.cancel');}).catch(function(e){toast(e.message);});}
++ if(op==='cancel')w1OpenCancel(o);
+  else if(op==='confirm')w1OpenReview({orderId:o.orderId,expectedRevision:o.revision,labelLater:true},o);
+  else{$('w1Details').textContent=o.orderId+' · '+o.status+'\n'+o.lines.map(function(l){return l.title+' · '+l.sku+' · entered '+l.enteredPrice+' · SALES '+l.ledgerPrice;}).join('\n')+'\nCustomer Shipping '+o.customerShipping+' · Shipping Subsidy '+o.shippingSubsidy;}
+ });
+-$('w1Commit').addEventListener('click',function(){if(!w1Review)return;w1Run('orders.confirm',w1Review.payload).then(function(r){w1Saved(r,'orders.confirm');}).catch(function(e){toast(e.message);});});
++function w1OpenCancel(order){w1Review={action:'orders.cancel',payload:{orderId:order.orderId,expectedRevision:order.revision}};$('w1ReviewTitle').textContent='Cancel order';$('w1ReviewContent').innerHTML='<p>'+esc(order.orderId)+'</p><p>Release only this order’s reservation. Other Pending orders remain reserved.</p>';$('w1Commit').textContent='Confirm cancel';showModal('w1ReviewModal',true);w1SyncButtons();}
++$('w1Commit').addEventListener('click',function(){if(!w1Review)return;var action=w1Review.action;w1Run(action,w1Review.payload).then(function(r){showModal('w1ReviewModal',false);w1Saved(r,action);}).catch(function(e){toast(e.message);});});
+ w1SyncButtons();
+ 
+ load();

@@ -1,0 +1,1 @@
+﻿PASS: UTF-8, data validation, demo label, zero/full bars, monitor placement, native drag hit-test, native window and rendering.

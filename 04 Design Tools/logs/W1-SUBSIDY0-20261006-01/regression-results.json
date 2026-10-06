@@ -1,0 +1,26 @@
+{
+  "initial": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "3617fa",
+        "wall_time_seconds": 0.7650593,
+        "exit_code": 1,
+        "original_token_count": 271,
+        "output": "node:internal/assert/utils:77\r\n    throw err;\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\r\n\r\n  assert(i>=0&&j>i)\r\n\r\n    at between (C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-SUBSIDY0-20261006-01\\subsidy.test.cjs:3:69)\r\n    at Object.<anonymous> (C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-SUBSIDY0-20261006-01\\subsidy.test.cjs:19:68)\r\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\r\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\r\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\r\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\r\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\r\n    at node:internal/main/run_main_module:33:47 {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.19.0\r\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "38b200",
+        "wall_time_seconds": 1.6510919,
+        "exit_code": 0,
+        "original_token_count": 481,
+        "output": "{\n  \"result\": \"PASS\",\n  \"groups\": 14,\n  \"checks\": [\n    \"Save & confirm: buyer/recipient distinct; literal formula-safe phone/postcode; replay one sale/client; allowlist; combined +66 search\",\n    \"CRM CLIENT literal row failure/after-effect: SOLD snapshot survives; only CRM retries, one client and sale\",\n    \"CRM journal PREPARED failure/after-effect: SOLD snapshot survives; only CRM retries, one client and sale\",\n    \"CRM journal DONE failure/after-effect: SOLD snapshot survives; only CRM retries, one client and sale\",\n    \"Partial literal CLIENT row, missing column 0: same allocated ID-only recovery\",\n    \"Partial literal CLIENT row, missing column 3: same allocated ID-only recovery\",\n    \"Partial literal CLIENT row, missing column 6: same allocated ID-only recovery\",\n    \"Partial literal CLIENT row, missing column 7: same allocated ID-only recovery\",\n    \"Label later completion/reprint/get never writes ledger or stock; CLIENT update leaves old snapshot unchanged; revision/access rejects\",\n    \"Intent-write failure prevents sale and recipient loss\",\n    \"Invalid recipient rejects before effects\",\n    \"Lost response before CLIENT intent: parent ID-only recovery/status/list remain actionable without a second sale\",\n    \"Monotonic CLIENT revision, duplicate-name IDs, combined ranking and default order-only edit preserve CLIENT/SALES\",\n    \"Label after-effect original-ID replay preserves sold ledger; changed payload rejects; schema replay retains stable client identities\"\n  ]\n}\n{\"result\":\"PASS\",\"checks\":[\"HTML escaped; real __MORE__ title stays literal\",\"Natural sort shared by standalone and web\",\"Printable document prunes every non-allowlisted field\",\"100x150mm/zero page margin and font/image ready guard\",\"One-item overflow may become +1 item; no silent clipped title\",\"Generated print document syntax\"]}\nPASS latest Orders response wins; stale result/error cannot restore old actionable cards\n"
+      }
+    }
+  ],
+  "subsidyRetest": "PASS after correcting test extraction boundary w1Resume; same assertions preserved",
+  "result": "PASS"
+}

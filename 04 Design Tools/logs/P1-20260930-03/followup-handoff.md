@@ -1,0 +1,5 @@
+
+
+## Session 22 — test Apps Script Save and readback (2026-09-30)
+
+Change/Request `P1-20260930-03` / `P1-ADD-TEST-SOURCE-INSTALL-001`. Owner-pasted unsaved Code/Index in the exact separate test project matched prepared LF hashes `6006FE13F41F4C156E1FC623C9D77FCF2A219EC02D1703AE13F1C55807A9C3F8` / `4734E5F9AC56A771760E97B740C37D1252C112702249ED95A9A008724EBEEAA6`; TEST bank/project key verified. Ctrl+S saved, and both full hashes matched again after editor reload; Webapp stayed `5A818FC25701205910362E739967879B3644199FDEE7020381B3BC44AA74A257`. Test `/dev` loaded and Add form opened/closed without Save. AX Save clicks opened Rename or left Unsaved; Escape/ Ctrl+S recovered. Evidence/error/retry/restore references: `04 Design Tools/logs/P1-20260930-03/result.md`, `changes.csv`, source backups and Apps Script history. No test `/exec` deploy, shop/Back House LAB write, or live timeout claim. Next: separate Change ID for one synthetic test Add with fresh before/after Sheet export, then bounded timeout/recovery QA. Sol / High for implementation/tests; Astra / High for consequential integrity review.

@@ -1,0 +1,149 @@
+{
+  "Verified": "2026-09-23 01:55:43 +07:00",
+  "Status": "LOCAL-BINDINGS-VERIFIED-NOT-DEPLOYED",
+  "LiveSheetRows": 2465,
+  "PriorityIdsChecked": 35,
+  "BoundProductIds": 29,
+  "BoundImageRows": 31,
+  "FreshMasterHashes": 2913,
+  "InstockProducts": 1333,
+  "InstockImages": 1933,
+  "CrossProductCollisions": 0,
+  "PendingPageDecisions": 5,
+  "PendingBlankType": 1,
+  "ExternalMutations": "NONE",
+  "Files": [
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\image-library.ps1",
+      "Bytes": 15720,
+      "SHA256": "5EEBFC67D8513B945D78043F6F5B607C97A911DA42E846DF1663F30FA94049B4"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\image-bindings.csv",
+      "Bytes": 8653,
+      "SHA256": "7536343F978536D1C6414016FD90B86EB298C39EE456CBFB477B31A0EEEBE703"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\export-instock-snapshot.ps1",
+      "Bytes": 15246,
+      "SHA256": "070910080363C1076F7DCEFD3DE21AD53E67AEADDDCC09185BEA4842D6DA71DD"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\build-r2-library-mapping.ps1",
+      "Bytes": 6220,
+      "SHA256": "960C413E54E42521477B8698F47E007A59CCF00B327B6D8DF59C2A060A26144C"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\audit-image-baseline.py",
+      "Bytes": 21103,
+      "SHA256": "04EA776F430C6F0BB4DFDEAA0C260751D9E44B2F2C22E1F6816CF2712E6AF9E5"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\image-library.test.ps1",
+      "Bytes": 8187,
+      "SHA256": "F23AD68499C6B2A6DA8632138BB5D604AB10F7C73C8EB774F267A67B0E409E80"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\03 Apps Script\\Web App\\R2Upload.gs",
+      "Bytes": 10084,
+      "SHA256": "B00E029A5B41BA3C44E58FF01F61757C3C6F671A616F3990E72DBAB32891660A"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\03 Apps Script\\Web App\\R2Upload.test.js",
+      "Bytes": 2013,
+      "SHA256": "3332488802DA83842F682704F76841FD85F5438646AB0257D0D96247AA3EF1B9"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\BASELINE-R2-REVIEW_2026-09-23.md",
+      "Bytes": 11440,
+      "SHA256": "5515E7F1A04BAD50330E688DC4B58AD5EC713CB9B4A1E49E0C729C1C1E7E1B79"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\PLAN-R2-HYBRID_2026-09-22.md",
+      "Bytes": 49493,
+      "SHA256": "D5B9DB1BAC7B15EA5246AC1FF7C2D989B31FCA7E186376DC0192B2FECFF96434"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\HANDOFF_2026-09-23.md",
+      "Bytes": 6541,
+      "SHA256": "8F7B67B1F95795B4A51718788B3CA80E2AE08BEB96A12811EFB5BE9880493356"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\image_bindings_20260923-014408\\GAME GUIDE BOOKS.csv",
+      "Bytes": 134569,
+      "SHA256": "BECC52FA154B1AB286DF7114DDC7222FE605ACE759B22E536DB68D6CF9DD2332"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\image_bindings_20260923-014408\\MAGAZINE.csv",
+      "Bytes": 76971,
+      "SHA256": "0C9285DC71CC02B6472A8B7A82CFBCFCF0E91A28EBA9D54FB573EABE331716B3"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\image_bindings_20260923-014408\\before-after.csv",
+      "Bytes": 7050,
+      "SHA256": "C26441560D8E0E63E3F740216CE37CE5949E1AF836B3ED90543DD679BC7261EF"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\image_bindings_20260923-014408\\all-product-before-after.csv",
+      "Bytes": 2100,
+      "SHA256": "EA62EFB250E46988E5A047E380421361D02B86E6BC436EB3BE4CB95A170A6E83"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\image_bindings_20260923-014408\\image_library_check_20260923-014758.csv",
+      "Bytes": 746825,
+      "SHA256": "109B9C5595E6085C99018188E117D507BF8A8D867DB07012653762918C302F13"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\image_bindings_20260923-014408\\instock_snapshot_dryrun_20260923-014917.csv",
+      "Bytes": 706424,
+      "SHA256": "5AF69F89E58C4B6E4A356F171933E27CF76E2C32392E94E46A3AD8783517F67F"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\image_bindings_20260923-014408\\action-log.csv",
+      "Bytes": 1210,
+      "SHA256": "29C0FEA1A1568681564B91AADDB926CC6129C5F486193956847752BDAAB731B3"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\image_bindings_20260923-014408\\test-results.csv",
+      "Bytes": 624,
+      "SHA256": "FC6EF7D9BBFDD8284B9BF2C2FFCB82A754E577170E53213E55E96B13D747CE53"
+    }
+  ],
+  "Tests": [
+    {
+      "Check": "Image library integration",
+      "Result": "PASS",
+      "Evidence": "image-library test passed"
+    },
+    {
+      "Check": "Python compile and worker self-test",
+      "Result": "PASS",
+      "Evidence": "r2-queue-worker self-test passed"
+    },
+    {
+      "Check": "PowerShell parser",
+      "Result": "PASS",
+      "Evidence": "4 changed PowerShell scripts parsed"
+    },
+    {
+      "Check": "Full strict image check",
+      "Result": "PASS",
+      "Evidence": "2913 fresh hashes, zero owner collisions"
+    },
+    {
+      "Check": "Full Instock preview",
+      "Result": "PASS",
+      "Evidence": "1333 products, 1933 mapped images, zero issues"
+    },
+    {
+      "Check": "All-product mapping diff",
+      "Result": "PASS",
+      "Evidence": "9 intended alias changes; 1 Sold base title ambiguity resolved; 0 other Instock changes"
+    },
+    {
+      "Check": "Apps Script request-contract test",
+      "Result": "PASS",
+      "Evidence": "Wrong-Type read-back rejected; Node syntax check passed"
+    }
+  ]
+}

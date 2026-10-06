@@ -1,0 +1,15 @@
+const fs=require('node:fs'),path=require('node:path'),dir=__dirname,backup=dir+'/attempts/F04/before';
+const files=['candidate/Code_v34.gs','candidate/WebApp_v34.gs','candidate/W1Orders.gs','candidate/Index.html','harness.cjs','stage.cjs','candidate/p1-add.test.cjs','candidate/p1-ui.test.cjs','revision.json'];
+for(const f of files){const out=backup+'/'+f;if(fs.existsSync(out))throw Error('Already attempted');fs.mkdirSync(path.dirname(out),{recursive:true});fs.copyFileSync(dir+'/'+f,out);}
+function edit(f,old,value){let s=fs.readFileSync(dir+'/'+f,'utf8');if(!s.includes(old))throw Error('Anchor '+f);fs.writeFileSync(dir+'/'+f,s.replace(old,value));}
+for(const name of ['Code','WebApp']){const old=dir+'/candidate/'+name+'_v34.gs',to=dir+'/candidate/'+name+'_v35.gs';fs.writeFileSync(to,fs.readFileSync(old,'utf8').replaceAll('v34','v35'));fs.mkdirSync(dir+'/candidate/backup',{recursive:true});fs.copyFileSync(old,dir+'/candidate/backup/'+name+'_v34.gs');fs.writeFileSync(old,'// Superseded local/test v34. Full source: backup/'+name+'_v34.gs; current: '+name+'_v35.gs.\n');}
+edit('candidate/WebApp_v35.gs','case "requests.intent": return _w1Intent_(p.requestId);','case "requests.intent": return _w1Intent_(p.requestId);\n    case "requests.resume": return _w1Resume_(p.requestId);');
+edit('candidate/W1Orders.gs','function _w1View_(){','// Resume by ID on the server: Google object transport may reorder payload keys.\nfunction _w1Resume_(id){var intent=_w1Intent_(id);return _w1Mutate_(intent.action.slice(7),intent.payload);}\nfunction _w1View_(){');
+edit('candidate/W1Orders.gs','Code v34 / WebApp v34','Code v35 / WebApp v35');
+edit('candidate/W1Orders.gs','W1 v34 local/test candidate','W1 v35 local/test candidate');
+edit('candidate/Index.html','function w1Run(action,payload){','function w1Run(action,payload,serverRecovery){');
+edit('candidate/Index.html','w1Pending={action:action,payload:payload};','w1Pending={action:action,payload:payload,serverRecovery:!!serverRecovery};');
+edit('candidate/Index.html','return callApi(pending.action,pending.payload).then(function(result){','return callApi(pending.serverRecovery?\'requests.resume\':pending.action,pending.serverRecovery?{requestId:pending.payload.requestId}:pending.payload).then(function(result){');
+edit('candidate/Index.html','return w1Run(intent.action,intent.payload).then(function(r){','return w1Run(intent.action,intent.payload,true).then(function(r){');
+for(const f of ['harness.cjs','stage.cjs','candidate/p1-add.test.cjs','candidate/p1-ui.test.cjs']){let s=fs.readFileSync(dir+'/'+f,'utf8').replaceAll('Code_v34.gs','Code_v35.gs').replaceAll('WebApp_v34.gs','WebApp_v35.gs');fs.writeFileSync(dir+'/'+f,s);}
+require('node:child_process').execFileSync(process.execPath,[dir+'/record.cjs','F04-FIX','Owner-only requests.resume loads immutable server payload by ID; UI retains recovery flag across reload; paired v35','Scoped source edit; before backups complete; affected tests next','attempts/F04/before; existing12 unchanged until same-ID resume']);

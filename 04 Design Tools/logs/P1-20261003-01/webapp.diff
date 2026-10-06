@@ -1,0 +1,54 @@
+diff --git "a/04 Design Tools\\logs\\P1-20261003-01\\before\\webapp.gs" "b/04 Design Tools\\logs\\P1-20260929-01\\candidate\\webapp.gs"
+index f6f9c04..89fa9dd 100644
+--- "a/04 Design Tools\\logs\\P1-20261003-01\\before\\webapp.gs"	
++++ "b/04 Design Tools\\logs\\P1-20260929-01\\candidate\\webapp.gs"	
+@@ -184,7 +184,7 @@ function _addNumber(v, field) {
+ function _apiInvAddData(p) {
+   var title = String(p.title || "").trim();
+   if (!title) throw new Error("Please enter a product title");
+-
++  if (p.source !== 'GGB' && p.source !== 'MAG') throw new Error('Invalid Add source');
+   var sheetName = _sheetFromCode(p.source);
+   return {
+     requestId: String(p.requestId || '').trim(),
+@@ -195,7 +195,7 @@ function _apiInvAddData(p) {
+     original: _addNumber(p.original, 'Original'),
+     cost:     _addNumber(p.cost, 'Cost'),
+     price:    _addNumber(p.price, 'Price'),
+-    status:   String(p.status || "").trim() || "New Arrival",
++    status:   _addStatus(p.status),
+     // SP-2: handled inside addInventoryRow (platform affects the curve, so it must be set first)
+     platform:  String(p.platform  || "").trim(),
+     genre:     String(p.genre     || "").trim(),
+@@ -214,9 +214,10 @@ function _apiInvAdd(p) {
+ }
+ 
+ function _apiInvAddResult(res, sheetName) {
+-  var sheet = _getSheetOrThrow(sheetName);
+-  var itemRow = _findRowBySku(sheet, _resolveColumns(sheet), res.sku);
+-  var item = _readRow(sheet, itemRow, _srcCode(sheetName));
++  if (!res.itemSnapshot || res.itemSnapshot.productId !== res.sku ||
++      res.itemSnapshot.name !== res.title || res.sheetName !== sheetName)
++    throw new Error('Add DONE result requires recovery; item snapshot missing or inconsistent');
++  var item = res.itemSnapshot;
+   // P3: match the booking queue on base title — a booking error must not fail the add
+   var matches = [];
+   try { matches = _apiBookingMatch(item.name).matches; } catch (e) { matches = []; }
+@@ -242,11 +243,15 @@ function _apiInvAddStatus(p) {
+     var result;
+     try { result = JSON.parse(prior[15]); } catch (e) {}
+     if (!result || result.success !== true || result.sku !== prior[11] ||
+-        Number(result.row) !== Number(prior[10]))
++        Number(result.row) !== Number(prior[10]) || result.sheetName !== prior[8])
+       throw new Error('Add DONE result requires recovery; Request ID ' + id);
+     return { state: 'DONE', result: result };
+   });
+-  if (status.state === 'DONE') return { state: 'DONE', data: _apiInvAddResult(status.result, data.sheetName) };
++  if (status.state === 'DONE') {
++    var recovered = _apiInvAddResult(status.result, data.sheetName);
++    recovered.historical = true;
++    return { state: 'DONE', data: recovered };
++  }
+   return status;
+ }
+ 

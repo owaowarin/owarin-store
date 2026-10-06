@@ -1,0 +1,12 @@
+{
+  "formula": "=A2-B2-C2",
+  "inputs": [
+    390.1,
+    100.05,
+    10.02
+  ],
+  "googleExportCachedValue": 280.03,
+  "jsExpression": 280.03000000000003,
+  "sameDouble": false,
+  "existingTabsUnchanged": true
+}

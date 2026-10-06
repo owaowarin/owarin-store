@@ -1,0 +1,17 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\before\\00 Docs\\HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md"
+index 8366200..abed135 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\before\\00 Docs\\HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md"	
+@@ -165,3 +165,12 @@ Test project → W1Qa.gs → function dropdown w1QaPrepare20261004 → Run → R
+ SHOP: INVENTORY → Add to cart beside price → CART → confirm Customer Shipping and Shipping Subsidy (0 explicitly allowed) → Create order → ORDERS/Pending. Cancel releases only that order; Clear cart never cancels it. Confirm sold → Final review → Back makes no sale; Confirm sold · Label later commits once. SHOPEE cart: Confirm sold opens review showing entered and ledger round(entered*0.7-50); commit Label later once. Single Review sale uses the same journal. Every new cart/sale requires subsidy again. Sold cards show Missing label/Complete label: W2.
+ 
+ If timeout/error: retain stored Request ID → Check / retry request; only DONE canonical readback clears recovery. Never use a new ID. If corrupt journal/external conflict/partial derived edit: stop mutations, export and reconcile exact cells/events; successful writes stay intact. Script cannot prevent direct owner Sheet edits; managed UID orphan/duplicates fail closed. Local preview command `node 04 Design Tools/logs/W1-20261003-01/preview.cjs` serves unchanged UI + mock transport at127.0.0.1:8766; it is synthetic and not Google acceptance.
++
++
++## Session37 — current W1 candidate and isolated Google test
++
++W1-20261004-01/v32@AECC03651A1CD7EC62650EF1611582E4B77580EB8629F68B4A6ABE17D18AC2D3; current package `04 Design Tools/logs/W1-20261004-01/`. Core Google acceptance PASS; focused review pending; authoritative shop source remains v31/deployment4 (dated Session34). W1 is usable only in isolated /dev HEAD https://script.google.com/macros/s/AKfycbwx5zAX0pyIEt-Ui11Aj3trTEneG1rmuV9YSkDu9D0D/dev; numbered /exec deployment was not updated. No Back House LAB/W2 work.
++
++ORDERS → Cancel → Cancel order modal → Back leaves it unchanged, Confirm cancel releases only that order. Clear cart now clears only the current client cart directly; it does not cancel any Pending order or delete inventory/SALES. Confirm sold → Final review → Back no write / Confirm sold · Label later commits once. Label completion remains W2/MISSING.
++
++Test fixture and recovery already ran; do not press Prepare fixture once / Run recovery once again or use editor Run blindly. Editor consent popup could not be exposed by automation; guarded helpers succeeded through the normal test web app using existing authorization, without granting wider scopes. Pending request → Check / retry request with the exact ID; external conflict → export/reconcile exact cells first. Current test state and recovery IDs are in google-final.xlsx, google-assertions.json and UNDO.md; backups/diffs/logs retained.

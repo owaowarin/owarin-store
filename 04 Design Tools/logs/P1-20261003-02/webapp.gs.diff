@@ -1,0 +1,13 @@
+diff --git a/04 Design Tools/logs/P1-20261003-02/baseline/candidate/webapp.gs b/04 Design Tools/logs/P1-20260929-01/candidate/webapp.gs
+index 89fa9dd..c5b725a 100644
+--- a/04 Design Tools/logs/P1-20261003-02/baseline/candidate/webapp.gs	
++++ b/04 Design Tools/logs/P1-20260929-01/candidate/webapp.gs	
+@@ -221,7 +221,7 @@ function _apiInvAddResult(res, sheetName) {
+   // P3: match the booking queue on base title — a booking error must not fail the add
+   var matches = [];
+   try { matches = _apiBookingMatch(item.name).matches; } catch (e) { matches = []; }
+-  return { result: res, item: item, bookingMatches: matches };
++  return { result: res, item: item, bookingMatches: matches, historical: res.replayed === true };
+ }
+ 
+ function _apiInvAddStatus(p) {

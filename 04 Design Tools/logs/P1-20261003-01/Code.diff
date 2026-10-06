@@ -1,0 +1,141 @@
+diff --git "a/04 Design Tools\\logs\\P1-20261003-01\\before\\Code.gs" "b/04 Design Tools\\logs\\P1-20260929-01\\candidate\\Code.gs"
+index 2e7f305..451cfcf 100644
+--- "a/04 Design Tools\\logs\\P1-20261003-01\\before\\Code.gs"	
++++ "b/04 Design Tools\\logs\\P1-20260929-01\\candidate\\Code.gs"	
+@@ -2054,6 +2054,12 @@ function _addRequestHash(data) {
+   var bytes = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, JSON.stringify(p));
+   return bytes.map(function(b){ return ('0' + (b & 255).toString(16)).slice(-2); }).join('');
+ }
++function _addStatus(value) {
++  var status = String(value || '').trim() || 'New Arrival';
++  if (['Instock', 'Sold', 'Auction', 'Hold', 'New Arrival'].indexOf(status) < 0)
++    throw new Error('Invalid Add status: ' + status);
++  return status;
++}
+ function _addRequestEvent(sh, id, attempt, state, source, hash, row, sku, before, after, error, result) {
+   var eventRow = sh.getLastRow() + 1;
+   var actor = 'Unknown';
+@@ -2078,6 +2084,21 @@ function addInventoryRow(data) {
+     var ss = SpreadsheetApp.getActiveSpreadsheet();
+     var requestId = String(data.requestId || '').trim();
+     if (!/^[A-Za-z0-9_-]{12,100}$/.test(requestId)) throw new Error('Valid Add Request ID required');
++    if (data.sheetName !== GGB_SHEET && data.sheetName !== MAG_SHEET) throw new Error('Invalid Add source');
++    data.status = _addStatus(data.status);
++    var sheetName = data.sheetName;
++    var sheet = ss.getSheetByName(sheetName);
++    if (!sheet) throw new Error('Sheet not found: ' + sheetName);
++    delete _colCache[sheet.getSheetId()]; // Add must see a header removed since the last request.
++    var COL = _resolveColumns(sheet);
++    ['name', 'productId', 'status', 'original', 'cost', 'price', 'suggested'].forEach(function (key) {
++      if (!COL[key]) throw new Error('Inventory header missing: ' + key);
++    });
++    ['pub', 'cond', 'platform', 'genre', 'subGenre', 'type', 'copyFlags', 'rarity', 'marketRef', 'refNote'].forEach(function (key) {
++      var col = {pub:'publisher', cond:'condition'}[key] || key;
++      if (data[key] !== undefined && data[key] !== null && String(data[key]).trim() !== '' && !COL[col])
++        throw new Error('Inventory header missing for supplied field: ' + col);
++    });
+     var journal = _addRequestSheet(ss);
+     var hash = _addRequestHash(data);
+     var events = journal.getLastRow() > 1 ? journal.getRange(2, 1, journal.getLastRow() - 1, 17).getValues() : [];
+@@ -2089,7 +2110,9 @@ function addInventoryRow(data) {
+         var saved;
+         try { saved = JSON.parse(prior[15]); } catch (ignored) {}
+         if (!saved || saved.success !== true || saved.sku !== prior[11] ||
+-            Number(saved.row) !== Number(prior[10]) || saved.sheetName !== prior[8])
++            Number(saved.row) !== Number(prior[10]) || saved.sheetName !== prior[8] ||
++            !saved.itemSnapshot || saved.itemSnapshot.productId !== saved.sku ||
++            saved.itemSnapshot.name !== saved.title)
+           throw new Error('Add DONE result requires recovery; Request ID ' + requestId);
+         _addRequestEvent(journal, requestId, attempt, 'DONE', prior[8], hash, prior[10], prior[11],
+                          'replay of DONE', prior[13], '', prior[15]);
+@@ -2099,12 +2122,6 @@ function addInventoryRow(data) {
+                        'retry of ' + prior[4], '', 'Retry blocked pending recovery', '');
+       throw new Error('Add outcome requires recovery; Request ID ' + requestId + ' (no duplicate row created)');
+     }
+-    var sheetName = (data && data.sheetName === MAG_SHEET) ? MAG_SHEET : GGB_SHEET;
+-    var sheet = ss.getSheetByName(sheetName);
+-    if (!sheet) throw new Error("Sheet not found: " + sheetName);
+-
+-    var COL     = _resolveColumns(sheet);
+-    if (!COL.name || !COL.productId || !COL.status) throw new Error('Inventory name, Product ID or Status column missing');
+     var lastRow = sheet.getLastRow();
+     var lastCol = sheet.getLastColumn();
+     var newRow  = lastRow + 1;
+@@ -2116,7 +2133,7 @@ function addInventoryRow(data) {
+     var original  = data.original === 0 ? 0 : (data.original || "");
+     var cost      = data.cost === 0 ? 0 : (data.cost || "");
+     var price     = data.price === 0 ? 0 : (data.price || "");
+-    var status    = String(data.status || '').trim() || 'New Arrival';
++    var status    = data.status;
+     var platform  = (data.platform  || "").toString().trim();
+     var genre     = (data.genre     || "").toString().trim();
+     var copyFlags = (data.copyFlags || "").toString().trim();
+@@ -2136,6 +2153,8 @@ function addInventoryRow(data) {
+                  original: original, cost: cost, copyFlags: copyFlags,
+                  rarity: rarity, marketRef: marketRef };
+     var result = _sp2Calc(item, idx);
++    if (result.rangeStr && !COL.priceRange) throw new Error('Inventory header missing: priceRange');
++    if (result.refStr && !COL.maxGRef) throw new Error('Inventory header missing: maxGRef');
+ 
+     _addRequestEvent(journal, requestId, attempt, 'PREPARED', sheetName, hash, newRow, sku,
+                      'absent', '', '', '');
+@@ -2170,7 +2189,7 @@ function addInventoryRow(data) {
+     if (status !== "Sold" && COL.listedDate) setIf("listedDate", new Date());
+     if (status === "Sold" && COL.soldDate) setIf("soldDate", new Date());
+ 
+-    _setDerivedFormulasForRow(sheet, newRow, COL);
++    var formulas = _setDerivedFormulasForRow(sheet, newRow, COL);
+     if (_SP2_WRITE_ERRORS.length) throw new Error('Add formula/write error: ' + _sp2WriteErrMsg());
+ 
+     SpreadsheetApp.flush();
+@@ -2189,6 +2208,10 @@ function addInventoryRow(data) {
+         throw new Error('Add readback mismatch: ' + key);
+       after[key] = actual;
+     });
++    Object.keys(formulas).forEach(function (key) {
++      if (sheet.getRange(newRow, COL[key]).getFormula() !== formulas[key])
++        throw new Error('Add readback mismatch: formula ' + key);
++    });
+     if (status !== 'Sold' && COL.listedDate && !rowValues[COL.listedDate - 1]) throw new Error('Add readback mismatch: listedDate');
+     if (status === 'Sold' && COL.soldDate && !rowValues[COL.soldDate - 1]) throw new Error('Add readback mismatch: soldDate');
+     if (COL.listedDate) after.listedDate = rowValues[COL.listedDate - 1] || '';
+@@ -2197,7 +2220,8 @@ function addInventoryRow(data) {
+              suggested: result.price, target: result.target, open: result.open,
+              priceRange: result.rangeStr, refStr: result.refStr,
+              tier: result.tier, label: result.label, review: result.review,
+-             isRestock: restockResult.isRestock, sheetName: sheetName };
++             isRestock: restockResult.isRestock, sheetName: sheetName,
++             itemSnapshot: _rowToObj(rowValues, COL, newRow, sheetName === MAG_SHEET ? 'MAG' : 'GGB') };
+     _addRequestEvent(journal, requestId, attempt, 'DONE', sheetName, hash, newRow, sku,
+                      'absent', JSON.stringify(after), '', JSON.stringify(saved));
+     return saved;
+@@ -2519,18 +2543,20 @@ function _pclFormula(A, P) {
+ }
+ 
+ function _setDerivedFormulasForRow(sheet, row, COL) {
+-  if (!COL.price) return;
++  var formulas = {};
++  if (!COL.price) return formulas;
+   var P = _colLetter(COL.price) + row;
+   var C = COL.cost ? _colLetter(COL.cost) + row : "";
+   var A = COL.name ? _colLetter(COL.name) + row : "";
+-  if (COL.marketplace) _tryWrite("formula Market Place Price", function () {
+-    sheet.getRange(row, COL.marketplace).setFormula(_mktFormula(P)); });
+-  if (COL.grossProfit && C) _tryWrite("formula Gross Profit", function () {
+-    sheet.getRange(row, COL.grossProfit).setFormula(_gpFormula(P, C)); });
+-  if (COL.grossProfitMP && C && COL.marketplace) _tryWrite("formula Gross Profit MP", function () {
+-    sheet.getRange(row, COL.grossProfitMP).setFormula(_gpMpFormula(_colLetter(COL.marketplace) + row, C)); });
+-  if (COL.priceContentLists && A) _tryWrite("formula Price Content Lists", function () {
+-    sheet.getRange(row, COL.priceContentLists).setFormula(_pclFormula(A, P)); });
++  if (COL.marketplace) formulas.marketplace = _mktFormula(P);
++  if (COL.grossProfit && C) formulas.grossProfit = _gpFormula(P, C);
++  if (COL.grossProfitMP && C && COL.marketplace)
++    formulas.grossProfitMP = _gpMpFormula(_colLetter(COL.marketplace) + row, C);
++  if (COL.priceContentLists && A) formulas.priceContentLists = _pclFormula(A, P);
++  Object.keys(formulas).forEach(function (key) {
++    _tryWrite('formula ' + key, function () { sheet.getRange(row, COL[key]).setFormula(formulas[key]); });
++  });
++  return formulas;
+ }
+ 
+ function _fixDerivedFormulasForSheet(sheet, COL) {

@@ -1,0 +1,70 @@
+[
+  {
+    "sheet": "SALES",
+    "dimension": null,
+    "tables": [
+      {
+        "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId3"
+      }
+    ],
+    "protectionExported": false,
+    "validations": [
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"custom\" allowBlank=\"1\" showDropDown=\"1\" sqref=\"C2:C51\"><ns0:formula1>OR(NOT(ISERROR(DATEVALUE(C2))), AND(ISNUMBER(C2), LEFT(CELL(\"format\", C2))=\"D\"))</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"custom\" allowBlank=\"1\" showDropDown=\"1\" sqref=\"E2:E51\"><ns0:formula1>AND(ISNUMBER(E2),(NOT(OR(NOT(ISERROR(DATEVALUE(E2))), AND(ISNUMBER(E2), LEFT(CELL(\"format\", E2))=\"D\")))))</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" allowBlank=\"1\" showDropDown=\"1\" sqref=\"A2:A51\" />",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"list\" allowBlank=\"1\" sqref=\"B2:B51\"><ns0:formula1>\"MANGA,GAMEMAG and MEGA,TONBO,HOBBY MODEL and TOYS,ART TOYS,TOYS,TV-MAGAZINE,GAME GUIDE BOOK,OTHER,Novel\"</ns0:formula1></ns0:dataValidation>"
+    ]
+  },
+  {
+    "sheet": "GAME GUIDE BOOKS",
+    "dimension": null,
+    "tables": [
+      {
+        "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId5"
+      }
+    ],
+    "protectionExported": false,
+    "validations": [
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"list\" allowBlank=\"1\" showInputMessage=\"1\" prompt=\"Rarity: R1 / R2 / R3 / NEW\" sqref=\"F2:F1615\"><ns0:formula1>\"R1,R2,R3,NEW\"</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"list\" allowBlank=\"1\" sqref=\"H2:H1615\"><ns0:formula1>\"Famicom,Game Boy,Game Boy Advance,Game Boy Color,Handheld Digital Pets,Multi-Platform,Nintendo 64,Nintendo DS,Nintendo Switch,PC,PlayStation,PlayStation / PC,PlayStation 2,PlayStation 2, Playstation Portable,PlayStation 3,PlayStation 3 / PlayStation Porta\"&amp;\"ble,PlayStation 3 / Xbox 360,PlayStation 4 / Playstation Vista,PlayStation 4 / Xbox One / PC,PlayStation Portable,Super Famicom,Wii,Wii / PlayStation 3 / Xbox 360,Xbox 360\"</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"list\" allowBlank=\"1\" sqref=\"Y2:Y1615\"><ns0:formula1>\"GAME GUIDE BOOKS,GAMEMAG SPECIAL,GAMEMAG TOP SECRET,GAMEMAG CHEATS &amp; CODE,SPECIAL TECHNIC\"</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"list\" allowBlank=\"1\" showInputMessage=\"1\" prompt=\"Click and enter a value from the list of items\" sqref=\"C2:C1615\"><ns0:formula1>\"Instock,Sold,Auction,Hold,New Arrival\"</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"list\" allowBlank=\"1\" sqref=\"I2:I1615\"><ns0:formula1>\"Action,Action / Beat 'em up,Action / Beat 'em up / Open World,Action / Beat 'em up / Platformer,Action / Hack and Slash,Action / Shooter (FPS/TPS),Action / Stealth,Action / Survival Horror,Action Platformer,Action Platformer / Metroidvania / Tactical RPG,\"&amp;\"Action RPG,Action RPG / Fighting,Action RPG / Hack and Slash,Action RPG / Metroidvania,Action RPG / Open World,Action RPG / Turn Based,Action-Adventure,Action-Adventure / Action RPG / Metroidvania,Action-Adventure / Beat 'em up,Action-Adventure / Hack and\"&amp;\" Slash,Action-Adventure / Open World,Action-Adventure / Platformer,Action-Adventure / Shooter (FPS/TPS),Action-Adventure / Stealth,Action-Adventure / Survival Horror,Action-RPG / Shooter (FPS/TPS),Action-RPG / Survival Horror,Adventure,Adventure / Horror,\"&amp;\"Adventure / Simulation,Beat 'em up / Hack and Slash,Card / Board,Cheats &amp; Codes,Fighting,Hack and Slash,Metroidvania,MMORPG,Monster-Taming RPG,Platformer,Psychological Horror,Puzzle / Platformer,Racing,Real Time Strategy (RTS),Rhythm / Music,RPG,RPG / Sim\"&amp;\"ulation,RPG / Turn-based,Shooter (FPS/TPS),Simulation,Sport / Simulation,Sports,Survival Horror,Survival Horror / Psychological Horror,Tactical RPG,Tactical RPG / Monster Breeding,Tactical RPG / Survival Horror,Tactical RPG / Turn-based,Turn-based,Virtual\"&amp;\" Pet / Simulation,Visual Novel\"</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"list\" allowBlank=\"1\" showInputMessage=\"1\" prompt=\"Condition: S / A / B / C / D\" sqref=\"D2:D1615\"><ns0:formula1>\"S,A,B,C,D\"</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"list\" allowBlank=\"1\" showInputMessage=\"1\" prompt=\"Click and enter a value from the list of items\" sqref=\"G2:G1615\"><ns0:formula1>\"A GAME,ALPHA,APT,BOMB,BRIGHT,CLEAR GAME,COMPGAMER,CONSOLE GAME,CYBERTEAM,DS PLAYER,DUMBO,EASY GAMER,ELISE,ENIX,EXPERT GAMER,FAMILY COMPUTER,FG TEAM,FORWARD,FUTURE GAMER,G GENERATION NEXT,GAME EXPRESS,GAME PLAYER,GAMERPLAYER,GAME STAR,GAMEBEST,GAMEBOY PROJ\"&amp;\"ECT,GAMEGUIDE,GAMEMAG SPECIAL,GAMEMAG TOP SECRET,GAMEMAG CHEAT &amp; CODE,GOLDEN GROUP,GOLDEN JOY,INSIDE,IX NEXT,JOKER GAMES,JZ COMPANY,KOE,M,MAGIC GUIDE,MAGNUM,MAYA SUPER BOOK,MEGA,MILLENNIUM,NU TRON,PA.GROUP,PC-CD ROM,PERFECT GUIDE BOOK,PLAY LITE,PLAYSTATIO\"&amp;\"N,PRIMA GAMES,PROFESSIONAL GAMER,PS PASS,SB,SO GOOD,SPEED,TAGTEAMG-GAMES,TECHINCAL,THE MAX,TONBO MAG PRO,UKI,V.T.GROUP,VALENTINE'S FAMILY,VIDEO GAMES MAGAZINE,YEN PRINT,YK GROUP,YOEI,YUKIKUN,ZINE,GAMEFIXS,GAME PLUS\"</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"custom\" allowBlank=\"1\" showDropDown=\"1\" sqref=\"T2:T1615\"><ns0:formula1>OR(NOT(ISERROR(DATEVALUE(T2))), AND(ISNUMBER(T2), LEFT(CELL(\"format\", T2))=\"D\"))</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"custom\" allowBlank=\"1\" showDropDown=\"1\" sqref=\"J2:K1615 M2:M1615 O2:O1615 U2:U1615\"><ns0:formula1>AND(ISNUMBER(J2),(NOT(OR(NOT(ISERROR(DATEVALUE(J2))), AND(ISNUMBER(J2), LEFT(CELL(\"format\", J2))=\"D\")))))</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"list\" allowBlank=\"1\" sqref=\"E2:E1615\"><ns0:formula1>\"MAP,COLOUR,POSTER\"</ns0:formula1></ns0:dataValidation>"
+    ]
+  },
+  {
+    "sheet": "MAGAZINE",
+    "dimension": null,
+    "tables": [
+      {
+        "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId5"
+      }
+    ],
+    "protectionExported": false,
+    "validations": [
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"list\" allowBlank=\"1\" showInputMessage=\"1\" prompt=\"Rarity: R1 / R2 / R3 / NEW\" sqref=\"F2:F854\"><ns0:formula1>\"R1,R2,R3,NEW\"</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"list\" allowBlank=\"1\" showInputMessage=\"1\" prompt=\"Click and enter a value from the list of items\" sqref=\"C2:C854\"><ns0:formula1>\"Instock,Sold,Auction,Hold,Retake,New Arrival\"</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"list\" allowBlank=\"1\" showInputMessage=\"1\" prompt=\"Condition: S / A / B / C / D\" sqref=\"D2:D854\"><ns0:formula1>\"S,A,B,C,D\"</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"custom\" allowBlank=\"1\" showDropDown=\"1\" sqref=\"R2:R854\"><ns0:formula1>OR(NOT(ISERROR(DATEVALUE(R2))), AND(ISNUMBER(R2), LEFT(CELL(\"format\", R2))=\"D\"))</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"custom\" allowBlank=\"1\" showDropDown=\"1\" sqref=\"K2:K854 M2:M854 S2:S854\"><ns0:formula1>AND(ISNUMBER(K2),(NOT(OR(NOT(ISERROR(DATEVALUE(K2))), AND(ISNUMBER(K2), LEFT(CELL(\"format\", K2))=\"D\")))))</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"list\" allowBlank=\"1\" showInputMessage=\"1\" prompt=\"Click and enter a value from the list of items\" sqref=\"G2:G854\"><ns0:formula1>\"ANIMATE GROUP,BIG BUG STUDIO,DEX EXPRESS,FUTURE GAMER,HERO ANIMATION,KADOKAWA  CORPORATION,KITBUILDERS,LUCKPIM,TANABAN PINKLAO,TRUE DIGITAL CONTENT &amp; MEDIA,VIBULKIJ,TRIPLE P WORKSHOP\"</ns0:formula1></ns0:dataValidation>",
+      "<ns0:dataValidation xmlns:ns0=\"http://schemas.openxmlformats.org/spreadsheetml/2006/main\" type=\"list\" allowBlank=\"1\" sqref=\"W2:W854\"><ns0:formula1>\"Other,A・Club,HOBBY JAPAN,GAMEMAG MAGAZINE,HOBBY MODEL,HOBBY TOY AND MODEL,MEGA MAGAZINE,MEGA MONTH,MEGA⨯GAME,PLAY,TONBO MAGAZINE,TV MAGAZINE,TV MAGAZINE HERO\"</ns0:formula1></ns0:dataValidation>"
+    ]
+  },
+  {
+    "sheet": "CLIENT",
+    "dimension": null,
+    "tables": [
+      {
+        "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id": "rId3"
+      }
+    ],
+    "protectionExported": false,
+    "validations": []
+  }
+]

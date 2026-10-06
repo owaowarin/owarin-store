@@ -1,0 +1,15 @@
+const fs=require('node:fs'),path=require('node:path'),w=require('./work.cjs');
+const rel='04 Design Tools/logs/W1-20261004-03/';
+let s=fs.readFileSync(path.join(w.dir,'helpers.gs'),'utf8');
+const a="  _w1Encode_(req.snap);_w1Event_(req,'PREPARED');";
+if(!s.includes(a))throw Error('ANCHOR');
+s=s.replace(a,"  _w1Encode_(Object.assign({},req.snap,{afterFormulas:req.snap.beforeFormulas}));_w1Event_(req,'PREPARED');");
+s=s.replace("   if(after)after();req.snap.after=range.getValues();req.snap.afterFormulas=range.getFormulas();","   var errorsBefore=_SP2_WRITE_ERRORS.length;if(after)after();if(_SP2_WRITE_ERRORS.length>errorsBefore)throw new Error('MAINTENANCE_DERIVED_WRITE '+_sp2WriteErrMsg());req.snap.after=range.getValues();req.snap.afterFormulas=range.getFormulas();");
+w.write(rel+'helpers.gs',s);
+let o=fs.readFileSync(path.join(w.dir,'candidate/W1Orders.gs'),'utf8');
+o=o.slice(0,o.indexOf('// Journal keeps the existing 15-column schema'))+s;
+w.write(rel+'candidate/W1Orders.gs',o);
+let t=fs.readFileSync(path.join(w.dir,'remaining.test.cjs'),'utf8');
+t+=`\n{const f=fixture(true);f.item('DERIVED');const sh=f.sheets['GAME GUIDE BOOKS'],range=sh.getRange(3,1,1,sh.getLastColumn()),before=range.getValues();f.c._SP2_WRITE_ERRORS.push('prior error');const ok=f.c._w1MaintenanceWrite_('prior error not new',sh,range,before);assert.equal(f.c._w1Requests_()[ok.requestId].state,'DONE');assert.throws(()=>f.c._w1MaintenanceWrite_('derived failure',sh,range,before,()=>f.c._SP2_WRITE_ERRORS.push('injected formula write failure')),/MAINTENANCE_DERIVED_WRITE/);assert(Object.values(f.c._w1Requests_()).some(r=>r.state==='NEEDS_REVIEW'));console.log('PASS R4 swallowed derived-write error blocks DONE; previous error does not cause false failure');}\n`;
+w.write(rel+'remaining.test.cjs',t);
+w.log('R4-FINAL-01','Reproduce swallowed derived callback error; propagate new errors before DONE; preflight formula snapshot','Targeted test pending; exact-before recovery retained');

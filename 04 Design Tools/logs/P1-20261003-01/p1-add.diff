@@ -1,0 +1,102 @@
+diff --git "a/04 Design Tools\\logs\\P1-20261003-01\\before\\p1-add.test.cjs" "b/04 Design Tools\\logs\\P1-20260929-01\\p1-add.test.cjs"
+index e994604..252bf87 100644
+--- "a/04 Design Tools\\logs\\P1-20261003-01\\before\\p1-add.test.cjs"	
++++ "b/04 Design Tools\\logs\\P1-20260929-01\\p1-add.test.cjs"	
+@@ -21,7 +21,8 @@ function sheet(name, rows, fail) {
+       getValues(){return Array.from({length:h},(_,i)=>Array.from({length:w},(_,j)=>rows[r+i-1]?.[c+j-1] ?? ''));},
+       setValue(v){const effect=fail?.(name,r,c,v);if(effect==='DROP')return this;if(effect)throw Error('INJECTED WRITE FAILURE');(rows[r-1] ||= [])[c-1]=v;return this;},
+       setValues(v){v.forEach((a,i)=>a.forEach((x,j)=>thisCell(r+i,c+j,x)));return this;},
+-      setBackground(){return this;}, setFormula(v){return this.setValue(v);}
++      setBackground(){return this;}, setFormula(v){return this.setValue(v);},
++      getFormula(){const v=rows[r-1]?.[c-1];return typeof v==='string' && v.startsWith('=') ? v : '';}
+     };function thisCell(rr,cc,v){const effect=fail?.(name,rr,cc,v);if(effect==='DROP')return;if(effect)throw Error('INJECTED WRITE FAILURE');(rows[rr-1] ||= [])[cc-1]=v;}}
+   };
+ }
+@@ -37,10 +38,12 @@ const c=vm.createContext({SpreadsheetApp:{getActiveSpreadsheet:()=>ss,flush(){}}
+   Utilities:{DigestAlgorithm:{SHA_256:'sha256'},computeDigest:(_,s)=>[...crypto.createHash('sha256').update(s).digest()]},
+   Session:{getScriptTimeZone:()=> 'Asia/Bangkok',getActiveUser:()=>({getEmail:()=>''})},Logger:{log(){}}});
+ vm.runInContext(read('Code.gs'),c);vm.runInContext(read('webapp.gs'),c);
++const realResolve=c._resolveColumns;
+ c._resolveColumns=()=>columns;
+ c._autoFormat=x=>x;c._detectRestock=x=>({title:x,isRestock:false});
+ c._buildSKU=()=> 'TEST-' + next++;c._sp2BuildIndexes=()=>({});c._sp2Calc=()=>({price:300});
+-c._setDerivedFormulasForRow=()=>{};
++const realFormulas=c._setDerivedFormulasForRow;
++c._setDerivedFormulasForRow=()=>({});
+ c._readRow=(s,r,source)=>({source,productId:s.rows[r-1][1],name:s.rows[r-1][0],status:s.rows[r-1][2],suggested:300});
+ c._apiBookingMatch=()=>({matches:[]});
+ const add=(i,source='GGB',extra={})=>c._apiInvAdd({requestId:'p1-test-request-'+i,source,title:'Synthetic '+i,price:'0',...extra});
+@@ -125,5 +128,72 @@ failure=null;
+ assert.equal(rowsA.length,beforeSilentDone+1,'business row exists after silent DONE result loss');
+ assert.throws(()=>add('silent-done','GGB'),/recovery/);
+ assert.equal(rowsA.length,beforeSilentDone+1,'retry after silent DONE failure must not duplicate row');
+-console.log('PASS: syntax, missing/mismatched journal fail closed, 20 Add calls, read-only status lookup, numeric validation, replay, partial/failed writes, silent inventory/PREPARED/DONE readback failures');
++// R1: DONE is the committed snapshot, even after sorting, renumbering, reuse, duplicates or deletion.
++const original=rowsA[2], originalSku=original[1], other=rowsA[3];
++rowsA[2]=other;rowsA[3]=original;
++assert.equal(status(0).data.item.name,'Synthetic 0');
++original[1]='RENAMED-ORIGINAL';
++rowsA.push(['Different inventory copy',originalSku,'New Arrival']);
++assert.equal(status(0).data.item.name,'Synthetic 0');
++assert.equal(add(0).item.productId,originalSku);
++rowsA.push(['Duplicate inventory copy',originalSku,'New Arrival']);
++assert.equal(status(0).data.item.name,'Synthetic 0');
++rowsA.splice(rowsA.indexOf(original),1);
++assert.equal(status(0).data.item.name,'Synthetic 0');
++assert.equal(status(0).data.historical,true);
++const oldDone=[...rowsJ].reverse().find(r=>r[2]==='p1-test-request-0'&&r[4]==='DONE');
++const oldResult=oldDone[15], noSnapshot=JSON.parse(oldResult);
++delete noSnapshot.itemSnapshot;oldDone[15]=JSON.stringify(noSnapshot);
++const beforeBadReplay=rowsJ.length;
++assert.throws(()=>status(0),/requires recovery/);
++assert.throws(()=>add(0),/requires recovery/);
++assert.equal(rowsJ.length,beforeBadReplay,'old DONE without snapshot must not get a new DONE');
++oldDone[15]=oldResult;
++// R2: missing required/supplied destinations fail before PREPARED or inventory append.
++for(const key of ['cost','price','platform']){
++  const col=columns[key], beforeRows=rowsA.length, beforeJournal=rowsJ.length;
++  delete columns[key];
++  assert.throws(()=>add('missing-'+key,'GGB',{[key]:key==='platform'?'PS2':99}),/Inventory header missing/);
++  assert.equal(rowsA.length,beforeRows);assert.equal(rowsJ.length,beforeJournal);
++  columns[key]=col;
++}
++rowsA[0][0]='Item name';rowsA[0][1]='Product ID';rowsA[0][2]='Status';
++rowsA[0][9]='Original';rowsA[0][10]='Cost';rowsA[0][12]='Price';rowsA[0][20]='Suggested Price';
++c._resolveColumns=realResolve;c._resolveColumns(shA); // Prime the real column cache before removing Cost.
++rowsA[0][10]='';
++const beforeHeaderRows=rowsA.length,beforeHeaderJournal=rowsJ.length;
++assert.throws(()=>add('removed-real-header','GGB',{cost:99}),/Inventory header missing: cost/);
++assert.equal(rowsA.length,beforeHeaderRows);assert.equal(rowsJ.length,beforeHeaderJournal);
++rowsA[0][10]='Cost';c._resolveColumns=()=>columns;
++const optionalCol=columns.platform;delete columns.platform;
++add('empty-platform','GGB',{platform:''});
++columns.platform=optionalCol;
++// R3: direct API, status lookup and core reject unknown source/status before journal writes.
++for(const call of [()=>add('bad-source','INVALID_SOURCE'),()=>status('bad-source','INVALID_SOURCE'),
++                   ()=>add('bad-status','GGB',{status:'Pending-without-order'}),
++                   ()=>c.addInventoryRow({requestId:'p1-test-core-bad',sheetName:'WRONG',title:'Bad',status:'Hold'}),
++                   ()=>c.addInventoryRow({requestId:'p1-test-core-status',sheetName:'GAME GUIDE BOOKS',title:'Bad',status:'Unknown'})]){
++  const beforeRows=rowsA.length,beforeJournal=rowsJ.length;
++  assert.throws(call,/Invalid Add (source|status)/);
++  assert.equal(rowsA.length,beforeRows);assert.equal(rowsJ.length,beforeJournal);
++}
++// R4: exercise the real formula writer at every derived destination.
++Object.assign(columns,{marketplace:15,grossProfit:16,grossProfitMP:22,priceContentLists:24});
++c._setDerivedFormulasForRow=realFormulas;
++for(const key of ['marketplace','grossProfit','grossProfitMP','priceContentLists']){
++  const formulaRow=rowsA.length+1, beforeFormulaDone=rowsJ.filter(r=>r[4]==='DONE').length;
++  failure=(name,row,col)=>name==='GAME GUIDE BOOKS'&&row===formulaRow&&col===columns[key]?'DROP':null;
++  assert.throws(()=>add('formula-drop-'+key,'GGB',{price:100}),new RegExp('Add readback mismatch: formula '+key));
++  failure=null;
++  assert.equal(rowsJ.at(-1)[4],'ERROR','partial formula write must retain recovery state');
++  assert.equal(rowsJ.filter(r=>r[4]==='DONE').length,beforeFormulaDone);
++  assert.throws(()=>add('formula-drop-'+key,'GGB',{price:100}),/recovery/);
++  assert.equal(rowsJ.at(-1)[4],'ERROR','blocked retry must be logged');
++  assert.equal(rowsA.length,formulaRow,'formula failure retry must not append a second row');
++}
++const goodFormula=add('formula-good','GGB',{price:100});
++for(const key of ['marketplace','grossProfit','grossProfitMP','priceContentLists'])
++  assert.match(rowsA[goodFormula.result.row-1][columns[key]-1],/^=IF/);
++assert.equal(rowsJ.at(-1)[4],'DONE');
++console.log('PASS: 20 Add calls; R1 committed snapshot after sort/SKU reuse/duplicate/removal; R2 fresh header and supplied-field gates; R3 source/status gates; R4 four formula readbacks and blocked retries; existing journal/write failures');
+ 

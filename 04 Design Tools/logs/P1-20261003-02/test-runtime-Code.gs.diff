@@ -1,0 +1,19 @@
+--- C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-01\test-runtime-source\Code.gs
++++ C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE\04 Design Tools\logs\P1-20261003-02\test-runtime-source\Code.gs
+@@ -2051,6 +2051,8 @@
+   return bytes.map(function(b){ return ('0' + (b & 255).toString(16)).slice(-2); }).join('');
+ }
+ function _addStatus(value) {
++  if (value !== undefined && value !== null && typeof value !== 'string')
++    throw new Error('Invalid Add status: expected text');
+   var status = String(value || '').trim() || 'New Arrival';
+   if (['Instock', 'Sold', 'Auction', 'Hold', 'New Arrival'].indexOf(status) < 0)
+     throw new Error('Invalid Add status: ' + status);
+@@ -2112,6 +2114,7 @@
+           throw new Error('Add DONE result requires recovery; Request ID ' + requestId);
+         _addRequestEvent(journal, requestId, attempt, 'DONE', prior[8], hash, prior[10], prior[11],
+                          'replay of DONE', prior[13], '', prior[15]);
++        saved.replayed = true;
+         return saved;
+       }
+       _addRequestEvent(journal, requestId, attempt, 'ERROR', prior[8], hash, prior[10], prior[11],

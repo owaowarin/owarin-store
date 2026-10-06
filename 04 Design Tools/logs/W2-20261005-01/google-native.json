@@ -1,0 +1,536 @@
+{
+  "prepare": {
+    "dry": {
+      "changes": [
+        "Create synthetic CLIENT with original A:F plus Client ID/Updated At"
+      ],
+      "rows": 0
+    },
+    "schema": {
+      "schema": "READY",
+      "rows": 0
+    },
+    "fixture": {
+      "start": 1351,
+      "count": 3,
+      "prefix": "W2V39"
+    },
+    "orders": [
+      {
+        "orderId": "OWA-20261005-04",
+        "status": "PENDING"
+      },
+      {
+        "orderId": "OWA-20261005-05",
+        "status": "PENDING"
+      }
+    ]
+  },
+  "beforeRetry": {
+    "preserved": {
+      "ORDER REQUESTS": true,
+      "ORDERS": true,
+      "ORDER LINES": true,
+      "GAME GUIDE BOOKS": true,
+      "MAGAZINE": true,
+      "SALES": true
+    },
+    "orders": [
+      {
+        "id": "OWA-20261005-04",
+        "status": "SOLD",
+        "clientId": "CL-c42e3b9f-7a50-40e5-91f5-6ccf1df274aa",
+        "revision": 2,
+        "ready": "READY"
+      },
+      {
+        "id": "OWA-20261005-05",
+        "status": "PENDING",
+        "clientId": "",
+        "revision": 1,
+        "ready": "MISSING"
+      }
+    ],
+    "saleCount": 1,
+    "lineIds": [
+      "OWA-20261005-04-L1"
+    ],
+    "clientCount": 1,
+    "clients": [
+      {
+        "id": "CL-c42e3b9f-7a50-40e5-91f5-6ccf1df274aa",
+        "revision": "2026-10-05T14:42:45.311Z",
+        "facebook": "#ERROR!",
+        "name": "ผู้ซื้อ จำลอง W2 Google",
+        "phone": "890000001",
+        "address": "45 ถนนผู้ซื้อ ทดสอบ",
+        "postalCode": "123",
+        "note": "@INTERNAL NEVER PRINT"
+      }
+    ],
+    "requests": [
+      {
+        "id": "qa-w2-create-0-20261005",
+        "action": "create",
+        "state": "DONE",
+        "attempt": 1,
+        "payloadRetained": true
+      },
+      {
+        "id": "qa-w2-create-1-20261005",
+        "action": "create",
+        "state": "DONE",
+        "attempt": 1,
+        "payloadRetained": true
+      },
+      {
+        "id": "w1-1791211286953-0rsaw0nbbhm9",
+        "action": "confirm",
+        "state": "DONE",
+        "attempt": 1,
+        "payloadRetained": true
+      },
+      {
+        "id": "crm-e25e645597759a0b94bb7618f355e489633d7ac3afcf0556701ab91cbe7b698c",
+        "action": "clients.save",
+        "state": "NEEDS_REVIEW",
+        "attempt": 1,
+        "payloadRetained": true
+      }
+    ],
+    "labels": [
+      {
+        "senderName": "OWA — OWARIN's STORE",
+        "senderPhone": "065-208-3088",
+        "recipientName": "ผู้รับ จำลองชื่อภาษาไทยสำหรับทดสอบฉลาก",
+        "phone": "+66 89 000 0002",
+        "address": "123 ถนนทดสอบ แขวงทดสอบ เขตทดสอบ กรุงเทพมหานคร อาคารทดสอบ ชั้นสอง ห้องตัวอย่าง สำหรับตรวจฉลากภาษาไทย",
+        "postalCode": "00123",
+        "deliveryNote": "ฝากไว้กับยาม · ทดสอบเท่านั้น",
+        "itemTitles": [
+          "W2V39 Copy 0 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        ]
+      }
+    ],
+    "journalRows": 1258,
+    "journalHash": "9805c5dd64a25028a068418c994e2c73d0e16eb03570e86540a0505b3c46bc19"
+  },
+  "textRepair": {
+    "result": "TEXT_REPAIRED",
+    "originalRequestId": "crm-e25e645597759a0b94bb7618f355e489633d7ac3afcf0556701ab91cbe7b698c",
+    "formulas": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "phoneType": "string",
+    "postalType": "string"
+  },
+  "afterRetry": {
+    "preserved": {
+      "ORDER REQUESTS": true,
+      "ORDERS": true,
+      "ORDER LINES": true,
+      "GAME GUIDE BOOKS": true,
+      "MAGAZINE": true,
+      "SALES": true
+    },
+    "orders": [
+      {
+        "id": "OWA-20261005-04",
+        "status": "SOLD",
+        "clientId": "CL-c42e3b9f-7a50-40e5-91f5-6ccf1df274aa",
+        "revision": 2,
+        "ready": "READY"
+      },
+      {
+        "id": "OWA-20261005-05",
+        "status": "PENDING",
+        "clientId": "",
+        "revision": 1,
+        "ready": "MISSING"
+      }
+    ],
+    "saleCount": 1,
+    "lineIds": [
+      "OWA-20261005-04-L1"
+    ],
+    "clientCount": 1,
+    "clients": [
+      {
+        "id": "CL-c42e3b9f-7a50-40e5-91f5-6ccf1df274aa",
+        "revision": "2026-10-05T14:42:45.311Z",
+        "facebook": "=FB INTERNAL SYNTHETIC W2",
+        "name": "ผู้ซื้อ จำลอง W2 Google",
+        "phone": "0890000001",
+        "address": "45 ถนนผู้ซื้อ ทดสอบ",
+        "postalCode": "00123",
+        "note": "@INTERNAL NEVER PRINT"
+      }
+    ],
+    "requests": [
+      {
+        "id": "qa-w2-create-0-20261005",
+        "action": "create",
+        "state": "DONE",
+        "attempt": 1,
+        "payloadRetained": true
+      },
+      {
+        "id": "qa-w2-create-1-20261005",
+        "action": "create",
+        "state": "DONE",
+        "attempt": 1,
+        "payloadRetained": true
+      },
+      {
+        "id": "w1-1791211286953-0rsaw0nbbhm9",
+        "action": "confirm",
+        "state": "DONE",
+        "attempt": 1,
+        "payloadRetained": true
+      },
+      {
+        "id": "crm-e25e645597759a0b94bb7618f355e489633d7ac3afcf0556701ab91cbe7b698c",
+        "action": "clients.save",
+        "state": "DONE",
+        "attempt": 3,
+        "payloadRetained": true
+      }
+    ],
+    "labels": [
+      {
+        "senderName": "OWA — OWARIN's STORE",
+        "senderPhone": "065-208-3088",
+        "recipientName": "ผู้รับ จำลองชื่อภาษาไทยสำหรับทดสอบฉลาก",
+        "phone": "+66 89 000 0002",
+        "address": "123 ถนนทดสอบ แขวงทดสอบ เขตทดสอบ กรุงเทพมหานคร อาคารทดสอบ ชั้นสอง ห้องตัวอย่าง สำหรับตรวจฉลากภาษาไทย",
+        "postalCode": "00123",
+        "deliveryNote": "ฝากไว้กับยาม · ทดสอบเท่านั้น",
+        "itemTitles": [
+          "W2V39 Copy 0 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        ]
+      }
+    ],
+    "journalRows": 1263,
+    "journalHash": "cb374d56ec679efe3093fdf4c55e277ecae0ddd457b64ccc960a607f787caab3"
+  },
+  "afterNewClientUi": {
+    "saved": "Saved · OWA-20261005-05",
+    "preview": ""
+  },
+  "final": {
+    "preserved": {
+      "ORDER REQUESTS": true,
+      "ORDERS": true,
+      "ORDER LINES": true,
+      "GAME GUIDE BOOKS": true,
+      "MAGAZINE": true,
+      "SALES": true
+    },
+    "orders": [
+      {
+        "id": "OWA-20261005-04",
+        "status": "SOLD",
+        "clientId": "CL-c42e3b9f-7a50-40e5-91f5-6ccf1df274aa",
+        "revision": 3,
+        "ready": "READY"
+      },
+      {
+        "id": "OWA-20261005-05",
+        "status": "SOLD",
+        "clientId": "CL-68601c9f-9ae7-4ca6-93e3-66c93317ad3b",
+        "revision": 3,
+        "ready": "READY"
+      }
+    ],
+    "saleCount": 2,
+    "lineIds": [
+      "OWA-20261005-04-L1",
+      "OWA-20261005-05-L1"
+    ],
+    "clientCount": 2,
+    "clients": [
+      {
+        "id": "CL-c42e3b9f-7a50-40e5-91f5-6ccf1df274aa",
+        "revision": "2026-10-05T14:42:45.311Z",
+        "facebook": "=FB INTERNAL SYNTHETIC W2",
+        "name": "ผู้ซื้อ จำลอง W2 Google",
+        "phone": "0890000001",
+        "address": "45 ถนนผู้ซื้อ ทดสอบ",
+        "postalCode": "00123",
+        "note": "@INTERNAL NEVER PRINT"
+      },
+      {
+        "id": "CL-68601c9f-9ae7-4ca6-93e3-66c93317ad3b",
+        "revision": "2026-10-05T15:11:11.736Z",
+        "facebook": "+FB INTERNAL SYNTHETIC",
+        "name": "ผู้ซื้อ จำลอง W2 ใหม่",
+        "phone": "0890000003",
+        "address": "234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ",
+        "postalCode": "00124",
+        "note": "=2+3 INTERNAL"
+      }
+    ],
+    "requests": [
+      {
+        "id": "qa-w2-create-0-20261005",
+        "action": "create",
+        "state": "DONE",
+        "attempt": 1,
+        "payloadRetained": true
+      },
+      {
+        "id": "qa-w2-create-1-20261005",
+        "action": "create",
+        "state": "DONE",
+        "attempt": 1,
+        "payloadRetained": true
+      },
+      {
+        "id": "w1-1791211286953-0rsaw0nbbhm9",
+        "action": "confirm",
+        "state": "DONE",
+        "attempt": 1,
+        "payloadRetained": true
+      },
+      {
+        "id": "crm-e25e645597759a0b94bb7618f355e489633d7ac3afcf0556701ab91cbe7b698c",
+        "action": "clients.save",
+        "state": "DONE",
+        "attempt": 3,
+        "payloadRetained": true
+      },
+      {
+        "id": "w1-1791212258776-uhkq20tawig",
+        "action": "confirm",
+        "state": "DONE",
+        "attempt": 1,
+        "payloadRetained": true
+      },
+      {
+        "id": "w2-1791212370313-nwi36oxgpy",
+        "action": "labels.save",
+        "state": "DONE",
+        "attempt": 1,
+        "payloadRetained": true
+      },
+      {
+        "id": "w1-1791213011996-e0ywaj6bd6j",
+        "action": "labels.save",
+        "state": "DONE",
+        "attempt": 1,
+        "payloadRetained": true
+      },
+      {
+        "id": "crm-515740f3a747c839be1023edd58ef97d79cd5b3d17e163614d3415eb0ac61c84",
+        "action": "clients.save",
+        "state": "DONE",
+        "attempt": 1,
+        "payloadRetained": true
+      }
+    ],
+    "labels": [
+      {
+        "senderName": "OWA — OWARIN's STORE",
+        "senderPhone": "065-208-3088",
+        "recipientName": "ผู้รับ จำลองชื่อภาษาไทยสำหรับทดสอบฉลาก",
+        "phone": "+66 89 000 0002",
+        "address": "123 ถนนทดสอบ แขวงทดสอบ เขตทดสอบ กรุงเทพมหานคร อาคารทดสอบ ชั้นสอง ห้องตัวอย่าง สำหรับตรวจฉลากภาษาไทย",
+        "postalCode": "00123",
+        "deliveryNote": "ฝากไว้กับยาม · ทดสอบเท่านั้น",
+        "itemTitles": [
+          "W2V39 Copy 0 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        ]
+      },
+      {
+        "senderName": "OWA — OWARIN's STORE",
+        "senderPhone": "065-208-3088",
+        "recipientName": "ผู้ซื้อ จำลอง W2 ใหม่",
+        "phone": "0890000003",
+        "address": "234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ",
+        "postalCode": "00124",
+        "deliveryNote": "ลูกค้าใหม่ · ข้อมูลจำลอง",
+        "itemTitles": [
+          "W2V39 Copy 1 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        ]
+      }
+    ],
+    "journalRows": 1295,
+    "journalHash": "b146cc23d1c921931e08a2167dcf70ceea9bffc9420773cceb083a78cb499d1b"
+  },
+  "replay": {
+    "result": "PASS",
+    "replays": [
+      {
+        "id": "w1-1791211286953-0rsaw0nbbhm9",
+        "replayed": true
+      },
+      {
+        "id": "crm-e25e645597759a0b94bb7618f355e489633d7ac3afcf0556701ab91cbe7b698c",
+        "replayed": true
+      },
+      {
+        "id": "w1-1791212258776-uhkq20tawig",
+        "replayed": true
+      },
+      {
+        "id": "w2-1791212370313-nwi36oxgpy",
+        "replayed": true
+      },
+      {
+        "id": "w1-1791213011996-e0ywaj6bd6j",
+        "replayed": true
+      },
+      {
+        "id": "crm-515740f3a747c839be1023edd58ef97d79cd5b3d17e163614d3415eb0ac61c84",
+        "replayed": true
+      }
+    ],
+    "proof": {
+      "preserved": {
+        "ORDER REQUESTS": true,
+        "ORDERS": true,
+        "ORDER LINES": true,
+        "GAME GUIDE BOOKS": true,
+        "MAGAZINE": true,
+        "SALES": true
+      },
+      "orders": [
+        {
+          "id": "OWA-20261005-04",
+          "status": "SOLD",
+          "clientId": "CL-c42e3b9f-7a50-40e5-91f5-6ccf1df274aa",
+          "revision": 3,
+          "ready": "READY"
+        },
+        {
+          "id": "OWA-20261005-05",
+          "status": "SOLD",
+          "clientId": "CL-68601c9f-9ae7-4ca6-93e3-66c93317ad3b",
+          "revision": 3,
+          "ready": "READY"
+        }
+      ],
+      "saleCount": 2,
+      "lineIds": [
+        "OWA-20261005-04-L1",
+        "OWA-20261005-05-L1"
+      ],
+      "clientCount": 2,
+      "clients": [
+        {
+          "id": "CL-c42e3b9f-7a50-40e5-91f5-6ccf1df274aa",
+          "revision": "2026-10-05T14:42:45.311Z",
+          "facebook": "=FB INTERNAL SYNTHETIC W2",
+          "name": "ผู้ซื้อ จำลอง W2 Google",
+          "phone": "0890000001",
+          "address": "45 ถนนผู้ซื้อ ทดสอบ",
+          "postalCode": "00123",
+          "note": "@INTERNAL NEVER PRINT"
+        },
+        {
+          "id": "CL-68601c9f-9ae7-4ca6-93e3-66c93317ad3b",
+          "revision": "2026-10-05T15:11:11.736Z",
+          "facebook": "+FB INTERNAL SYNTHETIC",
+          "name": "ผู้ซื้อ จำลอง W2 ใหม่",
+          "phone": "0890000003",
+          "address": "234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ",
+          "postalCode": "00124",
+          "note": "=2+3 INTERNAL"
+        }
+      ],
+      "requests": [
+        {
+          "id": "qa-w2-create-0-20261005",
+          "action": "create",
+          "state": "DONE",
+          "attempt": 1,
+          "payloadRetained": true
+        },
+        {
+          "id": "qa-w2-create-1-20261005",
+          "action": "create",
+          "state": "DONE",
+          "attempt": 1,
+          "payloadRetained": true
+        },
+        {
+          "id": "w1-1791211286953-0rsaw0nbbhm9",
+          "action": "confirm",
+          "state": "DONE",
+          "attempt": 1,
+          "payloadRetained": true
+        },
+        {
+          "id": "crm-e25e645597759a0b94bb7618f355e489633d7ac3afcf0556701ab91cbe7b698c",
+          "action": "clients.save",
+          "state": "DONE",
+          "attempt": 3,
+          "payloadRetained": true
+        },
+        {
+          "id": "w1-1791212258776-uhkq20tawig",
+          "action": "confirm",
+          "state": "DONE",
+          "attempt": 1,
+          "payloadRetained": true
+        },
+        {
+          "id": "w2-1791212370313-nwi36oxgpy",
+          "action": "labels.save",
+          "state": "DONE",
+          "attempt": 1,
+          "payloadRetained": true
+        },
+        {
+          "id": "w1-1791213011996-e0ywaj6bd6j",
+          "action": "labels.save",
+          "state": "DONE",
+          "attempt": 1,
+          "payloadRetained": true
+        },
+        {
+          "id": "crm-515740f3a747c839be1023edd58ef97d79cd5b3d17e163614d3415eb0ac61c84",
+          "action": "clients.save",
+          "state": "DONE",
+          "attempt": 1,
+          "payloadRetained": true
+        }
+      ],
+      "labels": [
+        {
+          "senderName": "OWA — OWARIN's STORE",
+          "senderPhone": "065-208-3088",
+          "recipientName": "ผู้รับ จำลองชื่อภาษาไทยสำหรับทดสอบฉลาก",
+          "phone": "+66 89 000 0002",
+          "address": "123 ถนนทดสอบ แขวงทดสอบ เขตทดสอบ กรุงเทพมหานคร อาคารทดสอบ ชั้นสอง ห้องตัวอย่าง สำหรับตรวจฉลากภาษาไทย",
+          "postalCode": "00123",
+          "deliveryNote": "ฝากไว้กับยาม · ทดสอบเท่านั้น",
+          "itemTitles": [
+            "W2V39 Copy 0 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          ]
+        },
+        {
+          "senderName": "OWA — OWARIN's STORE",
+          "senderPhone": "065-208-3088",
+          "recipientName": "ผู้ซื้อ จำลอง W2 ใหม่",
+          "phone": "0890000003",
+          "address": "234 ถนนทดสอบลูกค้าใหม่ กรุงเทพ",
+          "postalCode": "00124",
+          "deliveryNote": "ลูกค้าใหม่ · ข้อมูลจำลอง",
+          "itemTitles": [
+            "W2V39 Copy 1 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          ]
+        }
+      ],
+      "journalRows": 1295,
+      "journalHash": "b146cc23d1c921931e08a2167dcf70ceea9bffc9420773cceb083a78cb499d1b"
+    }
+  }
+}

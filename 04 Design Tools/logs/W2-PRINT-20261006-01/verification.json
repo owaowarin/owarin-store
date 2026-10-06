@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "session": "Session50",
+  "scope": "Local/test CLOSED",
+  "printBasis": "OWNER_CONFIRMED",
+  "agentNativePrintInspection": false,
+  "localCandidateHashes": 9,
+  "runtimeChanged": false,
+  "remoteAction": false,
+  "stateLines": 48,
+  "closeChecklist": [
+    "CSV",
+    "decisions",
+    "plan",
+    "STATE",
+    "one-page HANDOFF",
+    "related docs/README",
+    "conditional owner-confirmation rule",
+    "readback"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "changeId":"P1-20260929-04",
+  "requestId":"P1-TABLE-INVALID-001",
+  "testSheetId":"13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM",
+  "testScriptId":"1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd",
+  "started":"2026-09-29 02:58:00 +07:00",
+  "completed":"2026-09-29 02:58:02 +07:00",
+  "before":"GAME GUIDE BOOKS!K3 empty",
+  "write":"accepted",
+  "readback":"NOT_A_NUMBER",
+  "after":"GAME GUIDE BOOKS!K3 empty",
+  "independentReadback":"GAME GUIDE BOOKS!K3 and ADD REQUESTS!A2:Q3 have no CellData values",
+  "conclusion":"Native CURRENCY Table type did not reject a nonnumeric Apps Script setValue write in this separate test fixture.",
+  "shopMutation":false
+}

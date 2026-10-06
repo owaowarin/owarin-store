@@ -1,0 +1,10 @@
+P1-20260929-15 / P1-QA-CONCURRENT-001
+Only separate synthetic Google Sheet 13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM and test /dev were used.
+Fresh pre-run export test-sheet-before.xlsx SHA256 C399DC462580D5BCD1E0122C449808D61C5F0F00F9FDAF3B253CEE3C9763AF66: GAME GUIDE BOOKS 17 named rows through row19; MAGAZINE 10 through row12; ADD REQUESTS 64 events through row65; GGB A20 empty.
+Two different browser tabs submitted synthetic GGB Adds less than one second apart; both UIs showed Saving simultaneously.
+Tab A Request ID add-1790674542719-40wrcvxbwlt, title Synthetic QA Parallel 20260929 A28, Original 300, Cost 100, Price 290, publisher TEST, default New Arrival. UI result OWA-GGBS018N00 and cleared form.
+Tab B Request ID add-1790674543674-9qeygjqbszk, title Synthetic QA Parallel 20260929 A29, Original 300, Cost 100, Price 291, publisher TEST, default New Arrival. UI result OWA-GGBS019N00 and cleared form.
+Fresh post-run export test-sheet-after.xlsx SHA256 D68B551F9B7E38C86529F96CABE230AA67978D5487FC4D85CC2165BAA797A979: GGB now 19 named rows; MAG still 10 and identical to before; prior GGB rows 1:19 and prior journal rows 1:65 have identical exported values/formulas. GGB row20 = A28 / OWA-GGBS018N00 / New Arrival / TEST / 300 / 100 / 290; row21 = A29 / OWA-GGBS019N00 / New Arrival / TEST / 300 / 100 / 291; row22 empty.
+Journal row66 16:35:45.439 PREPARED A28 attempt1 row20 SKU018; row67 16:35:47.401 DONE A28; row68 16:35:49.470 PREPARED A29 attempt1 row21 SKU019; row69 16:35:52.223 DONE A29. Two distinct Request IDs and payload hashes, no ERROR or retry event. Server journal order shows serialization; both browser requests were in flight together before either UI completed.
+Tab B initially held only its own new item in local cache (28/28); after pressing REFRESH, it showed 29/29 with A28 and A29 once each. This is expected cross-tab cache staleness until refresh, not request recovery.
+No source/schema/deployment changed. These synthetic rows and journal events remain in the isolated Sheet as test evidence. True transport timeout, lost Request ID on a new device, and general partial-write recovery remain open.

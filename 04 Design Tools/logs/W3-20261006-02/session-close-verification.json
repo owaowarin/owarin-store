@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "session": "Session49",
+  "stateLines": 48,
+  "csv": true,
+  "decisions": true,
+  "plan": true,
+  "handoff": true,
+  "relatedDocs": true,
+  "datedLesson": true,
+  "readback": true,
+  "runtimeVersion": "v39 unchanged",
+  "print": "DEFERRED; NOT PASS"
+}

@@ -1,0 +1,27 @@
+{
+  "result": "PASS",
+  "source": "existing final export; no new Google writes or redundant runtime rerun",
+  "sixOrderStatuses": true,
+  "fourExactSalesAndProfits": true,
+  "cancel02And06NoSales": true,
+  "claimsOwnedAndReleased": true,
+  "latestRequestStates": {
+    "w1-20261004-recovery-create": "DONE",
+    "w1-20261004-recovery-confirm": "DONE",
+    "w1-1791058934065-x15ej6xtmrb": "DONE",
+    "w1-1791059010239-4hpepb26a9n": "DONE",
+    "w1-1791059465888-wzpaj3c0gl": "DONE",
+    "w1-1791059669311-wcaptgbi8vn": "DONE",
+    "w1-1791060029426-05o01xtbp1ou": "DONE",
+    "w1-1791060140231-e2uhpxl6rzc": "DONE",
+    "w1-1791060212878-kfb4lcdndq": "DONE",
+    "external-9028d9f0-176e-4228-8def-cfe09078f962": "DONE",
+    "external-5135ace8-9c1a-4ee5-8236-3edcd5fe45a4": "DONE",
+    "w1-1791060443030-zkdasmeult": "DONE"
+  },
+  "externalConfirmPreflightNoJournal": true,
+  "M31Restored390": true,
+  "eightCopyStatuses": true,
+  "initialP1InventoryMagazineAddJournalPreserved": true,
+  "csvEntries": 145
+}

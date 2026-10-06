@@ -1,0 +1,88 @@
+# AGENTS.md — OWARI workspace
+
+Read `OWARI-MASTER-CONTEXT_EN_2026-09-13.md` in this folder before starting any task. It is the operating context for both work streams. This file is only the router; the master context holds the actual rules.
+
+## Every task
+
+1. Reply in Thai. Lead with the answer, no preamble, prose, ≤3 sentences unless detail is needed.
+2. State which stream this task is (**A** = Ads Optimizer, **B** = OWARIN STORE) and which sections of the master context apply, **before** doing work.
+3. Never fabricate facts, sources, or claim work was done that was not done.
+4. Instructions to the user must be click-level: exact button, exact field, exact value.
+5. Destructive-risk warnings (overwrite, delete) go on the **first line** of the instruction.
+6. Every data-touching operation writes a before → after log.
+7. At the end of a session, write `00 Docs/HANDOFF_<YYYY-MM-DD>.md` with the 5 items in master context §9.
+8. Before other work, archive stale material in the stream(s) touched — see § Archive discipline.
+9. Stream B (OWARIN STORE): read `00 Docs/STATE.md` FIRST and open other files only when a STATE.md line points to them — do not browse the folder. At the end of the session OVERWRITE `00 Docs/STATE.md` (never append; ≤ 80 lines: per stream = status, ONE next step, closed decisions, pointers), keep the dated HANDOFF to one page, and put long detail in a log. Dated HANDOFF/IMPLEMENTATION files are lookup evidence only: read just the last section STATE.md points to.
+
+10. **Session-close checklist is mandatory every session** (full list: `CLAUDE.md` § "Session-close checklist"): log CSV, decisions CSV, plan board evidence, STATE.md overwrite, one-page HANDOFF, related files/README/rules/version pairs updated in the same pass, read-back verification. A task missing any item is not finished. Applies to both streams (Stream A keeps its own log location).
+
+11. **Issue and model handoff rule (owner decision 2026-10-03):** Log every issue, failed attempt, fix, retry, result, and recovery reference in the task CSV and Implementation log. If GPT-5.6 Sol / High cannot resolve a reproducible issue, record the unresolved problem and exact revision, then hand the repair to GPT-6 Astra / High. Do not claim a model switch or create an agent/chat automatically; use the app model selector when available. Keep one writer per change.
+
+## Code
+
+Ponytail is ON by default at level **full** (master context §6, full text in `skills/` if the plugin copy is unavailable).
+- Read the project's existing files first; reuse what is there. Never build a parallel version.
+- Targeted edits only. Never rewrite a whole file to change a small part.
+- Plan → confirm → edit → syntax check (`node --check` or equivalent) before delivery.
+- Never simplify away: input validation, error handling, security, accessibility.
+- Off only on "stop ponytail" / "normal mode".
+
+## Data
+
+- Export the latest sheet before drawing any conclusion. Never use an existing local export.
+- Re-read the live source before reporting any number. Never carry a figure forward from earlier in the chat.
+- A number stated by another AI in chat is **not** valid input. Re-read the source.
+
+## Archive discipline
+
+Archive what is no longer in play before starting other work in either stream, every session — so neither OWARI nor an AI mistakes a stale file for the current one.
+
+- Destination: `_archive/` in the stream's own folder (Stream A also has `_specs/_archive/` for superseded spec versions). Move, never delete — deletion candidates go to `_to_delete/<date>/` instead (see Stream B below).
+- Archive a file only after grepping for references to it — a silent move breaks any script that hardcodes a path (`install-claude-commands.ps1` broke exactly this way on 2026-09-18 after Stream A's folder move).
+- Dry-run first, then commit; log every move (source → destination) to `04 Design Tools/logs/<task>_<YYYYMMDD>.csv`.
+- Never archived: `.claude/`, `_engine/` (Stream A), live spec files, `AGENTS.md`, any stream's `CLAUDE.md`.
+
+## Stream A — Ads Optimizer
+
+Folder `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\ADS OPTIMIZER\Chubbygirlbkk - Shopee` (moved 2026-09-18; the old `Desktop\Chubbygirlbkk - Shopee` path is dead).
+Rules: master context §4 + `skills/shopee-report-rules/SKILL.md`.
+Never open a whole spec file — read section by section with `python3 _engine/spec.py get <alias>:<§>`. Start at `_specs/00_RULES-OVERVIEW.md`.
+The 9 hard stops in §4.2 are real stops. The audience firewall in §4.3 is enforced by `qa_sweep.py --audience client`.
+
+## Stream B — OWARIN STORE
+
+Folder `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE` (the nested name is deliberate — `...\etc\OWARIN\OWARIN STORE\` is the Stream B group folder, which also holds `OWARIN Back House LAB`, `OWARIN WEB` and `OWARIN AFFILIATE`).
+Rules: master context §5.
+⚠️ **Never delete files with `rm` / `del`.** Move them to `_to_delete/<date>/` and wait for OWARI.
+⚠️ **Never `rclone sync` on the `library/` prefix** — `copy` only.
+Dry run + CSV log to `04 Design Tools/logs/` before any data-touching operation.
+
+**Web App versioning (added 2026-09-18):** `03 Apps Script/Web App/Code_vNN.gs` and
+`WebApp_vNN.gs` are a paired, numbered set (`WebApp_vNN.gs`'s header comment declares
+"pairs with Code.gs vNN"). Every code edit to either file — however small — bumps `NN`
+on **both** files, even the one with no functional change, so the pairing comment never
+goes stale. In the same pass: archive the previous `vNN` pair into `backup/` (copy the
+old content there, replace the root copy with a short stub pointing at the new version —
+this folder cannot delete files, only add/overwrite), update the file table and any
+`_vNN.gs` filename mentioned in `Web App/README.md`, and log the change in
+`00 Docs/HANDOFF_<date>.md`. `Index.html` has no version suffix — it is shared across
+every `Code_vNN.gs`.
+
+## Skills in this bundle
+
+Source of truth for skill files: `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\_skills\` (one copy, shared by both streams).
+
+| Path under `_skills\` | Why it is here |
+|---|---|
+| `shopee-report-rules\SKILL.md` | Private skill, not on any public registry. This is the offline backup of the copy installed in the Claude account — reinstall from here if the account copy is lost. |
+| `diagram-design-OWARIN-skin\` | The OWARIN-branded SKILL.md + `references/style-guide.md`. The public `diagram-design` repo has the **unbranded** versions — overwrite those two files with these, or diagrams will not match the brand (dark-first, washi/sumi/vermilion, Trirong + IBM Plex Sans Thai + IBM Plex Mono). Unpacked from `Claude outputs\diagram-design-owarin-v2.zip`. |
+| `token-harness\`, `grill-with-docs\` | Account skills; keep an offline copy here so Codex and a fresh machine can be set up without the Claude account. |
+
+## Token discipline
+
+Follow the rules in the token-harness skill. Put a one-line model/effort alert at the top of the reply when a cheaper or stronger model fits the work, and remind the owner about the manual steps (`/clear`, `/context`, `/mcp`, plan mode, edit-message) when their trigger fires. Never claim to have switched models yourself.
+
+## Precedence
+
+Spec files in `_specs/` > the skills > the master context > this file.
+The master context is a copy, dated 2026-09-13. When a rule changes upstream, propagate it in the same pass (master context §4.9) or this workspace will run on stale rules.

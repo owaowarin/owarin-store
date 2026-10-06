@@ -1,0 +1,8 @@
+{
+  "changeId": "P1-20260929-03",
+  "sheetId": "13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM",
+  "scriptId": "1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd",
+  "requestId": "P1-TABLE-PROBE-001",
+  "action": "rerun test-only guarded probe after owner authorization",
+  "shopMutation": false
+}

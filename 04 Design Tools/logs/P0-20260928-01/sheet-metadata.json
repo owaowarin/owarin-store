@@ -1,0 +1,218 @@
+{
+  "spreadsheetId": "16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0",
+  "spreadsheetUrl": "https://docs.google.com/spreadsheets/d/16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0/edit",
+  "properties": {
+    "title": "OWARIN STORE",
+    "locale": "en_US",
+    "timeZone": "Asia/Bangkok"
+  },
+  "sheets": [
+    {
+      "properties": {
+        "sheetId": 220950620,
+        "title": "SALES",
+        "index": 0,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 84,
+          "columnCount": 26,
+          "frozenRowCount": 1,
+          "frozenColumnCount": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 286842017,
+        "title": "GAME GUIDE BOOKS",
+        "index": 1,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 1615,
+          "columnCount": 32,
+          "frozenRowCount": 2,
+          "frozenColumnCount": 3
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 2075440050,
+        "title": "MAGAZINE",
+        "index": 2,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 854,
+          "columnCount": 30,
+          "frozenColumnCount": 4
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 751459385,
+        "title": "CLIENT",
+        "index": 3,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 1000,
+          "columnCount": 6,
+          "frozenRowCount": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 122259981,
+        "title": "FB CATALOGUE ARCHIVE",
+        "index": 4,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 1000,
+          "columnCount": 26,
+          "frozenRowCount": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 43902532,
+        "title": "R2 JOBS",
+        "index": 5,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 1334,
+          "columnCount": 26,
+          "frozenRowCount": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 1613238929,
+        "title": "IMAGE UPLOADS",
+        "index": 6,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 1000,
+          "columnCount": 26,
+          "frozenRowCount": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 277605871,
+        "title": "FB: ALBUM CAPTION",
+        "index": 7,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 1080,
+          "columnCount": 26,
+          "frozenRowCount": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 26118055,
+        "title": "FB CATALOGUE",
+        "index": 8,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 3541,
+          "columnCount": 26,
+          "frozenRowCount": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 2060075873,
+        "title": "FB ALBUMS",
+        "index": 9,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 1000,
+          "columnCount": 26,
+          "frozenRowCount": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 674770928,
+        "title": "TYPE LIST",
+        "index": 10,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 1000,
+          "columnCount": 26
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 350046975,
+        "title": "R2 IMAGES",
+        "index": 11,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 2673,
+          "columnCount": 26
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 392274967,
+        "title": "GAME INFO",
+        "index": 12,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 1000,
+          "columnCount": 26
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 355347627,
+        "title": "META EXPORT",
+        "index": 13,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 1343,
+          "columnCount": 26,
+          "frozenRowCount": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 1490976804,
+        "title": "BOOKING",
+        "index": 14,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 308,
+          "columnCount": 19,
+          "frozenRowCount": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "sheetId": 765340244,
+        "title": "TEMPLATES",
+        "index": 15,
+        "sheetType": "GRID",
+        "gridProperties": {
+          "rowCount": 315,
+          "columnCount": 20,
+          "frozenRowCount": 1
+        }
+      }
+    }
+  ]
+}

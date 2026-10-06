@@ -1,0 +1,94 @@
+{
+  "revision": "W1-20261005-01/v38@3E7CF8A86790DF274D2EEC0D01EFD09DB65C8BBCCB224A07F895F7F7069F0C42",
+  "oldTabsCellsAndEventsPreserved": true,
+  "addedOrders": 2,
+  "addedLines": 3,
+  "addedSales": 3,
+  "newJournalEvents": 58,
+  "oldJournalPrefixRows": 1151,
+  "allLatestRequestsDone": true,
+  "uniqueSalesLineIds": 109,
+  "nativeScratch": [
+    390.1,
+    100.05,
+    10.02,
+    280.03000000000003
+  ],
+  "orders": [
+    {
+      "orderId": "OWA-20261005-02",
+      "subtotal": 390.1,
+      "customerShipping": 50.0,
+      "subsidy": 10.02,
+      "total": 440.1,
+      "status": "SOLD"
+    },
+    {
+      "orderId": "OWA-20261005-03",
+      "subtotal": 0.3,
+      "customerShipping": 60.0,
+      "subsidy": 10.02,
+      "total": 60.3,
+      "status": "SOLD"
+    }
+  ],
+  "nativeLedger": [
+    {
+      "row": 1107,
+      "orderId": "OWA-20261005-02",
+      "lineId": "OWA-20261005-02-L1",
+      "sku": "W1V38DEC-0",
+      "price": 390.1,
+      "cost": 100.05,
+      "subsidy": 10.02,
+      "profit": 280.03000000000003,
+      "formula": "=E1107-D1107-F1107"
+    },
+    {
+      "row": 1108,
+      "orderId": "OWA-20261005-03",
+      "lineId": "OWA-20261005-03-L1",
+      "sku": "W1V38DEC-1",
+      "price": 0.1,
+      "cost": 0.05,
+      "subsidy": 10.02,
+      "profit": -9.969999999999999,
+      "formula": "=E1108-D1108-F1108"
+    },
+    {
+      "row": 1109,
+      "orderId": "OWA-20261005-03",
+      "lineId": "OWA-20261005-03-L2",
+      "sku": "W1V38DEC-2",
+      "price": 0.2,
+      "cost": 0.05,
+      "subsidy": 0,
+      "profit": 0.15000000000000002,
+      "formula": "=E1109-D1109-F1109"
+    }
+  ],
+  "sameIdReplays": [
+    {
+      "requestId": "w1-1791182943745-jb8tj3oq1up",
+      "replayed": true,
+      "status": "PENDING"
+    },
+    {
+      "requestId": "w1-1791183027627-fi41yldo27",
+      "replayed": true,
+      "status": "SOLD"
+    },
+    {
+      "requestId": "w1-1791183168274-9vfoby474xc",
+      "replayed": true,
+      "status": "PENDING"
+    },
+    {
+      "requestId": "w1-1791183259032-kju9q5lj3vd",
+      "replayed": true,
+      "status": "SOLD"
+    }
+  ],
+  "finalXlsxBytes": 1345964,
+  "finalXlsxSHA256": "9cc89d03dc705843fa153de72e3c06d1a68cb276977ce00bc1978c71fb27af2e"
+}

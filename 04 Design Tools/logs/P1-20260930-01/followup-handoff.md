@@ -1,0 +1,5 @@
+
+
+## Session 20 — fresh shop schema read-only gate (2026-09-30)
+
+Change `P1-20260930-01`, no business Request ID. Fresh shop Sheet metadata at 00:02 +07 lists 16 tabs with **no ADD REQUESTS**, ORDERS or runtime AUDIT LOG. Bounded header reads confirm SALES A:I and existing CLIENT A:F; inventory header layouts remain visible. This verifies that the P1 Add candidate's exact 17-header journal prerequisite is missing from the shop now. Evidence: `04 Design Tools/logs/P1-20260930-01/shop-schema-readback.md` and `changes.csv`. Before→after: external state unchanged; local Implementation log/HANDOFF appended from backups. No error/retry, external recovery, shop mutation/deploy, or Back House LAB change. Next: install/read back the P1-16 watchdog only in the separate test script through a supported route, test timeout and reconcile lost-ID scope, then review transaction integrity and the journal migration before any shop promotion. Sol / High for implementation/tests; Astra / High for consequential design/focused review.

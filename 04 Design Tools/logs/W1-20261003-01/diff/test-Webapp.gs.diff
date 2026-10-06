@@ -1,0 +1,333 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-before\\webapp.gs" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-runtime\\Webapp.gs"
+index c5b725a..233c4db 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-before\\webapp.gs"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261003-01\\test-runtime\\Webapp.gs"	
+@@ -1,5 +1,9 @@
+ // ============================================================
+-// OWARIN BACK-OFFICE — WebApp.gs v25 (SP-2, pairs with Code.gs v25)
++// OWARIN BACK-OFFICE — WebApp.gs v32 (SP-2, pairs with Code.gs v32)
++// v31 (2026-10-03): validated Add payload and read-only same-ID recovery; pairs with Code.gs v32.
++// v28: no functional change -- bumped only to stay paired with Code.gs v30 (identical copies listed once; all-caps titles).
++// v27: no functional change -- bumped only to stay paired with Code.gs v29 (Meta title without RESTOCK).
++// v26: no functional change -- bumped only to stay paired with Code.gs v28 (nightly Refresh Meta feed).
+ // v25: no functional change -- bumped only to stay paired with Code.gs v25.
+ // v24: no functional change -- bumped only to stay paired with Code.gs v24.
+ // Replaces the whole previous WebApp.gs.
+@@ -17,6 +21,7 @@
+ // ============================================================
+ 
+ function doGet(e) {
++  _w1Access_();
+   return HtmlService.createHtmlOutputFromFile("Index")
+     .setTitle("OWARIN BACK-OFFICE")
+     .addMetaTag("viewport", "width=device-width, initial-scale=1, maximum-scale=1");
+@@ -25,6 +30,7 @@ function doGet(e) {
+ // ── The single entry point for every action ──
+ function api(action, payload) {
+   try {
++    _w1Access_();
+     var data = _route(action, payload || {});
+     return JSON.stringify({ ok: true, data: data });
+   } catch (err) {
+@@ -34,6 +40,12 @@ function api(action, payload) {
+ 
+ function _route(action, p) {
+   switch (action) {
++    case "orders.create": return _w1Mutate_("create",p);
++    case "orders.cancel": return _w1Mutate_("cancel",p);
++    case "orders.confirm": return _w1Mutate_("confirm",p);
++    case "orders.list": return _w1List_(p.status);
++    case "orders.get": return _w1Get_(p.orderId);
++    case "requests.get": return _w1Status_(p.requestId);
+     case "ping":                  return { now: new Date().toISOString() };
+     case "inventory.bootstrap":   return _invBootstrap();
+     case "inventory.list":        return _readInventory(_sheetFromCode(p.source));
+@@ -98,7 +110,7 @@ function _findRowBySku(sheet, COL, sku) {
+ }
+ 
+ // ── READ ──
+-var _INV_KEYS = ["name","status","publisher","platform","genre","subGenre","type","condition","original","cost",
++var _INV_KEYS = ["itemUid","name","status","publisher","platform","genre","subGenre","type","condition","original","cost",
+                  "suggested","price","marketplace","grossProfit","productId",
+                  "priceContentLists","soldDate",
+                  "listedDate","copyFlags","rarity","marketRef","refNote","priceRange","maxGRef"];
+@@ -167,7 +179,6 @@ function _numOrRaw(v) {
+   return isNaN(n) ? s : n;
+ }
+ 
+-// Add must not rely on a typed Sheets column to reject malformed money.
+ function _addNumber(v, field) {
+   var s = String(v === undefined || v === null ? '' : v).trim();
+   if (!s) return '';
+@@ -275,8 +286,8 @@ function _priceToBase(v, channel) {
+   return n;
+ }
+ 
+-function _apiInvUpdate(p) {
+-  return _withLock(function () {
++function _apiInvUpdate(p) { return _w1Edit_(p); }
++function _apiInvUpdateCore_(p) {
+     var sheetName = _sheetFromCode(p.source);
+     var sheet = _getSheetOrThrow(sheetName);
+     var COL = _resolveColumns(sheet);
+@@ -284,6 +295,8 @@ function _apiInvUpdate(p) {
+     var row = _findRowBySku(sheet, COL, sku);
+ 
+     var ch = p.changes || {};
++    _w1EditGuard_(sheet,row,ch,p.requestId);
++    _sp2ResetWriteErrors();
+     var prevStatus = (sheet.getRange(row, COL.status).getValue() || "").toString().trim();
+ 
+     for (var i = 0; i < _EDITABLE.length; i++) {
+@@ -294,7 +307,7 @@ function _apiInvUpdate(p) {
+       if (key === "condition")     v = String(v || "").toUpperCase().trim();
+       else if (_NUMERIC[key])      v = _numOrRaw(v);
+       else                         v = (v === null) ? "" : String(v);
+-      sheet.getRange(row, COL[key]).setValue(v);
++      _w1Write_("edit "+key,function(){sheet.getRange(row,COL[key]).setValue(v);});
+     }
+ 
+     // Sold Date transitions (a web write does not fire onEdit)
+@@ -316,93 +329,22 @@ function _apiInvUpdate(p) {
+     });
+ 
+     SpreadsheetApp.flush();
++    if (_SP2_WRITE_ERRORS.length) throw new Error(_sp2WriteErrMsg());
+     return { item: _readRow(sheet, row, _srcCode(sheetName)), prevSku: sku };
+-  });
+ }
+ 
++
+ // ── WRITE: MARK SOLD (single sale, not through the cart) ──
+ // payload: { source, sku, price?, channel? } — price = the actual price for that channel
+ //   channel "SHOPEE" -> converted back to the shop-front base before saving (SP-2 §6)
+ function _apiMarkSold(p) {
+-  return _withLock(function () {
+-    var sheetName = _sheetFromCode(p.source);
+-    var sheet = _getSheetOrThrow(sheetName);
+-    var COL = _resolveColumns(sheet);
+-    var row = _findRowBySku(sheet, COL, String(p.sku || "").trim());
+-
+-    var cur = (sheet.getRange(row, COL.status).getValue() || "").toString().trim();
+-    if (cur === "Sold") throw new Error("This copy is already marked Sold — press REFRESH");
+-
+-    if (p.price !== undefined && p.price !== null && String(p.price).trim() !== "" && COL.price) {
+-      sheet.getRange(row, COL.price).setValue(_priceToBase(_numOrRaw(p.price), p.channel));
+-    }
+-    sheet.getRange(row, COL.status).setValue("Sold");
+-    if (COL.soldDate) {
+-      var sd = sheet.getRange(row, COL.soldDate);
+-      if (!sd.getValue()) sd.setValue(new Date());
+-    }
+-    SpreadsheetApp.flush();
+-
+-    var item = _readRow(sheet, row, _srcCode(sheetName));
+-
+-    // P5.2: also write to SALES, otherwise the ledger is incomplete (only cart sales used to be recorded)
+-    // Shipping: use it when sent, otherwise 0 (walk-in / Shopee where shipping is charged separately)
+-    var salesInfo = null;
+-    try {
+-      salesInfo = _appendSalesRows([{ obj: item, sku: String(p.sku || "").trim(), price: item.price }],
+-                                   _numOrRaw(p.shipping) === "" ? 0 : _numOrRaw(p.shipping));
+-    } catch (e) {
+-      salesInfo = { error: String((e && e.message) || e) };   // the sale succeeded — do not throw over it
+-    }
+-    return { item: item, sales: salesInfo };
+-  });
++  return _w1Mutate_("confirm",{requestId:p.requestId,channel:p.channel,items:[{source:p.source,sku:p.sku,itemUid:p.itemUid,price:p.price}],customerShipping:p.customerShipping,shippingSubsidy:p.shippingSubsidy,labelLater:p.labelLater,single:true});
+ }
+ 
+ // ── Write rows into SALES (shared by markSold and cart checkout) ──
+ // entries: [{ obj (row object), sku, price }] · full shipping on the first row, 0 on the rest
+-function _appendSalesRows(entries, shipping) {
+-  var salesSheet = _getSalesSheet();
+-  var sCOL = _resolveColumns(salesSheet);
+-  var orderId = _nextOrderId(salesSheet, sCOL);
+-  var today = new Date();
+-  var startRow = Math.max(salesSheet.getLastRow() + 1, 3);
+-
+-  for (var k = 0; k < entries.length; k++) {
+-    var e = entries[k];
+-    var rowNo = startRow + k;
+-    var price = _numOrRaw(e.price);
+-    if (price === "") price = (e.obj.price !== "" ? e.obj.price : e.obj.suggested);
+-
+-    _setSalesCells(salesSheet, sCOL, rowNo, {
+-      order:       orderId,
+-      product:     e.obj.baseTitle,
+-      orderDate:   today,
+-      cost:        (e.obj.cost !== "" && e.obj.cost !== null) ? e.obj.cost : "",
+-      price:       price,
+-      shipingCost: (k === 0 ? shipping : 0),
+-      productId:   e.sku,          // new column per the plan (skipped automatically if absent)
+-      note:        e.sku           // for older sheets that kept the SKU in Note
+-    });
+-
+-    if (sCOL.netProfit && sCOL.price && sCOL.cost && sCOL.shipingCost) {
+-      salesSheet.getRange(rowNo, sCOL.netProfit).setFormula(
+-        "=" + _colLetter(sCOL.price) + rowNo +
+-        "-" + _colLetter(sCOL.cost) + rowNo +
+-        "-" + _colLetter(sCOL.shipingCost) + rowNo
+-      );
+-    }
+-  }
+-  SpreadsheetApp.flush();
+-  return { orderId: orderId, count: entries.length, shipping: shipping };
+-}
+-
+-// ============================================================
+-// TOOLS — web-safe versions (SpreadsheetApp.getUi() is unavailable in a web app)
+-// They call the same helpers as the sheet menu (_buildSoldIndex / _calcSuggestedPrice /
+-// _fixDerivedFormulasForSheet / _getPubCode / _natCmp), so the results are identical.
+-// ============================================================
++function _appendSalesRows() { throw new Error("LEGACY_SALE_WRITER_RETIRED use orders.confirm"); }
+ 
+-// Calculate Suggested Price for a whole sheet — the same SP-2 core as the menu
+ function _toolsFillSuggested(source) {
+   return _withLock(function () {
+     var sheetName = _sheetFromCode(source);
+@@ -545,6 +487,7 @@ function _toolsCheckPublishers(source) {
+ // Natural A-Z sort (= sortInventory) — reorders the whole sheet, so the client must reload
+ function _toolsSort(source) {
+   return _withLock(function () {
++    _w1TechnicalGate_("");
+     var sheetName = _sheetFromCode(source);
+     var sheet = _getSheetOrThrow(sheetName);
+     var COL = _resolveColumns(sheet);
+@@ -567,7 +510,8 @@ function _toolsSort(source) {
+       return _natCmp(va, vb);
+     });
+ 
+-    range.setValues(data);
++    _w1Write_("sort inventory",function(){range.setValues(data);});
++    if(JSON.stringify(range.getValues())!==JSON.stringify(data))throw new Error("SORT_READBACK");
+     _fixDerivedFormulasForSheet(sheet, COL); // setValues overwrote the formulas -> put them back
+     if (sheetName === GGB_SHEET) _sp2RepaintFromRange(sheet, COL); // REVIEW colours do not follow the sort -> repaint
+     SpreadsheetApp.flush();
+@@ -613,113 +557,19 @@ function _getSalesSheet() {
+ }
+ 
+ // Order = OWA-YYYYMMDD-NN (NN = running number within the day)
+-function _nextOrderId(sheet, COL) {
+-  var ymd = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), "yyyyMMdd");
+-  var prefix = ORDER_PREFIX + "-" + ymd + "-";
+-  var max = 0;
+-  var lastRow = sheet.getLastRow();
+-  if (lastRow >= 3 && COL.order) {
+-    var vals = sheet.getRange(3, COL.order, lastRow - 2, 1).getValues();
+-    for (var i = 0; i < vals.length; i++) {
+-      var v = vals[i][0] ? vals[i][0].toString().trim() : "";
+-      if (v.indexOf(prefix) === 0) {
+-        var nn = parseInt(v.slice(prefix.length), 10);
+-        if (!isNaN(nn) && nn > max) max = nn;
+-      }
+-    }
+-  }
+-  var next = max + 1;
+-  return prefix + (next < 10 ? "0" + next : "" + next);
+-}
++function _nextOrderId() { _w1Access_(); return _w1NextId_(); }
+ 
+ // Note: the productId key uses the same "Product ID" header as the inventory (resolved per sheet)
+-function _setSalesCells(sheet, COL, rowNo, obj) {
+-  Object.keys(obj).forEach(function (key) {
+-    if (COL[key]) sheet.getRange(rowNo, COL[key]).setValue(obj[key]);
+-  });
+-}
++function _setSalesCells() { throw new Error("LEGACY_SALE_WRITER_RETIRED use orders.confirm"); }
+ 
+ // ── CONFIRM SOLD: write SALES + Status=Sold + Sold Date (locked; current Status checked first) ──
+ // payload: { items:[{source, sku, price}], shipping?, channel? }
+ //   channel "SHOPEE" -> every price converted back to the shop-front base · Note = SKU · channel
+-function _apiSalesConfirm(p) {
+-  return _withLock(function () {
+-    var items = p.items || [];
+-    if (!items.length) throw new Error("The cart is empty");
+-
+-    var shipping = _numOrRaw(p.shipping);
+-    if (shipping === "") shipping = _calcShipping(items.length);
+-
+-    // Resolve the inventory rows and check whether any copy is already sold (reject the whole cart if so)
+-    var resolved = [], conflicts = [];
+-    for (var i = 0; i < items.length; i++) {
+-      var it = items[i];
+-      var invSheet = _getSheetOrThrow(_sheetFromCode(it.source));
+-      var invCOL = _resolveColumns(invSheet);
+-      var row = _findRowBySku(invSheet, invCOL, String(it.sku || "").trim());
+-      var obj = _readRow(invSheet, row, it.source);
+-      var cur = String(obj.status || "").trim();
+-      if (cur === "Sold") conflicts.push(it.sku + " (" + obj.baseTitle + ")");
+-      resolved.push({ it: it, sheet: invSheet, COL: invCOL, row: row, obj: obj });
+-    }
+-    if (conflicts.length) {
+-      throw new Error("The cart contains copies that are already sold: " + conflicts.join(", ") + " — remove them and try again");
+-    }
+-
+-    var salesSheet = _getSalesSheet();
+-    var sCOL = _resolveColumns(salesSheet);
+-    var orderId = _nextOrderId(salesSheet, sCOL);
+-    var today = new Date();
+-    var startRow = Math.max(salesSheet.getLastRow() + 1, 3);
+-
+-    var channel = String(p.channel || "").toUpperCase();
+-    for (var k = 0; k < resolved.length; k++) {
+-      var r = resolved[k];
+-      var price = _numOrRaw(r.it.price);
+-      if (price === "") price = (r.obj.price !== "" ? r.obj.price : r.obj.suggested);
+-      else price = _priceToBase(price, channel);   // SP-2: always the shop-front base
+-      var cost = (r.obj.cost !== "" && r.obj.cost !== null) ? r.obj.cost : "";
+-      var rowNo = startRow + k;
+-
+-      _setSalesCells(salesSheet, sCOL, rowNo, {
+-        order:       orderId,
+-        product:     r.obj.baseTitle,     // base title without RESTOCK (per §6)
+-        orderDate:   today,
+-        cost:        cost,
+-        price:       price,
+-        shipingCost: (k === 0 ? shipping : 0),  // full shipping on the first row, 0 on the rest
+-        productId:   r.it.sku,                  // new column per the plan (skipped when absent)
+-        note:        r.it.sku + (channel && channel !== "SHOP" ? " · " + channel : "")
+-      });
+-
+-      // Net Profit = Price - Cost - Shiping Cost (formula kept identical to the sheet)
+-      if (sCOL.netProfit && sCOL.price && sCOL.cost && sCOL.shipingCost) {
+-        salesSheet.getRange(rowNo, sCOL.netProfit).setFormula(
+-          "=" + _colLetter(sCOL.price) + rowNo +
+-          "-" + _colLetter(sCOL.cost) + rowNo +
+-          "-" + _colLetter(sCOL.shipingCost) + rowNo
+-        );
+-      }
+-
+-      // Mark the inventory row Sold (+ the real price, converted for the channel)
+-      if (r.it.price !== undefined && String(r.it.price).trim() !== "" && r.COL.price) {
+-        r.sheet.getRange(r.row, r.COL.price).setValue(_priceToBase(_numOrRaw(r.it.price), channel));
+-      }
+-      r.sheet.getRange(r.row, r.COL.status).setValue("Sold");
+-      if (r.COL.soldDate) {
+-        var sd = r.sheet.getRange(r.row, r.COL.soldDate);
+-        if (!sd.getValue()) sd.setValue(today);
+-      }
+-    }
+-
+-    SpreadsheetApp.flush();
+-    var updated = resolved.map(function (r) { return _readRow(r.sheet, r.row, r.it.source); });
+-    return { orderId: orderId, count: resolved.length, shipping: shipping, items: updated };
+-  });
+-}
++function _apiSalesConfirm(p) { return _w1Mutate_("confirm",p); }
+ 
+-// ── SALES LIST (P4): read every SALES row -> the client builds the monthly dashboard ──
+ function _apiSalesList() {
++  _w1Access_();
++  var unsettled={};var requests=_w1Requests_();Object.keys(requests).forEach(function(k){if(requests[k].state!=="DONE")unsettled[requests[k].snap.orderId]=true;});
+   var sheet = _getSalesSheet();
+   var COL = _resolveColumns(sheet);
+   var lastRow = sheet.getLastRow();
+@@ -737,6 +587,7 @@ function _apiSalesList() {
+     if (!order && !product) continue;  // skip empty rows
+     var od = _val(data[i], COL, "orderDate");
+     var odStr = (od instanceof Date) ? Utilities.formatDate(od, tz, "yyyy-MM-dd") : str(od);
++    if(unsettled[str(_val(data[i],COL,"order"))]) continue;
+     out.push({
+       order:       order,
+       product:     product,

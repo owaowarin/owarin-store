@@ -1,0 +1,9 @@
+# Fresh shop Sheet schema check — read-only
+
+Change ID P1-20260930-01; Google Sheet ID 16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0; checked 2026-09-30 00:02 +07 with Google Sheets connector metadata, then bounded A1 header reads. No data values, source, schema or deployment were written. No business Request ID was created.
+
+The native Sheet metadata lists 16 tabs: SALES (sheetId 220950620), GAME GUIDE BOOKS (286842017), MAGAZINE (2075440050), CLIENT (751459385), FB CATALOGUE ARCHIVE, R2 JOBS, IMAGE UPLOADS, FB: ALBUM CAPTION, FB CATALOGUE, FB ALBUMS, TYPE LIST, R2 IMAGES, GAME INFO, META EXPORT, BOOKING and TEMPLATES. There is **no ADD REQUESTS tab**, no ORDERS tab and no runtime AUDIT LOG tab in this fresh metadata. This directly confirms the P1 Add candidate's exact 17-header ADD REQUESTS gate is not met in the shop.
+
+Bounded header reads: SALES A1:I1 = Order ID, Item Name Sold, Order date, Cost, Price, Shipping Cost, Net Profit, Note, Product ID. GAME GUIDE BOOKS A1:AF1 = 32 visible headers beginning Item name, Product ID, Status and including Cost/Price/Market Place Price; MAGAZINE A1:AD1 = 30 visible headers beginning Item name, Product ID, Status and including Cost/Price/Market Place Price. CLIENT A1:F1 = Facebook Account, Name, Phone Number, Address, Post Code, Note. Row 2 was included in two inventory range requests but returned no value row; this read is not evidence that inventory is empty.
+
+Before→after: no change to the Google Sheet; local docs only will append this finding. This is a schema/header observation, not a production data audit or numerical conclusion. Recovery: no external rollback required. Promotion remains blocked until the journal schema is created with the exact reviewed headers and test-backed migration/readback; shop writes/deploy are outside this read-only step.

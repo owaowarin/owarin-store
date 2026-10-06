@@ -1,0 +1,514 @@
+--- 03 Apps Script/Web App/Code_v27.gs
++++ 04 Design Tools/logs/P1-20260929-01/candidate/Code.gs
+@@ -2038,14 +2038,68 @@
+ //   SP-2 + Listed Date + newer fields (platform/genre/copyFlags/rarity/marketRef/refNote)
+ //   copyFlags: when omitted it is derived from the title (v17.4)
+ // ============================================================
++function _addRequestSheet(ss) {
++  var sh = ss.getSheetByName('ADD REQUESTS');
++  if (!sh) throw new Error('ADD REQUESTS journal is missing; Add is disabled');
++  var expected = ['Event ID','Timestamp','Request ID','Attempt','State','Actor','Entry Source','App Version','Sheet','Payload Hash','Row','Product ID','Before','After','Error','Result','Recovery Ref'];
++  var actual = sh.getRange(1, 1, 1, expected.length).getValues()[0];
++  for (var i = 0; i < expected.length; i++) {
++    if (actual[i] !== expected[i]) throw new Error('ADD REQUESTS header mismatch at ' + (i + 1));
++  }
++  return sh;
++}
++function _addRequestHash(data) {
++  var p = {};
++  Object.keys(data).sort().forEach(function(k){ if (k !== 'requestId') p[k] = data[k]; });
++  var bytes = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, JSON.stringify(p));
++  return bytes.map(function(b){ return ('0' + (b & 255).toString(16)).slice(-2); }).join('');
++}
++function _addRequestEvent(sh, id, attempt, state, source, hash, row, sku, before, after, error, result) {
++  var eventRow = sh.getLastRow() + 1;
++  var actor = 'Unknown';
++  var eventId = id + '-' + attempt + '-' + state;
++  sh.getRange(eventRow, 1, 1, 17).setValues([[
++    eventId, new Date(), id, attempt, state, actor, 'inventory.add API', 'P1 candidate',
++    source, hash, row || '', sku || '', before || '', after || '', error || '', result || '', id
++  ]]);
++  SpreadsheetApp.flush();
++  var check = sh.getRange(eventRow, 1, 1, 17).getValues()[0];
++  if (!check[1]) throw new Error('ADD REQUESTS event readback failed at column 2');
++  var required = {0:eventId, 2:id, 3:attempt, 4:state, 5:actor,
++                  6:'inventory.add API', 7:'P1 candidate', 8:source, 9:hash,
++                  10:row || '', 11:sku || '', 12:before || '', 13:after || '',
++                  14:error || '', 15:result || '', 16:id};
++  Object.keys(required).forEach(function (col) {
++    if (String(check[col]) !== String(required[col])) throw new Error('ADD REQUESTS event readback failed at column ' + (Number(col) + 1));
++  });
++}
+ function addInventoryRow(data) {
+   return _withLock(function () {
+     var ss = SpreadsheetApp.getActiveSpreadsheet();
++    var requestId = String(data.requestId || '').trim();
++    if (!/^[A-Za-z0-9_-]{12,100}$/.test(requestId)) throw new Error('Valid Add Request ID required');
++    var journal = _addRequestSheet(ss);
++    var hash = _addRequestHash(data);
++    var events = journal.getLastRow() > 1 ? journal.getRange(2, 1, journal.getLastRow() - 1, 17).getValues() : [];
++    var prior = null, attempt = 1;
++    for (var e = 0; e < events.length; e++) if (String(events[e][2]) === requestId) { prior = events[e]; attempt = Math.max(attempt, Number(events[e][3]) + 1); }
++    if (prior) {
++      if (prior[9] !== hash) throw new Error('Add Request ID was already used with different item data');
++      if (prior[4] === 'DONE') {
++        _addRequestEvent(journal, requestId, attempt, 'DONE', prior[8], hash, prior[10], prior[11],
++                         'replay of DONE', prior[13], '', prior[15]);
++        return JSON.parse(prior[15]);
++      }
++      _addRequestEvent(journal, requestId, attempt, 'ERROR', prior[8], hash, prior[10], prior[11],
++                       'retry of ' + prior[4], '', 'Retry blocked pending recovery', '');
++      throw new Error('Add outcome requires recovery; Request ID ' + requestId + ' (no duplicate row created)');
++    }
+     var sheetName = (data && data.sheetName === MAG_SHEET) ? MAG_SHEET : GGB_SHEET;
+     var sheet = ss.getSheetByName(sheetName);
+     if (!sheet) throw new Error("Sheet not found: " + sheetName);
+ 
+     var COL     = _resolveColumns(sheet);
++    if (!COL.name || !COL.productId || !COL.status) throw new Error('Inventory name, Product ID or Status column missing');
+     var lastRow = sheet.getLastRow();
+     var lastCol = sheet.getLastColumn();
+     var newRow  = lastRow + 1;
+@@ -2054,16 +2108,16 @@
+     var title     = _autoFormat(data.title.trim());
+     var pub       = (data.pub || "").trim();
+     var cond      = (data.cond || "").trim().toUpperCase();
+-    var original  = data.original || "";
+-    var cost      = data.cost     || "";
+-    var price     = data.price    || "";
+-    var status    = data.status   || "Instock";
++    var original  = data.original === 0 ? 0 : (data.original || "");
++    var cost      = data.cost === 0 ? 0 : (data.cost || "");
++    var price     = data.price === 0 ? 0 : (data.price || "");
++    var status    = String(data.status || '').trim() || 'New Arrival';
+     var platform  = (data.platform  || "").toString().trim();
+     var genre     = (data.genre     || "").toString().trim();
+     var copyFlags = (data.copyFlags || "").toString().trim();
+     var rarity    = (data.rarity    || "").toString().trim();
+     if (!copyFlags) copyFlags = _sp2FlagsFromName(title);   // v17.4: derived from the title
+-    var marketRef = data.marketRef  || "";
++    var marketRef = data.marketRef === 0 ? 0 : (data.marketRef || "");
+     var refNote   = (data.refNote   || "").toString().trim();
+ 
+     var allData = (lastRow >= 3) ? sheet.getRange(3, 1, lastRow - 2, lastCol).getValues() : [];
+@@ -2078,7 +2132,11 @@
+                  rarity: rarity, marketRef: marketRef };
+     var result = _sp2Calc(item, idx);
+ 
+-    var setIf = function(key, val) { if (COL[key]) _tryWrite("add " + key, function () { sheet.getRange(newRow, COL[key]).setValue(val); }); };
++    _addRequestEvent(journal, requestId, attempt, 'PREPARED', sheetName, hash, newRow, sku,
++                     'absent', '', '', '');
++    try {
++    _sp2ResetWriteErrors();
++    var setIf = function(key, val) { if (COL[key] && !_tryWrite("add " + key, function () { sheet.getRange(newRow, COL[key]).setValue(val); })) throw new Error('Add write failed: ' + key); };
+     setIf("name", finalTitle);
+     setIf("publisher", pub);
+     setIf("platform", platform);
+@@ -2094,6 +2152,8 @@
+     setIf("rarity", rarity);
+     setIf("marketRef", marketRef);
+     setIf("refNote", refNote);
++    setIf("type", String(data.type || '').trim());
++    setIf("subGenre", String(data.subGenre || '').trim());
+ 
+     if (COL.priceRange) {
+       setIf("priceRange", result.rangeStr || "");
+@@ -2106,14 +2166,41 @@
+     if (status === "Sold" && COL.soldDate) setIf("soldDate", new Date());
+ 
+     _setDerivedFormulasForRow(sheet, newRow, COL);
++    if (_SP2_WRITE_ERRORS.length) throw new Error('Add formula/write error: ' + _sp2WriteErrMsg());
+ 
+     SpreadsheetApp.flush();
+-
+-    return { success: true, row: newRow, title: finalTitle, sku: sku,
++    var expected = { name: finalTitle, productId: sku, status: status, publisher: pub,
++      platform: platform, genre: genre, subGenre: String(data.subGenre || '').trim(),
++      type: String(data.type || '').trim(), condition: cond, original: original,
++      cost: cost, price: price, suggested: result.price, copyFlags: copyFlags,
++      rarity: rarity, marketRef: marketRef, refNote: refNote,
++      priceRange: result.rangeStr || '', maxGRef: result.refStr || '' };
++    var rowValues = sheet.getRange(newRow, 1, 1, lastCol).getValues()[0];
++    var after = {};
++    Object.keys(expected).forEach(function (key) {
++      if (!COL[key]) return;
++      var actual = rowValues[COL[key] - 1];
++      if (String(actual === null || actual === undefined ? '' : actual) !== String(expected[key]))
++        throw new Error('Add readback mismatch: ' + key);
++      after[key] = actual;
++    });
++    if (status !== 'Sold' && COL.listedDate && !rowValues[COL.listedDate - 1]) throw new Error('Add readback mismatch: listedDate');
++    if (status === 'Sold' && COL.soldDate && !rowValues[COL.soldDate - 1]) throw new Error('Add readback mismatch: soldDate');
++    if (COL.listedDate) after.listedDate = rowValues[COL.listedDate - 1] || '';
++    if (COL.soldDate) after.soldDate = rowValues[COL.soldDate - 1] || '';
++    var saved = { success: true, row: newRow, title: finalTitle, sku: sku,
+              suggested: result.price, target: result.target, open: result.open,
+              priceRange: result.rangeStr, refStr: result.refStr,
+              tier: result.tier, label: result.label, review: result.review,
+              isRestock: restockResult.isRestock, sheetName: sheetName };
++    _addRequestEvent(journal, requestId, attempt, 'DONE', sheetName, hash, newRow, sku,
++                     'absent', JSON.stringify(after), '', JSON.stringify(saved));
++    return saved;
++    } catch (err) {
++      try { _addRequestEvent(journal, requestId, attempt, 'ERROR', sheetName, hash, newRow, sku,
++                             'absent', '', String((err && err.message) || err), ''); } catch (ignored) {}
++      throw new Error('Add outcome requires recovery; Request ID ' + requestId + ': ' + String((err && err.message) || err));
++    }
+   });
+ }
+ 
+--- 03 Apps Script/Web App/WebApp_v25.gs
++++ 04 Design Tools/logs/P1-20260929-01/candidate/Webapp.gs
+@@ -38,6 +38,7 @@
+     case "inventory.bootstrap":   return _invBootstrap();
+     case "inventory.list":        return _readInventory(_sheetFromCode(p.source));
+     case "inventory.add":         return _apiInvAdd(p);
++    case "inventory.addStatus":   return _apiInvAddStatus(p);
+     case "inventory.update":      return _apiInvUpdate(p);
+     case "inventory.markSold":    return _apiMarkSold(p);
+     case "sales.confirm":         return _apiSalesConfirm(p);
+@@ -166,44 +167,87 @@
+   return isNaN(n) ? s : n;
+ }
+ 
++// Add must not rely on a typed Sheets column to reject malformed money.
++function _addNumber(v, field) {
++  var s = String(v === undefined || v === null ? '' : v).trim();
++  if (!s) return '';
++  if (!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(s) &&
++      !/^[+-]?\d{1,3}(?:,\d{3})+(?:\.\d+)?$/.test(s)) throw new Error(field + ' must be a number');
++  var n = Number(s.replace(/,/g, ''));
++  if (!isFinite(n)) throw new Error(field + ' must be a finite number');
++  return n;
++}
++
+ // ── WRITE: ADD ──
+ // Uses addInventoryRow from Code.gs (lock + SP-2 + Listed Date all included)
+ // then fills the fields the old sidebar did not have (platform / genre), header-driven
+-function _apiInvAdd(p) {
++function _apiInvAddData(p) {
+   var title = String(p.title || "").trim();
+   if (!title) throw new Error("Please enter a product title");
+ 
+   var sheetName = _sheetFromCode(p.source);
+-  var res = addInventoryRow({
++  return {
++    requestId: String(p.requestId || '').trim(),
+     sheetName: sheetName,
+     title:    title,
+     pub:      String(p.pub || "").trim(),
+     cond:     String(p.cond || "").trim(),
+-    original: _numOrRaw(p.original),
+-    cost:     _numOrRaw(p.cost),
+-    price:    _numOrRaw(p.price),
+-    status:   String(p.status || "Instock").trim() || "Instock",
++    original: _addNumber(p.original, 'Original'),
++    cost:     _addNumber(p.cost, 'Cost'),
++    price:    _addNumber(p.price, 'Price'),
++    status:   String(p.status || "").trim() || "New Arrival",
+     // SP-2: handled inside addInventoryRow (platform affects the curve, so it must be set first)
+     platform:  String(p.platform  || "").trim(),
+     genre:     String(p.genre     || "").trim(),
++    subGenre:  String(p.subGenre  || "").trim(),
++    type:      String(p.type      || "").trim(),
+     copyFlags: String(p.copyFlags || "").trim(),
+     rarity:    String(p.rarity    || "").trim(),
+-    marketRef: _numOrRaw(p.marketRef),
++    marketRef: _addNumber(p.marketRef, 'Market Ref'),
+     refNote:   String(p.refNote   || "").trim()
+-  });
+-
++  };
++}
++
++function _apiInvAdd(p) {
++  var data = _apiInvAddData(p);
++  return _apiInvAddResult(addInventoryRow(data), data.sheetName);
++}
++
++function _apiInvAddResult(res, sheetName) {
+   var sheet = _getSheetOrThrow(sheetName);
+-  // P5.1: Type (category / book format) — header-driven, written after the row is created
+-  var typeVal = String(p.type || "").trim();
+-  if (typeVal) {
+-    var _tCOL = _resolveColumns(sheet);
+-    if (_tCOL.type) { sheet.getRange(res.row, _tCOL.type).setValue(typeVal); SpreadsheetApp.flush(); }
+-  }
+-  var item = _readRow(sheet, res.row, _srcCode(sheetName));
++  var itemRow = _findRowBySku(sheet, _resolveColumns(sheet), res.sku);
++  var item = _readRow(sheet, itemRow, _srcCode(sheetName));
+   // P3: match the booking queue on base title — a booking error must not fail the add
+   var matches = [];
+   try { matches = _apiBookingMatch(item.name).matches; } catch (e) { matches = []; }
+   return { result: res, item: item, bookingMatches: matches };
++}
++
++function _apiInvAddStatus(p) {
++  var data = _apiInvAddData(p);
++  var id = data.requestId;
++  if (!/^[A-Za-z0-9_-]{12,100}$/.test(id)) throw new Error('Valid Add Request ID required');
++  var hash = _addRequestHash(data);
++  var status = _withLock(function () {
++    var journal = _addRequestSheet(SpreadsheetApp.getActiveSpreadsheet());
++    var last = journal.getLastRow();
++    if (last < 2) return { state: 'NOT_FOUND' };
++    var events = journal.getRange(2, 1, last - 1, 17).getValues();
++    var prior = null;
++    for (var i = 0; i < events.length; i++) if (String(events[i][2]) === id) prior = events[i];
++    if (!prior) return { state: 'NOT_FOUND' };
++    if (prior[9] !== hash) throw new Error('Add Request ID was already used with different item data');
++    if (prior[4] !== 'DONE') return { state: String(prior[4] || 'UNKNOWN'), row: prior[10],
++                                   sku: String(prior[11] || ''), error: String(prior[14] || '') };
++    var result;
++    try { result = JSON.parse(prior[15]); } catch (e) {}
++    if (!result || result.success !== true || result.sku !== prior[11] ||
++        Number(result.row) !== Number(prior[10]))
++      throw new Error('Add DONE result requires recovery; Request ID ' + id);
++    return { state: 'DONE', result: result };
++  });
++  if (status.state === 'DONE') return { state: 'DONE', data: _apiInvAddResult(status.result, data.sheetName) };
++  return status;
+ }
+ 
+ // ── WRITE: UPDATE (edit a row) ──
+--- 03 Apps Script/Web App/Index.html
++++ 04 Design Tools/logs/P1-20260929-01/candidate/Index.html
+@@ -569,6 +569,22 @@
+ var M = { mode: 'add', source: 'GGB', sku: '', row: null, saving: false, soldChannel: 'SHOP',
+           auto: { genre: false, platform: false, original: false } };
+ var LAST_ADD = null;
++var addSuggestionResets = [], addAutoTimers = [];
++// ponytail: this tab survives reloads; cross-tab recovery needs a server request-status lookup.
++var ADD_PENDING_KEY = 'owarin.add.pending.1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp.v1';
++var addPending = null, addPendingBroken = false;
++try {
++  var savedAdd = sessionStorage.getItem(ADD_PENDING_KEY);
++  if (savedAdd) {
++    addPending = JSON.parse(savedAdd);
++    if (!addPending || !/^[A-Za-z0-9_-]{12,100}$/.test(addPending.requestId) ||
++        !addPending.payload || addPending.payload.requestId !== addPending.requestId ||
++        (addPending.payload.source !== 'GGB' && addPending.payload.source !== 'MAG') ||
++        typeof addPending.payload.title !== 'string' || !addPending.payload.title.trim())
++      throw new Error('Invalid pending Add');
++  }
++} catch (e) { addPending = null; addPendingBroken = true; }
++var addRequestId = addPending ? addPending.requestId : '';
+ 
+ /* ── api bridge: one contract end to end ── */
+ function callApi(action, payload) {
+@@ -623,7 +639,7 @@
+ function inventoryRows(){
+   return S.allSheets ? S.data.GGB.concat(S.data.MAG) : S.data[S.source];
+ }
+-function addToCache(item){ S.data[item.source].push(item); }
++function addToCache(item){ replaceInCache(item.productId, item); }
+ function replaceInCache(prevSku, item){
+   var arr = S.data[item.source];
+   for (var i = 0; i < arr.length; i++) {
+@@ -839,8 +855,12 @@
+ function showModal(id, on){ $(id).classList.toggle('open', !!on); }
+ document.addEventListener('click', function(e){
+   var c = e.target.closest ? e.target.closest('[data-close]') : null;
+-  if (c) { showModal(c.getAttribute('data-close'), false); return; }
++  if (c) {
++    if (M.mode === 'add' && M.saving && c.getAttribute('data-close') === 'modal') return;
++    showModal(c.getAttribute('data-close'), false); return;
++  }
+   if (e.target.classList && e.target.classList.contains('modal-bg')) {
++    if (M.mode === 'add' && M.saving && e.target.id === 'modal') return;
+     e.target.classList.remove('open');
+   }
+ });
+@@ -854,8 +874,8 @@
+   var els = document.querySelectorAll('.ggb-only');
+   for (var i = 0; i < els.length; i++) els[i].style.display = show;
+ }
+-$('mSrcGGB').addEventListener('click', function(){ if (M.mode === 'add') setModalSource('GGB'); });
+-$('mSrcMAG').addEventListener('click', function(){ if (M.mode === 'add') setModalSource('MAG'); });
++$('mSrcGGB').addEventListener('click', function(){ if (M.mode === 'add' && !M.saving) setModalSource('GGB'); });
++$('mSrcMAG').addEventListener('click', function(){ if (M.mode === 'add' && !M.saving) setModalSource('MAG'); });
+ 
+ /* ── SP-2: copy flag chips ── */
+ function setFlagChips(str){
+@@ -930,18 +950,53 @@
+   return ch;
+ }
+ 
++function resetAddForm(){
++  clearTimeout(_flT);
++  addAutoTimers.forEach(clearTimeout); addAutoTimers = [];
++  addSuggestionResets.forEach(function(reset){ reset(); });
++  fillForm({ status: 'New Arrival' });
++  M.auto = { genre: false, platform: false, original: false, type: false };
++  M.sku = ''; M.row = null;
++}
++function setAddBusy(busy){
++  var fields = document.querySelectorAll('#modal input, #modal select, #modal button');
++  for (var i = 0; i < fields.length; i++) fields[i].disabled = busy;
++  if (!busy && addPending) {
++    fields = document.querySelectorAll('#modal input, #modal select');
++    for (var j = 0; j < fields.length; j++) fields[j].disabled = true;
++    $('mSrcGGB').disabled = $('mSrcMAG').disabled = true;
++  }
++  $('mSave').textContent = busy ? 'Saving…' : (addPending ? 'Check / retry request' : 'Save');
++}
+ function openAdd(){
++  if (M.saving) return;
++  if (addPendingBroken) { toast('Browser storage unavailable — Add is disabled to prevent duplicate requests'); return; }
++  if (addPending) {
++    var old = addPending.payload;
++    M.mode = 'add'; M.sku = ''; M.row = null;
++    $('mTitle').textContent = '＋ Add item';
++    $('mSrcRow').style.display = '';
++    setModalSource(old.source);
++    fillForm({ name: old.title, publisher: old.pub, condition: old.cond, status: old.status,
++      original: old.original, cost: old.cost, price: old.price, platform: old.platform,
++      genre: old.genre, subGenre: old.subGenre, type: old.type, copyFlags: old.copyFlags,
++      rarity: old.rarity, marketRef: old.marketRef, refNote: old.refNote });
++    $('mResult').textContent = 'Unresolved Add Request ' + addRequestId + ' — check status before retry';
++    showModal('modal', true);
++    setAddBusy(false);
++    return;
++  }
+   M.mode = 'add'; M.sku = ''; M.row = null;
+-  M.auto = { genre: false, platform: false, original: false, type: false };
+   $('mTitle').textContent = '＋ Add item';
+   $('mSrcRow').style.display = '';
+   setModalSource(S.source);
+-  fillForm({ status: 'New Arrival' });
++  resetAddForm();
+   $('mResult').innerHTML = '';
+   showModal('modal', true);
+   setTimeout(function(){ $('fName').focus(); }, 80);
+ }
+ function openEdit(sku, src){
++  if (M.saving) return;
+   var r = findBySku(src || S.source, sku);
+   if (!r) { toast('Item not found — press REFRESH'); return; }
+   M.mode = 'edit'; M.sku = sku; M.row = r;
+@@ -955,29 +1010,49 @@
+ 
+ $('mSave').addEventListener('click', function(){
+   if (M.saving) return;
+-  var p = collectForm();
++  if (M.mode === 'add' && addPendingBroken) { toast('Browser storage unavailable — Add is disabled'); return; }
++  var p = (M.mode === 'add' && addPending) ? addPending.payload : collectForm();
+   if (!p.title) { toast('Enter the item name first'); return; }
+ 
+   M.saving = true;
+-  $('mSave').disabled = true;
+-  $('mSave').textContent = 'Saving…';
+-
++  if (M.mode === 'add') setAddBusy(true);
++  else { $('mSave').disabled = true; $('mSave').textContent = 'Saving…'; }
++
++  var committedSku = '';
+   var done = function(){
+     M.saving = false;
+-    $('mSave').disabled = false;
+-    $('mSave').textContent = 'Save';
++    if (M.mode === 'add') setAddBusy(false);
++    else { $('mSave').disabled = false; $('mSave').textContent = 'Save'; }
++    if (committedSku && M.mode === 'add') $('fName').focus();
+   };
+ 
+   if (M.mode === 'add') {
+-    callApi('inventory.add', {
+-      source: M.source, title: p.title, pub: p.pub, cond: p.cond,
+-      original: p.original, cost: p.cost, price: p.price, status: p.status,
+-      platform: p.platform, genre: p.genre, subGenre: p.subGenre, type: p.type,
+-      copyFlags: p.copyFlags, rarity: p.rarity, marketRef: p.marketRef, refNote: p.refNote
+-    }).then(function(dd){
+-      addToCache(dd.item);
+-      buildFilterOptions(true);
+-      render(false);
++    var retrying = !!addPending;
++    if (!addPending) {
++      addRequestId = 'add-' + Date.now() + '-' + Math.random().toString(36).slice(2);
++      addPending = { requestId: addRequestId, payload: {
++        requestId: addRequestId, source: M.source, title: p.title, pub: p.pub, cond: p.cond,
++        original: p.original, cost: p.cost, price: p.price, status: p.status,
++        platform: p.platform, genre: p.genre, subGenre: p.subGenre, type: p.type,
++        copyFlags: p.copyFlags, rarity: p.rarity, marketRef: p.marketRef, refNote: p.refNote
++      } };
++      try { sessionStorage.setItem(ADD_PENDING_KEY, JSON.stringify(addPending)); }
++      catch (e) { addPending = null; addRequestId = ''; done(); toast('Could not keep Add Request ID — nothing was sent'); return; }
++    }
++    var frozen = addPending.payload;
++    var addCall = retrying ? callApi('inventory.addStatus', frozen).then(function(status){
++      if (status && status.state === 'DONE') return status.data;
++      if (status && status.state === 'NOT_FOUND') return callApi('inventory.add', frozen);
++      throw new Error('Add Request ' + addRequestId + ' is ' + (status && status.state || 'UNKNOWN') +
++                      ' — inspect ADD REQUESTS before recovery');
++    }) : callApi('inventory.add', frozen);
++    addCall.then(function(dd){
++      if (!dd || !dd.item || !dd.item.productId) throw new Error('Save result is unclear — refresh inventory before retrying');
++      committedSku = dd.item.productId;
++      try { sessionStorage.removeItem(ADD_PENDING_KEY); } catch (e) {}
++      addPending = null;
++      addRequestId = '';
++      resetAddForm();
+       var res = dd.result || {};
+       var sugLine;
+       if (res.review) {
+@@ -997,10 +1072,19 @@
+       LAST_ADD = { item: dd.item, matches: dd.bookingMatches || [] };
+       if (LAST_ADD.matches.length) $('mResult').innerHTML += bookingBanner(LAST_ADD);
+       okToast('Added: ' + dd.item.productId);
+-      fillForm({ status: 'New Arrival' });
+-      M.auto = { genre: false, platform: false, original: false, type: false };
+-      $('fName').focus();
+-    }).catch(function(e){ toast(e.message); }).finally(done);
++      try {
++        addToCache(dd.item);
++        buildFilterOptions(true);
++        render(false);
++      } catch (e) { toast('Added — refresh the list to see the item'); }
++    }).catch(function(e){
++      if (!retrying && !committedSku && /^(Original|Cost|Price|Market Ref) must be a (finite )?number$/.test(String(e.message || e))) {
++        try { sessionStorage.removeItem(ADD_PENDING_KEY); } catch (ignored) {}
++        addPending = null; addRequestId = '';
++      }
++      toast(committedSku ? 'Added ' + committedSku + ' — refresh inventory' :
++            e.message + (addRequestId ? ' · Request ID: ' + addRequestId + ' (check same request)' : ''));
++    }).finally(done);
+   } else {
+     var changes = diffChanges(M.row, p);
+     if (!Object.keys(changes).length) { toast('Nothing changed'); done(); return; }
+@@ -1031,8 +1115,9 @@
+ }
+ function attachSuggest(inputId, boxId, listFn, onChoose){
+   var inp = $(inputId), box = $(boxId);
+-  var items = [], active = -1;
++  var items = [], active = -1, blurTimer;
+   function hide(){ box.style.display = 'none'; active = -1; }
++  addSuggestionResets.push(function(){ clearTimeout(blurTimer); items = []; box.innerHTML = ''; hide(); });
+   function paint(){
+     var nodes = box.querySelectorAll('.sug-i');
+     for (var i = 0; i < nodes.length; i++) nodes[i].classList.toggle('on', i === active);
+@@ -1069,7 +1154,7 @@
+     e.preventDefault();
+     choose(it.textContent);
+   });
+-  inp.addEventListener('blur', function(){ setTimeout(hide, 150); });
++  inp.addEventListener('blur', function(){ blurTimer = setTimeout(hide, 150); });
+ }
+ attachSuggest('fName', 'sugName', function(){ return titleList(M.source); }, autofillFromName);
+ attachSuggest('fPubIn', 'sugPub', function(){ return pubListOf(M.source); }, autofillOriginal);
+@@ -1158,14 +1243,14 @@
+   var pub = $('fPubIn').value.trim().toLowerCase();
+   setAuto('fOrig', 'original', (base && pub) ? lookupOriginal(base, pub) : '');
+ }
+-$('fName').addEventListener('blur', function(){ setTimeout(autofillFromName, 160); });
++$('fName').addEventListener('blur', function(){ addAutoTimers.push(setTimeout(autofillFromName, 160)); });
+ $('fName').addEventListener('change', autofillFromName);
+ // เดา flag ระหว่างพิมพ์ด้วย (debounce) — ไม่ต้องรอ blur
+ var _flT;
+ $('fName').addEventListener('input', function(){
+   clearTimeout(_flT); _flT = setTimeout(autofillFlags, 350);
+ });
+-$('fPubIn').addEventListener('blur', function(){ setTimeout(autofillOriginal, 160); });
++$('fPubIn').addEventListener('blur', function(){ addAutoTimers.push(setTimeout(autofillOriginal, 160)); });
+ $('fPubIn').addEventListener('change', autofillOriginal);
+ 
+ /* ── mark sold / revert — SP-2: channel + ฐานหน้าร้าน ── */

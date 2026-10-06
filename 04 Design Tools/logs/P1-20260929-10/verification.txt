@@ -1,0 +1,16 @@
+P1-20260929-10 | 2026-09-29 08:01 +07 | separate synthetic test only
+
+Test Sheet: 13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM
+Fresh XLSX export: 22,645 bytes
+GAME GUIDE BOOKS A3:C16: 13 populated synthetic rows; A23 exactly once at row 15; row 16 empty
+MAGAZINE A3:C13: 10 populated synthetic rows
+ADD REQUESTS C48:E55: prior P1-09 PREPARED/ERROR/ERROR/RECOVERED rows 48-51; A23 PREPARED/DONE rows 52-53; rows 54-55 empty
+A23 runtime Request ID: add-1790643489683-6r7d6ujyhrs
+Test /dev after source restoration: 23/23 cards, one A23
+Test Code.gs editor copy after removing temporary wrapper: exact pre-probe content; LF SHA256 D1D4DEE32188B35807DD8B3C5A0F6DEAEE7EF14C4C8A1B14769E4844E0A090AD; Saved to Drive
+P1-10 changes.csv: 6 unique event IDs, parsed by Import-Csv
+Implementation/HANDOFF: one new section each; before→after diffs saved in this folder
+Git --no-index --check: only expected exit 1 for changed documents; no whitespace errors (line-ending conversion advisory)
+
+Limit: A23 callback apparently completed before browser reload. No A23 timeout or retry event; do not claim those tests passed. Earlier A21/A22 are the actual same-ID reload/retry checks.
+Recovery: the temporary wrapper is already removed; if checking future source, compare with code-before.gs before restoring anything. Keep synthetic A23 and its journal pair for reconciliation; do not roll back whole Sheet. Test deployment version 2 was not changed; production was not touched.

@@ -1,0 +1,11 @@
+diff --git a/OWARIN STORE/04 Design Tools/logs/W1-20261004-05/candidate/backup/v36/WebApp_v36.gs b/OWARIN STORE/04 Design Tools/logs/W1-20261004-05/candidate/WebApp_v37.gs
+index 0b26c96..585b6a4 100644
+--- a/OWARIN STORE/04 Design Tools/logs/W1-20261004-05/candidate/backup/v36/WebApp_v36.gs	
++++ b/OWARIN STORE/04 Design Tools/logs/W1-20261004-05/candidate/WebApp_v37.gs	
+@@ -1,5 +1,5 @@
+ // ============================================================
+-// OWARIN BACK-OFFICE — WebApp.gs v36 (SP-2, pairs with Code.gs v36)
++// OWARIN BACK-OFFICE — WebApp.gs v37 (SP-2, pairs with Code.gs v37)
+ // v31 (2026-10-03): validated Add payload and read-only same-ID recovery; pairs with Code.gs v32.
+ // v28: no functional change -- bumped only to stay paired with Code.gs v30 (identical copies listed once; all-caps titles).
+ // v27: no functional change -- bumped only to stay paired with Code.gs v29 (Meta title without RESTOCK).

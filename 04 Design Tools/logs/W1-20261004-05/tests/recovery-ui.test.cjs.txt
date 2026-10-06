@@ -1,0 +1,1 @@
+PASS actual UI recovery sends ID only and retains mode/exact intent across lost-response reload; normal send unchanged

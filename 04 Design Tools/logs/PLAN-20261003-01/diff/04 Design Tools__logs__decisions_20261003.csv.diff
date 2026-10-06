@@ -1,0 +1,7 @@
+--- before/04 Design Tools/logs/decisions_20261003.csv
++++ 04 Design Tools/logs/decisions_20261003.csv
+@@ -2,3 +2,4 @@
+ 2026-10-03,"Log every issue, failed attempt, fix, retry, result and recovery in the task CSV and Implementation log; when GPT-5.6 Sol / High cannot resolve a reproducible issue, hand repair to GPT-6 Astra / High with the exact revision",Stream B work and model routing,Owner instruction after P1 test-source Save,CLOSED,"AGENTS.md; CLAUDE.md; P1-20261003-01/changes.csv; Implementation log; HANDOFF"
+ 2026-10-03,"Continue P1 production readiness with backup of all affected production source and Sheet before real-shop testing for undo",Stream B P1 promotion,"Owner response: ทำการสำรองอะไรที่จะใช้ในร้านจริงก่อนทดสอบในร้านจริงสำหรับ undo",CLOSED,"P1-20261003-03/UNDO.md; changes.csv; Implementation log; HANDOFF"
+ 2026-10-03,"อนุมัติแก้ source/schema และ deploy ร้านจริง",Stream B P1 v31 and ADD REQUESTS promotion,"Explicit owner reply to scoped production approval after backup-first condition",CLOSED,"P1-20261003-03/changes.csv; UNDO.md; Implementation log; HANDOFF"
++2026-10-03,Adopt six delivery priorities: plan/checks; minimal scoped changes with backup; separately authorized agent roles; reproduce/root cause/retest; verify/UI and disclose gaps; actionable lessons/retire stale active rules,Stream B remaining-work plan and guidance,"Explicit owner request; efficient complete user workflows, one writer, no automatic agents",CLOSED,PLAN; HANDBOOK; AGENTS; CLAUDE; master §5.2.1; STATE; README; Session35

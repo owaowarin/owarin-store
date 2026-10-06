@@ -1,0 +1,1 @@
+PASS old absent/10 batch size exact-intent retry; malformed batch size blocked before business writes

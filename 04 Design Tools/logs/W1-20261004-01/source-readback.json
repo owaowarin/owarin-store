@@ -1,0 +1,37 @@
+{
+  "time": "2026-10-04 04:00:33 +0700",
+  "projectId": "1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd",
+  "files": [
+    {
+      "file": "Code.gs",
+      "sha256StagedLF": "EA6A1139E14B022EB1EF88C7A8F4DDE79BBAE94A4BC9F52F03A0B6F0130EC519",
+      "evidence": "Session36 source-readback.json; local staged bytes unchanged, not redundantly read in Session37"
+    },
+    {
+      "file": "Webapp.gs",
+      "sha256StagedLF": "3E371C14DA33E66A89E6DBF8B2A10154AD76C7F37F21018A6486E334B91CBEE3",
+      "evidence": "Session36 source-readback.json; local staged bytes unchanged, not redundantly read in Session37"
+    },
+    {
+      "file": "Index.html",
+      "sha256StagedLF": "640C72A84EE4FAFA97D86F3F5BDA94A00D10B37F206ECEF072D4DC979216F42B",
+      "evidence": "Session37 selected-file full clipboard LF comparison + saved/cloud_done; changes.csv install/readback entries"
+    },
+    {
+      "file": "W1Orders.gs",
+      "sha256StagedLF": "3596CCE53149A15A5A58D226D1525200C0129A5901FDDDE991E09C9D48F8ACC2",
+      "evidence": "Session36 source-readback.json; local staged bytes unchanged, not redundantly read in Session37"
+    },
+    {
+      "file": "W1Qa.gs",
+      "sha256StagedLF": "56A2398B25C294071F3FE5B985C83C858E82A39081544F0A6B28D7B7C1487176",
+      "evidence": "Session37 selected-file full clipboard LF comparison + saved/cloud_done; changes.csv install/readback entries"
+    },
+    {
+      "file": "appsscript.json",
+      "sha256StagedLF": "5BE1C5B8A215FE3BCED90564B7C083989A2B71E182D8B8AA0046BB9A756A8D4A",
+      "evidence": "Session36 source-readback.json; local staged bytes unchanged, not redundantly read in Session37"
+    }
+  ],
+  "testOnly": "Index project storage keys and QA controls; sanitized test bank Code; guarded W1Qa helper; constrained manifest. Do not install test-runtime to production."
+}

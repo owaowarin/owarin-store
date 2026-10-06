@@ -1,0 +1,798 @@
+{
+  "file": "fixture-ready.xlsx",
+  "tabs": {
+    "GAME GUIDE BOOKS": {
+      "rows": 50,
+      "columns": 27,
+      "tables": [
+        "P1_GGB_TYPED_TEST"
+      ]
+    },
+    "SALES": {
+      "rows": 52,
+      "columns": 10,
+      "tables": []
+    },
+    "ORDERS": {
+      "rows": 1,
+      "columns": 14,
+      "tables": []
+    },
+    "ORDER LINES": {
+      "rows": 1,
+      "columns": 14,
+      "tables": []
+    },
+    "ORDER REQUESTS": {
+      "rows": 1,
+      "columns": 15,
+      "tables": []
+    },
+    "MAGAZINE": {
+      "rows": 50,
+      "columns": 24,
+      "tables": [
+        "P1_MAG_TYPED_TEST"
+      ]
+    },
+    "ADD REQUESTS": {
+      "rows": 103,
+      "columns": 17,
+      "tables": []
+    }
+  },
+  "copies": [
+    {
+      "row": 30,
+      "name": "W1 QA 20261004 Copy 1",
+      "status": "Instock",
+      "sku": "OWA-GGBW001N00",
+      "uid": null
+    },
+    {
+      "row": 31,
+      "name": "W1 QA 20261004 Copy 2",
+      "status": "Instock",
+      "sku": "OWA-GGBW002N00",
+      "uid": null
+    },
+    {
+      "row": 32,
+      "name": "W1 QA 20261004 Copy 3",
+      "status": "Instock",
+      "sku": "OWA-GGBW003N00",
+      "uid": null
+    },
+    {
+      "row": 33,
+      "name": "W1 QA 20261004 Copy 4",
+      "status": "Instock",
+      "sku": "OWA-GGBW004N00",
+      "uid": null
+    },
+    {
+      "row": 34,
+      "name": "W1 QA 20261004 Copy 5",
+      "status": "Instock",
+      "sku": "OWA-GGBW005N00",
+      "uid": null
+    },
+    {
+      "row": 35,
+      "name": "W1 QA 20261004 Copy 6",
+      "status": "Instock",
+      "sku": "OWA-GGBW006N00",
+      "uid": null
+    },
+    {
+      "row": 36,
+      "name": "W1 QA 20261004 Copy 7",
+      "status": "Instock",
+      "sku": "OWA-GGBW007N00",
+      "uid": null
+    },
+    {
+      "row": 37,
+      "name": "W1 QA 20261004 Copy 8",
+      "status": "Instock",
+      "sku": "OWA-GGBW008N00",
+      "uid": null
+    }
+  ],
+  "ORDERS": [
+    [
+      "Order ID",
+      "Status",
+      "Channel",
+      "Created At",
+      "Sold At",
+      "Cancelled At",
+      "Client ID",
+      "Subtotal",
+      "Customer Shipping",
+      "Shipping Subsidy",
+      "Total",
+      "Recipient Snapshot",
+      "Revision",
+      "Last Request ID"
+    ]
+  ],
+  "ORDER LINES": [
+    [
+      "Order ID",
+      "Line ID",
+      "Item UID",
+      "Source",
+      "SKU Snapshot",
+      "Title Snapshot",
+      "Condition Snapshot",
+      "Cost Snapshot",
+      "Entered Price",
+      "Ledger Price",
+      "Price Basis",
+      "Prior Status",
+      "Reservation State",
+      "Inventory Snapshot"
+    ]
+  ],
+  "ORDER REQUESTS": [
+    [
+      "Event ID",
+      "Timestamp",
+      "Request ID",
+      "Attempt",
+      "Action",
+      "Payload Hash",
+      "Order ID",
+      "State",
+      "Snapshot",
+      "Result",
+      "Error",
+      "Actor",
+      "Entry Source",
+      "App Version",
+      "Recovery Ref"
+    ]
+  ],
+  "SALES": [
+    [
+      "Order ID",
+      "Item Name Sold",
+      "Order date",
+      "Cost",
+      "Price",
+      "Shipping Cost",
+      "Net Profit",
+      "Note",
+      "Product ID",
+      "Order Line ID"
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      {
+        "formula": "=IF(E2:E51<>\"\",E2:E51-D2:D51-F2:F51,\"\")",
+        "ref": "G2:G51"
+      },
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "",
+      null,
+      null,
+      null
+    ],
+    [
+      "LEGACY-TEST",
+      "Legacy synthetic",
+      "2026-10-03T00:00:00",
+      100.0,
+      390.0,
+      10.0,
+      "=E52-D52-F52",
+      null,
+      null,
+      null
+    ]
+  ],
+  "SALES_profit_cached": [
+    {
+      "row": 1,
+      "order": "Order ID",
+      "profit": "Net Profit"
+    },
+    {
+      "row": 52,
+      "order": "LEGACY-TEST",
+      "profit": 280
+    }
+  ]
+}

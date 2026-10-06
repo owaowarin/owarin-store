@@ -1,0 +1,84 @@
+{
+  "result": "PASS",
+  "ui": {
+    "channels": [
+      "SHOP",
+      "SHOPEE"
+    ],
+    "orders": [
+      "OWA-20261006-01",
+      "OWA-20261006-02"
+    ],
+    "newSales": 2,
+    "newClient": 1,
+    "oldPrefixesPreserved": true,
+    "changedInventory": [
+      {
+        "row": 1001,
+        "sku": "W1V33CHECK-0"
+      },
+      {
+        "row": 1353,
+        "sku": "W2V39-2"
+      }
+    ],
+    "requests": [
+      {
+        "id": "w1-1791226216521-t41c39mwrds",
+        "action": "create",
+        "state": "DONE"
+      },
+      {
+        "id": "w1-1791226531572-5e6mjr9rc27",
+        "action": "confirm",
+        "state": "DONE"
+      },
+      {
+        "id": "w1-1791227007644-4ohjasct10r",
+        "action": "confirm",
+        "state": "DONE"
+      },
+      {
+        "id": "w1-1791227196113-gtrc5x72f7n",
+        "action": "labels.save",
+        "state": "DONE"
+      },
+      {
+        "id": "crm-855e1c85450f74df9846a21e101a1e3bfb8e504c46267636b75ba85178563a4f",
+        "action": "clients.save",
+        "state": "DONE"
+      }
+    ],
+    "journalAddedEvents": 59
+  },
+  "print": "DEFERRED — ยังไม่ได้ทดสอบ; NOT PASS",
+  "nativeMigration": {
+    "result": "PASS",
+    "originalAFValuesFormulas": true,
+    "originalNineTabsUnchanged": true,
+    "sameIdsRevisionRetry": true,
+    "blankRowDistinctIds": true,
+    "allocatedIds": [
+      "CL-4b0abf59-926e-4aa3-a672-fcf012290098",
+      "",
+      "CL-71231225-383b-4dd8-9a76-a4aa9f2e6da4",
+      "CL-705cecf2-e7d6-45f2-9f31-5e5885beca2e"
+    ],
+    "allocatedRevision": "2026-10-05T19:13:05.209Z",
+    "journalEvents": 9
+  },
+  "nativeReplay": {
+    "result": "PASS",
+    "migrationReplay": true,
+    "uiOriginalRequests": 5,
+    "allSheetValuesFormulasUnchanged": true
+  },
+  "mainJournalRows": 1364,
+  "exports": {
+    "google-before.xlsx": "15a8903ba6e8f91c975738c452f0d107f89daee463e75705a69ef41c810a91cd",
+    "google-after-ui.xlsx": "45db700877f585378c3872582a17d50c71ea82e3f8bc80cc0f8f12a2fd9db141",
+    "google-before-migration.xlsx": "8cfb9db72ae7a85ae50f7e54a2032ead2a1a18cb2cbe4621d55006f0f39776a6",
+    "google-final.xlsx": "80f53768e992ef01cf9a0a85a6c25cfae51aec7fed0b7e7b1ab457eb5cd8f461",
+    "google-after-replay.xlsx": "581f16864030c588580b60ea0cd02a0251d433f38e6f8716a55b639a598f2fb0"
+  }
+}

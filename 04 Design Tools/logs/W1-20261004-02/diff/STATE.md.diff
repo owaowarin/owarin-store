@@ -1,0 +1,28 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-02\\before\\00 Docs\\STATE.md" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\STATE.md"
+index a2eb04b..8a5ac39 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-02\\before\\00 Docs\\STATE.md"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\STATE.md"	
+@@ -1,18 +1,18 @@
+ # STATE — OWARIN STORE (read this FIRST; open other files only when a line below points to them)
+ 
+-จัดทำ: 2026-10-04 03:53:17 +0700 — Stream B Session37. Other streams retain prior snapshots.
++จัดทำ: 2026-10-04 04:11:40 +0700 — Stream B Session38. Other streams retain prior snapshots.
+ Rule: OVERWRITE at session close; ≤80 lines. Read active PLAN for scope; dated logs are lookup evidence.
+ 
+ ## Streams
+ 
+-### 1. Add / Cart / Orders / Label (Stream B) — P1 LIVE; W1 local/Google test ready for focused review
+-- Status: W1 v32 core implementation + isolated-Google acceptance PASS. Six synthetic orders/four unique SALES; real partial Hold/SALES retry, two-tabs one-copy concurrency, Cancel/reload/recovery, SHOP/Shopee/single, Auction/shared guards/external conflict, typed SALES/footer/formulas verified. W1 IN PROGRESS: critical review pending.
+-- Next ONE step: GPT-6 Astra / High focused money/stock/security review against exact revision; no self-switch/new agent/chat. Then address focused findings; no W2/shop release in this chat.
++### 1. Add / Cart / Orders / Label (Stream B) — P1 LIVE; W1 core tested; focused analysis found audit blockers
++- Status: W1 IN PROGRESS. Session36/37 core tests remain historical PASS; Session38 bounded repro confirms R1 journal event overwrite and R2 missed multi-row/UID-deletion audit. R3 journal size/capacity and R4 touched maintenance audit remain open. No candidate/Google write this session.
++- Next ONE step: fix R1/R2 at shared external-edit journal boundary; follow three bounded batches A audit → B journal limits → C focused close in `04 Design Tools/logs/W1-20261004-02/COMPACT.md`.
+ - Plan: `00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md` §0/§10; handbook/README updated. No P0/P1 restart.
+ - Shop: root production v31 four files unchanged; no source/schema/data/Run/Save/deploy mutation. Fresh shop baseline is Session36 read-only evidence; deployment4 remains dated Session34 evidence. First real P1 Add observation still pending.
+ - Test: exact isolated Sheet13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM and project1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd. Seven tabs now; saved source/readback; W1 usable /dev HEAD only. No numbered deployment updated; prior /exec is not current W1 proof. Fixture/recovery helpers must not rerun blindly.
+ - Closed rules: Pending reserves; Cancel only own order; only Instock sells/Auction unavailable; SALES Shipping Cost=shop subsidy separate from customer shipping; CLIENT reused/Facebook off Label; price/SALES/Meta/R2 preserved.
+-- Limits: focused review pending; max-cart/quota/latency and multi-cell/UID/menu trigger coverage not all tested on Google. Owner can edit Sheets directly; corrupt journal/partial derived edit/external conflict/lost ID need manual reconciliation. W2 CLIENT/snapshot/Label/print absent, Label later=MISSING.
++- Limits: R1–R4 must close before W1 DONE; focused review not complete. No new live QA claim. Owner direct edits remain possible; W2 CLIENT/Label/print absent; no production release in this chat.
+ - Evidence/revision: `04 Design Tools/logs/W1-20261004-01/result.md`, revision.json, diff/, google-final.xlsx, google-assertions.json, changes.csv, implementation.md, UNDO.md, REVIEW-ASTRA-HIGH.md; W1-20261004-01/v32@AECC03651A1CD7EC62650EF1611582E4B77580EB8629F68B4A6ABE17D18AC2D3. Frozen full implementation +14 groups/1,032 injected positions/6 regressions at W1-20261003-01.
+ - History: AGENTS/CLAUDE/master §§2,5,6,9 +§5.2.1; HANDOFF_2026-10-04.md and historical HANDOFF_2026-09-28.md/Implementation log appended Session37; Session35 PLAN-20261003-01 retained. P1 production undo remains P1-20261003-03/UNDO.md.
+ 

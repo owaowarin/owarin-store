@@ -1,0 +1,11 @@
+diff --git a/OWARIN STORE/04 Design Tools/logs/W1-20261004-05/candidate/backup/v36/Code_v36.gs b/OWARIN STORE/04 Design Tools/logs/W1-20261004-05/candidate/Code_v37.gs
+index 45fe12b..fe930fa 100644
+--- a/OWARIN STORE/04 Design Tools/logs/W1-20261004-05/candidate/backup/v36/Code_v36.gs	
++++ b/OWARIN STORE/04 Design Tools/logs/W1-20261004-05/candidate/Code_v37.gs	
+@@ -1,5 +1,5 @@
+ // ============================================================
+-// OWARIN BACK-OFFICE — Code.gs v36 (SP-2 pricing/SKU engine, pairs with WebApp.gs v36)
++// OWARIN BACK-OFFICE — Code.gs v37 (SP-2 pricing/SKU engine, pairs with WebApp.gs v37)
+ // v31 (2026-10-03): durable Add journal, validated money/source/status, committed snapshot replay and formula readback.
+ // v30 (2026-10-02): (1) Identical copies are listed ONCE in META EXPORT: same base title + Publisher + Original
+ //   (cover price) + Condition + Copy Flags -> one row (the first complete copy), quantity_to_sell_on_facebook =

@@ -1,0 +1,52 @@
+{
+  "Verified": "2026-09-23 02:23:51 +07:00",
+  "Status": "SIX-LOCAL-DATA-ISSUES-RESOLVED",
+  "Source": "Fresh connected Google Sheet plus freshly hashed local master",
+  "Items": 6,
+  "Images": 11.0,
+  "PositionOrMappingIssues": 0,
+  "ImageContentErrors": 0,
+  "DataWritesByThisRun": "NONE",
+  "Files": [
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\six_pending_recheck_20260923-022058\\GAME GUIDE BOOKS.csv",
+      "Bytes": 485,
+      "SHA256": "104D15D546528D375A3E5D13859F60CE158C8378D47CECE0E27B7528D07E3B4E"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\six_pending_recheck_20260923-022058\\MAGAZINE.csv",
+      "Bytes": 98,
+      "SHA256": "AC7520164F4CE4DAFEEDEAD5EB77492F9921071CC2FF1FAE910FCF3CA9F2D3F1"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\six_pending_recheck_20260923-022058\\six-item-recheck.csv",
+      "Bytes": 3458,
+      "SHA256": "FB6FA18BB985FE321516A4A53934CD942311FA908F2AA99D367B7E49EE324DE9"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\six_pending_recheck_20260923-022058\\summary.json",
+      "Bytes": 267,
+      "SHA256": "5DC4AC5B004ABDD1D82BA39F3EB65AD59587315E7A08FE7197EFF5165AC045F9"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\six_pending_recheck_20260923-022058\\action-log.csv",
+      "Bytes": 1642,
+      "SHA256": "6ABB65903CE6FE88F6C36D7F5F82D3A3CF7AB91D97A682921654D17DEAA00C59"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\BASELINE-R2-REVIEW_2026-09-23.md",
+      "Bytes": 12633,
+      "SHA256": "4661F3B2C980B59695D7A49EF31E68FC3D2D852BF6AC4CC18DA487A9F15281A5"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\PLAN-R2-HYBRID_2026-09-22.md",
+      "Bytes": 49906,
+      "SHA256": "3B8236BEEA34CB476EBC769E4E6C7AC0E7A565C2DD7B68AAC0894E573FFFF0E6"
+    },
+    {
+      "Path": "C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\00 Docs\\HANDOFF_2026-09-23.md",
+      "Bytes": 7912,
+      "SHA256": "6BD395BF64109B4AB8A6BF4CEDA4DB3C4C8070AB7B60B289FFCAE656082D33D8"
+    }
+  ]
+}

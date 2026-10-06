@@ -1,0 +1,10 @@
+--- before/implementation
++++ after/implementation
+@@ -237,3 +237,7 @@
+ 4. Native Table column types, exact live permission-denial behavior and hidden manifest scopes require staging/native verification; exported metadata alone is insufficient. No runtime journal/AUDIT LOG is installed or accepted.
+ 
+ One next step: isolated Google test-copy reproduction against these hashes, then P1 Add/reset (GPT-5.6 Sol / Medium; use High for append/retry/partial-write logic). Use GPT-6 Astra / High only if consequential diagnosis/design uncertainty remains; P3 transaction implementation uses GPT-5.6 Sol / High followed by focused Astra / High review. One writer; no agents/new chats/global model changes. P1–P6 and deployment still require their intended authorized scope; this P0 did not start them.
++
++### Close verification — P0-20260928-01-CLOSE-20260929
++
++2026-09-29 02:02 +07:00: resumed P0 only. Verified all 31 files in the 28 Sep evidence manifest, five local application-source hashes, final document hashes and byte-preservation of the original HANDOFF history; all passed before this closing append. No new live-data conclusions, no need to rerun unchanged diagnostics, and no P1/source/schema/deployment work. The 28 Sep manifest remains the immutable audit baseline; closing artifacts and updated document hashes are in `04 Design Tools/logs/P0-20260928-01/close-20260929/`. Added dated `HANDOFF_2026-09-29.md` to direct the next session to the verified findings and remaining runtime/access gates. Runtime Request ID: N/A; Live mutations: none. Recovery: use closing document backup/diff for this append only, preserving the original P0 report and future history.

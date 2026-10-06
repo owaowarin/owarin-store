@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "AI Usage Widget Connector",
+  "version": "2.0.0",
+  "description": "Reads only Claude Usage and sends quota to the local widget through Chrome Native Messaging.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5dgpe2HOqrMde+1UONStTZxp+ja1zu3isseCP5QWmAg44ehFapfyiOo/mKAFsWzR5/rrS1d4PQV1AIDGJpq9cK+igruDYZcny466G6n7sM/WKba7QDDK7p464C8Mcx6kt425958wUiMk/cvA8UJc/mWmkqGC1q7Y+J6+mXCQs5Jj/IYdHbQyQOZELMmrhqx/KxDYVnMFLYeNRetuUlgB0wbNSb4kxweTdAlwAl8buqsxAbHNEPrUVXSDCXdSqDP/4nKHCLV6WJygS/i+BVkfXhEu2GkfGgFeOv6/66Hq1LJyDaIvPG7j2JuiC/ThHXJpc6nCe3BeKPeCKrQh9nejRwIDAQAB",
+  "permissions": [
+    "nativeMessaging",
+    "storage",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://claude.ai/settings/usage*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://claude.ai/settings/usage*"
+      ],
+      "js": [
+        "parser.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "AI Usage Widget: connection status",
+    "default_popup": "popup.html"
+  }
+}

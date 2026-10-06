@@ -1,0 +1,27 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),d=__dirname,b=path.join(d,'../W1-20261004-05');
+fs.mkdirSync(d+'/test-runtime',{recursive:true});
+let code=fs.readFileSync(d+'/candidate/Code_v38.gs','utf8'),bank=fs.readFileSync(b+'/test-runtime/Code.gs','utf8').match(/var BANK_INFO = \{[\s\S]*?\};/)[0];code=code.replace(/var BANK_INFO = \{[\s\S]*?\};/,bank);
+let qa=fs.readFileSync(b+'/test-runtime/W1Qa.gs','utf8')+`
+// R7 isolated-only decimal fixture. Existing inventory and journal rows remain immutable.
+function w1QaV38Prepare(){
+ _w1QaV34Test_();return _withLock(function(){var id='qa-v38-decimal-fixture-20261005',old=_w1Requests_()[id];if(old&&old.state==='DONE')return JSON.stringify(old.result);_w1TechnicalGate_(id);
+ var sh=_getSheetOrThrow(MAG_SHEET),c=_resolveColumns(sh),req=old;
+ if(!req){var rows=[],prices=[390.10,0.10,0.20],costs=[100.05,0.05,0.05];for(var i=0;i<3;i++){var r=new Array(sh.getLastColumn()).fill('');r[c.name-1]='W1 V38 DECIMAL '+i;r[c.productId-1]='W1V38DEC-'+i;r[c.status-1]='Instock';r[c.cost-1]=costs[i];r[c.price-1]=prices[i];r[c.condition-1]='A';r[c.publisher-1]='TEST';rows.push(r);}var s={orderId:'',sheet:MAG_SHEET,start:sh.getMaxRows()+1,rows:rows};req={id:id,attempt:1,action:'QA_FIXTURE',hash:_w1PayloadHash_(s),entrySource:'isolated R7 decimal QA',snap:s};_w1Event_(req,'PREPARED');}
+ var s=req.snap;_w1EnsureRow_(sh,s.start+2);var range=sh.getRange(s.start,1,3,s.rows[0].length),current=range.getValues();current.forEach(function(r,i){r.forEach(function(v,j){if(v!==''&&v!==s.rows[i][j])throw Error('QA_DECIMAL_CONFLICT');});});_w1Write_('QA decimal fixture',function(){range.setValues(s.rows);});if(JSON.stringify(range.getValues())!==JSON.stringify(s.rows))throw Error('QA_DECIMAL_READBACK');var result={requestId:id,start:s.start,count:3,skus:['W1V38DEC-0','W1V38DEC-1','W1V38DEC-2']};_w1Event_(req,'DONE',result);return JSON.stringify(result);
+ });
+}
+function w1QaV38Read(){
+ _w1QaV34Test_();return _withLock(function(){var lines=_w1Rows_('ORDER LINES').filter(function(r){return String(r[4]).indexOf('W1V38DEC-')===0;}),ids=lines.map(function(r){return r[0];}).filter(function(v,i,a){return a.indexOf(v)===i;}),requests=_w1Requests_(),sales=_getSalesSheet(),c=_resolveColumns(sales),rows=sales.getRange(2,1,sales.getLastRow()-1,sales.getLastColumn()).getValues(),ledger=[];
+ rows.forEach(function(r,i){if(ids.indexOf(r[c.order-1])>=0)ledger.push({row:i+2,orderId:r[c.order-1],lineId:r[c.orderLineId-1],sku:r[c.productId-1],price:r[c.price-1],cost:r[c.cost-1],subsidy:r[c.shipingCost-1],profit:r[c.netProfit-1],formula:sales.getRange(i+2,c.netProfit).getFormula()});});
+ return JSON.stringify({orders:ids.map(function(id){return _w1Order_(id);}),ledger:ledger,requests:Object.keys(requests).filter(function(k){return ids.indexOf(requests[k].snap.orderId)>=0;}).map(function(k){var r=requests[k];return {requestId:k,action:r.action,state:r.state,attempt:r.attempt};}),nativeScratch:SpreadsheetApp.getActiveSpreadsheet().getSheetByName('W1 DECIMAL REVIEW').getRange(2,1,1,4).getValues()[0]});
+ });
+}
+function w1QaV38Replay(){
+ _w1QaV34Test_();var requests=_w1Requests_(),ids=_w1Rows_('ORDER LINES').filter(function(r){return String(r[4]).indexOf('W1V38DEC-')===0;}).map(function(r){return r[0];}),out=[];
+ Object.keys(requests).forEach(function(k){var r=requests[k];if(ids.indexOf(r.snap.orderId)>=0&&r.state==='DONE'&&(r.action==='create'||r.action==='confirm')){var result=_w1Resume_(k);out.push({requestId:k,replayed:!!result.replayed,status:result.status});}});return JSON.stringify(out);
+}
+`;
+const aside='<aside style="background:#fff3cd;color:#111;padding:8px"><strong>ISOLATED TEST v38 — R7 DECIMAL</strong> <button id="qaPrepare">Prepare 3 decimal copies</button> <button id="qaRead">Read decimal result</button> <button id="qaReplay">Replay original IDs</button><pre id="qaResult">Ready; old evidence retained.</pre></aside><script>(function(){var methods={qaPrepare:"w1QaV38Prepare",qaRead:"w1QaV38Read",qaReplay:"w1QaV38Replay"};Object.keys(methods).forEach(function(id){document.getElementById(id).onclick=function(){var b=this,out=document.getElementById("qaResult");b.disabled=true;out.textContent="RUNNING "+id;google.script.run.withSuccessHandler(function(v){out.textContent="PASS "+v;b.disabled=false;}).withFailureHandler(function(e){out.textContent="ERROR "+e.message+"; preserve original ID";b.disabled=false;})[methods[id]]();};});})();</script>';
+let html=fs.readFileSync(d+'/candidate/Index.html','utf8').replace('<body>','<body>'+aside).replace('owarin.w1.pending.TEST_OR_PROJECT.v32','owarin.w1.pending.1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd.v32');
+for(const [f,s] of [['Code.gs',code],['Webapp.gs',fs.readFileSync(d+'/candidate/WebApp_v38.gs','utf8')],['W1Orders.gs',fs.readFileSync(d+'/candidate/W1Orders.gs','utf8')],['W1Qa.gs',qa],['Index.html',html],['appsscript.json',fs.readFileSync(b+'/test-runtime/appsscript.json','utf8')]]){if(f.endsWith('.gs'))new vm.Script(s);if(f==='Index.html')for(const m of s.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi))if(m[1].trim())new vm.Script(m[1]);fs.writeFileSync(d+'/test-runtime/'+f,s);}
+fs.appendFileSync(d+'/changes.csv',[new Date().toISOString(),'W1-20261005-01','STAGE','v38 candidate -> sanitized test-runtime with 3-copy decimal QA controls only','Syntax PASS; manifest unchanged; Google not saved','candidate/backup/v37; previous test-runtime in package05'].map(v=>'"'+v.replaceAll('"','""')+'"').join(',')+'\n');console.log('PASS staged v38 test-runtime');

@@ -1,0 +1,1 @@
+PASS: 20 UI resets, status-before-retry DONE/NOT_FOUND/ERROR, frozen reload, storage failure, safe validation release, render failure, in-flight guard, Add timeout/no-callback reload/late callback, stale suggestion clear

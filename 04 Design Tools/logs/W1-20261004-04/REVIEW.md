@@ -1,0 +1,48 @@
+# Session40 — focused review and implementation handoff
+
+Stream B; master §§2,5,5.2.1,6,9. Change W1-20261004-04. User reports selecting Astra and authorizes its review/diagnosis phase in this chat; no self-switch, agent or second chat. Runtime implementation is the next Sol / High phase under the owner's model policy.
+
+**Verdict: CHANGES REQUIRED. Review performed; W1 is not approved for release.** Two bounded items remain: R5 service-call amplification and R6 missing recoverable original intent. R1–R4 are not reopened. No application source, Google project, Sheet or production changes in this review.
+
+Exact reviewed runtime: `W1-20261004-03/v33@1F361D653366B59CD938F2BBB18AEFECEE38B3226280F1FE01D74410A3567B20`. Four LF hashes verified against revision.json before tests. No Git repository. Frozen candidate remains the source of truth; this package contains review/tests/docs only.
+
+## R5 — high: transaction I/O scales per cell and per full snapshot
+
+Locations in the reviewed candidate/W1Orders.gs: `_w1Write_`11–14, `_w1Inv_`51–64, `_w1Step_`123–127, `_w1Sales_`136–158, `_w1Apply_`161–194. Every journal event flushes and rereads a full row; each elementary step emits ARMED and DONE with the entire growing transaction snapshot. Each inventory validation repeatedly scans the source matrix and cross-source UID column. SALES inserts one physical row and writes/flushes each field separately. This is the principal code-level explanation for the historical Google timeouts, not a measured per-call Google latency breakdown.
+
+Fresh local instrumentation of the unchanged real v33 functions:
+
+| Operation | Items | getValues calls | Full inventory scans | flush calls | Journal events | Snapshot JSON chars processed |
+|---|---:|---:|---:|---:|---:|---:|
+| Create | 1 | 47 | 7 | 17 | 11 | 11,185 |
+| Create | 10 | 326 | 70 | 108 | 65 | 546,838 |
+| Create | 100 | 3,116 | 700 | 1,019 | 605 | 50,075,818 |
+| Confirm existing Pending | 100 | 5,125 | 600 | 2,631 | 1,205 | 104,205,423 |
+
+Counts are intercepted Apps Script method calls in the existing Node fixture, **not actual network RPC counts, bytes stored, Google wall time, or a speed guarantee**. The fixture contains only the synthetic items and bounded grids; real inventory/header/formula sizes differ. Request-status after the 100-item Create performs 1,815 decode invocations because `_w1Requests_` parses every historical snapshot and parses each result twice. The raw snapshot total is before GZIP. Existing Session39 Google evidence independently documents four execution-limit failures and completion on attempt5; no fresh live claims this session.
+
+Fix direction: bounded phase batches with durable ARMED intent, grouped writes, one flush/readback per batch, fresh identity/ownership checks at batch boundaries and targeted pre-write checks. Preserve fail-closed behavior and legacy journal readability. Do not merely raise limits, shrink the supported cart, skip readback, remove all flush calls, cache across executions, or turn five manual retries into a claimed performance fix. Implementation details and stop criteria: SOL-HANDOFF.md.
+
+## R6 — medium: original payload cannot be recovered from the journal
+
+Locations: W1Orders.gs87–110,196–205,215; Index.html2045–2046,2054–2071,2082–2086. Server intent stores normalized business snapshots plus `SHA256(JSON.stringify(payload))`, but not the original payload. Browser intent lives in sessionStorage. If an unfinished request loses its original browser record, an equivalent payload reconstructed from the journal can have a different hash (string/number representation, omitted fields or key order). `requests.get` exposes status/result, not resumable intent. The old UNDO instruction to recover the **exact payload from the journal** is therefore incorrect; manually reviewing data is possible, but no supported same-ID resume is supplied for this case.
+
+Fresh deterministic repro R6-LOST-INTENT: accepted price `"0390.00"`, subsidy `"10.00"`, customer shipping `"50.00"`; injected Hold write failure; journal NEEDS_REVIEW lacks original payload; reconstructing numeric equivalents produces REQUEST_PAYLOAD_CONFLICT; retaining the actual original payload completes with the same ID. Evidence review.cjs/review-results.json/changes.csv. No duplicate order or sale occurred; this is a recoverability gap, not proof of double selling.
+
+Fix direction: persist the exact JSON-compatible request/action inside bounded durable intent before the first business write, preflight its size, and let owner-only recovery retrieve/reuse that immutable payload by Request ID. Do not weaken the payload-hash comparison. Old v33 pending requests without saved payload remain explicitly manual; never fabricate the missing original or rewrite their hash. Current historical Google bulk request was already DONE, so this review creates no repair need for that request.
+
+## Money, stock, security and integrity assessment
+
+- Money/IDs: inspected strict price/subsidy validation, SHOP vs SHOPEE ledger basis, first-line subsidy allocation, Order/Line ID allocator, SALES uniqueness/readback/formula retention, report hiding of unsettled orders. No additional release-blocking defect established in these paths. Price formulas and shipping decisions are unchanged.
+- Stock: inspected common ScriptLock, stable UID/source uniqueness, own-claim Cancel, Instock-only new sale, Auction/Sold rejection, retry before/after checks and relevant scoped maintenance guards. Full-sheet batch rewrite from an old snapshot would weaken these properties; the handoff explicitly forbids it.
+- Recovery: added **103 after-effect failure positions** across Create17/Cancel12/Confirm32/direct Shopee42, using the real v33 functions and existing fixture. Every full `_w1Write_` effect is applied and then throws; same-ID retry plus DONE replay passes with exactly the expected SALES count. This complements the frozen 1,032 before-write/cell-position tests; it does not replace them or simulate real Google network timing.
+- Access: W1 mutation/read/reconcile helpers enforce owner access; private W1 helpers end in underscore. Historical test manifest is USER_DEPLOYING/MYSELF with unchanged scopes. Several inherited helpers have only a leading underscore (which is not private), so deployment access must remain owner-only; this is not a claim that every legacy helper independently authenticates or that an unauthorized account was tested live today. New recovery payload access must enforce `_w1Access_` and contain no public route.
+- Integrity: reviewed legacy/plain and GZIP bounds, line-cell bounds, maintenance before/formula reconciliation and audit-lock coverage. Direct owner edits, undelivered simple triggers, malformed historical journal and manual derived-edit reconciliation remain documented limits; no claim of tamper-proof Sheets transactions.
+
+Source checks and local tests are sufficient for this read-only review. No repeated full regression or Google fixture run was needed. Updated critical code must receive affected failure/retry tests, actual isolated UI checks and focused diff review before W1 can close.
+
+## References and evidence provenance
+
+Google recommends minimizing alternating service reads/writes and using batch operations: [Apps Script best practices](https://developers.google.com/apps-script/guides/support/best-practices#use_batch_operations). Platform execution limits are documented at [quotas](https://developers.google.com/apps-script/guides/services/quotas). Only trailing-underscore functions are private to HTML service: [server communication](https://developers.google.com/apps-script/guides/html/communication#private_functions). Read 2026-10-04. Recommendations above are this review's design conclusions, not a claim that Google provides atomic transactions for these writes.
+
+Historical evidence read: Session39 revision/source-readback/manifest/result/UNDO/google-assertions and source; Session36/37 tests are referenced as historical evidence only. No new export or live shop figures are claimed. New evidence is exclusively local, synthetic and reproducible with `node review.cjs` (a rerun must get its own attempt log and preserve existing output).

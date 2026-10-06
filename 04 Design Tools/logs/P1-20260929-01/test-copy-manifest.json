@@ -1,0 +1,16 @@
+{
+  "changeId": "P1-20260929-01",
+  "testSpreadsheetId": "13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM",
+  "testScriptId": "1ILKjMLjbVErqsUMbz0-Cx0FbifI0R0aPpt5mDlNKmG0hfDdk3F-Y5BWd",
+  "shopSpreadsheetId": "16TV5aA0iYMZQhDv34HFTkNOe0nBpk66pa4HC3wt98S0",
+  "shopScriptId": "1sxaS-J3YmCyJKX98HlrPvQH1uw9fRqITHEHN8_xGyJOKyuZchvAYhkkp",
+  "testTabs": [
+    "GAME GUIDE BOOKS",
+    "MAGAZINE",
+    "ADD REQUESTS"
+  ],
+  "timeZone": "Asia/Bangkok",
+  "dataRows": 0,
+  "sourceInstalled": false,
+  "runtimeTestsRun": false
+}

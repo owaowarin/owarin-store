@@ -1,0 +1,7 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict'),{fixture}=require('./harness.cjs'),w=require('./work.cjs');
+let f=fixture(true),encoded=f.c._w1Encode_({text:'x'.repeat(78000)});
+vm.runInContext("function legacyDecode(text){return JSON.parse(Utilities.ungzip(Utilities.newBlob(Utilities.base64Decode(text.slice(5)))).getDataAsString('UTF-8'));}",f.c);
+assert.throws(()=>f.c.legacyDecode(encoded),/non-null content type/);assert.equal(f.c._w1Decode_(encoded).text.length,78000);
+const old=fs.readFileSync(path.join(w.dir,'before/04 Design Tools/logs/W1-20261004-03/helpers.gs'),'utf8');vm.runInContext(old,f.c);f.item('DERIVED');const sh=f.sheets['GAME GUIDE BOOKS'],range=sh.getRange(3,1,1,sh.getLastColumn());const r=f.c._w1MaintenanceWrite_('legacy swallowed callback',sh,range,range.getValues(),()=>f.c._SP2_WRITE_ERRORS.push('injected derived failure'));assert.equal(f.c._w1Requests_()[r.requestId].state,'DONE');
+w.write('04 Design Tools/logs/W1-20261004-03/tests/repro-final.txt','PASS before fix: legacy GZIP decoder throws exact Google MIME failure; corrected decoder succeeds.\nPASS before fix: derived callback write error incorrectly reaches DONE; remaining.test verifies corrected NEEDS_REVIEW.\n');
+w.log('R3-R4-REPRO','Retained before-code reproduction against strict platform harness','PASS old fails as observed; corrected regression PASS','Original Google check order cancelled; maintenance reconciled; finish gzip only');

@@ -1,0 +1,416 @@
+{
+  "orders": [
+    [
+      "OWA-20261006-01",
+      "SOLD",
+      "SHOP",
+      "2026-10-05T18:50:27.301Z",
+      "2026-10-05T18:55:48.192Z",
+      null,
+      "CL-c42e3b9f-7a50-40e5-91f5-6ccf1df274aa",
+      390.1,
+      50.0,
+      10.0,
+      440.1,
+      "{\"name\":\"ผู้รับ W3 SHOP จำลอง\",\"phone\":\"0890000201\",\"address\":\"99 ถนนผู้รับทดสอบ กรุงเทพ\",\"postalCode\":\"00201\",\"deliveryNote\":\"W3 SHOP ทดสอบเท่านั้น\"}",
+      2.0,
+      "w1-1791226531572-5e6mjr9rc27"
+    ],
+    [
+      "OWA-20261006-02",
+      "SOLD",
+      "SHOPEE",
+      "2026-10-05T19:03:50.952Z",
+      "2026-10-05T19:03:50.952Z",
+      null,
+      "CL-25dc0180-8bd5-41f3-9371-e1f3b73aef16",
+      500.0,
+      0.0,
+      0.0,
+      500.0,
+      "{\"name\":\"ผู้รับ W3 SHOPEE จำลอง\",\"phone\":\"0890000203\",\"address\":\"88 ถนนผู้รับทดสอบ กรุงเทพ\",\"postalCode\":\"00203\",\"deliveryNote\":\"W3 SHOPEE ทดสอบเท่านั้น\"}",
+      2.0,
+      "w1-1791227196113-gtrc5x72f7n"
+    ]
+  ],
+  "requests": {
+    "w1-1791226216521-t41c39mwrds": {
+      "id": "w1-1791226216521-t41c39mwrds",
+      "action": "create",
+      "state": "DONE",
+      "snapshot": {
+        "format": 2,
+        "batchSize": 20,
+        "payload": {
+          "channel": "SHOP",
+          "requestId": "w1-1791226216521-t41c39mwrds",
+          "labelLater": true,
+          "items": [
+            {
+              "source": "MAG",
+              "price": "390.10",
+              "itemUid": "",
+              "sku": "W2V39-2"
+            }
+          ],
+          "customerShipping": "50",
+          "shippingSubsidy": "10"
+        },
+        "orderId": "OWA-20261006-01",
+        "created": "2026-10-05T18:50:27.301Z",
+        "lines": [
+          {
+            "id": "OWA-20261006-01-L1",
+            "uid": "e323a099-a7ab-4cdf-aa0b-2703a900d034",
+            "source": "MAG",
+            "sku": "W2V39-2",
+            "title": "W2V39 Copy 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "condition": "A",
+            "cost": 100,
+            "entered": 390.1,
+            "ledger": 390.1,
+            "basis": "SHOP entered",
+            "prior": "Instock",
+            "before": {
+              "name": "W2V39 Copy 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              "publisher": "TEST",
+              "condition": "A",
+              "copyFlags": "",
+              "original": "",
+              "cost": "100",
+              "price": "390",
+              "status": "Instock",
+              "soldDate": ""
+            },
+            "newUid": true
+          }
+        ],
+        "steps": {
+          "uid:0": "DONE",
+          "line:0": "DONE",
+          "hold:0": "DONE",
+          "order": "DONE"
+        },
+        "channel": "SHOP",
+        "customerShipping": 50,
+        "subsidy": 10,
+        "revision": 1,
+        "subtotal": 390.1,
+        "total": 440.1,
+        "alloc": {
+          "lines": 417,
+          "sales": 0
+        }
+      }
+    },
+    "w1-1791226531572-5e6mjr9rc27": {
+      "id": "w1-1791226531572-5e6mjr9rc27",
+      "action": "confirm",
+      "state": "DONE",
+      "snapshot": {
+        "format": 2,
+        "batchSize": 20,
+        "payload": {
+          "clientChoice": {
+            "id": "CL-c42e3b9f-7a50-40e5-91f5-6ccf1df274aa",
+            "expectedRevision": "2026-10-05T14:42:45.311Z",
+            "fields": {
+              "facebook": "=FB INTERNAL SYNTHETIC W2",
+              "note": "@INTERNAL NEVER PRINT",
+              "postalCode": "00123",
+              "phone": "0890000001",
+              "address": "45 ถนนผู้ซื้อ ทดสอบ",
+              "name": "ผู้ซื้อ จำลอง W2 Google"
+            },
+            "mode": "order"
+          },
+          "expectedRevision": 1,
+          "requestId": "w1-1791226531572-5e6mjr9rc27",
+          "labelLater": false,
+          "recipient": {
+            "phone": "0890000201",
+            "address": "99 ถนนผู้รับทดสอบ กรุงเทพ",
+            "deliveryNote": "W3 SHOP ทดสอบเท่านั้น",
+            "name": "ผู้รับ W3 SHOP จำลอง",
+            "postalCode": "00201"
+          },
+          "orderId": "OWA-20261006-01"
+        },
+        "orderId": "OWA-20261006-01",
+        "created": "2026-10-05T18:55:48.192Z",
+        "lines": [
+          {
+            "id": "OWA-20261006-01-L1",
+            "uid": "e323a099-a7ab-4cdf-aa0b-2703a900d034",
+            "source": "MAG",
+            "sku": "W2V39-2",
+            "title": "W2V39 Copy 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "condition": "A",
+            "cost": 100,
+            "entered": 390.1,
+            "ledger": 390.1,
+            "basis": "SHOP entered",
+            "prior": "Instock",
+            "before": {
+              "name": "W2V39 Copy 2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              "publisher": "TEST",
+              "condition": "A",
+              "copyFlags": "",
+              "original": "",
+              "cost": "100",
+              "price": "390",
+              "status": "Hold",
+              "soldDate": ""
+            }
+          }
+        ],
+        "steps": {
+          "line:0": "DONE",
+          "sales:0": "DONE",
+          "price:0": "DONE",
+          "date:0": "DONE",
+          "sold:0": "DONE",
+          "order": "DONE",
+          "finish:0": "DONE"
+        },
+        "orderBefore": [
+          "OWA-20261006-01",
+          "PENDING",
+          "SHOP",
+          "2026-10-05T18:50:27.301Z",
+          "",
+          "",
+          "",
+          390.1,
+          50,
+          10,
+          440.1,
+          "",
+          1,
+          "w1-1791226216521-t41c39mwrds"
+        ],
+        "channel": "SHOP",
+        "customerShipping": 50,
+        "subsidy": 10,
+        "revision": 2,
+        "clientId": "CL-c42e3b9f-7a50-40e5-91f5-6ccf1df274aa",
+        "recipientSnapshot": "{\"name\":\"ผู้รับ W3 SHOP จำลอง\",\"phone\":\"0890000201\",\"address\":\"99 ถนนผู้รับทดสอบ กรุงเทพ\",\"postalCode\":\"00201\",\"deliveryNote\":\"W3 SHOP ทดสอบเท่านั้น\"}",
+        "clientChoice": {
+          "mode": "order",
+          "id": "CL-c42e3b9f-7a50-40e5-91f5-6ccf1df274aa"
+        },
+        "subtotal": 390.1,
+        "total": 440.1,
+        "alloc": {
+          "lines": 0,
+          "sales": 1112
+        }
+      }
+    },
+    "w1-1791227007644-4ohjasct10r": {
+      "id": "w1-1791227007644-4ohjasct10r",
+      "action": "confirm",
+      "state": "DONE",
+      "snapshot": {
+        "format": 2,
+        "batchSize": 20,
+        "payload": {
+          "items": [
+            {
+              "source": "MAG",
+              "itemUid": "",
+              "price": "500",
+              "sku": "W1V33CHECK-0"
+            }
+          ],
+          "customerShipping": "0",
+          "labelLater": true,
+          "shippingSubsidy": "0",
+          "channel": "SHOPEE",
+          "requestId": "w1-1791227007644-4ohjasct10r"
+        },
+        "orderId": "OWA-20261006-02",
+        "created": "2026-10-05T19:03:50.952Z",
+        "lines": [
+          {
+            "id": "OWA-20261006-02-L1",
+            "uid": "069b3c59-37d3-4252-9bbf-c479301f8636",
+            "source": "MAG",
+            "sku": "W1V33CHECK-0",
+            "title": "W1V33CHECK Copy 0 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "condition": "A",
+            "cost": 100,
+            "entered": 500,
+            "ledger": 300,
+            "basis": "round(entered*0.7-50)",
+            "prior": "Instock",
+            "before": {
+              "name": "W1V33CHECK Copy 0 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+              "publisher": "TEST",
+              "condition": "A",
+              "copyFlags": "",
+              "original": "",
+              "cost": "100",
+              "price": "390",
+              "status": "Instock",
+              "soldDate": ""
+            },
+            "newUid": true
+          }
+        ],
+        "steps": {
+          "uid:0": "DONE",
+          "line:0": "DONE",
+          "hold:0": "DONE",
+          "sales:0": "DONE",
+          "price:0": "DONE",
+          "date:0": "DONE",
+          "sold:0": "DONE",
+          "order": "DONE",
+          "finish:0": "DONE"
+        },
+        "channel": "SHOPEE",
+        "customerShipping": 0,
+        "subsidy": 0,
+        "revision": 1,
+        "clientId": "",
+        "recipientSnapshot": "",
+        "subtotal": 500,
+        "total": 500,
+        "alloc": {
+          "lines": 418,
+          "sales": 1113
+        }
+      }
+    },
+    "w1-1791227196113-gtrc5x72f7n": {
+      "id": "w1-1791227196113-gtrc5x72f7n",
+      "action": "labels.save",
+      "state": "DONE",
+      "snapshot": {
+        "orderId": "OWA-20261006-02",
+        "before": [
+          "OWA-20261006-02",
+          "SOLD",
+          "SHOPEE",
+          "2026-10-05T19:03:50.952Z",
+          "2026-10-05T19:03:50.952Z",
+          "",
+          "",
+          500,
+          0,
+          0,
+          500,
+          "",
+          1,
+          "w1-1791227007644-4ohjasct10r"
+        ],
+        "after": [
+          "OWA-20261006-02",
+          "SOLD",
+          "SHOPEE",
+          "2026-10-05T19:03:50.952Z",
+          "2026-10-05T19:03:50.952Z",
+          "",
+          "CL-25dc0180-8bd5-41f3-9371-e1f3b73aef16",
+          500,
+          0,
+          0,
+          500,
+          "{\"name\":\"ผู้รับ W3 SHOPEE จำลอง\",\"phone\":\"0890000203\",\"address\":\"88 ถนนผู้รับทดสอบ กรุงเทพ\",\"postalCode\":\"00203\",\"deliveryNote\":\"W3 SHOPEE ทดสอบเท่านั้น\"}",
+          2,
+          "w1-1791227196113-gtrc5x72f7n"
+        ],
+        "clientChoice": {
+          "mode": "new",
+          "id": "CL-25dc0180-8bd5-41f3-9371-e1f3b73aef16",
+          "expectedRevision": "",
+          "fields": {
+            "facebook": "=FB W3 SYNTHETIC",
+            "name": "ผู้ซื้อ W3 SHOPEE จำลอง",
+            "phone": "0890000202",
+            "address": "77 ถนนลูกค้าทดสอบ กรุงเทพ",
+            "postalCode": "00202",
+            "note": "@PRIVATE W3 NEVER PRINT"
+          }
+        },
+        "payload": {
+          "expectedRevision": 1,
+          "recipient": {
+            "phone": "0890000203",
+            "deliveryNote": "W3 SHOPEE ทดสอบเท่านั้น",
+            "postalCode": "00203",
+            "name": "ผู้รับ W3 SHOPEE จำลอง",
+            "address": "88 ถนนผู้รับทดสอบ กรุงเทพ"
+          },
+          "requestId": "w1-1791227196113-gtrc5x72f7n",
+          "clientChoice": {
+            "mode": "new",
+            "fields": {
+              "postalCode": "00202",
+              "name": "ผู้ซื้อ W3 SHOPEE จำลอง",
+              "phone": "0890000202",
+              "address": "77 ถนนลูกค้าทดสอบ กรุงเทพ",
+              "facebook": "=FB W3 SYNTHETIC",
+              "note": "@PRIVATE W3 NEVER PRINT"
+            }
+          },
+          "orderId": "OWA-20261006-02"
+        },
+        "steps": {
+          "label": "DONE"
+        }
+      }
+    },
+    "crm-855e1c85450f74df9846a21e101a1e3bfb8e504c46267636b75ba85178563a4f": {
+      "id": "crm-855e1c85450f74df9846a21e101a1e3bfb8e504c46267636b75ba85178563a4f",
+      "action": "clients.save",
+      "state": "DONE",
+      "snapshot": {
+        "orderId": "OWA-20261006-02",
+        "clientId": "CL-25dc0180-8bd5-41f3-9371-e1f3b73aef16",
+        "row": 1101,
+        "before": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "after": [
+          "=FB W3 SYNTHETIC",
+          "ผู้ซื้อ W3 SHOPEE จำลอง",
+          "0890000202",
+          "77 ถนนลูกค้าทดสอบ กรุงเทพ",
+          "00202",
+          "@PRIVATE W3 NEVER PRINT",
+          "CL-25dc0180-8bd5-41f3-9371-e1f3b73aef16",
+          "2026-10-05T19:07:40.791Z"
+        ],
+        "payload": {
+          "requestId": "crm-855e1c85450f74df9846a21e101a1e3bfb8e504c46267636b75ba85178563a4f",
+          "orderId": "OWA-20261006-02",
+          "choice": {
+            "mode": "new",
+            "id": "CL-25dc0180-8bd5-41f3-9371-e1f3b73aef16",
+            "expectedRevision": "",
+            "fields": {
+              "facebook": "=FB W3 SYNTHETIC",
+              "name": "ผู้ซื้อ W3 SHOPEE จำลอง",
+              "phone": "0890000202",
+              "address": "77 ถนนลูกค้าทดสอบ กรุงเทพ",
+              "postalCode": "00202",
+              "note": "@PRIVATE W3 NEVER PRINT"
+            }
+          }
+        },
+        "steps": {
+          "client": "DONE"
+        }
+      }
+    }
+  }
+}

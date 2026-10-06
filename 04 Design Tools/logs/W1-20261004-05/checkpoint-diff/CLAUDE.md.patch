@@ -1,0 +1,15 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05\\checkpoint-before\\CLAUDE.md" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\CLAUDE.md"
+index d03e6b3..8bcc967 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-05\\checkpoint-before\\CLAUDE.md"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\CLAUDE.md"	
+@@ -93,3 +93,10 @@ Sold: change Status to Sold → it leaves the feed at the next nightly refresh (
+ **Feed content rules (Code v30, 2026-10-02):** (1) Identical copies are listed ONCE: same base title + Publisher + Original (cover price) + Condition + Copy Flags → one row (first complete copy), `quantity_to_sell_on_facebook` = number of copies; any difference in those fields = separate rows. When the listed copy sells, the next one takes over at the next refresh. (2) Titles never carry `(RESTOCK-NN)` (stripped at the v20b write and again at export). (3) A title with no lowercase Latin letter is exported Capitalised (GAMEMAG → Gamemag; PS2/RPG/VII untouched); the sheet name is not changed. (4) FB CATALOGUE `Price` / `Description` columns ARE the Meta price/description fields by design (header match is case-insensitive); the `price (Meta format)` columns are legacy and unused. The 80% drop guard compares rows, so a change that merges many copies must be checked against it (first v30 run: 1,337 → 1,162 expected, guard minimum 1,070).
+ 
+ PID changes are logged in **PID CHANGES**; never delete that tab. Orphaned FB CATALOGUE rows (old PID no longer in inventory) are auto-archived to **FB CATALOGUE ARCHIVE**; never delete that tab either. Plan: `00 Docs/PLAN-META-PIPELINE-HARDENING_2026-09-25.md`.
++
++
++## Session41 lessons — 2026-10-04
++
++- google.script.run may reorder object keys; exact-payload hash recovery must use stored original intent server-side, owner-only and ID-only, with durable client recovery mode. Never substitute a normalized payload/hash.
++- Read mutable transaction/journal/capacity metadata only after acquiring its shared lock, including recovery and QA helpers. Duplicate isolated helper executions are real evidence; server cache mechanism remains inference until native proof establishes it.
++- A rejected reconciliation hash is a stop before writes. Compare fresh native values with export, diagnose server hash/serialization, preserve every original event/position, and append explicit proven gap notes only. Never skip blank journal rows to declare success.

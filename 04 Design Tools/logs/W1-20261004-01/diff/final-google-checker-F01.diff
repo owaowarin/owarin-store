@@ -1,0 +1,14 @@
+diff --git "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\before\\04 Design Tools\\logs\\W1-20261004-01\\final_google.py" "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\final_google.py"
+index 306e768..dd7f516 100644
+--- "a/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\before\\04 Design Tools\\logs\\W1-20261004-01\\final_google.py"	
++++ "b/C:\\Users\\JIN\\OneDrive\\Desktop\\etc\\OWARIN\\OWARIN STORE\\OWARIN STORE\\04 Design Tools\\logs\\W1-20261004-01\\final_google.py"	
+@@ -25,6 +25,9 @@ def norm(x):
+     return x
+ for tab in ['GAME GUIDE BOOKS','MAGAZINE','ADD REQUESTS']:
+     for row in baseline[tab]:
++        if tab=='GAME GUIDE BOOKS' and 30<=row[0].row<=37:
++            assert all(c.value is None for c in row),'Fixture overwrote original data'
++            continue
+         for c in row:
+             assert norm(c.value)==norm(current[tab][c.coordinate].value),(tab,c.coordinate)
+ with (p/'changes.csv').open(encoding='utf-8',newline='') as stream:

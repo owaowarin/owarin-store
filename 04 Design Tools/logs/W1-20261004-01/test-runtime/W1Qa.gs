@@ -1,0 +1,22 @@
+// One-shot synthetic fixture. Exact isolated Sheet guard; never install in production.
+function w1QaPrepare20261004(){
+ _w1Access_();var ss=SpreadsheetApp.getActiveSpreadsheet();if(ss.getId()!=='13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM')throw new Error('TEST_ONLY');
+ if(ss.getSheetByName('ORDERS'))throw new Error('W1 fixture already exists; no blind rerun');
+ if(!ss.getSheetByName('SALES')){var sh=ss.insertSheet('SALES');_w1Write_('QA SALES headers',function(){sh.getRange(1,1,1,9).setValues([['Order ID','Item Name Sold','Order date','Cost','Price','Shipping Cost','Net Profit','Note','Product ID']]);});
+  _w1Write_('QA SALES finite array',function(){sh.getRange('G2').setFormula('=ARRAYFORMULA(IF(E2:E51<>"",E2:E51-D2:D51-F2:F51,""))');});
+  _w1Write_('QA SALES baseline',function(){sh.getRange('A52:F52').setValues([['LEGACY-TEST','Legacy synthetic','2026-10-03',100,390,10]]);sh.getRange('G52').setFormula('=E52-D52-F52');});
+ }
+ var dry=w1SchemaDryRun();Logger.log('DRY_RUN '+JSON.stringify(dry));w1PrepareTestSchema();
+ for(var i=1;i<=8;i++){var r=_apiInvAdd({requestId:'w1-20261004-fixture-'+i,source:'GGB',title:'W1 QA 20261004 Copy '+i,publisher:'QA',condition:'A',status:'Instock',cost:'100',price:'390'});Logger.log('FIXTURE '+i+' '+r.item.productId);}
+ Logger.log('PASS W1 synthetic fixture ready; no shop data copied');return 'Fixture ready: eight synthetic copies; exact test Sheet';
+}
+function w1QaRecovery20261004(){
+ _w1Access_();if(SpreadsheetApp.getActiveSpreadsheet().getId()!=='13WC54eKp6kLnE05XCey38q7aZHYrnrs6bpBQP5J3QtM')throw new Error('TEST_ONLY');
+ var items=_readInventory(GGB_SHEET).filter(function(o){return o.name.indexOf('W1 QA 20261004 Copy 7')>=0;});if(items.length!==1)throw new Error('QA identity');
+ var p={requestId:'w1-20261004-recovery-create',channel:'SHOP',items:[{source:'GGB',sku:items[0].productId,price:390}],customerShipping:50,shippingSubsidy:10};
+ if(_w1Status_(p.requestId).state!=='NOT_FOUND')throw new Error('QA already run');
+ var write=_tryWrite,armed=false;try{_tryWrite=function(label,fn){if(label.indexOf('inventory')>=0&&label.indexOf('status')>=0&&!armed){armed=true;return false;}return write(label,fn);};var error='';try{_w1Mutate_('create',p);}catch(e){error=e.message;}if(error.indexOf('RECOVERY_REQUIRED')<0||!armed)throw Error('Missing injected failure');Logger.log('INJECTED '+error);}finally{_tryWrite=write;}
+ var order=_w1Mutate_('create',p);if(order.status!=='PENDING')throw Error('Retry create');var confirm={requestId:'w1-20261004-recovery-confirm',orderId:order.orderId,expectedRevision:order.revision,labelLater:true};
+ armed=false;try{_tryWrite=function(label,fn){if(label.indexOf('SALES')>=0&&label.indexOf('price')>=0&&!armed){armed=true;return false;}return write(label,fn);};var error='';try{_w1Mutate_('confirm',confirm);}catch(e){error=e.message;}if(error.indexOf('RECOVERY_REQUIRED')<0||!armed)throw Error('Missing ledger failure');Logger.log('INJECTED '+error);}finally{_tryWrite=write;}
+ var sold=_w1Mutate_('confirm',confirm),retry=_w1Mutate_('confirm',confirm);if(sold.status!=='SOLD'||!retry.replayed||sold.orderId!==retry.orderId)throw Error('Retry sold');Logger.log('PASS W1 real-Google partial Hold/SALES recovery '+sold.orderId+'; exact Request IDs '+p.requestId+' / '+confirm.requestId);return 'Partial Hold + SALES recovery '+sold.orderId+'; same-ID confirm replay verified';
+}

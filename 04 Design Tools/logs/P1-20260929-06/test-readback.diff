@@ -1,0 +1,42 @@
+diff --git a/04 Design Tools/logs/P1-20260929-06/p1-add-before.test.cjs b/04 Design Tools/logs/P1-20260929-01/p1-add.test.cjs
+index 3746979..633d07c 100644
+--- a/04 Design Tools/logs/P1-20260929-06/p1-add-before.test.cjs	
++++ b/04 Design Tools/logs/P1-20260929-01/p1-add.test.cjs	
+@@ -19,10 +19,10 @@ function sheet(name, rows, fail) {
+     getRange(r,c,h=1,w=1){return {
+       getValue(){return rows[r-1]?.[c-1] ?? '';},
+       getValues(){return Array.from({length:h},(_,i)=>Array.from({length:w},(_,j)=>rows[r+i-1]?.[c+j-1] ?? ''));},
+-      setValue(v){if(fail?.(name,r,c,v))throw Error('INJECTED WRITE FAILURE');(rows[r-1] ||= [])[c-1]=v;return this;},
++      setValue(v){const effect=fail?.(name,r,c,v);if(effect==='DROP')return this;if(effect)throw Error('INJECTED WRITE FAILURE');(rows[r-1] ||= [])[c-1]=v;return this;},
+       setValues(v){v.forEach((a,i)=>a.forEach((x,j)=>thisCell(r+i,c+j,x)));return this;},
+       setBackground(){return this;}, setFormula(v){return this.setValue(v);}
+-    };function thisCell(rr,cc,v){if(fail?.(name,rr,cc,v))throw Error('INJECTED WRITE FAILURE');(rows[rr-1] ||= [])[cc-1]=v;}}
++    };function thisCell(rr,cc,v){const effect=fail?.(name,rr,cc,v);if(effect==='DROP')return;if(effect)throw Error('INJECTED WRITE FAILURE');(rows[rr-1] ||= [])[cc-1]=v;}}
+   };
+ }
+ const hdr=['Event ID','Timestamp','Request ID','Attempt','State','Actor','Entry Source','App Version','Sheet','Payload Hash','Row','Product ID','Before','After','Error','Result','Recovery Ref'];
+@@ -81,5 +81,23 @@ assert.equal(rowsA.length,beforeIntentFailure,'no business write before durable
+ failure=null;
+ const comma=add('comma','GGB',{cost:'1,200.50'});
+ assert.equal(rowsA[comma.result.row-1][10],1200.5);
+-console.log('PASS: syntax, 20 Add calls, invalid numeric rejection, comma numeric parsing, zero/default/explicit status, replay, changed payload, partial write, DONE log failure, intent failure');
++const silentRow=rowsA.length+1, doneBefore=rowsJ.filter(r=>r[4]==='DONE').length;
++failure=(name,row,col)=>name==='GAME GUIDE BOOKS'&&row===silentRow&&col===11?'DROP':null;
++assert.throws(()=>add('silent-cost','GGB',{cost:'99'}),/Add readback mismatch: cost/);
++failure=null;
++assert.equal(rowsJ.filter(r=>r[4]==='DONE').length,doneBefore,'silently missing cost must not commit DONE');
++assert.throws(()=>add('silent-cost','GGB',{cost:'99'}),/recovery/);
++const rowsBeforeJournal=rowsA.length;
++failure=(name,row,col)=>name==='ADD REQUESTS'&&col===10?'DROP':null;
++assert.throws(()=>add('silent-journal','GGB'),/ADD REQUESTS event readback failed at column 10/);
++failure=null;
++assert.equal(rowsA.length,rowsBeforeJournal,'journal readback failure must precede inventory write');
++const beforeSilentDone=rowsA.length;
++failure=(name,row,col,value)=>name==='ADD REQUESTS'&&col===16&&String(value).includes('"success":true')?'DROP':null;
++assert.throws(()=>add('silent-done','GGB'),/recovery/);
++failure=null;
++assert.equal(rowsA.length,beforeSilentDone+1,'business row exists after silent DONE result loss');
++assert.throws(()=>add('silent-done','GGB'),/recovery/);
++assert.equal(rowsA.length,beforeSilentDone+1,'retry after silent DONE failure must not duplicate row');
++console.log('PASS: syntax, 20 Add calls, numeric validation, replay, partial/failed writes, silent inventory/PREPARED/DONE readback failures');
+ 

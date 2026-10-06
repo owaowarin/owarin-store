@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "checks": [
+    "service restored on success/throw",
+    "exact owner/test ID guard",
+    "native helper routed only fixture tabs",
+    "after-effect failure observed",
+    "same ID/revision retry",
+    "DONE replay no write",
+    "original nine tabs unchanged",
+    "blank row preserved; duplicate names get distinct IDs"
+  ],
+  "nativeCoercion": "Not simulated; native execution required"
+}

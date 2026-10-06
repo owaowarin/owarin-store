@@ -1,0 +1,7 @@
+{
+  "model": "sonnet",
+  "permissions": {
+    "defaultMode": "default",
+    "deny": ["Bash(rclone sync:*)", "Bash(rclone delete:*)", "Bash(rclone purge:*)"]
+  }
+}
