@@ -9,6 +9,7 @@
 /Supplier
 /_exports
 /Facebook - Catalouge Project
+/_from-outer-root/outputs
 
 # secrets - never commit
 .env
