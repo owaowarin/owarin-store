@@ -50,7 +50,7 @@ Sidebar.html   ← unchanged, still works
 | Design system | `index.css` tokens | Implemented in `Index.html` (§2.1) — the back-office already looks like the future site |
 
 ### 2.1 Design tokens (implemented in Index.html)
-Background `hsl(0 0% 5%)` · foreground `hsl(0 0% 95%)` · card `hsl(0 0% 8%)` · border `hsl(0 0% 18%)` · gold `hsl(43 76% 52%)` (muted `43 40% 35%`, bright `43 85% 60%`) · **radius 0 everywhere** · fonts: Outfit 300 (UI) + Cormorant Garamond (price/serif accents) · 2-px scrollbar, gold on hover · hairline borders.
+Background `hsl(0 0% 5%)` · foreground `hsl(0 0% 95%)` · card `hsl(0 0% 8%)` · border `hsl(0 0% 18%)` · gold `hsl(43 76% 52%)` (muted `43 40% 35%`, bright `43 85% 60%`) · **radius 0 everywhere** · fonts: Outfit 300 (UI) + Shippori Mincho (price/serif accents; replaced Cormorant Garamond, as live Index.html v42 loads — doc synced 2026-10-07) · 2-px scrollbar, gold on hover · hairline borders.
 
 ## 3. Modules A–F
 

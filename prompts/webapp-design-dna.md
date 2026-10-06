@@ -1,0 +1,2 @@
+# Next step — web app design DNA cleanup (prepared 2026-10-07)
+Read 00 Docs/STATE.md first. In `03 Apps Script/Web App/W2LabelUI.html` replace hard-coded colours (#000b #151515 #eee #222 #ad914d #63532e #ddd #555) with the Index.html tokens (var(--bg)/--card/--fg/--border/--gold/--gold-muted/--muted-fg), keep radius 0, no behaviour change. Bump the pair to Code_v43/WebApp_v43 per CLAUDE.md, run all 7 Web App tests, give the owner click-level paste+deploy steps, log CSV + HANDOFF + STATE.

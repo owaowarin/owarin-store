@@ -1,1 +1,2 @@
 date,actor,what_went_wrong,cause,fix,rule_or_script_changed,status
+2026-10-07,webapp-sync-audit,Owner believed ChatGPT edited live web app after Claude release; Drive modifiedTime and hashes show live = repo v42,No action needed; verify via hashes before syncing,closed
