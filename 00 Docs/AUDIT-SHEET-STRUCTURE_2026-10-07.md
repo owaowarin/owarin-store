@@ -27,3 +27,25 @@ Gives per tab: real data rows, trailing blanks, formula cells + R1C1 patterns, h
 
 ## 4. Phase 3 — plan (after JSON)
 One plan file with: target tab list, per-tab action, order (backup → archive copies → code release if needed → delete), dry-run log per step, UNDO. Expected outcome stated honestly: fewer tabs and lighter recalculation; Add speed comes from v44 code changes.
+
+## 5. Apps Script tools (menu 📦 Inventory Tools + web TOOLS tab) — proposal, waits owner approval
+Owner 2026-10-07: "tools" = Apps Script menu/functions. Removal = drop the menu item + web TOOLS button (+ dead function) in one code release; nothing in the Sheet changes.
+
+| Tool (function) | Evidence | Proposal |
+|---|---|---|
+| 🔄 Rebuild ALL Product IDs (`forceRegenerateAllSKUs`) | CLAUDE.md: never click, breaks R2 image links | **Remove** |
+| 🗂️ Build / update SERIES MAP (`sp2BuildSeriesMap`) | tab retired; Series lives in GAME INFO; the item `insertSheet`s the old tab | **Remove** |
+| R2 Images ▸ Export Instock snapshot / View image job results (`r2ExportInstockSnapshot`, `r2ShowUploadResults`) + tabs R2 JOBS, IMAGE UPLOADS + `r2-queue-worker.py` | old queue-worker design; IMAGE UPLOADS never got a result row; live chain = `upload-missing-r2.ps1` | **Remove** (tabs → backup file) |
+| 📘 Build FB CATALOGUE / ✍️ Rebuild descriptions / 📤 Build META EXPORT | all run inside 🚀 Refresh Meta feed | **Move** to ⚙️ Setup & repair |
+| 🧱 SP-2 column setup / 🎨 Lay out sheet | "run once" items | **Move** to ⚙️ Setup & repair |
+| 🏷️ Fill Copy Flags from title (`sp2MigrateFlags`) | v17.4 migration; Add derives flags automatically | **Move** to Setup & repair (owner confirms) |
+| 🖼️ Build ALBUM CAPTION / 🏷️ SOLD OUT caption / 📷 FB Album Auto-Post menu | FB album autopost; trigger `fbaPostBatch` error 100% | **PARKED** (owner 2026-10-07: record, resume later) |
+| 🚀 Refresh Meta feed · Validate / Fill missing Product IDs (safe) · Find publishers · Sort A-Z · Fill formulas · SP-2 calculate/preview/apply · Audit under-market · Review queue · Labels · Install trigger · Apply SP-2 every row · Renumber RESTOCK | in daily chain or guarded repair | **Keep** |
+
+## 6. How R2 photo upload works now (from code, 2026-10-07)
+1. Sort photos with `new-arrivals-to-folders.ps1` (folders named exactly like Item name).
+2. `upload-missing-r2.ps1` (dry-run) reads the LIVE Sheet, lists R2 `owarin-images/library/`, and plans only Instock PIDs that have NO folder on R2; a PID changed in PID CHANGES is copied R2-side from the old PID.
+3. `-Commit` uploads with `rclone copy --ignore-existing` (never overwrites/deletes), rebuilds `meta/images.csv` (pid,n,ext index) via `build-r2-images-index.ps1`, backs it up, publishes, reads it back (`read-back identical: True`).
+4. Apps Script `_r2ImageIndex()` reads that `meta/images.csv` live for image links in FB CATALOGUE / META EXPORT; tab `R2 IMAGES` is only the fallback when the live read fails.
+The Sheet menu R2 Images and tabs R2 JOBS / IMAGE UPLOADS are not part of this chain.
+
