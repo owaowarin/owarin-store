@@ -97,6 +97,8 @@ Split rule read off the chart: **code + docs** (the arrows) → git; **media + d
 **B1-H done (ads-optimizer `ea89e9c`):** 11,891 copies → hard links, 0 skipped, 3,731,357,881 B won (PASS). **Nested `_archive` docs committed** (`689ad72`, 33 files, guards PASS).
 **B1-G result (ads-optimizer `fbbbb9b`, by path; hard-linked copies count once per path):** R2 `r2:owarin-images` = 3,147 objects / 0.92 GB. On R2: `_fb_albums` 856/857 · `All Products` 6,941/7,909 (2.06 of 3.08 GB) · `_r2_upload` 6,593/8,715. **Not on R2 at all:** `GGB Online Files` 1.48 GB · `Supplier` 128 MB · `outputs` 36 MB · `Facebook - Catalouge Project` 34 MB · `_exports` 6 MB · `OWARIN AFFILIATE` 0.3 MB; plus 968 `All Products` and 2,122 `_r2_upload` files. Full list: `C:\Users\JIN\OWARIN-DATA\_logs\B1_r2-missing_2026-10-07_030445.csv` (PC only). → Media backup is NOT covered by R2; owner decision pending (close-out).
 
+**B1 backup done (ads-optimizer `caaada3`, 2026-10-07 04:53):** `tools/pc/b1-backup-r2.ps1 -Apply` → private bucket `r2:owarin-backup/OWARIN-DATA`, 9,125 files / 5,045,037,499 B, copy + read-back check PASS, count and bytes equal to local. Excluded `_r2_upload`, `_logs`. Re-run the same command to refresh (copy only, never deletes; the free tier is 10 GB-month). Secrets are NOT in the backup (single copy, accepted). Remaining for the owner: B1-F (switch VS Code / Claude Desktop to `C:\Users\JIN\owarin-store`).
+
 Rollback: every move is a rename listed in `B1_moves_<stamp>.csv` (source → destination); reverse = move each destination back in reverse order. No step deletes anything.
 
 ## 5. Owner decisions 2026-10-07 (answers to the first open list)
