@@ -30,7 +30,7 @@
 - **OWARIN STORE** — secondhand Japanese game guidebook & magazine shop, selling through Facebook and Shopee
 - Ads clients with history: chubbygirlbkk (Thai fashion), JIN COFFEE&ROASTED, Chanathip Wat (Meta)
 - Real tool stack: **Claude Cowork** (planning) + **Claude Code** (implementation) + **ChatGPT/Codex** · evaluating Antigravity for UI design
-- Workstation: `desktop-45q3cr4` (Windows, VS Code, OneDrive)
+- Workstation: `desktop-45q3cr4` (Windows, VS Code; OneDrive removed 2026-10-07 — no cloud backup)
 
 ---
 
@@ -113,7 +113,7 @@ In actual load order:
 
 ### 4.0 Router
 Jobs in this stream: weekly deck · MoM · PoP · deep-dive · rotation · any spec edit in the `Chubbygirlbkk - Shopee` folder.
-Real folder: `C:\Users\JIN\OneDrive\Desktop\Chubbygirlbkk - Shopee`
+Real folder: `C:\Users\JIN\ads-optimizer` (since 2026-10; github owaowarin/ads-optimizer — its own rules win)
 
 ### 4.1 How to read the specs without blowing up token cost
 `_specs/` totals ~745 KB (Core 178 KB · Deep-Dive 164 KB) — **never open a whole file, never attach one to a chat.**
@@ -214,7 +214,7 @@ CHECKPOINTs are written **per task, as you go** (`--claim` `--proof` `--counter`
 
 ### 4.9 A rule change must propagate in one pass
 ① grep the old wording across **every file** → ② fix upstream first (Core → master prompt → deep-dive → period files) → ③ record what changed, why, and when in **`_specs/CHANGELOG.md`** → ④ grep again until zero hits → ⑤ `python3 _engine/spec.py index` and update the relevant runbook.
-**⚠️ These files live on OneDrive** — after writing, always `grep` the content back to confirm. There has been a round where exit code was 0 but the new content vanished entirely.
+**⚠️ (OneDrive removed 2026-10-07; rule kept)** — after writing, always `grep` the content back to confirm. There has been a round where exit code was 0 but the new content vanished entirely.
 **The `shopee-report-rules` skill must be updated in the same pass as the spec.**
 
 ### 4.10 Analytical principles for ads data
@@ -248,13 +248,13 @@ CHECKPOINTs are written **per task, as you go** (`--claim` `--proof` `--counter`
 ## 5 · Stream B — OWARIN STORE
 
 ### 5.0 Router
-Real folder: `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE`
+Real folder: `C:\Users\JIN\owarin-store` (since 2026-10-07, B1: code + docs in git; media `C:\Users\JIN\OWARIN-DATA` via junctions; secrets `C:\Users\JIN\Documents\OWARIN-secrets`)
 Structure after the 5 Sep 2026 reorganisation:
 ```
 00 Docs/          HANDOFF + PLAN-* + Card Spec + Ad Visual Style Guide
 03 Apps Script/   FbAlbum.gs, RESTORE_Code.gs, Web App/ (entire folder)
 04 Design Tools/  studio HTML, owarin_covers.js, owarin_logo.js, owarin_card_test.mjs, logs/
-_archive/         (+ _archive/secrets/ : r2-setup.bat, cloudflare token.txt)
+_archive/         (moved out 2026-10-07 → `C:\Users\JIN\_archive\OWARIN STORE-inner-archive_*`; `cloudflare token.txt` → `C:\Users\JIN\Documents\OWARIN-secrets\owarin-store\`)
 _exports/  _r2_upload/  _fb_albums/  Shopee/   <- pipeline folders stay put
 ```
 `Shopee/build_shopee_upload.py` reads `../_exports` — do not move it.
@@ -509,8 +509,8 @@ Written to `00 Docs/HANDOFF_<YYYY-MM-DD>.md` (stream B) or that period's runbook
 
 - `/model opusplan` is the default (Opus in plan mode, Sonnet otherwise).
 - Per-folder model locks instead of pressing shift+tab manually:
-  - `C:\Users\JIN\OneDrive\Desktop\Chubbygirlbkk - Shopee\.claude\settings.json` = `{"model":"opus"}`
-  - `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\.claude\settings.json` = `{"model":"sonnet"}`
+  - `C:\Users\JIN\ads-optimizer\.claude\settings.json` (path updated 2026-10-07) = `{"model":"opus"}`
+  - `C:\Users\JIN\owarin-store\.claude\settings.json` (path updated 2026-10-07) = `{"model":"sonnet"}`
   - `C:\Users\JIN\.claude\settings.json` = model `opusplan` + `env CLAUDE_CODE_SUBAGENT_MODEL=haiku`
 - `OWARIN STORE\.claude\settings.local.json` already holds PowerShell permissions.allow entries — **do not overwrite.**
 - **`.claude/` is writable only from OWARI's machine** — remote tools are blocked ("Writing to .claude is not permitted via remote tools").

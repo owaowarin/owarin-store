@@ -18,7 +18,7 @@
 
 $ErrorActionPreference = 'Stop'
 $Bucket = 'owarin-images'
-$Store  = 'C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE'
+$Store  = $PSScriptRoot   # repo root; _r2_upload is a junction to OWARIN-DATA (B1, 2026-10-07)
 
 $Pairs = @(
   @{ old = 'OWA-GGBG045GMSAN00'; new = 'OWA-GGBG045GMSCN00'; name = 'GAMEMAG SPECIAL vol 41' },

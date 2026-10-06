@@ -41,7 +41,7 @@ Rule: OVERWRITE at session close; ≤80 lines. Active PLAN holds scope; dated lo
 - Back-office web app, storefront (on hold), watermark tool, FB album autopost, AI Usage Widget, Chubbygirlbkk reporting: see memory areas / `STATUS_OWARIN-STORE.md` (last 2026-09-13) — status unknown here.
 
 ## Environment
-- Current Codex local host (2026-10-03): PowerShell can read/write this workspace; verify changed files after OneDrive writes. The 2026-09-08 remote mount workaround is historical, not required here.
+- Workspace moved 2026-10-07 (B1): `C:\Users\JIN\owarin-store` (git, github owaowarin/owarin-store) + media `C:\Users\JIN\OWARIN-DATA` via junctions + secrets `C:\Users\JIN\Documents\OWARIN-secrets`; see `PLAN_2026-10-07_B1_repo-data-split.md`. Verify changed files after every write (OneDrive removed). The 2026-09-08 remote mount workaround is historical, not required here.
 
 ## Housekeeping
 - DONE 2026-10-01/02 (by OWARI in PowerShell): HANDOFF.md + HANDOFF_2026-09-12/13/14/18/20/22/23/24/25/29 moved to `00 Docs/_archive/handoffs_old/` (11 files, verified by folder listing 2026-10-02). `HANDOFF_2026-09-29.md` was a byte-identical prefix of 09-28, so nothing was lost.

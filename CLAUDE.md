@@ -1,5 +1,14 @@
 # OWARIN STORE — กฎถาวรสำหรับ Claude
 
+**Rules version 2026-10-07 · D41** — router and owner-wide rules: `AGENTS.md` (§ Owner-wide rules).
+
+## Layout (B1, 2026-10-07)
+
+Layout since B1 (2026-10-07, `PLAN_2026-10-07_B1_repo-data-split.md`): code + docs = this repo `C:\Users\JIN\owarin-store` (github owaowarin/owarin-store, private) · media/data = `C:\Users\JIN\OWARIN-DATA` (reached through junctions of the same names in this folder: `All Products`, `_r2_upload`, `GGB Online Files`, `_fb_albums`, `Supplier`, `_exports`, `Facebook - Catalouge Project`) · secrets = `C:\Users\JIN\Documents\OWARIN-secrets` (Google key: `owarin-store\credential\owarin-store-api-3588e4e975d7.json` → pass it to `--credentials`; never open, print or commit a secret) · web repo `C:\Users\JIN\owarin-retro-guides_1` (on hold) · LAB `C:\Users\JIN\owarin-back-house-lab` (separate project, own repo). The old `...\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE` path is dead.
+⚠️ Junctions: never delete a junction folder with `Remove-Item -Recurse` / Explorer "Delete" — it can delete the real files in OWARIN-DATA; to remove a junction use `cmd /c rmdir "<path>"`.
+⚠️ Hard links (B1-H): identical images in OWARIN-DATA may share one copy on disk; never edit an image in place — save as a new file (every tool here already does).
+No cloud backup (OneDrive uninstalled 2026-10-07, D37): code/docs are backed up only by `git push`; commit with `C:\Users\JIN\ads-optimizer\tools\pc\b1-store-commit.ps1` (guards: size, secret names/values).
+
 ## วันที่
 
 - ห้ามใช้วันที่จากความจำของโมเดล ทุกครั้งที่จะเขียนวันที่ลงไฟล์ ต้องรัน
@@ -13,7 +22,7 @@
 - แก้แบบ targeted ห้ามเขียนไฟล์ใหม่ทั้งไฟล์เพื่อแก้จุดเดียว
 - อ่านไฟล์จริงก่อนสรุปเสมอ ห้ามเดาจากชื่อไฟล์
 - อ่านแบบประหยัด: ดูชื่อ+ขนาด+วันที่ก่อน อ่านเต็มเฉพาะที่จำเป็น ไฟล์เกิน 50 KB ใช้ grep หาหัวข้อ
-- ไฟล์อยู่บน OneDrive เขียนเสร็จต้องอ่านกลับมายืนยันทุกครั้ง
+- After every write, read the file back and confirm (OneDrive was removed 2026-10-07; the rule stays).
 - ก่อนลบหรือเขียนทับ ต้องเตือนเป็นบรรทัดแรก
 - **ทุกงานที่แก้ เพิ่ม ลบ ย้าย หรืออัปโหลดข้อมูล ต้องเขียน log CSV ลง `04 Design Tools/logs/` ทุกครั้ง**
   ทั้งรอบ dry-run และรอบ commit · คอลัมน์อย่างน้อย: ต้นทาง → ปลายทาง, ก่อน → หลัง

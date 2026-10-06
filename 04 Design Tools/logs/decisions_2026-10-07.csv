@@ -1,0 +1,8 @@
+﻿"date","id","decision","status","source"
+"2026-10-07","B1-1","Workspace split (B1): code+docs in github owaowarin/owarin-store; media in C:\Users\JIN\OWARIN-DATA via junctions; secrets in C:\Users\JIN\Documents\OWARIN-secrets","CLOSED","owner chat 2026-10-07"
+"2026-10-07","B1-2","Web project owarin-retro-guides_1 on hold: .env in its git history left as is until the project restarts","CLOSED","owner chat 2026-10-07"
+"2026-10-07","B1-3","cloudflare token.txt: no rotation (single-owner); kept in the secrets folder; owner may delete the token in Cloudflare if unused","CLOSED","owner chat 2026-10-07"
+"2026-10-07","B1-4","Media backup: verify what R2 already holds (B1-G) before choosing a backup","CLOSED","owner chat 2026-10-07"
+"2026-10-07","B1-5","Back House LAB = separate project, own private repo owaowarin/owarin-back-house-lab","CLOSED","owner chat 2026-10-07"
+"2026-10-07","B1-6","Secrets have a single copy: accepted for now","CLOSED","owner chat 2026-10-07"
+"2026-10-07","B1-7","Duplicate images in OWARIN-DATA: replace extra copies with hard links (B1-H)","CLOSED","owner chat 2026-10-07"

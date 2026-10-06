@@ -1,11 +1,13 @@
-# AGENTS.md — OWARI workspace
+# AGENTS.md — OWARIN STORE workspace (Stream B)
+
+**Rules version 2026-10-07 · D41.** Owner-wide rules come from github owaowarin/ads-optimizer `AGENTS.md` (synced to `C:\Users\JIN\.claude\CLAUDE.md` and `C:\Users\JIN\.codex\AGENTS.md`); this file holds OWARIN STORE rules only.
 
 Read `OWARI-MASTER-CONTEXT_EN_2026-09-13.md` in this folder before starting any task. It is the operating context for both work streams. This file is only the router; the master context holds the actual rules.
 
 ## Every task
 
 1. Reply in Thai. Lead with the answer, no preamble, prose, ≤3 sentences unless detail is needed.
-2. State which stream this task is (**A** = Ads Optimizer, **B** = OWARIN STORE) and which sections of the master context apply, **before** doing work.
+2. This workspace is Stream B (OWARIN STORE). Stream A (Ads Optimizer) lives in `C:\Users\JIN\ads-optimizer` with its own rules; do not work on it from here. Name the master-context sections that apply **before** doing work.
 3. Never fabricate facts, sources, or claim work was done that was not done.
 4. Instructions to the user must be click-level: exact button, exact field, exact value.
 5. Destructive-risk warnings (overwrite, delete) go on the **first line** of the instruction.
@@ -19,6 +21,13 @@ Read `OWARI-MASTER-CONTEXT_EN_2026-09-13.md` in this folder before starting any 
 11. **Issue and model handoff rule (owner decision 2026-10-03):** Log every issue, failed attempt, fix, retry, result, and recovery reference in the task CSV and Implementation log. If GPT-5.6 Sol / High cannot resolve a reproducible issue, record the unresolved problem and exact revision, then hand the repair to GPT-6 Astra / High. Do not claim a model switch or create an agent/chat automatically; use the app model selector when available. Keep one writer per change.
 
 12. **Delivery priorities (owner 2026-10-03):** Follow master §5.2.1 for Stream B: plan/checks first; smallest scoped fix with backup; explicit roles only if agents are separately authorized; reproduce/root-cause/retest; verify UI and failure/retry before done; record actionable lessons and retire obsolete active rules. One writer, no new agents/chats for this project. The current three-package plan is `00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md` §0/§10.
+
+## Owner-wide rules (2026-10-07 · D41, full text in ads-optimizer `AGENTS.md`)
+- D36: every task reply starts with `🧭 <model> · <effort> — <reason> · <fits ✅ | how to switch>`; never claim to have switched.
+- D37: OneDrive is gone and there is no cloud backup; anything not pushed to GitHub exists once.
+- D38: chat in Thai; files, rules and skills in English.
+- D39: anything a cloud session must read from the PC comes as a file the owner commits and pushes; the owner pastes only the commit id.
+- D40/D41: plain Thai, numbered steps, one action per line, full PC paths (`C:\Users\JIN\...`), paste-ready text in the chat. Close-out: list every leftover with importance + impact, fix small ones, ask once "fix now or plan"; next prompt saved in `prompts/<task>.md`; mistakes, FAILs and owner corrections → `_logs/INCIDENTS.csv`.
 
 ## Code
 
@@ -46,14 +55,14 @@ Archive what is no longer in play before starting other work in either stream, e
 
 ## Stream A — Ads Optimizer
 
-Folder `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\ADS OPTIMIZER\Chubbygirlbkk - Shopee` (moved 2026-09-18; the old `Desktop\Chubbygirlbkk - Shopee` path is dead).
-Rules: master context §4 + `skills/shopee-report-rules/SKILL.md`.
-Never open a whole spec file — read section by section with `python3 _engine/spec.py get <alias>:<§>`. Start at `_specs/00_RULES-OVERVIEW.md`.
-The 9 hard stops in §4.2 are real stops. The audience firewall in §4.3 is enforced by `qa_sweep.py --audience client`.
+Moved to its own repo `C:\Users\JIN\ads-optimizer` (github owaowarin/ads-optimizer, 2026-10); the old OneDrive folder is archived at `C:\Users\JIN\_archive\ADS OPTIMIZER`. Its rules live there, not here.
 
 ## Stream B — OWARIN STORE
 
-Folder `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE` (the nested name is deliberate — `...\etc\OWARIN\OWARIN STORE\` is the Stream B group folder, which also holds `OWARIN Back House LAB`, `OWARIN WEB` and `OWARIN AFFILIATE`).
+Layout since B1 (2026-10-07, `PLAN_2026-10-07_B1_repo-data-split.md`): code + docs = this repo `C:\Users\JIN\owarin-store` (github owaowarin/owarin-store, private) · media/data = `C:\Users\JIN\OWARIN-DATA` (reached through junctions of the same names in this folder: `All Products`, `_r2_upload`, `GGB Online Files`, `_fb_albums`, `Supplier`, `_exports`, `Facebook - Catalouge Project`) · secrets = `C:\Users\JIN\Documents\OWARIN-secrets` (Google key: `owarin-store\credential\owarin-store-api-3588e4e975d7.json` → pass it to `--credentials`; never open, print or commit a secret) · web repo `C:\Users\JIN\owarin-retro-guides_1` (on hold) · LAB `C:\Users\JIN\owarin-back-house-lab` (separate project, own repo). The old `...\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE` path is dead.
+⚠️ Junctions: never delete a junction folder with `Remove-Item -Recurse` / Explorer "Delete" — it can delete the real files in OWARIN-DATA; to remove a junction use `cmd /c rmdir "<path>"`.
+⚠️ Hard links (B1-H): identical images in OWARIN-DATA may share one copy on disk; never edit an image in place — save as a new file (every tool here already does).
+No cloud backup (OneDrive uninstalled 2026-10-07, D37): code/docs are backed up only by `git push`; commit with `C:\Users\JIN\ads-optimizer\tools\pc\b1-store-commit.ps1` (guards: size, secret names/values).
 Rules: master context §5.
 ⚠️ **Never delete files with `rm` / `del`.** Move them to `_to_delete/<date>/` and wait for OWARI.
 ⚠️ **Never `rclone sync` on the `library/` prefix** — `copy` only.
@@ -72,7 +81,7 @@ every `Code_vNN.gs`.
 
 ## Skills in this bundle
 
-Source of truth for skill files: `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\_skills\` (one copy, shared by both streams).
+Source of truth for the account skills (`token-harness`, `shopee-report-rules`, `research-relay`): github owaowarin/ads-optimizer `skills/` (synced to local copies by `tools/pc/rules-sync.ps1`). The OWARIN diagram skin and other offline copies stay in `C:\Users\JIN\Desktop\etc\OWARIN\_skills\`.
 
 | Path under `_skills\` | Why it is here |
 |---|---|
@@ -82,7 +91,7 @@ Source of truth for skill files: `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\_skil
 
 ## Token discipline
 
-Follow the rules in the token-harness skill. Put a one-line model/effort alert at the top of the reply when a cheaper or stronger model fits the work, and remind the owner about the manual steps (`/clear`, `/context`, `/mcp`, plan mode, edit-message) when their trigger fires. Never claim to have switched models yourself.
+Follow the rules in the token-harness skill. Start every task reply with the D36 routing line (above), and remind the owner about the manual steps (`/clear`, `/context`, `/mcp`, plan mode, edit-message) when their trigger fires. Never claim to have switched models yourself.
 
 ## Precedence
 

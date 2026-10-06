@@ -62,7 +62,7 @@ __pycache__/
 *.tmp
 *.bak*
 out/
-_archive/
+/_archive/
 .claude/settings.local.json
 desktop.ini
 Thumbs.db

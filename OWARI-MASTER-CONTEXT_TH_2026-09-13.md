@@ -29,7 +29,7 @@
 - **OWARIN STORE** — ร้านหนังสือไกด์บุ๊กเกม/นิตยสารญี่ปุ่นมือสอง ขายผ่าน Facebook + Shopee
 - ลูกค้า ads ที่มีประวัติ: chubbygirlbkk (แฟชั่นไทย), JIN COFFEE&ROASTED, Chanathip Wat (Meta)
 - สแตกเครื่องมือจริง: **Claude Cowork** (วางแผน) + **Claude Code** (ลงมือโค้ด) + **ChatGPT/Codex** · กำลังพิจารณา Antigravity สำหรับ UI design
-- เครื่องทำงาน: `desktop-45q3cr4` (Windows, VS Code, OneDrive)
+- เครื่องทำงาน: `desktop-45q3cr4` (Windows, VS Code; OneDrive removed 2026-10-07 — no cloud backup)
 
 ---
 
@@ -112,7 +112,7 @@
 
 ### 4.0 Router
 งานที่เข้าสายนี้: weekly deck · MoM · PoP · deep-dive · rotation · แก้สเปกในโฟลเดอร์ `Chubbygirlbkk - Shopee`
-โฟลเดอร์จริง: `C:\Users\JIN\OneDrive\Desktop\Chubbygirlbkk - Shopee`
+โฟลเดอร์จริง: `C:\Users\JIN\ads-optimizer` (since 2026-10; github owaowarin/ads-optimizer — its own rules win)
 
 ### 4.1 วิธีอ่านสเปกโดยไม่ระเบิด token
 `_specs/` รวม ~745 KB (Core 178 KB · Deep-Dive 164 KB) — **ห้ามเปิดทั้งไฟล์ ห้ามแนบเข้าแชท**
@@ -213,7 +213,7 @@ CHECKPOINT เขียน **ต่อ task ระหว่างทาง** (`-
 
 ### 4.9 แก้กฎแล้วต้องไหลครบรอบเดียว
 ① grep หาข้อความเดิมใน **ทุกไฟล์** → ② แก้ต้นทางก่อน (Core → master prompt → deep-dive → ไฟล์งวด) → ③ บันทึกว่าแก้อะไร เพราะอะไร เมื่อไร ลง **`_specs/CHANGELOG.md`** → ④ grep ซ้ำให้เหลือศูนย์ → ⑤ `python3 _engine/spec.py index` + อัปเดต runbook
-**⚠️ ไฟล์อยู่บน OneDrive** — เขียนเสร็จต้อง `grep` อ่านกลับมายืนยันเสมอ เคยมีรอบที่ exit 0 แต่เนื้อหาใหม่หายทั้งก้อน
+**⚠️ (OneDrive ถอนแล้ว 2026-10-07; กฎยังใช้)** — เขียนเสร็จต้อง `grep` อ่านกลับมายืนยันเสมอ เคยมีรอบที่ exit 0 แต่เนื้อหาใหม่หายทั้งก้อน
 **กฎในสกิล `shopee-report-rules` ต้องอัปเดตรอบเดียวกับสเปกเสมอ**
 
 ### 4.10 หลักการวิเคราะห์ข้อมูล ads
@@ -247,13 +247,13 @@ CHECKPOINT เขียน **ต่อ task ระหว่างทาง** (`-
 ## 5 · สาย B — OWARIN STORE
 
 ### 5.0 Router
-โฟลเดอร์จริง: `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE`
+โฟลเดอร์จริง: `C:\Users\JIN\owarin-store` (since 2026-10-07, B1: code + docs in git; media `C:\Users\JIN\OWARIN-DATA` via junctions; secrets `C:\Users\JIN\Documents\OWARIN-secrets`)
 โครงหลังจัดใหม่ 5 ก.ย. 2026:
 ```
 00 Docs/          HANDOFF + PLAN-* + Card Spec + Ad Visual Style Guide
 03 Apps Script/   FbAlbum.gs, RESTORE_Code.gs, Web App/ (ทั้งโฟลเดอร์)
 04 Design Tools/  studio HTML, owarin_covers.js, owarin_logo.js, owarin_card_test.mjs, logs/
-_archive/         (+ _archive/secrets/ : r2-setup.bat, cloudflare token.txt)
+_archive/         (moved out 2026-10-07 → `C:\Users\JIN\_archive\OWARIN STORE-inner-archive_*`; `cloudflare token.txt` → `C:\Users\JIN\Documents\OWARIN-secrets\owarin-store\`)
 _exports/  _r2_upload/  _fb_albums/  Shopee/   ← pipeline อยู่ที่เดิม
 ```
 `Shopee/build_shopee_upload.py` อ่าน `../_exports` — อย่าย้าย
@@ -498,8 +498,8 @@ Output: `<tag> <ตัดอะไร>. <อะไรมาแทน>. [path]` �
 
 - `/model opusplan` เป็นค่าเริ่มต้น (Opus ตอน plan mode · Sonnet ตอนอื่น)
 - ล็อกโมเดลรายโฟลเดอร์แทนการกด shift+tab เอง:
-  - `C:\Users\JIN\OneDrive\Desktop\Chubbygirlbkk - Shopee\.claude\settings.json` = `{"model":"opus"}`
-  - `C:\Users\JIN\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\.claude\settings.json` = `{"model":"sonnet"}`
+  - `C:\Users\JIN\ads-optimizer\.claude\settings.json` (path updated 2026-10-07) = `{"model":"opus"}`
+  - `C:\Users\JIN\owarin-store\.claude\settings.json` (path updated 2026-10-07) = `{"model":"sonnet"}`
   - `C:\Users\JIN\.claude\settings.json` = model `opusplan` + `env CLAUDE_CODE_SUBAGENT_MODEL=haiku`
 - `OWARIN STORE\.claude\settings.local.json` เดิมมี permissions.allow ของคำสั่ง PowerShell — **ห้ามเขียนทับ**
 - **`.claude/` เขียนได้จากเครื่อง OWARI เท่านั้น** — remote tool ฝั่ง Cowork ถูกบล็อก ("Writing to .claude is not permitted via remote tools")
