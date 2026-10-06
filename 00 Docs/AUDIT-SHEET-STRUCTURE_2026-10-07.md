@@ -28,7 +28,7 @@ Gives per tab: real data rows, trailing blanks, formula cells + R1C1 patterns, h
 ## 4. Phase 3 — plan (after JSON)
 One plan file with: target tab list, per-tab action, order (backup → archive copies → code release if needed → delete), dry-run log per step, UNDO. Expected outcome stated honestly: fewer tabs and lighter recalculation; Add speed comes from v44 code changes.
 
-## 5. Apps Script tools (menu 📦 Inventory Tools + web TOOLS tab) — proposal, waits owner approval
+## 5. Apps Script tools (menu 📦 Inventory Tools + web TOOLS tab) — APPROVED 2026-10-07 (TOOLS-MENU-1), not yet coded
 Owner 2026-10-07: "tools" = Apps Script menu/functions. Removal = drop the menu item + web TOOLS button (+ dead function) in one code release; nothing in the Sheet changes.
 
 | Tool (function) | Evidence | Proposal |
