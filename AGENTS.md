@@ -6,6 +6,8 @@ Read `OWARI-MASTER-CONTEXT_EN_2026-09-13.md` in this folder before starting any 
 
 ## Every task
 
+0. **Folder switch pending (B1-F, owner 2026-10-07):** at the start of the first session in this project, BEFORE any work, remind the owner once, in Thai: (a) VS Code → **File** → **Open Folder...** → `C:\Users\JIN\owarin-store` → **Select Folder** → **Yes, I trust the authors**; (b) Claude Desktop → choose `C:\Users\JIN\owarin-store` instead of the old folder; (c) delete only old OWARIN STORE shortcuts on the Desktop, never the `owarin-store` folder; (d) refresh the R2 backup when there are new photos: `C:\Users\JIN\ads-optimizer\tools\pc\b1-backup-r2.ps1 -Apply`. After the owner confirms (a)+(b), delete this item 0 and log it.
+
 1. Reply in Thai. Lead with the answer, no preamble, prose, ≤3 sentences unless detail is needed.
 2. This workspace is Stream B (OWARIN STORE). Stream A (Ads Optimizer) lives in `C:\Users\JIN\ads-optimizer` with its own rules; do not work on it from here. Name the master-context sections that apply **before** doing work.
 3. Never fabricate facts, sources, or claim work was done that was not done.

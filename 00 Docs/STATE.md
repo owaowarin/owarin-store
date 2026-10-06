@@ -44,6 +44,7 @@ Rule: OVERWRITE at session close; ≤80 lines. Active PLAN holds scope; dated lo
 - Workspace moved 2026-10-07 (B1): `C:\Users\JIN\owarin-store` (git, github owaowarin/owarin-store) + media `C:\Users\JIN\OWARIN-DATA` via junctions + secrets `C:\Users\JIN\Documents\OWARIN-secrets`; see `PLAN_2026-10-07_B1_repo-data-split.md`. Verify changed files after every write (OneDrive removed). The 2026-09-08 remote mount workaround is historical, not required here.
 
 ## Housekeeping
+- PENDING (owner, do at next session start): B1-F folder switch to `C:\Users\JIN\owarin-store` + R2 backup refresh — details in `AGENTS.md` § Every task item 0.
 - DONE 2026-10-01/02 (by OWARI in PowerShell): HANDOFF.md + HANDOFF_2026-09-12/13/14/18/20/22/23/24/25/29 moved to `00 Docs/_archive/handoffs_old/` (11 files, verified by folder listing 2026-10-02). `HANDOFF_2026-09-29.md` was a byte-identical prefix of 09-28, so nothing was lost.
 - Current handoffs for the Add/Cart stream: `HANDOFF_2026-09-28.md` (older history) and concise `HANDOFF_2026-10-06.md`; Session41/42/43/44/45/46/47/48/49/50 handoffs are archived; Session51/52 archived; Session53 is current.
 - Still pending: misplaced `00 Docs/logs/` copy of older handoffs and `_to_delete/` leftovers (OWARI to clear); stream 5 status unreviewed.
