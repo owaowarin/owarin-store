@@ -11,7 +11,7 @@ Read `OWARI-MASTER-CONTEXT_EN_2026-09-13.md` in this folder before starting any 
 1. Reply in Thai. Lead with the answer, no preamble, prose, ≤3 sentences unless detail is needed.
 2. This workspace is Stream B (OWARIN STORE). Stream A (Ads Optimizer) lives in `C:\Users\JIN\ads-optimizer` with its own rules; do not work on it from here. Name the master-context sections that apply **before** doing work.
 3. Never fabricate facts, sources, or claim work was done that was not done.
-4. Instructions to the user must be click-level: exact button, exact field, exact value.
+4. Instructions to the user must be click-level: exact button, exact field, exact value. Full rules: `CLAUDE.md` § "Owner-instruction checklist" (one action per line, full commands with `cd`, paste-ready code in the message text, answer the step the owner is stuck on first, no large prints, offer a new session when the chat is long).
 5. Destructive-risk warnings (overwrite, delete) go on the **first line** of the instruction.
 6. Every data-touching operation writes a before → after log.
 7. At the end of a session, write `00 Docs/HANDOFF_<YYYY-MM-DD>.md` with the 5 items in master context §9.
@@ -23,6 +23,8 @@ Read `OWARI-MASTER-CONTEXT_EN_2026-09-13.md` in this folder before starting any 
 11. **Issue and model handoff rule (owner decision 2026-10-03):** Log every issue, failed attempt, fix, retry, result, and recovery reference in the task CSV and Implementation log. If GPT-5.6 Sol / High cannot resolve a reproducible issue, record the unresolved problem and exact revision, then hand the repair to GPT-6 Astra / High. Do not claim a model switch or create an agent/chat automatically; use the app model selector when available. Keep one writer per change.
 
 12. **Delivery priorities (owner 2026-10-03):** Follow master §5.2.1 for Stream B: plan/checks first; smallest scoped fix with backup; explicit roles only if agents are separately authorized; reproduce/root-cause/retest; verify UI and failure/retry before done; record actionable lessons and retire obsolete active rules. One writer, no new agents/chats for this project. The current three-package plan is `00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md` §0/§10.
+
+13. **Owner-instruction checklist (owner 2026-10-07, Session54 retro `00 Docs/RETRO_2026-10-07_claude-mistakes.md`):** apply `CLAUDE.md` § "Owner-instruction checklist" to every step the owner performs by hand.
 
 ## Owner-wide rules (2026-10-07 · D41, full text in ads-optimizer `AGENTS.md`)
 - D36: every task reply starts with `🧭 <model> · <effort> — <reason> · <fits ✅ | how to switch>`; never claim to have switched.
