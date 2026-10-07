@@ -8,6 +8,7 @@
 3. **Evidence before questions.** Before asking the owner about files, folders, photos, sheet or app state, search repo evidence: `04 Design Tools/logs/` (plan/result CSVs, `image-inventory-cache.json`), `_logs/` (B1 moves, sheet-audit JSON), `decisions_*.csv`, HANDOFF. Tell the owner what it says and its date; ask only what the cloud cannot see. A CLOSED decision is never re-asked.
 4. **Owner step = one command that produces evidence** (read-only / dry-run, full line in the chat). At most ONE question or ONE action per message.
 5. **Owner says "not found / unclear" or is frustrated:** stop, re-read the evidence, answer only that point with one concrete step, log the miss in `_logs/INCIDENTS.csv` in the same turn.
+7. **AI does it first (owner 2026-10-07, repeat miss):** if a Meta/R2/git tool can do it (e.g. an ad error → create a new ad/creative with the fix and delete the superseded draft), do it and report; send the owner to a UI only when no tool can, and say why.
 6. **Handoff out:** write `prompts/<task>.md` from `prompts/_TEMPLATE_handoff.md`, commit + push, give the owner one paste line that names the branch.
 
 ## 2. Token budget (owner: effective, value-for-money tokens)
