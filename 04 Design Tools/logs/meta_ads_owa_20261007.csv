@@ -22,3 +22,9 @@ timestamp_bkk,step,action,object_level,object_id,object_name,field,before,after,
 2026-10-07 11:10,S4,ACTIVATE,campaign,120248381934380018,07OCT2026 : sub-owa,status,DRAFT,ACTIVE (live; delivery inactive no_ads),owner "go",OK
 2026-10-07 11:10,S4,ACTIVATE,adset,120248381940540018/120248381940920018/120248381941490018,3 ad sets,status,DRAFT,ACTIVE ฿100/day each (no_ads),owner "go",OK
 2026-10-07 11:10,S4,ACTIVATE,ad,120248382228780018/120248382229660018/120248382223040018,3 v4 ads,status,DRAFT,still DRAFT after 2 publish attempts + 2 min; no error returned (API earlier said these posts are not owned by the Page),owner "go",ERROR:publisher did not create the ads
+2026-10-07 11:17,S4,READ-CHECK,ad,v4 ads + 6 deleted drafts,9 draft ads,owner UI publish,,owner screenshot: 3 v4 = Permissions error (album posts not promotable by this ad account); 6 = Invalid ad group status (drafts set DELETED by Claude),owner chat,ERROR:not published
+2026-10-07 11:17,S4,CHECK,account,764423867382929,Shonen Star Studio,amount_spent today,,no spend / no impressions returned,live read,OK (฿0)
+2026-10-07 11:17,S4,CREATE,creative,28530110309976911,07OCT2026 : catalog GGB-MAG carousel,all,(none),Advantage+ catalog carousel; product set All Products 2506277376475857; CTA MESSAGE_PAGE→Messenger; Thai primary text,owner "กูอนุมัติทุกอย่าง",OK
+2026-10-07 11:17,S4,CREATE+ACTIVATE,ad,120248382347130018,07OCT2026 : catalog carousel - retro A,status,(none),ACTIVE; delivery pending (review),owner approval,OK
+2026-10-07 11:17,S4,CREATE+ACTIVATE,ad,120248382367340018,07OCT2026 : catalog carousel - retro B,status,(none),ACTIVE; delivery pending (review),owner approval,OK
+2026-10-07 11:17,S4,CREATE+ACTIVATE,ad,120248382367780018,07OCT2026 : catalog carousel - console,status,(none),ACTIVE; delivery pending (review),owner approval,OK
