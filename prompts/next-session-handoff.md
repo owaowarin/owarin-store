@@ -1,25 +1,38 @@
-# Next session — full context handoff (written 2026-10-07 by Sonnet; start with Sonnet medium)
-Read `CLAUDE.md` (incl. § Owner-instruction checklist — obey it), `00 Docs/STATE.md`, `00 Docs/HANDOFF_2026-10-07.md` (last 3 sections), `00 Docs/AUDIT-SHEET-STRUCTURE_2026-10-07.md` §7–8. Owner style: Thai, short numbered click-level steps, ONE action per line, full commands (always `cd <path>` first), name files by full PC path, paste-ready code goes IN THE CHAT (tool output is collapsed for the owner), never ask for screenshots of long text. Check every instruction against the real screen/file before saying it. Owner is frustrated by vague steps — be literal.
+# 4 photos to R2 → v44 deploy — handoff (written 2026-10-07 by Opus, Session55)
+- **Branch:** `claude/peaceful-brown-1o4cc8`
+- **Model to start:** Sonnet · medium for the photo steps — switch to Opus · high at step 3 (v44 review)
+- **Read first:** `CLAUDE.md` § Session protocol, `00 Docs/STATE.md`, `00 Docs/HANDOFF_2026-10-07.md` § Session55
 
-## State (2026-10-07)
-- v43 LIVE = Version 7 (PASS owner-confirmed). v44 candidate built + tested in repo, NOT deployed: packet `04 Design Tools/logs/V44-ADD-PERF-20261007-01/`, prompt `prompts/v44-review-and-deploy.md` (Opus review first, then owner paste Code.gs ← Code_v44.gs, webapp.gs ← WebApp_v44.gs → Deploy → expect Version 8).
-- Add speed baseline (before Step A, owner-measured in Executions): `api` Add = 3.588 s.
-- Sheet audit done (`_logs/sheet-audit_2026-10-07_0651.json`). AUDIT §8 Step A approved (SHEET-A-1): owner has done the Refresh Meta feed check; UNKNOWN which of Step A items 3–7 are done → ASK the owner first, one line.
-- Refresh Meta feed result: 1,129 ready (unchanged), 4 Instock products have NO photo on R2: OWA-GGBB026INBR01 Breath of Fire V：Dragon Quarter (RESTOCK-01); OWA-GGBY025YKAN00 and OWA-GGBY025YKAR01 Yu-Gi-Oh! GX：Tag Force Evolution (+RESTOCK-01); OWA-MAGH075AMAR01 HOBBY SEXY 1999 - 01 (RESTOCK-01).
+## Known facts (do NOT ask the owner again)
+| Fact | Source file | Date of evidence |
+|---|---|---|
+| v43 live = Version 7 (owner PASS); v44 built + tested, NOT deployed | STATE.md, `04 Design Tools/logs/V44-ADD-PERF-20261007-01/` | 2026-10-07 |
+| AUDIT §8 Step A items 3–7 done (tabs, `R2 IMAGES`!A2, named range) | owner reply "1-6 เป็นตามที่บอก" | 2026-10-07 |
+| Add duration after Step A: 11.796 s (cold) / 3.852 s vs 3.588 s before → no gain; speed fix = v44 | `04 Design Tools/logs/step-a-add-duration_20261007.csv` | 2026-10-07 |
+| Refresh Meta feed: 1,129 ready; 4 Instock PIDs have no R2 photo: OWA-GGBB026INBR01, OWA-GGBY025YKAN00, OWA-GGBY025YKAR01, OWA-MAGH075AMAR01 | HANDOFF_2026-10-07 | 2026-10-07 |
+| Local photos existed: `GGB - GAME GUIDE BOOKS\Breath of Fire V：Dragon Quarter (RESTOCK-01)\` (2 jpg); `Hobby\Hobby Model\HOBBY SEXY 1999 - 01 (RESTOCK-01) (1).jpg`; Yu-Gi-Oh has two folders `Yu-Gi-Oh! GX：Tag Force Evolution` and mis-spaced `Yu-Gi-Oh! GX ：Tag Force Evolution`, and NO `(RESTOCK-01)` folder | `04 Design Tools/logs/image-inventory-cache.json` | 2026-09-25 (may be stale; owner says names may have been edited) |
+| Photo library moved in B1: `C:\Users\JIN\OWARIN-DATA\All Products` (= `C:\Users\JIN\owarin-store\All Products`) | `_logs/B1_moves_2026-10-07_024209.csv` #5, #30 | 2026-10-07 |
 
-## Owner's open question (answer first, literally)
-"Where is the photo folder?" Real answers from code/docs (verify with owner's screen, do not guess): new photos land in `C:\Users\JIN\Downloads` (loose files), `04 Design Tools\new-arrivals-to-folders.ps1` (dry-run first) moves them into `C:\Users\JIN\owarin-store\All Products\All - GGB\<category folder>\` (junction → `C:\Users\JIN\OWARIN-DATA\All Products`); folder/file names must equal sheet `Item name` letter for letter (full-width ： kept). Magazines use the magazine folders per `00 Docs/IMAGE-LIBRARY-RULES.md`. Then `.\upload-missing-r2.ps1` (dry-run) → `-Commit` → last line `read-back identical: True` → Refresh Meta feed again → expect 1133 ready.
+## Unknown — cloud cannot see it
+- Which of the 4 PIDs the uploader can bind to a folder now → owner runs the dry-run below; read the `=== Plan ===` block and the plan CSV path it prints (owner commits that CSV if detail is needed).
 
-## Owner's pending list (owner pasted it 2026-10-07 as "what is still open" — work these first, one step at a time)
-1. Step A item 8 (test): web app REFRESH loads normally; Inventory Tools → 🚀 Refresh Meta feed → popup first line `✅ Every Instock product is in the feed (N)`. Already observed once: 1,129 ready (= before), only ⚠️ = 4 products without R2 photo (not caused by Step A).
-2. Step A item 9: Add one real item, read Executions → Function `api` → Duration; compare with baseline 3.588 s.
-3. Step A item 10: owner says "ขั้น A เสร็จ" + Duration before/after. Items 3–7 status unknown → verify by asking the owner to look at the tab bar (are `FB: ALBUM CAPTION BACKUP 2026-10-04`, `FB ALBUM CAPTION BACKUP 2026-10-04`, `TYPE LIST` gone? is `R2 IMAGES`!A2 empty? named range `A633BZ1` gone?).
-4. Do NOT delete `R2 JOBS` / `IMAGE UPLOADS` until v44 is live.
-5. 4 products without R2 photo (Breath of Fire V：Dragon Quarter (RESTOCK-01); Yu-Gi-Oh! GX：Tag Force Evolution + (RESTOCK-01); HOBBY SEXY 1999 - 01 (RESTOCK-01)): check photo folders (names = Item name exactly) → if missing run `new-arrivals-to-folders.ps1` dry-run first → `cd "C:\Users\JIN\owarin-store\04 Design Tools"` → `.\upload-missing-r2.ps1` (plan must list the 4) → `.\upload-missing-r2.ps1 -Commit` → last line `read-back identical: True` → Refresh Meta feed → expect `✅ … (1133)`.
+## First owner action (exactly one)
+```
+cd "C:\Users\JIN\owarin-store\04 Design Tools"; .\upload-missing-r2.ps1
+```
+Owner pastes the lines under `=== Plan ===`.
 
-## Next, in order
-1. Ask owner: Step A items done? + Add Duration after (compare 3.588 s). Give remaining Step A steps one at a time if needed. Do NOT delete R2 JOBS / IMAGE UPLOADS yet.
-2. Help owner get the 4 photos uploaded (above).
-3. Switch to Opus · high for `prompts/v44-review-and-deploy.md`, then deploy Version 8, then Step B/C per AUDIT §8 (delete R2 JOBS, IMAGE UPLOADS, FB CATALOGUE legacy columns, empty columns) with backup file first.
-4. FB Album autopost is PARKED (decision FBA-PARK-1) — do not touch.
-Log every mistake/correction in `_logs/INCIDENTS.csv`; owner decisions in `decisions_2026-10-07.csv`.
+## Then, in order
+1. If the plan lists UPLOAD for all 4 → `.\upload-missing-r2.ps1 -Commit` → last line must read `read-back identical: True`.
+2. If a PID shows SKIP / BINDING-ERROR → fix the folder name to equal the sheet `Item name` letter for letter (likely Yu-Gi-Oh `GX ：` → `GX：`, and a `(RESTOCK-01)` folder) — give the owner one rename at a time, never overwrite; re-run the dry-run. Done when the dry-run lists the 4 as UPLOAD.
+3. 📦 Inventory Tools → 🚀 Refresh Meta feed → first popup line `✅ Every Instock product is in the feed (1133)`.
+4. Switch to Opus · high → `prompts/v44-review-and-deploy.md` → owner pastes Code.gs + webapp.gs → Deploy → Version 8 → owner adds 1 item, reports `api` Duration vs 3.588 s.
+5. Then AUDIT §8 Step B/C (backup file first).
+
+## Do not
+- Delete `R2 JOBS` / `IMAGE UPLOADS` before v44 is live.
+- Touch FB Album autopost (FBA-PARK-1, parked).
+- Send the owner to the Desktop or ask them to "look for" files the cache or a dry-run can show.
+
+## Paths (post-B1)
+- Repo `C:\Users\JIN\owarin-store` · photos `C:\Users\JIN\OWARIN-DATA\All Products` · tools `C:\Users\JIN\owarin-store\04 Design Tools` · Desktop\etc path is dead.

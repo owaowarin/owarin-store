@@ -26,6 +26,8 @@ Read `OWARI-MASTER-CONTEXT_EN_2026-09-13.md` in this folder before starting any 
 
 13. **Owner-instruction checklist (owner 2026-10-07, Session54 retro `00 Docs/RETRO_2026-10-07_claude-mistakes.md`):** apply `CLAUDE.md` § "Owner-instruction checklist" to every step the owner performs by hand.
 
+14. **Session protocol (owner 2026-10-07, Session55 retro):** before the first reply run `CLAUDE.md` § "Session protocol" (find the named file on every branch, evidence before questions, one dry-run command per owner step, post-B1 paths); handoffs use `prompts/_TEMPLATE_handoff.md`.
+
 ## Owner-wide rules (2026-10-07 · D41, full text in ads-optimizer `AGENTS.md`)
 - D36: every task reply starts with `🧭 <model> · <effort> — <reason> · <fits ✅ | how to switch>`; never claim to have switched.
 - D37: OneDrive is gone and there is no cloud backup; anything not pushed to GitHub exists once.

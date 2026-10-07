@@ -2,6 +2,17 @@
 
 **Rules version 2026-10-07 · D41** — router and owner-wide rules: `AGENTS.md` (§ Owner-wide rules).
 
+## Session protocol — run this BEFORE the first reply (added 2026-10-07 · S55, owner order after Session55 retro)
+
+Why: Session55 lost several owner round-trips (handoff file on another branch, 7 questions at once, owner sent to `Downloads` and to the dead Desktop path although repo evidence already showed where the photos were). Steps:
+1. **Find the file.** If the owner names a file that is not in the working tree, run `git fetch origin` and search every remote branch (`git ls-tree -r --name-only origin/<branch>`); check out the branch that has it. Never reply "file not found" before this.
+2. **Read** `CLAUDE.md`, `00 Docs/STATE.md`, then the handoff prompt. A handoff in the format of `prompts/_TEMPLATE_handoff.md` lists known facts; do not re-ask them.
+3. **Evidence before questions.** Before asking the owner anything about files, folders, photos, sheet or app state, search the repo evidence first: `04 Design Tools/logs/` (plan/result CSVs, `image-inventory-cache.json`), `_logs/` (B1 moves, sheet-audit JSON), decisions CSVs, HANDOFF. Tell the owner what the evidence says and its date; ask only for what the cloud cannot see.
+4. **Owner step = one command that produces evidence.** Prefer a read-only / dry-run command (full line, `cd "<full path>"` first, in the chat) whose output answers the question, over "go and look for X". At most ONE question or ONE action per message.
+5. **Paths after B1 (2026-10-07).** Never send the owner to `...\Desktop\etc\OWARIN\...` (dead). Photo library = `C:\Users\JIN\OWARIN-DATA\All Products` (same as `C:\Users\JIN\owarin-store\All Products`, junction); new photos inbox = `C:\Users\JIN\Downloads` (default `-SourceDir` of `new-arrivals-to-folders.ps1`); tools = `C:\Users\JIN\owarin-store\04 Design Tools`. When the owner asks "where is X", answer with the full path AND say the old Desktop path is gone.
+6. **Owner frustrated or says "not found / unclear".** Stop, re-read the evidence, and answer only that point with one concrete step (§ Owner-instruction checklist item 4). Log the miss in `_logs/INCIDENTS.csv` in the same turn.
+7. **Handoff out.** Write the next prompt from `prompts/_TEMPLATE_handoff.md`, commit and push it, and give the owner one paste line that includes the branch: `git checkout <branch>` then `ทำตาม prompts/<file>.md`.
+
 ## Layout (B1, 2026-10-07)
 
 Layout since B1 (2026-10-07, `PLAN_2026-10-07_B1_repo-data-split.md`): code + docs = this repo `C:\Users\JIN\owarin-store` (github owaowarin/owarin-store, private) · media/data = `C:\Users\JIN\OWARIN-DATA` (reached through junctions of the same names in this folder: `All Products`, `_r2_upload`, `GGB Online Files`, `_fb_albums`, `Supplier`, `_exports`, `Facebook - Catalouge Project`) · secrets = `C:\Users\JIN\Documents\OWARIN-secrets` (Google key: `owarin-store\credential\owarin-store-api-3588e4e975d7.json` → pass it to `--credentials`; never open, print or commit a secret) · web repo `C:\Users\JIN\owarin-retro-guides_1` (on hold) · LAB `C:\Users\JIN\owarin-back-house-lab` (separate project, own repo). The old `...\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE` path is dead.
