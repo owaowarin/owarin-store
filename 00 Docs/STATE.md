@@ -19,9 +19,9 @@ Rule: OVERWRITE at tier-L close; ≤ 80 short lines; per stream = status, ONE ne
 ## 3. Shopee relisting — 584 listings LIVE (2026-10-02)
 - Next ONE: reconcile 64 old listings vs build (needs owner's Mass Update Sales Info export). Other opens: archive STATE §3; plan `00 Docs/PLAN-shopee-relisting.md`.
 
-## 4. OWA Facebook ads — PARKED
-- Resume only on owner "go" after D1 budget, D2 posts, D3 break-even. Plan `00 Docs/PLAN-OWA-META-ADS_2026-09-25.md`.
-
+## 4. OWA Facebook ads — ROUND 1 DRAFTED (2026-10-07)
+- Campaign `07OCT2026 : sub-owa` 120248381934380018 = Ads Manager DRAFT (not live): 3 ad sets ฿100/day (GAMEMAG SPECIAL + MEGA MONTH → retro men 30–54; GGB → console men 35–54), album posts reused. Log `04 Design Tools/logs/meta_ads_owa_20261007.csv`.
+- Next ONE: owner "go" → publish the draft (ads_activate_entity on campaign + 3 ad sets + 3 ads) → read results D+3/D+7 (PLAN §6). SSS ad cannot be reactivated: its post can't be promoted (needs a new post).
 ## 4b. Sheet compaction — Step A DONE (owner, 2026-10-07)
 - Step A tabs/A2/named range removed (owner reply). Next ONE: after v44 live → AUDIT §8 Step B/C with backup first; do NOT delete `R2 JOBS` / `IMAGE UPLOADS` before v44. `00 Docs/AUDIT-SHEET-STRUCTURE_2026-10-07.md`.
 

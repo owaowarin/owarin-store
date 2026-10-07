@@ -9,10 +9,10 @@ Status: **PLANNED — nothing created in Meta yet.** Data source: Meta Ads conne
 
 | Step | What | Who | Status |
 |---|---|---|---|
-| S0 | Pre-flight reads + owner decisions D1–D3 | Sonnet asks, owner answers | TODO |
-| S1 | Owner publishes / picks 3 category posts | Owner | TODO |
-| S2 | Create campaign + 3 ad sets + ads, all **PAUSED** | Sonnet | TODO |
-| S3 | Read-back verify + preview links → owner approves | Sonnet + owner | TODO |
+| S0 | Pre-flight reads + owner decisions D1–D3 | Sonnet asks, owner answers | DONE 2026-10-07 (D1 ฿100×3, D2 album posts; D3 OPEN) |
+| S1 | Owner publishes / picks 3 category posts | Owner | DONE 2026-10-07 (GAMEMAG SPECIAL / MEGA MONTH / GGB albums) |
+| S2 | Create campaign + 3 ad sets + ads, all **PAUSED** | Sonnet | DONE 2026-10-07 as Ads Manager DRAFT, campaign 120248381934380018 |
+| S3 | Read-back verify + preview links → owner approves | Sonnet + owner | WAITING owner "go" |
 | S4 | Activate (only after owner says go) | Sonnet | TODO |
 | S5 | Read results D+3 / D+7 / D+14, apply §6 rules | Sonnet | TODO |
 | S6 | Close round: handoff + next-round proposal | Sonnet | TODO |

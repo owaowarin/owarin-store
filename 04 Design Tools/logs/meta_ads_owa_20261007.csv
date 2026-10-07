@@ -1,0 +1,10 @@
+timestamp_bkk,step,action,object_level,object_id,object_name,field,before,after,source_ref,result
+2026-10-07 10:42,SSS,ACTIVATE,ad,120247779992870018,SSS : Main Post,status,PAUSED,PAUSED (unchanged),owner "เปิดของ sss ด้วย",ERROR:Page Post Can't Be Used (post 1364294805829401 cannot be promoted)
+2026-10-07 10:42,S2,CREATE,campaign,120248381934380018,07OCT2026 : sub-owa,all,(none),DRAFT; OUTCOME_ENGAGEMENT; AUCTION; ABO,PLAN §4.1,OK
+2026-10-07 10:42,S2,CREATE,adset,120248381940540018,owa-gamemagsp-retro-07OCT2026,all,(none),DRAFT; CONVERSATIONS→MESSENGER; 10000/day; men 30-54; retro flexible_spec (A2); FB only; A+A off,PLAN §4.2 A2,OK
+2026-10-07 10:42,S2,CREATE,adset,120248381940920018,owa-megamonth-retro-07OCT2026,all,(none),DRAFT; same as gamemagsp,PLAN §4.2 A2,OK
+2026-10-07 10:42,S2,CREATE,adset,120248381941490018,owa-ggb-console-07OCT2026,all,(none),DRAFT; CONVERSATIONS→MESSENGER; 10000/day; men 35-54; Console gamers (A3); FB only; A+A off,PLAN §4.2 A3,OK
+2026-10-07 10:42,S2,CREATE,ad,120248381944650018,07OCT2026 : Album - GAMEMAG SPECIAL,creative,(none),copy of ad 120247779856270018; post 676297058896868_122195757602903319,PLAN §4.3,OK
+2026-10-07 10:42,S2,CREATE,ad,120248381945060018,07OCT2026 : Album - MEGA MONTH,creative,(none),copy of ad 120247779856260018; post 676297058896868_122195949386903319,PLAN §4.3,OK
+2026-10-07 10:42,S2,CREATE,ad,120248381946050018,07OCT2026 : Album - GGB,creative,(none),copy of ad 120247779760480018; post 676297058896868_122196116996903319,PLAN §4.3,OK
+2026-10-07 10:42,S2,READ-CHECK,adset,120240126787570018,owa-retrogaming (reference),targeting,,4 retro interest IDs still resolve,PLAN §4.2,OK
