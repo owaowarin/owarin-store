@@ -12,8 +12,8 @@ Rule: OVERWRITE at tier-L close; ≤ 80 short lines; per stream = status, ONE ne
 
 ## 2. Meta feed / R2 images — v30 pipeline LIVE
 - Nightly `refreshMetaFeedAuto` 04:00–05:00 +07 → REFRESH LOG; Meta pulls ~05:50. One catalogue `OWARIN STORE` (1993212747992458, feed 1048143251023664). Procedure: LESSONS L5.
-- 2026-10-07 manual refresh: 1,129 ready; 4 Instock PIDs without R2 photo: OWA-GGBB026INBR01, OWA-GGBY025YKAN00, OWA-GGBY025YKAR01, OWA-MAGH075AMAR01 (cache evidence + steps in `prompts/next-session-handoff.md`).
-- Next ONE: owner runs `upload-missing-r2.ps1` dry-run → fix names if SKIP → `-Commit` → Refresh → expect 1,133.
+- 2026-10-07 4 photos DONE (owner dry-run + -Commit): the 4 PIDs were PID changes, so R2 folders were copied from the old PIDs (`rclone` verified 4/4; index 2060 PIDs, read-back identical True). Refresh Meta feed popup (owner): "Every Instock product is in the feed (1131)" — handoff expected 1133; Instock count drifts, difference of 2 unexplained (OPEN, small). Log `04 Design Tools/logs/r2-pid-copy_20261007.csv`.
+- Next ONE: none for R2 photos; nightly refresh continues. Optional: compare 1131 vs 1133 in REFRESH LOG.
 - Old open smalls (catalog count lag, all-caps titles): archive STATE §2.
 
 ## 3. Shopee relisting — 584 listings LIVE (2026-10-02)

@@ -1,0 +1,5 @@
+timestamp,actor,action,count,result
+2026-10-07 10:08,owner,upload-missing-r2.ps1 dry-run,4,R2COPY PID_CHANGED 4; upload 0
+2026-10-07 10:10,owner,upload-missing-r2.ps1 -Commit (R2 copy from old PIDs),4,rclone exit 0; verified on R2 4/4
+2026-10-07 10:11,owner,R2 index rebuild (_r2_upload/images.csv),2060,read-back identical True; backup _r2_backup/20261007-101047
+2026-10-07,owner,Refresh Meta feed popup,1131,"Every Instock product is in the feed; expected 1133 per handoff, not reconciled"
