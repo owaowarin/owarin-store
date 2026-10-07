@@ -735,3 +735,12 @@ Issues retained: the first loopback capture corrupted a multibyte character at a
 Evidence `04 Design Tools/logs/W1-SUBSIDY0-20261006-01/`: revision, source-verification, regression-results/root-regressions, ui-smoke.json, deployment-before/after, ui.png/deploy.png, changes.csv and before/native original three sources. Full old root pair in Web App/backup/pre-v42-20261006 with41stubs; before/ docs/Index/tests retained. UNDO.md returns runtime toVersion5 without restoring any data. Session51 private Sheet/source/data backup remains available; never overwrite later business history with it.
 
 Next ONE: owner refreshes the old web tab once and re-adds unsaved Cart items, then uses normal Create order; default0 applies automatically and may be edited for actual shop contribution. Observe a real owner transaction rather than synthesizing one.
+
+## Session54 — DNA/UX v43 (2026-10-07)
+
+Revision: see `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/revision.json` (base W1-SUBSIDY0 v42@AD586F22…). Steps: S1 pair bump + stubs + backup; A1 W2LabelUI fallbacks; A2 Arial exception documented; B1–B6 Index.html CSS/JS; T1 tests.
+Issue: plan CSS `.bad{outline…}` did not render (input rules carry `outline:none` with higher specificity) → found by `bad-check.cjs`, fixed CSS-only with `!important` (`fix1.py`); money logic untouched.
+Tests PASS: Index, R2Upload, fb-catalogue, image-url, meta-pipeline, p1-add, p1-ui, dna-ux, subsidy (re-pointed), regression (re-pointed). Harness phone+desktop 0 JS errors; brand 28 px, count 14 px, all phone buttons ≥36 / inputs ≥40 (inventory view).
+Leftover: Cart row remove button `.cl-rm` (✕) is 23 px tall on phone (outside plan B5 scope).
+Live /exec unchanged until owner deploys Version 7; PASS only by owner confirmation.
+Opus pre-release review: fix2 (order-saved toast hidden by B3 → showView before okToast) and fix3 (selected last nav tab under fade mask) — CSS/JS UI only; final revision WEBAPP-DNA-UX-20261007-01/v43@4F23D01DBD71B5D5E363AD48678E27C2E59B284CA9013848DD67B484D47C3F52; all tests PASS.

@@ -1,0 +1,10 @@
+const path=require('path');const {chromium}=require('/opt/node-tools/node_modules/playwright');
+(async()=>{const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium-1194/chrome-linux/chrome'});const pg=await b.newPage({viewport:{width:390,height:844}});
+await pg.goto('file://'+process.argv[2]+'/page.html');await pg.waitForTimeout(1200);
+await pg.locator('button:has-text("Add to cart")').nth(0).click();await pg.click('nav >> text=CART');await pg.waitForTimeout(300);
+await pg.fill('#cShipShop','');await pg.click('button:text-is("Create order")');await pg.waitForTimeout(300);
+console.log(JSON.stringify(await pg.$eval('#cShipShop',e=>({cls:e.className,outline:getComputedStyle(e).outline,focused:document.activeElement===e}))));
+await pg.fill('#cShipShop','0');console.log('after typing',await pg.$eval('#cShipShop',e=>e.className));
+await pg.fill('.cl-price','abc');await pg.click('button:text-is("Create order")');await pg.waitForTimeout(300);
+console.log('price',JSON.stringify(await pg.$eval('.cl-price',e=>({cls:e.className,focused:document.activeElement===e}))),await pg.$eval('#toast',e=>e.textContent));
+await pg.screenshot({path:process.argv[2]+'/f5-bad-price.png'});await b.close();})();

@@ -1,5 +1,5 @@
 // Regression test: buildFbCatalogue() must fill the Meta block from the inventory.
-// Loads Code_v42.gs THEN R2Upload.gs into one context -- the same way Apps Script
+// Loads Code_v44.gs THEN R2Upload.gs into one context -- the same way Apps Script
 // concatenates project files -- so a helper redefined in R2Upload.gs (the 2026-09-23
 // incident: _resolveColumns/_val/_tryWrite overridden) fails this test.
 // Run: node fb-catalogue.test.js
@@ -43,7 +43,7 @@ const ctx = {
   Logger: { log() {} }, console
 };
 vm.createContext(ctx);
-vm.runInContext(fs.readFileSync(__dirname + "/Code_v42.gs", "utf8"), ctx);
+vm.runInContext(fs.readFileSync(__dirname + "/Code_v44.gs", "utf8"), ctx);
 vm.runInContext(fs.readFileSync(__dirname + "/R2Upload.gs", "utf8"), ctx);   // loads after Code.gs, as in the project
 
 vm.runInContext("rebuildDescriptions()", ctx);   // owner runs this first (menu: Rebuild descriptions)

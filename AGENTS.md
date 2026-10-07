@@ -1,35 +1,26 @@
 # AGENTS.md — OWARIN STORE workspace (Stream B)
 
-**Rules version 2026-10-07 · D41.** Owner-wide rules come from github owaowarin/ads-optimizer `AGENTS.md` (synced to `C:\Users\JIN\.claude\CLAUDE.md` and `C:\Users\JIN\.codex\AGENTS.md`); this file holds OWARIN STORE rules only.
+**Rules version 2026-10-07 · D42.** Owner-wide rules come from github owaowarin/ads-optimizer `AGENTS.md` (synced to `C:\Users\JIN\.claude\CLAUDE.md` and `C:\Users\JIN\.codex\AGENTS.md`); this file holds OWARIN STORE rules only.
 
-Read `OWARI-MASTER-CONTEXT_EN_2026-09-13.md` in this folder before starting any task. It is the operating context for both work streams. This file is only the router; the master context holds the actual rules.
+Working rulebook = `CLAUDE.md` (session protocol, token budget, paths, owner steps, close tiers); topic lessons = `00 Docs/LESSONS.md` (by trigger). `OWARI-MASTER-CONTEXT_EN_2026-09-13.md` is background (the `_TH_` file is the owner's Thai copy; AIs never read it): read only the § a rule names (`grep -n "^#"` first), never in full (S55-RULES-1, 2026-10-07; pre-S55 copy `00 Docs/_archive/rules/AGENTS_2026-10-07_pre-S55.md`).
 
 ## Every task
 
 0. **Folder switch pending (B1-F, owner 2026-10-07):** at the start of the first session in this project, BEFORE any work, remind the owner once, in Thai: (a) VS Code → **File** → **Open Folder...** → `C:\Users\JIN\owarin-store` → **Select Folder** → **Yes, I trust the authors**; (b) Claude Desktop → choose `C:\Users\JIN\owarin-store` instead of the old folder; (c) delete only old OWARIN STORE shortcuts on the Desktop, never the `owarin-store` folder; (d) refresh the R2 backup when there are new photos: `C:\Users\JIN\ads-optimizer\tools\pc\b1-backup-r2.ps1 -Apply`. After the owner confirms (a)+(b), delete this item 0 and log it.
+1. Run `CLAUDE.md` §1 Session protocol before the first reply; budget reading per §2.
+2. Reply in Thai, answer first, ≤ 3 sentences unless detail is needed; owner steps per `CLAUDE.md` §4.
+3. This workspace is Stream B (OWARIN STORE). Stream A (Ads Optimizer) lives in `C:\Users\JIN\ads-optimizer`; do not work on it from here.
+4. Never fabricate facts, sources, or completed work. Destructive warnings on the first line.
+5. Close the session per `CLAUDE.md` §7 (tier S / M / L); a tier-L task missing an item is not finished.
+6. Delivery priorities (master §5.2.1) and the model handoff rule: `00 Docs/LESSONS.md` L1, L2. One writer; no new agents/chats unless authorized.
 
-1. Reply in Thai. Lead with the answer, no preamble, prose, ≤3 sentences unless detail is needed.
-2. This workspace is Stream B (OWARIN STORE). Stream A (Ads Optimizer) lives in `C:\Users\JIN\ads-optimizer` with its own rules; do not work on it from here. Name the master-context sections that apply **before** doing work.
-3. Never fabricate facts, sources, or claim work was done that was not done.
-4. Instructions to the user must be click-level: exact button, exact field, exact value.
-5. Destructive-risk warnings (overwrite, delete) go on the **first line** of the instruction.
-6. Every data-touching operation writes a before → after log.
-7. At the end of a session, write `00 Docs/HANDOFF_<YYYY-MM-DD>.md` with the 5 items in master context §9.
-8. Before other work, archive stale material in the stream(s) touched — see § Archive discipline.
-9. Stream B (OWARIN STORE): read `00 Docs/STATE.md` FIRST and open other files only when a STATE.md line points to them — do not browse the folder. At the end of the session OVERWRITE `00 Docs/STATE.md` (never append; ≤ 80 lines: per stream = status, ONE next step, closed decisions, pointers), keep the dated HANDOFF to one page, and put long detail in a log. Dated HANDOFF/IMPLEMENTATION files are lookup evidence only: read just the last section STATE.md points to.
-
-10. **Session-close checklist is mandatory every session** (full list: `CLAUDE.md` § "Session-close checklist"): log CSV, decisions CSV, plan board evidence, STATE.md overwrite, one-page HANDOFF, related files/README/rules/version pairs updated in the same pass, read-back verification. A task missing any item is not finished. Applies to both streams (Stream A keeps its own log location).
-
-11. **Issue and model handoff rule (owner decision 2026-10-03):** Log every issue, failed attempt, fix, retry, result, and recovery reference in the task CSV and Implementation log. If GPT-5.6 Sol / High cannot resolve a reproducible issue, record the unresolved problem and exact revision, then hand the repair to GPT-6 Astra / High. Do not claim a model switch or create an agent/chat automatically; use the app model selector when available. Keep one writer per change.
-
-12. **Delivery priorities (owner 2026-10-03):** Follow master §5.2.1 for Stream B: plan/checks first; smallest scoped fix with backup; explicit roles only if agents are separately authorized; reproduce/root-cause/retest; verify UI and failure/retry before done; record actionable lessons and retire obsolete active rules. One writer, no new agents/chats for this project. The current three-package plan is `00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md` §0/§10.
-
-## Owner-wide rules (2026-10-07 · D41, full text in ads-optimizer `AGENTS.md`)
+## Owner-wide rules (2026-10-07 · D42, full text in ads-optimizer `AGENTS.md`)
 - D36: every task reply starts with `🧭 <model> · <effort> — <reason> · <fits ✅ | how to switch>`; never claim to have switched.
 - D37: OneDrive is gone and there is no cloud backup; anything not pushed to GitHub exists once.
 - D38: chat in Thai; files, rules and skills in English.
 - D39: anything a cloud session must read from the PC comes as a file the owner commits and pushes; the owner pastes only the commit id.
 - D40/D41: plain Thai, numbered steps, one action per line, full PC paths (`C:\Users\JIN\...`), paste-ready text in the chat. Close-out: list every leftover with importance + impact, fix small ones, ask once "fix now or plan"; next prompt saved in `prompts/<task>.md`; mistakes, FAILs and owner corrections → `_logs/INCIDENTS.csv`.
+- D42 (= this repo's S55 rules): session protocol (search every remote branch before "not found"; read only rules + STATE stream + handoff; evidence before questions; one read-only/dry-run command per owner step, ≤ 1 question per message; "not found/unclear" → answer only that point + INCIDENTS), reading budget, session close tiers S/M/L, every AI-read file English, handoff template. Here: `CLAUDE.md` §1, §2, §7, `prompts/_TEMPLATE_handoff.md`.
 
 ## Code
 
@@ -61,7 +52,7 @@ Moved to its own repo `C:\Users\JIN\ads-optimizer` (github owaowarin/ads-optimiz
 
 ## Stream B — OWARIN STORE
 
-Layout since B1 (2026-10-07, `PLAN_2026-10-07_B1_repo-data-split.md`): code + docs = this repo `C:\Users\JIN\owarin-store` (github owaowarin/owarin-store, private) · media/data = `C:\Users\JIN\OWARIN-DATA` (reached through junctions of the same names in this folder: `All Products`, `_r2_upload`, `GGB Online Files`, `_fb_albums`, `Supplier`, `_exports`, `Facebook - Catalouge Project`) · secrets = `C:\Users\JIN\Documents\OWARIN-secrets` (Google key: `owarin-store\credential\owarin-store-api-3588e4e975d7.json` → pass it to `--credentials`; never open, print or commit a secret) · web repo `C:\Users\JIN\owarin-retro-guides_1` (on hold) · LAB `C:\Users\JIN\owarin-back-house-lab` (separate project, own repo). The old `...\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE` path is dead.
+Paths, junction and hard-link warnings: `CLAUDE.md` §3 (B1 plan `PLAN_2026-10-07_B1_repo-data-split.md`). Summary — layout since B1 (2026-10-07): code + docs = this repo `C:\Users\JIN\owarin-store` (github owaowarin/owarin-store, private) · media/data = `C:\Users\JIN\OWARIN-DATA` (reached through junctions of the same names in this folder: `All Products`, `_r2_upload`, `GGB Online Files`, `_fb_albums`, `Supplier`, `_exports`, `Facebook - Catalouge Project`) · secrets = `C:\Users\JIN\Documents\OWARIN-secrets` (Google key: `owarin-store\credential\owarin-store-api-3588e4e975d7.json` → pass it to `--credentials`; never open, print or commit a secret) · web repo `C:\Users\JIN\owarin-retro-guides_1` (on hold) · LAB `C:\Users\JIN\owarin-back-house-lab` (separate project, own repo). The old `...\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE` path is dead.
 ⚠️ Junctions: never delete a junction folder with `Remove-Item -Recurse` / Explorer "Delete" — it can delete the real files in OWARIN-DATA; to remove a junction use `cmd /c rmdir "<path>"`.
 ⚠️ Hard links (B1-H): identical images in OWARIN-DATA may share one copy on disk; never edit an image in place — save as a new file (every tool here already does).
 No cloud backup (OneDrive uninstalled 2026-10-07, D37): code/docs are backed up only by `git push`; commit with `C:\Users\JIN\ads-optimizer\tools\pc\b1-store-commit.ps1` (guards: size, secret names/values).
@@ -83,7 +74,7 @@ every `Code_vNN.gs`.
 
 ## Skills in this bundle
 
-Source of truth for the account skills (`token-harness`, `shopee-report-rules`, `research-relay`): github owaowarin/ads-optimizer `skills/` (synced to local copies by `tools/pc/rules-sync.ps1`). The OWARIN diagram skin and other offline copies stay in `C:\Users\JIN\Desktop\etc\OWARIN\_skills\`.
+Source of truth for the account skills (`token-harness`, `shopee-report-rules`, `research-relay`): github owaowarin/ads-optimizer `skills/` (synced to local copies by `tools/pc/rules-sync.ps1`). The OWARIN diagram skin and other offline copies were in `C:\Users\JIN\Desktop\etc\OWARIN\_skills\` (pre-B1; location after B1 UNVERIFIED — check before use).
 
 | Path under `_skills\` | Why it is here |
 |---|---|
@@ -97,5 +88,5 @@ Follow the rules in the token-harness skill. Start every task reply with the D36
 
 ## Precedence
 
-Spec files in `_specs/` > the skills > the master context > this file.
+Spec files in `_specs/` > the skills > `CLAUDE.md` + this file + `00 Docs/LESSONS.md` (newest dated rule wins) > the master context (2026-09-13 copy).
 The master context is a copy, dated 2026-09-13. When a rule changes upstream, propagate it in the same pass (master context §4.9) or this workspace will run on stale rules.

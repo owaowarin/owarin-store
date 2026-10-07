@@ -501,3 +501,7 @@ Issues retained: the first loopback capture corrupted a multibyte character at a
 Evidence `04 Design Tools/logs/W1-SUBSIDY0-20261006-01/`: revision, source-verification, regression-results/root-regressions, ui-smoke.json, deployment-before/after, ui.png/deploy.png, changes.csv and before/native original three sources. Full old root pair in Web App/backup/pre-v42-20261006 with41stubs; before/ docs/Index/tests retained. UNDO.md returns runtime toVersion5 without restoring any data. Session51 private Sheet/source/data backup remains available; never overwrite later business history with it.
 
 Next ONE: owner refreshes the old web tab once and re-adds unsaved Cart items, then uses normal Create order; default0 applies automatically and may be edited for actual shop contribution. Observe a real owner transaction rather than synthesizing one.
+
+## Session54 — DNA/UX v43 (LIVE Version 7, owner-confirmed 2026-10-07)
+
+Closed 2026-10-07 · plan `00 Docs/PLAN_2026-10-07_webapp-dna-ux.md` · packet `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`. UI-only release v43 (W2LabelUI tokens+fallbacks, phone nav/header/touch/FAB, toast hide, field-specific money errors). Live stays v42 / Version6 until owner pastes + deploys Version 7 (C1); then owner-confirms.

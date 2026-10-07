@@ -1,137 +1,116 @@
-# OWARIN — กฎคลังรูปสินค้า (Downloads → All Products)
+# OWARIN — product image library rules (Downloads → All Products)
 
-**จัดทำ:** 2026-09-12 (Saturday) · วันที่จากเครื่องผู้ใช้ (อ่านผ่านเบราว์เซอร์บนเครื่อง เพราะ `device_bash` ใช้ไม่ได้จาก Windows update 8 ก.ย.)
-**ที่มา:** เปิดอ่านโฟลเดอร์จริงทั้ง 4 หมวดใน `All Products\GGB-All` + `C:\Users\JIN\Downloads` + ชีต GAME GUIDE BOOKS สด ไม่ได้เดาจากชื่อไฟล์
-
----
-
-## 1. เส้นทางของรูป
-
-```
-C:\Users\JIN\Downloads          ← ที่พักชั่วคราว รูปใหม่ลงที่นี่ก่อน
-        ↓ (จัดโครงสร้างตามหมวด)
-All Products\GGB-All\<หมวด>\    ← คลังจริง
-        ↓ (rclone sync)
-Cloudflare R2 bucket owarin-images
-```
-
-**Downloads ไม่ใช่ปลายทาง** — `new-arrivals-to-folders.ps1` ย้ายจาก Downloads เข้า `GGB-All` **ตรง ๆ ในขั้นเดียว** ไม่ได้แวะจัดโครงสร้างใน Downloads ก่อน
-
-**ข้อจำกัดที่ต้องรู้:** สคริปต์จับเฉพาะ **ไฟล์ที่ลอยอยู่** ใน Downloads
-ถ้ามีโฟลเดอร์ที่จัดมือไว้แล้วค้างอยู่ สคริปต์จะไม่แตะ ต้องย้ายแยกอีกรอบ
+**Prepared:** 2026-09-12 (Saturday), from the owner's machine date. **English rewrite:** 2026-10-07 (S55-RULES-1); Thai original kept verbatim at `00 Docs/_archive/rules/IMAGE-LIBRARY-RULES_TH_2026-09-13_pre-S55.md`.
+**Source:** the real folders (4 categories), `C:\Users\JIN\Downloads` and the live GAME GUIDE BOOKS sheet were read; nothing guessed from file names.
+**S55 corrections (checked against code 2026-10-07):** the library roots are `All - GGB` and `All - MAGAZINE` (`image-library.ps1`, `new-arrivals-to-folders.ps1`), not `GGB-All` / `Magazine` as the 2026-09 text said; since B1 the library lives in `C:\Users\JIN\OWARIN-DATA\All Products` (same as `C:\Users\JIN\owarin-store\All Products`, junction); R2 upload = `upload-missing-r2.ps1` (never `rclone sync` on `library/`).
 
 ---
 
-## 2. โครงสร้าง 4 หมวด — ยืนยันจากของจริงแล้ว
+## 1. Image path
 
-หมวดมาจาก **คอลัมน์ `Type` ในชีต** ไม่ใช่เดาจากชื่อไฟล์หรือจำนวนรูป
+```
+C:\Users\JIN\Downloads                                  ← temporary inbox; new photos land here first
+        ↓ new-arrivals-to-folders.ps1 (by category)
+C:\Users\JIN\OWARIN-DATA\All Products\All - GGB\<category>\   ← the real library (magazines: All - MAGAZINE)
+        ↓ upload-missing-r2.ps1 (dry-run, then -Commit)
+Cloudflare R2 bucket owarin-images (library/<Product ID>/<n>.<ext>)
+```
 
-| `Type` ในชีต | โฟลเดอร์ปลายทาง | โครงสร้าง | ตัวอย่างไฟล์จริง |
+**Downloads is not a destination** — `new-arrivals-to-folders.ps1` moves files from Downloads into `All - GGB` **directly in one step**; it does not stage a structure inside Downloads.
+
+**Limitation:** the script only picks up **loose files** in Downloads. Hand-made folders left in Downloads are not touched; move them separately.
+
+---
+
+## 2. The 4 categories — verified against the real folders
+
+The category comes from the **sheet `Type` column**, never from the file name or the number of photos.
+
+| Sheet `Type` | Destination folder | Structure | Real example |
 |---|---|---|---|
-| `GAME GUIDE BOOKS` | `GGB - GAME GUIDE BOOKS` | **โฟลเดอร์ต่อเล่ม** | `Dino Crisis (RESTOCK-03)\Dino Crisis (RESTOCK-03) (1).png` |
-| `GAMEMAG TOP SECRET` | `GGB - GAMEMAG TOP SECRET` | **แบน** ไม่มีโฟลเดอร์ย่อย | `GAMEMAG TOP SECRET - Chrono Trigger (RESTOCK-01) (1).jpg` |
-| `GAMEMAG SPECIAL` | `GGB - GAMEMAG SPECIAL` | **แบน** | `GAMEMAG SPECIAL vol 05 (RESTOCK-01) (1).jpg` |
-| `GAMEMAG CHEATS & CODE` | `GGB - CHEAT & CODE` | **แบน** (ชื่อโฟลเดอร์ไม่ตรงกับ Type — ระวัง) | `GAMEMAG ฉบับสูตรเกม vol 6 (RESTOCK-02) (1).jpg` |
+| `GAME GUIDE BOOKS` | `GGB - GAME GUIDE BOOKS` | **one folder per book** | `Dino Crisis (RESTOCK-03)\Dino Crisis (RESTOCK-03) (1).png` |
+| `GAMEMAG TOP SECRET` | `GGB - GAMEMAG TOP SECRET` | **flat**, no subfolders | `GAMEMAG TOP SECRET - Chrono Trigger (RESTOCK-01) (1).jpg` |
+| `GAMEMAG SPECIAL` | `GGB - GAMEMAG SPECIAL` | **flat** | `GAMEMAG SPECIAL vol 05 (RESTOCK-01) (1).jpg` |
+| `GAMEMAG CHEATS & CODE` | `GGB - CHEAT & CODE` | **flat** (folder name differs from Type — careful) | `GAMEMAG ฉบับสูตรเกม vol 6 (RESTOCK-02) (1).jpg` |
 
-**นับรายการในชีต (2026-09-12, เฉพาะ Instock):** GAME GUIDE BOOKS 450 · GAMEMAG SPECIAL 64 · GAMEMAG CHEATS & CODE 25 · GAMEMAG TOP SECRET 20 = 559
+**Sheet count (2026-09-12, Instock only):** GAME GUIDE BOOKS 450 · GAMEMAG SPECIAL 64 · GAMEMAG CHEATS & CODE 25 · GAMEMAG TOP SECRET 20 = 559.
 
-`POCKET BOOK` ที่เคยมีใน Type **ไม่มีโฟลเดอร์รองรับใน GGB-All** ถ้าเจอต้องถามก่อน ห้ามสร้างเอง
+`POCKET BOOK`, once used in Type, **has no folder in `All - GGB`**; ask the owner first, never create one.
 
-### ⚠️ `MEGA MONTH` ไม่ใช่ `GAMEMAG SPECIAL` — คนละแท็บ คนละปลายทาง ห้ามปนกันเด็ดขาด
+### ⚠️ `MEGA MONTH` is not `GAMEMAG SPECIAL` — different tab, different destination, never mix
 
-`Type` = `MEGA MONTH` เป็นค่าที่อยู่ใน **แท็บ MAGAZINE** (นิตยสารจริง คนละสายกับแท็บ GAME GUIDE BOOKS
-ที่ 4 หมวดด้านบนสังกัดอยู่) ปลายทางไฟล์คือ **`All Products\Magazine\MEGA MONTH\` เท่านั้น**
-**ห้ามวางไฟล์ `MEGA MONTH ...` ใน `GGB-All` ไม่ว่ากรณีใด** แม้ชื่อไฟล์จะดูคล้ายรูปแบบ GAMEMAG ก็ตาม
-ดูบทเรียนข้อ 6 (รอบ 2026-09-13) — เคยปนกันมาแล้ว 156 ไฟล์
+`Type` = `MEGA MONTH` belongs to the **MAGAZINE tab** (real magazines; a different line from the GAME GUIDE BOOKS tab that owns the 4 categories above). Its destination is **only `All Products\All - MAGAZINE\…\MEGA MONTH\`**. **Never put a `MEGA MONTH ...` file in `All - GGB`**, even if the name looks like the GAMEMAG pattern. See lesson §6 (2026-09-13): 156 files were mixed once.
 
 ---
 
-## 3. กฎตั้งชื่อ
+## 3. Naming rules
 
-1. **ชื่อไฟล์/โฟลเดอร์ = ค่าในคอลัมน์ `Item name` ของชีตแบบตรงตัวอักษรต่ออักษร** ชีตคือแหล่งความจริง
-2. ทุกไฟล์ลงท้าย ` (1)` = ปกหน้า · ` (2)` = ปกหลัง **หมวดแบนก็ต้องมี ` (1)` ห้ามตัดทิ้ง**
-3. หมวด `GAME GUIDE BOOKS`: ชื่อโฟลเดอร์ = ชื่อไฟล์ตัด ` (1)` / ` (2)` ท้ายออก · **ชื่อไฟล์ข้างในไม่แตะ**
-4. **อักขระเต็มความกว้างห้ามแปลงเป็น ASCII เด็ดขาด** — `：` `／` `×` `⨯` `・` `｜` `–` `＋`
-   Windows ห้ามใช้ `:` `/` `|` ในชื่อไฟล์อยู่แล้ว ระบบจึงใช้ตัวเต็มความกว้างแทนทั้งหมด
-5. มีรูปเดียว (ไม่มี `(2)`) **ไม่ได้แปลว่าเป็นหมวดแบน** — เล่มเก่าใน `GAME GUIDE BOOKS` ที่ถ่ายแค่ปกหน้าก็มี เช่น `Dino Crisis (RESTOCK-03)`
+1. **File/folder name = the sheet `Item name` value, letter for letter.** The sheet is the source of truth.
+2. Every file ends with ` (1)` = front cover, ` (2)` = back cover. **Flat categories also keep ` (1)`; never drop it.**
+3. `GAME GUIDE BOOKS`: folder name = file name without the trailing ` (1)` / ` (2)`. **Never touch the file names inside.**
+4. **Never convert full-width characters to ASCII** — `：` `／` `×` `⨯` `・` `｜` `–` `＋`. Windows forbids `:` `/` `|` in file names, so the system uses full-width forms everywhere.
+5. A single photo (no `(2)`) **does not mean a flat category** — older GAME GUIDE BOOKS items have only a front cover, e.g. `Dino Crisis (RESTOCK-03)`.
 
-### ตัวอย่างที่พลาดได้ง่าย
-มี 2 เล่มคนละหมวดชื่อคล้ายกันมาก:
-- `Final Fantasy X-2 (RESTOCK-05)` → Type `GAME GUIDE BOOKS` → ทำโฟลเดอร์
-- `GAMEMAG TOP SECRET - Final Fantasy X-2 (RESTOCK-01)` → Type `GAMEMAG TOP SECRET` → วางแบน
-
----
-
-## 4. ขั้นตอนทำงานทุกครั้ง
-
-1. **export/อ่านชีตสด** ก่อนเสมอ ห้ามใช้ export เก่า
-2. เทียบชื่อทุกไฟล์ใน Downloads กับ `Item name` ในชีต — ต้องตรง **100%** ก่อนแตะไฟล์
-3. รันสคริปต์แบบ **dry-run** ดูตารางแผน
-4. ตรวจตารางด้วยตา แก้ทุกแถวที่ไม่ใช่ `NEW`
-5. รันจริงด้วย `-Commit` (ไฟล์เข้า `GGB-All` เลย)
-6. เช็คว่ามีโฟลเดอร์จัดมือค้างใน Downloads ไหม ถ้ามีย้ายแยก
-7. `rclone sync` ขึ้น R2
-8. อัปเดตเอกสารที่เกี่ยวข้องในรอบเดียวกัน
-
-สคริปต์: `04 Design Tools\new-arrivals-to-folders.ps1`
+### Easy-to-confuse example
+Two items in different categories with near-identical names:
+- `Final Fantasy X-2 (RESTOCK-05)` → Type `GAME GUIDE BOOKS` → make a folder
+- `GAMEMAG TOP SECRET - Final Fantasy X-2 (RESTOCK-01)` → Type `GAMEMAG TOP SECRET` → place flat
 
 ---
 
-## 5. กฎความปลอดภัย (ห้ามข้าม)
+## 4. Procedure, every time
 
-| กฎ | เหตุผล |
+1. **Export/read the live sheet** first; never use an old export.
+2. Compare every file name in Downloads with the sheet `Item name` — must match **100%** before touching files.
+3. Run the script as **dry-run** and read the plan table.
+4. Check the table by eye; fix every row that is not `NEW`.
+5. Run for real with `-Commit` (files go straight into `All - GGB`).
+6. Check for hand-made folders left in Downloads; move them separately.
+7. Upload to R2: `cd "C:\Users\JIN\owarin-store\04 Design Tools"; .\upload-missing-r2.ps1` (dry-run) → `.\upload-missing-r2.ps1 -Commit` → last line `read-back identical: True` (chain: `00 Docs/LESSONS.md` L5).
+8. Update the related documents in the same pass.
+
+Script: `04 Design Tools\new-arrivals-to-folders.ps1`
+
+---
+
+## 5. Safety rules (never skip)
+
+| Rule | Why |
 |---|---|
-| **dry-run เป็น default** ต้องใส่ `-Commit` ถึงย้ายจริง | รูปคือสินทรัพย์ ย้ายผิดแล้วตามยาก |
-| **ไฟล์ปลายทางชนชื่อ = `CONFLICT` ไม่ย้าย ห้ามเขียนทับทุกกรณี** | ชั้นเดียวที่กันข้อมูลหายจริง ๆ ที่เหลือแค่ช่วยหา |
-| ชื่อไม่ตรงชีต = `NOT-IN-SHEET` หยุด ไม่เดา | ชื่อผิดไหลลง Shopee/FB ทั้งระบบ |
-| near-duplicate ต้องเทียบข้าม **Downloads ↔ GGB-All ทั้ง 4 หมวด** | โฟลเดอร์ปลายทางอยู่คนละที่กับที่ทำงาน |
-| เขียน log CSV ต้นทาง→ปลายทางทุกรอบ | ย้อนกลับได้ |
+| **Dry-run is the default**; only `-Commit` moves files | Photos are assets; a wrong move is hard to trace |
+| **Destination name clash = `CONFLICT`, not moved; never overwrite in any case** | The only layer that truly prevents loss; the rest only helps finding |
+| Name not in the sheet = `NOT-IN-SHEET`, stop, do not guess | A wrong name flows into Shopee/FB everywhere |
+| Near-duplicates are checked across **Downloads ↔ all 4 categories in `All - GGB`** | The destination is elsewhere from the work folder |
+| Write a source → destination CSV log every run | Makes undo possible |
 
-### สถานะในตาราง dry-run
-`NEW` สร้างใหม่ · `MERGE` โฟลเดอร์มีอยู่ ไฟล์ไม่ชน · `CONFLICT` ไฟล์ชน ไม่ย้าย · `DUP?` ชื่อใกล้เคียงของเดิม · `NOT-IN-SHEET` ไม่พบในชีต · `SKIP` ไม่ใช่ไฟล์สินค้า
+### Dry-run table statuses
+`NEW` new · `MERGE` folder exists, files do not clash · `CONFLICT` file clash, not moved · `DUP?` close to an existing name · `NOT-IN-SHEET` not in the sheet · `SKIP` not a product file
 
-### วิธี normalize สำหรับหา near-duplicate
-lowercase → ตัดช่องว่างทั้งหมด → ตัด `：／｜×⨯・,.'-–—_&+()` ทิ้ง → `RESTOCK-1` กับ `RESTOCK-01` ให้นับเป็นตัวเดียวกัน
+### Normalisation for near-duplicate search
+lowercase → remove all spaces → remove `：／｜×⨯・,.'-–—_&+()` → treat `RESTOCK-1` and `RESTOCK-01` as the same.
 
-### ไฟล์ที่ต้อง SKIP เสมอใน Downloads
-`desktop.ini` · `.~lock.*#` · `*.zip` · ไฟล์ที่ชื่อไม่ลงท้าย ` (1)` / ` (2)` · ภาพถ่ายทั่วไปที่ชื่อเป็นตัวเลขล้วน เช่น `20260121_155442.jpg`
-
----
-
-## 6. บทเรียนจริงที่เคยเกิด
-
-- **ตัวคั่นเพี้ยน** — `.hack／／G.U. Vol. 1／Rebirth` (`／` เดียว) vs `.hack／／G.U. Vol. 1／／Rebirth` (`／／`) vs `.hack｜G.U. Vol. 1｜Rebirth` (`｜`) อยู่ในระบบพร้อมกันทั้ง 3 แบบ **ตัวถูกคือ `／／` ตามชีต**
-- **ลืมหาง `(1)`** — `GAMEMAG TOP SECRET - Final Fantasy X-2 (RESTOCK-01).jpg` ใน Downloads ไม่มี ` (1)` ขณะที่ทั้ง 20 ไฟล์ในโฟลเดอร์จริงมีครบ
-- **filter ค้างบนชีต** — ถ้ามี filter เปิดอยู่ `gviz/tq` จะคืนเฉพาะแถวที่ filter แสดง ไม่ใช่ทั้งแท็บ เช็คจำนวนแถวที่ได้ทุกครั้งก่อนสรุป
-- **เลข RESTOCK ผิดตอนลงสต็อก** — 2026-09-12 ลง `Dragon Quest VII (RESTOCK-05)` และ `Genso Suikoden III (RESTOCK-01)`
-  ทั้งที่เลขนั้นมีเล่มอยู่แล้ว ที่ถูกคือ `(RESTOCK-06)` และ `(RESTOCK-02)`
-  **`CONFLICT` ในตาราง dry-run มักไม่ใช่ไฟล์ซ้ำ แต่เป็นเลข RESTOCK ผิด** — เช็คชีตก่อนเสมอ ห้ามเผลอเขียนทับ
-- **บั๊ก regex ใน normalize (PowerShell)** — `[regex]::Escape()` **ไม่ escape `-` (ASCII hyphen)**
-  เอาผลไปใส่ใน character class `[...]` ตรง ๆ จะกลายเป็น range กิน Unicode เกือบทั้งหมด
-  ทุกชื่อจะ normalize เป็นค่าว่างเท่ากันหมด แล้วขึ้น `DUP?` ปลอมทั้งชุด
-  **ใช้ alternation `(a|b|c)` แทน character class** และทดสอบยืนยัน 3 เคสเสมอ:
-  `RESTOCK-1` = `RESTOCK-01` ✓ · `RESTOCK-04` ≠ `RESTOCK-05` ✓ · `.hack／／` = `.hack｜` ✓
-- **encoding ของสคริปต์** — ต้องเซฟเป็น **UTF-8 with BOM** ไม่งั้น Windows PowerShell 5.1 อ่านอักขระเต็มความกว้างในซอร์สโค้ดเพี้ยน
-- **`MEGA MONTH` ปนอยู่ใน `GGB - GAMEMAG SPECIAL` มา 156 ไฟล์ (พบ 2026-09-13)** — ตอนไล่หารูปที่หายของ
-  Type `GAMEMAG SPECIAL` (แท็บ GAME GUIDE BOOKS) เจอว่าโฟลเดอร์ `GGB - GAMEMAG SPECIAL` ที่ควรมีแต่ไฟล์
-  ชื่อ `GAMEMAG SPECIAL vol NN...` กลับมีไฟล์ `MEGA MONTH ...` แทนเกือบทั้งหมด (156 ไฟล์) ซึ่งจริง ๆ คือ
-  Type `MEGA MONTH` จาก **แท็บ MAGAZINE** (คนละแท็บ คนละสาย) เทียบ SHA-256 แล้วตรงกับที่มีอยู่แล้วใน
-  `Magazine\MEGA MONTH` ทุกไฟล์ 100% (156/156) จึงย้าย (ไม่ลบ) ไฟล์ชุดนี้ออกจาก `GGB-All` ไปพักที่
-  `GGB-All\_to_delete\20260913\` — **ห้ามลบไฟล์จริงด้วย rm/del เด็ดขาดในทุกกรณี** (ไดรฟ์เป็น SSD + TRIM
-  ลบแล้วกู้คืนไม่ได้ พิสูจน์มาแล้วจากเหตุการณ์อื่น) ย้ายเข้าโฟลเดอร์พักเสมอ แล้วรอเจ้าของงานสั่งลบเองภายหลัง
+### Always SKIP in Downloads
+`desktop.ini` · `.~lock.*#` · `*.zip` · files whose name does not end with ` (1)` / ` (2)` · generic camera photos with numeric names such as `20260121_155442.jpg`
 
 ---
 
-## 7. นามสกุลไฟล์รูป
+## 6. Real lessons
 
-- `library/` เก็บนามสกุลจริงตามต้นฉบับ **ห้าม re-encode ห้าม rename ข้ามนามสกุล** เด็ดขาด
-- ของจริง ณ 2026-09-13 (สำรวจ `rclone lsf` ทั้ง `library/`): **jpg ล้วน 1,775 PID · png ล้วน 36 PID ·
-  ปนกัน 5 PID** ไม่มีนามสกุลอื่นเลย (ไม่มี jpeg, ไม่มี JPG ตัวใหญ่, ไม่มี webp)
-- ดัชนี `meta/images.csv` เป็น **`pid,n,ext`** — **ทุกตัวที่สร้าง URL รูปต้องอ่านคอลัมน์ ext จริง
-  ห้ามฮาร์ดโค้ด `.jpg` เด็ดขาด** (เคยทำให้ Shopee builder สร้าง URL 404 และทำให้ FB Album auto-post พัง
-  16 ปกมาแล้ว — ดู `04 Design Tools/logs/decisions_20260913.csv`)
-- 5 PID ที่ปนกัน:
-  - `OWA-GGBS011INAN00` · `OWA-GGBS035SBAN00` · `OWA-GGBS043YKAR02` — คนละตำแหน่งคนละนามสกุล ปกติ
-    ไม่มีไฟล์ซ้ำซ้อน
-  - `OWA-GGBD045BRBN00` · `OWA-GGBD049FWAN00` — มี `.png` ค้างจาก 29 ส.ค. เป็น orphan รอย้าย
-    (ยังไม่ได้ย้าย) **ใช้ `.jpg` เท่านั้น** เทียบกับต้นฉบับใน `All Products\GGB-All` แล้วตรงไบต์ต่อไบต์เป๊ะ
+- **Separator drift** — `.hack／／G.U. Vol. 1／Rebirth` (single `／`) vs `.hack／／G.U. Vol. 1／／Rebirth` (`／／`) vs `.hack｜G.U. Vol. 1｜Rebirth` (`｜`) all existed at once. **The correct one is `／／`, per the sheet.**
+- **Missing `(1)` tail** — `GAMEMAG TOP SECRET - Final Fantasy X-2 (RESTOCK-01).jpg` in Downloads had no ` (1)` while all 20 files in the real folder had it.
+- **Filter left on the sheet** — with a filter on, `gviz/tq` returns only the visible rows, not the whole tab. Check the row count every time before concluding.
+- **Wrong RESTOCK number at stock-in** — on 2026-09-12 `Dragon Quest VII (RESTOCK-05)` and `Genso Suikoden III (RESTOCK-01)` were entered although those numbers were taken; correct were `(RESTOCK-06)` and `(RESTOCK-02)`. **A `CONFLICT` in the dry-run is usually a wrong RESTOCK number, not a duplicate file** — check the sheet first, never overwrite.
+- **Regex bug in normalise (PowerShell)** — `[regex]::Escape()` **does not escape `-` (ASCII hyphen)**. Put inside a character class `[...]` it becomes a range that eats almost all Unicode; every name normalises to empty and the whole set shows false `DUP?`. **Use alternation `(a|b|c)` instead of a character class** and always test 3 cases: `RESTOCK-1` = `RESTOCK-01` ✓ · `RESTOCK-04` ≠ `RESTOCK-05` ✓ · `.hack／／` = `.hack｜` ✓
+- **Script encoding** — save as **UTF-8 with BOM**, otherwise Windows PowerShell 5.1 misreads full-width characters in the source.
+- **`MEGA MONTH` mixed into `GGB - GAMEMAG SPECIAL`, 156 files (found 2026-09-13)** — while tracing missing photos of Type `GAMEMAG SPECIAL` (GAME GUIDE BOOKS tab), the `GGB - GAMEMAG SPECIAL` folder held almost only `MEGA MONTH ...` files (156), which are Type `MEGA MONTH` from the **MAGAZINE tab**. SHA-256 matched the existing copies in the magazine `MEGA MONTH` folder 100% (156/156), so the set was moved (not deleted) to `_to_delete\20260913\`. **Never delete real files with rm/del** (SSD + TRIM: deleted files cannot be recovered, proven in another incident); always move to a holding folder and wait for the owner to delete.
+
+---
+
+## 7. Image file extensions
+
+- `library/` keeps the original extension. **Never re-encode, never rename across extensions.**
+- Reality on 2026-09-13 (`rclone lsf` over all of `library/`): **jpg only 1,775 PIDs · png only 36 PIDs · mixed 5 PIDs**; no other extension (no jpeg, no upper-case JPG, no webp).
+- The index `meta/images.csv` is **`pid,n,ext`** — **every tool that builds an image URL must read the real ext column; never hard-code `.jpg`** (it once made the Shopee builder produce 404 URLs and broke 16 covers in FB Album auto-post — see `04 Design Tools/logs/decisions_20260913.csv`).
+- The 5 mixed PIDs:
+  - `OWA-GGBS011INAN00` · `OWA-GGBS035SBAN00` · `OWA-GGBS043YKAR02` — different positions, different extensions; normal, no duplicates.
+  - `OWA-GGBD045BRBN00` · `OWA-GGBD049FWAN00` — a stray `.png` from 2026-08-29 is an orphan waiting to be moved (not moved yet). **Use `.jpg` only**; byte-identical to the original in the library.

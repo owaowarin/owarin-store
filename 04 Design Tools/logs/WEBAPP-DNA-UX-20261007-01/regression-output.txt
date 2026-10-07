@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "groups": 14,
+  "checks": [
+    "Save & confirm: buyer/recipient distinct; literal formula-safe phone/postcode; replay one sale/client; allowlist; combined +66 search",
+    "CRM CLIENT literal row failure/after-effect: SOLD snapshot survives; only CRM retries, one client and sale",
+    "CRM journal PREPARED failure/after-effect: SOLD snapshot survives; only CRM retries, one client and sale",
+    "CRM journal DONE failure/after-effect: SOLD snapshot survives; only CRM retries, one client and sale",
+    "Partial literal CLIENT row, missing column 0: same allocated ID-only recovery",
+    "Partial literal CLIENT row, missing column 3: same allocated ID-only recovery",
+    "Partial literal CLIENT row, missing column 6: same allocated ID-only recovery",
+    "Partial literal CLIENT row, missing column 7: same allocated ID-only recovery",
+    "Label later completion/reprint/get never writes ledger or stock; CLIENT update leaves old snapshot unchanged; revision/access rejects",
+    "Intent-write failure prevents sale and recipient loss",
+    "Invalid recipient rejects before effects",
+    "Lost response before CLIENT intent: parent ID-only recovery/status/list remain actionable without a second sale",
+    "Monotonic CLIENT revision, duplicate-name IDs, combined ranking and default order-only edit preserve CLIENT/SALES",
+    "Label after-effect original-ID replay preserves sold ledger; changed payload rejects; schema replay retains stable client identities"
+  ]
+}
+{"result":"PASS","checks":["HTML escaped; real __MORE__ title stays literal","Natural sort shared by standalone and web","Printable document prunes every non-allowlisted field","100x150mm/zero page margin and font/image ready guard","One-item overflow may become +1 item; no silent clipped title","Generated print document syntax"]}
+PASS latest Orders response wins; stale result/error cannot restore old actionable cards

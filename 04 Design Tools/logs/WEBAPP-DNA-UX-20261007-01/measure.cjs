@@ -1,0 +1,21 @@
+// v43 phone measurements. Usage: node measure.cjs <outDir with page.html>
+const path=require('path');const {chromium}=require('/opt/node-tools/node_modules/playwright');const OUT=process.argv[2];
+(async()=>{const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium-1194/chrome-linux/chrome'});
+const pg=await b.newPage({viewport:{width:390,height:844}});const errs=[];pg.on('pageerror',e=>errs.push(e.message));
+await pg.goto('file://'+path.join(OUT,'page.html'));await pg.waitForTimeout(1500);
+const h=s=>pg.$eval(s,e=>e.getBoundingClientRect().height);
+console.log('brand',await h('.brand'),'count',await h('#count'));
+console.log('nav more at load',await pg.$eval('nav',e=>e.classList.contains('more')));
+const smalls=async()=>pg.$$eval('button,select,input:not([type=checkbox])',els=>els.filter(e=>e.offsetHeight&&e.offsetParent).map(e=>({t:e.tagName,id:e.id,c:e.className,txt:(e.textContent||'').trim().slice(0,14),h:e.offsetHeight})));
+const inv=await smalls();console.log('inv buttons<36',JSON.stringify(inv.filter(x=>x.t==='BUTTON'&&x.h<36)),'inputs/selects<40',JSON.stringify(inv.filter(x=>x.t!=='BUTTON'&&x.h<40)));
+console.log('refresh/all-sheets heights',JSON.stringify(inv.filter(x=>/REFRESH|ALL SHEETS|GUIDE|MAGAZINE/i.test(x.txt)).map(x=>[x.txt,x.h])));
+await pg.$eval('nav',e=>{e.scrollLeft=e.scrollWidth});await pg.waitForTimeout(200);
+console.log('nav more at end',await pg.$eval('nav',e=>e.classList.contains('more')));
+await pg.$eval('nav',e=>{e.scrollLeft=0});await pg.waitForTimeout(200);
+await pg.click('nav >> text=TOOLS');await pg.waitForTimeout(400);
+console.log('TOOLS in view',await pg.$eval('nav button.on',e=>{const r=e.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth+1}),'more',await pg.$eval('nav',e=>e.classList.contains('more')));
+await pg.click('nav >> text=INVENTORY');await pg.waitForTimeout(300);
+await pg.evaluate(()=>{toast('hello')});console.log('toast shown',await pg.$eval('#toast',e=>e.style.display));
+await pg.click('#fab');await pg.waitForTimeout(300);console.log('toast after Add form',await pg.$eval('#toast',e=>e.style.display));
+await pg.screenshot({path:OUT+'/m-add-form.png'});
+console.log('errors',errs);await b.close();})();
