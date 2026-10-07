@@ -2,7 +2,7 @@
 
 จัดทำ: 2026-10-07 · by Sonnet at owner's request. Evidence = this session's transcript; no token count is available to Claude.
 
-| # | Mistake | Cost to owner | Root cause | Proposed rule (waits owner confirm) |
+| # | Mistake | Cost to owner | Root cause | Proposed rule (CONFIRMED by owner 2026-10-07; added to CLAUDE.md) |
 |---|---|---|---|---|
 | 1 | Owner steps without full command (`cd`), `git pull` on a feature branch | PowerShell error, lost round | no pre-send check of owner-facing steps | every owner command is a full line, `cd` first |
 | 2 | "Code is above" while tool output was collapsed | 2 wasted rounds, anger | assumed the owner sees tool output | paste-ready code goes in assistant text |

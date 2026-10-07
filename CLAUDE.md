@@ -161,3 +161,14 @@ For UTF-8 evidence transfers, concatenate raw network Buffers then decode once; 
 ## Shared partials and LabelDialog (added 2026-10-07)
 
 Partials included by both Index.html and LabelDialog.html (e.g. W2LabelUI.html) must use `var(--token,#fallback)` for every colour; LabelDialog has no `:root` tokens. Phone (≤600 px) touch targets are ≥ 36 px (inputs 40). A new UI state class must be checked by computed style, not only by class presence (input rules carry `outline:none`).
+
+## Owner-instruction checklist (added 2026-10-07, owner-confirmed after Session54 retro)
+
+Applies to every step the owner must perform by hand (`00 Docs/RETRO_2026-10-07_claude-mistakes.md`).
+1. One action per line, in short numbered steps. Name the exact button, menu path, column or text as it appears on screen; never "the top row" or "the first line" without saying of what.
+2. Every command is a full line, starting with `cd <full path>` when a folder matters. Never give a folder path alone. Check the owner is on the right git branch before any `git pull`.
+3. Paste-ready code goes in the assistant's message text, never only in tool output (the owner does not see collapsed tool output). Never write "above".
+4. When the owner says a step is unclear or not found, answer ONLY that step first, with more detail; do not move to another topic or ask a different question.
+5. Do not print large files or tables into the session; use grep/summary of the needed part only. Do not create extra prompt/doc files that the task does not need.
+6. When the chat is long (about 60 messages) or the owner reports repeated mistakes, offer a new session with a handoff file in `prompts/` and give the owner the single line to paste.
+
