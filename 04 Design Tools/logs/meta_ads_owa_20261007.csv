@@ -8,3 +8,8 @@ timestamp_bkk,step,action,object_level,object_id,object_name,field,before,after,
 2026-10-07 10:42,S2,CREATE,ad,120248381945060018,07OCT2026 : Album - MEGA MONTH,creative,(none),copy of ad 120247779856260018; post 676297058896868_122195949386903319,PLAN §4.3,OK
 2026-10-07 10:42,S2,CREATE,ad,120248381946050018,07OCT2026 : Album - GGB,creative,(none),copy of ad 120247779760480018; post 676297058896868_122196116996903319,PLAN §4.3,OK
 2026-10-07 10:42,S2,READ-CHECK,adset,120240126787570018,owa-retrogaming (reference),targeting,,4 retro interest IDs still resolve,PLAN §4.2,OK
+2026-10-07 10:56,S3,READ-CHECK,ad,120248381944650018/120248381945060018/120248381946050018,3 album ads,object_story_id,02SEP posts,owner re-picked posts 122201414348903319 / 122201395460903319 / 122201580950903319 in Ads Manager,owner chat,OK
+2026-10-07 10:56,S3,READ-CHECK,ad,120248381944650018/120248381945060018,GAMEMAG + MEGA MONTH ads,active_errors,,Advertiser is missing (Thailand verified advertiser),owner chat,MISMATCH:advertiser missing
+2026-10-07 10:56,S3,UPDATE,adset,120248381940540018/120248381940920018,gamemagsp + megamonth ad sets,regional_regulation_identities,(none),THAILAND_UNIVERSAL beneficiary+payer 2694497230910974 (copied from GGB ad set set by owner),Thai ad rule,OK (errors cleared; awaiting Meta validation)
+2026-10-07 10:56,S3,READ-CHECK,ad,120248381946050018,07OCT2026 : Album - GGB,active_errors,,Invalid Creative For Objective (template copied from 02SEP GGB ad),owner chat,MISMATCH:invalid creative
+2026-10-07 10:56,S3,CREATE,ad,120248382127870018,07OCT2026 : Album - GGB v2,creative,(none),copy of ad 120247779856270018 (GAMEMAG template); owner to switch post to GGB 122201580950903319; old GGB draft excluded from publish,PLAN §4.3,OK
