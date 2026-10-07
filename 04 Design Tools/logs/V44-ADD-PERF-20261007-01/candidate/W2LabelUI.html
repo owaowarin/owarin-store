@@ -1,0 +1,61 @@
+<style>
+#w2Modal{position:fixed;inset:0;background:hsl(0 0% 0% / .73);z-index:100;overflow:auto;padding:20px;display:none}#w2Modal .w2-panel{max-width:1000px;margin:auto;background:var(--card,#151515);color:var(--fg,#eee);padding:20px;border:1px solid var(--gold-muted,#ad914d)}#w2Modal .w2-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}#w2Modal label{display:block;margin:10px 0}#w2Modal input:not([type=checkbox]),#w2Modal textarea{width:100%;background:var(--input,#222);color:var(--fg,#eee);padding:8px;border:1px solid var(--border,#555);box-sizing:border-box}#w2Modal input[type=checkbox]{width:auto}#w2Modal .w2-suggest{max-height:220px;overflow:auto;background:var(--input,#222)}#w2Modal .sug-i{padding:8px;cursor:pointer}#w2Modal .sug-i.on,#w2Modal .sug-i:hover{background:var(--gold-muted,#63532e)}#w2Modal .w2-actions{display:flex;gap:10px;flex-wrap:wrap}#w2Modal button{padding:10px;cursor:pointer}#w2Preview{width:100%;height:650px;border:0;background:#ddd}@media(max-width:750px){#w2Modal .w2-grid{grid-template-columns:1fr}}
+</style>
+<div id="w2Modal" role="dialog" aria-modal="true" aria-labelledby="w2Title"><div class="w2-panel">
+<h2 id="w2Title">Customer &amp; Label</h2><p id="w2State" role="status"></p>
+<div class="w2-grid"><section><h3>Buyer · CLIENT</h3>
+<label>Name<input id="w2Name" autocomplete="off"></label><div class="w2-suggest" id="w2NameSuggestions"></div>
+<label>Phone<input id="w2Phone" type="tel" autocomplete="off"></label><div class="w2-suggest" id="w2PhoneSuggestions"></div>
+<label>Facebook Account<input id="w2Facebook" autocomplete="off"></label><div class="w2-suggest" id="w2FacebookSuggestions"></div>
+<label>Address<textarea id="w2Address" rows="3"></textarea></label><div class="w2-suggest" id="w2AddressSuggestions"></div>
+<label>Post Code<input id="w2PostalCode" inputmode="numeric" maxlength="5"></label><div class="w2-suggest" id="w2PostalCodeSuggestions"></div>
+<label>Internal Note<textarea id="w2Note" rows="2"></textarea></label><div class="w2-suggest" id="w2NoteSuggestions"></div>
+<p id="w2Selected">New client</p><button type="button" id="w2ClearClient">Choose another / New client</button>
+<label><input type="checkbox" id="w2SaveNew" checked> New client — save to CLIENT</label>
+<label><input type="checkbox" id="w2UpdateClient"> Update saved client details</label>
+</section><section><h3>Recipient · this order</h3><label><input type="checkbox" id="w2Different"> Use different recipient</label>
+<div id="w2RecipientFields"><label>Recipient name<input id="w2RecipientName"></label><label>Recipient phone<input id="w2RecipientPhone" type="tel"></label><label>Recipient address<textarea id="w2RecipientAddress" rows="4"></textarea></label><label>Recipient postal code<input id="w2RecipientPostalCode" inputmode="numeric" maxlength="5"></label></div>
+<label>Delivery Note<textarea id="w2DeliveryNote" rows="2"></textarea></label><p>Facebook Account and Internal Note stay outside the label.</p>
+</section></div>
+<div class="w2-actions"><button type="button" id="w2Back">Back</button><button type="button" id="w2Save">Save label</button><button type="button" id="w2RetryClient" hidden>Retry client save</button><button type="button" id="w2Print" disabled>Preview / Print / Reprint</button></div>
+<iframe id="w2Preview" title="Printable label preview" hidden></iframe>
+</div></div>
+<script>
+var W2UI=(function(){
+ var current=null,selected=null,busy=false,generation=0,lastFocus=null;
+ var fields=['name','phone','facebook','address','postalCode','note'];
+ var el=id=>document.getElementById(id),key=k=>'w2'+k[0].toUpperCase()+k.slice(1);
+ function status(s){el('w2State').textContent=s;}
+ function buyer(){var out={};fields.forEach(k=>out[k]=el(key(k)).value.trim());return out;}
+ function choose(c){remoteSuggestionEpoch++;selected=c;fields.forEach(k=>el(key(k)).value=c[k]||'');el('w2Selected').textContent='Selected '+c.name+' · '+c.id;el('w2SaveNew').checked=false;el('w2SaveNew').disabled=true;el('w2UpdateClient').checked=false;el('w2UpdateClient').disabled=false;}
+ function clear(){remoteSuggestionEpoch++;selected=null;el('w2Selected').textContent='New client';el('w2SaveNew').disabled=false;el('w2SaveNew').checked=true;el('w2UpdateClient').checked=false;el('w2UpdateClient').disabled=true;}
+ function search(){if(selected||busy)return Promise.resolve([]);var f=buyer();return callApi('clients.search',{fields:f}).then(data=>data.clients.map(c=>Object.assign({},c,{label:c.name+' · '+c.facebook+' · …'+c.phone.replace(/\D/g,'').slice(-4)+' · '+c.address.slice(0,40),searchText:c.name+' '+c.facebook+' '+c.phone})));}
+ fields.forEach(k=>attachSuggest(key(k),key(k)+'Suggestions',search,choose,{remote:true}));
+ function recipient(){var b=buyer();return {name:el('w2Different').checked?el('w2RecipientName').value.trim():b.name,phone:el('w2Different').checked?el('w2RecipientPhone').value.trim():b.phone,address:el('w2Different').checked?el('w2RecipientAddress').value.trim():b.address,postalCode:el('w2Different').checked?el('w2RecipientPostalCode').value.trim():b.postalCode,deliveryNote:el('w2DeliveryNote').value.trim()};}
+ function choice(){return selected?{mode:el('w2UpdateClient').checked?'update':'order',id:selected.id,expectedRevision:selected.revision,fields:buyer()}:{mode:el('w2SaveNew').checked?'new':'none',fields:buyer()};}
+ function sync(){el('w2RecipientFields').hidden=!el('w2Different').checked;el('w2Save').disabled=busy||!!(current&&(current.clientNeedsRetry||current.loadError));el('w2Back').disabled=busy;el('w2RetryClient').hidden=!(current&&current.clientNeedsRetry);el('w2RetryClient').disabled=busy;}
+ async function open(mode,payload,order){
+  var token=++generation;current={mode,payload,order};busy=!!order;selected=null;clear();fields.forEach(k=>el(key(k)).value='');['Name','Phone','Address','PostalCode'].forEach(k=>el('w2Recipient'+k).value='');el('w2DeliveryNote').value='';el('w2Different').checked=false;el('w2Preview').hidden=true;el('w2Print').disabled=true;el('w2Save').textContent=mode==='confirm'?'Save & confirm sold':'Save label';lastFocus=document.activeElement;el('w2Modal').style.display='block';status(order?'Loading saved order…':'');sync();el('w2Name').focus();
+  if(order){try{var d=await callApi('labels.draft',{orderId:order.orderId});if(token!==generation)return;current.order=d;el('w2Print').disabled=!d.recipient;
+   if(d.recipient){var r=d.recipient;el('w2Different').checked=true;['name','phone','address','postalCode'].forEach(k=>el('w2Recipient'+k[0].toUpperCase()+k.slice(1)).value=r[k]);el('w2DeliveryNote').value=r.deliveryNote;sync();}
+   current.clientNeedsRetry=!!d.clientRecoveryRequestId;current.clientRecoveryRequestId=d.clientRecoveryRequestId;sync();if(current.clientNeedsRetry)status('Saved; client save needs retry');
+   if(d.clientId&&!current.clientNeedsRetry){var c=await callApi('clients.get',{clientId:d.clientId});if(token!==generation)return;choose(c);}
+   if(!current.clientNeedsRetry)status('');
+  }catch(e){if(token===generation){current.loadError=true;status(e.message);}}finally{if(token===generation){busy=false;sync();}}}
+ }
+ function close(){generation++;remoteSuggestionEpoch++;el('w2Modal').style.display='none';if(lastFocus&&lastFocus.focus)lastFocus.focus();}
+ el('w2Different').onchange=sync;el('w2ClearClient').onclick=clear;el('w2Back').onclick=close;
+ el('w2Save').onclick=async function(){if(busy||!current)return;busy=true;sync();try{var p=Object.assign({},current.payload,{recipient:recipient(),clientChoice:choice()}),action;
+  if(current.mode==='confirm'){action='orders.confirm';p.labelLater=false;if(current.order){p.orderId=current.order.orderId;p.expectedRevision=current.order.revision;}}
+  else{action='labels.save';p.orderId=current.order.orderId;p.expectedRevision=current.order.revision;}
+  var result=await w1Run(action,p);status(result.message||'Saved · '+result.orderId);current={mode:'label',payload:{},order:{orderId:result.orderId,revision:result.revision},clientNeedsRetry:result.clientSync==='NEEDS_RETRY',clientRecoveryRequestId:result.clientRecoveryRequestId};el('w2Save').textContent='Save label';el('w2Print').disabled=false;
+  if(result.clientId&&result.clientSync==='SAVED')choose(await callApi('clients.get',{clientId:result.clientId}));
+  // The committed recipient is read from ORDERS, never reconstructed from CLIENT on reprint.
+  var data=await callApi('labels.get',{orderId:result.orderId});el('w2Preview').srcdoc=W2Label.documentHTML(data.labels);el('w2Preview').hidden=false;
+  if(typeof w1Saved==='function')w1Saved(result,action);if(typeof w1LoadOrders==='function')w1LoadOrders();
+ }catch(e){status(e.message);}finally{busy=false;sync();}};
+ el('w2RetryClient').onclick=async function(){if(busy||!current||!current.clientRecoveryRequestId)return;busy=true;sync();try{var r=await callApi('requests.resume',{requestId:current.clientRecoveryRequestId});current.clientNeedsRetry=r.clientSync==='NEEDS_RETRY';status(r.message||'Client recovered');if(!current.clientNeedsRetry&&r.clientId)choose(await callApi('clients.get',{clientId:r.clientId}));if(typeof w1LoadOrders==='function')w1LoadOrders();}catch(e){status(e.message);}finally{busy=false;sync();}};
+ el('w2Print').onclick=function(){if(!current||!current.order)return;var win=window.open('','_blank');if(!win){status('Allow the label window, then click Preview / Print again.');return;}win.document.write('<p>Loading saved label…</p>');callApi('labels.get',{orderId:current.order.orderId}).then(data=>{win.document.open();win.document.write(W2Label.documentHTML(data.labels));win.document.close();}).catch(e=>{win.document.body.textContent=e.message;status(e.message);});};
+ return {open,close};
+})();
+</script>

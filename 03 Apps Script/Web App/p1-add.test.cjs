@@ -5,7 +5,7 @@ const vm = require('node:vm');
 const crypto = require('node:crypto');
 const base = __dirname;
 const read = f => fs.readFileSync(path.join(base, f), 'utf8');
-for (const f of ['Code_v43.gs', 'WebApp_v43.gs']) new vm.Script(read(f), {filename:f});
+for (const f of ['Code_v44.gs', 'WebApp_v44.gs']) new vm.Script(read(f), {filename:f});
 const suggest = read('W2Suggest.html').replace(/^<script>\s*/, '').replace(/\s*<\/script>\s*$/, '');
 const html = read('Index.html').replace('<?!= _w2Include_("W2Suggest") ?>', suggest);
 for (const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)) if (m[1].trim()) new vm.Script(m[1], {filename:'Index.html'});
@@ -23,6 +23,7 @@ function sheet(name, rows, fail) {
       setValue(v){const effect=fail?.(name,r,c,v);if(effect==='DROP')return this;if(effect)throw Error('INJECTED WRITE FAILURE');(rows[r-1] ||= [])[c-1]=v;return this;},
       setValues(v){v.forEach((a,i)=>a.forEach((x,j)=>thisCell(r+i,c+j,x)));return this;},
       setBackground(){return this;}, setFormula(v){return this.setValue(v);},
+      getFormulas(){return Array.from({length:h},(_,i)=>Array.from({length:w},(_,j)=>{const v=rows[r+i-1]?.[c+j-1];return typeof v==='string' && v.startsWith('=') ? v : '';}));},
       getFormula(){const v=rows[r-1]?.[c-1];return typeof v==='string' && v.startsWith('=') ? v : '';}
     };function thisCell(rr,cc,v){const effect=fail?.(name,rr,cc,v);if(effect==='DROP')return;if(effect)throw Error('INJECTED WRITE FAILURE');(rows[rr-1] ||= [])[cc-1]=v;}}
   };
@@ -38,7 +39,7 @@ const c=vm.createContext({SpreadsheetApp:{getActiveSpreadsheet:()=>ss,flush(){}}
   LockService:{getScriptLock:()=>({waitLock(){},releaseLock(){}})},
   Utilities:{DigestAlgorithm:{SHA_256:'sha256'},computeDigest:(_,s)=>[...crypto.createHash('sha256').update(s).digest()]},
   Session:{getScriptTimeZone:()=> 'Asia/Bangkok',getActiveUser:()=>({getEmail:()=>''})},Logger:{log(){}}});
-vm.runInContext(read('Code_v43.gs'),c);vm.runInContext(read('WebApp_v43.gs'),c);
+vm.runInContext(read('Code_v44.gs'),c);vm.runInContext(read('WebApp_v44.gs'),c);
 const realResolve=c._resolveColumns;
 c._resolveColumns=()=>columns;
 c._autoFormat=x=>x;c._detectRestock=x=>({title:x,isRestock:false});

@@ -13,3 +13,5 @@
 "2026-10-07","AUDIT-RUN-1","Sheet audit Phase 2: owner runs SheetAudit.gs manually (Claude PC session at limit)","CLOSED","owner chat 2026-10-07"
 "2026-10-07","TOOLS-SCOPE-1","Tool cleanup scope = Apps Script menu/functions (+ web TOOLS tab), not HTML studio files","CLOSED","owner chat 2026-10-07"
 "2026-10-07","TOOLS-MENU-1","Approve AUDIT §5 menu proposal as written: remove Rebuild ALL Product IDs, Build SERIES MAP, R2 Images submenu (+R2 JOBS/IMAGE UPLOADS to backup, r2-queue-worker.py); move FB CATALOGUE/descriptions/META EXPORT builders, SP-2 setup/layout, Fill Copy Flags to Setup & repair; FB Album parked","CLOSED","owner chat 2026-10-07 ""อนุมัตเมนู"""
+"2026-10-07","SHEET-A-1","Approve AUDIT §8 Step A (sheet-only compaction, backup first)","CLOSED","owner chat 2026-10-07 ""อนุมัติ A และ v44"""
+"2026-10-07","ADD-PERF-1","Approve v44 Add speed plan (prompts/add-save-performance.md)","CLOSED","owner chat 2026-10-07 ""อนุมัติ A และ v44"""

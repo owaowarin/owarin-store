@@ -238,3 +238,7 @@ Shipping Subsidy defaults0 in Cart and single sold form; Clear/success/new sold 
 ## Session54 — v43 DNA/UX (LIVE since 2026-10-07 = Version 7, owner-confirmed)
 
 UI only, server unchanged. W2LabelUI colours use `var(--token,#fallback)` (LabelDialog has no tokens); phone nav fade + active tab scrolled into view, header no-wrap, touch targets ≥36 px (inputs 40), FAB hides while scrolling, toast hides on tab change/modal open; money errors name and outline the bad field (`markBad`). Accept/reject set identical to v42 (`dna-ux.test.cjs`). Packet `04 Design Tools/logs/WEBAPP-DNA-UX-20261007-01/`; backup `backup/pre-v43-20261007/`; paste order in `00 Docs/PLAN_2026-10-07_webapp-dna-ux.md` §8.
+
+## Session54e — v44 candidate (repo only; live = v43 / Version 7)
+
+`Code_v44.gs` + `WebApp_v44.gs`: Add speed (2-col journal scan, one formula readback, BOOKING by name) + menu cleanup (TOOLS-MENU-1). Test `v44.test.cjs`. Backup `backup/pre-v44-20261007/`; packet `04 Design Tools/logs/V44-ADD-PERF-20261007-01/`. Files v43 are stubs.
