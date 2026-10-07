@@ -19,3 +19,6 @@ timestamp_bkk,step,action,object_level,object_id,object_name,field,before,after,
 2026-10-07 11:04,S3,CREATE,ad,120248382228780018,07OCT2026 : Album - GAMEMAG SPECIAL v4 +catalog,creative,(none),post 122201414348903319 + same CTA + catalog,owner chat,OK VALIDATED
 2026-10-07 11:04,S3,CREATE,ad,120248382229660018,07OCT2026 : Album - MEGA MONTH v4 +catalog,creative,(none),post 122201395460903319 + same CTA + catalog,owner chat,OK VALIDATED
 2026-10-07 11:04,S3,DELETE,ad,120248382127870018/120248381944650018/120248381945060018/120248382211650018/120248382214080018/120248382214820018,superseded draft ads (never published),status,DRAFT,DELETED,owner "ทำเองได้ไปเลย",OK
+2026-10-07 11:10,S4,ACTIVATE,campaign,120248381934380018,07OCT2026 : sub-owa,status,DRAFT,ACTIVE (live; delivery inactive no_ads),owner "go",OK
+2026-10-07 11:10,S4,ACTIVATE,adset,120248381940540018/120248381940920018/120248381941490018,3 ad sets,status,DRAFT,ACTIVE ฿100/day each (no_ads),owner "go",OK
+2026-10-07 11:10,S4,ACTIVATE,ad,120248382228780018/120248382229660018/120248382223040018,3 v4 ads,status,DRAFT,still DRAFT after 2 publish attempts + 2 min; no error returned (API earlier said these posts are not owned by the Page),owner "go",ERROR:publisher did not create the ads
