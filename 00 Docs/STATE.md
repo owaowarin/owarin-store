@@ -1,6 +1,6 @@
 # STATE — OWARIN STORE (read FIRST; only the stream you work on)
 
-จัดทำ: 2026-10-07 — Session55 compact rewrite (S55-RULES-1). Full previous detail, verbatim: `00 Docs/_archive/STATE_2026-10-07_pre-S55.md`.
+Prepared: 2026-10-07 — Session55 compact rewrite (S55-RULES-1). Full previous detail, verbatim: `00 Docs/_archive/STATE_2026-10-07_pre-S55.md`.
 Rule: OVERWRITE at tier-L close; ≤ 80 short lines; per stream = status, ONE next step, pointers.
 
 ## 1. Add / Cart / Orders / Label web app (Stream B) — LIVE
@@ -29,4 +29,4 @@ Rule: OVERWRITE at tier-L close; ≤ 80 short lines; per stream = status, ONE ne
 
 ## Rules / housekeeping
 - Rules restructured 2026-10-07 S55: `CLAUDE.md` (how to work) + `00 Docs/LESSONS.md` (by trigger) + `prompts/_TEMPLATE_handoff.md`.
-- PENDING owner: B1-F folder switch (AGENTS.md item 0); global rules in ads-optimizer not yet aligned with S55 (see HANDOFF_2026-10-07 § Session55).
+- PENDING: B1-F folder switch (AGENTS.md item 0); ads-optimizer global rules sync to S55 = `prompts/ads-optimizer-rules-sync.md` (cloud session here could not attach that repo).

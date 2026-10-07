@@ -1,109 +1,122 @@
 # OWARIN STORE — Web App / Tools
 
-This folder holds the **live code** and the manuals still in use. Retired material is in `_archive/`.
-English rewrite 2026-10-07 (S55-RULES-1); Thai original verbatim: `../../00 Docs/_archive/rules/WebApp-README_TH_2026-10-07_pre-S55.md`.
+โฟลเดอร์นี้เก็บ **โค้ดจริงที่ใช้งานอยู่** และคู่มือที่ยังใช้อ้างอิง
+ของเก่าที่เลิกใช้แล้วอยู่ใน `_archive/`
 
 ---
 
-## Code files (live — must be pasted into Apps Script)
+## ไฟล์โค้ด (ตัวจริง — ต้องอัปขึ้น Apps Script)
 
-**Update 2026-09-18:** `Code.gs` / `WebApp.gs` (no v suffix) were an old mismatched pair (`WebApp.gs` said "pairs with Code.gs v17" while `Code.gs` claimed v19, and it had no `doGet()`/`api()` of its own, so it could not run as the web app); its column order also did not match the live sheet → **archived; never paste it into Apps Script again.** The live files are `Code_v43.gs` + `WebApp_v43.gs` (v43 = Version 7, LIVE since 2026-10-07, owner-confirmed; v44 candidate exists in the repo, not deployed — see STATE). (v20–v31 are superseded too — see the version rule below.)
+**อัปเดต 2026-09-18:** `Code.gs` / `WebApp.gs` (ไม่มีต่อท้าย v20) เป็นโค้ดเก่าที่หลุดคู่กัน
+(`WebApp.gs` เขียนไว้ว่า "คู่กับ Code.gs v17" แต่ `Code.gs` เองอ้างว่าเป็น v19 — ไปคนละทาง
+และไม่มี `doGet()`/`api()` ของตัวเอง ใช้เป็นเว็บแอปไม่ได้) กับสอบเทียบลำดับคอลัมน์ในชีตจริงแล้ว
+ไม่ตรงด้วย → **ย้ายเข้า archive แล้ว ห้ามอัปขึ้น Apps Script อีก** ไฟล์ตัวจริงคือ `Code_v43.gs` + `WebApp_v43.gs` (ติดตั้ง/อ่านกลับร้าน Session53 วันที่2026-10-06; deployment Version6; คู่ v42/v42)
+(v20–v31 ถูกแทนที่แล้วเช่นกัน — ดูกฎเวอร์ชันด้านล่าง)
 
-| File | What it is | Where it goes |
+| ไฟล์ | คืออะไร | อัปไปที่ไหน |
 |---|---|---|
-| `Code_v43.gs` | Core logic (v43 = UI-only DNA/UX, server unchanged; backup `backup/pre-v43-20261007/`; v42 = default0 UI + unchanged v41 server; v41 = accepted W1/W2 + fresh Code v32 FB Album changes + guarded native CLIENT metadata migration; v31 = v30 + durable Add journal, same-ID recovery, R1–R4 validation/readback · v30 = v29 + identical copies (title+Publisher+Original+Condition+Copy Flags) listed once in the feed with quantity = copies + all-caps titles exported Capitalised + D6 recorded · v29 = v28 + no `(RESTOCK-NN)` in Meta titles: v20b step writes the stripped name + RESTOCK stripped from every FB Title at export · v28 = v27 + nightly automatic Meta feed refresh: `refreshMetaFeedAuto`, <80% drop guard, REFRESH LOG tab, e-mail alerts, `installMetaRefreshTrigger` · v27 = v26 + P1: PID CHANGES ledger + follow/archive orphan FB CATALOGUE rows, F2: empty Description filled from the caption template, F4: image index read live from R2 meta/images.csv, menu 🚀 Refresh Meta feed + health check): SP-2 prices, SKU, Inventory Tools menu, Facebook tools | Apps Script → `Code.gs` |
-| `WebApp_v43.gs` | Web app API (inventory / cart / sales / booking / contents) — header comment says "pairs with Code.gs v43" | Apps Script → `webapp.gs` |
-| `R2Upload.gs` | `R2 Images` commands: snapshot Instock rows into `R2 JOBS` and open `IMAGE UPLOADS` — ⚠️ never declare a helper with the same name as one in Code.gs (`_resolveColumns`/`_val`/`_tryWrite`/`_sp2ResetWriteErrors`/`_withLock`): this file loads later and overrides the whole project (incident 2026-09-23) · the copy in Apps Script now = old v3 + helpers renamed `_r2*_` (not yet the v4 file in this folder) | Apps Script → add file `R2Upload.gs` |
+| `Code_v43.gs` | ตรรกะหลัก (v43 = UI-only DNA/UX, server unchanged; backup `backup/pre-v43-20261007/`; v42 = default0 UI + unchanged v41 server; v41 = accepted W1/W2 + fresh Code v32 FB Album changes + guarded native CLIENT metadata migration; v31 = v30 + durable Add journal, same-ID recovery, R1–R4 validation/readback · v30 = v29 + เล่มซ้ำที่เหมือนกัน (ชื่อ+Publisher+Original+Condition+Copy Flags) ลงฟีดแถวเดียว quantity = จำนวนเล่ม + ชื่อตัวพิมพ์ใหญ่ล้วนส่งออกเป็น Capitalised + บันทึก D6 · v29 = v28 + ชื่อสินค้าที่ส่ง Meta ไม่มี (RESTOCK-NN) อีก: ขั้น v20b เขียนชื่อที่ตัดแล้ว + ตัด RESTOCK จาก FB Title ทุกค่าตอน export · v28 = v27 + รีเฟรช Meta feed อัตโนมัติทุกคืน: `refreshMetaFeedAuto`, ด่านกันยอดตก <80%, แท็บ REFRESH LOG, อีเมลแจ้งเตือน, `installMetaRefreshTrigger` · v27 = v26 + P1: PID CHANGES ledger + follow/archive แถวกำพร้าใน FB CATALOGUE, F2: Description ว่างเติมจาก caption template, F4: image index อ่านสดจาก R2 meta/images.csv, เมนู 🚀 Refresh Meta feed + health check): ราคา SP-2, SKU, เมนู Inventory Tools, เครื่องมือ Facebook | Apps Script → `Code.gs` |
+| `WebApp_v43.gs` | API ของเว็บแอป (inventory / cart / sales / booking / contents) — คอมเมนต์หัวไฟล์เขียนไว้ชัดว่า "pairs with Code.gs v43" | Apps Script → `webapp.gs` |
+| `R2Upload.gs` | คำสั่ง `R2 Images`: snapshot แถว Instock ลง `R2 JOBS` และเปิดดู `IMAGE UPLOADS` — ⚠️ ห้ามประกาศ helper ชื่อซ้ำกับ Code.gs (`_resolveColumns`/`_val`/`_tryWrite`/`_sp2ResetWriteErrors`/`_withLock`) เพราะไฟล์นี้โหลดทีหลังและจะทับทั้งโปรเจกต์ (เหตุการณ์ 2026-09-23) · ตัวใน Apps Script ตอนนี้ = v3 เดิม + rename helper เป็น `_r2*_` (ยังไม่ใช่ไฟล์ v4 ในโฟลเดอร์นี้) | Apps Script → เพิ่มไฟล์ `R2Upload.gs` |
 | `P1Journal.gs` | guarded ADD REQUESTS migration + read-only production readiness; no trigger installed | Apps Script → `P1Journal.gs` |
-| `Index.html` | The whole web app page (SPA) — one file shared by every Code.gs version, no version suffix | Apps Script → `Index.html` |
+| `Index.html` | หน้าเว็บแอปทั้งหมด (SPA) — ไฟล์เดียว ใช้ร่วมกับทุกเวอร์ชันของ Code.gs ไม่มีเวอร์ชันแยก | Apps Script → `Index.html` |
 | `W1Orders.gs` | Cart/Orders/stock guards + durable same-ID transactions | Apps Script → `W1Orders.gs` |
 | `W2Clients.gs` | CLIENT identities/search/save + separate CRM retry + committed recipient | Apps Script → `W2Clients.gs` |
 | `LabelRenderer.html` | Canonical allowlisted 100×150mm renderer / CAUTION | Apps Script → `LabelRenderer.html` |
 | `W2LabelUI.html` / `W2Suggest.html` | Shared label controls/customer suggestions | Apps Script → matching HTML files |
 | `LabelDialog.html` | Native Sheets Label Tool | Apps Script → `LabelDialog.html` |
 | `ReleaseMigration.gs` | Owner/exact production schema entrypoints; original schema request DONE | Apps Script → `ReleaseMigration.gs`; do not reset/run with new IDs |
-| `Index.test.js` | Smoke test of ALL SHEETS + Add Item defaults (`node Index.test.js`) | local only |
-| `image-url.test.js` | Tests `_r2ImageIndex()`/`_imageUrl()`/`_looksLikeSheetError()` in `Code_v43.gs` (`node image-url.test.js`) | local only |
-| `fb-catalogue.test.js` | Loads `Code_v43.gs` then `R2Upload.gs` in one context (like Apps Script) → runs Rebuild descriptions / Build FB CATALOGUE / Build META EXPORT on mock data · catches another file overriding a Code.gs helper (`node fb-catalogue.test.js`) | local only |
-| `dna-ux.test.cjs` | v43: W2LabelUI has a fallback for every colour, money accept/reject = v42, `confirmSold` points at the wrong field, toast/nav/FAB (`node dna-ux.test.cjs`) | local only |
-| `meta-pipeline.test.js` | Tests v27 + v28 + v29 + v30 (merged copies / all-caps titles) (auto refresh: no popup, guard, REFRESH LOG, e-mail, trigger): PID CHANGES ledger + chain resolution, `refreshMetaFeed()` end-to-end (rename-in-place / archive orphan / safety-stop), live-index fallback, `_recalcRow` ledger logging (`node meta-pipeline.test.js`) | local only |
-| `prepare_r2_upload.py` | Prepares images for the Cloudflare R2 upload (old catalog chain) | local (from the repo root) |
+| `Index.test.js` | Smoke test ของ ALL SHEETS + ค่าเริ่มต้น Add Item (`node Index.test.js`) | รันบนเครื่องเท่านั้น |
+| `image-url.test.js` | Test `_r2ImageIndex()`/`_imageUrl()`/`_looksLikeSheetError()` ใน `Code_v43.gs` (`node image-url.test.js`) | รันบนเครื่องเท่านั้น |
+| `fb-catalogue.test.js` | โหลด `Code_v43.gs` แล้วตามด้วย `R2Upload.gs` ในบริบทเดียว (เหมือน Apps Script) → รัน Rebuild descriptions / Build FB CATALOGUE / Build META EXPORT กับข้อมูลจำลอง · จับได้ถ้าไฟล์อื่นทับ helper ของ Code.gs (`node fb-catalogue.test.js`) | รันบนเครื่องเท่านั้น |
+| `dna-ux.test.cjs` | v43: W2LabelUI มี fallback ทุกสี, money accept/reject = v42, `confirmSold` ชี้ช่องที่ผิด, toast/nav/FAB (`node dna-ux.test.cjs`) | รันบนเครื่องเท่านั้น |
+| `meta-pipeline.test.js` | Test v27 + v28 + v29 + v30 (รวมเล่มซ้ำ/ชื่อตัวพิมพ์ใหญ่) (รีเฟรชอัตโนมัติ: ไม่มี popup, ด่านกัน, REFRESH LOG, อีเมล, trigger): PID CHANGES ledger + chain resolution, `refreshMetaFeed()` end-to-end (rename-in-place / archive orphan / safety-stop), live-index fallback, `_recalcRow` ledger logging (`node meta-pipeline.test.js`) | รันบนเครื่องเท่านั้น |
+| `prepare_r2_upload.py` | เตรียมรูปสำหรับอัป Cloudflare R2 | รันบนเครื่อง (วางที่โฟลเดอร์ OWARIN STORE) |
 
-W1/W2 production **v42 / Version6 LIVE** (superseded by v43 / Version 7 on 2026-10-07, UI-only): fresh saved/reloaded3changedfile LF hashes match42; Session51 prior13file readback retained, original auxiliary sources/manifest retained. Native migration recovered original request/allocated CLIENT IDs, A:F preserved, DONE replay unchanged. Six root impact regressions plus13migration/failure and14CRM/retry groups PASS; root10sources match revision. Previous full root31pair: `backup/pre-v41-20261006/`; root31 files are stubs. Private native backup + exact original exports/source/settings/undo: `../../04 Design Tools/logs/W3-PROD-20261006-01/`.
+W1/W2 production **v42 / Version6 LIVE**: fresh saved/reloaded3changedfile LF hashes match42; Session51 prior13file readback retained, original auxiliary sources/manifest retained. Native migration recovered original request/allocated CLIENT IDs, A:F preserved, DONE replay unchanged. Six root impact regressions plus13migration/failure and14CRM/retry groups PASS; root10sources match revision. Previous full root31pair: `backup/pre-v41-20261006/`; root31 files are stubs. Private native backup + exact original exports/source/settings/undo: `../../04 Design Tools/logs/W3-PROD-20261006-01/`.
 
-If a Save result is unclear, use the same Request ID and `Check / retry request`; never create a new request to guess a fix. If the CLIENT save fails after SOLD, retry only the original CRM request; Print/Reprint uses the original order and never sells again. See the [plan](../../00%20Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md) and the [handbook](../../00%20Docs/HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md). Native Table generated headers/root fix and UI evidence are in the release packet. Print/PDF/physical PASS remains owner-confirmed Session50; first real order is observation only.
+หากผล Save ไม่ชัดเจน ใช้ Request ID เดิมและ `Check / retry request`; อย่าสร้างคำขอใหม่เพื่อเดาแก้. SOLD แล้ว CLIENT saveล้มเหลวให้ retry CRMเดิมเท่านั้น; Print/Reprintใช้orderเดิมไม่ขายซ้ำ. ดู [แผน](../../00%20Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md) และ [คู่มือ](../../00%20Docs/HANDBOOK-ADD-CART-ORDERS-LABEL_2026-09-28.md). Native Table generated headers/root fix and UI evidence are in the release packet. Print/PDF/physical PASS remains owner-confirmed Session50; first real order is observation only.
 
-> ⚠️ After editing these files you must **copy them into Apps Script + Save** for them to take effect.
-> With the `/exec` URL you also need Deploy > Manage deployments > New version.
-> **Version rule (since 2026-09-18):** every code edit bumps the v number on both files (Code_vNN.gs +
-> WebApp_vNN.gs, even if one has no real change, so the "pairs with" comment always matches); move the
-> previous version to `backup/` with a stub at the root, and update this table + HANDOFF in the same pass — no step skipped.
-> `Code.gs`/`WebApp.gs` (no v number) and older numbered files such as v20/v21 in this folder are only stubs
-> pointing here — the full original content is in `backup/*_superseded_2026-09-18.gs`.
+> ⚠️ แก้ไฟล์พวกนี้แล้วต้อง **คัดลอกไปวางใน Apps Script + Save** ถึงจะมีผล
+> ถ้าใช้ URL `/exec` ต้อง Deploy > Manage deployments > New version ด้วย
+> **กฎเวอร์ชัน (ตั้งแต่ 2026-09-18):** แก้โค้ดครั้งไหนก็ตาม ต้องเพิ่มเลข v ทั้งคู่ (Code_vNN.gs +
+> WebApp_vNN.gs แม้ไฟล์ใดไฟล์หนึ่งไม่มีการเปลี่ยนจริงก็ bump ไปด้วยเพื่อให้คู่คอมเมนต์ "pairs with"
+> ตรงกันเสมอ) ย้ายเวอร์ชันก่อนหน้าไป `backup/` พร้อม stub ชี้ทางที่ root และอัปเดตตารางนี้ +
+> HANDOFF ในการแก้ไขรอบเดียวกัน — ห้ามข้ามขั้นตอนไหน
+> `Code.gs`/`WebApp.gs` (ไม่มีเลข v) และไฟล์ numbered รุ่นก่อนหน้าอย่าง v20/v21 ที่เห็นในโฟลเดอร์นี้ตอนนี้
+> เป็นแค่ stub ชี้มาที่หน้านี้ — เนื้อหาเดิมเต็มๆ อยู่ใน `backup/*_superseded_2026-09-18.gs`
 
 ---
 
-## Reference manuals
+## คู่มือที่ใช้อ้างอิง
 
-| File | When to use it |
+| ไฟล์ | ใช้ตอนไหน |
 |---|---|
-| `../../00 Docs/PLAN-R2-HYBRID_2026-09-22.md` | Hybrid plan revision 3: local Export Instock Snapshot succeeded; Apps Script queue written and tested offline but not deployed; Windows pickup, New Arrival and R2 not enabled |
-| `cloudflare-r2-guide.md` | Upload images to R2 · rclone setup · `image_link` formula |
-| `SP2-column-guide.md` | Meaning of every column in the stock sheet |
-| `OWARIN-SYSTEM-OVERVIEW.md` | Whole-system overview |
-| `suggested-price-redesign_SP2.md` | Origin of the SP-2 price formula |
-| `../../00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md` | Current Add/Cart/Orders/CLIENT/Label plan: W1–W3; requirements/QA/status board |
-| `owarin-webapp-plan_v4.1-EN.md` | Earlier web roadmap; phase numbers do not match the current project |
-| `sheet-consolidation-plan.md` | Sheet merge 10→7 (done — kept for the reasoning) |
-| `cleanup-plan.md` | Code/folder clean-up plan |
+| `../../00 Docs/PLAN-R2-HYBRID_2026-09-22.md` | แผน Hybrid revision 3: local Export Instock Snapshot สำเร็จแล้ว; Apps Script queue เขียนและทดสอบแบบ offline แล้ว แต่ยังไม่ deploy; Windows pickup, New Arrival และ R2 ยังไม่เปิดใช้ |
+| `cloudflare-r2-guide.md` | อัปรูปขึ้น R2 · ตั้งค่า rclone · สูตร `image_link` |
+| `SP2-column-guide.md` | ความหมายของทุกคอลัมน์ในชีตสต็อก |
+| `OWARIN-SYSTEM-OVERVIEW.md` | ภาพรวมระบบทั้งหมด |
+| `suggested-price-redesign_SP2.md` | ที่มาของสูตรคำนวณราคา SP-2 |
+| `../../00 Docs/PLAN-ADD-CART-ORDERS-LABEL_2026-09-28.md` | แผนปัจจุบัน Add/Cart/Orders/CLIENT/Label: W1–W3; requirements/QA/status board |
+| `owarin-webapp-plan_v4.1-EN.md` | roadmap เว็บรุ่นก่อน; หมายเลข phase ไม่ตรงกับโครงการปัจจุบัน |
+| `sheet-consolidation-plan.md` | แผนยุบชีต 10→7 (ทำเสร็จแล้ว — เก็บไว้ดูเหตุผล) |
+| `cleanup-plan.md` | แผนทำความสะอาดโค้ด/โฟลเดอร์ |
 
 ---
 
-## Routine operations
+## ขั้นตอนใช้งานประจำ
 
-**Add a new product** → fill it in the web app (`+` button) or type it in the sheet; the system makes the SKU/price.
+**เพิ่มสินค้าใหม่** → กรอกในเว็บแอป (ปุ่ม `+`) หรือพิมพ์ในชีต ระบบสร้าง SKU/ราคาให้เอง
 
-**Sell** → SHOP: add to cart → Create order → ORDERS Pending → Confirm sold → final review/Client/Label; SHOPEE: CART → Confirm sold → final review. Reprint from the original order without Confirm sold again.
+**ขายของ** → SHOP: ใส่ตะกร้า → Create order → ORDERS Pending → Confirm sold → final review/Client/Label; SHOPEE: CART → Confirm sold → final review. พิมพ์ซ้ำจาก orderเดิมโดยไม่ Confirm soldอีก
 
-**Upload new photos to R2** — current chain: `../../00 Docs/IMAGE-LIBRARY-RULES.md` §4 and `../../00 Docs/LESSONS.md` L5 (`new-arrivals-to-folders.ps1` → `upload-missing-r2.ps1`).
+**อัปรูปใหม่ขึ้น R2**
 
-> Steps 1–4 below are the OLD catalog chain (path `GGB All/GGB - POCKET BOOK`) and do not cover the current library; never use them for the library. Historical only.
+> ขั้นตอน 1–4 ด้านล่างเป็นสาย catalog เก่า ใช้ path `GGB All/GGB - POCKET BOOK` และไม่ครอบคลุมคลังรูปปัจจุบัน; อย่าใช้เป็นคำสั่งสำหรับ Hybrid/library รอบใหม่ ให้ดู [แผน R2 Hybrid](../../00%20Docs/PLAN-R2-HYBRID_2026-09-22.md) ก่อน (สถานะ: ออกแบบแล้ว ยังไม่ใช่ระบบที่ติดตั้งเสร็จ)
 
-1. Put images at `GGB All/GGB - POCKET BOOK/<sheet name>/<sheet name> (1).jpg`
-2. Export the GAME GUIDE BOOKS sheet as CSV over `_r2_upload/Update.csv`
+1. วางรูปที่ `GGB All/GGB - POCKET BOOK/<ชื่อตามชีต>/<ชื่อตามชีต> (1).jpg`
+2. export ชีต GAME GUIDE BOOKS เป็น CSV ทับ `_r2_upload/Update.csv`
 3. `python prepare_r2_upload.py`
 4. `rclone copy _r2_upload/catalog r2:owarin-images/catalog --progress`
 
-**New Export Instock command (installed; production batch never run):** live Apps Script has `Code.gs` v22 + `R2Upload.gs` and menu `📦 Inventory Tools → 🖼️ R2 Images → 📁 Export Instock snapshot`. It only writes a request into `R2 JOBS`; the Windows worker uses a service account stored outside the repo and passed an authenticated dry-run. Before a real run: export once, check the queue, run the worker with `--dry-run`. (`R2 JOBS` / `IMAGE UPLOADS` are scheduled for removal after v44 is live — AUDIT §8.)
+**คำสั่ง Export Instock รุ่นใหม่ (ติดตั้งแล้ว; ยังไม่รัน production batch):** live Apps Script มี
+`Code.gs` v22 + `R2Upload.gs` และเมนู `📦 Inventory Tools → 🖼️ R2 Images → 📁 Export Instock snapshot`.
+คำสั่งนี้เขียน request ลง `R2 JOBS` เท่านั้น; Windows worker ใช้ service account ที่เก็บนอก OneDrive
+และผ่าน authenticated dry-run แล้ว. ก่อนรันจริงต้องกด export หนึ่งครั้ง ตรวจ queue แล้วรัน worker `--dry-run`.
 
-**Facebook catalogue (historical manual upload, POCKET BOOK era)** — replaced by the nightly feed (LESSONS L5):
-1. Menu 📦 Inventory Tools → **📘 จัด FB CATALOGUE** (menu text as shown on screen)
+**อัปแค็ตตาล็อก Facebook** (ทำเฉพาะ POCKET BOOK)
+1. เมนู 📦 Inventory Tools → **📘 จัด FB CATALOGUE**
 2. → **✍️ สร้าง Description ใหม่**
 3. → **📤 สร้างชีต META EXPORT**
-4. On the META EXPORT tab → File → Download → CSV
-5. Commerce Manager → Data Sources → Upload (choose **Replace**)
+4. อยู่ที่แท็บ META EXPORT → File → Download → CSV
+5. Commerce Manager → Data Sources → Upload (เลือก **Replace**)
 
 ---
 
-## Rules to remember
+## กฎที่ต้องจำ
 
-- **Facebook catalogue scope (2026-09 text): POCKET BOOK + Instock only**, controlled in one place, `_metaInScope()` in `Code_v22.gs` — never write a separate filter. (Historical: the current feed covers all Instock products, 1,129 ready on 2026-10-07; check `_metaInScope()` in the live Code before relying on scope.)
-- **Status has 5 values:** `Instock` `Sold` `Auction` `Hold` `New Arrival` (changed 2026-09-18 — the dropdown had `Retake`, never used in real data, replaced by `New Arrival`; live sheet checked, no `Retake` rows) — options added in `Code_v22.gs` (SP2_DROPDOWNS) and `Index.html` (filter chips + status select + badge CSS).
-- **Item names:** `:` is converted to full-width `：` automatically on save (no spaces around it) — prevents errors with Windows file names, which forbid `:`.
-- **Never sort the FB CATALOGUE sheet** without selecting every column (it once shifted the whole sheet).
-- **`Series` is reserved for SP-2** (GAME INFO sheet) · **`Type` is reserved for category/format**.
-- **Copy Flags** use `MAP` and `COLOUR` (not the old POSTER / FC).
-- Before running a CSV-based script **always export the sheet fresh** — an old CSV once hid newly stocked items.
+- **ขอบเขต Facebook Catalogue = POCKET BOOK + Instock เท่านั้น** นิตยสารทำแยกทีหลัง
+  คุมที่ `_metaInScope()` ใน `Code_v22.gs` จุดเดียว — อย่าเขียนตัวกรองแยก
+- **Status มี 5 ค่า:** `Instock` `Sold` `Auction` `Hold` `New Arrival` (แก้ 2026-09-18 —
+  เดิม dropdown มี `Retake` ซึ่งไม่มีข้อมูลจริงใช้เลย เปลี่ยนเป็น `New Arrival` ตามที่ใช้งานจริง
+  ตรวจกับชีตสดแล้วว่าไม่มีแถวไหนเป็น `Retake`) — เพิ่ม option ใหม่ครบใน `Code_v22.gs`
+  (SP2_DROPDOWNS) และ `Index.html` (filter chips + status select + badge CSS) แล้ว
+- **ชื่อสินค้า:** `:` ถูกแปลงเป็น full-width `：` อัตโนมัติตอนบันทึก (ไม่มีเว้นวรรครอบตัว) —
+  กัน error เวลาต้องใช้ชื่อไฟล์บน Windows ที่ห้ามมี `:`
+- **ห้าม sort ชีต FB CATALOGUE** โดยเลือกไม่ครบทุกคอลัมน์ (เคยทำข้อมูลเลื่อนทั้งชีตมาแล้ว)
+- **`Series` สงวนให้ SP-2** (ชีต GAME INFO) · **`Type` สงวนให้หมวด/รูปแบบเล่ม**
+- **Copy Flags** ใช้ `MAP` และ `COLOUR` (ไม่ใช่ POSTER / FC แบบเก่า)
+- ก่อนรันสคริปต์ที่ใช้ CSV ให้ **export ชีตใหม่เสมอ** — CSV เก่าเคยทำให้มองไม่เห็นของที่เพิ่งเข้าสต็อก
 
 ---
 
-## `backup/` — old code versions
+## `backup/` — โค้ดเวอร์ชันเก่า
 
-Kept for rollback; never paste into Apps Script.
+เก็บไว้เผื่อย้อนกลับ ไม่ต้องอัปขึ้น Apps Script
 
-## `_archive/` — retired material
+## `_archive/` — ของที่เลิกใช้แล้ว
 
-Old plan versions · Supabase approach (replaced by Cloudflare R2) · old zip files
+แผนเวอร์ชันเก่า · แนวทาง Supabase (เปลี่ยนไปใช้ Cloudflare R2 แทน) · ไฟล์ zip เก่า
 
 
 ## Session36 — W1 candidate is separate from production v31

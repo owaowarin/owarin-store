@@ -34,7 +34,8 @@
 5. When the chat is long (~60 messages) or mistakes repeat, offer a new session with a handoff file and one paste line.
 
 ## 5. Working rules
-- Dates: never from model memory; take them from the machine (`Get-Date -Format 'yyyy-MM-dd (dddd)'` on the PC, `date +%F` in the cloud). ISO dates, C.E. only (no B.E.). Reports carry `จัดทำ: <date>` at the top; ages ("N days old") state the reference date.
+- Dates: never from model memory; take them from the machine (`Get-Date -Format 'yyyy-MM-dd (dddd)'` on the PC, `date +%F` in the cloud). ISO dates, C.E. only (no B.E.). Reports carry `Prepared: <date>` at the top (older files keep `จัดทำ:`); ages ("N days old") state the reference date.
+- Language (S55): every file Claude or another AI reads (rules, prompts, STATE, PLAN, LESSONS, logs, code comments) is English; chat with the owner is Thai; owner-facing manuals (`HANDBOOK*`) may stay Thai; owner quotes stay verbatim. Owner-wide rules (D36–D41) live in ads-optimizer `AGENTS.md` and must say the same as this file.
 - Targeted edits only; never rewrite a whole file to change one spot. Read the real file before concluding; never guess from a file name. Read back every write.
 - Destructive warning (delete/overwrite) on the first line of the instruction.
 - Every add/edit/delete/move/upload of data writes a CSV log in `04 Design Tools/logs/` (dry-run and commit runs; source → destination, before → after). No log = not done.

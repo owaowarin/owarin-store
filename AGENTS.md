@@ -2,7 +2,7 @@
 
 **Rules version 2026-10-07 · D41.** Owner-wide rules come from github owaowarin/ads-optimizer `AGENTS.md` (synced to `C:\Users\JIN\.claude\CLAUDE.md` and `C:\Users\JIN\.codex\AGENTS.md`); this file holds OWARIN STORE rules only.
 
-Working rulebook = `CLAUDE.md` (session protocol, token budget, paths, owner steps, close tiers); topic lessons = `00 Docs/LESSONS.md` (by trigger). `OWARI-MASTER-CONTEXT_EN_2026-09-13.md` is background: read only the § a rule names (`grep -n "^#"` first), never in full (S55-RULES-1, 2026-10-07; pre-S55 copy `00 Docs/_archive/rules/AGENTS_2026-10-07_pre-S55.md`).
+Working rulebook = `CLAUDE.md` (session protocol, token budget, paths, owner steps, close tiers); topic lessons = `00 Docs/LESSONS.md` (by trigger). `OWARI-MASTER-CONTEXT_EN_2026-09-13.md` is background (the `_TH_` file is the owner's Thai copy; AIs never read it): read only the § a rule names (`grep -n "^#"` first), never in full (S55-RULES-1, 2026-10-07; pre-S55 copy `00 Docs/_archive/rules/AGENTS_2026-10-07_pre-S55.md`).
 
 ## Every task
 

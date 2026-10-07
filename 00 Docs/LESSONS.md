@@ -1,6 +1,6 @@
 # LESSONS — OWARIN STORE (topic rules; read ONLY the section whose trigger matches the task)
 
-จัดทำ: 2026-10-07 — moved verbatim from CLAUDE.md in Session55 (S55-RULES-1). Full pre-move copy: `00 Docs/_archive/rules/CLAUDE_2026-10-07_pre-S55.md`. Each section keeps its original date label.
+Prepared: 2026-10-07 — moved verbatim from CLAUDE.md in Session55 (S55-RULES-1). Full pre-move copy: `00 Docs/_archive/rules/CLAUDE_2026-10-07_pre-S55.md`. Each section keeps its original date label.
 
 Find a section with: `grep -n "^## L" "00 Docs/LESSONS.md"`, then read only that range.
 
