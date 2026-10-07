@@ -39,6 +39,7 @@
 - Targeted edits only; never rewrite a whole file to change one spot. Read the real file before concluding; never guess from a file name. Read back every write.
 - Destructive warning (delete/overwrite) on the first line of the instruction.
 - Every add/edit/delete/move/upload of data writes a CSV log in `04 Design Tools/logs/` (dry-run and commit runs; source → destination, before → after). No log = not done.
+- Tool-log CSVs in `04 Design Tools/logs/` are git-ignored (`*.csv`): add each log you write with `git add -f "<file>"` after checking it holds names, sizes, hashes and PASS/FAIL only (no secrets).
 - Owner decisions → `04 Design Tools/logs/decisions_<date>.csv` (CLOSED/OPEN) + affected docs in the same pass. Read all `decisions_*.csv` before proposing options.
 - One writer per change; no new agents/chats unless the owner authorizes it. Mistakes, FAILs and owner corrections → `_logs/INCIDENTS.csv`.
 - Repeatable checks are script files in `04 Design Tools/` called with arguments, never long inline `python3 -c` / `powershell -Command`.
