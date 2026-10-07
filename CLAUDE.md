@@ -1,6 +1,6 @@
 # OWARIN STORE — rules for Claude
 
-**Rules version 2026-10-07 · D41 · S55.** Restructured in Session55 (decision S55-RULES-1): this file = how to work; topic lessons = `00 Docs/LESSONS.md` (read by trigger only); full pre-S55 text = `00 Docs/_archive/rules/CLAUDE_2026-10-07_pre-S55.md`. Owner-wide rules: `AGENTS.md` § Owner-wide rules.
+**Rules version 2026-10-07 · D42 · S55.** Restructured in Session55 (decision S55-RULES-1): this file = how to work; topic lessons = `00 Docs/LESSONS.md` (read by trigger only); full pre-S55 text = `00 Docs/_archive/rules/CLAUDE_2026-10-07_pre-S55.md`. Owner-wide rules: `AGENTS.md` § Owner-wide rules.
 
 ## 1. Session protocol — BEFORE the first reply (S55)
 1. **Find the file.** If the owner names a file not in the working tree: `git fetch origin`, search every remote branch (`git ls-tree -r --name-only origin/<branch>`), check out the branch that has it. Never reply "not found" before this.
@@ -35,7 +35,7 @@
 
 ## 5. Working rules
 - Dates: never from model memory; take them from the machine (`Get-Date -Format 'yyyy-MM-dd (dddd)'` on the PC, `date +%F` in the cloud). ISO dates, C.E. only (no B.E.). Reports carry `Prepared: <date>` at the top (older files keep `จัดทำ:`); ages ("N days old") state the reference date.
-- Language (S55): every file Claude or another AI reads (rules, prompts, STATE, PLAN, LESSONS, logs, code comments) is English; chat with the owner is Thai; owner-facing manuals (`HANDBOOK*`) may stay Thai; owner quotes stay verbatim. Owner-wide rules (D36–D41) live in ads-optimizer `AGENTS.md` and must say the same as this file.
+- Language (S55): every file Claude or another AI reads (rules, prompts, STATE, PLAN, LESSONS, logs, code comments) is English; chat with the owner is Thai; owner-facing manuals (`HANDBOOK*`) may stay Thai; owner quotes stay verbatim. Owner-wide rules (D36–D42) live in ads-optimizer `AGENTS.md` and must say the same as this file.
 - Targeted edits only; never rewrite a whole file to change one spot. Read the real file before concluding; never guess from a file name. Read back every write.
 - Destructive warning (delete/overwrite) on the first line of the instruction.
 - Every add/edit/delete/move/upload of data writes a CSV log in `04 Design Tools/logs/` (dry-run and commit runs; source → destination, before → after). No log = not done.

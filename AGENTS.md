@@ -1,6 +1,6 @@
 # AGENTS.md — OWARIN STORE workspace (Stream B)
 
-**Rules version 2026-10-07 · D41.** Owner-wide rules come from github owaowarin/ads-optimizer `AGENTS.md` (synced to `C:\Users\JIN\.claude\CLAUDE.md` and `C:\Users\JIN\.codex\AGENTS.md`); this file holds OWARIN STORE rules only.
+**Rules version 2026-10-07 · D42.** Owner-wide rules come from github owaowarin/ads-optimizer `AGENTS.md` (synced to `C:\Users\JIN\.claude\CLAUDE.md` and `C:\Users\JIN\.codex\AGENTS.md`); this file holds OWARIN STORE rules only.
 
 Working rulebook = `CLAUDE.md` (session protocol, token budget, paths, owner steps, close tiers); topic lessons = `00 Docs/LESSONS.md` (by trigger). `OWARI-MASTER-CONTEXT_EN_2026-09-13.md` is background (the `_TH_` file is the owner's Thai copy; AIs never read it): read only the § a rule names (`grep -n "^#"` first), never in full (S55-RULES-1, 2026-10-07; pre-S55 copy `00 Docs/_archive/rules/AGENTS_2026-10-07_pre-S55.md`).
 
@@ -14,12 +14,13 @@ Working rulebook = `CLAUDE.md` (session protocol, token budget, paths, owner ste
 5. Close the session per `CLAUDE.md` §7 (tier S / M / L); a tier-L task missing an item is not finished.
 6. Delivery priorities (master §5.2.1) and the model handoff rule: `00 Docs/LESSONS.md` L1, L2. One writer; no new agents/chats unless authorized.
 
-## Owner-wide rules (2026-10-07 · D41, full text in ads-optimizer `AGENTS.md`)
+## Owner-wide rules (2026-10-07 · D42, full text in ads-optimizer `AGENTS.md`)
 - D36: every task reply starts with `🧭 <model> · <effort> — <reason> · <fits ✅ | how to switch>`; never claim to have switched.
 - D37: OneDrive is gone and there is no cloud backup; anything not pushed to GitHub exists once.
 - D38: chat in Thai; files, rules and skills in English.
 - D39: anything a cloud session must read from the PC comes as a file the owner commits and pushes; the owner pastes only the commit id.
 - D40/D41: plain Thai, numbered steps, one action per line, full PC paths (`C:\Users\JIN\...`), paste-ready text in the chat. Close-out: list every leftover with importance + impact, fix small ones, ask once "fix now or plan"; next prompt saved in `prompts/<task>.md`; mistakes, FAILs and owner corrections → `_logs/INCIDENTS.csv`.
+- D42 (= this repo's S55 rules): session protocol (search every remote branch before "not found"; read only rules + STATE stream + handoff; evidence before questions; one read-only/dry-run command per owner step, ≤ 1 question per message; "not found/unclear" → answer only that point + INCIDENTS), reading budget, session close tiers S/M/L, every AI-read file English, handoff template. Here: `CLAUDE.md` §1, §2, §7, `prompts/_TEMPLATE_handoff.md`.
 
 ## Code
 

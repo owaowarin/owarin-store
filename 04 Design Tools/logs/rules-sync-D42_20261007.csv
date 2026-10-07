@@ -1,0 +1,5 @@
+timestamp,actor,operation,path,before,after
+2026-10-07T08:16:52+07:00,claude-cloud-opus,"edit (D41 -> D42 sync)","CLAUDE.md",size 8787 sha256 71fe4813f5d5b18d,size 8787 sha256 9a8385bd56e6d60a
+2026-10-07T08:16:52+07:00,claude-cloud-opus,"edit (D41 -> D42 sync)","AGENTS.md",size 9289 sha256 f40d92c3506caaab,size 9745 sha256 73c5c84e17008d30
+2026-10-07T08:16:52+07:00,claude-cloud-opus,"edit (D41 -> D42 sync)","00 Docs/HANDOFF_2026-10-07.md",size 6299 sha256 2b6e1b451334b150,size 6621 sha256 cb898dc32bc0e068
+2026-10-07T08:16:52+07:00,claude-cloud-opus,"edit (D41 -> D42 sync)","04 Design Tools/logs/decisions_2026-10-07.csv",size 3569 sha256 8fabd5529580195f,size 3917 sha256 e85a9207ac2c0187
