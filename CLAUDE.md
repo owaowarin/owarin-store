@@ -1,185 +1,73 @@
-# OWARIN STORE — กฎถาวรสำหรับ Claude
+# OWARIN STORE — rules for Claude
 
-**Rules version 2026-10-07 · D41** — router and owner-wide rules: `AGENTS.md` (§ Owner-wide rules).
+**Rules version 2026-10-07 · D41 · S55.** Restructured in Session55 (decision S55-RULES-1): this file = how to work; topic lessons = `00 Docs/LESSONS.md` (read by trigger only); full pre-S55 text = `00 Docs/_archive/rules/CLAUDE_2026-10-07_pre-S55.md`. Owner-wide rules: `AGENTS.md` § Owner-wide rules.
 
-## Session protocol — run this BEFORE the first reply (added 2026-10-07 · S55, owner order after Session55 retro)
+## 1. Session protocol — BEFORE the first reply (S55)
+1. **Find the file.** If the owner names a file not in the working tree: `git fetch origin`, search every remote branch (`git ls-tree -r --name-only origin/<branch>`), check out the branch that has it. Never reply "not found" before this.
+2. **Read only:** this file → `00 Docs/STATE.md` (the stream you work on) → the handoff prompt. Nothing else until a line there points to it.
+3. **Evidence before questions.** Before asking the owner about files, folders, photos, sheet or app state, search repo evidence: `04 Design Tools/logs/` (plan/result CSVs, `image-inventory-cache.json`), `_logs/` (B1 moves, sheet-audit JSON), `decisions_*.csv`, HANDOFF. Tell the owner what it says and its date; ask only what the cloud cannot see. A CLOSED decision is never re-asked.
+4. **Owner step = one command that produces evidence** (read-only / dry-run, full line in the chat). At most ONE question or ONE action per message.
+5. **Owner says "not found / unclear" or is frustrated:** stop, re-read the evidence, answer only that point with one concrete step, log the miss in `_logs/INCIDENTS.csv` in the same turn.
+6. **Handoff out:** write `prompts/<task>.md` from `prompts/_TEMPLATE_handoff.md`, commit + push, give the owner one paste line that names the branch.
 
-Why: Session55 lost several owner round-trips (handoff file on another branch, 7 questions at once, owner sent to `Downloads` and to the dead Desktop path although repo evidence already showed where the photos were). Steps:
-1. **Find the file.** If the owner names a file that is not in the working tree, run `git fetch origin` and search every remote branch (`git ls-tree -r --name-only origin/<branch>`); check out the branch that has it. Never reply "file not found" before this.
-2. **Read** `CLAUDE.md`, `00 Docs/STATE.md`, then the handoff prompt. A handoff in the format of `prompts/_TEMPLATE_handoff.md` lists known facts; do not re-ask them.
-3. **Evidence before questions.** Before asking the owner anything about files, folders, photos, sheet or app state, search the repo evidence first: `04 Design Tools/logs/` (plan/result CSVs, `image-inventory-cache.json`), `_logs/` (B1 moves, sheet-audit JSON), decisions CSVs, HANDOFF. Tell the owner what the evidence says and its date; ask only for what the cloud cannot see.
-4. **Owner step = one command that produces evidence.** Prefer a read-only / dry-run command (full line, `cd "<full path>"` first, in the chat) whose output answers the question, over "go and look for X". At most ONE question or ONE action per message.
-5. **Paths after B1 (2026-10-07).** Never send the owner to `...\Desktop\etc\OWARIN\...` (dead). Photo library = `C:\Users\JIN\OWARIN-DATA\All Products` (same as `C:\Users\JIN\owarin-store\All Products`, junction); new photos inbox = `C:\Users\JIN\Downloads` (default `-SourceDir` of `new-arrivals-to-folders.ps1`); tools = `C:\Users\JIN\owarin-store\04 Design Tools`. When the owner asks "where is X", answer with the full path AND say the old Desktop path is gone.
-6. **Owner frustrated or says "not found / unclear".** Stop, re-read the evidence, and answer only that point with one concrete step (§ Owner-instruction checklist item 4). Log the miss in `_logs/INCIDENTS.csv` in the same turn.
-7. **Handoff out.** Write the next prompt from `prompts/_TEMPLATE_handoff.md`, commit and push it, and give the owner one paste line that includes the branch: `git checkout <branch>` then `ทำตาม prompts/<file>.md`.
+## 2. Token budget (owner: effective, value-for-money tokens)
+- Start-of-session reading ≤ this file + one STATE stream + one handoff. Never read `OWARI-MASTER-CONTEXT_*` or a LESSONS/PLAN/HANDOFF file in full: `grep -n "^#"` then read one section.
+- Look at name + size + date before opening; files > 50 KB → grep only. Never print large files/tables into the chat.
+- Do not re-run passed checks unless the change touches them (money/stock failure + retry tests are never skipped).
+- Prefer one validated step over several speculative ones; no new prompt/doc files the task does not need.
 
-## Layout (B1, 2026-10-07)
+## 3. Paths (B1, 2026-10-07)
+- Code + docs: `C:\Users\JIN\owarin-store` (github owaowarin/owarin-store, private). Tools: `C:\Users\JIN\owarin-store\04 Design Tools`.
+- Media/data: `C:\Users\JIN\OWARIN-DATA`, reached through junctions of the same names in the repo folder (`All Products`, `_r2_upload`, `GGB Online Files`, `_fb_albums`, `Supplier`, `_exports`, `Facebook - Catalouge Project`). Photo library = `C:\Users\JIN\OWARIN-DATA\All Products`. New photos inbox = `C:\Users\JIN\Downloads` (default `-SourceDir` of `new-arrivals-to-folders.ps1`).
+- Secrets: `C:\Users\JIN\Documents\OWARIN-secrets` (Google key `owarin-store\credential\owarin-store-api-3588e4e975d7.json` → `--credentials`); never open, print or commit a secret.
+- Other: web repo `C:\Users\JIN\owarin-retro-guides_1` (on hold) · LAB `C:\Users\JIN\owarin-back-house-lab` (own repo).
+- The old `...\OneDrive\Desktop\etc\OWARIN\...` path is DEAD: never send the owner there; when asked "where is X" give the full new path and say the old one is gone.
+- ⚠️ Never delete a junction with `Remove-Item -Recurse` / Explorer Delete (deletes the real files); use `cmd /c rmdir "<path>"`.
+- ⚠️ Identical images may be hard links: never edit an image in place, save as a new file.
+- No cloud backup (D37): only `git push` backs up code/docs; commit on the PC with `C:\Users\JIN\ads-optimizer\tools\pc\b1-store-commit.ps1`.
 
-Layout since B1 (2026-10-07, `PLAN_2026-10-07_B1_repo-data-split.md`): code + docs = this repo `C:\Users\JIN\owarin-store` (github owaowarin/owarin-store, private) · media/data = `C:\Users\JIN\OWARIN-DATA` (reached through junctions of the same names in this folder: `All Products`, `_r2_upload`, `GGB Online Files`, `_fb_albums`, `Supplier`, `_exports`, `Facebook - Catalouge Project`) · secrets = `C:\Users\JIN\Documents\OWARIN-secrets` (Google key: `owarin-store\credential\owarin-store-api-3588e4e975d7.json` → pass it to `--credentials`; never open, print or commit a secret) · web repo `C:\Users\JIN\owarin-retro-guides_1` (on hold) · LAB `C:\Users\JIN\owarin-back-house-lab` (separate project, own repo). The old `...\OneDrive\Desktop\etc\OWARIN\OWARIN STORE\OWARIN STORE` path is dead.
-⚠️ Junctions: never delete a junction folder with `Remove-Item -Recurse` / Explorer "Delete" — it can delete the real files in OWARIN-DATA; to remove a junction use `cmd /c rmdir "<path>"`.
-⚠️ Hard links (B1-H): identical images in OWARIN-DATA may share one copy on disk; never edit an image in place — save as a new file (every tool here already does).
-No cloud backup (OneDrive uninstalled 2026-10-07, D37): code/docs are backed up only by `git push`; commit with `C:\Users\JIN\ads-optimizer\tools\pc\b1-store-commit.ps1` (guards: size, secret names/values).
+## 4. Owner-instruction checklist (Session54 retro, `00 Docs/RETRO_2026-10-07_claude-mistakes.md`)
+1. One action per line, short numbered steps; exact button, menu path, column or on-screen text — never "the top row" without saying of what.
+2. Every command is a full line starting with `cd "<full path>"` when a folder matters; never a folder path alone. Check the owner's git branch before any `git pull`.
+3. Paste-ready code goes in the message text, never only in tool output; never write "above".
+4. When a step is unclear or not found, answer ONLY that step first, in more detail.
+5. When the chat is long (~60 messages) or mistakes repeat, offer a new session with a handoff file and one paste line.
 
-## วันที่
+## 5. Working rules
+- Dates: never from model memory; take them from the machine (`Get-Date -Format 'yyyy-MM-dd (dddd)'` on the PC, `date +%F` in the cloud). ISO dates, C.E. only (no B.E.). Reports carry `จัดทำ: <date>` at the top; ages ("N days old") state the reference date.
+- Targeted edits only; never rewrite a whole file to change one spot. Read the real file before concluding; never guess from a file name. Read back every write.
+- Destructive warning (delete/overwrite) on the first line of the instruction.
+- Every add/edit/delete/move/upload of data writes a CSV log in `04 Design Tools/logs/` (dry-run and commit runs; source → destination, before → after). No log = not done.
+- Owner decisions → `04 Design Tools/logs/decisions_<date>.csv` (CLOSED/OPEN) + affected docs in the same pass. Read all `decisions_*.csv` before proposing options.
+- One writer per change; no new agents/chats unless the owner authorizes it. Mistakes, FAILs and owner corrections → `_logs/INCIDENTS.csv`.
+- Repeatable checks are script files in `04 Design Tools/` called with arguments, never long inline `python3 -c` / `powershell -Command`.
+- Status lives in STATE, scope/QA in PLAN, operational steps in HANDBOOK, attempts/results in the task CSV + Implementation log. Progress reports = delivered owner-visible outcomes, not volume of edits.
 
-- ห้ามใช้วันที่จากความจำของโมเดล ทุกครั้งที่จะเขียนวันที่ลงไฟล์ ต้องรัน
-  `Get-Date -Format 'yyyy-MM-dd (dddd)'` ก่อน แล้วใช้ค่าที่ได้
-- เอกสารทุกฉบับใช้วันที่แบบ ISO (2026-09-12) และ ค.ศ. เสมอ ห้ามปน พ.ศ.
-- ไฟล์สรุป/รายงานต้องมีบรรทัด "จัดทำ: <วันที่จากเครื่อง>" ที่หัวไฟล์
-- เลขอายุไฟล์ ("เก่าไป N วัน") คำนวณจากวันที่เครื่อง ณ ตอนเขียน และเขียนกำกับว่านับจากวันไหน
+## 6. Hard safety (sheet / images)
+- Never click **"🔄 Rebuild ALL Product IDs"** (`forceRegenerateAllSKUs`); only **"🆕 Fill missing Product IDs (safe)"** (`regenerateAllSKUs`).
+- Change a Product ID by typing over column B; never edit Publisher/Item name/Condition to make onEdit recompute it (rows without a RESTOCK sibling get a new 3-digit number from `_buildSKU`).
+- Image library rules: `00 Docs/IMAGE-LIBRARY-RULES.md` — read before touching image files. File/folder names equal the sheet `Item name` letter for letter; never convert full-width `：／×⨯・｜` to ASCII. Sort photos only with `04 Design Tools/new-arrivals-to-folders.ps1`, dry-run first, never overwrite.
+- Keep exactly ONE Meta catalogue; never delete the PID CHANGES or FB CATALOGUE ARCHIVE tabs (detail: LESSONS L5).
 
-## การทำงาน
+## 7. Session close — scaled to the task (S55)
+- **S — answer only, no file change:** nothing to write.
+- **M — docs / rules / prompts / logs only:** log CSV row (if data or rules changed) + one HANDOFF line + INCIDENTS rows for misses + commit and push. STATE only if a stream's next step changed.
+- **L — code release, sheet/data change, live action (Apps Script, Sheet, Meta, R2):** full list — (1) log CSV; (2) decisions CSV; (3) plan board tick + evidence; (4) STATE.md overwrite (≤ 80 short lines; per stream status, ONE next step, pointers); (5) one-page HANDOFF `00 Docs/HANDOFF_<date>.md`; (6) related files in the same pass (README, rules, version pairs `Code_vNN`+`WebApp_vNN` with previous pair → `backup/` + stub, tests re-pointed); (7) rules updated in English, dated; (8) read-back verification (do not re-open live services just to close; re-read a service before a live claim); (9) live actions recorded with time, who clicked, what was observed.
+- Archive superseded material by move into `_archive/`, never delete. Dated HANDOFF/IMPLEMENTATION files are lookup evidence: read only the last section.
 
-- แก้แบบ targeted ห้ามเขียนไฟล์ใหม่ทั้งไฟล์เพื่อแก้จุดเดียว
-- อ่านไฟล์จริงก่อนสรุปเสมอ ห้ามเดาจากชื่อไฟล์
-- อ่านแบบประหยัด: ดูชื่อ+ขนาด+วันที่ก่อน อ่านเต็มเฉพาะที่จำเป็น ไฟล์เกิน 50 KB ใช้ grep หาหัวข้อ
-- After every write, read the file back and confirm (OneDrive was removed 2026-10-07; the rule stays).
-- ก่อนลบหรือเขียนทับ ต้องเตือนเป็นบรรทัดแรก
-- **ทุกงานที่แก้ เพิ่ม ลบ ย้าย หรืออัปโหลดข้อมูล ต้องเขียน log CSV ลง `04 Design Tools/logs/` ทุกครั้ง**
-  ทั้งรอบ dry-run และรอบ commit · คอลัมน์อย่างน้อย: ต้นทาง → ปลายทาง, ก่อน → หลัง
-  **ไม่มี log = ถือว่างานยังไม่เสร็จ**
-- **Issue and model handoff rule (owner decision 2026-10-03):** Record every issue, failed attempt, fix, retry, result, and recovery reference in the task CSV and Implementation log. If GPT-5.6 Sol / High cannot resolve a reproducible issue, record the remaining problem and exact revision, then hand the repair to GPT-6 Astra / High. Do not claim a switch or create an agent/chat automatically; keep one writer per change.
-- การตัดสินใจของเจ้าของงานที่ปิดแล้ว ให้บันทึกลง `04 Design Tools/logs/decisions_<วันที่>.csv`
-  และลงเอกสารที่เกี่ยวข้องทันทีในรอบเดียวกัน
-- **อ่าน `decisions_*.csv` ทุกไฟล์ก่อนเสนอทางเลือกใด ๆ** ถ้าเรื่องนั้นมีสถานะ CLOSED อยู่แล้ว
-  ห้ามเสนอทางเลือกอื่นและห้ามถามทวน
-- จบทุกรอบงานต้อง append หัวข้อลง `00 Docs/HANDOFF_<วันที่>.md` (สั้น ไม่เกินหนึ่งหน้า รายละเอียดยาวไปไว้ใน log) และอัปเดตเอกสารที่เกี่ยวข้องในรอบเดียวกัน
-
-## Delivery priorities and lessons — owner update 2026-10-03
-
-- Apply the six ordered priorities in master §5.2.1; AGENTS is the router. For this project keep one writer and no new agents/chats unless explicitly authorized separately.
-- When the owner asks for progress, report delivered user actions, verified environment/revision and remaining outcomes; do not equate code edits or documentation volume with a completed workflow.
-- When an old plan/prompt says a completed phase is unstarted, update active guidance from dated evidence; preserve historical logs and do not rerun the old phase merely to match stale wording.
-- When a relevant gate has passed and the next edit adds no related risk, proceed; rerun checks only for affected behavior or a required release gate. Never omit stock/money failure/retry tests to save effort.
-- When a business rule is closed (Shipping Cost=subsidy, Auction unavailable, CLIENT reuse), propagate it to schema/UI/test contracts in the same pass; do not ask the owner again.
-- Keep current status in STATE, requirements/priorities/QA in PLAN, operational steps in HANDBOOK, and detailed attempts/results/recovery in the task CSV plus a linked Implementation summary. Update only affected references; no repeated full reports.
-
-## Session-close checklist — MANDATORY every session, every time (added 2026-10-02)
-
-"Done" means all of these are done in the same pass. A task with any unticked item is NOT finished; say which one is missing instead of closing the task.
-1. **Log CSV** in `04 Design Tools/logs/` for every edit / upload / delete / move / deploy / trigger change (source → destination, before → after). Name: `<task>_<YYYYMMDD>.csv`.
-2. **Decisions** the owner closed → `decisions_<date>.csv` (CLOSED/OPEN rows). Read all `decisions_*.csv` before proposing options.
-3. **Plan board** (the plan file's status table): tick the step, add the evidence (file, byte size, row count, screenshot).
-4. **STATE.md** overwritten (≤ 80 lines): per stream = status, ONE next step, pointers.
-5. **HANDOFF** `00 Docs/HANDOFF_<date>.md`: one page (done / state / decisions / next step / risks). Detail goes in the log, not here.
-6. **Related files in the same pass**: README tables, CLAUDE.md / AGENTS.md rules, version pairs (`Code_vNN` + `WebApp_vNN`, previous pair → `backup/` + stub), tests re-pointed to the live version.
-7. **Rules**: if the session taught a new rule or invalidated one, edit CLAUDE.md / AGENTS.md now, in English, dated.
-8. **Verify** by reading back the changed artifact. For a docs-only change check files/links/history/source hashes; do not re-open live services just to close the checklist. Before a live action or fresh live claim re-read that service; date historical evidence explicitly.
-9. **Live-system actions** (Apps Script, Sheet, Meta) are recorded with time + result: who clicked, what was observed.
-
-## Apps Script integrity hashes (added 2026-10-05)
-
-For new request or proof hashes containing user text, pass `Utilities.Charset.UTF_8` explicitly to `Utilities.computeDigest`. The default charset in the isolated test project replaced Thai characters with `?`, causing both a false journal-proof mismatch and colliding payload hashes. Never rewrite historical hashes/events; keep a versioned legacy verifier and compare the exact original payload on same-ID replay. Test two distinct Unicode payloads and an old unfinished request before accepting a hash migration.
-
-## Browser / Apps Script editor safety (added 2026-10-02)
-
-- In the Apps Script code editor never press keys (Enter, typing, shortcuts) unless the cursor is deliberately placed there; a stray click + Enter edits live code (happened 2026-10-02, undone before saving). Select functions only by clicking the dropdown option, and confirm the dropdown is open (screenshot) before clicking an item.
-- After any editor session confirm the title bar reads "Saved to Drive" with no unsaved edit, and that line 2 still shows the intended `Code.gs vNN` header.
-- Google's OAuth consent window opens as a separate Chrome window the browser tool cannot see: the owner clicks Allow.
-
-## STATE.md — read first, token-saving rules (added 2026-10-01)
-
-- Read `00 Docs/STATE.md` FIRST in every session; open any other file only when a STATE.md line points to it. Do not browse the folder.
-- At the end of every session OVERWRITE `00 Docs/STATE.md` (never append; keep it under 80 lines): per stream = current status, ONE next step, closed decisions, pointers to detail files.
-- Before starting work in a project folder, archive superseded material (old handoffs, closed plans) into `_archive/` by move, never delete; STATE.md lists what is pending.
-- Dated HANDOFF/IMPLEMENTATION logs are evidence for lookup only; read just the last section when STATE.md points to them.
-
-## รูปสินค้า / คลังรูป
-
-- กฎคลังรูปทั้งหมดอยู่ที่ `00 Docs/IMAGE-LIBRARY-RULES.md` อ่านก่อนแตะไฟล์รูปทุกครั้ง
-- ชื่อไฟล์/โฟลเดอร์ต้องตรงกับคอลัมน์ `Item name` ในชีตแบบตรงตัวอักษรต่ออักษร
-  ห้ามแปลงอักขระเต็มความกว้าง `：／×⨯・｜` เป็น ASCII
-- จัดรูปด้วย `04 Design Tools/new-arrivals-to-folders.ps1` เท่านั้น
-  **ต้อง dry-run ดูตารางก่อนเสมอ** ห้ามเขียนทับไฟล์ปลายทางทุกกรณี
-
-## เครื่องมือ/สคริปต์
-
-- งานตรวจที่ต้องรันซ้ำได้ ให้เขียนเป็นไฟล์สคริปต์ใน `04 Design Tools/` แล้วเรียกด้วย argument
-  ห้ามเขียน `python3 -c` / `powershell -Command` แบบ inline ยาว ๆ เพราะ whitelist ไม่ได้ ต้องกดอนุมัติทุกครั้ง
-- ห้ามกดเมนู **"🔄 Rebuild ALL Product IDs"** (`forceRegenerateAllSKUs`) เด็ดขาดทุกกรณี ใช้ได้แค่
-  **"🆕 Fill missing Product IDs (safe)"** (`regenerateAllSKUs`)
-- แก้ Product ID ให้พิมพ์ทับคอลัมน์ B ตรง ๆ ห้ามแก้ Publisher/Item name/Condition เพื่อหวังให้ onEdit คำนวณให้
-  (แถวที่ไม่มีพี่น้อง RESTOCK ร่วม base title จะได้เลข 3 หลักใหม่ทันทีจาก `_buildSKU` ไม่ใช่เลขเดิม)
-
-## Meta feed / R2 image publish chain (v27, 2026-09-25 — replaces the earlier chain)
-
-New arrival or edited product:
-1. Edit the row in GAME GUIDE BOOKS or MAGAZINE as usual — if Product ID changes, a toast confirms it was logged in the **PID CHANGES** tab; nothing else to do.
-2. Sort photos with `new-arrivals-to-folders.ps1` (unchanged).
-3. PowerShell at `04 Design Tools`: `.\upload-missing-r2.ps1` (dry-run) → `.\upload-missing-r2.ps1 -Commit` — finishes the whole R2 side in one command; the last line must read `read-back identical: True`.
-4. **Automatic since 2026-10-02 (Code v28):** a nightly Apps Script trigger runs `refreshMetaFeedAuto` between 04:00 and 05:00 (Asia/Bangkok), before Meta's ~05:50 pull. Check the **REFRESH LOG** tab: the newest row must be `OK` (Ready = Instock count). `GUARD` = Ready fell below 80% of the current META EXPORT (tab left untouched), `ERROR` / `BUSY` = failed; each of these also sends an e-mail. Manual click is only for same-day changes: **📦 Inventory Tools → 🚀 Refresh Meta feed** — the popup's first line must read `✅ Every Instock product is in the feed (N)`; a `⚠️ … NOT in the feed` line names which product and what to fix.
-5. Meta pulls the published feed on its own (~05:50 Bangkok, daily).
-
-Sold: change Status to Sold → it leaves the feed at the next nightly refresh (or click **🚀 Refresh Meta feed** for same-day) — Meta then removes it automatically at its pull.
-
-**Single-catalogue rule (decided 2026-10-02):** keep exactly ONE Meta catalogue — currently `OWARIN STORE` (1993212747992458, feed 1048143251023664). Facebook requires the commerce account (`OWA — OWARIN's STORE`, 1342667447501637) to keep at least one catalogue, so the last catalogue cannot be deleted (Meta greys it out). Routine updates go through the existing daily feed; never create a second catalogue for them. Only when a catalogue truly must be replaced: (1) create the new one with its creation date (YYYY-MM-DD) in the name; (2) recreate its feed from META EXPORT (gid 355347627) with the daily 06:00 REPLACE schedule; (3) connect it to the commerce account and re-point any ads / product sets; (4) verify the first pull (detected = persisted, 0 invalid); (5) only then delete the old catalogue. Log every step. Any new feed or manual upload also carries its date in its name.
-
-**Feed content rules (Code v30, 2026-10-02):** (1) Identical copies are listed ONCE: same base title + Publisher + Original (cover price) + Condition + Copy Flags → one row (first complete copy), `quantity_to_sell_on_facebook` = number of copies; any difference in those fields = separate rows. When the listed copy sells, the next one takes over at the next refresh. (2) Titles never carry `(RESTOCK-NN)` (stripped at the v20b write and again at export). (3) A title with no lowercase Latin letter is exported Capitalised (GAMEMAG → Gamemag; PS2/RPG/VII untouched); the sheet name is not changed. (4) FB CATALOGUE `Price` / `Description` columns ARE the Meta price/description fields by design (header match is case-insensitive); the `price (Meta format)` columns are legacy and unused. The 80% drop guard compares rows, so a change that merges many copies must be checked against it (first v30 run: 1,337 → 1,162 expected, guard minimum 1,070).
-
-PID changes are logged in **PID CHANGES**; never delete that tab. Orphaned FB CATALOGUE rows (old PID no longer in inventory) are auto-archived to **FB CATALOGUE ARCHIVE**; never delete that tab either. Plan: `00 Docs/PLAN-META-PIPELINE-HARDENING_2026-09-25.md`.
-
-
-## Session41 lessons — 2026-10-04
-
-- google.script.run may reorder object keys; exact-payload hash recovery must use stored original intent server-side, owner-only and ID-only, with durable client recovery mode. Never substitute a normalized payload/hash.
-- Read mutable transaction/journal/capacity metadata only after acquiring its shared lock, including recovery and QA helpers. Duplicate isolated helper executions are real evidence; server cache mechanism remains inference until native proof establishes it.
-- A rejected reconciliation hash is a stop before writes. Compare fresh native values with export, diagnose server hash/serialization, preserve every original event/position, and append explicit proven gap notes only. Never skip blank journal rows to declare success.
-
-
-## Monetary readback (added 2026-10-05, R7)
-
-For cent-valued W1 totals use integer-cent addition. Keep the exact formula and typed finite-number guard, with a tightly bounded tolerance only for floating representation noise; reject one-cent discrepancies and preserve historical intent/hash. Verify actual Apps Script getValues before attributing a rounded XLSX cache difference to the transaction engine: export and native values can differ even when native equals V8. A cent-readback mock is a compatibility test, not evidence of a native failure. Exercise affected legacy/fixed-ID retry paths and an actual isolated decimal flow before sign-off.
-
-## CLIENT / label native verification lessons (added 2026-10-06)
-
-- Do not trust a mock or RichText API to preserve identifiers or literal formula prefixes. Native Sheets coerced zero-prefixed phone/postal code and evaluated an equal prefix. For CLIENT writes use escaped plain-text values and require exact typed value plus empty-formula readback, including after-effect retry. Retain observed before values/formulas and original durable intent; never silently repair an unknown row or rewrite old events.
-- Apps Script HTML partials must be valid HTML. For shared JavaScript use a valid script wrapper with bounded include extraction. Source transfers must compare the complete saved bytes/LF hashes, not a truncated DOM read; test generated child print-document JavaScript as well as its outer template.
-- Keep W2 browser recovery records to Request IDs, not customer contact payloads. A CLIENT failure after sale is a separate original-intent retry. Preserve SOLD and the committed recipient; never create a second sale to repair a customer record.
-- Guard shared async Orders/search results with a request generation; clear old actionable cards while loading and discard stale successes/errors.
-- READY preview and a print invocation do not prove exported PDF page size or physical output. Record the browser/driver limitation and keep that gate OPEN until actual PDF/printer evidence is inspected. Do not rerun transactions or fixtures to test printing.
-
-## Print environment distinction (added 2026-10-06)
-
-An empty IAB native-app inventory does not prove the Windows computer-use plugin is unavailable: its list_apps/list_windows may still work. Check the purpose-built plugin before making that claim. If its browser URL verification stops capture, stop UI inputs for that turn; do not bypass it or repeat the unchanged attempt without a changed verified target. A separate browser connection may be unavailable even while Chrome is running. Missing browser/printer access is an environment issue; a larger model, duplicate renderer or fabricated substitute PDF cannot close native print acceptance.
-
-## Owner-deferred verification (added 2026-10-06)
-
-An explicit owner deferral changes scheduling, not evidence. While deferred, mark PDF/physical Print-Reprint as untested, never PASS or fully accepted. Continue independent authorized local/test work and retain the gap in STATE/PLAN/release checklist; do not repeatedly block that work on printer/browser setup. When the owner subsequently reports completed tests, record PASS — owner-confirmed with the exact message and checklist context, and close the active deferral; never recast human confirmation as agent-inspected PDF/physical output or invent printer settings/artifacts. Keep prior deferred logs as dated history. Keep money, stock, access and recovery validation intact. Neither deferral nor completed test acceptance authorizes production or migration of real CLIENT data. Updated 2026-10-06.
-
-## Migration and fresh replay evidence (added 2026-10-06)
-
-For legacy CLIENT migration, prove original A:F values/formulas remain intact and original allocated IDs/revision survive retry; do not infer or repair legacy leading zeroes. The existing isolated schema request is fixed and DONE: never replace its eight-column CLIENT with a new six-column fixture. W2_SCHEMA recovers with its original helper, not generic UI requests.resume. Before native replay, export fresh and reconcile every delta against durable intent; enumerate actual DONE requests instead of assuming historical counts/revisions. A cleared QA textarea must receive a new response before parsing/claiming proof. Local VM checks, native DONE replay and full native UI/migration are distinct acceptance gates.
-
-## Native legacy migration fixture and UI acceptance (added 2026-10-06)
-
-Keep existing eight-column CLIENT and its DONE schema request intact. Test actual helper migration on separately named native fixture/client-journal tabs through a QA-only execution-local adapter with actual owner/Sheet-ID/lock checks and finally-restored service binding; never include the adapter in candidate/production. Export before/after, compare original A:F values AND formulas and every original table, and prove after-effect retry keeps originally allocated IDs/revision. Count nonblank client identities separately from blank append capacity; preserve blank rows rather than assuming contiguous data. Distinguish journal Event ID/Request ID using authoritative headers. Avoid naming Python diagnostics inspect.py (stdlib collision). Clear transfer textareas before AX dumps and show only capture result, never giant source/base64. Full two-channel UI/native migration acceptance still does not prove PDF/physical printing.
-
-## Production native Table / release evidence lessons (2026-10-06)
-
-- Extending native Sheets Tables may generate Column N headers. Accept only observed exact placeholders in an ARMED durable migration step with original business snapshot unchanged and all new metadata values AND formulas empty. Preserve original request ID/allocated identities/time across after-effect retry; reject surprising metadata/formulas. Keep isolated test guards intact and add exact owner/production guards separately.
-- Large DOM value reads can truncate embedded fonts near200KB. Use full editor clipboard copy/save/reload, then independent LF-only SHA256 without trim before source acceptance. Preserve failed capture as diagnostic, not authoritative source.
-- Native Sheet copies can inherit public/service-account sharing and recalculate external derived output. Verify sharing explicitly; owner-only restriction follows scoped authorization. Keep exact fresh original exports/source/settings beside the native bound-script copy; do not enable external access/automation on the baseline copy. Never restore old exports over subsequent history.
-- Approval review quota failure is not execution. Retry through normal review after the user resumes and the quota is available; never bypass it. Record failed action/checkpoint and eventual native receipt. Test loaders must resolve actual HTML partials rather than weakening behavioral assertions or editing unrelated runtime code.
-
-## Cart validation diagnosis (2026-10-06, Session52)
-
-When the Cart money-validation toast appears, inspect price, Customer Shipping and Shipping Subsidy separately. Owner Session53 explicitly approved UI default0 (normal shipping covers costs), superseding manual entry on every new Cart/sold form. Preserve edited contribution and original pending/retry intent; blank/invalid entries still reject and Customer Shipping must never be substituted for subsidy.
-
-## Local UI evidence transport (2026-10-06, Session53)
-
-For UTF-8 evidence transfers, concatenate raw network Buffers then decode once; decoding each chunk can introduce replacement characters at multibyte boundaries. Reject mismatched complete LF hashes, recheck native clipboard and retain failed evidence; never attribute transport corruption to live source or weaken equality to proceed.
-
-## Shared partials and LabelDialog (added 2026-10-07)
-
-Partials included by both Index.html and LabelDialog.html (e.g. W2LabelUI.html) must use `var(--token,#fallback)` for every colour; LabelDialog has no `:root` tokens. Phone (≤600 px) touch targets are ≥ 36 px (inputs 40). A new UI state class must be checked by computed style, not only by class presence (input rules carry `outline:none`).
-
-## Owner-instruction checklist (added 2026-10-07, owner-confirmed after Session54 retro)
-
-Applies to every step the owner must perform by hand (`00 Docs/RETRO_2026-10-07_claude-mistakes.md`).
-1. One action per line, in short numbered steps. Name the exact button, menu path, column or text as it appears on screen; never "the top row" or "the first line" without saying of what.
-2. Every command is a full line, starting with `cd <full path>` when a folder matters. Never give a folder path alone. Check the owner is on the right git branch before any `git pull`.
-3. Paste-ready code goes in the assistant's message text, never only in tool output (the owner does not see collapsed tool output). Never write "above".
-4. When the owner says a step is unclear or not found, answer ONLY that step first, with more detail; do not move to another topic or ask a different question.
-5. Do not print large files or tables into the session; use grep/summary of the needed part only. Do not create extra prompt/doc files that the task does not need.
-6. When the chat is long (about 60 messages) or the owner reports repeated mistakes, offer a new session with a handoff file in `prompts/` and give the owner the single line to paste.
-
+## 8. Lessons index — open `00 Docs/LESSONS.md` § only when the trigger matches
+| Trigger | Section |
+|---|---|
+| Priorities / gates / propagating closed business rules | L1 |
+| A model cannot solve a reproducible issue | L2 |
+| Hashes with user text in Apps Script | L3 |
+| Using the Apps Script editor in a browser | L4 |
+| Meta feed, R2 upload, catalogue, Refresh Meta feed | L5 |
+| Journal / lock / recovery hash in W1/W2 | L6 |
+| Money totals, cents | L7 |
+| CLIENT writes, label, HTML partials, Orders search | L8 |
+| Printing / PDF / computer-use plugin | L9, L10 |
+| CLIENT migration, native replay, Tables | L11, L12, L13 |
+| Cart money-validation toast | L14 |
+| UTF-8 evidence transfer | L15 |
+| Shared partials / LabelDialog / phone touch sizes | L16 |

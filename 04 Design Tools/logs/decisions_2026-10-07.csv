@@ -17,3 +17,4 @@
 "2026-10-07","ADD-PERF-1","Approve v44 Add speed plan (prompts/add-save-performance.md)","CLOSED","owner chat 2026-10-07 ""อนุมัติ A และ v44"""
 "2026-10-07","RULES-RETRO-1","Add Owner-instruction checklist (6 rules) to CLAUDE.md","CLOSED","owner chat 2026-10-07 ""ยืนยันข้อเสนอ"""
 "2026-10-07","S55-PROTO-1","Adopt CLAUDE.md § Session protocol + prompts/_TEMPLATE_handoff.md (evidence before questions; one dry-run command per owner step); full rules rewrite still OPEN","CLOSED","owner chat 2026-10-07 Session55"
+"2026-10-07","S55-RULES-1","Rules restructure for token value: CLAUDE.md = how to work (short); topic lessons moved verbatim to 00 Docs/LESSONS.md; session close scaled S/M/L; master context read by section only; STATE compact","CLOSED","owner chat 2026-10-07 Session55 (owner: fix it all now, effective tokens)"

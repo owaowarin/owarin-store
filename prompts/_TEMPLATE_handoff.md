@@ -3,7 +3,7 @@
 # <task> — handoff (written <date from machine> by <model>)
 - **Branch:** `<exact branch>` (the owner's paste line must name it)
 - **Model to start:** <model · effort> — switch point: <step that needs Opus, or "none">
-- **Read first:** `CLAUDE.md` § Session protocol, `00 Docs/STATE.md`, <only the files this task needs, with section>
+- **Read first:** `CLAUDE.md` §1 Session protocol, `00 Docs/STATE.md`, <only the files this task needs, with section>
 
 ## Known facts (do NOT ask the owner again)
 | Fact | Source file | Date of evidence |

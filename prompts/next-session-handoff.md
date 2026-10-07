@@ -1,7 +1,7 @@
 # 4 photos to R2 → v44 deploy — handoff (written 2026-10-07 by Opus, Session55)
 - **Branch:** `claude/peaceful-brown-1o4cc8`
 - **Model to start:** Sonnet · medium for the photo steps — switch to Opus · high at step 3 (v44 review)
-- **Read first:** `CLAUDE.md` § Session protocol, `00 Docs/STATE.md`, `00 Docs/HANDOFF_2026-10-07.md` § Session55
+- **Read first:** `CLAUDE.md` §1 Session protocol, `00 Docs/STATE.md`, `00 Docs/HANDOFF_2026-10-07.md` § Session55
 
 ## Known facts (do NOT ask the owner again)
 | Fact | Source file | Date of evidence |
