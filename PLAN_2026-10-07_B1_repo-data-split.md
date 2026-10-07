@@ -99,6 +99,8 @@ Split rule read off the chart: **code + docs** (the arrows) → git; **media + d
 
 **B1 backup done (ads-optimizer `caaada3`, 2026-10-07 04:53):** `tools/pc/b1-backup-r2.ps1 -Apply` → private bucket `r2:owarin-backup/OWARIN-DATA`, 9,125 files / 5,045,037,499 B, copy + read-back check PASS, count and bytes equal to local. Excluded `_r2_upload`, `_logs`. Re-run the same command to refresh (copy only, never deletes; the free tier is 10 GB-month). Secrets are NOT in the backup (single copy, accepted). Remaining for the owner: B1-F (switch VS Code / Claude Desktop to `C:\Users\JIN\owarin-store`).
 
+**B1 close (2026-10-07):** backup CSVs re-read — `B1_backup-r2_A_2026-10-07_042407.csv` dry-run PASS, `B1_backup-r2_B_2026-10-07_042524.csv` PASS (copy_exit=0, check_exit=0, r2 = local = 9,125 files / 5,045,037,499 B). Only B1-F (owner clicks) remains.
+
 Rollback: every move is a rename listed in `B1_moves_<stamp>.csv` (source → destination); reverse = move each destination back in reverse order. No step deletes anything.
 
 ## 5. Owner decisions 2026-10-07 (answers to the first open list)
