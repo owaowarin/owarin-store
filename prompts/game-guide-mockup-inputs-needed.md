@@ -1,6 +1,6 @@
 # Game Guide Book mockup — inputs needed (2026-10-08)
 
-Status: BLOCKED. Gates G1-G7 = BLOCKED (no image exists). Spec: `prompts/owarin-design-latest.md` v1.0.
+Status: BLOCKED. Gates G1-G7 = BLOCKED (no image exists). Spec: `prompts/owarin-design-latest.md` v1.1 (fat round soft lettering).
 
 ## Why blocked
 1. The repo (all remote branches) contains no image files. Cover sources and references live only on the owner PC.
@@ -18,3 +18,8 @@ Compose with code (Pillow: ivory ground, real cover files placed per R1, taupe f
 
 ## One line to paste in the next session
 Read prompts/game-guide-mockup-inputs-needed.md and prompts/owarin-design-latest.md on branch claude/amazing-fermi-epks6q, then build the Game Guide Book mockup from the committed inputs (code composition authorized: YES/NO).
+
+## Update 2026-10-08 (after the first GPT run)
+- GPT produced one mockup (1254x1254, not saved in the repo). Review against spec: G1 FAIL (size), G3 structure PASS, G4 FAIL (Japanese right-aligned), G5 FAIL (angular, Japanese too light), G6 FAIL (band almost equal to ivory), G2 PASS as mockup only (cover text is regenerated), G7 not checked. Recorded as F2 in the spec.
+- Owner decision: lettering must be fat, round, soft and relaxed. Spec raised to v1.1 with the fixes above.
+- Next step after the reset: owner commits the input files above, answers the code-composition YES/NO question, then one targeted correction per spec section 4. The PC copy of the spec (C:\Users\JIN\OWARIN-DATA\All Products\prompts\owarin-design-latest.md) is still v1.0 until the owner pastes v1.1 over it.

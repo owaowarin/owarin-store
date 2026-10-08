@@ -1,3 +1,4 @@
 date,step,source,destination,result
 2026-10-08,add spec file from owner chat paste,owner message (owarin-design-latest.md v1.0),prompts/owarin-design-latest.md on claude/amazing-fermi-epks6q,PASS 143 lines 15486 bytes
 2026-10-08,update spec v1.0 to v1.1 (fat round soft lettering; F2 failures into gates),prompts/owarin-design-latest.md,PASS 149 lines
+2026-10-08,write handoff update for design mockup,prompts/game-guide-mockup-inputs-needed.md and 00 Docs/HANDOFF_2026-10-08.md,PASS
