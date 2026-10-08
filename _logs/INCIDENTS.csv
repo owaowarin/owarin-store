@@ -1,1 +1,2 @@
 date,actor,what_went_wrong,cause,fix,rule_or_script_changed,status
+2026-10-08,owner,"Checked the ads-optimizer repo instead of owaowarin/owarin-store and reported no access; then reported push 403 Resource not accessible by integration despite push:true","Wrong repository was checked; write permission was never tested","Read access confirmed (get_me, list_branches); designated branch claude/amazing-fermi-epks6q absent on origin; write test run on a branch created from origin/main","none","OPEN - push result pending (see github-write-test CSV)"
