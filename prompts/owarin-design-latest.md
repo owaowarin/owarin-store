@@ -133,7 +133,7 @@ Log owner corrections, tool failures and resolutions in C:/Users/JIN/OWARIN-DATA
 
 Canonical intended file: C:/Users/JIN/OWARIN-DATA/All Products/prompts/owarin-design-latest.md
 Repo copy: prompts/owarin-design-latest.md on branch claude/amazing-fermi-epks6q (the PC copy is authoritative only once verified on disk).
-Design-spec version: 1.0. Keep this separate from historical image version numbers.
+Design-spec version: 1.1. Keep this separate from historical image version numbers.
 Next image number: choose the next unused version after inspecting actual output files. Several recent generated previews were not confirmed saved into the workspace; do not invent their saved names or approvals.
 Image path pattern: C:/Users/JIN/OWARIN-DATA/All Products/output/owarin-game-guide-books-vNN/01-game-guide-book-MOCKUP-1080.png
 Prompt/QA: save one short per-image brief referencing this master; do not duplicate the entire master.
