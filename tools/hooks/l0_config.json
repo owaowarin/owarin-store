@@ -1,0 +1,6 @@
+{
+  "repo": "store",
+  "precommit_checks": ["B2", "B4", "B5", "B8"],
+  "junctions": ["All Products", "_r2_upload", "GGB Online Files", "_fb_albums", "Supplier", "_exports", "Facebook - Catalouge Project", "_from-outer-root/outputs"],
+  "meta_server_id": "af3816a8-4b14-40fe-9888-257847fd2470"
+}

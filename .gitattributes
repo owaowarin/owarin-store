@@ -1,0 +1,19 @@
+# Line endings (L0 E): normalise text to LF in the index; scripts keep their native ending
+* text=auto
+*.ps1 text eol=crlf
+*.sh text eol=lf
+.githooks/* text eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.xlsx binary
+*.zip binary
+_logs/B1-D_2026-10-07.csv -text
+"04 Design Tools/logs/decisions_2026-10-07.csv" -text

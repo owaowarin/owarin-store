@@ -2,6 +2,100 @@
   "model": "sonnet",
   "permissions": {
     "defaultMode": "default",
-    "deny": ["Bash(rclone sync:*)", "Bash(rclone delete:*)", "Bash(rclone purge:*)"]
+    "deny": [
+      "Bash(rclone sync:*)",
+      "Bash(rclone delete:*)",
+      "Bash(rclone purge:*)",
+      "Read(./All Products/**)",
+      "Read(./_r2_upload/**)",
+      "Read(./GGB Online Files/**)",
+      "Read(./_fb_albums/**)",
+      "Read(./Supplier/**)",
+      "Read(./Facebook - Catalouge Project/**)"
+    ],
+    "ask": [
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_activate_entity",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_boost_ig_post",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_create",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_create_feed_rule",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_create_product_feed",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_create_product_feed_upload_session",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_create_product_set",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_delete_product",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_event_source_connect",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_event_source_disconnect",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_product_create",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_product_feed_delete",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_product_feed_delete_rule",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_product_set_delete",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_update_catalog",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_update_product",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_update_product_feed",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_catalog_update_product_set",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_create_ad",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_create_ad_set",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_create_campaign",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_create_creative",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_create_custom_audience",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_creative_delete",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_creative_update",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_creative_upload_media",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_delete_custom_audience",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_experiment_abtest_create_test",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_experiment_abtest_update_test",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_experiment_lift_create_test",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_pixel_event_create",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_pixel_event_delete",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_pixel_event_update",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_pixel_parameter_create",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_pixel_parameter_delete",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_pixel_parameter_update",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_update_custom_audience",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_update_custom_audience_users",
+      "mcp__af3816a8-4b14-40fe-9888-257847fd2470__ads_update_entity"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/tools/hooks/run.sh\" pre"
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__.*__ads_.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/tools/hooks/run.sh\" meta"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/tools/hooks/run.sh\" post"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/tools/hooks/run.sh\" session"
+          }
+        ]
+      }
+    ]
   }
 }

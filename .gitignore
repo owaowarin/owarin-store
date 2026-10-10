@@ -67,3 +67,6 @@ out/
 desktop.ini
 Thumbs.db
 *.lnk
+
+# Claude Code worktrees (L0 H)
+.claude/worktrees/
