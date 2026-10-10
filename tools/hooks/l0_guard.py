@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """L0 guard for Claude Code hooks (identical copy in ads-optimizer and owarin-store).
 
-usage: l0_guard.py pre|meta|post|session   (hook JSON on stdin)
+usage: l0_guard.py pre|meta|post|session|stop   (hook JSON on stdin)
 pre/meta: stdout JSON permissionDecision ask|deny, exit 0; pass = no output.
+stop: owner command block without `owner-only:` -> stdout JSON decision block (once; stop_hook_active passes).
 post: syntax error -> stderr + exit 2. Fails closed: an internal error on pre/meta = ask.
 """
 import ast
@@ -209,6 +210,51 @@ def check_session(data):
         print("L0: core.hooksPath set to .githooks (pre-commit guard active)")
 
 
+# ---------------------------------------------------------------- stop (D61: AI runs what its shell can)
+CMD_FENCE = re.compile(r"```[ \t]*(powershell|pwsh|ps1|bash|sh|shell|cmd|bat|console)?[ \t]*\n(.*?)```", re.I | re.S)
+CMD_START = re.compile(r"^\s*(cd|git|python3?|py|powershell|pwsh|npm|node|rclone|claude)\b", re.I | re.M)
+
+
+def final_text(path):
+    """text the assistant wrote after its last tool call / the last user message (= the reply the owner reads)."""
+    texts = []
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            try:
+                e = json.loads(line)
+            except ValueError:
+                continue
+            msg = e.get("message") or {}
+            content = msg.get("content")
+            if e.get("type") == "user":
+                texts = []
+            elif e.get("type") == "assistant" and isinstance(content, list):
+                for c in content:
+                    if c.get("type") == "tool_use":
+                        texts = []
+                    elif c.get("type") == "text":
+                        texts.append(c.get("text") or "")
+    return "\n".join(texts)
+
+
+def check_stop(data):
+    if data.get("stop_hook_active"):
+        return
+    path = data.get("transcript_path")
+    if not path or not os.path.isfile(path):
+        return
+    text = final_text(path)
+    if "owner-only:" in text.lower():
+        return
+    for m in CMD_FENCE.finditer(text):
+        if m.group(1) or CMD_START.search(m.group(2)):
+            print(json.dumps({"decision": "block", "reason": (
+                "L0 D61: your reply hands the owner a command block. Run it yourself with your shell/terminal tools now, "
+                "then report the result. Only if it truly needs the owner (account login/clicks, a decision, or a tool denial) "
+                "keep it and add a line `owner-only: <why the AI cannot run it>` next to it.")}))
+            return
+
+
 def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else ""
     raw = sys.stdin.read()
@@ -221,6 +267,8 @@ def main():
         return check_post(data)
     elif mode == "session":
         check_session(data)
+    elif mode == "stop":
+        check_stop(data)
     return 0
 
 
