@@ -1,0 +1,6 @@
+timestamp,actor,item,op,path,before,after,result
+2026-10-11T05:18:45+07:00,sonnet,step9,copy,tools/hooks (5 shared files),-,sha256 equal to ads-optimizer (test_l0 byte-equal check),PASS
+2026-10-11T05:18:45+07:00,sonnet,A+C+D,settings,.claude/settings.json,3 deny rules,hooks + 39 ask + 6 Read denies (R084),PASS
+2026-10-11T05:18:45+07:00,sonnet,E+H,files,.gitattributes + .gitignore,-,cacb4f8,PASS
+2026-10-11T05:18:45+07:00,sonnet,E,renormalise dry-run,store,-,0 files listed,PASS
+2026-10-11T05:18:45+07:00,sonnet,step7,git config,core.hooksPath,unset,.githooks,PASS
