@@ -3,7 +3,7 @@
 # <task> — handoff (written <date from machine> by <model>)
 - **Branch:** `<exact branch>` (the owner's paste line must name it)
 - **Model to start:** <model · effort> — switch point: <step that needs Opus, or "none">
-- **Read first:** `CLAUDE.md` §1 Session protocol, `00 Docs/STATE.md`, <only the files this task needs, with section>
+- **Read first:** `rules/CORE.md`, `AGENTS.md`, `00 Docs/STATE.md`, <only the files this task needs, with section>
 
 ## Known facts (do NOT ask the owner again)
 | Fact | Source file | Date of evidence |
@@ -25,3 +25,7 @@
 
 ## Paths (post-B1)
 - Repo `C:\Users\JIN\owarin-store` · photos `C:\Users\JIN\OWARIN-DATA\All Products` · tools `C:\Users\JIN\owarin-store\04 Design Tools` · Desktop\etc path is dead.
+
+## Run prompt (for a PLAN)
+- Owner steps in the PLAN: do them yourself when your tools reach them; the owner only for accounts, decisions or a tool denial.
+- Every owner step left in the PLAN states why the AI cannot do it.
