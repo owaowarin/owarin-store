@@ -147,6 +147,7 @@ def _range(lines, start, end):
 
 def readfirst(ref, client):
     """bytes of the read-first set (port of the gate command in PLAN_2026-10-07_D42.md)"""
+    core = blob(ref, "rules/CORE.md") or ""
     a = blob(ref, "AGENTS.md") or ""
     ca = blob(ref, f"clients/{client}/AGENTS.md") or ""
     cs = blob(ref, f"clients/{client}/STATE.md") or ""
@@ -159,7 +160,7 @@ def readfirst(ref, client):
         last = "" if line.startswith("## ") else last
         last += line + NL
     h0 = NL.join(hb[:5]) + NL
-    return sum(len(x.encode("utf-8")) for x in (a, ca, cs, h0, _range(hb, "## 0 ", "## 2 "), _range(hb, "## 4 ", "## 5 "), last))
+    return sum(len(x.encode("utf-8")) for x in (core, a, ca, cs, h0, _range(hb, "## 0 ", "## 2 "), _range(hb, "## 4 ", "## 5 "), last))
 
 
 def b6(cfg, adds, new):
@@ -179,7 +180,7 @@ def b6(cfg, adds, new):
                     out.append(f"L0 B6 size: {p} - new handoff {len(now.encode('utf-8'))} B > 3072 B; cut it")
             elif _lines(now) - _lines(old) > 6:
                 out.append(f"L0 B6 size: {p} - grows by {_lines(now) - _lines(old)} lines (max 6 per commit); cut it")
-    inputs = ("AGENTS.md", "HANDBOOK_SYSTEM-V2.md")
+    inputs = ("AGENTS.md", "rules/CORE.md", "HANDBOOK_SYSTEM-V2.md")
     if any(p in inputs or re.fullmatch(r"HANDOFF_[^/]*\.md", p) or re.fullmatch(r"clients/[^/]+/(AGENTS|STATE)\.md", p) for p in staged):
         clients = sorted({m.group(1) for f in (git("ls-files", "clients/*/STATE.md") or "").split("\n") for m in [re.match(r"clients/([^/]+)/STATE\.md$", f)] if m})
         for c in clients:
