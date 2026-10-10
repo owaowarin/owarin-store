@@ -1,0 +1,7 @@
+timestamp,actor,operation,file,before,after,result
+2026-10-11T06:00+07:00,claude(Sonnet PC),tag cp/rules-phase2-start,-,-,-,PASS
+2026-10-11T06:05+07:00,claude(Sonnet PC),generated L1 copy by tools/rules_sync.py,rules/CORE.md,-,sha256-16 87458179fb22da93,PASS
+2026-10-11T06:25+07:00,claude(Sonnet PC),L3 path rules (apps-script images logs),.claude/rules/*.md,-,3 files,PASS
+2026-10-11T07:00+07:00,claude(Sonnet PC),item H restructure: CLAUDE.md imports; AGENTS.md L2 rows kept; R258 retired; L1/L0/L3 lines removed (map: ads _intake/RULES_COVERAGE_2026-10-11.csv),CLAUDE.md AGENTS.md,9321+9837 B,200+7443 B,PASS
+2026-10-11T07:20+07:00,claude(Sonnet PC),item J handoff template (Read first -> CORE + AGENTS; Run prompt section),prompts/_TEMPLATE_handoff.md,1217 B,see file,PASS
+2026-10-11T07:35+07:00,claude(Sonnet PC),item K precommit.py byte-equal copy of ads,tools/hooks/precommit.py,-,sha256-16 ddb55136c66bc71f,PASS
