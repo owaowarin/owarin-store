@@ -2,7 +2,7 @@
 """L0 git pre-commit (identical copy in ads-optimizer and owarin-store; repo differences in l0_config.json).
 
 Scans STAGED content only. One line per FAIL: `L0 B<n> <id>: <path>[:line] - <fix>`; exit 1 on any FAIL.
-Checks B1-B8 (see PLAN_2026-10-11_rules-phase1-L0.md). Escape for B1: line carries `[no-client-figure]`.
+Checks B1-B9 (see PLAN_2026-10-11_rules-phase1-L0.md). Escape for B1: line carries `[no-client-figure]`.
 """
 import ast
 import fnmatch
@@ -251,7 +251,26 @@ def b8(cfg, adds, new):
     return out
 
 
-CHECKS = {"B1": b1, "B2": b2, "B3": b3, "B4": b4, "B5": b5, "B6": b6, "B7": b7, "B8": b8}
+def b9(cfg, adds, new):
+    pj = ".claude-plugin/plugin.json"
+    head = blob("HEAD", pj)
+    if head is None:
+        return []
+    if not any(re.match(r"skills/[^/]+/.", p) for p in names("ACMRD")):
+        return []
+
+    def ver(text):
+        try:
+            return json.loads((text or "").lstrip("﻿")).get("version")
+        except ValueError:
+            return None
+
+    if ver(blob(":", pj)) == ver(head):
+        return [f'L0 B9 D64: skills changed - bump "version" in {pj}']
+    return []
+
+
+CHECKS = {"B1": b1, "B2": b2, "B3": b3, "B4": b4, "B5": b5, "B6": b6, "B7": b7, "B8": b8, "B9": b9}
 
 
 def main():
