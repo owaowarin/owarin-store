@@ -1,0 +1,3 @@
+﻿timestamp,actor,operation,file,before,after,result
+2026-10-11T08:37+07:00,claude(Sonnet PC),tag cp/rules-phase3-start,-,-,-,PASS
+2026-10-11T08:37+07:00,claude(Sonnet PC),item I precedence line (no pointer to missing _specs/),AGENTS.md line 60,Spec files in _specs/ first,Precedence line; _specs/ ranks first if created; sha256-16 7a7bed3c4674a4a0,PASS

@@ -57,4 +57,4 @@ Source of truth for the account skills (`token-harness`, `shopee-report-rules`, 
 | Shared partials / LabelDialog / phone touch sizes | L16 |
 
 ## Precedence
-Spec files in `_specs/` > the skills > `CLAUDE.md` + this file + `00 Docs/LESSONS.md` (newest dated rule wins) > the master context (2026-09-13 copy).
+Precedence: the skills > `CLAUDE.md` + this file + `00 Docs/LESSONS.md` (newest dated rule wins) > the master context (2026-09-13 copy). A `_specs/` folder, if one is created, ranks first.
